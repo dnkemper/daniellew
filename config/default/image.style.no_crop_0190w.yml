@@ -1,0 +1,21 @@
+uuid: 9c7cc33c-066c-4950-a1e8-840af5380acf
+langcode: en
+status: true
+dependencies: {  }
+name: no_crop_0190w
+label: 'No crop (190w)'
+effects:
+  67a531c2-99a8-4134-b5d6-e54eba7480a3:
+    uuid: 67a531c2-99a8-4134-b5d6-e54eba7480a3
+    id: image_scale
+    weight: 1
+    data:
+      width: 190
+      height: null
+      upscale: false
+  e3f0b1ca-4a23-4c86-88c4-d21ec70c310f:
+    uuid: e3f0b1ca-4a23-4c86-88c4-d21ec70c310f
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

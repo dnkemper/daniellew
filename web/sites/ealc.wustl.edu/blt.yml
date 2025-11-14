@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: ealc.ddev.site
+    protocol: https
+  machine_name: ealc
+  human_name: ealc.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: ealc.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/ealc.wustl.edu/files'
+    origin: 'https://ealc.wustl.edu'
+drupal:
+  db:
+    database: drupal_ealc
+system:
+  site:
+    contact_us_url: 'https://ealc.wustl.edu/contact-us'
+    name: ealc
+    email: ealc@wustl.edu

@@ -1,0 +1,51 @@
+uuid: 36815c60-5973-4ec6-8ee9-756dfcf9a03c
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_anchor_section
+field_name: field_anchor_section
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: announcements
+      label: Announcements
+    -
+      value: featured-news
+      label: 'Featured News'
+    -
+      value: pubvideo
+      label: 'Full Screen Video'
+    -
+      value: student-profiles
+      label: 'Featured People'
+    -
+      value: testimonial
+      label: Testimonial
+    -
+      value: gallery
+      label: Gallery
+    -
+      value: awards
+      label: Awards
+    -
+      value: degrees
+      label: Degrees
+    -
+      value: student-stories
+      label: 'Student Stories'
+    -
+      value: support-us
+      label: 'Call to Action'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

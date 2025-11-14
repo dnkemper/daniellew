@@ -1,0 +1,19 @@
+uuid: 23c219fe-66ab-4d1e-835a-2c32b34371d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_twitter_description
+    - paragraphs.paragraphs_type.publication_twitter_section
+id: paragraph.publication_twitter_section.field_twitter_description
+field_name: field_twitter_description
+entity_type: paragraph
+bundle: publication_twitter_section
+label: Description
+description: "Example: Connect with Department of Biology's twitter account for the latest from campus."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,108 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
++----------------------------------+----------+------------------+-------------+
+| Field name                       | Required | Field type       | Cardinality |
++----------------------------------+----------+------------------+-------------+
+| field_custom_button_             |          | link             | 1           |
+| field_custom_caption             |          | string_long      | 1           |
+| field_half_image                 |          | entity_reference | 1           |
+| field_half_image_description     |          | string_long      | 1           |
+| field_half_image_main_titl       |          | link             | 1           |
+| field_half_image_optional_header |          | string           | 1           |
++----------------------------------+----------+------------------+-------------+
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+  {% set color_style = "white" %}
+
+
+{% block paragraph %}
+  <article class="slide with-caption flex">
+    <div class="image column half"
+        style="background-image: url('{{ file_url(paragraph.field_half_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_680w')) }}');">
+      {% if content.field_half_image.0 %}
+        <picture>
+          <source
+            srcset="{{ file_url(paragraph.field_half_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_680w')) }}"
+            media="(min-width: 600px)">
+          <img
+            src="{{ file_url(paragraph.field_half_image.entity.field_media_image.entity.fileuri) }}"  alt="">
+        </picture>
+      {% endif %}
+    </div>
+    <div class="slide-title post-details column half">
+      <div class="caption">
+        {% if content.field_custom_caption.0 %}
+          <p> {{ content.field_custom_caption.0 }}</p>
+        {% endif %}
+      </div>
+      <div class="cat">
+        {% if content.field_half_image_optional_header.0 %}
+          {{ content.field_half_image_optional_header.0 }}
+        {% endif %}
+      </div>
+      {% if content.field_half_image_main_titl[0]['#url'] and content.field_half_image_main_titl[0]['#title'] %}
+        <h2>
+          <a href="{{ content.field_half_image_main_titl[0]['#url'] }}" target="_blank"
+             aria-label="Opens {{ content.field_half_image_main_titl[0]['#title']|render }} in new window">
+            {{ content.field_half_image_main_titl[0]['#title']|render }}
+          </a>
+        </h2>
+      {% elseif content.field_half_image_main_titl[0]['#title'] %}
+        <h2>{{ content.field_half_image_main_titl[0]['#title']|render }}</h2>
+      {% endif %}
+      {% if content.field_half_image_description.0 %}
+        <div class="description"><p>{{ content.field_half_image_description.0 }}</p></div>
+      {% endif %}
+      {% if content.field_custom_button_[0]['#url'] %}
+        {% if content.field_custom_button_.0.url.external or paragraph.field_custom_button_.0.url.external %}
+          <a href="{{ content.field_custom_button_[0]['#url'] }}" class="button" target="_blank"
+             aria-label="Opens {{ content.field_custom_button_[0]['#title']|render }} in new window">
+            {{ content.field_custom_button_[0]['#title']|render }}
+          </a>
+        {% else %}
+          <a href="{{ content.field_custom_button_[0]['#url'] }}" class="button"
+             aria-label="Navigate to {{ content.field_custom_button_[0]['#title']|render }}">
+            {{ content.field_custom_button_[0]['#title']|render }}
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </article>
+  {# </div> #}
+{% endblock paragraph %}

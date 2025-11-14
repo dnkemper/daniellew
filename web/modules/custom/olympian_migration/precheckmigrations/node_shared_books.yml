@@ -1,0 +1,39 @@
+id: node_shared_books
+label: 'Migrate Borrowed Shared Book Nodes'
+migration_tags:
+  - shared_content
+source:
+  plugin: d7_node
+  node_type: book
+
+process:
+  skip_on_empty:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+      negate: false
+    source: field_shared_content_xml
+    method: row
+  # editable fields
+  field_byline_options: field_byline_options
+  field_byline_names: field_byline_names
+  field_book_categories:
+    plugin: sub_process
+    source: field_book_categories
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_book_
+        source: tid
+  field_faculty_and_staff:
+    plugin: sub_process
+    source: field_faculty_and_staff
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_faculty_staff
+        source: target_id
+destination:
+  plugin: shared_entity
+  entity_type: 'node'  # Specify the entity type here
+  bundle: 'book'

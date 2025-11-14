@@ -1,0 +1,1931 @@
+<?php
+
+/**
+ * @file
+ * Install tasks.
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Config\FileStorage;
+
+/**
+ * Solves the error: "Mismatched entity and/or field definitions".
+ */
+function olympian_core_update_9001() {
+  $entity_type_manager = Drupal::entityTypeManager();
+  $entity_type_manager->clearCachedDefinitions();
+
+  $entity_type_ids = [];
+  $change_summary = Drupal::service('entity.definition_update_manager')->getChangeSummary();
+  foreach ($change_summary as $entity_type_id => $change_list) {
+    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+    Drupal::entityDefinitionUpdateManager()->installEntityType($entity_type);
+    $entity_type_ids[] = $entity_type_id;
+  }
+  drupal_flush_all_caches();
+
+  return t("Installed/Updated the entity type(s): @entity_type_ids", [
+    '@entity_type_ids' => implode(', ', $entity_type_ids),
+  ]);
+}
+
+/**
+ * Flush all caches after changing service constructors.
+ */
+function olympian_core_update_9002() {
+  drupal_flush_all_caches();
+}
+
+/**
+ * Populate Article Categories.
+ */
+function olympian_core_update_9003() {
+
+  // Vocabulary machine name.
+  $article_categories = 'article_categories';
+  // List of test terms.
+  $categories = ['Faculty', 'Student', 'Staff', 'General', 'Alumni'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $article_categories,
+    ])->save();
+  }
+}
+
+/**
+ * Populate Event Categories.
+ */
+function olympian_core_update_9004() {
+
+  // Vocabulary machine name.
+  $event_categories = 'event_categories';
+  // List of test terms.
+  $categories = ['Alumni', 'Social Events', 'Workshops', 'General', 'Other Events'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $event_categories,
+    ])->save();
+  }
+}
+
+/**
+ * Populate Image Card Categories.
+ */
+function olympian_core_update_9005() {
+
+  // Vocabulary machine name.
+  $image_cards = 'image_cards';
+  // List of test terms.
+  $categories = ['Faculty Engagement', 'Staff Engagement', 'Undergraduate Student Engagement', 'Graduate Student Engagement', 'Other'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $image_cards,
+    ])->save();
+  }
+}
+
+/**
+ * Populate Resource Categories.
+ */
+function olympian_core_update_9006() {
+
+  // Vocabulary machine name.
+  $resource_categories = 'resource_categories';
+  // List of test terms.
+  $categories = ['Faculty and Staff Resources', 'Graduate Student Resources', 'Undergraduate Student Resources', 'Forms and Policies', 'Other'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $resource_categories,
+    ])->save();
+  }
+}
+
+/**
+ * Populate Person Type Categories.
+ */
+function olympian_core_update_9007() {
+
+  // Vocabulary machine name.
+  $leadership_administrative_staff = 'leadership_administrative_staf';
+  // List of test terms.
+  $categories = ['Director of Graduate Studies', 'Graduate Students', 'Staff', 'Current Faculty', 'Affiliated Faculty', 'Emeriti', 'Other'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $leadership_administrative_staff,
+    ])->save();
+  }
+}
+
+/**
+ * Delete config that is no longer needed.
+ */
+function olympian_core_update_9008() {
+  $config_files = [
+    'addtocalendar.settings',
+    'field.storage.node.field_add_to_cal',
+    'field.field.node.events.field_add_to_cal',
+    'block.block.main_navigation__superfish__horizontal',
+    'colorbox.settings',
+    'custom_search.settings',
+    'custom_search.settings.results',
+    'entity_usage.settings',
+    'flexslider.optionset.defaul',
+    'flexslider.settings',
+    'plupload.settings',
+    'tvi.taxonomy_vocabulary.article_categories',
+    'flexslider.optionset.default',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Fix long lost modules are missing from the filesystem.
+ */
+function olympian_core_update_9009() {
+  $modules = [
+    'address',
+    'address_map_link',
+    'colorbox',
+    'custom_view_filters',
+    'date_all_day',
+    'file_download_link',
+    'address',
+    'image_url_formatter',
+    'plupload',
+    'file_download_link',
+    'search_api_block',
+    'select2',
+    'select2_multicheck',
+    'selective_better_exposed_filters',
+    'select_or_other',
+    'slick_carousel_slider',
+    'slick_entityreference',
+    'slick_media',
+    'slick_paragraphs',
+    'taxonomy_custom_controller',
+    'views_block_filter_block',
+    'views_tree',
+    'depcalc_ui',
+    'depcalc',
+    'feeds_ical',
+    'module_missing_message_fixer',
+    'multiselect',
+    'page_manager',
+    'pcr',
+    'search_api_autocomplete',
+    'search_autocomplete',
+    'structure_sync',
+    'twig_xdebug',
+    'unused_modules',
+    'video_filter',
+    'views_filters_populate',
+  ];
+  Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', $modules, 'IN')
+    ->execute();
+}
+
+/**
+ * Delete config that is no longer needed.
+ */
+function olympian_core_update_9010() {
+  $config_files = [
+    'page_manager.page.node_view',
+    'multiselect.settings',
+    'search_api_autocomplete.search.search_content',
+    'search_api_autocomplete.settings',
+    'redirect_domain.domains',
+    'views.view.redirect_404',
+    'ultimate_cron.job.simple_sitemap_views_cron',
+    'ultimate_cron.job.simple_sitemap_engines_cron',
+    'ultimate_cron.job.redirect_404_cron',
+    'simple_sitemap_engines.simple_sitemap_engine.google',
+    'simple_sitemap_engines.simple_sitemap_engine.bing',
+    'simple_sitemap_engines.settings',
+    'redirect_404.settings',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Populate Media Folder Categories.
+ */
+function olympian_core_update_9011() {
+
+  // Vocabulary machine name.
+  $olympian_media_directory = 'media_folders';
+  // List of test terms.
+  $categories = ['Media Root', 'Campus Photos', 'News', 'Faculty Books', 'Home Slides', 'Icons', 'People'];
+  foreach ($categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => $olympian_media_directory,
+    ])->save();
+  }
+}
+
+/**
+ * Resets Moderation State for article content.
+ */
+function olympian_core_update_9022() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'article');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for page content.
+ */
+function olympian_core_update_9023() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for book content.
+ */
+function olympian_core_update_9024() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'book');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for contact_landing_page content.
+ */
+function olympian_core_update_9025() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'contact_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for course_landing content.
+ */
+function olympian_core_update_9026() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'course_landing');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for courses content.
+ */
+function olympian_core_update_9027() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'courses');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for events_landing_page content.
+ */
+function olympian_core_update_9028() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'events_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faq content.
+ */
+function olympian_core_update_9029() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'faq');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for events content.
+ */
+function olympian_core_update_9030() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'events');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faculty_landing_page content.
+ */
+function olympian_core_update_9031() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'faculty_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faculty_staff content.
+ */
+function olympian_core_update_9032() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'faculty_staff');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for generic_page content.
+ */
+function olympian_core_update_9033() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'generic_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for home_page content.
+ */
+function olympian_core_update_9034() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'home_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for image_cards_landing content.
+ */
+function olympian_core_update_9035() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'image_cards_landing');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for image_cards content.
+ */
+function olympian_core_update_9036() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'image_cards');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for news_landing_page content.
+ */
+function olympian_core_update_9037() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'news_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for page_not_found content.
+ */
+function olympian_core_update_9038() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'page_not_found');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for page content.
+ */
+function olympian_core_update_9039() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for past_events_landing_page content.
+ */
+function olympian_core_update_9040() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'past_events_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for publication_page content.
+ */
+function olympian_core_update_9041() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'publication_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for resources_landing_page content.
+ */
+function olympian_core_update_9042() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'resources_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for resources content.
+ */
+function olympian_core_update_9043() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'resources');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for testimonial content.
+ */
+function olympian_core_update_9044() {
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'testimonial');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('moderation_state', 'published');
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for content.
+ */
+function olympian_core_update_9045() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'article']);
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for page content.
+ */
+function olympian_core_update_9046() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for book content.
+ */
+function olympian_core_update_9047() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'book']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for contact_landing_page content.
+ */
+function olympian_core_update_9048() {
+  $types = [
+    'contact_landing_page',
+    'course_landing',
+    'courses',
+    'events_landing_page',
+    'faq',
+    'events',
+    'faculty_landing_page',
+    'faculty_staff',
+    'generic_page',
+    'image_cards_landing',
+    'home_page',
+    'image_cards',
+    'news_landing_page',
+    'home_page',
+    'page_not_found',
+    'past_events_landing_page',
+    'publication_page',
+    'resources_landing_page',
+    'resources',
+    'testimonial',
+  ];
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'contact_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for course_landing content.
+ */
+function olympian_core_update_9049() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'course_landing']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for courses content.
+ */
+function olympian_core_update_9050() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'courses']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for events_landing_page content.
+ */
+function olympian_core_update_9051() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'events_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faq content.
+ */
+function olympian_core_update_9052() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'faq']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for events content.
+ */
+function olympian_core_update_9053() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'events']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faculty_staff content.
+ */
+function olympian_core_update_9060() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'faculty_staff']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for generic_page content.
+ */
+function olympian_core_update_9054() {
+
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'generic_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for image_cards_landing content.
+ */
+function olympian_core_update_9055() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'image_cards_landing']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for faculty_landing_page content.
+ */
+function olympian_core_update_9056() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'faculty_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for home_page content.
+ */
+function olympian_core_update_9057() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'home_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for image_cards content.
+ */
+function olympian_core_update_9058() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'image_cards']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for news_landing_page content.
+ */
+function olympian_core_update_9059() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'news_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for past_events_landing_page content.
+ */
+function olympian_core_update_9061() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'past_events_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for publication_page content.
+ */
+function olympian_core_update_9062() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'publication_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for resources_landing_page content.
+ */
+function olympian_core_update_9063() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'resources_landing_page']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for resources content.
+ */
+function olympian_core_update_9064() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'resources']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for testimonial content.
+ */
+function olympian_core_update_9065() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'testimonial']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Resets Moderation State for page_not_found content.
+ */
+function olympian_core_update_9066() {
+  $nodes = \Drupal::entityTypeManager()->getListBuilder('node')->getStorage()->loadByProperties(['type' => 'page_not_found']);
+
+  foreach ($nodes as $node) {
+    $node->set('field_search', 'search');
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = 'Created revision for node';
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+    $node->setRevisionUserId(\Drupal::currentUser()->id());
+    $node->save();
+  }
+}
+
+/**
+ * Delete config that is no longer needed.
+ */
+function olympian_core_update_9067() {
+  $config_files = [
+    'yaml_editor.config',
+    'geocoder.geocoder_provider.google',
+    'geocoder.settings',
+    'system.action.user_edit_action',
+    'ultimate_cron.job.xmlsitemap_engines_cron',
+    'views.view.redirect_404',
+    'webform_image_select.webform_image_select_images.kittens',
+    'xmlsitemap_engines.settings',
+    'photoswipe.settings',
+    'rest.resource.entity.node',
+    'contact.form.personal',
+    'contact.settings',
+    'core.entity_view_mode.contact_message.token',
+    'embed.button.views',
+    'entity_browser_enhanced.widgets.media_directory_browser_videos',
+    'entity_browser_enhanced.widgets.media_directory_field_widget_soundcloud',
+    'entity_browser_enhanced.widgets.media_entity_browser',
+    'entity_browser_enhanced.widgets.media_entity_browser_media_library',
+    'entity_browser_enhanced.widgets.media_entity_browser_modal',
+    'entity_browser_enhanced.widgets.olympian_media_directories_document',
+    'entity_browser_enhanced.widgets.olympian_media_directories_overview',
+    'entity_browser_enhanced.widgets.olympian_media_directories_soundcloud',
+    'language.content_settings.contact_message.personal',
+    'multiselect.settings',
+    'menu_per_role.settings',
+    'search_api_autocomplete.settings',
+    'redirect_domain.domains',
+    'views.view.redirect_404',
+    'ultimate_cron.job.simple_sitemap_views_cron',
+    'ultimate_cron.job.simple_sitemap_engines_cron',
+    'ultimate_cron.job.redirect_404_cron',
+    'simple_sitemap_engines.simple_sitemap_engine.google',
+    'simple_sitemap_engines.simple_sitemap_engine.bing',
+    'simple_sitemap_engines.settings',
+    'redirect_404.settings',
+    'redirect_domain.domains',
+    'hal.settings',
+    'override_node_options.settings',
+    'rest.resource.entity.node',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ *
+ */
+function olympian_core_update_9068() {
+  $modules = [
+    'yaml_editor',
+    'menu_per_role',
+    'ckeditor',
+    'entity_browser_enhanced',
+    'menu_admin_per_menu',
+    'facets_pretty_paths',
+    'facets_searchbox_widget',
+    'node_revision_generate',
+    'telephone_formatter',
+    'search_api_date_popup',
+    'views_evi',
+    'xmlsitemap_custom',
+    'views_contextual_filters_or',
+    'theme_permission',
+    'override_node_options',
+    'hal',
+    'variationcache',
+    'paragraphs_type_permissions',
+    'node_title_help_text',
+    'geocoder',
+    'geophp',
+    'search_api_date_popup',
+    'editor_advanced_link',
+    'webform_image_select',
+  ];
+
+  foreach ($modules as $module) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+
+  }
+}
+
+/**
+ * Delete config that is no longer needed.
+ */
+function olympian_core_update_9069() {
+  $config_files = [
+    'entity_browser.browser.olympian_media_directories_cv',
+    'entity_browser.browser.olympian_media_directories_document',
+    'entity_browser.browser.olympian_media_directories_soundcloud',
+    'entity_browser.browser.olympian_media_directories_video',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Delete config after core migration.
+ */
+function olympian_core_update_9072() {
+  $config_files = [
+    'tvi.global_settings.yml',
+    'tvi.taxonomy_vocabulary.areas_of_interest',
+    'tvi.taxonomy_vocabulary.article_categories',
+    'tvi.taxonomy_vocabulary.book',
+    'tvi.taxonomy_vocabulary.concentration',
+    'tvi.taxonomy_vocabulary.course_level',
+    'tvi.taxonomy_vocabulary.event_categories',
+    'tvi.taxonomy_vocabulary.grad_undergrad',
+    'tvi.taxonomy_vocabulary.image_cards',
+    'tvi.taxonomy_vocabulary.leadership_administrative_staf',
+    'tvi.taxonomy_vocabulary.requirements',
+    'tvi.taxonomy_vocabulary.resource_categories',
+    'tvi.taxonomy_vocabulary.semester',
+    'tvi.taxonomy_vocabulary.tags',
+    'ultimate_cron.job.redirect_404_cron',
+    'ultimate_cron.job.xmlsitemap_engines_cron',
+    's3fs.settings',
+    'ultimate_cron.job.aggregator_cron',
+    'views.view.aggregator_rss_feed',
+    'views.view.aggregator_sources',
+    'rules.settings',
+    'rdf.mapping.taxonomy_term.tags',
+    'rdf.mapping.user.user',
+    'rdf.mapping.node.page',
+    'rdf.mapping.node.article',
+    'rdf.mapping.comment.comment',
+    'language.content_settings.aggregator_item.aggregator_item',
+    'language.content_settings.aggregator_feed.aggregator_feed',
+    'google_tag.container.olympian_gtag',
+    'field.storage.aggregator_feed.feeds_item',
+    'field.field.aggregator_feed.aggregator_feed.feeds_item',
+    'core.entity_view_mode.aggregator_item.token',
+    'core.entity_view_mode.aggregator_item.summary',
+    'core.entity_view_mode.aggregator_feed.token',
+    'core.entity_view_mode.aggregator_feed.summary',
+    'core.entity_view_display.aggregator_item.aggregator_item.summary',
+    'core.entity_view_display.aggregator_feed.aggregator_feed.summary',
+    'core.entity_view_display.aggregator_feed.aggregator_feed.default',
+    'aggregator.settings',
+    'editor.editor.webform_default',
+    'filter.format.webform_default',
+    'system.feature_flags',
+    'system.action.feeds_feed_import_action',
+    'system.action.feeds_feed_clear_action',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Uninstall modules after core migration.
+ */
+function olympian_core_update_9073() {
+  $modules = [
+    'editor_advanced_link',
+    's3fs',
+    'tvi',
+    'entity_browser_enhanced',
+    'addtocal',
+    'csv_serialization',
+    'feeds_ical',
+    'rdf',
+    'rules',
+    'lazy',
+  ];
+
+  foreach ($modules as $module) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function olympian_core_update_9084() {
+  // Specify the content type machine name and the desired node ID.
+  $content_type = 'page_not_found';
+  $node_id = 12;
+
+  // Check if the node with the given ID already exists.
+  $existing_node = Node::load($node_id);
+  if ($existing_node) {
+    // drupal_set_message(t('A node with ID @nid already exists.', ['@nid' => $node_id]), 'warning');.
+    return;
+  }
+
+  // Create a new node of the specified content type and ID.
+  $node = Node::create([
+    'type' => $content_type,
+    'nid' => $node_id,
+    'title' => 'Custom Node Title',
+    // Add other fields as needed.
+  ]);
+  $node->save();
+
+  // drupal_set_message(t('Node with ID @nid of type @type created.', ['@nid' => $node_id, '@type' => $content_type]));.
+}
+
+/**
+ * Delete config after core migration.
+ */
+function olympian_core_update_9095() {
+  $config_files = [
+    'structure_sync.data',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Uninstall modules after core migration.
+ */
+function olympian_core_update_9096() {
+  $modules = [
+    'structure_sync',
+  ];
+
+  foreach ($modules as $module) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+
+  }
+}
+
+/**
+ * Add default value for new caption overlay field.
+ */
+function olympian_core_update_9097() {
+  // Query for all home_page nodes.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'home_page');
+  $nids = $query->execute();
+
+  // Load and update each node.
+  foreach ($nids as $nid) {
+    $node = Node::load($nid);
+    if ($node) {
+      // Set the field_featured_cap_overlay radio field to 0.
+      $node->set('field_featured_cap_overlay', 0);
+      $node->save();
+    }
+  }
+}
+
+/**
+ * Add default value for new linkedin field.
+ */
+function olympian_core_update_9098() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('paragraph_linkedin_username', 'school/washington-university-in-st-louis/');
+
+  $config->save();
+}
+
+/**
+ * Delete visbility taxonomy terms.
+ */
+function olympian_core_update_9099() {
+
+  $tids = \Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', 'visibility')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  $controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $entities = $controller->loadMultiple($tids);
+  $controller->delete($entities);
+}
+
+/**
+ * Fix long lost modules are missing from the filesystem.
+ */
+function olympian_core_update_9100() {
+  $modules = [
+    'allowed_formats',
+    'iframe_title_filter',
+    'maxlength',
+    'profile_switcher',
+  ];
+  Drupal::database()->delete('key_value')
+    ->condition('collection', 'system.schema')
+    ->condition('name', $modules, 'IN')
+    ->execute();
+}
+
+/**
+ * Flush all caches after fixing schema key values.
+ */
+function olympian_core_update_9101() {
+  drupal_flush_all_caches();
+}
+
+/**
+ * Delete config from unwanted modules.
+ */
+function olympian_core_update_9102() {
+  $config_files = [
+    'auditfiles.settings',
+    'chosen.settings'
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Uninstall unwanted modules.
+ */
+function olympian_core_update_9103() {
+  $modules = [
+    'auditfiles',
+    'chosen',
+    'chosen_lib'
+  ];
+
+  foreach ($modules as $module) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+
+  }
+}
+
+/**
+ * Add default value for new 403 options.
+ */
+function olympian_core_update_9104() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('custom_403.display', TRUE);
+  $config->set('custom_403.message', '<h3>Please click here to log in</h3><p><a class="button" href="/user">login here</a></p>');
+
+  $config->save();
+}
+
+/**
+ * Fix default value for 403 page.
+ */
+function olympian_core_update_9105() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('custom_403.display', FALSE);
+  $config->save();
+}
+
+
+/**
+ * Delete config after core update.
+ */
+function olympian_core_update_9106() {
+  $config_files = [
+    'filter.format.aggregator_html',
+  ];
+
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ * Add default hubspot js.
+ */
+function olympian_core_update_9107() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('hubspot', '<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/44596675.js"></script>');
+
+  $config->save();
+}
+
+/**
+ * Add default hubspot js.
+ */
+function olympian_core_update_9108() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+    // Array of configuration settings to check and update.
+    $social_configs = [
+      'paragraph_social.twitter_username' => 'washuartsci',
+      'paragraph_social.instagram_username' => 'washuartsci',
+      'paragraph_youtube_username' => 'washuartsci',
+      'paragraph_twitter_username' => 'washuartsci',
+      'paragraph_facebook_username' => 'washuartsci',
+      'paragraph_instagram_username' => 'washuartsci',
+    ];
+    foreach ($social_configs as $key => $new_value) {
+      $current_value = $config->get($key);
+      if ($current_value === 'wustlartsci' || empty($current_value)) {
+        $config->set($key, $new_value);
+      }
+    }
+
+    $config->save();
+
+}
+
+/**
+ * Fix linkedin account.
+ */
+function olympian_core_update_9109() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('paragraph_linkedin_username', 'showcase/washu-arts-sciences/');
+  $config->save();
+}
+
+/**
+ * Removing Dark Mode
+ */
+function olympian_core_update_9110() {
+  $config = \Drupal::configFactory()->getEditable('olympian9.setting');
+  $config->set('header_color', '1');
+  $config->save();
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function olympian_core_update_9111() {
+  // Query for nodes of the "webform" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'webform' with your content type machine name.
+    ->condition('type',  'webform')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+
+/**
+ * Drop completed migrate_% db tables
+ */
+function olympian_core_update_9112() {
+$database = \Drupal::database();
+  if ($migrate_tables = $database->schema()->findTables('migrate_%')) {
+    foreach ($migrate_tables as $table) {
+      $database->schema()->dropTable($table);
+    }
+  }
+}
+
+/**
+ * Drop completed m_% db tables
+ */
+function olympian_core_update_9113() {
+$database = \Drupal::database();
+  if ($migrate_tables = $database->schema()->findTables('m_')) {
+    foreach ($migrate_tables as $table) {
+      $database->schema()->dropTable($table);
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function olympian_core_update_9114() {
+  // Query for twitter media.
+  $entity_ids = \Drupal::entityQuery('media')
+    ->condition('bundle',  'x')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the media items if they exist.
+    $nodes = Media::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+
+
+/**
+ * Implements hook_update_N().
+ */
+function olympian_core_update_9115() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $permissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+  /** @var \Drupal\user\RoleInterface[] $roles */
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  foreach ($roles as $role) {
+    $role_permissions = $role->getPermissions();
+    $differences = array_diff($role_permissions, $permissions);
+    if ($differences) {
+      foreach ($differences as $permission) {
+        $role->revokePermission($permission);
+      }
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Fixes field_is_shared value for shared events.
+ */
+function olympian_core_update_9116() {
+  // Load all nodes of type 'events' that have the 'field_shared_content_xml' field set
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'events']);
+
+  foreach ($nodes as $node) {
+    // Check if the field_shared_content_xml has a value
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // If the field has a value, set field_is_shared to 0
+      $node->set('field_is_shared', 0);
+
+      // Set new revision if needed:
+      $node->setNewRevision(TRUE);
+      $node->isDefaultRevision(TRUE);
+      $node->revision_log = 'Fixed shared field based on content XML value';
+
+      // Set revision creation time
+      $current_time = \Drupal::time()->getRequestTime();
+      $node->setRevisionCreationTime($current_time);
+
+      // Set the current user as the revision creator
+      $node->setRevisionUserId(1);
+
+      // Save the updated node
+      $node->save();
+    }
+  }
+}
+
+/**
+ * Fixes field_is_shared value for shared people.
+ */
+function olympian_core_update_9117() {
+  // Load all nodes of type 'people' that have the 'field_shared_content_xml' field set
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'faculty_staff']);
+
+  foreach ($nodes as $node) {
+    // Check if the field_shared_content_xml has a value
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // If the field has a value, set field_is_shared to 0
+      $node->set('field_is_shared', 0);
+
+      // Set new revision if needed:
+      $node->setNewRevision(TRUE);
+      $node->isDefaultRevision(TRUE);
+      $node->revision_log = 'Fixed shared field based on content XML value';
+
+      // Set revision creation time
+      $current_time = \Drupal::time()->getRequestTime();
+      $node->setRevisionCreationTime($current_time);
+
+      // Set the current user as the revision creator
+      $node->setRevisionUserId(1);
+
+      // Save the updated node
+      $node->save();
+    }
+  }
+}
+
+
+/**
+ * Fixes field_is_shared value for shared book.
+ */
+function olympian_core_update_9118() {
+  // Load all nodes of type 'book' that have the 'field_shared_content_xml' field set
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'book']);
+
+  foreach ($nodes as $node) {
+    // Check if the field_shared_content_xml has a value
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // If the field has a value, set field_is_shared to 0
+      $node->set('field_is_shared', 0);
+
+      // Set new revision if needed:
+      $node->setNewRevision(TRUE);
+      $node->isDefaultRevision(TRUE);
+      $node->revision_log = 'Fixed shared field based on content XML value';
+
+      // Set revision creation time
+      $current_time = \Drupal::time()->getRequestTime();
+      $node->setRevisionCreationTime($current_time);
+
+      // Set the current user as the revision creator
+      $node->setRevisionUserId(1);
+
+      // Save the updated node
+      $node->save();
+    }
+  }
+}
+
+
+/**
+ * Fixes field_is_shared value for shared articles.
+ */
+function olympian_core_update_9119() {
+  // Load all nodes of type 'article' that have the 'field_shared_content_xml' field set
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']);
+
+  foreach ($nodes as $node) {
+    // Check if the field_shared_content_xml has a value
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // If the field has a value, set field_is_shared to 0
+      $node->set('field_is_shared', 0);
+
+      // Set new revision if needed:
+      $node->setNewRevision(TRUE);
+      $node->isDefaultRevision(TRUE);
+      $node->revision_log = 'Fixed shared field based on content XML value';
+      // Set revision creation time
+      $current_time = \Drupal::time()->getRequestTime();
+      $node->setRevisionCreationTime($current_time);
+
+      // Set the current user as the revision creator
+      $node->setRevisionUserId(1);
+
+      // Save the updated node
+      $node->save();
+    }
+  }
+}
+
+
+/**
+ * Fixes field_shown_items value for instagram_twitter_section paragraphs.
+ */
+function olympian_core_update_9120() {
+  // Load all paragraphs of type 'instagram_twitter_section'
+  $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadByProperties(['type' => 'instagram_twitter_section']);
+
+  foreach ($paragraphs as $paragraph) {
+    // Check if the field_shown_items has a value
+    if (!empty($paragraph->get('field_shown_items')->value)) {
+      // If the field has a value, update it
+      $current_value = $paragraph->get('field_shown_items')->value;
+
+      // Update logic: Change values as per your requirement
+      // Example: Change '1' to '2', '2' to '3', etc. or any other mapping
+      switch ($current_value) {
+        case '1':
+          // Update '1' (Instagram and X) to '2' (Shown)
+          $paragraph->set('field_shown_items', 2);
+          break;
+        case '2':
+          // Update '2' (Instagram) to '3' (X)
+          $paragraph->set('field_shown_items', 2);
+          break;
+        case '3':
+          $paragraph->set('field_shown_items', 1);
+          break;
+      }
+
+      // Save the updated paragraph
+      $paragraph->save();
+    }
+  }
+}
+
+
+/**
+ * Fixes field_is_shared value for shared people.
+ */
+function olympian_core_update_9121() {
+  // Load all nodes of type 'people' that have the 'field_shared_content_xml' field set
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'faculty_staff']);
+
+  foreach ($nodes as $node) {
+    // Check if the field_shared_content_xml has a value
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // If the field has a value, set field_is_shared to 0
+      $node->set('field_is_shared', 0);
+
+      // Set new revision if needed:
+      $node->setNewRevision(TRUE);
+      $node->isDefaultRevision(TRUE);
+      $node->revision_log = 'Fixed shared field based on content XML value';
+
+      // Set revision creation time
+      $current_time = \Drupal::time()->getRequestTime();
+      $node->setRevisionCreationTime($current_time);
+
+      // Set the current user as the revision creator
+      $node->setRevisionUserId(1);
+
+      // Save the updated node
+      $node->save();
+    }
+  }
+}
+
+/**
+ * Add default value for new 403 options.
+ */
+function olympian_core_update_9122() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  if ($config->get('page.403') == $config->get('page.404')) {
+    $config->set('page.403', '/404');
+    $config->save();
+  }
+}
+
+/**
+ * Add default value for new 403 options.
+ */
+function olympian_core_update_9123() {
+  $config = \Drupal::configFactory()->getEditable('system.site');
+  $config->set('page.404', '/404');
+  $config->save();
+}
+
+/**
+ * Delete Page Not Found node entities.
+ */
+function olympian_core_update_9124() {
+ // Query for nodes of the "page_not_found" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'page_not_found' with your content type machine name.
+    ->condition('type',  'page_not_found')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+/**
+ * Rebuild user role perms after removing page not found permissions.
+ */
+function olympian_core_update_9125() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $permissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+  /** @var \Drupal\user\RoleInterface[] $roles */
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  foreach ($roles as $role) {
+    $role_permissions = $role->getPermissions();
+    $differences = array_diff($role_permissions, $permissions);
+    if ($differences) {
+      foreach ($differences as $permission) {
+        $role->revokePermission($permission);
+      }
+      $role->save();
+    }
+  }
+}
+
+/**
+ * Force update config files without drush cim.
+ */
+function olympian_core_update_9126() {
+  $config_path = DRUPAL_ROOT . '/../config/default';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+
+  // The following config is needed for the next update.
+  $config_names = [
+    'config_ignore.settings',
+    'image.style.testimonial_desktop',
+    'image.style.blog_thumbnail',
+  ];
+  $config_storage = \Drupal::service('config.storage');
+  foreach ($config_names as $config_name) {
+    $config_storage->write($config_name, $source->read($config_name));
+  }
+}
+
+/**
+ * Force update config files without drush cim.
+ */
+function olympian_core_update_9128() {
+  $config_path = DRUPAL_ROOT . '/../config/default';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+
+  // The following config is needed for the next update.
+  $config_names = [
+    'views.view.shared_content',
+    'core.entity_view_display.media.cv.shared_default',
+  ];
+  $config_storage = \Drupal::service('config.storage');
+  foreach ($config_names as $config_name) {
+    $config_storage->write($config_name, $source->read($config_name));
+  }
+}

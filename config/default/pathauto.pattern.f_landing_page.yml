@@ -1,0 +1,22 @@
+uuid: ec5e5587-b151-42d2-aecf-8a5d102059d9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: f_landing_page
+label: 'Faculty Landing Page'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:facultylanding]'
+selection_criteria:
+  17c4ad35-9567-4ce6-8c97-590b879ef536:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 17c4ad35-9567-4ce6-8c97-590b879ef536
+    context_mapping:
+      node: node
+    bundles:
+      faculty_landing_page: faculty_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

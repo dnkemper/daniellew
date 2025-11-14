@@ -1,0 +1,23 @@
+uuid: 668f6fd1-3301-4607-adbb-f57a9c1b8529
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_featured_new_window
+    - paragraphs.paragraphs_type.featured_full_w_text
+id: paragraph.featured_full_w_text.field_featured_new_window
+field_name: field_featured_new_window
+entity_type: paragraph
+bundle: featured_full_w_text
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

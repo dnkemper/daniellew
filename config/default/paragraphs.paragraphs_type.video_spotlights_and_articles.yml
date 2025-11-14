@@ -1,0 +1,10 @@
+uuid: a2a06a92-4953-4211-8bcb-6c62a15f2001
+langcode: en
+status: true
+dependencies: {  }
+id: video_spotlights_and_articles
+label: 'Video Spotlights and Articles'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Video Spotlights and Articles'
+behavior_plugins: {  }

@@ -1,0 +1,10 @@
+uuid: b85684c0-a0d9-4092-94c4-c08d871ab3d1
+langcode: en
+status: true
+dependencies: {  }
+id: article_spotlight
+label: 'Articles Spotlight'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Articles Spotlight'
+behavior_plugins: {  }

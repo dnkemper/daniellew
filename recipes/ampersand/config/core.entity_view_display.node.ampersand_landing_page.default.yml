@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.ampersand_landing_page.field_artsci_bookshelf_callout
+    - field.field.node.ampersand_landing_page.field_artsci_footer_callout_p
+    - field.field.node.ampersand_landing_page.field_artsci_in_the_news
+    - field.field.node.ampersand_landing_page.field_artsci_introduction_p
+    - field.field.node.ampersand_landing_page.field_artsci_metatags
+    - field.field.node.ampersand_landing_page.field_artsci_search
+    - field.field.node.ampersand_landing_page.field_artsci_spotlights_p
+    - node.type.ampersand_landing_page
+  module:
+    - entity_reference_revisions
+    - user
+_core:
+  default_config_hash: 9aiulJo6l-2COLSB-4lTcwvjkKCz6fVkEoTF8zUjp4M
+id: node.ampersand_landing_page.default
+targetEntityType: node
+bundle: ampersand_landing_page
+mode: default
+content:
+  field_artsci_bookshelf_callout:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_artsci_in_the_news:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_artsci_introduction_p:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_artsci_search:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_artsci_spotlights_p:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_artsci_footer_callout_p: true
+  field_artsci_metatags: true
+  links: true
+  private: true
+  search_api_excerpt: true

@@ -1,0 +1,412 @@
+uuid: 8da587ce-eb21-41ef-9b74-f1cc4d9e7184
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.publication_page.field_announcements
+    - field.field.node.publication_page.field_awards
+    - field.field.node.publication_page.field_featured_people
+    - field.field.node.publication_page.field_featured_pub_news
+    - field.field.node.publication_page.field_full_screen_video
+    - field.field.node.publication_page.field_intro_section
+    - field.field.node.publication_page.field_intro_selection_type
+    - field.field.node.publication_page.field_intro_with_table_of_conten
+    - field.field.node.publication_page.field_meta_tags
+    - field.field.node.publication_page.field_publication_call_to_action
+    - field.field.node.publication_page.field_publication_degrees
+    - field.field.node.publication_page.field_publication_gallery
+    - field.field.node.publication_page.field_publication_testimonial
+    - field.field.node.publication_page.field_search
+    - field.field.node.publication_page.field_student_stories
+    - node.type.publication_page
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - metatag
+    - paragraphs
+    - paragraphs_features
+    - path
+    - private_content
+id: node.publication_page.default
+targetEntityType: node
+bundle: publication_page
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_announcements:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: 'Announcement Section'
+      title_plural: 'Announcement Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_awards:
+    type: paragraphs
+    weight: 10
+    region: content
+    settings:
+      title: 'Awards Section'
+      title_plural: 'Awards Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_people:
+    type: paragraphs
+    weight: 7
+    region: content
+    settings:
+      title: 'Featured People Section'
+      title_plural: 'Featured People Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_pub_news:
+    type: paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: 'Featured News'
+      title_plural: 'Featured News'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_full_screen_video:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: 'Full Screen Video'
+      title_plural: 'Full Screen Videos'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_intro_section:
+    type: paragraphs
+    weight: 2
+    region: content
+    settings:
+      title: 'Standard Intro Section'
+      title_plural: 'Standard Intro Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_intro_selection_type:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_intro_with_table_of_conten:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: 'Table of Contents'
+      title_plural: 'Tables of Contents'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 22
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_publication_call_to_action:
+    type: paragraphs
+    weight: 15
+    region: content
+    settings:
+      title: 'Call to Action'
+      title_plural: 'Calls to Action'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_publication_degrees:
+    type: paragraphs
+    weight: 12
+    region: content
+    settings:
+      title: 'Degrees Section'
+      title_plural: 'Degrees Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_publication_gallery:
+    type: paragraphs
+    weight: 9
+    region: content
+    settings:
+      title: Gallery
+      title_plural: Galleries
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_publication_testimonial:
+    type: paragraphs
+    weight: 8
+    region: content
+    settings:
+      title: Testimonial
+      title_plural: Testimonials
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_search:
+    type: string_textarea
+    weight: 21
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_student_stories:
+    type: paragraphs
+    weight: 13
+    region: content
+    settings:
+      title: 'Student Stories Section'
+      title_plural: 'Student Stories Sections'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  moderation_state:
+    type: moderation_state_default
+    weight: 20
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  promote: true
+  status: true
+  sticky: true

@@ -1,0 +1,11 @@
+uuid: d5458645-fa5c-4926-82c1-8f28e22f7d05
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.large__landscape
+label: 'large landscape'
+description: ''
+targetEntityType: media
+cache: true

@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
++---------------------+----------+----------------------------+-------------+
+| Field name          | Required | Field type                 | Cardinality |
++---------------------+----------+----------------------------+-------------+
+| field_button_link   |          | link                       | 1           |
+| field_callout_title |          | string                     | 1           |
+| field_main_content  |          | text_long                  | 1           |
+| field_slideshow_p   |          | entity_reference_revisions | -1          |
+| field_title         |          | string                     | 1           |
++---------------------+----------+----------------------------+-------------+
+ * @see template_preprocess_paragraph()
+ */
+#}
+
+{% block paragraph %}
+
+  {% if content.field_slideshow_p|render or content.field_title.0 %}
+    {% set class='' %}
+  {% else %}
+    {% set class='no-aside' %}
+  {% endif %}
+  {% if content.field_slideshow_p|render or content.field_title.0 or content.field_main_content.0 or content.field_callout_title.0 or content.field_button_link[0]['#url'] or content.field_button_link[0]['#title'] %}
+  <section id="intro" class="{{ class }}" aria-label="sidebar slideshow">
+    <div class="container flex">
+      <article class="column wysiwyg">
+        <div class="inner">
+          <div class="wysiwyg-editor-text">{{ content.field_main_content }}</div>
+        </div>
+      </article>
+      {% if content.field_slideshow_p|render or content.field_title.0 %}
+        <aside class="column">
+          <div class="inner">
+            {% if content.field_title.0 %}
+              <h2>{{ content.field_title.0 }}</h2>
+            {% endif %}
+            <div class="stats slideshow text-slideshow">
+              {{ content.field_slideshow_p }}
+            </div>
+            <h2>{{ content.field_callout_title.0 }}</h2>
+
+             {% if '1' in content.field_slideshow_link_new_window[0] and content.field_button_link[0]['#url'] and content.field_button_link[0]['#title'] %}
+                <a class="button solid red" href="{{ content.field_button_link[0]['#url'] }}"
+                   aria-label="Button link originates outside of WashU">{{ content.field_button_link[0]['#title']|render }}
+                    <svg class="icon">
+              <use xlink:href="#link-out"></use>
+            </svg>
+                   </a>
+              {% elseif content.field_button_link[0]['#url'] and content.field_button_link[0]['#title'] %}
+                <a class="button solid red" href="{{ content.field_button_link[0]['#url'] }}"
+                   aria-label="Navigate to {{ content.field_button_link[0]['#title']|render }}">{{ content.field_button_link[0]['#title']|render }}</a>
+              {% endif %}
+
+          </div>
+        </aside>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+{% endblock paragraph %}

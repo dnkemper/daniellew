@@ -1,0 +1,19 @@
+uuid: ad96e82f-dd7f-48eb-baf0-9aa995aa4469
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content
+    - node.type.book
+id: node.book.field_shared_content
+field_name: field_shared_content
+entity_type: node
+bundle: book
+label: shared_content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

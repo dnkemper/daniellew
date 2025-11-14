@@ -1,0 +1,21 @@
+uuid: 487f7af8-ef42-4ea9-ac85-f6cc93de5a1c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_shared_content_notify
+field_name: field_shared_content_notify
+entity_type: node
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: olympian_core_emails_allowed_values_function
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

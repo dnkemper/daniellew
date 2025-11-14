@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 582f1150-9852-415c-b671-332a2006f4e9
+  bundle: resource_categories
+  default_langcode: und
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Faculty and Staff Resources'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /resources26
+      langcode: und
+      pathauto: 0

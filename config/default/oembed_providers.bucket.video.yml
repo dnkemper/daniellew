@@ -1,0 +1,14 @@
+uuid: 4355054f-d1b7-4277-a301-696687b38bde
+langcode: en
+status: true
+dependencies: {  }
+id: video
+label: 'Video URL'
+description: "Overrides core remote video'"
+providers:
+  - Livestream
+  - SproutVideo
+  - TED
+  - Vimeo
+  - Wave.video
+  - YouTube

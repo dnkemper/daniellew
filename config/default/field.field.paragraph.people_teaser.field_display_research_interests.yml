@@ -1,0 +1,21 @@
+uuid: dba15966-0eb7-4417-9217-8ca14b61819f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_research_interests
+    - paragraphs.paragraphs_type.people_teaser
+id: paragraph.people_teaser.field_display_research_interests
+field_name: field_display_research_interests
+entity_type: paragraph
+bundle: people_teaser
+label: 'Display Research Interests'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

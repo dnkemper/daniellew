@@ -1,0 +1,129 @@
+uuid: 301667bb-a83a-4517-99ab-5af73b202fb4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.footer
+    - field.field.node.book.field_book_categories
+    - field.field.node.book.field_byline_names
+    - field.field.node.book.field_byline_options
+    - field.field.node.book.field_content_hash
+    - field.field.node.book.field_description
+    - field.field.node.book.field_faculty_and_staff
+    - field.field.node.book.field_featured_book
+    - field.field.node.book.field_is_shared
+    - field.field.node.book.field_last_fetch
+    - field.field.node.book.field_links_p
+    - field.field.node.book.field_meta_tags
+    - field.field.node.book.field_search
+    - field.field.node.book.field_shared_content
+    - field.field.node.book.field_shared_content_notify
+    - field.field.node.book.field_shared_content_subscribers
+    - field.field.node.book.field_shared_content_xml
+    - field.field.node.book.field_thumbnail
+    - node.type.book
+  module:
+    - entity_reference_revisions
+    - options
+    - private_content
+    - text
+    - user
+id: node.book.footer
+targetEntityType: node
+bundle: book
+mode: footer
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_byline_names:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_byline_options:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_description:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_faculty_and_staff:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_is_shared:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_links_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_shared_content_xml:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_thumbnail:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: book_cover
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_book_categories: true
+  field_content_hash: true
+  field_featured_book: true
+  field_last_fetch: true
+  field_meta_tags: true
+  field_search: true
+  field_shared_content: true
+  field_shared_content_notify: true
+  field_shared_content_subscribers: true
+  search_api_excerpt: true

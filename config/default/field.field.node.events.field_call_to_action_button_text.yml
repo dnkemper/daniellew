@@ -1,0 +1,19 @@
+uuid: 0d5e1229-b550-4af2-8057-5ac955cee8ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_call_to_action_button_text
+    - node.type.events
+id: node.events.field_call_to_action_button_text
+field_name: field_call_to_action_button_text
+entity_type: node
+bundle: events
+label: 'Button Text'
+description: 'If no text is specified, the default "MORE INFO" will show.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

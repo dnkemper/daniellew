@@ -1,0 +1,20 @@
+uuid: cc9be818-36dc-4a07-b16d-03fc0c7cf183
+langcode: en
+status: true
+dependencies:
+  module:
+    - block
+    - entity_embed
+label: Masquerade
+id: masquerade
+type_id: entity
+type_settings:
+  entity_type: block
+  bundles: {  }
+  display_plugins:
+    - 'entity_reference:entity_reference_entity_view'
+  entity_browser: ''
+  entity_browser_settings:
+    display_review: false
+icon: {  }
+icon_uuid: null

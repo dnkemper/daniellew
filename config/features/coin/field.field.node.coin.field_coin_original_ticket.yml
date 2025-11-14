@@ -1,0 +1,21 @@
+uuid: 06d1fc62-8938-4038-9949-4c7fd8cd2526
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_original_ticket
+    - node.type.coin
+  module:
+    - options
+id: node.coin.field_coin_original_ticket
+field_name: field_coin_original_ticket
+entity_type: node
+bundle: coin
+label: 'Original Ticket'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

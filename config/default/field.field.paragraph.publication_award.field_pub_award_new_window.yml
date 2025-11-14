@@ -1,0 +1,23 @@
+uuid: 3f786e73-8cff-4989-8379-803c93e744e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pub_award_new_window
+    - paragraphs.paragraphs_type.publication_award
+id: paragraph.publication_award.field_pub_award_new_window
+field_name: field_pub_award_new_window
+entity_type: paragraph
+bundle: publication_award
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

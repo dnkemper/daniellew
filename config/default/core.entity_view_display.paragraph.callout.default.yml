@@ -1,0 +1,23 @@
+uuid: 6fa2fd80-0d68-4da6-80c2-8701d9390e3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.callout.field_description_formatted
+    - paragraphs.paragraphs_type.callout
+  module:
+    - text
+id: paragraph.callout.default
+targetEntityType: paragraph
+bundle: callout
+mode: default
+content:
+  field_description_formatted:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,113 @@
+// This is used in ".ck-content .hasviewmode" in editor.scss
+// and in ".wysiwyg .hasviewmode" in _base.scss.
+// Don't add anything that's not specifically shared by those two files.
+// This is only to avoid duplicate code.
+
+:root {
+  --media-viewmode-x-small: 190px;
+  --media-viewmode-small: 290px;
+  --media-viewmode-medium: 428px;
+  --media-viewmode-large: 930px;
+}
+
+@mixin image-hasviewmode-maxwidths($percentWidth: 100%) {
+  &:has(.mode-x_small, .mode-x_small__square) {
+    max-width: min($percentWidth, var(--media-viewmode-x-small));
+  }
+  &:has(
+      .mode-small,
+      .mode-small__square,
+      .mode-small__portrait,
+      .mode-small__landscape
+    ) {
+    max-width: min($percentWidth, var(--media-viewmode-small));
+  }
+  &:has(
+      .mode-medium,
+      .mode-medium__square,
+      .mode-medium__portrait,
+      .mode-medium__landscape
+    ) {
+    max-width: min($percentWidth, var(--media-viewmode-medium));
+  }
+  &:has(
+      .mode-large,
+      .mode-large__square,
+      .mode-large__portrait,
+      .mode-large__landscape
+    ) {
+    max-width: min($percentWidth, var(--media-viewmode-large));
+  }
+}
+
+@mixin image-viewmode-widths($percentWidth: 100%) {
+  &.mode-x_small,
+  &.mode-x_small__square {
+    max-width: min($percentWidth, var(--media-viewmode-x-small));
+  }
+  &.mode-small,
+  &.mode-small__square,
+  &.mode-small__portrait,
+  &.mode-small__landscape {
+    max-width: min($percentWidth, var(--media-viewmode-small));
+  }
+  &.mode-medium,
+  &.mode-medium__square,
+  &.mode-medium__portrait,
+  &.mode-medium__landscape {
+    max-width: min($percentWidth, var(--media-viewmode-medium));
+  }
+  &.mode-large,
+  &.mode-large__square,
+  &.mode-large__portrait,
+  &.mode-large__landscape {
+    max-width: min($percentWidth, var(--media-viewmode-large));
+  }
+}
+
+@mixin image-viewmodes {
+  .hasviewmode {
+    max-width: 100%;
+
+    img {
+      display: block;
+      object-fit: cover; // cover the space if the intrinsic size is big enough
+      width: revert-layer;
+      //min-height: 100%; --> no longer necessary
+      max-height: 100%;
+    }
+
+    // set widths
+    @include image-viewmode-widths(100%);
+
+    // Set aspect ratios
+    &.mode-x_small__square,
+    &.mode-small__square,
+    &.mode-medium__square,
+    &.mode-large__square {
+      img {
+        aspect-ratio: 1/1;
+      }
+    }
+
+    &.mode-small__portrait,
+    &.mode-medium__portrait,
+    &.mode-large__portrait {
+      img {
+        aspect-ratio: 2/3;
+      }
+    }
+
+    &.mode-small__landscape,
+    &.mode-medium__landscape,
+    &.mode-large__landscape {
+      img {
+        aspect-ratio: 16/9;
+      }
+    }
+  }
+
+  figure.hasviewmode > div {
+    height: 100%;
+  }
+}

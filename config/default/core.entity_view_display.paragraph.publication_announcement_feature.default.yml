@@ -1,0 +1,59 @@
+uuid: 0a73fbab-ddaa-48c0-93a7-04c93aef55d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_announcement_feature.field_announcement_image
+    - field.field.paragraph.publication_announcement_feature.field_background_color_announce
+    - field.field.paragraph.publication_announcement_feature.field_description
+    - field.field.paragraph.publication_announcement_feature.field_subtitle
+    - field.field.paragraph.publication_announcement_feature.field_title
+    - paragraphs.paragraphs_type.publication_announcement_feature
+  module:
+    - options
+id: paragraph.publication_announcement_feature.default
+targetEntityType: paragraph
+bundle: publication_announcement_feature
+mode: default
+content:
+  field_announcement_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_background_color_announce:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

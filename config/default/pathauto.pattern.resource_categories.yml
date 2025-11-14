@@ -1,0 +1,22 @@
+uuid: d09edad2-c2ed-4704-9f20-1ddc804b5980
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: resource_categories
+label: 'Resource Categories'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[olympian_seo:resourceslanding][olympian_seo:tid][term:tid]'
+selection_criteria:
+  dc594b8e-4ead-473c-8ba0-616ccdb998a6:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: dc594b8e-4ead-473c-8ba0-616ccdb998a6
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      resource_categories: resource_categories
+selection_logic: and
+weight: -5
+relationships: {  }

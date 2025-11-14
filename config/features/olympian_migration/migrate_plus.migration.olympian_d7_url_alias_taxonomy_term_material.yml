@@ -1,0 +1,47 @@
+uuid: 0c1fe20e-a8eb-49d0-aca3-7e6927fe7c83
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_url_alias_taxonomy_term_material
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'URL aliases of Material taxonomy terms'
+source:
+  plugin: d7_url_alias
+  constants:
+    slash: /
+  entity_type_id: taxonomy_term
+  bundle: material
+process:
+  id:
+    -
+      plugin: get
+      source: pid
+  alias:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - alias
+  langcode:
+    -
+      plugin: get
+      source: language
+  path:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - source
+destination:
+  plugin: 'entity:path_alias'
+migration_dependencies:
+  required:
+    - olympian_d7_taxonomy_term_material
+  optional:
+    - olympian_d7_taxonomy_term_material

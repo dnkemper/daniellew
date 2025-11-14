@@ -1,0 +1,10 @@
+uuid: b5c52ccb-7020-4e84-a4e2-b2465b8775ea
+langcode: en
+status: true
+dependencies: {  }
+id: image_gallery
+label: 'Image Gallery'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Image Gallery'
+behavior_plugins: {  }

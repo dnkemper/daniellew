@@ -1,0 +1,29 @@
+uuid: 3e42efd8-d505-4116-9854-0bd279bdfdd5
+langcode: en
+status: true
+dependencies:
+  module:
+    - shared_content
+title: 'Default cron handler'
+id: shared_content_cron
+weight: 0
+module: shared_content
+callback: shared_content_cron
+scheduler:
+  id: crontab
+  configuration:
+    rules:
+      - '0 6,18 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

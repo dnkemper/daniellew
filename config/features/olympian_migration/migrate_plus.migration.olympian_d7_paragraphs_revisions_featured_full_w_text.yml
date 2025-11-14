@@ -1,0 +1,70 @@
+uuid: 8b5544a0-3f5a-417e-bc09-2200622dc132
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_featured_full_w_text
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Featured Full w/Text)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: featured_full_w_text
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_feat_full_background_image:
+    plugin: sub_process
+    source: field_feat_full_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_optional_header:
+    -
+      plugin: get
+      source: field_optional_header
+  field_additional_information:
+    -
+      plugin: get
+      source: field_additional_information
+  field_custom_button:
+    plugin: field_link_custom
+    source: field_custom_button_
+    title_source: field_custom_button/0/title
+  field_main_title:
+    plugin: field_link_custom
+    source: field_main_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: featured_full_w_text
+migration_dependencies:
+  required: {}
+  optional: {  }

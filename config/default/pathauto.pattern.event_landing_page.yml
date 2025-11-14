@@ -1,0 +1,22 @@
+uuid: 3eed6820-34f2-48bf-823c-8e0efaf66daa
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: event_landing_page
+label: 'Event Landing Page'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:eventlanding]'
+selection_criteria:
+  079f79d8-381c-40a7-8002-903343bd61fb:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 079f79d8-381c-40a7-8002-903343bd61fb
+    context_mapping:
+      node: node
+    bundles:
+      events_landing_page: events_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

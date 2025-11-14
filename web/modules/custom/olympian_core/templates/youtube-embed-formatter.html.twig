@@ -1,0 +1,52 @@
+{#
+/**
+ * @file
+ * Default theme implementation for YouTube embed formatter.
+ *
+ * Available variables:
+ * - video_id: The YouTube video ID.
+ * - width: The width of the video.
+ * - height: The height of the video.
+ * - responsive: Whether to make the video responsive.
+ * - parameters: Array of YouTube embed parameters.
+ * - show_url: Whether to display the embed URL as text.
+ */
+#}
+{% if video_id %}
+  {% set embed_url = 'https://www.youtube.com/embed/' ~ video_id %}
+  {% set query_params = [] %}
+  {% for key, value in parameters %}
+    {% set query_params = query_params|merge([key ~ '=' ~ value]) %}
+  {% endfor %}
+  {% if query_params %}
+    {% set embed_url = embed_url ~ '?' ~ query_params|join('&') %}
+  {% endif %}
+
+  {% if responsive %}
+    <div class="youtube-embed-responsive">
+      <iframe
+        src="{{ embed_url }}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  {% else %}
+    <div class="youtube-embed-fixed">
+      <iframe
+        src="{{ embed_url }}"
+        width="{{ width }}"
+        height="{{ height }}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  {% endif %}
+
+  {% if show_url %}
+    <div class="youtube-embed-url" style="margin-top: 10px; font-size: 0.9em;">
+      <strong>Embed URL:</strong> <a href="{{ embed_url }}" target="_blank" rel="noopener">{{ embed_url }}</a>
+    </div>
+  {% endif %}
+{% endif %}

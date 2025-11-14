@@ -1,0 +1,69 @@
+uuid: 1bf9dc25-72a6-4480-92a0-15c35eb412ad
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_jump_to
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Jump To)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: jump_to
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_links_p:
+    -
+      plugin: sub_process
+      source: field_links_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: jump_to
+migration_dependencies: {  }

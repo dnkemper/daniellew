@@ -1,0 +1,76 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 98d035c6-646a-476d-a75f-389a4d96573a
+  bundle: faculty_landing_page
+  default_langcode: en
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: People
+  created:
+    -
+      value: 1690474908
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /people
+      langcode: en
+      pathauto: 0
+  field_areas_of_interest_title:
+    -
+      value: test
+  field_faculty_column_layout:
+    -
+      value: areas
+  field_introduction_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 634d4f18-3879-48c9-8ca4-e85824c1d375
+          bundle: introduction
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690474926
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_ampersand:
+            -
+              value: true
+          field_background:
+            -
+              value: White
+          field_headline:
+            -
+              value: 'Our People'

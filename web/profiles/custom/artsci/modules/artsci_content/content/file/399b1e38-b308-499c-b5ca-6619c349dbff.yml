@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 399b1e38-b308-499c-b5ca-6619c349dbff
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: externalresourcesformilitarystudents_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/externalresourcesformilitarystudents_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 25878
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

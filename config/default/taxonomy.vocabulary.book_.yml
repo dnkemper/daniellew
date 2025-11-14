@@ -1,0 +1,9 @@
+uuid: 0ca276c6-3033-4179-86d4-2b69924274f5
+langcode: en
+status: true
+dependencies: {  }
+name: Book
+vid: book_
+description: null
+weight: 0
+new_revision: false

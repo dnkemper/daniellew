@@ -1,0 +1,50 @@
+uuid: 9f7f4b11-0c66-4a94-8100-be920515d3eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.spotlights.field_spotlight_image
+    - field.field.paragraph.spotlights.field_spotlight_video_short
+    - field.field.paragraph.spotlights.field_spotlight_video_title
+    - field.field.paragraph.spotlights.field_spotlight_video_url
+    - paragraphs.paragraphs_type.spotlights
+id: paragraph.spotlights.default
+targetEntityType: paragraph
+bundle: spotlights
+mode: default
+content:
+  field_spotlight_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight_desktop
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_spotlight_video_short:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_spotlight_video_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_spotlight_video_url:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,110 @@
+uuid: e1ad31cb-cf50-4a55-b220-641b90804671
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_taxonomy_term_ruler
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Taxonomy terms (Ruler)'
+source:
+  plugin: d7_taxonomy_term
+  bundle: ruler
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  revision_id:
+    -
+      plugin: get
+      source: tid
+  vid:
+    -
+      plugin: migration_lookup
+      migration: olympian_d7_taxonomy_vocabulary
+      source: vid
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+  parent_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration:
+        - olympian_d7_taxonomy_term_article_categories
+        - olympian_d7_taxonomy_term_event_categories
+        - olympian_d7_taxonomy_term_levels
+        - olympian_d7_taxonomy_term_leadership_administrative_staff
+        - olympian_d7_taxonomy_term_resource_categories
+        - olympian_d7_taxonomy_term_media_folders
+        - olympian_d7_taxonomy_term_tags
+        - olympian_d7_taxonomy_term_image_cards
+        - olympian_d7_taxonomy_term_book_
+        - olympian_d7_taxonomy_term_denomination
+        - olympian_d7_taxonomy_term_inscription_language
+        - olympian_d7_taxonomy_term_issuer
+        - olympian_d7_taxonomy_term_material
+        - olympian_d7_taxonomy_term_mintmarks
+        - olympian_d7_taxonomy_term_object_type
+        - olympian_d7_taxonomy_term_portrayed
+        - olympian_d7_taxonomy_term_ruler
+        - olympian_d7_taxonomy_term_status
+        - olympian_d7_taxonomy_term_mint
+        - olympian_d7_taxonomy_term_language
+        - olympian_d7_taxonomy_term_collection
+        - olympian_d7_taxonomy_term_object_number
+        - olympian_d7_taxonomy_term_acquisition_year
+        - olympian_d7_taxonomy_term_lot_number
+        - olympian_d7_taxonomy_term_areas_of_interest
+        - olympian_d7_taxonomy_term_concentration
+        - olympian_d7_taxonomy_term_course_level
+        - olympian_d7_taxonomy_term_requirements
+        - olympian_d7_taxonomy_term_semester
+        - olympian_d7_taxonomy_term_grad_undergrad
+  parent:
+    -
+      plugin: default_value
+      default_value: 0
+      source: '@parent_id'
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  langcode:
+    -
+      plugin: get
+      source: language
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: ruler
+migration_dependencies:
+  required:
+    - olympian_d7_taxonomy_vocabulary
+  optional:
+    - olympian_d7_field_instance
+    - olympian_d7_taxonomy_vocabulary

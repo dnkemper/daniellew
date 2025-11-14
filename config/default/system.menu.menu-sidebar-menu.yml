@@ -1,0 +1,8 @@
+uuid: 20948fbf-5333-4c7b-892f-2002d9a4fba9
+langcode: en
+status: true
+dependencies: {  }
+id: menu-sidebar-menu
+label: 'Sidebar Menu'
+description: 'Optional sidebar menu for navigating related content.'
+locked: false

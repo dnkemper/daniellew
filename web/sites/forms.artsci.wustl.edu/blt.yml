@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: forms.ddev.site
+    protocol: https
+  machine_name: forms
+  human_name: forms.artsci.wustl.edu
+drush:
+  aliases:
+    local: forms.local
+    remote: forms.remote
+drupal:
+  db:
+    database: drupal_forms
+artsci:
+  stage_file_proxy:
+    origin: 'https://forms.artsci.wustl.edu'
+    origin_dir: sites/forms.artsci.wustl.edu/files
+system:
+  site:
+    contact_us_url: 'https://forms.artsci.wustl.edu/contact-us'
+    name: forms
+    email: forms@wustl.edu

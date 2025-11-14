@@ -1,0 +1,11 @@
+adding:
+  file:
+    file_public: true
+    make_unused_managed_files_temporary: true
+removing:
+  element:
+    excluded_elements:
+      managed_file: managed_file
+  file:
+    file_public: false
+    make_unused_managed_files_temporary: false

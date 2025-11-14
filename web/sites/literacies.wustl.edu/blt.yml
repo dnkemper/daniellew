@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: literacies.ddev.site
+    protocol: https
+  machine_name: literacies
+  human_name: literacies.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: literacies.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/literacies.wustl.edu/files'
+    origin: 'https://literacies.wustl.edu'
+drupal:
+  db:
+    database: drupal_literacies
+system:
+  site:
+    contact_us_url: 'https://literacies.wustl.edu/contact-us'
+    name: literacies
+    email: literacies@wustl.edu

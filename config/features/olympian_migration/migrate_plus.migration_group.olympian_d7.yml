@@ -1,0 +1,20 @@
+uuid: 6f85593f-7d8b-487d-8c94-bd0279c6f0dc
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7
+label: 'Import from Drupal 7'
+description: 'Migrations originally generated from drush migrate-upgrade --configure-only'
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: migrate
+  media_view_mode_width_ranges:
+    x_small: {min: 0, max: 238}
+    small: {min: 239, max: 362}
+    medium: {min: 363, max: 535}
+    large: {min: 536, max: 999999}
+  media_view_mode_aligned_size:
+    max_width: 535
+    view_mode: medium

@@ -1,0 +1,551 @@
+id: node_home_page
+migration_group: olympian_migration
+label: Migrate home page content from Drupal 7
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: home_page
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   Field name                         Required   Field type                   Cardinality
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   date_repeat_entity_clone_state                boolean                      1
+#   date_repeat_entity_master_uuid                string                       1
+#   field_add_resources                           entity_reference_revisions   1
+#   field_call_to_action                          entity_reference_revisions   1
+#   field_event_and_article_spotligh              entity_reference_revisions   1
+#   field_events                                  entity_reference_revisions   1
+#   field_featured_cap_overlay                    boolean                      1
+#   field_featured_full_w_text                    entity_reference_revisions   5
+#   field_featured_image_and_text                 entity_reference_revisions   5
+#   field_featured_news                           entity_reference_revisions   1
+#   field_featured_with_caption                   entity_reference_revisions   5
+#   field_featured_without_caption                entity_reference_revisions   1
+#   field_full_width_slide                        entity_reference_revisions   3
+#   field_generic_intro_with_image                entity_reference_revisions   1
+#   field_generic_intro_with_side_it              entity_reference_revisions   1
+#   field_half_text_and_half_testimo              entity_reference_revisions   1
+#   field_home_testimonial                        entity_reference_revisions   1
+#   field_instagram_and_twitter                   entity_reference_revisions   1
+#   field_intro_type                              list_string                  1
+#   field_links_p                                 entity_reference_revisions   -1
+#   field_meta_tags                               metatag                      1
+#   field_search                                  string_long                  1
+#   field_second_spotlight                        entity_reference_revisions   1
+#   field_slideshow_type                          list_string                  1
+#   field_spotlights_p                            entity_reference_revisions   1
+#   field_video                                   entity_reference_revisions   1
+#   field_video_spotlight_and_articl              entity_reference_revisions   1
+#  ---------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: home_page
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    - 
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  date_repeat_entity_clone_state:
+    plugin: get
+    source: date_repeat_entity_clone_state
+  date_repeat_entity_master_uuid:
+    plugin: get
+    source: date_repeat_entity_master_uuid
+
+  field_events:
+    plugin: sub_process
+    source: field_events
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_events
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_links
+        source: revision_id
+      target_id: 
+        plugin: extract_nth
+        source: '@temporary_ids'
+        index: 0
+      target_revision_id:
+        plugin: extract_nth
+        source: '@temporary_ids'
+        index: 1
+
+  field_spotlights_p:
+    plugin: sub_process
+    source: field_spotlights_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_spotlights
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_featured_full_w_text:
+    plugin: sub_process
+    source: field_featured_full_w_text
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_featured_full_w_text
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_featured_with_caption:
+    plugin: sub_process
+    source: field_featured_with_caption
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_featured_with_caption
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  #This is a funky migration because of paragraph revisions being out of whack
+  # field_links_p:
+  #   plugin: sub_process
+  #   source: field_links_p
+  #   process:
+  #     temporary_ids:
+  #       plugin: migration_lookup
+  #       migration: paragraph_links
+  #       source: revision_id
+  #     target_id: 
+  #       plugin: extract_nth
+  #       source: '@temporary_ids'
+  #       index: 0
+  #     target_revision_id:
+  #       plugin: extract_nth
+  #       source: '@temporary_ids'
+  #       index: 1
+
+
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    plugin: get
+    source: field_meta_tags
+
+
+  field_slideshow_type:
+    plugin: get
+    source: field_slideshow_type
+
+  field_featured_image_and_text:
+    plugin: sub_process
+    source: field_featured_image_and_text
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_featured_half_image_w_text
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_generic_intro_with_image:
+    plugin: sub_process
+    source: field_generic_intro_with_image
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_intro_text_with_image
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+
+  field_generic_intro_with_side_it:
+    plugin: sub_process
+    source: field_generic_intro_with_side_it
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_intro_with_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_intro_type:
+    plugin: get
+    source: field_intro_type
+
+  field_full_width_slide:
+    plugin: sub_process
+    source: field_full_width_slide
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_full_screen_home_slide
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_home_testimonial:
+    plugin: sub_process
+    source: field_home_testimonial
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_testimonials
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_video:
+    plugin: sub_process
+    source: field_video
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # Paragraphs field mappings
+  field_add_resources:
+    plugin: sub_process
+    source: field_add_resources
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_additional_resources
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_call_to_action:
+    plugin: sub_process
+    source: field_call_to_action
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_call_to_action_blocks
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_half_text_and_half_testimo:
+    plugin: sub_process
+    source: field_half_text_and_half_testimo
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_text_link_with_testimonial
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_featured_news:
+    plugin: sub_process
+    source: field_featured_news
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_featured_news
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_event_and_article_spotligh:
+    plugin: sub_process
+    source: field_event_and_article_spotligh
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_article_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_video_spotlight_and_articl:
+    plugin: sub_process
+    source: field_video_spotlight_and_articl
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_video_spotlights_and_articles
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_second_spotlight:
+    plugin: sub_process
+    source: field_second_spotlight
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_instagram_and_twitter:
+    plugin: sub_process
+    source: field_instagram_and_twitter
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_instagram_twitter_section
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: home_page
+migration_dependencies:
+  required:
+    - paragraph_additional_resource
+    - paragraph_links
+    - paragraph_button
+    - paragraph_title_and_body
+    - node_events
+    - node_articles
+    - node_testimonial
+    - node_resources
+    - paragraph_testimonial
+    - paragraph_events
+    - paragraph_spotlights
+    - paragraph_featured_full_w_text
+    - paragraph_featured_with_caption
+    - paragraph_featured_half_image_w_text
+    - paragraph_intro_text_with_image
+    - paragraph_intro_with_links
+    - paragraph_full_screen_home_slide
+    - paragraph_testimonials
+    - paragraph_additional_resources
+    - paragraph_text_link_with_testimonial
+    - paragraph_call_to_action_blocks
+    - paragraph_featured_news
+    - paragraph_instagram_twitter_section
+    - paragraph_article_spotlight
+    - paragraph_video_spotlights_and_articles
+  optional: {  }

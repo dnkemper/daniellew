@@ -1,0 +1,39 @@
+uuid: 372e8bf0-c11c-4058-8a1d-3181b11c4441
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.button.field_call_to_action_button
+    - field.field.paragraph.button.field_new_window
+    - paragraphs.paragraphs_type.button
+  module:
+    - link
+id: paragraph.button.default
+targetEntityType: paragraph
+bundle: button
+mode: default
+content:
+  field_call_to_action_button:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

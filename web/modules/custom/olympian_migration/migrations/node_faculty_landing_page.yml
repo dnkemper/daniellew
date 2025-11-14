@@ -1,0 +1,136 @@
+id: node_faculty_landing_page
+migration_group: olympian_migration
+label: Migrate faculty landing page content from Drupal 7
+migration_tags:
+  - artsci
+source:
+  plugin: d7_node_with_alias
+  node_type: faculty_landing_page
+#  ------------------------------- ---------- ---------------------------- -------------
+#   Field name                      Required   Field type                   Cardinality
+#  ------------------------------- ---------- ---------------------------- -------------
+#   field_areas_of_interest_title              string                       1
+#   field_default_person_type                  list_string                  1
+#   field_faculty_column_layout     ✔          list_string                  1
+#   field_introduction_p                       entity_reference_revisions   1
+#   field_meta_tags                            metatag                      1
+#   field_search                               string_long                  1
+#  ------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: faculty_landing_page  # Replace with the machine name of the 'events' content type in D10 if different
+  #Don't import borrowed content here
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_faculty_column_layout:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: person_filter_layout
+    -
+      plugin: static_map
+      map:
+        '1': 'areas'
+        '2': 'null'
+  field_default_person_type:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: default_people
+    -
+      plugin: get
+      source: default_people
+
+  field_areas_of_interest_title:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: areas_of_interest_title
+    -
+      plugin: get
+      source: areas_of_interest_title
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    plugin: get
+    source: field_meta_tags
+destination:
+  plugin: 'entity:node'
+  default_bundle: faculty_landing_page
+migration_dependencies:
+  required:
+    - paragraph_introduction
+    - node_faculty_staff
+  optional: {  }

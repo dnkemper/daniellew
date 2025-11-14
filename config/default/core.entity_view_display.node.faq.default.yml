@@ -1,0 +1,81 @@
+uuid: 3ce391c3-a542-4679-8e78-ee84b64c7530
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.faq.field_faqs
+    - field.field.node.faq.field_footer_callout_p
+    - field.field.node.faq.field_introduction_p
+    - field.field.node.faq.field_meta_tags
+    - field.field.node.faq.field_search
+    - node.type.faq
+  module:
+    - entity_reference_revisions
+    - metatag
+    - private_content
+    - user
+id: node.faq.default
+targetEntityType: node
+bundle: faq
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_faqs:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_introduction_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

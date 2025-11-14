@@ -1,0 +1,10 @@
+uuid: 6555df4d-45bd-4dff-b94f-50d74f1aaae7
+langcode: en
+status: true
+dependencies: {  }
+id: tabs
+label: Tabs
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Tabs'
+behavior_plugins: {  }

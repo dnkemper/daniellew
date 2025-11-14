@@ -1,0 +1,19 @@
+uuid: 52b621ea-cbdc-45d3-a1ae-f02d37ceea9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_feat_article_title
+    - paragraphs.paragraphs_type.featured_news
+id: paragraph.featured_news.field_feat_article_title
+field_name: field_feat_article_title
+entity_type: paragraph
+bundle: featured_news
+label: 'Main Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

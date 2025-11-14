@@ -1,0 +1,10 @@
+uuid: 2af5f303-6616-40d4-b004-e67de1181c19
+langcode: en
+status: true
+dependencies: {  }
+id: featured_news
+label: 'Featured News'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Featured News'
+behavior_plugins: {  }

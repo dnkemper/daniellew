@@ -1,0 +1,11 @@
+uuid: 17eb85ed-cbc1-4e1f-9364-270c08c3ea66
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.wysiwyg
+label: wysiwyg
+description: faculty
+targetEntityType: media
+cache: true

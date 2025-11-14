@@ -1,0 +1,23 @@
+uuid: f8c89bbe-0993-411e-8517-759a22bb6121
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_us_link
+    - node.type.resources_landing_page
+  module:
+    - link
+id: node.resources_landing_page.field_contact_us_link
+field_name: field_contact_us_link
+entity_type: node
+bundle: resources_landing_page
+label: 'Contact Us Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 1
+field_type: link

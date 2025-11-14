@@ -1,0 +1,58 @@
+uuid: 4dbea7b8-cae7-46ae-85c7-431dea70ad72
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publication_award
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Award)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publication_award
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_read_the_story_link_url:
+    plugin: field_link_custom
+    source: field_read_the_story_link_url
+  field_recipient_title:
+    -
+      plugin: get
+      source: field_recipient_title
+  field_awards_description:
+    -
+      plugin: get
+      source: field_awards_description
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publication_award
+migration_dependencies:
+  required: {}
+  optional: {  }

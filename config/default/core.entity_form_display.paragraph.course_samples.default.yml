@@ -1,0 +1,60 @@
+uuid: a524f0b0-8bc0-424d-a34c-9d82d8ee481b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.course_samples.field_description
+    - field.field.paragraph.course_samples.field_links_p
+    - field.field.paragraph.course_samples.field_title
+    - paragraphs.paragraphs_type.course_samples
+  module:
+    - paragraphs
+    - paragraphs_features
+id: paragraph.course_samples.default
+targetEntityType: paragraph
+bundle: course_samples
+mode: default
+content:
+  field_description:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_links_p:
+    type: paragraphs
+    weight: 2
+    region: content
+    settings:
+      title: Link
+      title_plural: Links
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

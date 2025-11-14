@@ -1,0 +1,222 @@
+uuid: 934b188a-6ad2-4711-815d-359a20d74ce7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.coin.body
+    - field.field.node.coin.field_coin_acquisition_y
+    - field.field.node.coin.field_coin_additional_image
+    - field.field.node.coin.field_coin_authority_issuer
+    - field.field.node.coin.field_coin_authority_ruler
+    - field.field.node.coin.field_coin_bibliography
+    - field.field.node.coin.field_coin_collection
+    - field.field.node.coin.field_coin_collection_number
+    - field.field.node.coin.field_coin_conservation
+    - field.field.node.coin.field_coin_curators_comment
+    - field.field.node.coin.field_coin_date_first
+    - field.field.node.coin.field_coin_date_last
+    - field.field.node.coin.field_coin_denomination
+    - field.field.node.coin.field_coin_die_axis
+    - field.field.node.coin.field_coin_dimensions_1
+    - field.field.node.coin.field_coin_languages
+    - field.field.node.coin.field_coin_lot_num
+    - field.field.node.coin.field_coin_material
+    - field.field.node.coin.field_coin_meta_tags
+    - field.field.node.coin.field_coin_mint1
+    - field.field.node.coin.field_coin_object_num
+    - field.field.node.coin.field_coin_object_type
+    - field.field.node.coin.field_coin_obverse_comment
+    - field.field.node.coin.field_coin_obverse_description
+    - field.field.node.coin.field_coin_obverse_image
+    - field.field.node.coin.field_coin_obverse_languages
+    - field.field.node.coin.field_coin_obverse_legend
+    - field.field.node.coin.field_coin_obverse_mintmarks
+    - field.field.node.coin.field_coin_original_ticket
+    - field.field.node.coin.field_coin_original_ticket_photo
+    - field.field.node.coin.field_coin_permanent_location
+    - field.field.node.coin.field_coin_portrayed
+    - field.field.node.coin.field_coin_provenance
+    - field.field.node.coin.field_coin_purchase_information
+    - field.field.node.coin.field_coin_reverse_comment
+    - field.field.node.coin.field_coin_reverse_description
+    - field.field.node.coin.field_coin_reverse_image
+    - field.field.node.coin.field_coin_reverse_languages
+    - field.field.node.coin.field_coin_reverse_legend
+    - field.field.node.coin.field_coin_reverse_mintmarks
+    - field.field.node.coin.field_coin_status
+    - field.field.node.coin.field_coin_temporary_location
+    - field.field.node.coin.field_coin_value
+    - field.field.node.coin.field_coin_weight
+    - node.type.coin
+  module:
+    - user
+id: node.coin.teaser
+targetEntityType: node
+bundle: coin
+mode: teaser
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_coin_acquisition_y:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_coin_authority_issuer:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_coin_date_first:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_coin_date_last:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_coin_denomination:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_coin_dimensions_1:
+    type: number_decimal
+    label: visually_hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  field_coin_languages:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_coin_lot_num:
+    type: number_integer
+    label: visually_hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_coin_material:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_coin_mint1:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_coin_object_num:
+    type: number_integer
+    label: visually_hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_coin_object_type:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_coin_obverse_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_coin_weight:
+    type: number_decimal
+    label: visually_hidden
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 13
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  body: true
+  field_coin_additional_image: true
+  field_coin_authority_ruler: true
+  field_coin_bibliography: true
+  field_coin_collection: true
+  field_coin_collection_number: true
+  field_coin_conservation: true
+  field_coin_curators_comment: true
+  field_coin_die_axis: true
+  field_coin_meta_tags: true
+  field_coin_obverse_comment: true
+  field_coin_obverse_description: true
+  field_coin_obverse_languages: true
+  field_coin_obverse_legend: true
+  field_coin_obverse_mintmarks: true
+  field_coin_original_ticket: true
+  field_coin_original_ticket_photo: true
+  field_coin_permanent_location: true
+  field_coin_portrayed: true
+  field_coin_provenance: true
+  field_coin_purchase_information: true
+  field_coin_reverse_comment: true
+  field_coin_reverse_description: true
+  field_coin_reverse_image: true
+  field_coin_reverse_languages: true
+  field_coin_reverse_legend: true
+  field_coin_reverse_mintmarks: true
+  field_coin_status: true
+  field_coin_temporary_location: true
+  field_coin_value: true
+  search_api_excerpt: true

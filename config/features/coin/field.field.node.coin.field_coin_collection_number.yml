@@ -1,0 +1,19 @@
+uuid: 1c684f9d-9097-487b-9fce-059960468016
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_collection_number
+    - node.type.coin
+id: node.coin.field_coin_collection_number
+field_name: field_coin_collection_number
+entity_type: node
+bundle: coin
+label: 'Collection Number'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

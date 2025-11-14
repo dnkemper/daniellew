@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4592e21f-f584-48ce-b767-244c27ad6091
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: financialservices_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/financialservices_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 25718
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

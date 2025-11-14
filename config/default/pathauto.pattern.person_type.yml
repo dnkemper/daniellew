@@ -1,0 +1,22 @@
+uuid: 1a59b2c7-c29b-4f95-9c72-b16a3da16ee0
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: person_type
+label: 'Person Type'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[olympian_seo:facultylanding][olympian_seo:tid][term:tid]'
+selection_criteria:
+  466919fe-df5f-4569-b3ba-dcda11a4ba15:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 466919fe-df5f-4569-b3ba-dcda11a4ba15
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      leadership_administrative_staf: leadership_administrative_staf
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: fellowshipsoffice.ddev.site
+    protocol: https
+  machine_name: fellowshipsoffice
+  human_name: fellowshipsoffice.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: fellowshipsoffice.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/fellowshipsoffice.wustl.edu/files'
+    origin: 'https://fellowshipsoffice.wustl.edu'
+drupal:
+  db:
+    database: drupal_fellowshipsoffice
+system:
+  site:
+    contact_us_url: 'https://fellowshipsoffice.wustl.edu/contact-us'
+    name: fellowshipsoffice
+    email: fellowshipsoffice@wustl.edu

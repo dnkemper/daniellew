@@ -1,0 +1,22 @@
+uuid: 8ebdcd34-dfa7-4597-a350-7340b7c1997d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: people
+label: People
+type: 'canonical_entities:node'
+pattern: 'people/[node:title]'
+selection_criteria:
+  2d331e6d-5b09-42d3-919e-7c765d2ed30d:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 2d331e6d-5b09-42d3-919e-7c765d2ed30d
+    context_mapping:
+      node: node
+    bundles:
+      faculty_staff: faculty_staff
+selection_logic: and
+weight: -5
+relationships: {  }

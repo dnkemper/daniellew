@@ -1,0 +1,19 @@
+uuid: 593c52a8-d106-48f4-8fda-bf9e64864345
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search
+    - node.type.faculty_landing_page
+id: node.faculty_landing_page.field_search
+field_name: field_search
+entity_type: node
+bundle: faculty_landing_page
+label: Search
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,27 @@
+uuid: 652945ab-3a94-4eda-b9d6-0f9961fa115b
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.landscape_16_9_320w
+    - image.style.landscape_16_9_448w
+    - image.style.landscape_16_9_600w
+    - image.style.landscape_16_9_944w
+    - image.style.square_1_1_1888w
+id: resp_landscape_to_square
+label: 'resp landscape-to-square'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:1029px) 85vw, 1300px'
+      sizes_image_styles:
+        - landscape_16_9_320w
+        - landscape_16_9_448w
+        - landscape_16_9_600w
+        - landscape_16_9_944w
+        - square_1_1_1888w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_1888w

@@ -1,0 +1,253 @@
+uuid: 7cc143e9-b297-4dd8-bed4-d4a20f753eb6
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_entity_browser
+    - entity_browser.browser.media_entity_browser_modal
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - media.type.cv
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.soundcloud
+    - node.type.article
+    - node.type.book
+    - node.type.events
+    - node.type.faculty_staff
+    - node.type.faq
+    - node.type.generic_page
+    - node.type.image_cards
+    - node.type.page
+    - node.type.publication_page
+    - node.type.resources
+    - node.type.testimonial
+    - taxonomy.vocabulary.media_folders
+    - workflows.workflow.editorial
+  module:
+    - access_unpublished
+    - actions_permissions
+    - captcha
+    - content_moderation
+    - entity_browser
+    - file
+    - filter
+    - media
+    - metatag_extended_perms
+    - node
+    - node_view_permissions
+    - olympian_core
+    - path
+    - private_content
+    - rebuild_cache_access
+    - replicate_ui
+    - system
+    - taxonomy
+    - toolbar
+id: editor
+label: Editor
+weight: -7
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access media overview'
+  - 'access media_entity_browser entity browser pages'
+  - 'access media_entity_browser_modal entity browser pages'
+  - 'access metatag advanced__author'
+  - 'access metatag advanced__cache_control'
+  - 'access metatag advanced__canonical_url'
+  - 'access metatag advanced__expires'
+  - 'access metatag advanced__geo_placename'
+  - 'access metatag advanced__geo_position'
+  - 'access metatag advanced__geo_region'
+  - 'access metatag advanced__google'
+  - 'access metatag advanced__icbm'
+  - 'access metatag advanced__image_src'
+  - 'access metatag advanced__next'
+  - 'access metatag advanced__original_source'
+  - 'access metatag advanced__pragma'
+  - 'access metatag advanced__prev'
+  - 'access metatag advanced__rating'
+  - 'access metatag advanced__referrer'
+  - 'access metatag advanced__refresh'
+  - 'access metatag advanced__revisit_after'
+  - 'access metatag advanced__rights'
+  - 'access metatag advanced__robots'
+  - 'access metatag advanced__set_cookie'
+  - 'access metatag advanced__shortlink'
+  - 'access metatag basic__abstract'
+  - 'access metatag basic__description'
+  - 'access metatag basic__keywords'
+  - 'access metatag basic__title'
+  - 'access metatag site_verification__facebook_domain_verification'
+  - 'access metatag site_verification__google_site_verification'
+  - 'access private content'
+  - 'access toolbar'
+  - 'access_unpublished node article'
+  - 'access_unpublished node book'
+  - 'access_unpublished node contact_landing_page'
+  - 'access_unpublished node events'
+  - 'access_unpublished node events_landing_page'
+  - 'access_unpublished node faculty_landing_page'
+  - 'access_unpublished node faculty_staff'
+  - 'access_unpublished node faq'
+  - 'access_unpublished node generic_page'
+  - 'access_unpublished node home_page'
+  - 'access_unpublished node image_cards'
+  - 'access_unpublished node image_cards_landing'
+  - 'access_unpublished node news_landing_page'
+  - 'access_unpublished node page'
+  - 'access_unpublished node past_events_landing_page'
+  - 'access_unpublished node publication_page'
+  - 'access_unpublished node resources'
+  - 'access_unpublished node resources_landing_page'
+  - 'access_unpublished node testimonial'
+  - 'create article content'
+  - 'create book content'
+  - 'create cv media'
+  - 'create document media'
+  - 'create events content'
+  - 'create faculty_staff content'
+  - 'create faq content'
+  - 'create generic_page content'
+  - 'create image media'
+  - 'create image_cards content'
+  - 'create media'
+  - 'create page content'
+  - 'create publication_page content'
+  - 'create remote_video media'
+  - 'create resources content'
+  - 'create soundcloud media'
+  - 'create terms in media_folders'
+  - 'create testimonial content'
+  - 'create url aliases'
+  - 'delete article revisions'
+  - 'delete book revisions'
+  - 'delete events revisions'
+  - 'delete faculty_staff revisions'
+  - 'delete faq revisions'
+  - 'delete generic_page revisions'
+  - 'delete image_cards revisions'
+  - 'delete media'
+  - 'delete own article content'
+  - 'delete own book content'
+  - 'delete own cv media'
+  - 'delete own document media'
+  - 'delete own events content'
+  - 'delete own faculty_staff content'
+  - 'delete own faq content'
+  - 'delete own files'
+  - 'delete own generic_page content'
+  - 'delete own image media'
+  - 'delete own image_cards content'
+  - 'delete own page content'
+  - 'delete own publication_page content'
+  - 'delete own remote_video media'
+  - 'delete own resources content'
+  - 'delete own soundcloud media'
+  - 'delete own testimonial content'
+  - 'delete page revisions'
+  - 'delete publication_page revisions'
+  - 'delete resources revisions'
+  - 'delete testimonial revisions'
+  - 'download media'
+  - 'edit any article content'
+  - 'edit any book content'
+  - 'edit any events content'
+  - 'edit any faculty_staff content'
+  - 'edit any faq content'
+  - 'edit any generic_page content'
+  - 'edit any image_cards content'
+  - 'edit any page content'
+  - 'edit any publication_page content'
+  - 'edit any resources content'
+  - 'edit any testimonial content'
+  - 'edit own article content'
+  - 'edit own book content'
+  - 'edit own cv media'
+  - 'edit own document media'
+  - 'edit own events content'
+  - 'edit own faculty_staff content'
+  - 'edit own image media'
+  - 'edit own remote_video media'
+  - 'edit own soundcloud media'
+  - 'edit private content'
+  - 'edit terms in media_folders'
+  - 'rebuild cache access'
+  - 'replicate entities'
+  - 'revert article revisions'
+  - 'revert book revisions'
+  - 'revert events revisions'
+  - 'revert faculty_staff revisions'
+  - 'revert faq revisions'
+  - 'revert generic_page revisions'
+  - 'revert image_cards revisions'
+  - 'revert page revisions'
+  - 'revert publication_page revisions'
+  - 'revert resources revisions'
+  - 'revert testimonial revisions'
+  - 'skip CAPTCHA'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition ready_for_review'
+  - 'use editorial transition restore_to_needs_review'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view all media revisions'
+  - 'view all revisions'
+  - 'view any article content'
+  - 'view any book content'
+  - 'view any contact_landing_page content'
+  - 'view any events content'
+  - 'view any events_landing_page content'
+  - 'view any faculty_landing_page content'
+  - 'view any faculty_staff content'
+  - 'view any faq content'
+  - 'view any generic_page content'
+  - 'view any home_page content'
+  - 'view any image_cards content'
+  - 'view any image_cards_landing content'
+  - 'view any news_landing_page content'
+  - 'view any page content'
+  - 'view any past_events_landing_page content'
+  - 'view any publication_page content'
+  - 'view any resources content'
+  - 'view any resources_landing_page content'
+  - 'view any testimonial content'
+  - 'view any unpublished content'
+  - 'view article revisions'
+  - 'view book revisions'
+  - 'view events revisions'
+  - 'view faculty_staff revisions'
+  - 'view faq revisions'
+  - 'view generic_page revisions'
+  - 'view image_cards revisions'
+  - 'view latest version'
+  - 'view media'
+  - 'view own article content'
+  - 'view own book content'
+  - 'view own contact_landing_page content'
+  - 'view own events content'
+  - 'view own events_landing_page content'
+  - 'view own faculty_landing_page content'
+  - 'view own faculty_staff content'
+  - 'view own faq content'
+  - 'view own generic_page content'
+  - 'view own home_page content'
+  - 'view own image_cards content'
+  - 'view own image_cards_landing content'
+  - 'view own news_landing_page content'
+  - 'view own page content'
+  - 'view own past_events_landing_page content'
+  - 'view own publication_page content'
+  - 'view own resources content'
+  - 'view own resources_landing_page content'
+  - 'view own testimonial content'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view page revisions'
+  - 'view publication_page revisions'
+  - 'view resources revisions'
+  - 'view testimonial revisions'
+  - 'view the administration theme'

@@ -1,0 +1,27 @@
+uuid: c61f1ed0-7a61-498b-a1de-ac589a505c8c
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_shown_items
+field_name: field_shown_items
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: Hidden
+    -
+      value: '2'
+      label: Shown
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

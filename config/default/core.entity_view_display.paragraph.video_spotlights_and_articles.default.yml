@@ -1,0 +1,54 @@
+uuid: 66ad93b5-ae85-4436-b312-2687aeccf8e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.video_spotlights_and_articles.field_articles
+    - field.field.paragraph.video_spotlights_and_articles.field_category
+    - field.field.paragraph.video_spotlights_and_articles.field_second_article
+    - field.field.paragraph.video_spotlights_and_articles.field_spotlights
+    - paragraphs.paragraphs_type.video_spotlights_and_articles
+  module:
+    - entity_reference_revisions
+id: paragraph.video_spotlights_and_articles.default
+targetEntityType: paragraph
+bundle: video_spotlights_and_articles
+mode: default
+content:
+  field_articles:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_second_article:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_spotlights:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

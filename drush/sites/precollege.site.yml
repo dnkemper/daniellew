@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://precollege.ddev.site
+  paths:
+    files: sites/precollege.wustl.edu/files
+dev:
+  uri: https://precollege.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/precollege.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://precollege.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/precollege.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://precollege.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/precollege.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

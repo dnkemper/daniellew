@@ -1,0 +1,29 @@
+uuid: 6a5fbc03-46f9-46e8-a5d5-c76d6f55a24a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_introduction_exerpt
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.tabs.field_introduction_exerpt
+field_name: field_introduction_exerpt
+entity_type: paragraph
+bundle: tabs
+label: 'Intro Text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

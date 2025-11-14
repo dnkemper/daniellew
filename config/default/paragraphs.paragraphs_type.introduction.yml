@@ -1,0 +1,10 @@
+uuid: 7dabe19e-b702-4d9a-8f34-a104ae47ac78
+langcode: en
+status: true
+dependencies: {  }
+id: introduction
+label: Introduction
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Introduction'
+behavior_plugins: {  }

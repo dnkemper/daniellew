@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fc9b6f58-365b-44ad-9161-6847a860f7bb
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: meetcollege_420x420.png
+  uri:
+    -
+      value: 'public://2023-07/meetcollege_420x420_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 28433
+  status:
+    -
+      value: false
+  created:
+    -
+      value: 1690613279

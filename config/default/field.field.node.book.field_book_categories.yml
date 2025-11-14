@@ -1,0 +1,26 @@
+uuid: 72abe594-566d-4df8-8e7a-0f20555eddeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_book_categories
+    - node.type.book
+    - taxonomy.vocabulary.book_
+id: node.book.field_book_categories
+field_name: field_book_categories
+entity_type: node
+bundle: book
+label: 'Book Categories'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      book_: book_
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,55 @@
+{#
+/**
+ * @file
+ * Theme override to display a search result card.
+ *
+ * Available variables:
+ * - resultType: (optional) The type of result, if different wording is preferred over the default (typically the content type).
+ * - resultUrl: URL of the result (the title is determined from `label` field).
+ * - descriptionField: Teaser text.
+ * - details: Some extra information about the result.
+ *   Example details:
+ *    set details = [
+ *      {'label':'Date', 'value':'April 1, 2024'},
+ *      {'label':'Location', 'value':'Olin Library'}
+ *    ]
+ *
+ */
+#}
+{# BEGIN TEST (uncomment to test styles for this case)
+{% set details = [
+  {'label':'Date', 'value':'April 1, 2024'},
+  {'label':'Location', 'value':'Olin Library'},
+  {'label':'Label3', 'value':'A long text value the quick brown fox jumps'},
+  {'label':'Longish Label', 'value':'The 4th value'},
+  {'label':'Label 5', 'value':'A single row-value pair on a row'},
+]%} #}
+{# END TEST #}
+{% set resultType = resultType ?? label['#bundle']|replace({'_': ' '}) %}
+{% set classes = [
+  'node--type-' ~ resultType|clean_class,
+] %}
+{{ attach_library('olympian9/node--search') }}
+<div{{ attributes.addClass(classes) }}>
+
+  <div class="result">
+    {% if resultType %}<div class="result-type">{{ resultType|capitalize }}</div>{% endif %}
+    <a href="{{ resultUrl }}">
+      {{ title_prefix }}
+      {% if label %}
+        <h3{{ title_attributes }}>{{ label }}</h3>
+      {% endif %}
+      {{ title_suffix }}
+    </a>
+    <p>{{ descriptionField }}</p>
+    {% if details %}
+    <ul class="result-details">
+      {% for item in details %}
+        {% if item.value is not empty %}
+          <li><span class="detail-label">{{ item.label }}:</span><span class="detail-value">{{ item.value }}</span></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</div>

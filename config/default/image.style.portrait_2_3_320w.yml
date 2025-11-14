@@ -1,0 +1,23 @@
+uuid: 00a25fd9-8a55-4c48-a24b-06f93296c3aa
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_2_3_320w
+label: 'portrait 2:3 (320w)'
+effects:
+  0a8e317e-7156-40d9-a7ef-6c47dce82efd:
+    uuid: 0a8e317e-7156-40d9-a7ef-6c47dce82efd
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 480
+      crop_type: focal_point
+  816c4246-2709-454e-9358-51e9620a37fb:
+    uuid: 816c4246-2709-454e-9358-51e9620a37fb
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

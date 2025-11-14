@@ -1,0 +1,191 @@
+/*--------------------------------------------------------------
+# Resource Filter
+--------------------------------------------------------------*/
+
+.resource-filter {
+  background: var(--darkest-gray);
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+  color: #dedede;
+  margin-bottom: 40px;
+}
+
+.resource-filter .heading {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-align: center;
+  height: 70px;
+  font-family: var(--serif);
+}
+
+#about-deans h3,
+#about-history h3 {
+  font-family: var(--sans-serif);
+}
+
+.resource-filter .categories {
+  text-align: center;
+  background: var(--dark-gray);
+  position: relative;
+  min-height: 70px;
+  text-transform: uppercase;
+}
+
+.resource-filter .categories.show ul {
+  max-height: 500px;
+}
+
+.resource-filter ul {
+  background: #3c3c3c;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  padding-top: 70px;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.4s ease;
+  transition: max-height 0.4s ease;
+}
+
+.resource-filter a {
+  display: block;
+  box-sizing: border-box;
+  padding: 15px 40px 15px 30px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.resource-filter a:hover {
+  color: var(--light-blue);
+}
+
+.resource-filter .active {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  background: var(--dark-gray);
+  background: var(--red);
+  color: var(--light-blue);
+  color: #fff;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 30px 0 30px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.resource-filter .active:hover {
+  background: #444;
+  background: var(--dark-red);
+  color: #fff;
+}
+
+@media all and (min-width: 1030px) {
+  .resource-filter .categories {
+    text-align: left;
+  }
+  .resource-filter .active {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+  }
+}
+
+.search.with-categories .resource-filter .toggle {
+  margin-right: 0;
+}
+
+.search.with-categories .resource-filter .toggle:before,
+.search.with-categories .resource-filter .toggle:after {
+  background: var(--light-gray);
+}
+
+.search.with-categories .resource-filter .toggle:before {
+  right: 44px;
+}
+
+.search.with-categories .resource-filter .toggle:after {
+  right: 34px;
+}
+
+.search.with-categories .resource-filter .show .toggle:before {
+  right: 39px;
+}
+
+.search.with-categories .resource-filter .show .toggle:after {
+  right: 39px;
+}
+// adding card styling to this one off
+.card.view.view-resources-landing-page {
+  .views-field.views-field-nothing-1,
+  .views-field.views-field-nothing {
+    background: var(--light-gray);
+  }
+  .views-field.views-field-nothing {
+    display: flex;
+    width: calc(100% - 60px);
+  }
+}
+
+/*--------------------------------------------------------------
+# Resources List
+--------------------------------------------------------------*/
+
+.resources-list {
+  padding: 50px 0;
+}
+
+.page-explore-academics .resources-list {
+  padding-top: 0;
+}
+
+.resources-list .container {
+  max-width: 1050px;
+}
+
+.resources-list header {
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto 70px;
+}
+
+.resources-list header a {
+  font-weight: 600;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.resources-list header a.button {
+  font-weight: bold;
+}
+
+.resources-list header a:hover {
+  color: var(--dark-red);
+}
+
+#about-faculty h2,
+.resources-list h2 {
+  margin-bottom: 0.5em;
+}
+
+.resources-list h2 {
+  color: var(--dark-red);
+  margin-bottom: 0.5em;
+}
+
+.resources-list h2 em {
+  font-style: normal;
+  color: var(--red);
+}

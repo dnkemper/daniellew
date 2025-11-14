@@ -1,0 +1,18 @@
+uuid: 69530004-f00a-45e4-bea7-b26d298ea53c
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: RDCkFL0NDt75Gwioooxo1iuA1S50xTVsBOgX__c6wTw
+id: '403'
+label: '403 access denied'
+tags:
+  canonical_url: '[site:url]'
+  google_plus_name: '[site:name]'
+  og_site_name: '[site:name]'
+  og_title: '[site:name]'
+  og_type: Website
+  og_url: '[site:url]'
+  robots: noindex
+  shortlink: '[site:url]'
+  title: '[current-page:title] | [current-page:pager][site:name]'

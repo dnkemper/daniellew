@@ -1,0 +1,10 @@
+uuid: d9299a13-c37c-45c4-ba59-1c404a301075
+langcode: en
+status: true
+dependencies: {  }
+id: additional_addresses
+label: 'Additional Addresses'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Additional Addresses'
+behavior_plugins: {  }

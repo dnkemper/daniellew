@@ -1,0 +1,31 @@
+uuid: 1b2dbf33-4729-4ef2-b45c-93832de68c2a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.coin_collection_landing_page.field_coin_introduction
+    - node.type.coin_collection_landing_page
+  module:
+    - entity_reference_revisions
+    - user
+id: node.coin_collection_landing_page.default
+targetEntityType: node
+bundle: coin_collection_landing_page
+mode: default
+content:
+  field_coin_introduction:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  search_api_excerpt: true

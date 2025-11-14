@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 87af8fe3-8b11-41fd-904d-a9bf41435db7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: prelaw_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/prelaw_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 22850
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

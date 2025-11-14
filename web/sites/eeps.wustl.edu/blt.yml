@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: eeps.ddev.site
+    protocol: https
+  machine_name: eeps
+  human_name: eeps.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: eeps.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/eeps.wustl.edu/files'
+    origin: 'https://eeps.wustl.edu'
+drupal:
+  db:
+    database: drupal_eeps
+system:
+  site:
+    contact_us_url: 'https://eeps.wustl.edu/contact-us'
+    name: eeps
+    email: eeps@wustl.edu

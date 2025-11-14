@@ -1,0 +1,19 @@
+uuid: f18faf57-fc8e-4fec-8192-db36a7533b9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_die_axis
+    - node.type.coin
+id: node.coin.field_coin_die_axis
+field_name: field_coin_die_axis
+entity_type: node
+bundle: coin
+label: 'Die axis'
+description: 'Die alignment expressed as a clock face hour'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

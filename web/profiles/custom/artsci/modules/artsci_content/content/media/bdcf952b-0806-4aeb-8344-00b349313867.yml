@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bdcf952b-0806-4aeb-8344-00b349313867
+  bundle: image
+  default_langcode: en
+  depends:
+    878dfafe-3450-45d8-aa29-4eb2133e096f: taxonomy_term
+    8aa5b0c2-4108-4e45-ae18-3e17752a5637: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: washufellowships_420x420.png
+  created:
+    -
+      value: 1701521698
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /washufellowships420x420png
+      langcode: en
+      pathauto: 1
+  field_media_directory:
+    -
+      entity: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  field_media_image:
+    -
+      entity: 8aa5b0c2-4108-4e45-ae18-3e17752a5637
+      alt: '""'
+      title: ''
+      width: 876
+      height: 876

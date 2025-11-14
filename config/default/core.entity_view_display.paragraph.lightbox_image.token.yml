@@ -1,0 +1,45 @@
+uuid: 22c25163-2f29-4933-8532-ea77c8d7c905
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.token
+    - field.field.paragraph.lightbox_image.field_description_formatted
+    - field.field.paragraph.lightbox_image.field_featured_image
+    - field.field.paragraph.lightbox_image.field_subtitle
+    - field.field.paragraph.lightbox_image.field_title
+    - paragraphs.paragraphs_type.lightbox_image
+  module:
+    - text
+id: paragraph.lightbox_image.token
+targetEntityType: paragraph
+bundle: lightbox_image
+mode: token
+content:
+  field_description_formatted:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_description: true
+  field_featured_image: true
+  search_api_excerpt: true

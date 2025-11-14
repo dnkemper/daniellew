@@ -1,0 +1,8 @@
+uuid: 66bdd9b3-28e5-48fa-9e2e-d0fe34401527
+langcode: en
+status: true
+dependencies: {  }
+id: filter
+label: Filter
+locked: false
+pattern: Ymd

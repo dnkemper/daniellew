@@ -1,0 +1,8 @@
+adding:
+  third_party_settings:
+    private_content:
+      private: 2
+removing:
+  third_party_settings:
+    private_content:
+      private: 1

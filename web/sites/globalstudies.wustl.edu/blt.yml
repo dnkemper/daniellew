@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: globalstudies.ddev.site
+    protocol: https
+  machine_name: globalstudies
+  human_name: globalstudies.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: globalstudies.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/globalstudies.wustl.edu/files'
+    origin: 'https://globalstudies.wustl.edu'
+drupal:
+  db:
+    database: drupal_globalstudies
+system:
+  site:
+    contact_us_url: 'https://globalstudies.wustl.edu/contact-us'
+    name: globalstudies
+    email: globalstudies@wustl.edu

@@ -1,0 +1,69 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.footer
+    - field.field.node.ampersand_landing_page.field_artsci_bookshelf_callout
+    - field.field.node.ampersand_landing_page.field_artsci_footer_callout_p
+    - field.field.node.ampersand_landing_page.field_artsci_in_the_news
+    - field.field.node.ampersand_landing_page.field_artsci_introduction_p
+    - field.field.node.ampersand_landing_page.field_artsci_metatags
+    - field.field.node.ampersand_landing_page.field_artsci_search
+    - field.field.node.ampersand_landing_page.field_artsci_spotlights_p
+    - node.type.ampersand_landing_page
+  module:
+    - entity_reference_revisions
+    - metatag
+    - user
+_core:
+  default_config_hash: wAXOPm68-75MmJPDYuculWFLT3U8P59xoYEir4vLARA
+id: node.ampersand_landing_page.footer
+targetEntityType: node
+bundle: ampersand_landing_page
+mode: footer
+content:
+  field_artsci_bookshelf_callout:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_artsci_in_the_news:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_artsci_metatags:
+    type: metatag_empty_formatter
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_artsci_spotlights_p:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  field_artsci_footer_callout_p: true
+  field_artsci_introduction_p: true
+  field_artsci_search: true
+  links: true
+  private: true

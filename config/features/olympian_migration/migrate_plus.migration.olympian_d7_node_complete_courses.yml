@@ -1,0 +1,269 @@
+uuid: 843eb483-f10e-42b9-b94f-b0154222013c
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_courses
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: olympian_d7
+label: 'Node complete (Course)'
+source:
+  plugin: olympian_node
+  node_type: courses
+  ids:
+    nid:
+      type: integer
+    vid:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: courses
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  nid: nid
+  vid: vid
+  uid: node_uid
+  title: title
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_course_instructors:
+    plugin: migration_lookup
+    migration: olympian_d7_node_complete_faculty_staff
+    source: field_course_instructors
+  field_course_links:
+    plugin: field_link_custom
+    source: field_course_links
+    title_source: field_course_links/0/title
+  field_course_new_window:
+    plugin: migration_custom_check_url
+    source: field_course_links
+  field_course_image_and_title:
+    -
+      plugin: sub_process
+      source: field_course_image_and_title
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_course_attributes:
+    -
+      plugin: sub_process
+      source: field_course_attributes
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_course_credits:
+    -
+      plugin: get
+      source: field_course_credits
+  field_course_department_name:
+    -
+      plugin: get
+      source: field_course_department_name
+  field_course_dept_code:
+    -
+      plugin: get
+      source: field_course_dept_code
+  field_course_description:
+    -
+      plugin: get
+      source: field_course_description
+  field_course_do_not_delete:
+    -
+      plugin: get
+      source: field_course_do_not_delete
+  field_course_featured:
+    -
+      plugin: get
+      source: field_course_featured
+  field_course_featured_image:
+    plugin: sub_process
+    source: field_course_featured_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_course_frequency:
+    -
+      plugin: get
+      source: field_course_frequency
+  field_course_id:
+    -
+      plugin: get
+      source: field_course_id
+  field_course_sections:
+    -
+      plugin: sub_process
+      source: field_course_sections
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_course_topic:
+    -
+      plugin: get
+      source: field_course_topic
+  field_search:
+    -
+      plugin: get
+      source: field_search
+    -
+      plugin: custom_media_wysiwyg_filter
+  field_course_graduate:
+    -
+      plugin: get
+      source: field_course_graduate
+  field_course_concentration:
+    plugin: migration_lookup
+    migration: olympian_d7_taxonomy_term_concentration
+    source: field_course_concentration
+  field_course_level:
+    plugin: migration_lookup
+    migration: olympian_d7_taxonomy_term_course_level
+    source: field_course_level
+  field_course_requirements:
+    plugin: migration_lookup
+    migration: olympian_d7_taxonomy_term_requirements
+    source: field_course_requirements
+  field_course_semester:
+    plugin: migration_lookup
+    migration: olympian_d7_taxonomy_term_semester
+    source: field_course_semester
+  field_course_undergrad:
+    -
+      plugin: get
+      source: field_course_undergrad
+  field_featured_weight:
+    -
+      plugin: get
+      source: field_featured_weight
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+  alias: alias
+  path/pathauto:
+    -
+      plugin: default_value
+      default_value: 0
+destination:
+  plugin: 'entity:node'
+  default_bundle: courses
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_course_attributes
+    - olympian_d7_paragraphs_course_sections
+    - olympian_d7_paragraphs_links
+    - olympian_d7_paragraphs_course_samples
+    - olympian_d7_paragraphs_sample_courses_publications
+    - olympian_d7_paragraphs_social_media_links
+    - olympian_d7_paragraphs_sample_courses
+    - olympian_d7_node_complete_faculty_staff
+  optional: {  }

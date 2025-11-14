@@ -1,0 +1,59 @@
+name: Composer and BLT Tests
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  install-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, json, gd, pdo, pdo_mysql, zip
+
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          php -r "unlink('composer-setup.php');"
+
+      - name: Create .env file
+        run: echo 'APP_ENV=dev' > .env
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Run BLT deprecated tests
+        id: blt-tests
+        run: |
+          vendor/bin/blt tests:deprecated | tee blt-tests-output.txt
+        continue-on-error: true
+
+      - name: Post Job Logs to PR
+        if: always()
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GH_PAT_TOKEN }}
+          script: |
+            const fs = require('fs');
+            // context is already provided by github-script
+            const logs = fs.readFileSync('blt-tests-output.txt', 'utf8');
+
+            const issue_number = context.payload.pull_request?.number || context.issue?.number;
+            
+            if (issue_number) {
+              github.issues.createComment({
+                ...context.repo,
+                issue_number,
+                body: `Here are the logs from the BLT deprecated tests:\n\n\`\`\`\n${logs}\n\`\`\``
+              });
+            } else {
+              console.log("No pull request or issue found to comment on.");
+            }
+

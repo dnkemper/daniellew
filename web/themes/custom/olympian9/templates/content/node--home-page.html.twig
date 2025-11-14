@@ -1,0 +1,283 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+  {# Search Icon only on homepage #}
+  <button type="button" id="main-search-toggle" aria-label="website search">
+    <svg class="icon">
+      <use xlink:href="#icon-search"></use>
+    </svg>
+  </button>
+  {# Featured Full Slideshow With Caption #}
+  <div class="home">
+    {% if content.field_slideshow_type[0]['#markup'] == 'caption' and content.field_featured_cap_overlay[0]['#markup'] == 1 %}
+      {% if content.field_featured_without_caption %}
+      {% set count = content.field_featured_without_caption['#items']|length %}
+
+        <div class="without full-width-slideshow">
+          <section class="featured full-width slideshow dot-slideshow dots-vertical count-{{ count }}"
+                   aria-label="full slide with caption">
+            {{ content.field_featured_without_caption }}
+          </section>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if content.field_slideshow_type[0]['#markup'] == 'caption' and content.field_featured_cap_overlay[0]['#markup'] == 0 %}
+      {% if content.field_featured_with_caption %}
+      {% set count = content.field_featured_with_caption['#items']|length %}
+        <div class="full-width-slideshow">
+          <section class="featured full-width slideshow dot-slideshow dots-vertical count-{{ count }}"
+                   aria-label="full slide with caption">
+            {{ content.field_featured_with_caption }}
+          </section>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {# Featured Full Slideshow with Text #}
+    {% if content.field_slideshow_type[0]['#markup'] == 'text' %}
+      {% if content.field_featured_full_w_text %}
+      {% set count = content.field_featured_full_w_text['#items']|length %}
+        <section class="featured full-width slideshow dot-slideshow dots-vertical count-{{ count }}"
+                 aria-label="featured full slideshow with text">
+          {{ content.field_featured_full_w_text }}
+        </section>
+      {% endif %}
+    {% endif %}
+
+    {# Featured Half Image and Text #}
+    {% if content.field_slideshow_type[0]['#markup'] == 'text_image' %}
+      {% if content.field_featured_image_and_text %}
+      {% set count = content.field_featured_image_and_text['#items']|length %}
+        <section class="featured slideshow dot-slideshow dots-vertical count-{{ count }}"
+                 aria-label="featured half image and text">
+          {{ content.field_featured_image_and_text }}
+        </section>
+      {% endif %}
+    {% endif %}
+
+    {# Featured News Slideshow #}
+    {% if content.field_slideshow_type[0]['#markup'] == 'News' %}
+          {% set count = content.field_header_image['#items']|length %}
+
+      <section class="featured slideshow dot-slideshow dots-vertical count-{{ count }}"
+               aria-label="featured half image and text">
+        {{ drupal_view('news_slideshow', 'block_home') }}
+      </section>
+    {% endif %}
+
+    {# Featured Events Slideshow #}
+    {% if content.field_slideshow_type[0]['#markup'] == 'Events' %}
+              {% set count = content.field_header_image['#items']|length %}
+
+      <section class="featured slideshow dot-slideshow dots-vertical count-{{ count }}"
+               aria-label="featured half image and text">
+        {{ drupal_view('event_slideshows', 'block_home') }}
+      </section>
+    {% endif %}
+
+    {# Grey quick links below the slideshow #}
+    {% if content.field_links_p|render %}
+      <nav id="quicklinks-nav" aria-label="quick link anchors">
+        <ul>
+          {{ content.field_links_p }}
+        </ul>
+      </nav>
+    {% endif %}
+
+    {# Render the Countdown Timer #}
+    {% if content.field_countdown_timer %}
+      <div class="countdown-timer">
+        {{ content.field_countdown_timer }}
+      </div>
+    {% endif %}
+
+    {% if content.field_intro_type[0]['#markup'] == 'Intro Text with Side Image' %}
+      {# Render the generic intro with side image field #}
+      {{ content.field_generic_intro_with_image }}
+    {% endif %}
+
+    {% if content.field_intro_type[0]['#markup'] == 'Intro Text with Related Links' %}
+      {# Render the generic intro with related links field #}
+      {{ content.field_generic_intro_with_side_it }}
+    {% endif %}
+
+    {#  Full width slide  #}
+    {% if content.field_full_width_slide|render %}
+    {% set count = content.field_full_width_slide['#items']|length %}
+      <section class="photo-gallery gallery-slideshow" aria-label="full width slide">
+        <div class="slideshow dot-slideshow reveal count-{{ count }}">
+          {{ content.field_full_width_slide }}
+        </div>
+      </section>
+    {% endif %}
+
+    {#  Render the full with video/spotlight section  #}
+    {% if content.field_video|render %}
+      {{ content.field_video }}
+    {% endif %}
+
+    {#  Render the half testimonial / half text section section  #}
+    {% if content.field_half_text_and_half_testimo %}
+      {{ content.field_half_text_and_half_testimo }}
+    {% endif %}
+
+    {% if content.field_featured_news %}
+      {{ content.field_featured_news }}
+    {% endif %}
+      {% set event_view = drupal_view_result('event_slideshows', 'upcoming_events_block')|length %}
+      {% if event_view < 2 %}
+      {% set event_count = 0 %}
+      {% endif %}
+    {% if content.field_events %}
+      {{ content.field_events }}
+    {% endif %}
+    {% set is_not_empty = FALSE %}
+    {% set count = node.field_spotlights_p.value|length %}
+
+    {% for i in 0..count %}
+      {% if node.field_spotlights_p[i].entity.field_spotlight_video_url is not empty %}
+        {% set is_not_empty = TRUE %}
+      {% endif %}
+    {% endfor %}
+
+    {% if is_not_empty %}
+      {#  Print the Video and Event Section  #}
+
+      <section class="combo flex" aria-label="video and event section" id="video-and-event-section">
+        <div class="column half blog-feed flex reveal">
+          <div class="slideshow dot-slideshow count-{{ count }}">
+            {{ content.field_spotlights_p }}
+          </div>
+        </div>
+
+        <div class="column half event-feed reveal">
+          <header>
+            <h2>upcoming <br>
+              events</h2>
+          </header>
+          <div class="slideshow dot-slideshow dots-vertical count-{{ event_count }}">
+            {{ drupal_view('event_slideshows', 'upcoming_events_block') }}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+    {% if field_spot_articles == TRUE %}
+
+      {% if content.field_event_and_article_spotligh %}
+
+        <section class="combo flex" aria-label="articles and events" id="articles-and-events">
+          <div class="column half event-feed reveal">
+            <header>
+              <h2>upcoming
+                <br>
+                events</h2>
+              <a class="more" href="{{ landing_page_alias }}">See More Events</a>
+            </header>
+            <div class="slideshow dot-slideshow dots-vertical count-{{ event_count }}">
+              {{ drupal_view('event_slideshows', 'upcoming_events_block') }}
+            </div>
+          </div>
+          {# <div class="column half blog-feed generic-blog-feed flex reveal"> #}
+            {{ content.field_event_and_article_spotligh }}
+          {# </div> #}
+
+        </section>
+
+      {% endif %}
+    {% endif %}
+    {% if content.field_video_spotlight_and_articl %}
+      {{ content.field_video_spotlight_and_articl }}
+    {% endif %}
+
+    {#  Rendering Resources Paragraph  #}
+    {% if content.field_add_resources %}
+      {{ content.field_add_resources }}
+    {% endif %}
+
+    {#  Render the testimonial paragraph field #}
+    {% if content.field_home_testimonial %}
+      {{ content.field_home_testimonial }}
+    {% endif %}
+
+    {% if content.field_second_spotlight %}
+      {{ content.field_second_spotlight }}
+    {% endif %}
+
+    {#  Social media feed  #}
+    {% if content.field_instagram_and_twitter %}
+      {{ content.field_instagram_and_twitter }}
+    {% endif %}
+
+    {#  Render the call to action sections  #}
+    {% if content.field_call_to_action %}
+      {{ content.field_call_to_action }}
+    {% endif %}
+
+  </div>

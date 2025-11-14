@@ -1,0 +1,28 @@
+uuid: 3c046d32-2b88-4fda-9d01-d7cb0315cf9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_external_url
+    - node.type.faculty_staff
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: node.faculty_staff.field_external_url
+field_name: field_external_url
+entity_type: node
+bundle: faculty_staff
+label: 'Office Directions URL'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

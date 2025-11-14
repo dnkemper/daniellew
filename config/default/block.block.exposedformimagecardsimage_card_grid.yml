@@ -1,0 +1,23 @@
+uuid: 2c501af8-3a03-49a5-977b-b652d96931b5
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.image_cards
+  module:
+    - views
+  theme:
+    - olympian9
+id: exposedformimagecardsimage_card_grid
+theme: olympian9
+region: featured
+weight: -8
+provider: null
+plugin: 'views_exposed_filter_block:image_cards-image_card_grid'
+settings:
+  id: 'views_exposed_filter_block:image_cards-image_card_grid'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility: {  }

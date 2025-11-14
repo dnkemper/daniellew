@@ -1,0 +1,544 @@
+id: node_generic_page
+migration_group: olympian_migration
+label: 'Generic Page content migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: generic_page
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   Field name                         Required   Field type                   Cardinality
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   date_repeat_entity_clone_state                boolean                      1
+#   date_repeat_entity_master_uuid                string                       1
+#   field_additional_resources                    entity_reference_revisions   1
+#   field_anchor_links                            entity_reference_revisions   -1
+#   field_articles_spot                           entity_reference_revisions   1
+#   field_book_categories                         entity_reference             1
+#   field_call_to_action_p                        entity_reference_revisions   1
+#   field_dark_callout                            entity_reference_revisions   1
+#   field_dotted_line                             entity_reference_revisions   1
+#   field_extra_two_column_content_p              entity_reference_revisions   1
+#   field_faculty_bookshelf_title                 string                       1
+#   field_footer_callout_p                        entity_reference_revisions   1
+#   field_fullscreen_slideshow                    entity_reference_revisions   1
+#   field_gallery                                 entity_reference_revisions   1
+#   field_introduction_p                          entity_reference_revisions   1
+#   field_meta_tags                               metatag                      1
+#   field_multipurpose_slideshow_p                entity_reference_revisions   1
+#   field_people_teaser                           entity_reference_revisions   1
+#   field_resources_callout_p                     entity_reference_revisions   1
+#   field_search                                  string_long                  1
+#   field_show_faculty_bookshelf       ✔          list_string                  1
+#   field_sidebar_slideshow_p                     entity_reference_revisions   1
+#   field_single_image_field_callout              list_string                  1
+#   field_spotlight_p                             entity_reference_revisions   1
+#   field_testimonials_p                          entity_reference_revisions   1
+#   field_timeline                                entity_reference_revisions   1
+#   field_two_column_content_p                    entity_reference_revisions   1
+#  ---------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: generic_page  # Replace with the machine name of the 'events' content type in D10 if different
+  #Don't import borrowed content here
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: changed
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    - 
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_faculty_bookshelf_title: field_faculty_bookshelf_title
+
+  # List fields
+  field_show_faculty_bookshelf:
+    plugin: get
+    source: field_show_faculty_bookshelf
+  field_single_image_field_callout:
+    plugin: get
+    source: field_single_image_field_callout
+
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_additional_resources:
+    plugin: sub_process
+    source: field_additional_resources
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_additional_resources
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_people_teaser:
+    plugin: sub_process
+    source: field_people_teaser
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_people_teaser
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_dark_callout:
+    plugin: sub_process
+    source: field_dark_callout
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_dark_callouts
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_multipurpose_slideshow_p:
+    plugin: sub_process
+    source: field_multipurpose_slideshow_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_multipurpose_slideshow
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_testimonials_p:
+    plugin: sub_process
+    source: field_testimonials_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_testimonials
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_call_to_action_p:
+    plugin: sub_process
+    source: field_call_to_action_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_call_to_action
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_extra_two_column_content_p:
+    plugin: sub_process
+    source: field_extra_two_column_content_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_two_column_content
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_dotted_line:
+    plugin: sub_process
+    source: field_dotted_line
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_school_structure
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_timeline:
+    plugin: sub_process
+    source: field_timeline
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_timeline_slideshow
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_anchor_links:
+    plugin: sub_process
+    source: field_anchor_links
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_anchor_link
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_fullscreen_slideshow:
+    plugin: sub_process
+    source: field_fullscreen_slideshow
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_fullscreen_slideshow
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_gallery:
+    plugin: sub_process
+    source: field_gallery
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_image_gallery
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_resources_callout_p:
+    plugin: sub_process
+    source: field_resources_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_resources_callout
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_spotlight_p:
+    plugin: sub_process
+    source: field_spotlight_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_sidebar_slideshow_p:
+    plugin: sub_process
+    source: field_sidebar_slideshow_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_sidebar_slideshow
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_two_column_content_p:
+    plugin: sub_process
+    source: field_two_column_content_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_two_column_content
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_articles_spot:
+    plugin: sub_process
+    source: field_articles_spot
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_video_spotlights_and_articles
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_book_categories:
+    plugin: sub_process
+    source: field_book_categories
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_book_
+        source: tid
+
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    plugin: get
+    source: field_meta_tags
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: generic_page
+migration_dependencies:
+  required:
+    - paragraph_anchor_link
+    - paragraph_button
+    - paragraph_social_media_links
+    - paragraph_additional_resource
+    - paragraph_links
+    - paragraph_slideshow
+    - node_testimonial
+    - node_resources
+    - node_faculty_staff
+    - node_articles
+    - paragraph_lightbox_image
+    - paragraph_fullscreen_image
+    - paragraph_timeline_slideshow_slides
+    - paragraph_timeline_slides
+    - paragraph_dark_callout
+    - paragraph_horizontal_slide
+    - paragraph_spotlights
+    - paragraph_introduction
+    - paragraph_testimonials
+    - paragraph_sidebar_slideshow
+    - paragraph_two_column_content
+    - paragraph_additional_resources
+    - paragraph_resources_callout
+    - paragraph_image_gallery
+    - paragraph_fullscreen_slideshow
+    - paragraph_timeline_slideshow
+    - paragraph_school_structure
+    - paragraph_call_to_action
+    - paragraph_people_teaser
+    - paragraph_dark_callouts
+    - paragraph_footer_callout
+    - paragraph_spotlight
+    - paragraph_video_spotlights_and_articles
+    - paragraph_multipurpose_slideshow
+  optional: {}

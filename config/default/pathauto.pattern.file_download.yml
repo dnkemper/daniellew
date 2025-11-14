@@ -1,0 +1,23 @@
+uuid: 7376d69b-cc8f-49b6-a22d-0b7e3c1f8180
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: file_download
+label: 'File Download'
+type: 'canonical_entities:media'
+pattern: 'media/[media:field_media_file:entity:fid]/download'
+selection_criteria:
+  18aa77d4-8b48-49ca-a33b-2e42749bc1f2:
+    id: 'entity_bundle:media'
+    negate: false
+    uuid: 18aa77d4-8b48-49ca-a33b-2e42749bc1f2
+    context_mapping:
+      media: media
+    bundles:
+      cv: cv
+      document: document
+selection_logic: and
+weight: -5
+relationships: {  }

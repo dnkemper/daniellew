@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for olympian_migration module.
+ */
+
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\File\Exception\FileException;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Site\Settings;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_install().
+ */
+function olympian_migration_install() {
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $path_resolver */
+  $config_path = DRUPAL_ROOT . '/../config/features/olympian_migration';
+  $source = new FileStorage($config_path);
+
+  // Loop through the config and import them all.
+  $config_storage = \Drupal::service('config.storage');
+  foreach ($source->listAll() as $config) {
+    $config_storage->write($config, $source->read($config));
+  }
+
+  // Enable the 'writinguniversity_migrate' split.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('config_split.config_split.olympian_migration');
+  $config->set('status', TRUE);
+  $config->save(TRUE);
+}
+/**
+ * Helper function for uninstalling config related to a migration.
+ */
+function olympian_migration_uninstall() {
+
+  // Disable the split.
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable("config_split.config_split.olympian_migration");
+  $config->set('status', FALSE);
+  $config->save(TRUE);
+
+  // Delete config-ignore entities that cause CM dependency problems on import.
+  $config_factory->getEditable('migrate_plus.migration_group.default')->delete();
+  $config_factory->getEditable('migrate_plus.migration_group.olympian_migration')->delete();
+}
+/**
+ * Fix default value for 403 page.
+ */
+function olympian_migration_update_9001() {
+  $config = \Drupal::configFactory()->getEditable('olympian_migration.settings_form');
+//          'public_file_path' => $form_state->getValue('public_file_path'),  $config->set('shared_configuration.source.database.source_base_path', Settings::get('olympian_migration_source_uri_prefix'));
+
+
+  $password = getenv('D7_PASSWORD_DATABASE');
+    $config->set('shared_configuration.source.database.username', 'drupal_db_user');
+    $config->set('shared_configuration.source.database.port', '3306');
+$config->set('shared_configuration.source.database.host', 'd7-vr-temp-db.cwqu12tw5vjb.us-east-1.rds.amazonaws.com');
+  $config->set('shared_configuration.source.database.source_base_path', Settings::get('olympian_migration_source_uri_prefix'));
+  $config->set('shared_configuration.source.database.database', Settings::get('olympian_database'));
+  $config->set('shared_configuration.source.database.password', $password);
+  $config->save();
+}
+
+/**
+ * Migrates the D7 theme setting for an events_header_image into a content type media field.
+ */
+function olympian_migration_update_9002() {
+  // 1) Retrieve the old theme setting value (file ID).
+  //    Adjust the key if your theme_get_setting is named differently.
+  //    This may return an array or a numeric ID, so handle accordingly.
+  $events_header_file_ids = theme_get_setting('events_header_image_upload');
+  if (empty($events_header_file_ids)) {
+    // Nothing to migrate, just return.
+    return;
+  }
+
+  // If it's an array, we typically want the first one:
+  if (is_array($events_header_file_ids)) {
+    $events_header_file_id = reset($events_header_file_ids);
+  }
+  else {
+    $events_header_file_id = $events_header_file_ids;
+  }
+
+  // 2) Load the file entity.
+  $file = File::load($events_header_file_id);
+  if (empty($file)) {
+    // If no file entity was found, skip.
+    return;
+  }
+
+  // Mark it permanent so it doesn't get garbage-collected.
+  $file->setPermanent();
+  $file->save();
+
+  // 3) Create the Media entity referencing that file.
+  $media = Media::create([
+    'bundle' => 'image', // Ensure you have an 'image' Media Type defined.
+    'name'   => 'Event header image (migrated)',
+    'field_media_image' => [
+      [
+        'target_id' => $file->id(),
+        'alt'       => 'Event header image',
+        'title'     => 'Default title',
+      ],
+    ],
+  ]);
+  $media->save();
+
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type',  'events_landing_page');
+  $results = $query->execute();
+
+  // Load all the articles.
+  $nodes = Drupal::entityTypeManager()->getStorage('node')->loadMultiple($results);
+  foreach ($nodes as $node) {
+    $node->set('field_event_header_image', [
+      'target_id' => $media->id(),
+    ]);
+    $node->save();
+  }
+}

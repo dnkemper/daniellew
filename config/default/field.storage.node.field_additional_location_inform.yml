@@ -1,0 +1,21 @@
+uuid: 27346b6a-41eb-4814-abd4-c732a65e8255
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_additional_location_inform
+field_name: field_additional_location_inform
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,7 @@
+name: Node Weight
+description: Adds a weight field to the node and allows for ordering of configured content types.
+type: module
+package: Custom
+core_version_requirement: ^8.8 || ^9 || ^10
+dependencies:
+  - drupal:node

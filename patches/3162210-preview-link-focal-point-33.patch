@@ -1,0 +1,47 @@
+diff --git a/css/focal_point_preview.css b/css/focal_point_preview.css
+index 35e675015b0ea4d309627bead7909f9335661d6e..3e573fd546614c5e4198ac3b4467630170be4852 100644
+--- a/css/focal_point_preview.css
++++ b/css/focal_point_preview.css
+@@ -46,3 +46,7 @@
+   line-height: 1.5em;
+   text-align: center;
+ }
++
++.focal-point-original-image {
++  height: 500px;
++}
+diff --git a/src/Controller/FocalPointPreviewController.php b/src/Controller/FocalPointPreviewController.php
+index a7ef76fd9cfe5822604a780250b1f9b99537b9bb..efb400c27f5c07de8cb8ad4dec8b844adf9c5271 100644
+--- a/src/Controller/FocalPointPreviewController.php
++++ b/src/Controller/FocalPointPreviewController.php
+@@ -12,7 +12,7 @@ use Drupal\Core\Access\AccessResult;
+ use Drupal\Core\Entity\EntityStorageInterface;
+ use Drupal\Core\Url;
+ use Drupal\Core\Ajax\AjaxResponse;
+-use Drupal\Core\Ajax\OpenModalDialogCommand;
++use Drupal\Core\Ajax\OpenDialogCommand;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+ use Drupal\Core\Image\ImageFactory;
+ use Symfony\Component\HttpFoundation\RequestStack;
+@@ -147,7 +147,7 @@ class FocalPointPreviewController extends ControllerBase {
+     ];
+     $response = new AjaxResponse();
+     $response->addCommand(
+-      new OpenModalDialogCommand($this->t('Images preview'), $output, $options)
++      new OpenDialogCommand('#focal-point-preview',$this->t('Images preview'), $output, $options)
+     );
+ 
+     return $response;
+diff --git a/templates/focal-point-preview-page.html.twig b/templates/focal-point-preview-page.html.twig
+index b487b8896d30dfe5f60a62564e8d163d84b510d1..fd06adf9aecaec21a5f950b5ca16653cc6759238 100644
+--- a/templates/focal-point-preview-page.html.twig
++++ b/templates/focal-point-preview-page.html.twig
+@@ -13,7 +13,7 @@
+ 
+   <div id="focal-point-preview">
+     <h2 id="focal-point-preview-label">{{ 'Original image'|t }}</h2>
+-    {{ original_image }}
++    <div class="focal-point-original-image">{{ original_image }}</div>
+   </div>
+   <span class="preview-note note">{{ preview_image_note }}</span>
+ 

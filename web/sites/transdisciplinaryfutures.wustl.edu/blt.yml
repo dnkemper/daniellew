@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: transdisciplinaryfutures.ddev.site
+    protocol: https
+  machine_name: transdisciplinaryfutures
+  human_name: transdisciplinaryfutures.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: transdisciplinaryfutures.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/transdisciplinaryfutures.wustl.edu/files'
+    origin: 'https://transdisciplinaryfutures.wustl.edu'
+drupal:
+  db:
+    database: drupal_transdisciplinaryfutures
+system:
+  site:
+    contact_us_url: 'https://transdisciplinaryfutures.wustl.edu/contact-us'
+    name: transdisciplinaryfutures
+    email: transdisciplinaryfutures@wustl.edu

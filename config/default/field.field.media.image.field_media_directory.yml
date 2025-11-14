@@ -1,0 +1,33 @@
+uuid: edeaf9d0-5d07-4250-b7af-511a39b83b5d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_directory
+    - media.type.image
+    - taxonomy.vocabulary.media_folders
+  content:
+    - 'taxonomy_term:media_folders:be4979d7-64b4-40d1-8036-eef3f6a1ad84'
+id: media.image.field_media_directory
+field_name: field_media_directory
+entity_type: media
+bundle: image
+label: 'Media Directory'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: be4979d7-64b4-40d1-8036-eef3f6a1ad84
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_folders: media_folders
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

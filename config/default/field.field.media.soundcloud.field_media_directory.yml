@@ -1,0 +1,29 @@
+uuid: b2e9f3d5-c681-4364-a4a9-5d6231fa317b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_directory
+    - media.type.soundcloud
+    - taxonomy.vocabulary.media_folders
+id: media.soundcloud.field_media_directory
+field_name: field_media_directory
+entity_type: media
+bundle: soundcloud
+label: 'Media Directory'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_folders: media_folders
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

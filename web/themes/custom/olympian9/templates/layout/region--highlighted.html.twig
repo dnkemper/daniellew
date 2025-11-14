@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Olympian's theme override to display the content region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% if content %}
+  {{ content }}
+
+  {# node was returning null, so let's use moderation_state and node_id
+  instead of node.isPublished() and node.id(). #}
+  {% if moderation_state != 'published' %}
+    {% set accessUnpublishedUrl = getHashTag(node_id) %}
+    {% if accessUnpublishedUrl is not empty %}
+      {{ attach_library('olympian9/status-messages') }}
+      {% set hashLinkTitleLink = 'hashed link' %}
+      {% set hashLinkTitlePre = 'You can use the ' %}
+      {% set linkClass1 = 'olympian-alert-text' %}
+      {% set hashLinkTitle = ' to view this unpublished content.' %}
+      {% set linkClass = 'link access-unpublished' %}
+
+      <div data-drupal-messages="" class="messages-list">
+        <div class="messages__wrapper">
+
+          <div role="contentinfo" aria-labelledby=""
+               class="messages-list__item messages messages--warning">
+            <div class="alert__icon info">
+              <span class="fa-stack fa-1x">
+                <span role="presentation"
+                      class="fas fa-circle fa-stack-2x"></span>
+                <span role="presentation"
+                      class="fas fa-stack-1x fa-inverse fa-info"></span>
+              </span>
+            </div>
+            <div class="messages__content">
+              {{ hashLinkTitlePre }}<a href="{{ accessUnpublishedUrl }}"
+                                       class="{{ linkClass }} olympian-alerts-text">{{ hashLinkTitleLink }}</a>{{ hashLinkTitle }}
+            </div>
+            <button type="button" class="button button--dismiss" title="Dismiss"
+                  data-once="olympian-messages-dismiss"><span
+              class="icon-close"></span>Close
+            </button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endif %}

@@ -1,0 +1,99 @@
+uuid: 520b9add-51ed-40fa-95a2-4f373f0f9a18
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.events_landing_page.date_repeat_entity_clone_state
+    - field.field.node.events_landing_page.date_repeat_entity_master_uuid
+    - field.field.node.events_landing_page.field_category_display
+    - field.field.node.events_landing_page.field_event_header_image
+    - field.field.node.events_landing_page.field_footer_callout_p
+    - field.field.node.events_landing_page.field_header_type
+    - field.field.node.events_landing_page.field_landing_page_type
+    - field.field.node.events_landing_page.field_meta_tags
+    - field.field.node.events_landing_page.field_search
+    - node.type.events_landing_page
+  module:
+    - entity_reference_revisions
+    - metatag
+    - options
+    - user
+id: node.events_landing_page.default
+targetEntityType: node
+bundle: events_landing_page
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_category_display:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_event_header_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: background_image
+      link: false
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_header_type:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_landing_page_type:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  search_api_excerpt: true

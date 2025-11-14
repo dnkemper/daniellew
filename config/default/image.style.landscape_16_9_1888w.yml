@@ -1,0 +1,23 @@
+uuid: 1f234b04-7bdc-439d-92e5-ef79e35d4b79
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_16_9_1888w
+label: 'landscape 16:9 (1888w)'
+effects:
+  d18a52cb-bd32-42ec-aa64-1749c7d2c2d2:
+    uuid: d18a52cb-bd32-42ec-aa64-1749c7d2c2d2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1888
+      height: 1062
+      crop_type: focal_point
+  3999cfdd-2842-4443-b906-2ac62028fd37:
+    uuid: 3999cfdd-2842-4443-b906-2ac62028fd37
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

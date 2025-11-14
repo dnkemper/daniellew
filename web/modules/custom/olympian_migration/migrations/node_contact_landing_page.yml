@@ -1,0 +1,148 @@
+id: node_contact_landing_page
+migration_group: olympian_migration
+label: 'Contact Landing Page Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: contact_landing_page
+
+process:
+  type:
+    plugin: default_value
+    default_value: contact_landing_page
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+
+  # Paragraphs fields
+#  field_tabs_p:
+
+  field_tabs_p:
+    plugin: sub_process
+    source: field_tabs_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_tabs
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: contact_landing_page
+
+migration_dependencies:
+  required:
+    - paragraph_button
+    - paragraph_social_media_links
+    - paragraph_introduction
+    - paragraph_tabs
+    - paragraph_footer_callout
+  optional: {}

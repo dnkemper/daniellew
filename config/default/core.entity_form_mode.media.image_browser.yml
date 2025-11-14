@@ -1,0 +1,11 @@
+uuid: 7103d99a-5159-471f-a010-7fdc4251a52c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.image_browser
+label: 'Image Browser'
+description: ''
+targetEntityType: media
+cache: true

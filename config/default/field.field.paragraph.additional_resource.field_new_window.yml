@@ -1,0 +1,23 @@
+uuid: 7d9a5c0f-26a6-45e7-984e-df6f9677c5e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_new_window
+    - paragraphs.paragraphs_type.additional_resource
+id: paragraph.additional_resource.field_new_window
+field_name: field_new_window
+entity_type: paragraph
+bundle: additional_resource
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

@@ -1,0 +1,20 @@
+uuid: c1398b92-aa29-4495-9f68-fb06471eb070
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_coin_lot_num
+field_name: field_coin_lot_num
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

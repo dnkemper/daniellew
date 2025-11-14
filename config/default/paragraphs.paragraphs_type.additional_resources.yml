@@ -1,0 +1,10 @@
+uuid: d6a99f6d-71a0-4f08-a7c5-ac276487f2fe
+langcode: en
+status: true
+dependencies: {  }
+id: additional_resources
+label: 'Additional Resources'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Additional Resources'
+behavior_plugins: {  }

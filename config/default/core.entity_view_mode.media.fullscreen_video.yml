@@ -1,0 +1,11 @@
+uuid: 1f82bc30-3ffb-423d-93da-6736f4b6cc6f
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.fullscreen_video
+label: 'Fullscreen Video'
+description: ''
+targetEntityType: media
+cache: true

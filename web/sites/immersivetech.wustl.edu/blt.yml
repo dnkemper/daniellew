@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: immersivetech.ddev.site
+    protocol: https
+  machine_name: immersivetech
+  human_name: immersivetech.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: immersivetech.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/immersivetech.wustl.edu/files'
+    origin: 'https://immersivetech.wustl.edu'
+drupal:
+  db:
+    database: drupal_immersivetech
+system:
+  site:
+    contact_us_url: 'https://immersivetech.wustl.edu/contact-us'
+    name: immersivetech
+    email: immersivetech@wustl.edu

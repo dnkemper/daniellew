@@ -1,0 +1,14 @@
+uuid: 20be3d92-5bd0-4a9f-a7fb-f9125ade5eed
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.coin_collection_landing_page
+id: node_type_coin_collection_landing_page
+entity_type_id: node_type
+entity_id: coin_collection_landing_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

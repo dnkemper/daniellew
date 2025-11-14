@@ -1,0 +1,114 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - field_section - list text
+ * - Main Content and Sidebar|Main Content and Sidebar
+ * - Video Spotlight with Articles|Video Spotlight with Articles
+ * - Dotted Line|Dotted Line
+ * - Dark Callout|Single Image Callout
+ * - Multi Image Callout|Multi Image Callout
+ * - Call to Action|Call to Action
+ * - Content|First Content Block
+ * - Spotlight|Spotlight
+ * - Fullscreen Slideshow|Fullscreen Slideshow
+ * - Resources Callout|Resources Callout
+ * - Second Content|Second Content Block
+ * - About History|Timeline
+ * - Gallery|Gallery
+ * - Faculty Bookshelf|Faculty Bookshelf
+ * - Additional Resources|Additional Resources
+ * - Testimonials|Testimonials
+ * - Embedded Webform|Embedded Webform
+ * - Footer Callout|Footer Callout
+ * - people|People Teaser
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{# {% set classes = [
+	'paragraph',
+	'paragraph--type--' ~ paragraph.bundle|clean_class,
+	view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+	not paragraph.isPublished() ? 'paragraph--unpublished'
+] %} #}
+
+{% block paragraph %}
+	{# <div{{ attributes.addClass(classes) }}> #}
+
+		{% if content.field_custom_section.0|render|lower|replace({' ':'-'}) %}
+			{% set key = content.field_custom_section.0|render|lower|replace({' ':'-'}) %}
+		{% else %}
+			{% if content.field_section.0|render|lower|replace({' ':'-'}) == 'main-content-and-sidebar' %}
+				{% set key = 'intro' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'video-spotlight-with-articles' %}
+				{% set key = 'video-spotlight-with-articles' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'dotted-line' %}
+				{% set key = 'dotted-line' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'dark-callout' %}
+				{% set key = 'dark-callout' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'multi-mage-callout' %}
+				{% set key = 'multi-image-callout' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'call-to-action' %}
+				{% set key = 'call-to-action' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'content' %}
+				{% set key = 'primary' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'spotlight' %}
+				{% set key = 'spotlight' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'fullscreen-slideshow' %}
+				{% set key = 'fullscreen-slideshow' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'resources-callout' %}
+				{% set key = 'resources-callout' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'second-content' %}
+				{% set key = 'secondary' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'about-history' %}
+				{% set key = 'about-history' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'gallery' %}
+				{% set key = 'gallery' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'faculty-bookshelf' %}
+				{% set key = 'faculty-bookshelf' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'additional-resources' %}
+				{% set key = 'additional-resources' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'testimonials' %}
+				{% set key = 'testimonials' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'embedded-webform' %}
+				{% set key = 'embedded-webform' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'footer-callout' %}
+				{% set key = 'bottom' %}
+			{% elseif content.field_section.0|render|lower|replace({' ':'-'}) == 'people' %}
+				{% set key = 'people' %}
+			{% else %}
+				{% set key = content.field_section.0|render|lower|replace({' ':'-'}) %}
+			{% endif %}
+		{% endif %}
+		{# <div class="anchor-link"> #}
+			<li><a class="js-scroll" href="#{{ key }}">{{ content.field_title.0 }}</a></li>
+		{# </div> #}
+	{# </div> #}
+{% endblock paragraph %}

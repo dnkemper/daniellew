@@ -1,0 +1,79 @@
+uuid: 7d58ea2a-d716-4200-937d-f809751a3ff7
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_pathauto_patterns
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: olympian_d7
+label: 'Pathauto patterns'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: pathauto_pattern
+  constants:
+    status: true
+    selection_logic: and
+process:
+  status:
+    -
+      plugin: get
+      source: constants/status
+  id:
+    -
+      plugin: get
+      source: id
+  label:
+    -
+      plugin: get
+      source: label
+  type:
+    -
+      plugin: get
+      source: type
+  pattern:
+    -
+      plugin: get
+      source: pattern
+  selection_criteria:
+    -
+      plugin: get
+      source: selection_criteria
+  selection_logic:
+    -
+      plugin: get
+      source: constants/selection_logic
+destination:
+  plugin: 'entity:pathauto_pattern'
+migration_dependencies:
+  required: {  }
+  optional:
+    - olympian_d7_node_type_article
+    - olympian_d7_node_type_author
+    - olympian_d7_node_type_book
+    - olympian_d7_node_type_coin
+    - olympian_d7_node_type_collection_landing_page
+    - olympian_d7_node_type_contact_landing_page
+    - olympian_d7_node_type_courses
+    - olympian_d7_node_type_course_landing
+    - olympian_d7_node_type_events
+    - olympian_d7_node_type_events_landing_page
+    - olympian_d7_node_type_faculty_landing_page
+    - olympian_d7_node_type_faculty_staff
+    - olympian_d7_node_type_faq
+    - olympian_d7_node_type_generic_page
+    - olympian_d7_node_type_home_page
+    - olympian_d7_node_type_image_cards
+    - olympian_d7_node_type_image_cards_landing
+    - olympian_d7_node_type_news_landing_page
+    - olympian_d7_node_type_page
+    - olympian_d7_node_type_past_events_landing_page
+    - olympian_d7_node_type_publication_page
+    - olympian_d7_node_type_resources
+    - olympian_d7_node_type_resources_landing_page
+    - olympian_d7_node_type_testimonial
+    - olympian_d7_node_type_webform

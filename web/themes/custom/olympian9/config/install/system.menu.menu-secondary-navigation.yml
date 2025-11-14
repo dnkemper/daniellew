@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: menu-secondary-navigation
+label: 'Secondary Navigation'
+description: 'This menu appears to the left of the main navigation (when open).'
+locked: false

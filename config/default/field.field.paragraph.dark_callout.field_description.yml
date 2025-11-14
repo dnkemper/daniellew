@@ -1,0 +1,19 @@
+uuid: 6026f098-2086-496f-a1a1-cac725cbbb5e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.dark_callout
+id: paragraph.dark_callout.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: dark_callout
+label: 'Additional Description'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

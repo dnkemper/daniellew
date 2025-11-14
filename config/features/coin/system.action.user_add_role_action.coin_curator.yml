@@ -1,0 +1,14 @@
+uuid: f73bd616-b091-456e-8fcc-7283982f0d91
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.coin_curator
+  module:
+    - user
+id: user_add_role_action.coin_curator
+label: 'Add the Curator role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: coin_curator

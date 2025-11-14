@@ -1,0 +1,29 @@
+uuid: b85fc788-48ca-4028-915a-b4324239a2cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_portrayed
+    - node.type.coin
+    - taxonomy.vocabulary.coin_portrayed
+id: node.coin.field_coin_portrayed
+field_name: field_coin_portrayed
+entity_type: node
+bundle: coin
+label: Portrayed
+description: 'Separate each entry with a comma'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_portrayed: coin_portrayed
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

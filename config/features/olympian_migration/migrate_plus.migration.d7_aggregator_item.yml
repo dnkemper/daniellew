@@ -1,0 +1,28 @@
+uuid: 9dc2deb4-1d9c-4e67-8c9b-ab64ee7058a3
+status: true
+id: d7_aggregator_item
+label: Aggregator items
+migration_group: olympian_d7
+audit: true
+migration_tags:
+  - Drupal 7
+  - Content
+source:
+  plugin: aggregator_item
+process:
+  iid: iid
+  fid:
+    plugin: migration_lookup
+    migration: d7_aggregator_feed
+    source: fid
+  title: title
+  link: link
+  author: author
+  description: description
+  timestamp: timestamp
+  guid: guid
+destination:
+  plugin: entity:aggregator_item
+migration_dependencies:
+  required:
+    - d7_aggregator_feed

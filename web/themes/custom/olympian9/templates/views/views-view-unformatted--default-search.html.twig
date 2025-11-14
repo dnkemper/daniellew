@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{{ attach_library('olympian9/node--search') }}
+<div class="search-results">
+	{% if title %}
+		<h3>{{ title }}</h3>
+	{% endif %}
+	{% if header %}
+		<div class="view-header">
+			{{ header }}
+		</div>
+	{% endif %}
+	<div class="results flex items">
+		<div class="column js-load-container">
+			{% for row in rows %}
+				{% set row_classes = [
+					default_row_class ? 'views-row',
+				] %}
+				<div{{ row.attributes.addClass(row_classes) }}>
+					{{- row.content -}}
+				</div>
+			{% endfor %}
+
+		{# <aside class="column">
+
+			<div class="related-resources">
+				<h3>Resources:</h3>
+				<a href="{{ landing_page_alias }}" class="more" title="See All Related Resources">See All</a>
+				{{ drupal_view('resources', 'related_resources') }}
+			</div>
+			<a class="to-top" href="#">Back to Top
+				<svg class="icon">
+					<use xlink:href="#circle-arrow"></use>
+				</svg>
+			</a>
+		</aside> #}
+	</div>
+</div>
+</div>

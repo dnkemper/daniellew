@@ -1,0 +1,23 @@
+uuid: c9e50596-0f38-4dfe-b1ca-03833d830fb2
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_2_3_944w
+label: 'portrait 2:3 (944w)'
+effects:
+  528b0a47-7571-4366-9dd4-3a6343aac768:
+    uuid: 528b0a47-7571-4366-9dd4-3a6343aac768
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 944
+      height: 1416
+      crop_type: focal_point
+  e3ee6fc0-a300-4821-8dcf-b44b70510f92:
+    uuid: e3ee6fc0-a300-4821-8dcf-b44b70510f92
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

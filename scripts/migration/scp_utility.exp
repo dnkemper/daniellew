@@ -1,0 +1,24 @@
+#!/usr/bin/expect -f
+
+# Runs scp using expect to pass in a password as needed.
+# Parameters (positional)
+#   1 : source file to copy
+#   2 : destination folder to copy into
+#   3 : password (applies for either source or destination; assumes that only one of them will prompt for a password)
+
+# see https://phoenixnap.com/kb/linux-expect
+# see https://stackoverflow.com/questions/17059682/how-to-pass-argument-in-expect-through-the-command-line-in-a-shell-script
+set parmsource [lindex $argv 0];
+set parmdest [lindex $argv 1];
+set parmpassword [lindex $argv 2];
+
+# remove quotes around password
+set parmpassword [string trim $parmpassword "\""]
+
+# see https://unix.stackexchange.com/questions/537586/auto-enter-password-for-scp
+# expect timeout: see https://stackoverflow.com/questions/61323100/scp-in-expect-script-works-for-few-files-but-not-for-many-files
+spawn scp -r $parmsource $parmdest
+expect "*password:*"
+send -- $parmpassword
+send -- "\r"
+expect -timeout -1 eof

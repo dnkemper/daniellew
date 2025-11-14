@@ -1,0 +1,61 @@
+default:
+  autoload:
+    - '/app/features/bootstrap'
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+          #   - BigPipeContext # Use this if bigpipe is messing things up
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+        - DrevOps\BehatScreenshotExtension\Context\ScreenshotContext 
+  extensions:
+    DrevOps\BehatScreenshotExtension:
+      dir: /app/web/screenshots
+      fail: true
+      purge: true
+    Drupal\MinkExtension:
+      browserkit_http: ~
+      base_url: https://washu_artsci_drupal9.lndo.site/  # Replace with your site's URL
+    Drupal\DrupalExtension:
+      blackbox: ~
+      region_map:
+        content: "#content"
+        Side Navigation: "#block-mainnavigation"
+        Page Title: "#block-pagetitle"
+      api_driver: 'drush'
+      drupal:
+        drupal_root: '/app/web'
+      text:
+        username_field: 'name'
+        password_field: 'pass'      
+      drush:
+        root: '/app/web'
+drupal:
+  suites:
+    default:
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\ConfigContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MarkupContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\MailContext
+        - Drupal\DrupalExtension\Context\RandomContext
+      filters:
+        tags: "~@blackbox&&~@wip"
+  extensions:
+    Drupal\MinkExtension:
+      base_url: http://drupal
+      files_path: /var/www/html/fixtures/files
+    Drupal\DrupalExtension:
+      api_driver: "drupal"
+      drupal:
+        drupal_root: "/var/www/html/drupal"
+      region_map:
+        main content: "#main"
+      selectors:
+        error_message_selector: '.messages--error'

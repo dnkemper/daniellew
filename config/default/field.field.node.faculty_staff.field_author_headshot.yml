@@ -1,0 +1,29 @@
+uuid: d76cc465-91c9-441e-b424-7e3a7bfb26ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_author_headshot
+    - media.type.image
+    - node.type.faculty_staff
+id: node.faculty_staff.field_author_headshot
+field_name: field_author_headshot
+entity_type: node
+bundle: faculty_staff
+label: Headshot
+description: 'A good quality headshot of the person.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

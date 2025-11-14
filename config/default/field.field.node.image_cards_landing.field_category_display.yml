@@ -1,0 +1,21 @@
+uuid: 627d8168-227c-4f91-ad2a-ad5cec73c1ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category_display
+    - node.type.image_cards_landing
+  module:
+    - options
+id: node.image_cards_landing.field_category_display
+field_name: field_category_display
+entity_type: node
+bundle: image_cards_landing
+label: 'Category Display'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

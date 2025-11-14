@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: hdw.ddev.site
+    protocol: https
+  machine_name: hdw
+  human_name: hdw.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: hdw.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/hdw.wustl.edu/files'
+    origin: 'https://hdw.wustl.edu'
+drupal:
+  db:
+    database: drupal_hdw
+system:
+  site:
+    contact_us_url: 'https://hdw.wustl.edu/contact-us'
+    name: hdw
+    email: hdw@wustl.edu

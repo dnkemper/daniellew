@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 02552cad-940b-4aa8-8698-1a28426763b2
+  bundle: image
+  default_langcode: en
+  depends:
+    878dfafe-3450-45d8-aa29-4eb2133e096f: taxonomy_term
+    6dda26fa-22d3-4b3f-a0fc-3024032f37c3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: backcredit_420x420.png
+  created:
+    -
+      value: 1701521698
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /backcredit420x420png
+      langcode: en
+      pathauto: 1
+  field_media_directory:
+    -
+      entity: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  field_media_image:
+    -
+      entity: 6dda26fa-22d3-4b3f-a0fc-3024032f37c3
+      alt: '""'
+      title: ''
+      width: 876
+      height: 875

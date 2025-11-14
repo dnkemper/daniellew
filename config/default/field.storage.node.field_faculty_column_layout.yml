@@ -1,0 +1,27 @@
+uuid: 711da4c6-0a74-4011-9e1b-deab291740d3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_faculty_column_layout
+field_name: field_faculty_column_layout
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: areas
+      label: '1 Column'
+    -
+      value: 'null'
+      label: '2 Column'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

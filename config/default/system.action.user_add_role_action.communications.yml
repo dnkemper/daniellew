@@ -1,0 +1,14 @@
+uuid: 1c77c26f-131e-4c0a-a04d-5f592cd753ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.communications
+  module:
+    - user
+id: user_add_role_action.communications
+label: 'Add the Communications role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: communications

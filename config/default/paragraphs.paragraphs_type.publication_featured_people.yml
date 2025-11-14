@@ -1,0 +1,10 @@
+uuid: 053ee2c5-bb1c-4080-8611-01c9aaaa92e0
+langcode: en
+status: true
+dependencies: {  }
+id: publication_featured_people
+label: 'Publication Featured People'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Featured People'
+behavior_plugins: {  }

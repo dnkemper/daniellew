@@ -1,0 +1,51 @@
+id: paragraph_publication_awards_section
+label: 'Publication Awards Section Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_awards_section  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_awards_section  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Paragraphs field mapping for 'field_publication_award'
+  field_publication_award:
+    plugin: sub_process
+    source: field_publication_award
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_award  # Replace with the ID of your 'publication_award' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  # Link field mapping
+  field_publication_button:
+    plugin: field_link_custom
+    source: field_button_url
+    title_source: field_button_text
+
+  # Text field mappings
+  field_subtitle: field_subtitle
+  field_title: field_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_awards_section
+migration_dependencies:
+  required:
+    - paragraph_publication_award  # Ensure this is the correct ID of your 'publication_award' paragraph migration
+  optional: {}

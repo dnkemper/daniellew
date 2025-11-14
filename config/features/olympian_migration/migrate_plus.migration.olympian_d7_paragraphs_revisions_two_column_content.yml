@@ -1,0 +1,76 @@
+uuid: 444341d8-7f75-4292-b1f7-a40ba5df8aa6
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_two_column_content
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Two Column Content)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: two_column_content
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_two_col_title:
+    -
+      plugin: get
+      source: field_two_col_title
+  field_two_col_wysiwyg:
+    -
+      plugin: lullabot_embedded_content
+      source: field_two_col_wysiwyg
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_footer_callout_bg:
+    -
+      plugin: get
+      source: field_footer_callout_bg
+  field_single_column:
+    -
+      plugin: get
+      source: field_single_column
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: two_column_content
+migration_dependencies:
+  required: {}
+  optional: {  }

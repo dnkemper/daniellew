@@ -1,0 +1,9 @@
+uuid: ab76188a-8480-47f4-af0a-80f91fc2f38f
+langcode: en
+status: true
+dependencies: {  }
+name: 'Area of Inquiry'
+vid: area_of_inquiry
+description: null
+weight: 0
+new_revision: false

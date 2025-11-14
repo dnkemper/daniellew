@@ -1,0 +1,30 @@
+uuid: fffc15e3-a04c-4128-8564-f22321e6aff9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_category_display
+field_name: field_category_display
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: collapsed
+      label: Collapsed
+    -
+      value: hidden
+      label: Hidden
+    -
+      value: expanded
+      label: Expanded
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

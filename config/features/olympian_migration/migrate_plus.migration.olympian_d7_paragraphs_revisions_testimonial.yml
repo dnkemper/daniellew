@@ -1,0 +1,76 @@
+uuid: d9fc3018-1d44-4f0c-95a2-bad9563edbaa
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_testimonial
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Testimonial)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: testimonial
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field__home_testimonial:
+    -
+      plugin: lullabot_embedded_content
+      source: field__home_testimonial
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_half_test_bkg_color:
+    -
+      plugin: get
+      source: field_half_test_bkg_color
+  field_test_name:
+    -
+      plugin: get
+      source: field_test_name
+  field_test_title:
+    -
+      plugin: get
+      source: field_test_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: testimonial
+migration_dependencies:
+  required: {}
+  optional: {  }

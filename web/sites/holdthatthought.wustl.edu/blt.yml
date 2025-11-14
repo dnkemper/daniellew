@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: holdthatthought.ddev.site
+    protocol: https
+  machine_name: holdthatthought
+  human_name: holdthatthought.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: holdthatthought.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/holdthatthought.wustl.edu/files'
+    origin: 'https://holdthatthought.wustl.edu'
+drupal:
+  db:
+    database: drupal_holdthatthought
+system:
+  site:
+    contact_us_url: 'https://holdthatthought.wustl.edu/contact-us'
+    name: holdthatthought
+    email: holdthatthought@wustl.edu

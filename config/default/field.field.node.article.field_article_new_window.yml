@@ -1,0 +1,23 @@
+uuid: eac8c1be-29d2-4a00-be1c-80b2b35c5b1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_new_window
+    - node.type.article
+id: node.article.field_article_new_window
+field_name: field_article_new_window
+entity_type: node
+bundle: article
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

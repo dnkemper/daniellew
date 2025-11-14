@@ -1,0 +1,23 @@
+uuid: 213b7e55-a92a-41f0-96f4-95edb105f080
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_open_in_new_window
+    - paragraphs.paragraphs_type.horizontal_slide
+id: paragraph.horizontal_slide.field_open_in_new_window
+field_name: field_open_in_new_window
+entity_type: paragraph
+bundle: horizontal_slide
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

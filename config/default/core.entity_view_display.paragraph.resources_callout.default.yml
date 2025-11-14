@@ -1,0 +1,44 @@
+uuid: 781c1186-00fe-4222-9d8c-e42e2d5414a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.resources_callout.field_description_formatted
+    - field.field.paragraph.resources_callout.field_links_p
+    - field.field.paragraph.resources_callout.field_resources
+    - paragraphs.paragraphs_type.resources_callout
+  module:
+    - entity_reference_revisions
+    - text
+id: paragraph.resources_callout.default
+targetEntityType: paragraph
+bundle: resources_callout
+mode: default
+content:
+  field_description_formatted:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_links_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_resources:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: card
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

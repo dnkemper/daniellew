@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: bc3cd6df-02a7-4ed4-ba05-f79587b631dc
+  bundle: events_landing_page
+  default_langcode: en
+  depends:
+    5ab90bd7-310e-405a-85a5-666a3ec3413f: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Events
+  created:
+    -
+      value: 1690474370
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /events
+      langcode: en
+      pathauto: 0
+  date_repeat_entity_clone_state:
+    -
+      value: false
+  field_category_display:
+    -
+      value: collapsed
+  field_event_header_image:
+    -
+      entity: 5ab90bd7-310e-405a-85a5-666a3ec3413f
+  field_header_type:
+    -
+      value: Static
+  field_landing_page_type:
+    -
+      value: card

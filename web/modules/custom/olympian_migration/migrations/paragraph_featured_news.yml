@@ -1,0 +1,74 @@
+id: paragraph_featured_news
+label: 'Featured Article Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: featured_news  # Replace with the machine name of the paragraph bundle in Drupal 7
+# +-----------------------------+----------+----------------------------+-------------+
+# | Field name                  | Required | Field type                 | Cardinality |
+# +-----------------------------+----------+----------------------------+-------------+
+# | field_feat_artice_bkg_color |          | list_string                | 1           |
+# | field_feat_article_button   |          | link                       | 1           |
+# | field_feat_article_image    |          | entity_reference           | 1           |
+# | field_feat_article_title    |          | string                     | 1           |
+# | field_title_and_body        |          | entity_reference_revisions | -1          |
+# +-----------------------------+----------+----------------------------+-------------+
+process:
+  type:
+    plugin: default_value
+    default_value: featured_news  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # List string field mapping
+  field_feat_artice_bkg_color: field_feat_artice_bkg_color
+  # Link field mapping
+  field_feat_article_button:
+    plugin: field_link_custom
+    source: field_feat_article_button_url
+    title_source: field_feat_article_button_text
+
+
+  # Image field mapping
+  field_feat_article_image:
+    plugin: sub_process
+    source: field_feat_article_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration  # Replace with the actual migration ID for images
+        source: fid
+
+  # String field mapping
+  field_feat_article_title: field_feat_article_title
+
+  # Entity reference revisions field mapping
+  field_title_and_body:
+    plugin: sub_process
+    source: field_title_and_body
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_link_title_and_body
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: featured_news
+
+migration_dependencies:
+  required:
+    - node_articles
+    - paragraph_link_title_and_body  # The migration we generated previously
+  optional: {}

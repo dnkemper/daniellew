@@ -1,0 +1,19 @@
+uuid: d04baa06-828c-4f7e-bd62-bd22eb4a88af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search
+    - node.type.faq
+id: node.faq.field_search
+field_name: field_search
+entity_type: node
+bundle: faq
+label: Search
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

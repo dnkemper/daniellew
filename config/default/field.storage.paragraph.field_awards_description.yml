@@ -1,0 +1,19 @@
+uuid: 2f90b454-dce7-47ab-9ed1-5db7a01f6cdc
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_awards_description
+field_name: field_awards_description
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

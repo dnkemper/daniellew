@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: menu-quick-links
+label: 'Quick Links'
+description: 'This menu appears in the footer.'
+locked: false

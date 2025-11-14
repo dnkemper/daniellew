@@ -1,0 +1,391 @@
+uuid: 441a3516-9217-4776-8c55-6d5fce582ff7
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_collection_landing_page
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Node complete (Collection Landing Page)'
+source:
+  plugin: d7_node_complete
+  node_type: collection_landing_page
+process:
+  nid:
+    -
+      plugin: get
+      source: tnid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  comment_node_collection_landing_page/0/status:
+    -
+      plugin: get
+      source: comment
+  field_introduction:
+    -
+      plugin: sub_process
+      source: field_introduction
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_search:
+    -
+      plugin: get
+      source: field_search
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+  default_bundle: collection_landing_page
+migration_dependencies:
+  required:
+    - olympian_d7_user
+    - olympian_d7_node_type_article
+    - olympian_d7_node_type_author
+    - olympian_d7_node_type_book
+    - olympian_d7_node_type_coin
+    - olympian_d7_node_type_collection_landing_page
+    - olympian_d7_node_type_contact_landing_page
+    - olympian_d7_node_type_courses
+    - olympian_d7_node_type_course_landing
+    - olympian_d7_node_type_events
+    - olympian_d7_node_type_events_landing_page
+    - olympian_d7_node_type_faculty_landing_page
+    - olympian_d7_node_type_faculty_staff
+    - olympian_d7_node_type_faq
+    - olympian_d7_node_type_generic_page
+    - olympian_d7_node_type_home_page
+    - olympian_d7_node_type_image_cards
+    - olympian_d7_node_type_image_cards_landing
+    - olympian_d7_node_type_news_landing_page
+    - olympian_d7_node_type_page
+    - olympian_d7_node_type_page_not_found
+    - olympian_d7_node_type_past_events_landing_page
+    - olympian_d7_node_type_publication_page
+    - olympian_d7_node_type_resources
+    - olympian_d7_node_type_resources_landing_page
+    - olympian_d7_node_type_testimonial
+    - olympian_d7_node_type_webform
+    - olympian_d7_paragraphs_additional_addresses
+    - olympian_d7_paragraphs_additional_faculty_information
+    - olympian_d7_paragraphs_additional_resource
+    - olympian_d7_paragraphs_additional_resources
+    - olympian_d7_paragraphs_additional_resources_section
+    - olympian_d7_paragraphs_alert
+    - olympian_d7_paragraphs_ampersand_callout
+    - olympian_d7_paragraphs_anchor_link
+    - olympian_d7_paragraphs_announcements
+    - olympian_d7_paragraphs_article_spotlight
+    - olympian_d7_paragraphs_basic_page_content
+    - olympian_d7_paragraphs_button
+    - olympian_d7_paragraphs_callout
+    - olympian_d7_paragraphs_call_to_action
+    - olympian_d7_paragraphs_call_to_action_blocks
+    - olympian_d7_paragraphs_contact_header
+    - olympian_d7_paragraphs_contact_highlights
+    - olympian_d7_paragraphs_contact_highlights_repeat
+    - olympian_d7_paragraphs_content_2
+    - olympian_d7_paragraphs_content_repeats
+    - olympian_d7_paragraphs_courses_image
+    - olympian_d7_paragraphs_course_attributes
+    - olympian_d7_paragraphs_course_page_header
+    - olympian_d7_paragraphs_course_samples
+    - olympian_d7_paragraphs_course_sections
+    - olympian_d7_paragraphs_dark_callout
+    - olympian_d7_paragraphs_dark_callouts
+    - olympian_d7_paragraphs_departments_programs
+    - olympian_d7_paragraphs_description_body
+    - olympian_d7_paragraphs_email_signup
+    - olympian_d7_paragraphs_embedded_webform
+    - olympian_d7_paragraphs_events
+    - olympian_d7_paragraphs_faq
+    - olympian_d7_paragraphs_faq_section
+    - olympian_d7_paragraphs_featured_event
+    - olympian_d7_paragraphs_featured_full_w_text
+    - olympian_d7_paragraphs_featured_half_image_w_text
+    - olympian_d7_paragraphs_featured_news
+    - olympian_d7_paragraphs_featured_news_slide
+    - olympian_d7_paragraphs_featured_slideshow
+    - olympian_d7_paragraphs_featured_with_caption
+    - olympian_d7_paragraphs_footer_callout
+    - olympian_d7_paragraphs_fullscreen_image
+    - olympian_d7_paragraphs_fullscreen_slideshow
+    - olympian_d7_paragraphs_fullscreen_video
+    - olympian_d7_paragraphs_full_screen_home_slide
+    - olympian_d7_paragraphs_full_width_video
+    - olympian_d7_paragraphs_get_to_know_the_deans
+    - olympian_d7_paragraphs_grants_awards
+    - olympian_d7_paragraphs_header
+    - olympian_d7_paragraphs_honors
+    - olympian_d7_paragraphs_horizontal_slide
+    - olympian_d7_paragraphs_image_block
+    - olympian_d7_paragraphs_image_blocks
+    - olympian_d7_paragraphs_image_gallery
+    - olympian_d7_paragraphs_important_dates
+    - olympian_d7_paragraphs_infographics
+    - olympian_d7_paragraphs_instagram_twitter_section
+    - olympian_d7_paragraphs_introduction
+    - olympian_d7_paragraphs_intro_text_with_image
+    - olympian_d7_paragraphs_intro_with_links
+    - olympian_d7_paragraphs_intro_with_tob
+    - olympian_d7_paragraphs_in_the_news
+    - olympian_d7_paragraphs_jump_to
+    - olympian_d7_paragraphs_lightbox_image
+    - olympian_d7_paragraphs_links
+    - olympian_d7_paragraphs_link_title_and_body
+    - olympian_d7_paragraphs_main_content_repeater
+    - olympian_d7_paragraphs_main_content_with_image
+    - olympian_d7_paragraphs_multipurpose_slideshow
+    - olympian_d7_paragraphs_optional_callout
+    - olympian_d7_paragraphs_people_teaser
+    - olympian_d7_paragraphs_programs_callout
+    - olympian_d7_paragraphs_publications
+    - olympian_d7_paragraphs_publications_featured_news
+    - olympian_d7_paragraphs_publications_intro
+    - olympian_d7_paragraphs_publication_announcement
+    - olympian_d7_paragraphs_publication_announcements
+    - olympian_d7_paragraphs_publication_announcement_feature
+    - olympian_d7_paragraphs_publication_award
+    - olympian_d7_paragraphs_publication_awards_section
+    - olympian_d7_paragraphs_publication_call_to_action
+    - olympian_d7_paragraphs_publication_degree
+    - olympian_d7_paragraphs_publication_degrees_section
+    - olympian_d7_paragraphs_publication_degrees_subsection
+    - olympian_d7_paragraphs_publication_degree_holder
+    - olympian_d7_paragraphs_publication_featured_people
+    - olympian_d7_paragraphs_publication_full_video
+    - olympian_d7_paragraphs_publication_gallery
+    - olympian_d7_paragraphs_publication_gallery_image
+    - olympian_d7_paragraphs_publication_person
+    - olympian_d7_paragraphs_publication_student_stories
+    - olympian_d7_paragraphs_publication_student_story
+    - olympian_d7_paragraphs_publication_testimonial_section
+    - olympian_d7_paragraphs_publication_twitter_section
+    - olympian_d7_paragraphs_related_links
+    - olympian_d7_paragraphs_resources_callout
+    - olympian_d7_paragraphs_room_schedule
+    - olympian_d7_paragraphs_sample_courses
+    - olympian_d7_paragraphs_sample_courses_publications
+    - olympian_d7_paragraphs_school_structure
+    - olympian_d7_paragraphs_sidebar_callout
+    - olympian_d7_paragraphs_sidebar_slideshow
+    - olympian_d7_paragraphs_slideshow
+    - olympian_d7_paragraphs_social_media_links
+    - olympian_d7_paragraphs_spotlight
+    - olympian_d7_paragraphs_spotlights
+    - olympian_d7_paragraphs_table_of_contents_anchors
+    - olympian_d7_paragraphs_tabs
+    - olympian_d7_paragraphs_testimonial
+    - olympian_d7_paragraphs_testimonials
+    - olympian_d7_paragraphs_text_link_with_testimonial
+    - olympian_d7_paragraphs_timeline_slides
+    - olympian_d7_paragraphs_timeline_slideshow
+    - olympian_d7_paragraphs_timeline_slideshow_slides
+    - olympian_d7_paragraphs_two_column_content
+    - olympian_d7_paragraphs_video_spotlights
+    - olympian_d7_paragraphs_video_spotlights_and_articles
+    - olympian_d7_paragraphs_video_spotlights_with_articles
+    - olympian_d7_paragraphs_revisions_additional_addresses
+    - olympian_d7_paragraphs_revisions_additional_faculty_information
+    - olympian_d7_paragraphs_revisions_additional_resource
+    - olympian_d7_paragraphs_revisions_additional_resources
+    - olympian_d7_paragraphs_revisions_additional_resources_section
+    - olympian_d7_paragraphs_revisions_alert
+    - olympian_d7_paragraphs_revisions_ampersand_callout
+    - olympian_d7_paragraphs_revisions_anchor_link
+    - olympian_d7_paragraphs_revisions_announcements
+    - olympian_d7_paragraphs_revisions_article_spotlight
+    - olympian_d7_paragraphs_revisions_basic_page_content
+    - olympian_d7_paragraphs_revisions_button
+    - olympian_d7_paragraphs_revisions_callout
+    - olympian_d7_paragraphs_revisions_call_to_action
+    - olympian_d7_paragraphs_revisions_call_to_action_blocks
+    - olympian_d7_paragraphs_revisions_contact_header
+    - olympian_d7_paragraphs_revisions_contact_highlights
+    - olympian_d7_paragraphs_revisions_contact_highlights_repeat
+    - olympian_d7_paragraphs_revisions_content_2
+    - olympian_d7_paragraphs_revisions_content_repeats
+    - olympian_d7_paragraphs_revisions_courses_image
+    - olympian_d7_paragraphs_revisions_course_attributes
+    - olympian_d7_paragraphs_revisions_course_page_header
+    - olympian_d7_paragraphs_revisions_course_samples
+    - olympian_d7_paragraphs_revisions_course_sections
+    - olympian_d7_paragraphs_revisions_dark_callout
+    - olympian_d7_paragraphs_revisions_dark_callouts
+    - olympian_d7_paragraphs_revisions_departments_programs
+    - olympian_d7_paragraphs_revisions_description_body
+    - olympian_d7_paragraphs_revisions_email_signup
+    - olympian_d7_paragraphs_revisions_embedded_webform
+    - olympian_d7_paragraphs_revisions_events
+    - olympian_d7_paragraphs_revisions_faq
+    - olympian_d7_paragraphs_revisions_faq_section
+    - olympian_d7_paragraphs_revisions_featured_event
+    - olympian_d7_paragraphs_revisions_featured_full_w_text
+    - olympian_d7_paragraphs_revisions_featured_half_image_w_text
+    - olympian_d7_paragraphs_revisions_featured_news
+    - olympian_d7_paragraphs_revisions_featured_news_slide
+    - olympian_d7_paragraphs_revisions_featured_slideshow
+    - olympian_d7_paragraphs_revisions_featured_with_caption
+    - olympian_d7_paragraphs_revisions_footer_callout
+    - olympian_d7_paragraphs_revisions_fullscreen_image
+    - olympian_d7_paragraphs_revisions_fullscreen_slideshow
+    - olympian_d7_paragraphs_revisions_fullscreen_video
+    - olympian_d7_paragraphs_revisions_full_screen_home_slide
+    - olympian_d7_paragraphs_revisions_full_width_video
+    - olympian_d7_paragraphs_revisions_get_to_know_the_deans
+    - olympian_d7_paragraphs_revisions_grants_awards
+    - olympian_d7_paragraphs_revisions_header
+    - olympian_d7_paragraphs_revisions_honors
+    - olympian_d7_paragraphs_revisions_horizontal_slide
+    - olympian_d7_paragraphs_revisions_image_block
+    - olympian_d7_paragraphs_revisions_image_blocks
+    - olympian_d7_paragraphs_revisions_image_gallery
+    - olympian_d7_paragraphs_revisions_important_dates
+    - olympian_d7_paragraphs_revisions_infographics
+    - olympian_d7_paragraphs_revisions_instagram_twitter_section
+    - olympian_d7_paragraphs_revisions_introduction
+    - olympian_d7_paragraphs_revisions_intro_text_with_image
+    - olympian_d7_paragraphs_revisions_intro_with_links
+    - olympian_d7_paragraphs_revisions_intro_with_tob
+    - olympian_d7_paragraphs_revisions_in_the_news
+    - olympian_d7_paragraphs_revisions_jump_to
+    - olympian_d7_paragraphs_revisions_lightbox_image
+    - olympian_d7_paragraphs_revisions_links
+    - olympian_d7_paragraphs_revisions_link_title_and_body
+    - olympian_d7_paragraphs_revisions_main_content_repeater
+    - olympian_d7_paragraphs_revisions_main_content_with_image
+    - olympian_d7_paragraphs_revisions_multipurpose_slideshow
+    - olympian_d7_paragraphs_revisions_optional_callout
+    - olympian_d7_paragraphs_revisions_people_teaser
+    - olympian_d7_paragraphs_revisions_programs_callout
+    - olympian_d7_paragraphs_revisions_publications
+    - olympian_d7_paragraphs_revisions_publications_featured_news
+    - olympian_d7_paragraphs_revisions_publications_intro
+    - olympian_d7_paragraphs_revisions_publication_announcement
+    - olympian_d7_paragraphs_revisions_publication_announcements
+    - olympian_d7_paragraphs_revisions_publication_announcement_feature
+    - olympian_d7_paragraphs_revisions_publication_award
+    - olympian_d7_paragraphs_revisions_publication_awards_section
+    - olympian_d7_paragraphs_revisions_publication_call_to_action
+    - olympian_d7_paragraphs_revisions_publication_degree
+    - olympian_d7_paragraphs_revisions_publication_degrees_section
+    - olympian_d7_paragraphs_revisions_publication_degrees_subsection
+    - olympian_d7_paragraphs_revisions_publication_degree_holder
+    - olympian_d7_paragraphs_revisions_publication_featured_people
+    - olympian_d7_paragraphs_revisions_publication_full_video
+    - olympian_d7_paragraphs_revisions_publication_gallery
+    - olympian_d7_paragraphs_revisions_publication_gallery_image
+    - olympian_d7_paragraphs_revisions_publication_person
+    - olympian_d7_paragraphs_revisions_publication_student_stories
+    - olympian_d7_paragraphs_revisions_publication_student_story
+    - olympian_d7_paragraphs_revisions_publication_testimonial_section
+    - olympian_d7_paragraphs_revisions_publication_twitter_section
+    - olympian_d7_paragraphs_revisions_related_links
+    - olympian_d7_paragraphs_revisions_resources_callout
+    - olympian_d7_paragraphs_revisions_room_schedule
+    - olympian_d7_paragraphs_revisions_sample_courses
+    - olympian_d7_paragraphs_revisions_sample_courses_publications
+    - olympian_d7_paragraphs_revisions_school_structure
+    - olympian_d7_paragraphs_revisions_sidebar_callout
+    - olympian_d7_paragraphs_revisions_sidebar_slideshow
+    - olympian_d7_paragraphs_revisions_slideshow
+    - olympian_d7_paragraphs_revisions_social_media_links
+    - olympian_d7_paragraphs_revisions_spotlight
+    - olympian_d7_paragraphs_revisions_spotlights
+    - olympian_d7_paragraphs_revisions_table_of_contents_anchors
+    - olympian_d7_paragraphs_revisions_tabs
+    - olympian_d7_paragraphs_revisions_testimonial
+    - olympian_d7_paragraphs_revisions_testimonials
+    - olympian_d7_paragraphs_revisions_text_link_with_testimonial
+    - olympian_d7_paragraphs_revisions_timeline_slides
+    - olympian_d7_paragraphs_revisions_timeline_slideshow
+    - olympian_d7_paragraphs_revisions_timeline_slideshow_slides
+    - olympian_d7_paragraphs_revisions_two_column_content
+    - olympian_d7_paragraphs_revisions_video_spotlights
+    - olympian_d7_paragraphs_revisions_video_spotlights_and_articles
+    - olympian_d7_paragraphs_revisions_video_spotlights_with_articles
+    - olympian_d7_file_entity_image_public
+  optional:
+    - olympian_d7_field_instance
+    - olympian_d7_comment_field_instance

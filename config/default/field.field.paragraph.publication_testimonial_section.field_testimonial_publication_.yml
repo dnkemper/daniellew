@@ -1,0 +1,32 @@
+uuid: 0dba7041-633d-4516-83de-751613bb419b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_publication_
+    - node.type.testimonial
+    - paragraphs.paragraphs_type.publication_testimonial_section
+id: paragraph.publication_testimonial_section.field_testimonial_publication_
+field_name: field_testimonial_publication_
+entity_type: paragraph
+bundle: publication_testimonial_section
+label: Testimonial
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      testimonial: testimonial
+    sort:
+      field: _none
+      direction: ASC
+    behaviors:
+      field_default_token:
+        status: true
+      views-select-list:
+        status: 0
+field_type: entity_reference

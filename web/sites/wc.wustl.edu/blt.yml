@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: wc.ddev.site
+    protocol: https
+  machine_name: wc
+  human_name: wc.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: wc.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/wc.wustl.edu/files'
+    origin: 'https://wc.wustl.edu'
+drupal:
+  db:
+    database: drupal_wc
+system:
+  site:
+    contact_us_url: 'https://wc.wustl.edu/contact-us'
+    name: wc
+    email: wc@wustl.edu

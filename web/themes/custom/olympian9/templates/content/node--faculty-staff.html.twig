@@ -1,0 +1,660 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+{% block content %}
+
+
+<div class="element-invisible">{{ sharedURL }}</div>
+  {% if is_shared_content == 1 %}
+
+    {% if contenttype == 'Short' %}
+      <article class="single-faculty-post flex short">
+        <div class="post-body">
+          <div class="inner">
+            <div class="post-content wysiwyg">
+              {{ title_prefix }}
+              {% if nodetitle %}
+                <h1>{{ nodetitle }}</h1>
+              {% endif %}
+              {{ title_suffix }}
+
+              <div class="title">{{ position|raw }}
+                {% if additionalTitles %}
+                  <br>{{ additionalTitles|raw }}
+                {% endif %}
+              </div>
+
+              {% if headshot %}
+                {{ headshot|raw }}
+              {% else %}
+                <div class="image column half">
+                  <img loading="lazy" src="{{ base_path ~ directory }}/images/default-person.png" alt="{{ 'default person image'|t }}" width="680" height="680">
+                </div>
+              {% endif %}
+
+              <div class="biography">{{ biography|raw }}</div>
+            </div>
+
+            {% if links %}
+              <h2 class="links-header">See more:</h2>
+              <ul class="person-links">
+                {{ links|raw }}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="faculty-contact">
+          <div class="inner">
+            {% if pronouns or emailAddress or phoneNumber or faxNumber or buildingNameRoomNumber %}
+              <h2>Contact info:</h2>
+              <ul class="detail contact">
+                {% if pronouns %}
+                  <li>Pronouns: {{ pronouns }}</li>
+                {% endif %}
+                {% if emailAddress %}
+                  <li>Email: <a href="mailto:{{ emailAddress }}">{{ emailAddress }}</a></li>
+                {% endif %}
+                {% if phoneNumber %}
+                  <li class="phone">Phone: {{ phoneNumber }}</li>
+                {% endif %}
+                {% if faxNumber %}
+                  <li>Fax: {{ faxNumber }}</li>
+                {% endif %}
+                {% if buildingNameRoomNumber %}
+                  <li>Office: {{ buildingNameRoomNumber }}</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="inner">
+            {% if officeHours %}
+              <h2>Office hours:</h2>
+              <ul class="detail">
+                <li>{{ officeHours|raw }}</li>
+              </ul>
+            {% endif %}
+            {% if officeDirectionsURL %}
+              <a class="button" href="{{ officeDirectionsURL }}" target="_blank" aria-label="Opens link to directions in new window">
+                Get Directions
+              </a><br>
+            {% endif %}
+          </div>
+
+          <div class="inner">
+            {% if mailingAddress %}
+              <h2>Mailing address:</h2>
+              <ul class="detail">
+                <li>{{ mailingAddress|raw }}</li>
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="inner">
+            {% if interests %}
+              <h2>Research interests:</h2>
+              <ul class="interests">
+                <li>{{ interests|render|replace({'<br />':'</li><li>'})|replace({'<br>':'</li><li>'})|replace({'<li></li>':''})|replace({'<br/>':'</li><li>'})|raw }}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="inner">
+            <ul class="detail contact">
+              {% if advisorURL and advisor %}
+                <li>Advisor: <a href="{{ advisorURL }}" aria-label="Navigate to {{ advisor }}">{{ advisor }}</a></li>
+              {% elseif advisor %}
+                <li>Advisor: {{ advisor }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+
+        <a class="more" href="{{ landing_page_alias }}">View All People</a>
+      </article>
+
+
+    {% elseif contenttype == 'Long' %}
+      <article class="single-faculty-post">
+        <div class="post-header flex">
+          {% if headshot %}
+            {{ headshot|raw }}
+          {% else %}
+            <div class="image column half">
+              <img src="{{ base_path ~ directory }}/images/default-person.png" alt="{{ 'default person image'|t }}" width="680" height="680">
+            </div>
+          {% endif %}
+
+          <div class="column half faculty-details">
+            {% if department %}
+              <div class="image">
+                <img src="{{ department }}" alt="" width="680" height="680">
+              </div>
+            {% endif %}
+            <div class="inner">
+
+              {% if nodetitle %}
+                <h1>{{ nodetitle }}</h1>
+              {% endif %}
+
+
+              <div class="title">{{ position|replace({'<br /><br />':'<br>'})|raw }}
+                {% if additionalTitles %}
+                  <br>{{ additionalTitles|replace({'<br /><br />':'<br>'})|raw }}<br>
+                {% endif %}
+              </div>
+
+              {% if endowedProfessorship %}
+                <div class="award">{{ endowedProfessorship|replace({'<br /><br />':'<br>'})|raw }}</div>
+              {% endif %}
+
+              {% if education %}
+                <div class="education">{{ education|replace({'<br /><br />':'<br>'})|raw }}</div>
+              {% endif %}
+
+              <ul class="links">
+                {% if cv %}
+                  <li>
+                    <div class="field-cv"><a href="{{ cv }}">Download CV <svg class="icon"><use xlink:href="#download"></use></svg></a></div>
+                  </li>
+                {% endif %}
+                {{ links|raw }}
+              </ul>
+
+              {% if interests %}
+                <div class="heading">Research interests:</div>
+                  <ul class="interests">
+                    {{ interests|render|replace({'<br />':'</li><li>'})|replace({'<br>':'</li><li>'})|replace({'<li></li>':''})|replace({'<br/>':'</li><li>'})|raw }}
+                  </ul>
+              {% endif %}
+
+              <ul class="advisor contact">
+                {% if advisorURL and advisor %}
+                  <li>Advisor: <a href="{{ advisorURL }}" aria-label="Navigate to {{ advisor }}">{{ advisor }}</a></li>
+                {% elseif advisor %}
+                  <li>Advisor: {{ advisor }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <a class="more" href="{{ landing_page_alias }}">View All People</a>
+
+        <div class="flex">
+          <div class="faculty-contact flex">
+            <div class="inner">
+              {{ socialMediaLinks|raw }}
+
+              {% if pronouns or emailAddress or phoneNumber or faxNumber or buildingNameRoomNumber %}
+                <h2>Contact info:</h2>
+                <ul class="detail contact">
+                  {% if pronouns %}
+                    <li>Pronouns: {{ pronouns }}</li>
+                  {% endif %}
+                  {% if emailAddress %}
+                    <li>Email: <a href="mailto:{{ emailAddress }}">{{ emailAddress }}</a></li>
+                  {% endif %}
+                  {% if phoneNumber %}
+                    <li>Phone: {{ phoneNumber }}</li>
+                  {% endif %}
+                  {% if faxNumber %}
+                    <li>Fax: {{ faxNumber }}</li>
+                  {% endif %}
+                  {% if buildingNameRoomNumber %}
+                    <li>Office: {{ buildingNameRoomNumber|raw }}</li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+            </div>
+
+            <div class="inner">
+              {% if officeHours %}
+                <h2>Office hours:</h2>
+                <ul class="detail">
+                  <li>{{ officeHours|raw }}</li>
+                </ul>
+              {% endif %}
+              {% if officeDirectionsURL %}
+                <a class="button" href="{{ officeDirectionsURL }}" target="_blank" aria-label="Opens link to directions in new window">Get Directions</a>
+              {% endif %}
+            </div>
+
+            <div class="inner">
+              {% if mailingAddress %}
+                <h2>Mailing address:</h2>
+                <ul class="detail">
+                  <li>{{ mailingAddress|raw }}</li>
+                </ul>
+              {% endif %}
+            </div>
+
+            {% if department %}
+              {# Keep this as hard-coded <img>, since we can't use drupal_image on a non-native URI. #}
+              <div class="detail-image"><img src="{{ department }}" alt="" width="680" height="680"></div>
+            {% endif %}
+          </div>
+
+          <div class="post-body">
+            <div class="inner">
+              <div class="post-excerpt">
+                {% if introText %}
+                  {{ introText|raw }}
+                {% endif %}
+              </div>
+              <div class="post-content wysiwyg">
+                {% if biography %}
+                  {{ biography|raw }}
+                {% endif %}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </article>
+
+      {# Slideshow and other sections #}
+      {{ content.field_sample_c_and_p_p }}
+            {% if courses %}
+      {{ courses|raw }}
+      {% endif %}
+      {% if description %}
+        <section class="text-only">
+          <div class="container wysiwyg">
+            {{ description|raw }}
+          </div>
+        </section>
+      {% endif %}
+
+      {% set view = drupal_view_result('faculty_articles', 'block_faculty_articles')|length %}
+      {% if view > 0 %}
+        <section class="more-posts flex">
+          <div class="column twenty heading flex">
+            <h2>in the news:</h2>
+            <div class="ampersand" aria-label="related news articles section">
+              <svg>
+                <use xlink:href="#ampersand"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="column eighty posts-feed flex">
+            <div class="slideshow more-posts-slideshow dots-below">
+              {{ drupal_view('faculty_articles', 'block_faculty_articles', node.id) }}
+              <a href="{{ news }}" class="slide post">
+                <div class="back-post">Read more news</div>
+              </a>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    {% endif %}
+ {% if drupal_view_result('books_by_faculty_member', 'block_faculty_books')|length > 0 %}
+
+        <section class="faculty-book" aria-label="books by faculty">
+          <div class="container slideshow dot-slideshow flex reveal">
+            {{ drupal_view('books_by_faculty_member', 'block_faculty_books') }}
+          </div>
+        </section>
+      {% endif %}
+
+  {% else %}
+
+    {% if content.field_content_type[0]['#markup'] == 'Short' %}
+      <article class="single-faculty-post flex short">
+        <div class="post-body">
+          <div class="inner">
+            <div class="post-content wysiwyg">
+              {{ title_prefix }}
+              {% if label %}
+                <h1{{ title_attributes }}>{{ label }}</h1>
+              {% endif %}
+              {{ title_suffix }}
+              {# <h1>{{ content.field_first_name.0 }} {{ content.field_last_name.0 }}</h1> #}
+              <div class="title">{{ content.field_position.0 }}
+                {# $Additional Titles #}
+                {% if content.field_additional_titles.0 %}
+                  <br>
+                  {{ content.field_additional_titles.0 }}
+                {% endif %}
+              </div>
+
+              <div class="image column half">
+                {% if content.field_author_headshot.0 %}
+                  {{ drupal_image(
+                    content.field_author_headshot.0['#media']|file_uri,
+                    'resp_landscape_to_square',
+                    { alt: content.headshotAlt ?? '', loading: 'eager' },
+                    responsive=true
+                  ) }}
+                {% else %}
+                  <img loading="lazy" src="{{ base_path ~ directory }}/images/default-person.png" alt="{{ 'default person image'|t }}" width="680" height="680">
+                {% endif %}
+              </div>
+
+              {{ content.field_biography.0 }}
+            </div>
+            {% if content.field_links_p|render %}
+              <h2 class="links-header">see more:</h2>
+              <ul class="person-links">
+                {{ content.field_links_p }}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="faculty-contact">
+          <div class="inner">
+            {% if content.field_pronouns.0 or content.field_email_address.0 or content.field_phone_number.0 or content.field_fax_number.0 or content.field_building_name_and_room_num.0 %}
+              <h2>contact info:</h2>
+              <ul class="detail contact">
+                {% if content.field_pronouns.0 %}
+                  <li>Pronouns: {{ content.field_pronouns.0 }}</li>
+                {% endif %}
+                {% if content.field_email_address.0 %}
+                  <li>Email: {{ content.field_email_address.0 }}</li>
+                {% endif %}
+                {% if content.field_phone_number.0 %}
+                  <li class="phone">Phone: {{ content.field_phone_number.0 }}</li>
+                {% endif %}
+                {% if content.field_fax_number.0 %}
+                  <li>Fax: {{ content.field_fax_number.0 }}</li>
+                {% endif %}
+                {% if content.field_building_name_and_room_num.0 %}
+                  <li>Office: {{ content.field_building_name_and_room_num.0 }}</li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </div>
+          <div class="inner">
+            {% if content.field_office_hours.0 %}
+              <h2>office hours:</h2>
+              <ul class="detail">
+                <li>{{ content.field_office_hours.0 }}</li>
+              </ul>
+            {% endif %}
+            {% if content.field_external_url[0]['#url'] %}
+              <a class="button" href="{{ content.field_external_url[0]['#url'] }}" target="_blank"
+                 aria-label="Opens link to directions in new window">Get Directions</a><br>
+            {% endif %}
+          </div>
+          <div class="inner">
+            {% if content.field_mailing_address.0 %}
+              <h2>mailing address:</h2>
+              <ul class="detail">
+                <li>{{ content.field_mailing_address.0 }}</li>
+              </ul>
+            {% endif %}
+          </div>
+          <div class="inner">
+            {% if content.field_interests.0 %}
+              <h2>research interests:</h2>
+              <ul class="interests">
+                <li>{{ content.field_interests.0|render|replace({'<br />':'</li><li>'})|replace({'<br>':'</li><li>'})|replace({'<li></li>':''})|replace({'<br/>':'</li><li>'})|raw }}</li>
+              </ul>
+            {% endif %}
+          </div>
+          <div class="inner">
+            <ul class="detail contact">
+              {% if content.field_advisor_url[0]['#url'] and content.field_advisor.0 %}
+                <li>Advisor: <a href="{{ content.field_advisor_url[0]['#url'] }}"
+                                aria-label="Navigate to {{ content.field_advisor.0 }}">{{ content.field_advisor.0 }}</a>
+                </li>
+              {% elseif content.field_advisor.0 %}
+                <li>Advisor: {{ content.field_advisor.0 }}</li>
+              {% endif %}
+            </ul>
+          </div>
+
+        </div>
+        <a class="more" href="{{ landing_page_alias }}">View All People</a>
+      </article>
+    {% elseif content.field_content_type[0]['#markup'] == 'Long' %}
+      <article class="single-faculty-post">
+        <div class="post-header flex">
+          <div class="image column half">
+            {# use eager loading for this case, because it is above the fold #}
+            {% if content.field_author_headshot.0 %}
+              {{ drupal_image(content.field_author_headshot.0['#media']|file_uri,
+                'resp_landscape_to_square',
+                { alt: content.headshotAlt ?? '', loading: 'eager' },
+                responsive=true
+              ) }}
+              {# can also get alt from node.field_author_headshot.entity.field_media_image.0.alt #}
+            {% else %}
+              <img src="{{ base_path ~ directory }}/images/default-person.png" alt="{{ 'default person image'|t }}" width="680" height="680">
+            {% endif %}
+          </div>
+
+          <div class="column half faculty-details">
+
+            {% if department_image_path %}
+              <div class="image" style="background-image: url('{{ department_image_path }}')"></div>
+            {% endif %}
+            <div class="inner">
+              {{ title_prefix }}
+              {% if label %}
+                <h1{{ title_attributes }}>{{ label }}</h1>
+              {% endif %}
+              {{ title_suffix }}
+              <div class="title">{{ content.field_position.0 }}
+                {% if content.field_additional_titles.0 %}
+                  <br>{{ content.field_additional_titles.0 }}
+                {% endif %}
+              </div>
+              {% if content.field_award.0 %}
+                <div class="award">{{ content.field_award.0 }}</div>
+              {% endif %}
+              {% if content.field_education.0 %}
+                <div class="education">{{ content.field_education.0 }}</div>
+              {% endif %}
+              <ul class="links">
+                {% if content.field_cv|render %}
+                  <li>
+                    <div class="field-cv">{{ content.field_cv }}
+                    </div>
+                  </li>
+                {% endif %}
+                {{ content.field_links_p }}
+              </ul>
+              {% if content.field_interests.0 %}
+                <div class="heading">research interests:</div>
+                  <ul class="interests">
+                    <li>{{ content.field_interests.0|render|replace({'<br />':'</li><li>'})|replace({'<br>':'</li><li>'})|replace({'<li></li>':''})|replace({'<br/>':'</li><li>'})|raw }}</li>
+                  </ul>
+
+              {% endif %}
+              <ul class="advisor contact">
+                {% if content.field_advisor_url[0]['#url'] and content.field_advisor.0 %}
+                  <li>Advisor: <a href="{{ content.field_advisor_url[0]['#url'] }}"
+                                  aria-label="Navigate to {{ content.field_advisor.0 }} link">{{ content.field_advisor.0 }}</a>
+                  </li>
+                {% elseif content.field_advisor.0 %}
+                  <li>Advisor: {{ content.field_advisor.0 }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <a class="more" href="{{ landing_page_alias }}">View All People</a>
+        <div class="flex">
+          <div class="faculty-contact flex">
+            <div class="inner">
+              {{ content.field_social_media_links_p }}
+              {% if content.field_pronouns.0 or content.field_email_address.0 or content.field_phone_number.0 or content.field_fax_number.0 or content.field_building_name_and_room_num.0 %}
+                <h2>contact info:</h2>
+                <ul class="detail contact">
+                  {% if content.field_pronouns.0 %}
+                    <li>Pronouns: {{ content.field_pronouns.0 }}</li>
+                  {% endif %}
+                  {% if content.field_email_address.0 %}
+                    <li>Email: {{ content.field_email_address.0 }}</li>
+                  {% endif %}
+                  {% if content.field_phone_number.0 %}
+                    <li>Phone: {{ content.field_phone_number.0 }}</li>
+                  {% endif %}
+                  {% if content.field_fax_number.0 %}
+                    <li>Fax: {{ content.field_fax_number.0 }}</li>
+                  {% endif %}
+                  {% if content.field_building_name_and_room_num.0 %}
+                    <li>Office: {{ content.field_building_name_and_room_num.0 }}</li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+            </div>
+            <div class="inner">
+              {% if content.field_office_hours.0 %}
+                <h2>office hours:</h2>
+                <ul class="detail">
+                  <li>{{ content.field_office_hours.0 }}</li>
+                </ul>
+              {% endif %}
+              {% if content.field_external_url[0]['#url'] %}
+                <a class="button" href="{{ content.field_external_url[0]['#url'] }}" target="_blank"
+                   aria-label="Open directions link in new window">Get Directions</a>
+              {% endif %}
+            </div>
+            <div class="inner">
+              {% if content.field_mailing_address.0 %}
+                <h2>mailing address:</h2>
+                <ul class="detail">
+                  <li>{{ content.field_mailing_address.0 }}</li>
+                </ul>
+              {% endif %}
+            </div>
+            {% if department_image_path %}
+              <div class="image" style="background-image: url('{{ department_image_path }}')"></div>
+            {% endif %}
+          </div>
+          <div class="post-body">
+            <div class="inner">
+              <div class="post-excerpt">
+                {% if content.field_intro_text and content.field_intro_text['#items']|length > 0 %}
+                  {{ content.field_intro_text }}
+                {% elseif content.field_link_excerpt and content.field_link_excerpt['#items']|length > 0 %}
+                  {{ content.field_link_excerpt }}
+                {% endif %}
+              </div>
+              <div class="post-content wysiwyg">
+                {% if content.field_biography %}
+                  {{ content.field_biography }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {# Display slideshow #}
+      {{ content.field_sample_c_and_p_p }}
+
+      {% if content.field_description.0 %}
+        <section class="text-only">
+          <div class="container wysiwyg">
+            {{ content.field_description }}
+          </div>
+        </section>
+      {% endif %}
+    {% endif %}
+    {% if content.field_content_type[0]['#markup'] == 'Long' %}
+      {{ drupal_view('faculty_soundcloud', 'block') }}
+
+      {% set view = drupal_view_result('faculty_articles', 'block_faculty_articles')|length %}
+      {% if view > 0 %}
+        <section class="more-posts flex">
+          <div class="column twenty heading flex">
+            <h2>in the news:</h2>
+            <div class="ampersand" aria-label="related news articles section">
+              <svg>
+                <use xlink:href="#ampersand"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="column eighty posts-feed flex">
+            <div class="slideshow more-posts-slideshow dots-below">
+              {{ drupal_view('faculty_articles', 'block_faculty_articles', node.id) }}
+              <a href="{{ news }}" class="slide post">
+                <div class="back-post">Read more news</div>
+              </a>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+      {% set view2 = drupal_view_result('books_by_faculty_member', 'block_faculty_books')|length %}
+      {% if view2 > 0 %}
+        <section class="faculty-book" aria-label="books by faculty">
+          <div class="container slideshow dot-slideshow flex reveal">
+            {{ drupal_view('books_by_faculty_member', 'block_faculty_books') }}
+          </div>
+        </section>
+      {% endif %}
+    {% endif %}
+
+  {% endif %}
+{% endblock content %}

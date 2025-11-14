@@ -1,0 +1,31 @@
+uuid: 38ad28d1-2e34-4965-ae07-3cdde1d2411c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_biography
+    - filter.format.full_html
+    - node.type.faculty_staff
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: node.faculty_staff.field_biography
+field_name: field_biography
+entity_type: node
+bundle: faculty_staff
+label: Biography
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

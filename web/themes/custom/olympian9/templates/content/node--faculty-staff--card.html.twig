@@ -1,0 +1,214 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ * field_description - text formatted long
+ * field_additional_titles - text plain long
+ * field_advisor - text plain
+ * field_ * field_advisor_url - text plain
+ * field_areas_of_interest - ER
+ * field_biography - text formatted long w/summary
+ * field_content_type - list text
+ * field_cv - file
+ * field_dark_slideshow - ERR
+ * field_education - text plain long
+ * field_email_address - text plain
+ * field_{{ content. * field_award.0 }} - text plain
+ * field_external_profile_link - text plain
+ * field_fax_number - text plain
+ * field_first_name - text plain
+ * field_author_headshot - ER
+ * field_interests - text plain long
+ * field_intro_text - text plain long
+ * field_is_shared - boolean
+ * field_last_name - text plain
+ * field_links_p - ERR
+ * field_mailing_address - text plain long
+ * field_building_name_and_room_num - text plain long
+ * field_external_url - text plain
+ * field_office_hours - text plain long
+ * field_phone_number - text plain
+ * field_pronouns - text plain
+ * field_search - text plain long
+ * field_shared_content - text plain long
+ * field_shared_content_subscribers - text plain long
+ * field_shared_content_xml - text plain
+ * field_social_media_links_p - ERR
+ * field_position - text plain
+ * field_type_of_staff - ER
+ +----------------------------------+----------+----------------------------+-------------+
+| Field name                       | Required | Field type                 | Cardinality |
++----------------------------------+----------+----------------------------+-------------+
+| field_additional_titles          |          | string_long                | 1           |
+| field_advisor                    |          | string                     | 1           |
+| field_advisor_url                |          | link                       | 1           |
+| field_areas_of_interest          |          | entity_reference           | -1          |
+| field_author_headshot            |          | entity_reference           | 1           |
+| field_award                      |          | string                     | 1           |
+| field_biography                  |          | text_with_summary          | 1           |
+| field_building_name_and_room_num |          | string_long                | 1           |
+| field_content_type               | ✔        | list_string                | 1           |
+| field_cv                         |          | entity_reference           | 1           |
+| field_dark_slideshow             |          | entity_reference_revisions | 1           |
+| field_description                |          | text_long                  | 1           |
+| field_education                  |          | string_long                | 1           |
+| field_email_address              |          | email                      | 1           |
+| field_external_profile_link      |          | link                       | 1           |
+| field_external_url               |          | link                       | 1           |
+| field_fax_number                 |          | string                     | 1           |
+| field_first_name                 | ✔        | string                     | 1           |
+| field_interests                  |          | string_long                | 1           |
+| field_intro_text                 |          | text_long                  | 1           |
+| field_is_shared                  |          | boolean                    | 1           |
+| field_last_name                  | ✔        | string                     | 1           |
+| field_links_p                    |          | entity_reference_revisions | -1          |
+| field_mailing_address            |          | string_long                | 1           |
+| field_meta_tags                  |          | metatag                    | 1           |
+| field_office_hours               |          | string_long                | 1           |
+| field_phone_number               |          | telephone                  | 1           |
+| field_position                   |          | string                     | 1           |
+| field_pronouns                   |          | string                     | 1           |
+| field_search                     |          | string_long                | 1           |
+| field_shared_content             |          | string_long                | 1           |
+| field_shared_content_subscribers |          | string_long                | 1           |
+| field_shared_content_xml         |          | string                     | 1           |
+| field_social_media_links_p       |          | entity_reference_revisions | 1           |
+| field_type_of_staff              |          | entity_reference           | -1          |
++----------------------------------+----------+----------------------------+-------------+
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+{% block content %}
+  {% if is_shared_content == 1 %}
+    {% if externalURL %}
+      <a href="{{ externalURL }}" class="card" id="faculty-card"
+        aria-label="View {{ firstName }} {{ lastName }}">
+    {% else %}
+        <a href="{{ url }}" id="faculty-card-container" class="card" aria-label="View {{ firstName}} {{ lastName }}">
+    {% endif %}
+      <article class="faculty-post">
+        <div class="image">
+          {% if headshotCard|raw %}
+            {{ headshotCard|raw }}
+          {% endif %}
+          <h3>
+            <div><span>{{ firstName }}</span></div>
+            <div><span>{{ lastName | raw }}</span></div>
+          </h3>
+        </div>
+        <div class="dept">
+          {# Check all conditions for possible titles and commas #}
+          {% if endowedProfessorship and position %}
+            {{ endowedProfessorship|replace({'<br /><br />':'<br>'})|raw }} , {{ position|replace({'<br /><br />':'<br>'})|raw }}
+          {% elseif endowedProfessorship %}
+            {{ endowedProfessorship|replace({'<br /><br />':'<br>'})|raw }}
+          {% else %}
+            {{ position|replace({'<br /><br />':'<br>'})|raw }}
+          {% endif %}
+          {% if additionalTitles %}
+              {{ additionalTitles|replace({'<br /><br />':'<br>'})|raw }}
+          {% endif %}
+        </div>
+      </article>
+    </a>
+  {% else %}
+  {% if content.field_external_profile_link[0]['#url'] %}
+  <a href="{{ content.field_external_profile_link[0]['#url'] }}" class="card" id="faculty-card"
+        aria-label="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}">
+  {% else %}
+    <a href="{{ url }}" id="faculty-card-container" class="card" aria-label="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}">
+  {% endif %}
+    <article class="faculty-post">
+        <div class="image">
+          {% if content.field_author_headshot.0 %}
+            {{ drupal_image(content.field_author_headshot.0['#media']|file_uri, 'resp_square_small', { alt: headshotAlt ?? '' }, responsive=true) }}
+            {# or could use fileID: {{ drupal_image(content.field_author_headshot.0['#media'].field_media_image.target_id, ...}}  #}
+          {% else %}
+            <img loading="lazy" src="{{ base_path ~ directory }}/images/default-person.png" alt="default person image" width="320" height="320">
+          {% endif %}
+          <h3>
+            <div><span>{{ content.field_first_name.0 }}</span></div>
+            <div><span>{{ content.field_last_name.0 }}</span></div>
+          </h3>
+        </div>
+        <div class="dept">
+          {# Check all conditions for possible titles and commas #}
+          {% if content.field_award.0 and content.field_position.0 %}
+            {{ content.field_award.0 }} , {{ content.field_position.0 }}
+          {% elseif content.field_award.0 %}
+            {{ content.field_award.0 }}
+          {% else %}
+            {{ content.field_position.0 }}
+          {% endif %}
+          {% if content.field_additional_titles.0 %}
+              {{ content.field_additional_titles.0 }}
+          {% endif %}
+        </div>
+      </article>
+    </a>
+
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,11 @@
+uuid: 49fefb00-ff08-4acc-8da7-48e69bc798ef
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.upcoming
+label: upcoming
+description: ''
+targetEntityType: node
+cache: true

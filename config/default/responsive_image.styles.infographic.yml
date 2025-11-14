@@ -1,0 +1,16 @@
+uuid: 5cb1728f-15af-410c-9f53-9d7ebb85ed70
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.infographic
+id: infographic
+label: Infographic
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: infographic
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: infographic

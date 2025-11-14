@@ -1,0 +1,71 @@
+uuid: 5602ffb8-0c8d-4c92-a1bf-ab6cfa4be3ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.aggregator_feed.summary
+    - field.field.aggregator_feed.aggregator_feed.field_aggregator_purge_items
+    - field.field.aggregator_feed.aggregator_feed.field_feed_source
+    - field.field.aggregator_feed.aggregator_feed.field_feed_type
+    - field.field.aggregator_feed.aggregator_feed.field_last_modified
+  module:
+    - aggregator
+_core:
+  default_config_hash: OCl6AtoDUvFAsnvg1fosqsjFuoUvnIWQ28b_0Nc14Cg
+id: aggregator_feed.aggregator_feed.summary
+targetEntityType: aggregator_feed
+bundle: aggregator_feed
+mode: summary
+content:
+  checked:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: long
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  description:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  items:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  link:
+    type: uri_link
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  more_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feed_icon: true
+  field_aggregator_purge_items: true
+  field_feed_source: true
+  field_feed_type: true
+  field_last_modified: true
+  image: true
+  search_api_excerpt: true

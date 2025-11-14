@@ -1,0 +1,9 @@
+{{ content.field_coin_introduction }}
+<section class="filtered">
+<div class="category-view toggle-wrap">
+{{ drupal_entity('block', 'coin_collection', check_access=false) }}
+</div>
+<div class="container filtered-cards faculty-cards flex js-load-container">
+{{ drupal_view('coin_collection', 'grid') }}
+</section>
+</div>

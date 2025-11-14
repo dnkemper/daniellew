@@ -1,0 +1,26 @@
+uuid: 64fdcbec-4f17-4a46-99e4-f5056c9ff41e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spot_event_category
+    - paragraphs.paragraphs_type.spotlight
+    - taxonomy.vocabulary.event_categories
+id: paragraph.spotlight.field_spot_event_category
+field_name: field_spot_event_category
+entity_type: paragraph
+bundle: spotlight
+label: 'Event Category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      event_categories: event_categories
+    sort:
+      field: _none
+field_type: entity_reference

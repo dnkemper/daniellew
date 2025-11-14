@@ -1,0 +1,8 @@
+uuid: 7fb93a8b-9e9b-4519-95dc-638885abd4e2
+langcode: en
+status: true
+dependencies: {  }
+name: 'Inscription Language'
+vid: coin_inscription_language
+description: ''
+weight: 0

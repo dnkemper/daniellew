@@ -1,0 +1,41 @@
+id: media_cv_migration
+label: 'Media CV Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+migration_group: olympian_d7
+source:
+  plugin: filtered_file_d7
+  scheme: public
+  filemime: 
+    - 'application/pdf'
+  constants:
+    source_uri_prefix: 'dynamic'
+    dest_uri_prefix: ''
+    source_base_path: ''
+process:
+  uid:
+    plugin: migration_lookup
+    migration: olympian_d7_user
+    source: uid
+    no_stub: true
+  field_media_file/target_id:
+    plugin: migration_lookup
+    migration: file_migration
+    source: fid
+  status: status
+  # Drupal 7 didn't keep track of the file's creation or update time.
+  # All it had was the vague "timestamp" column. So we'll use it
+  # for both.
+  created: timestamp
+  changed: timestamp
+  field_media_directory:
+    plugin: migration_lookup
+    source: field_media_directory
+    migration: olympian_d7_taxonomy_term_media_folders
+destination:
+  plugin: 'entity:media'
+  default_bundle: cv
+migration_dependencies:
+  required:
+    - file_migration
+  optional: {}

@@ -1,0 +1,23 @@
+uuid: 304cade6-3cf5-4d69-bf13-fc4c938c8cd4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.header.field_header_image
+    - paragraphs.paragraphs_type.header
+id: paragraph.header.default
+targetEntityType: paragraph
+bundle: header
+mode: default
+content:
+  field_header_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: background_image
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

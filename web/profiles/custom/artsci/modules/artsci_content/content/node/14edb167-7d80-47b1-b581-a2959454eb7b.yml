@@ -1,0 +1,77 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 14edb167-7d80-47b1-b581-a2959454eb7b
+  bundle: resources
+  default_langcode: en
+  depends:
+    4d43ed8c-649b-448d-8284-3a1aa580a591: media
+    582f1150-9852-415c-b671-332a2006f4e9: taxonomy_term
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Academic Calendar'
+  created:
+    -
+      value: 1690897105
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/academic-calendar
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://artsci.washu.edu/academic-calendar'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: 4d43ed8c-649b-448d-8284-3a1aa580a591
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 582f1150-9852-415c-b671-332a2006f4e9
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'find dates for deadlines, holidays, and more'
+  field_title:
+    -
+      value: 'Academic Calendar'

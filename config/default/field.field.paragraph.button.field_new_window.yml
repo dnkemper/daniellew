@@ -1,0 +1,23 @@
+uuid: 420911fa-77fd-489f-8a4b-71f3a0e538a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_new_window
+    - paragraphs.paragraphs_type.button
+id: paragraph.button.field_new_window
+field_name: field_new_window
+entity_type: paragraph
+bundle: button
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

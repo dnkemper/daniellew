@@ -1,0 +1,8 @@
+uuid: 93e7b8b1-23b6-4d16-a320-0191e0777d7f
+langcode: en
+status: true
+dependencies: {  }
+name: Ruler
+vid: coin_ruler
+description: ''
+weight: 0

@@ -1,0 +1,10 @@
+uuid: d39abc0b-ee25-418c-b5f6-c9fc8df864c9
+langcode: en
+status: true
+dependencies: {  }
+id: school_structure
+label: 'School Structure'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle School Structure'
+behavior_plugins: {  }

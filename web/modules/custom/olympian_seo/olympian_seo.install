@@ -1,0 +1,263 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for olympian_seo.
+ */
+
+/**
+ * Rebuild the cache for removed list builder handler service.
+ */
+function olympian_seo_update_8001() {
+  drupal_flush_all_caches();
+}
+
+/**
+ * Update metatag permission changes for sites that split role configuration.
+ */
+function olympian_seo_update_8002() {
+  $config_files = [
+    "core.entity_form_display.comment.comment_node_course_landing.default",
+    "core.entity_form_display.comment.comment_node_author.default",
+    "core.entity_form_display.comment.comment_node_testimonial.default",
+    "core.entity_view_display.comment.comment_node_author.default",
+    "core.entity_view_display.comment.comment_node_course_landing.default",
+    "core.entity_view_display.comment.comment_node_testimonial.default",
+    "field.field.comment.comment_node_author.comment_body",
+    "field.field.comment.comment_node_course_landing.comment_body",
+    "field.field.comment.comment_node_testimonial.comment_body",
+    "comment.type.comment_node_testimonial",
+    "comment.type.comment_node_course_landing",
+    "comment.type.comment_node_author",
+    "core.entity_form_display.comment.comment_node_date_migrate_exam.default",
+    "core.entity_form_display.comment.comment_node_faculty_staff.default",
+    "core.entity_form_display.comment.comment_node_news_landing_page.default",
+    "core.entity_form_display.comment.comment_node_page_not_found.default",
+    "core.entity_form_display.comment.comment_node_publication_page.default",
+    "core.entity_form_display.comment.comment_node_resources.default",
+    "core.entity_form_display.comment.comment_node_resources_landing.default",
+    "core.entity_view_display.comment.comment_node_date_migrate_exam.default",
+    "core.entity_view_display.comment.comment_node_faculty_staff.default",
+    "core.entity_view_display.comment.comment_node_news_landing_page.default",
+    "core.entity_view_display.comment.comment_node_page_not_found.default",
+    "core.entity_view_display.comment.comment_node_publication_page.default",
+    "core.entity_view_display.comment.comment_node_resources.default",
+    "core.entity_view_display.comment.comment_node_resources_landing.default",
+    "field.field.comment.comment_node_date_migrate_exam.comment_body",
+    "field.field.comment.comment_node_faculty_staff.comment_body",
+    "field.field.comment.comment_node_news_landing_page.comment_body",
+    "field.field.comment.comment_node_page_not_found.comment_body",
+    "field.field.comment.comment_node_publication_page.comment_body",
+    "field.field.comment.comment_node_resources.comment_body",
+    "field.field.comment.comment_node_resources_landing.comment_body",
+    "comment.type.comment_node_resources_landing",
+    "comment.type.comment_node_resources",
+    "comment.type.comment_node_publication_page",
+    "comment.type.comment_node_page_not_found",
+    "comment.type.comment_node_news_landing_page",
+    "comment.type.comment_node_faculty_staff",
+    "comment.type.comment_node_date_migrate_exam",
+    "core.entity_view_display.comment.comment_node_past_events_landi.default",
+    "core.entity_view_display.comment.comment_node_generic_page.default",
+    "core.entity_view_display.comment.comment_node_image_cards_landi.default",
+    "core.entity_form_display.comment.comment_node_past_events_landi.default",
+    "core.entity_form_display.comment.comment_node_generic_page.default",
+    "core.entity_form_display.comment.comment_node_image_cards_landi.default",
+    "core.entity_view_display.comment.comment_node_image_cards.default",
+    "core.entity_form_display.comment.comment_node_image_cards.default",
+    "core.entity_form_display.comment.comment_node_home_page.default",
+    "core.entity_view_display.comment.comment_node_home_page.default",
+    "field.field.comment.comment_node_generic_page.comment_body",
+    "field.field.comment.comment_node_home_page.comment_body",
+    "field.field.comment.comment_node_image_cards.comment_body",
+    "field.field.comment.comment_node_image_cards_landi.comment_body",
+    "field.field.comment.comment_node_past_events_landi.comment_body",
+    "comment.type.comment_node_past_events_landi",
+    "comment.type.comment_node_image_cards_landi",
+    "comment.type.comment_node_image_cards",
+    "comment.type.comment_node_home_page",
+    "comment.type.comment_node_generic_page",
+    "comment.comment_node_faq.default",
+    "core.entity_view_display.comment.comment_node_faq.default",
+    "core.entity_form_display.comment.comment_node_faq.default",
+    "core.entity_form_display.comment.comment_node_events.default",
+    "core.entity_form_display.comment.comment_node_faculty_landing_p.default",
+    "core.entity_form_display.comment.comment_node_faq.default",
+    "core.entity_form_display.comment.comment_node_events.default",
+    "core.entity_view_display.comment.comment_node_faculty_landing_p.default",
+    "core.entity_view_display.comment.comment_node_faq.default",
+    "field.field.comment.comment_node_events.comment_body",
+    "field.field.comment.comment_node_faculty_landing_p.comment_body",
+    "field.field.comment.comment_node_faq.comment_body",
+    "comment.type.comment_node_faq",
+    "comment.type.comment_node_faculty_landing_p",
+    "comment.type.comment_node_events",
+    "core.entity_form_display.comment.comment_node_contact_landing_p.default",
+    "core.entity_form_display.comment.comment_node_courses.default",
+    "core.entity_form_display.comment.comment_node_events_landing_pa.default",
+    "core.entity_view_display.comment.comment_node_contact_landing_p.default",
+    "core.entity_view_display.comment.comment_node_courses.default",
+    "core.entity_view_display.comment.comment_node_events_landing_pa.default",
+    "field.field.comment.comment_node_contact_landing_p.comment_body",
+    "field.field.comment.comment_node_courses.comment_body",
+    "field.field.comment.comment_node_events_landing_pa.comment_body",
+    "comment.type.comment_node_events_landing_pa",
+    "comment.type.comment_node_courses",
+    "comment.type.comment_node_contact_landing_p",
+    "core.entity_form_display.comment.comment_node_page.default",
+    "core.entity_form_display.comment.comment_node_webform.default",
+    "core.entity_form_display.comment.comment_node_book.default",
+    "core.entity_view_display.comment.comment_node_book.default",
+    "core.entity_view_display.comment.comment_node_page.default",
+    "core.entity_view_display.comment.comment_node_webform.default",
+    "field.field.comment.comment.comment_body",
+    "field.field.comment.comment_node_book.comment_body",
+    "field.field.comment.comment_node_page.comment_body",
+    "field.field.comment.comment_node_webform.comment_body",
+    "comment.type.comment_node_webform",
+    "comment.type.comment_node_page",
+    "comment.type.comment_node_book",
+    "contact.form.feedback",
+  ];
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+}
+
+/**
+ *
+ */
+function olympian_seo_update_8004() {
+  $nodes = \Drupal::entityTypeManager()
+    ->getListBuilder("node")
+    ->getStorage()
+    ->loadByProperties(["type" => "events"]);
+
+  foreach ($nodes as $node) {
+    $date = $node->get("field_event_smart_date")->value;
+    $tbd = $node->get("field_event_date_tbd")->value;
+    $today = strtotime("now");
+    if ($date < $today && $tbd == 0) {
+      $search = "past event";
+    }
+    else {
+      $search = "current event";
+    }
+    $node->set("field_search", $search);
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = "Created revision for node";
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(1);
+    $node->save();
+  }
+}
+
+/**
+ *
+ */
+function olympian_seo_update_8005() {
+  $nodes = \Drupal::entityTypeManager()
+    ->getListBuilder("node")
+    ->getStorage()
+    ->loadByProperties(["type" => "events"]);
+
+  foreach ($nodes as $node) {
+    $date = $node->get("field_event_smart_date")->value;
+    $tbd = $node->get("field_event_date_tbd")->value;
+    $today = strtotime("now");
+    if (
+      $date > $today ||
+      $tbd == 1 ||
+      ($tbd == 0 && $date == "") ||
+      ($tbd == 0 && $date == NULL)
+    ) {
+      $search = "current event";
+    }
+    $node->set("field_search", $search);
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = "Created revision for node";
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(1);
+    $node->save();
+  }
+}
+
+/**
+ *
+ */
+function olympian_seo_update_8007() {
+  $nodes = \Drupal::entityTypeManager()
+    ->getListBuilder("node")
+    ->getStorage()
+    ->loadByProperties(["type" => "events"]);
+
+  foreach ($nodes as $node) {
+    $date = $node->get("field_event_smart_date")->value;
+    $tbd = $node->get("field_event_date_tbd")->value;
+    $today = strtotime("now");
+    // If (
+    //   $date > $today ||
+    //   $tbd == 1 ||
+    //   ($tbd == 0 && $date == "") ||
+    //   ($tbd == 0 && $date == null)
+    // ) {
+    //   $search = "current event";
+    // }.
+    $node->set("field_event_date_alias", "current event");
+    // Set new revision:
+    $node->setNewRevision(TRUE);
+    $node->isDefaultRevision(TRUE);
+    $node->revision_log = "Created revision for node";
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $current_time = \Drupal::time()->getRequestTime();
+    $node->setRevisionCreationTime($current_time);
+
+    $node->setRevisionUserId(1);
+    $node->save();
+  }
+}
+
+/**
+ * Remove obsolute config and uninstall google analytics module.
+ */
+function olympian_seo_update_8008() {
+  $config_files = [
+    "google_analytics.settings",
+    "olympian_seo.settings",
+  ];
+  $config_factory = Drupal::configFactory();
+
+  foreach ($config_files as $config) {
+    $config = $config_factory->getEditable($config);
+
+    $config->delete();
+  }
+  $modules = [
+    'google_analytics',
+  ];
+
+  foreach ($modules as $module) {
+    \Drupal::service('module_installer')->uninstall([$module]);
+
+  }
+}

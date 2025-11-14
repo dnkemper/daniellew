@@ -1,0 +1,227 @@
+uuid: 73665b38-cd30-4d0d-ad6e-9f14ebae36fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.book
+id: node--book
+disabled: false
+path: node/book
+resourceType: node--book
+resourceFields:
+  nid:
+    disabled: false
+    fieldName: nid
+    publicName: nid
+    enhancer:
+      id: ''
+  uuid:
+    disabled: false
+    fieldName: uuid
+    publicName: uuid
+    enhancer:
+      id: ''
+  vid:
+    disabled: false
+    fieldName: vid
+    publicName: vid
+    enhancer:
+      id: ''
+  langcode:
+    disabled: false
+    fieldName: langcode
+    publicName: langcode
+    enhancer:
+      id: ''
+  type:
+    disabled: false
+    fieldName: type
+    publicName: type
+    enhancer:
+      id: ''
+  revision_timestamp:
+    disabled: false
+    fieldName: revision_timestamp
+    publicName: revision_timestamp
+    enhancer:
+      id: ''
+  revision_uid:
+    disabled: false
+    fieldName: revision_uid
+    publicName: revision_uid
+    enhancer:
+      id: ''
+  revision_log:
+    disabled: false
+    fieldName: revision_log
+    publicName: revision_log
+    enhancer:
+      id: ''
+  status:
+    disabled: false
+    fieldName: status
+    publicName: status
+    enhancer:
+      id: ''
+  uid:
+    disabled: false
+    fieldName: uid
+    publicName: uid
+    enhancer:
+      id: ''
+  title:
+    disabled: false
+    fieldName: title
+    publicName: title
+    enhancer:
+      id: ''
+  created:
+    disabled: false
+    fieldName: created
+    publicName: created
+    enhancer:
+      id: ''
+  changed:
+    disabled: false
+    fieldName: changed
+    publicName: changed
+    enhancer:
+      id: ''
+  promote:
+    disabled: false
+    fieldName: promote
+    publicName: promote
+    enhancer:
+      id: ''
+  sticky:
+    disabled: false
+    fieldName: sticky
+    publicName: sticky
+    enhancer:
+      id: ''
+  default_langcode:
+    disabled: false
+    fieldName: default_langcode
+    publicName: default_langcode
+    enhancer:
+      id: ''
+  revision_default:
+    disabled: false
+    fieldName: revision_default
+    publicName: revision_default
+    enhancer:
+      id: ''
+  revision_translation_affected:
+    disabled: false
+    fieldName: revision_translation_affected
+    publicName: revision_translation_affected
+    enhancer:
+      id: ''
+  moderation_state:
+    disabled: false
+    fieldName: moderation_state
+    publicName: moderation_state
+    enhancer:
+      id: ''
+  metatag:
+    disabled: false
+    fieldName: metatag
+    publicName: metatag
+    enhancer:
+      id: ''
+  path:
+    disabled: false
+    fieldName: path
+    publicName: path
+    enhancer:
+      id: ''
+  rh_action:
+    disabled: false
+    fieldName: rh_action
+    publicName: rh_action
+    enhancer:
+      id: ''
+  rh_redirect:
+    disabled: false
+    fieldName: rh_redirect
+    publicName: rh_redirect
+    enhancer:
+      id: ''
+  rh_redirect_response:
+    disabled: false
+    fieldName: rh_redirect_response
+    publicName: rh_redirect_response
+    enhancer:
+      id: ''
+  rh_redirect_fallback_action:
+    disabled: false
+    fieldName: rh_redirect_fallback_action
+    publicName: rh_redirect_fallback_action
+    enhancer:
+      id: ''
+  menu_link:
+    disabled: false
+    fieldName: menu_link
+    publicName: menu_link
+    enhancer:
+      id: ''
+  field_book_categories:
+    disabled: false
+    fieldName: field_book_categories
+    publicName: field_book_categories
+    enhancer:
+      id: ''
+  field_byline_names:
+    disabled: false
+    fieldName: field_byline_names
+    publicName: field_byline_names
+    enhancer:
+      id: ''
+  field_byline_options:
+    disabled: false
+    fieldName: field_byline_options
+    publicName: field_byline_options
+    enhancer:
+      id: ''
+  field_description:
+    disabled: false
+    fieldName: field_description
+    publicName: field_description
+    enhancer:
+      id: entity_share_embedded_entities
+  field_faculty_and_staff:
+    disabled: false
+    fieldName: field_faculty_and_staff
+    publicName: field_faculty_and_staff
+    enhancer:
+      id: ''
+  field_is_shared:
+    disabled: false
+    fieldName: field_is_shared
+    publicName: field_is_shared
+    enhancer:
+      id: ''
+  field_links_p:
+    disabled: false
+    fieldName: field_links_p
+    publicName: field_links_p
+    enhancer:
+      id: ''
+  field_meta_tags:
+    disabled: false
+    fieldName: field_meta_tags
+    publicName: field_meta_tags
+    enhancer:
+      id: ''
+  field_search:
+    disabled: false
+    fieldName: field_search
+    publicName: field_search
+    enhancer:
+      id: ''
+  field_thumbnail:
+    disabled: false
+    fieldName: field_thumbnail
+    publicName: field_thumbnail
+    enhancer:
+      id: ''

@@ -1,0 +1,27 @@
+uuid: 59548530-a4e6-4d7e-8713-2350441b33d8
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_half_test_bkg_color
+field_name: field_half_test_bkg_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Dark
+      label: Dark
+    -
+      value: Red
+      label: Red
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

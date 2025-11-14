@@ -1,0 +1,10 @@
+uuid: a26afcbf-69d9-467b-b635-17f36d10917f
+langcode: en
+status: true
+dependencies: {  }
+id: optional_callout
+label: 'Optional Callout'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Optional Callout'
+behavior_plugins: {  }

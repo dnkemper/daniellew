@@ -1,0 +1,27 @@
+uuid: 8fb42ff2-f786-4e80-8044-674df5fd83e9
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_cta_background_color
+field_name: field_cta_background_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Red
+      label: Red
+    -
+      value: Dark
+      label: Dark
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

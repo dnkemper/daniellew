@@ -1,0 +1,23 @@
+uuid: 24320564-ebdf-4f2e-9c52-d344f91bd0a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_new_window
+    - node.type.resources
+id: node.resources.field_new_window
+field_name: field_new_window
+entity_type: node
+bundle: resources
+label: 'link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

@@ -1,0 +1,27 @@
+uuid: 9ce96d12-7655-45a9-b22d-1793a85e8b3d
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_header_type
+field_name: field_header_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Slideshow
+      label: Slideshow
+    -
+      value: Static
+      label: Static
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

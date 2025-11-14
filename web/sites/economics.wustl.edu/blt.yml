@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: economics.ddev.site
+    protocol: https
+  machine_name: economics
+  human_name: economics.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: economics.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/economics.wustl.edu/files'
+    origin: 'https://economics.wustl.edu'
+drupal:
+  db:
+    database: drupal_economics
+system:
+  site:
+    contact_us_url: 'https://economics.wustl.edu/contact-us'
+    name: economics
+    email: economics@wustl.edu

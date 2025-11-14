@@ -1,0 +1,346 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4e366210-4fcb-4b7b-a7dc-83d6c394a66b
+  bundle: home_page
+  default_langcode: en
+  depends:
+    1171fd86-7b93-4b29-9c66-52a665789279: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Home Page'
+  created:
+    -
+      value: 1690473506
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /home
+      langcode: en
+      pathauto: 0
+  date_repeat_entity_clone_state:
+    -
+      value: false
+  field_featured_cap_overlay:
+    -
+      value: false
+  field_featured_full_w_text:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9f62fde7-dacc-410f-865f-db22c6915bab
+          bundle: featured_full_w_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690476357
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_additional_information:
+            -
+              value: 'Welcome to your new website! '
+          field_custom_button:
+            -
+              uri: 'https://it.artsci.wustl.edu/website-guide'
+              title: 'A&S Webguide'
+              options: {  }
+          field_feat_full_background_image:
+            -
+              entity: 1171fd86-7b93-4b29-9c66-52a665789279
+          field_main_title:
+            -
+              uri: 'internal:/home'
+              title: 'Arts & Sciences Web Theme'
+              options: {  }
+          field_optional_header:
+            -
+              value: 'optional header'
+  field_featured_image_and_text:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 74dcfb4a-8d74-436f-9845-027d34c526a2
+          bundle: featured_half_image_w_text
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690477695
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_half_image:
+            -
+              entity: 1171fd86-7b93-4b29-9c66-52a665789279
+          field_half_image_description:
+            -
+              value: 'Your new website has some sample content in it to get you started! If you have any questions, please feel free to contact the web team at artsci-webteam@wustl.edu or take a look at our website guide.'
+          field_half_image_main_titl:
+            -
+              uri: 'internal:/home'
+              title: 'Welcome to your new A&S website!'
+              options: {  }
+          field_half_image_optional_header:
+            -
+              value: 'Arts & Sciences '
+  field_featured_with_caption:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0646510d-f617-4ba8-93c9-f9a5befc4e93
+          bundle: featured_with_caption
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1701521196
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_background_feat_image:
+            -
+              entity: 1171fd86-7b93-4b29-9c66-52a665789279
+          field_caption:
+            -
+              value: 'Welcome to your new A&S website!'
+  field_generic_intro_with_side_it:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9d297525-148c-4ef7-8263-fbfa3c14e39b
+          bundle: intro_with_links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690476104
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_button_link:
+            -
+              uri: 'https://it.artsci.wustl.edu/website-guide'
+              title: 'Arts & Sciences Website guide'
+              options: {  }
+          field_generic_intro:
+            -
+              value: '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.&nbsp;</p><h3>Our Community</h3><p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur psum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.&nbsp;</p>'
+              format: full_html
+              summary: ''
+          field_generic_title:
+            -
+              value: 'About Our Department'
+          field_new_window:
+            -
+              value: true
+          field_related_links:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 99663198-2bd1-4e85-896e-6997fb142f0a
+                  bundle: related_links
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1690478322
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  field_button_link:
+                    -
+                      uri: 'https://it.artsci.wustl.edu/web-services'
+                      title: 'Website Support'
+                      options: {  }
+                  field_new_window:
+                    -
+                      value: false
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 9bf1b34e-1929-47b0-8891-f52bce6142e5
+                  bundle: related_links
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1690477588
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  field_button_link:
+                    -
+                      uri: 'https://it.artsci.wustl.edu/'
+                      title: 'A&S IT'
+                      options: {  }
+                  field_new_window:
+                    -
+                      value: false
+          field_related_links_title:
+            -
+              value: 'Popular Resources'
+  field_intro_type:
+    -
+      value: 'Intro Text with Related Links'
+  field_links_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6cd8b129-66de-47da-a3a3-723f985ed4a2
+          bundle: links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690478084
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_button_link:
+            -
+              uri: 'internal:/news'
+              title: News
+              options: {  }
+          field_new_window:
+            -
+              value: false
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 79622a1f-7040-4954-92ff-f4145136bb3c
+          bundle: links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690478095
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_button_link:
+            -
+              uri: 'internal:/events'
+              title: 'Our Events'
+              options: {  }
+          field_new_window:
+            -
+              value: false
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ee839acb-7aea-4d89-bdd9-8ec06c3ce7d3
+          bundle: links
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690478220
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_button_link:
+            -
+              uri: 'internal:/resources'
+              title: Resources
+              options: {  }
+          field_new_window:
+            -
+              value: false
+  field_slideshow_type:
+    -
+      value: text_image

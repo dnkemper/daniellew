@@ -1,0 +1,14 @@
+uuid: 397b0db2-51a1-4e45-a3c3-62ba750033bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.viewer
+  module:
+    - user
+id: user_remove_role_action.viewer
+label: 'Remove the viewer role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: viewer

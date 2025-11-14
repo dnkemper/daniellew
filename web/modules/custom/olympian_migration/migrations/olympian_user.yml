@@ -1,0 +1,57 @@
+id: olympian_user
+label: 'User accounts'
+migration_tags:
+  - artsci
+migration_group: olympian_migration
+source:
+  plugin: d7_user
+process:
+  uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  status: status
+  created: created
+  access: access
+  login: login
+  timezone: timezone
+  langcode:
+    -
+      plugin: user_langcode
+      source: entity_language
+      fallback_to_site_default: false
+  preferred_langcode:
+    -
+      plugin: user_langcode
+      source: language
+      fallback_to_site_default: true
+  preferred_admin_langcode:
+    -
+      plugin: user_langcode
+      source: language
+      fallback_to_site_default: true
+  init:
+    -
+      plugin: get
+      source: init
+  roles:
+    plugin: static_map
+    source: roles
+    map:
+      1: anonymous
+      2: authenticated
+      3: administrator
+      4: editor
+      5: editor
+      6: web_forms
+      7: site_staff
+      8: site_staff
+      11: editor
+      13: viewer
+      16: editor
+      19: viewer
+destination:
+  plugin: 'entity:user'
+
+migration_dependencies:
+  required: {}

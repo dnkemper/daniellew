@@ -1,0 +1,19 @@
+uuid: 517f30da-4a58-40a5-be83-def11fba63ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_office_hours
+    - node.type.faculty_staff
+id: node.faculty_staff.field_office_hours
+field_name: field_office_hours
+entity_type: node
+bundle: faculty_staff
+label: 'Office Hours'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

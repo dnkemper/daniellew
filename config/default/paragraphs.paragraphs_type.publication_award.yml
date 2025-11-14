@@ -1,0 +1,10 @@
+uuid: dbbe5a90-3ec2-434c-8748-1ebcd32d9a23
+langcode: en
+status: true
+dependencies: {  }
+id: publication_award
+label: 'Publication Award'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Award'
+behavior_plugins: {  }

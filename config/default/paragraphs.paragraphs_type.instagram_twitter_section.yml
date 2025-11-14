@@ -1,0 +1,10 @@
+uuid: 3e16daa2-84bb-459a-bcee-ef91d933fdee
+langcode: en
+status: true
+dependencies: {  }
+id: instagram_twitter_section
+label: Instagram
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Instagram and X Section'
+behavior_plugins: {  }

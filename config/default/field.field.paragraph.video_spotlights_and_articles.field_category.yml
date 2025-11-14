@@ -1,0 +1,26 @@
+uuid: ab970940-0796-4d8a-b989-82d99ebf09b7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_category
+    - paragraphs.paragraphs_type.video_spotlights_and_articles
+    - taxonomy.vocabulary.article_categories
+id: paragraph.video_spotlights_and_articles.field_category
+field_name: field_category
+entity_type: paragraph
+bundle: video_spotlights_and_articles
+label: Category
+description: 'You can also choose to automatically pull articles with the selected category. This option happens if no articles are selected.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      article_categories: article_categories
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,24 @@
+local:
+  root: /var/www/html/web
+  uri: 'https://forms.ddev.site'
+  paths:
+    drush-script: /var/www/html/vendor/bin/drush
+    files: sites/forms.artsci.wustl.edu/files
+dev:
+  uri: 'https://forms.artscidev.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+    files: sites/forms.artsci.wustl.edu/files
+stage:
+  uri: 'https://forms.artscistage.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+    files: sites/forms.artsci.wustl.edu/files
+prod:
+  uri: 'https://forms.artsci.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+    files: sites/forms.artsci.wustl.edu/files

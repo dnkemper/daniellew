@@ -1,0 +1,23 @@
+uuid: 178cbc44-681c-441b-aeb9-ad3f46a321bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_single_column
+    - paragraphs.paragraphs_type.two_column_content
+id: paragraph.two_column_content.field_single_column
+field_name: field_single_column
+entity_type: paragraph
+bundle: two_column_content
+label: 'Display as Single Column'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

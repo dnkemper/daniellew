@@ -1,0 +1,19 @@
+uuid: 666efac0-d0d2-4505-8c7a-2d5a13a41918
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+    - media_entity_soundcloud
+third_party_settings:
+  crop:
+    image_field: null
+id: soundcloud
+label: Soundcloud
+description: 'Either copy the soundcloud link or click on the option to share it and copy the shared link.'
+source: soundcloud
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_soundcloud
+field_map: {  }

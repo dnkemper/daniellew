@@ -1,0 +1,33 @@
+uuid: af71ea4a-88ce-4b83-a122-5a1c071dad8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_testimonial_section.field_testimoni_background_color
+    - field.field.paragraph.publication_testimonial_section.field_testimonial_publication_
+    - paragraphs.paragraphs_type.publication_testimonial_section
+  module:
+    - options
+id: paragraph.publication_testimonial_section.default
+targetEntityType: paragraph
+bundle: publication_testimonial_section
+mode: default
+content:
+  field_testimoni_background_color:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_testimonial_publication_:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: publication_testimonial
+      link: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+hidden:
+  search_api_excerpt: true

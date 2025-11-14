@@ -1,0 +1,58 @@
+id: paragraph_resources_callout
+label: 'Resources Callout Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: resources_callout
+
+process:
+  type:
+    plugin: default_value
+    default_value: resources_callout
+
+  # Text long field mapping
+  field_description_formatted:
+    plugin: get
+    source: field_description
+
+  field_resources:
+    plugin: sub_process
+    source: field_resources
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_resources
+        source: target_id
+
+  # Paragraphs field mapping
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_links
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: resources_callout
+
+migration_dependencies:
+  required:
+    - paragraph_links
+    - node_resources
+  optional: {}

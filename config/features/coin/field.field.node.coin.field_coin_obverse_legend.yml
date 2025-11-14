@@ -1,0 +1,26 @@
+uuid: 6969c03f-382c-4ee1-bef5-09bd5f7cd7a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_obverse_legend
+    - filter.format.full_html
+    - node.type.coin
+  module:
+    - text
+id: node.coin.field_coin_obverse_legend
+field_name: field_coin_obverse_legend
+entity_type: node
+bundle: coin
+label: 'Obverse Legend'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

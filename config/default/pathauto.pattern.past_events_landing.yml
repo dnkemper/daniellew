@@ -1,0 +1,22 @@
+uuid: f7617df7-832f-4921-b88c-b7e731dd5d83
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: past_events_landing
+label: 'Past Events Landing'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:pasteventlanding]'
+selection_criteria:
+  87b9225b-10d5-4bd2-9596-cdca721d0955:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 87b9225b-10d5-4bd2-9596-cdca721d0955
+    context_mapping:
+      node: node
+    bundles:
+      past_events_landing_page: past_events_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

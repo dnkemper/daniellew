@@ -1,0 +1,19 @@
+uuid: f8fda236-5311-4af5-8668-a8e78e8a1ddc
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_footer_callout_content
+field_name: field_footer_callout_content
+entity_type: paragraph
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

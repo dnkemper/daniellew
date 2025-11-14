@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_artsci_description
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.in_the_news
+  module:
+    - text
+_core:
+  default_config_hash: BhKLTXaKKvMJUsKVjSxYOgwDLZe1HTN1FA-6snMMQFc
+id: paragraph.in_the_news.field_artsci_description
+field_name: field_artsci_description
+entity_type: paragraph
+bundle: in_the_news
+label: 'Additional Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

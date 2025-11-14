@@ -1,0 +1,35 @@
+uuid: 3888279a-450e-4370-8ec2-a955bdd634b3
+langcode: en
+status: false
+dependencies: {  }
+id: olympian_migration
+label: Migration
+description: 'Content and files migrations for D7 standard sites. Not required for custom site migrations.'
+weight: 80
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/features/olympian_migration
+module:
+  lullabot_migrate_media: 0
+  media_migration: 0
+  media_migration_tools: 0
+  migmag: 0
+  migmag_menu_link_migrate: 0
+  migmag_process: 0
+  migrate: 0
+  migrate_conditions: 0
+  migrate_devel: 0
+  migrate_drupal: 0
+  migrate_plus: 0
+  migrate_process_url: 0
+  migrate_tools: 0
+  migrate_upgrade: 0
+  olympian_migration: 0
+  smart_sql_idmap: 0
+  video_filter_migrate: 0
+theme: {  }
+complete_list:
+  - 'migrate_plus.*'
+  - migrate_drupal.settings
+partial_list: {  }

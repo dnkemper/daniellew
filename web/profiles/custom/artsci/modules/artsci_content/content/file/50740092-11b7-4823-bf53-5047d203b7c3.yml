@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 50740092-11b7-4823-bf53-5047d203b7c3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: registration101_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/registration101_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 17874
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

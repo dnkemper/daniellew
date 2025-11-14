@@ -1,0 +1,14 @@
+uuid: a19d2a53-c5cd-4838-a13d-b79ee57440f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.faculty_staff
+id: node_type_faculty_staff
+entity_type_id: node_type
+entity_id: faculty_staff
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

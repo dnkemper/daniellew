@@ -1,0 +1,81 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 668cc49b-51e2-41ac-9631-a397da5fc30a
+  bundle: past_events_landing_page
+  default_langcode: en
+  depends:
+    8644d0bd-30ea-4639-9a47-9e87cc9139aa: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Past Events'
+  created:
+    -
+      value: 1690475102
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /past-events
+      langcode: en
+      pathauto: 0
+  date_repeat_entity_clone_state:
+    -
+      value: false
+  field_category_display:
+    -
+      value: collapsed
+  field_introduction_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 103a3804-536c-4656-8f70-9fe4150c1194
+          bundle: introduction
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690475114
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_ampersand:
+            -
+              value: false
+          field_background:
+            -
+              value: Dark
+          field_background_image:
+            -
+              entity: 8644d0bd-30ea-4639-9a47-9e87cc9139aa
+          field_headline:
+            -
+              value: 'Past Events'

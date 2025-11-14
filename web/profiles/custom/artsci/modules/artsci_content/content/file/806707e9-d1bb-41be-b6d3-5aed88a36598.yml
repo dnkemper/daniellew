@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 806707e9-d1bb-41be-b6d3-5aed88a36598
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: eventcalendar_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/eventcalendar_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 37742
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

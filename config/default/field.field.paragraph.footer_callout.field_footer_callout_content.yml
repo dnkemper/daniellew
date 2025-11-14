@@ -1,0 +1,31 @@
+uuid: aa1e3bfa-6208-4091-8501-386b5c93e0ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_footer_callout_content
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.footer_callout
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.footer_callout.field_footer_callout_content
+field_name: field_footer_callout_content
+entity_type: paragraph
+bundle: footer_callout
+label: Content
+description: 'Please use "Heading 2" for the large type, and normal paragraphs for all other copy. Italic within a Heading 2 style will color the text a lighter shade of red.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

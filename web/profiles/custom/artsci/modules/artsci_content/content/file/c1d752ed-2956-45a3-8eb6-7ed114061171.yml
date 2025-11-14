@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c1d752ed-2956-45a3-8eb6-7ed114061171
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: seigle-hall.jpg
+  uri:
+    -
+      value: 'public://2023-12/seigle-hall_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 6019177
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

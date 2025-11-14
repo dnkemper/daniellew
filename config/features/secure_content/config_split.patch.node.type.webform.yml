@@ -1,0 +1,12 @@
+adding:
+  dependencies:
+    module:
+      - private_content
+  third_party_settings:
+    private_content:
+      private: 2
+  description: null
+  help: null
+removing:
+  description: ''
+  help: ''

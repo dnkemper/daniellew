@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  bundle: media_folders
+  default_langcode: und
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Icons
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: und
+      pathauto: 0

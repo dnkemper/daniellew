@@ -1,0 +1,119 @@
+uuid: 968d6c9c-e52e-47b7-8d50-42f45a773e30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.image_cards_landing.field_callout_p
+    - field.field.node.image_cards_landing.field_category_display
+    - field.field.node.image_cards_landing.field_dotted_line
+    - field.field.node.image_cards_landing.field_footer_callout_p
+    - field.field.node.image_cards_landing.field_header_p
+    - field.field.node.image_cards_landing.field_meta_tags
+    - field.field.node.image_cards_landing.field_resources_callout_p
+    - field.field.node.image_cards_landing.field_search
+    - field.field.node.image_cards_landing.field_testimonials_p
+    - node.type.image_cards_landing
+  module:
+    - entity_reference_revisions
+    - metatag
+    - options
+    - user
+id: node.image_cards_landing.default
+targetEntityType: node
+bundle: image_cards_landing
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_category_display:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_dotted_line:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_header_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_resources_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_testimonials_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

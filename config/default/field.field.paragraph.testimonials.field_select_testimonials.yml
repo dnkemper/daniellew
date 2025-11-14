@@ -1,0 +1,25 @@
+uuid: e03ec2e0-0309-4302-948e-e53e9b29d400
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_select_testimonials
+    - paragraphs.paragraphs_type.testimonials
+id: paragraph.testimonials.field_select_testimonials
+field_name: field_select_testimonials
+entity_type: paragraph
+bundle: testimonials
+label: 'Select Testimonials'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_testimonial
+      arguments: {  }
+field_type: entity_reference

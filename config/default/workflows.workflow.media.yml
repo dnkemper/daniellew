@@ -1,0 +1,73 @@
+uuid: 45b41ea1-dbd0-4acd-8355-ce5ce857b211
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.type.cv
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.soundcloud
+  module:
+    - content_moderation
+id: media
+label: Media
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: 2
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: 0
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 1
+      published: true
+      default_revision: true
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - published
+      to: archived
+      weight: 2
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+      to: draft
+      weight: 0
+    publish:
+      label: Publish
+      from:
+        - draft
+        - published
+      to: published
+      weight: 1
+    restore:
+      label: Restore
+      from:
+        - archived
+      to: published
+      weight: 3
+    restore_to_draft:
+      label: 'Restore to Draft'
+      from:
+        - archived
+      to: draft
+      weight: 4
+  entity_types:
+    media:
+      - cv
+      - document
+      - image
+      - remote_video
+      - soundcloud
+  default_moderation_state: published

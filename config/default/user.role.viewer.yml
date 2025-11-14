@@ -1,0 +1,51 @@
+uuid: 56929ffc-a829-4180-81a0-dab652af904d
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_entity_browser
+    - entity_browser.browser.media_entity_browser_modal
+    - filter.format.restricted_html
+  module:
+    - access_unpublished
+    - actions_permissions
+    - captcha
+    - entity_browser
+    - file
+    - filter
+    - media
+    - private_content
+    - system
+id: viewer
+label: Viewer
+weight: -6
+is_admin: null
+permissions:
+  - 'access media_entity_browser entity browser pages'
+  - 'access media_entity_browser_modal entity browser pages'
+  - 'access private content'
+  - 'access_unpublished node article'
+  - 'access_unpublished node book'
+  - 'access_unpublished node contact_landing_page'
+  - 'access_unpublished node events'
+  - 'access_unpublished node events_landing_page'
+  - 'access_unpublished node faculty_landing_page'
+  - 'access_unpublished node faculty_staff'
+  - 'access_unpublished node faq'
+  - 'access_unpublished node generic_page'
+  - 'access_unpublished node home_page'
+  - 'access_unpublished node image_cards'
+  - 'access_unpublished node image_cards_landing'
+  - 'access_unpublished node news_landing_page'
+  - 'access_unpublished node page'
+  - 'access_unpublished node past_events_landing_page'
+  - 'access_unpublished node publication_page'
+  - 'access_unpublished node resources'
+  - 'access_unpublished node resources_landing_page'
+  - 'access_unpublished node testimonial'
+  - 'delete own files'
+  - 'edit private content'
+  - 'skip CAPTCHA'
+  - 'use text format restricted_html'
+  - 'view media'
+  - 'view the administration theme'

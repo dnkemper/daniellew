@@ -1,0 +1,10 @@
+uuid: d90529bb-f911-4a46-ae1e-6b1030058e22
+langcode: en
+status: true
+dependencies: {  }
+id: footer_callout
+label: 'Footer Callout'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Footer Callout'
+behavior_plugins: {  }

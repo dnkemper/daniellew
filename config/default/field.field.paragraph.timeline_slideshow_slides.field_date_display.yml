@@ -1,0 +1,21 @@
+uuid: 0211bce5-01ef-4073-af7f-1dc35a7686f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_date_display
+    - paragraphs.paragraphs_type.timeline_slideshow_slides
+  module:
+    - options
+id: paragraph.timeline_slideshow_slides.field_date_display
+field_name: field_date_display
+entity_type: paragraph
+bundle: timeline_slideshow_slides
+label: 'Date Display'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,33 @@
+uuid: fc4d8a25-49c0-4d0c-b526-dae0be44568d
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_publication_degrees_color
+field_name: field_publication_degrees_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Red
+      label: red
+    -
+      value: Green
+      label: green
+    -
+      value: Blue
+      label: blue
+    -
+      value: Yellow
+      label: yellow
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

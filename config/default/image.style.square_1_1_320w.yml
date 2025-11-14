@@ -1,0 +1,23 @@
+uuid: 837aa7e2-1d83-41bf-b063-457375bdd6f3
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_1_1_320w
+label: 'square 1:1 (320w)'
+effects:
+  2c77a86a-9991-4509-9cc6-a7fd3339fe1e:
+    uuid: 2c77a86a-9991-4509-9cc6-a7fd3339fe1e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 320
+      crop_type: focal_point
+  e1c141a4-81cb-4b80-96e2-d59b8060018d:
+    uuid: e1c141a4-81cb-4b80-96e2-d59b8060018d
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

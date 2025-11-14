@@ -1,0 +1,27 @@
+uuid: e88a1782-3531-43a6-962e-bd917b2bd2b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_file
+    - media.type.cv
+  module:
+    - file
+id: media.cv.field_media_file
+field_name: field_media_file
+entity_type: media
+bundle: cv
+label: File
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: 'media/{media_id}/download'
+  file_extensions: 'txt pdf cv'
+  max_filesize: '12 MB'
+  description_field: false
+field_type: file

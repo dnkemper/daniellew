@@ -1,0 +1,503 @@
+afas:
+  uri: https://afas.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/afas.wustl.edu/files
+aggregator:
+  uri: https://aggregator.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/aggregator.artsci.wustl.edu/files
+amcs:
+  uri: https://amcs.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/amcs.wustl.edu/files
+anthropology:
+  uri: https://anthropology.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/anthropology.wustl.edu/files
+arthistory:
+  uri: https://arthistory.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/arthistory.wustl.edu/files
+artsciadvising:
+  uri: https://artsciadvising.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+artsciportal:
+  uri: https://artsciportal.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/artsciportal.wustl.edu/files
+biology:
+  uri: https://biology.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/biology.wustl.edu/files
+buildingartsci:
+  uri: https://buildingartsci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/buildingartsci.wustl.edu/files
+chemistry:
+  uri: https://chemistry.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/chemistry.wustl.edu/files
+classics:
+  uri: https://classics.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/classics.wustl.edu/files
+collegewriting:
+  uri: https://collegewriting.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/collegewriting.wustl.edu/files
+complitandthought:
+  uri: https://complitandthought.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/complitandthought.wustl.edu/files
+ealc:
+  uri: https://ealc.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/ealc.wustl.edu/files
+economics:
+  uri: https://economics.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/economics.wustl.edu/files
+education:
+  uri: https://education.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/education.wustl.edu/files
+eeps:
+  uri: https://eeps.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/eeps.wustl.edu/files
+english:
+  uri: https://english.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/english.wustl.edu/files
+enst:
+  uri: https://enst.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/enst.wustl.edu/files
+fellowshipsoffice:
+  uri: https://fellowshipsoffice.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/fellowshipsoffice.wustl.edu/files
+fms:
+  uri: https://fms.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/fms.wustl.edu/files
+globalstudies:
+  uri: https://globalstudies.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+gradstudies:
+  uri: https://gradstudies.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/gradstudies.artsci.wustl.edu/files
+hdw:
+  uri: https://hdw.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/hdw.wustl.edu/files
+history:
+  uri: https://history.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/history.wustl.edu/files
+holdthatthought:
+  uri: https://holdthatthought.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/holdthatthought.wustl.edu/files
+humanities:
+  uri: https://humanities.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/humanities.wustl.edu/files
+insideartsci:
+  uri: https://insideartsci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+jimes:
+  uri: https://jimes.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/jimes.wustl.edu/files
+johnmaxwulfing:
+  uri: https://johnmaxwulfing.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+lasprogram:
+  uri: https://lasprogram.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/lasprogram.wustl.edu/files
+linguistics:
+  uri: https://linguistics.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/linguistics.wustl.edu/files
+literaryarts:
+  uri: https://literaryarts.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/literaryarts.wustl.edu/files
+math:
+  uri: https://math.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/math.wustl.edu/files
+mcss:
+  uri: https://mcss.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/mcss.wustl.edu/files
+movingstories:
+  uri: https://movingstories.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/movingstories.wustl.edu/files
+music:
+  uri: https://music.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/music.wustl.edu/files
+overseas:
+  uri: https://overseas.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/overseas.wustl.edu/files
+olympian:
+  uri: https://olympian.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/olympian.wustl.edu/files
+pad:
+  uri: https://pad.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/pad.wustl.edu/files
+philosophy:
+  uri: https://philosophy.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/philosophy.wustl.edu/files
+physics:
+  uri: https://physics.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/physics.wustl.edu/files
+pnp:
+  uri: https://pnp.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/pnp.wustl.edu/files
+polisci:
+  uri: https://polisci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/polisci.wustl.edu/files
+postbaccpremed:
+  uri: https://postbaccpremed.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+precollege:
+  uri: https://precollege.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/precollege.wustl.edu/files
+prehealth:
+  uri: https://prehealth.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/prehealth.wustl.edu/files
+psych:
+  uri: https://psych.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/psych.wustl.edu/files
+publichealthandsociety:
+  uri: https://publichealthandsociety.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/publichealthandsociety.wustl.edu/files
+quantumleaps:
+  uri: https://quantumleaps.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/quantumleaps.wustl.edu/files
+religiousstudies:
+  uri: https://religiousstudies.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/religiousstudies.wustl.edu/files
+rll:
+  uri: https://rll.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/rll.wustl.edu/files
+sds:
+  uri: https://sds.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/sds.wustl.edu/files
+slavery:
+  uri: https://slavery.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/slavery.wustl.edu/files
+sociology:
+  uri: https://sociology.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/sociology.wustl.edu/files
+strategicplan:
+  uri: https://strategicplan.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/strategicplan.artsci.wustl.edu/files
+summersession:
+  uri: https://summersession.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/summersession.wustl.edu/files
+transdisciplinaryfutures:
+  uri: https://transdisciplinaryfutures.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/transdisciplinaryfutures.wustl.edu/files
+triads:
+  uri: https://triads.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/triads.wustl.edu/files
+undergradresearch:
+  uri: https://undergradresearch.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/undergradresearch.wustl.edu/files
+wc:
+  uri: https://wc.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/wc.wustl.edu/files
+wgss:
+  uri: https://wgss.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/wgss.wustl.edu/files
+default:
+  uri: https://artsciprod.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artsciprod.wustl.edu
+  paths:
+    files: sites/default/files
+mindfulness:
+  uri: https://mindfulness.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+immersivetech:
+  uri: https://immersivetech.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/immersivetech.wustl.edu/files
+
+literacies:
+  uri: https://literacies.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/literacies.wustl.edu/files
+
+it:
+  uri: https://it.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/it.artsci.wustl.edu/files
+
+graduation:
+  uri: https://graduation.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/graduation.artsci.wustl.edu/files
+
+migrate:
+  uri: https://migrate.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/migrate.wustl.edu/files
+
+rev:
+  uri: https://rev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/rev.wustl.edu/files
+
+forms:
+  uri: https://forms.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artsciprod.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/forms.artsci.wustl.edu/files

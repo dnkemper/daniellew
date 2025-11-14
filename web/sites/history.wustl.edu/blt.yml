@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: history.ddev.site
+    protocol: https
+  machine_name: history
+  human_name: history.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: history.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/history.wustl.edu/files'
+    origin: 'https://history.wustl.edu'
+drupal:
+  db:
+    database: drupal_history
+system:
+  site:
+    contact_us_url: 'https://history.wustl.edu/contact-us'
+    name: history
+    email: history@wustl.edu

@@ -1,0 +1,108 @@
+@mixin breakpoint($class) {
+  @if $class==xs {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+
+  @if $class==xsm {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $class==sm {
+    @media (min-width: 768px) {
+      @content;
+    }
+  } @else if $class==md {
+    @media (min-width: 855px) {
+      @content;
+    }
+  } @else if $class==lg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $class==page-container {
+    @media (min-width: 84.375em) {
+      @content;
+    }
+  } @else if $class==xlg {
+    @media (min-width: 106em) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint mixin supports: xs, xsm, sm, menu, md, lg, page-container, xlg";
+  }
+}
+// vertical center mixin
+@mixin center($position) {
+  display: flex;
+
+  @if $position== 'both' {
+    align-items: center;
+    justify-content: center;
+  } @else if $position== 'vertical' {
+    align-items: center;
+  } @else if $position== 'horizontal' {
+    justify-content: center;
+  } @else if $position== 'none' {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+}
+@mixin container-width {
+  margin: 0 var(--gutter);
+  position: relative;
+
+  @include breakpoint(page-container) {
+    max-width: 81.875em;
+    margin: 0 auto;
+  }
+}
+
+@mixin fas() {
+  font-smooth: auto;
+  font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+// Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+// Makes an element visually hidden, but accessible.
+// @see http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Turns off the element-invisible effect.
+@mixin element-invisible-off {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+// Makes an element visually hidden by default, but visible when focused.
+@mixin element-focusable {
+  @include element-invisible;
+
+  &:active,
+  &:focus {
+    @include element-invisible-off;
+  }
+}

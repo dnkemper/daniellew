@@ -1,0 +1,28 @@
+olympian_migration.list:
+  path: '/admin/reports/fields/paragraphs'
+  defaults:
+    _title: 'Paragraphs usage'
+    _controller: '\Drupal\olympian_migration\Controller\ReportParagraphsUsageController::build'
+  requirements:
+    _permission: 'administer content types'
+olympian_migration.media:
+  path: '/admin/reports/fields/media'
+  defaults:
+    _title: 'Media usage'
+    _controller: '\Drupal\olympian_migration\Controller\MediaReportController::build'
+  requirements:
+    _permission: 'administer content types'
+olympian_migration.node:
+  path: '/admin/reports/fields/node'
+  defaults:
+    _title: 'Node usage'
+    _controller: '\Drupal\olympian_migration\Controller\NodeReportController::build'
+  requirements:
+    _permission: 'administer content types'
+olympian_migration.settings_form:
+  path: '/admin/config/olympian/olympian-migrate'
+  defaults:
+    _title: 'Olympian Migrate'
+    _form: '\Drupal\olympian_migration\Form\MigrateSettingsForm'
+  requirements:
+    _permission: 'administer olympian migrate'

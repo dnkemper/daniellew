@@ -1,0 +1,9 @@
+uuid: efb873f1-9b14-441e-a413-fdb46502e411
+langcode: en
+status: true
+dependencies: {  }
+name: 'Person Type'
+vid: leadership_administrative_staf
+description: null
+weight: -3
+new_revision: false

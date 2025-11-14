@@ -1,0 +1,2780 @@
+<?php
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Database\Database;
+use Drupal\Component\Utility\Xss;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\aggregator\Entity\Feed;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Drupal\views\Plugin\views\filter\InOperator;
+
+// SharedContentMail class declaration:
+// class SharedContentMail implements MailSystemInterface {
+//     /**
+//      * Concatenate and wrap the e-mail body for plain-text mails.
+//      *
+//      * @param array $message
+//      *   A message array, as described in hook_mail_alter().
+//      *
+//      * @return array
+//      *   The formatted $message.
+//      */
+//     public function format(array $message) {
+//         $message['body'] = implode("\n\n", $message['body']);
+//         return $message;
+//     }
+//
+//     /**
+//      * Send an e-mail message, using Drupal variables and default settings.
+//      *
+//      * @see http://php.net/manual/en/function.mail.php
+//      * @see drupal_mail()
+//      *
+//      * @param array $message
+//      *   A message array, as described in hook_mail_alter().
+//      *
+//      * @return bool
+//      *   TRUE if the mail was successfully accepted, otherwise FALSE.
+//      */
+//     public function mail(array $message) {
+//         $mimeheaders = array();
+//         foreach ($message['headers'] as $name => $value) {
+//             $mimeheaders[] = $name . ': ' . mime_header_encode($value);
+//         }
+//         $line_endings = variable_get('mail_line_endings', MAIL_LINE_ENDINGS);
+//         return mail(
+//             $message['to'],
+//             mime_header_encode($message['subject']),
+//             // Note: e-mail uses CRLF for line-endings. PHP's API requires LF
+//             // on Unix and CRLF on Windows. Drupal automatically guesses the
+//             // line-ending format appropriate for your system. If you need to
+//             // override this, adjust $conf['mail_line_endings'] in settings.php.
+//             preg_replace('@\r?\n@', $line_endings, $message['body']),
+//             // For headers, PHP's API suggests that we use CRLF normally,
+//             // but some MTAs incorrectly replace LF with CRLF. See #234403.
+//             implode("\n", $mimeheaders)
+//         );
+//     }
+// }
+// variable_set('mail_system', array('default-system' => 'SharedContentMail'));
+
+// hook_menu()
+// This hook enables modules to register paths in order to define how URL requests are handled.
+// This hook is rarely called (for example, when modules are enabled), and its results are cached in the database.
+
+// Add menu registration for two admin forms:
+
+// admin/shared-content [https://newtest.olympian.wustl.edu/admin/shared-content] - Shared Content tab for updating, viewing and filtering
+// shared content
+
+// admin/config/services/shared-content [https://newtest.olympian.wustl.edu/admin/config/services/shared-content] - Shared Content configuration
+// tab
+// function shared_content_menu() {
+//   $items = [];
+//
+//   $items['admin/shared-content'] = [ //this creates a URL that will call this form at "examples/form-example"
+//     'title' => 'Shared Content',
+//     //page title
+//     'description' => 'A list of shared content to import.',
+//     'page callback' => 'shared_content_callback',
+//     //this is the function that will be called when the page is accessed.  for a form, use drupal_get_form
+//     'page arguments' => [
+//       'shared_content_form',
+//       'shared_content_filter_form',
+//       'shared_content_update_form',
+//     ],
+//     //put the name of the form here
+//     'access arguments' => ['access shared_content content'],
+//     //'access callback' => TRUE
+//   ];
+//
+//   $items['admin/config/services/shared-content'] = [
+//     'title' => 'Shared Content ',
+//     'description' => 'Configuration options for the Shared Content module',
+//     'page callback' => 'drupal_get_form',
+//     'page arguments' => ['shared_content_settings_form'],
+//     'access arguments' => ['access administration shared_content pages'],
+//     'type' => MENU_NORMAL_ITEM,
+//   ];
+//
+//   return $items;
+// }
+
+//                          hook_menu() components
+
+// Linked as page callback @ function shared_content_menu()
+// uses drupal_get_form() to build the Update button form,
+// the Filter form and the Content table form
+// function shared_content_callback() {
+//   $build = [];
+//
+//   // Render your two forms here.
+//   $build['form_one'] = drupal_get_form('shared_content_filter_form');
+//   $build['form_three'] = drupal_get_form('shared_content_update_form');
+//   // $build['form_one'] = drupal_get_form('shared_content_filter_form');
+//   $build['form_two'] = \Drupal::formBuilder()
+//     ->getForm('Drupal\shared_content\Form\SharedContentForm');
+//
+//   // $build['form_two'] = drupal_get_form('shared_content_form');
+//
+//   return $build;
+// }
+//
+// // form_three - shared_content_callback - generated with drupal_get_form
+// function shared_content_update_form($form, &$form_state) {
+//   $form['from'] = [
+//     '#type' => 'item',
+//     '#markup' => '<p>Click Update Feeds to update each of the feeds.</p>',
+//   ];
+//
+//   $form['button'] = [
+//     '#type' => 'submit',
+//     '#name' => 'update',
+//     '#value' => t('Update Feeds'),
+//   ];
+//
+//   return $form;
+// }
+
+// hook_form_submit()
+// form_three - shared_content_callback - submit
+// function shared_content_update_form_submit() {
+//   $sharedCategory = db_query('SELECT * FROM aggregator_category WHERE title = \'Shared Content\'');
+//   $categoryID = NULL;
+//   foreach ($sharedCategory as $cat) {
+//     $categoryID = $cat->cid;
+//   }
+//
+//   $query = db_select('aggregator_category_feed', 'f');
+//   $results = $query->fields('f', ['fid', 'cid'])
+//     ->condition('f.cid', $categoryID, '=')
+//     ->execute()
+//     ->fetchAll();
+//
+//   $messages = '';
+//   foreach ($results as $result) {
+//     $feed = aggregator_feed_load($result->fid);
+//     aggregator_refresh($feed);
+//   }
+// }
+
+// form_one - shared_content_callback - generated with drupal_get_form
+// function shared_content_filter_form($form, &$form_state) {
+//   $contentTypeDefault = (isset($_SESSION['content_type'])) ? $_SESSION['content_type'] : 'All';
+//   $feedTypeDefault = (isset($_SESSION['feed_source'])) ? $_SESSION['feed_source'] : 'All';
+//   $titleDefault = (isset($_SESSION['title'])) ? $_SESSION['title'] : '';
+//   $authorDefault = (isset($_SESSION['author'])) ? $_SESSION['author'] : '';
+//   $reset = (isset($_SESSION['reset']) && $_SESSION['reset'] == 1) ? 1 : 0;
+//   if ($reset == 1) {
+//     $titleDefault = $contentTypeDefault = $feedTypeDefault = $authorDefault = '';
+//   }
+//
+//   $sharedCategory = db_query('SELECT * FROM aggregator_category WHERE title = \'Shared Content\'');
+//   $categoryID = NULL;
+//   foreach ($sharedCategory as $cat) {
+//     $categoryID = $cat->cid;
+//   }
+//
+//   // Get all unique feed sources for the filter dropdown.
+//   $query = db_select('aggregator_feed', 'f');
+//   $query->leftJoin('aggregator_category_feed', 'c', 'f.fid = c.fid');
+//   $query->leftJoin('aggregator_item', 'i', 'i.fid = f.fid');
+//   //$query->addField('f','title','ftitle');
+//   $results = $query->fields('f', ['title', 'fid', 'link'])
+//     ->fields('c', ['fid', 'cid'])
+//     ->fields('i', ['iid', 'author'])
+//     ->condition('c.cid', $categoryID, '=')
+//     ->execute()
+//     ->fetchAll();
+//
+//   // Alphabetize the Feed Sources
+//   sort($results);
+//
+//   $feedOptionsArray = [];
+//   $feedOptionsArray[''] = 'All';
+//   $authorOptionsArray[''] = 'All';
+//   foreach ($results as $result) {
+//     $title = $result->title;
+//     $chunks = explode('://', $result->link);
+//     if (isset($chunks[1])) {
+//       $url = explode('/', $chunks[1]);
+//       //$feedOptionsArray[$title] = $title;
+//       $feedOptionsArray[$url[0]] = $url[0];
+//     }
+//     $author = $result->author;
+//     $authorOptionsArray[$author] = $author;
+//   }
+//
+//   $form['filter'] = [
+//     '#type' => 'fieldset',
+//     '#title' => 'Filter Content',
+//     '#collapsible' => FALSE,
+//   ];
+//   $form['filter']['title'] = [
+//     '#type' => 'textfield',
+//     '#title' => 'Title',
+//     '#default_value' => $titleDefault,
+//   ];
+//   $form['filter']['content_type'] = [
+//     '#type' => 'select',
+//     '#title' => 'Content Type',
+//     '#options' => [
+//       '' => 'All',
+//       'Article' => 'Article',
+//       'Event' => 'Event',
+//       'Person' => 'Person',
+//       'Book' => 'Book',
+//     ],
+//     '#default_value' => $contentTypeDefault,
+//   ];
+//
+//   $form['filter']['feed_source'] = [
+//     '#type' => 'select',
+//     '#title' => 'Feed Source',
+//     '#options' => $feedOptionsArray,
+//     '#default_value' => $feedTypeDefault,
+//   ];
+//
+//   $form['filter']['author'] = [
+//     '#type' => 'select',
+//     '#title' => 'Author',
+//     '#options' => $authorOptionsArray,
+//     '#default_value' => $authorDefault,
+//   ];
+//
+//   $form['submit_button'] = [
+//     '#type' => 'submit',
+//     '#value' => t('Apply'),
+//   ];
+//
+//   $form['button'] = [
+//     '#type' => 'submit',
+//     '#name' => 'reset',
+//     '#value' => t('Reset'),
+//   ];
+//
+//   return $form;
+// }
+
+// hook_form_submit()
+// form_one - shared_content_callback - submit function
+// function shared_content_filter_form_submit($form, &$form_state) {
+//   /*
+//   // print_r of post shows:
+//   Array ( [content_type] => 0 [feed_source] => 1 [op] => Apply [form_build_id] => form-FULyndUDhus0JbHtaCGnnZLPsStQOYTXfodVWijrpe8 [form_token] => Hdyql-SckE5vNgRwCV0XeMY6din8SWm5dKkQr9NKt6k [form_id] => shared_content_filter_form )
+//       */
+//   $reset = ($form_state['triggering_element']['#value'] == 'Reset') ? TRUE : FALSE;
+//   $_SESSION['content_type'] = $_POST['content_type'];
+//   $_SESSION['feed_source'] = $_POST['feed_source'];
+//   $_SESSION['title'] = $_POST['title'];
+//   $_SESSION['author'] = $_POST['author'];
+//   $_SESSION['reset'] = $reset;
+// }
+//
+// // form_two - shared_content_callback - generated with drupal_get_form
+// function shared_content_form($form, &$form_state) {
+//   $sharedCategory = db_query('SELECT * FROM aggregator_category WHERE title = \'Shared Content\'');
+//   $categoryID = NULL;
+//   foreach ($sharedCategory as $cat) {
+//     $categoryID = $cat->cid;
+//   }
+//
+//   // Show 50 results
+//   $limit = 50;
+//
+//   // Default sort for the Header is by creation date
+//   $header = [
+//     'title' => ['data' => t('Title'), 'field' => 'i.title'],
+//     'type' => ['data' => t('Type'), 'field' => 'f.fid'],
+//     'feed' => ['data' => t('Feed Source'), 'field' => 'i.link'],
+//     'author' => ['data' => t('Author'), 'field' => 'i.author'],
+//     'created' => [
+//       'data' => t('Date Created'),
+//       'field' => 'i.timestamp',
+//       'sort' => 'desc',
+//     ],
+//   ];
+//
+//   $contentTypeDefault = (isset($_SESSION['content_type'])) ? $_SESSION['content_type'] : '';
+//   $feedTypeDefault = (isset($_SESSION['feed_source'])) ? $_SESSION['feed_source'] : '';
+//   $titleDefault = (isset($_SESSION['title'])) ? $_SESSION['title'] : '';
+//   $authorDefault = (isset($_SESSION['author'])) ? $_SESSION['author'] : '';
+//   $reset = (isset($_SESSION['reset']) && $_SESSION['reset'] == 1) ? 1 : 0;
+//
+//   if ($reset == 1) {
+//     $titleDefault = $contentTypeDefault = $feedTypeDefault = $authorDefault = '';
+//   }
+//
+//   $query = db_select('aggregator_item', 'i')->extend('PagerDefault');
+//   $query->leftJoin('aggregator_category_item', 'c', 'i.iid = c.iid');
+//   $query->leftJoin('aggregator_feed', 'f', 'i.fid = f.fid');
+//   $query->addField('f', 'title', 'ftitle');
+//   $results = $query->fields('i', [
+//     'iid',
+//     'title',
+//     'link',
+//     'fid',
+//     'guid',
+//     'author',
+//     'timestamp',
+//   ])
+//     ->fields('c', ['iid', 'cid'])
+//     ->fields('f', ['fid', 'title'])
+//     ->condition('c.cid', $categoryID, '=')
+//     ->condition('i.author', '%' . db_like($authorDefault) . '%', 'LIKE')
+//     ->condition('f.title', '%' . db_like($contentTypeDefault) . '%', 'LIKE')
+//     ->condition('i.link', 'https://' . db_like($feedTypeDefault) . '%', 'LIKE')
+//     ->condition('i.title', '%' . db_like($titleDefault) . '%', 'LIKE')
+//     ->limit($limit)
+//     ->extend('TableSort')
+//     ->orderByHeader($header)
+//     ->execute()
+//     ->fetchAll();
+//
+//   // Result is returned as a iterable object that returns a stdClass object on each iteration
+//   $form['from'] = [
+//     '#type' => 'item',
+//     '#markup' => '<p>Select the items you would like to import.</p>',
+//   ];
+//
+//   $options = [];
+//   $checkedArray = [];
+//
+//   foreach ($results as $key => $record) {
+//     $chunks = explode('://', $record->link);
+//     $url = explode('/', $chunks[1]);
+//
+//     $id = $record->iid;
+//     $title = $record->title;
+//     $link = $record->link;
+//     $guid = $record->guid;
+//     $type = 'Article';// Default type
+//     $feedType = $record->ftitle;
+//     $feed = $url[0];
+//     $author = $record->author;
+//     $timestamp = $record->timestamp;
+//
+//     // Content types to share: Articles, Events, Faculty
+//     if (strpos($feedType, 'Article') !== FALSE) {
+//       $type = 'Article';
+//     }
+//     else {
+//       if (strpos($feedType, 'Event') !== FALSE) {
+//         $type = 'Events';
+//       }
+//       else {
+//         if (strpos($feedType, 'Person') !== FALSE) {
+//           $type = 'Person';
+//         }
+//         else {
+//           if (strpos($feedType, 'Book') !== FALSE) {
+//             $type = 'Book';
+//           }
+//         }
+//       }
+//     }
+//
+//     // Check to see if node is already in the shared_content_items table by comparing
+//     // the original node id and original site URL to the values stored in our database
+//     // in the orig_nid and url columns
+//     $orig_info = explode(' at ', $guid);
+//     $importedNID = db_select('shared_content_items', 's')
+//       ->fields('s', ['url', 'orig_nid', 'nid'])
+//       ->condition(db_and()
+//         ->condition('s.orig_nid', $orig_info[0], '=')
+//         ->condition('s.url', $orig_info[1], '='))
+//       ->execute()->fetchAssoc();
+//
+//     if ($importedNID != '') {
+//       array_push($checkedArray, $id);
+//
+//       $importedoptions = ['absolute' => TRUE];
+//       $importedlink = url('node/' . $importedNID['nid'], $importedoptions);
+//       $suffix = ' <span class="marker">(<a href="' . $importedlink . '" target="_parent">view imported</a>)</span>';
+//       $disableClass = 'shared';
+//     }
+//     else {
+//       $suffix = '';
+//       $disabled = FALSE;
+//       $disableClass = '';
+//     }
+//
+//     $options[$id] = [
+//       'title' => [
+//         'data' => [
+//           '#type' => 'link',
+//           '#title' => $title,
+//           '#href' => $link,
+//           '#options' => [],
+//           '#suffix' => $suffix,
+//         ],
+//       ],
+//       'type' => $type,
+//       'feed' => $feed,
+//       'author' => $author,
+//       'created' => date('F j, Y', $timestamp),
+//       '#attributes' => ['class' => [$disableClass]],
+//     ];
+//
+//     $form['nodesExtra']['guid_' . $id] = [
+//       '#type' => 'hidden',
+//       '#title' => 'guid',
+//       '#value' => $guid,
+//     ];
+//     $form['nodesTitle']['title_' . $id] = [
+//       '#type' => 'hidden',
+//       '#title' => 'title',
+//       '#value' => $title,
+//     ];
+//     $form['nodesType']['type_' . $id] = [
+//       '#type' => 'hidden',
+//       '#title' => 'title',
+//       '#value' => strtolower($type),
+//     ];
+//   }
+//
+//   $form['nodes'] = [
+//     '#type' => 'tableselect',
+//     '#header' => $header,
+//     '#options' => $options,
+//     '#empty' => t('No content available.'),
+//   ];
+//
+//   $form['pager'] = [
+//     '#markup' => theme('pager'),
+//   ];
+//
+//   $form['submit_button'] = [
+//     '#type' => 'submit',
+//     '#value' => t('Import'),
+//   ];
+//
+//   return $form;
+// }
+
+// hook_form_alter()
+// form_two - shared_content_callback - form alter - fires before form is displayed
+// function shared_content_form_alter(&$form, $form_state, $form_id) {
+//     global $user;
+//     // Hide all necessary fields for shared content nodes
+//     if (arg(0) == 'node') {
+//         if (isset($form['#node'])) {
+//             $node_type = $form['#node']->type;
+//
+//             if ($node_type == 'faculty_staff' || $node_type == 'events' || $node_type == 'article' || $node_type = 'book') {
+//
+//                 // This is a list of the fields that are site-specific and should still be editable
+//                 $editable_fields = array(
+//                     'field_search',
+//                     'field_content_type',
+//                     'field_type',
+//                     'field_faculty_areas_of_study',
+//                     'field_feature_article',
+//                     'field_article_featured_image',
+//                     'field_featured_image',
+//                     'field_category',
+//                     'field_article_home_slideshow',
+//                     'field_featured_home_slideshow',
+//                     'field_type_of_staff',
+//                     'field_areas_of_interest',
+//                     'field_event_category',
+//                     'field_feature_event',
+//                     'field_faculty_and_staff',
+//                     'field_shared_content_subscribers',
+//                     'field_byline_options',
+//                     'field_byline_names',
+//                     'field_featured_book',
+//                     'field_department'
+//                 );
+//
+//                 // If we are an administrator, keep all fields visible
+//                 if (!in_array('administrator', $user->roles)) {
+//                     // For every field that isn't in the list above, set access to 0/false
+//                     if (!empty($form['#node'])) {
+//                         if (array_key_exists('field_is_shared', $form['#node'])) {
+//                             if($form['#node']->field_is_shared['und'][0]['value'] == 1) {
+//                                 // For all fields, set access to false
+//                                 for ($i = 0; $i <= count($form); $i++) {
+//                                     $name = key($form);
+//                                     if (preg_match("/field*/", $name) || $name == 'body') {
+//                                         if (!in_array($name, $editable_fields)) {
+//                                             $form[$name]['#access'] = 0;
+//                                         }
+//                                     }
+//                                     next($form);
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//                 global $user;
+//                 // Hide these secret fields for all content
+//                 if (!in_array('administrator', $user->roles)) {
+//                     $form['field_shared_content_xml']['#access'] = 0;
+//                     // $form['field_shared_content_subscribers']['#access'] = 0;
+//                     $form['field_shared_content']['#access'] = 0;
+//                     $form['field_is_shared']['#access'] = true;
+//                 }
+//
+//
+//
+//             }
+//         }
+//     }
+//
+//     // Only include on node add/edit forms.
+//     if (!empty($form['#node_edit_form'])) {
+//
+//         $type = $form['#node']->type;
+//
+//         // If this is a book form, make the Book Cover optional instead of required
+//         if ($type == 'book') {
+//             $wrapper = entity_metadata_wrapper('node', $form['nid']['#value']);
+//             if (isset($wrapper->field_is_shared)) {
+//                 if ($wrapper->field_is_shared->value()) {
+//                     $form['field_thumbnail'][LANGUAGE_NONE]['0']['#required'] = false;
+//                 }
+//             }
+//         }
+//
+//         // If this is one of the four content-shared items:
+//         if ($type == 'article' || $type == 'events' || $type == 'faculty_staff' || $type == 'book') {
+//
+//             $xml = (isset($form_state['node']->field_shared_content_xml['und'])) ? $form_state['node']->field_shared_content_xml['und'][0]['value'] : '';
+//             if ($xml == '') {
+//
+//                 // Hide shared_content_xml and shared_content_subscribers fields if not an admin
+//                 global $user;
+//                 $roles = $user->roles;
+//                 if (!in_array('administrator',$roles)) {
+//                     $form['field_shared_content_xml']['#access'] = 0;
+//                     $form['shared_content_subscribers']['#access'] = 0;
+//                 }
+//
+//                 // Create a fieldset that will be included in the vertical tab.
+//                 $form['shared_content_tab'] = array(
+//                     '#type' => 'fieldset',
+//                     '#title' => t('Shared content settings'),
+//                     '#collapsible' => TRUE,
+//                     '#collapsed' => FALSE,
+//                     //'#tree' => TRUE,
+//                     // Send this tab to the top of the list.
+//                     '#weight' => -99,
+//                     // The #group value must match the name of the vertical tabs element.
+//                     // In most cases, this is 'additional_settings'.
+//                     '#group' => 'additional_settings',
+//                     '#description' => t('Checking this box will allow other sites to import this content on their site.'),
+//                     // Vertical tabs provide its most usable appearance when they are used to
+//                     // include a summary of the information contained in the fieldset. To do
+//                     // this, we attach additional JavaScript to handle changing the summary
+//                     // when form settings are changed.
+//                     '#attached' => array(
+//                         'js' => array(
+//                             'vertical-tabs' => drupal_get_path('module', 'shared_content') . '/shared_content.js',
+//                         ),
+//                     ),
+//                     '#attributes' => array('class' => array('shared_content-settings-form')),
+//                 );
+//
+//                 // The form elements below provide a demonstration of how a fieldset
+//                 // summary can be displayed in a collapsed tab.
+//                 //
+//                 // This checkbox is used to show or hide the custom settings form using
+//                 // javascript (altering states of a container defined later).
+//                 $site = variable_get('site_name', "Default site name");
+//                 $defaultvalue = ($site == 'Arts & Sciences' || $site == 'Arts &amp; Sciences') ? TRUE : FALSE;
+//
+//                 $value = variable_get('shared_content_type_' . $type.'_'.$form['nid']['#value'] . '_shared_content_enabled');
+//                 $shareablevalue = (isset($value)) ? $value : $defaultvalue;
+//
+//                 //$autovalue = variable_get('shared_content_type_' . $type.'_'.$form['nid']['#value'] . '_shared_content_notify');
+//                 //if ($autovalue == '') $autovalue = 'none';
+//
+//                 $form['shared_content_tab']['shared_content_enabled'] = array(
+//                     '#type' => 'checkbox',
+//                     '#title' => t('Shareable'),
+//                     //'#default_value' => $defaultvalue,
+//                     '#default_value' => $shareablevalue,
+//                 );
+//
+//                 $form['shared_content_tab']['shared_content_notify'] = array(
+//                     '#type' => 'select',
+//                     '#title' => 'Email Notifications',
+//                     '#description' => 'Select all sites that should be notified of this content creation. Control + Click to select multiple (Command + Click on MAC)  or deselect.',
+//                     '#options' => array(
+//                         'none' => 'None',
+//                         'afas@wustl.edu' => t('AFAS'),
+//                         'amcs@wustl.edu' => t('AmCS'),
+//                         'anthro@wustl.edu' => t('Anthropology'),
+//                         'artarch@wustl.edu' => t('Art History'),
+//                         'artsci-comm@wustl.edu' => t('ArtSci'),
+//                         'artscihelp@wustl.edu' => t('Artsci Computing'),
+//                         'biology@wustl.edu' => t('Biology'),
+//                         'cenhum@wustl.edu' => t('Center for Humanities'),
+//                         'quantumleaps@wustl.edu' => t('Center for Quantum Leaps'),
+//                         'chemistry@wustl.edu' => t('Chemistry'),
+//                         'classics@wustl.edu' => t('Classics'),
+//                         'collegewriting@wustl.edu' => t('College Writing'),
+//                         'complit@wustl.edu' => t('Comparative Literature'),
+//                         'eps@wustl.edu' => t('Earth and Planetary'),
+//                         'ealc@wustl.edu' => t('EALC'),
+//                         'economics@wustl.edu' => t('Economics'),
+//                         'education@wustl.edu' => t('Education'),
+//                         'english@wustl.edu' => t('English'),
+//                         'environmental@wustl.edu' => t('Environmental Studies'),
+//                         'fms@wustl.edu' => t('Film and Media'),
+//                         'german@wustl.edu' => t('German'),
+//                         'globalstudies@wustl.edu' => t('Global Studies'),
+//                         'artscigrads@wustl.edu' => t('Grad Studies'),
+//                         'hdw@wustl.edu' => t('HDW'),
+//                         'harting@wustl.edu' => t('History'),
+//                         'ferguson.jennifer@wustl.edu' => t('Inside Artsci'),
+//                         'iph@wustl.edu' => t('IPH'),
+//                         'jimes@wustl.edu' => t('JIMES'),
+//                         'isanchez@wustl.edu' => t('Latin American'),
+//                         'bhyde@wustl.edu' => t('Linguistics'),
+//                         'literaryarts@wustl.edu' => t('Literary Arts'),
+//                         'math@wustl.edu' => t('Math'),
+//                         'alison@wustl.edu' => t('MCSS'),
+//                         'music@wustl.edu' => t('Music'),
+//                         'buildingartsci@wustl.edu' => t('New Arts & Sciences Building'),
+//                         'overseas@wustl.edu' => t('Overseas Programs'),
+//                         'pad@wustl.edu' => t('Performing Arts'),
+//                         'philosophy@wustl.edu' => t('Philosophy'),
+//                         'physics@wustl.edu' => t('Physics'),
+//                         'pnp@wustl.edu' => t('PNP'),
+//                         'polisci@wustl.edu' => t('Political Science'),
+//                         'postbaccpremed@wustl.edu' => t('Post-Bacc Premed'),
+//                         'summerexperiences@wustl.edu' => t('Pre-College'),
+//                         'prehealth@wustl.edu' => t('Pre-Health'),
+//                         'david@wustl.edu' => t('Psychology'),
+//                         'religiousstudies@wustl.edu' => t('Religious Studies'),
+//                         'rll@wustl.edu' => t('Romance Languages'),
+//                         'sociology@wustl.edu' => t('Sociology'),
+//                         'strategicplan@wustl.edu' => t('Strategic Plan'),
+//                         'summersession@wustl.edu' => t('Summer Session'),
+//                         'transdisciplinaryfutures@wustl.edu' => t('Transdisciplinary Futures'),
+//                         'triads@wustl.edu' => t('TRIADS'),
+//                         'undergradresearch@wustl.edu' => t('Undergraduate Research'),
+//                         'bthacker@wustl.edu' => t('Urban Studies'),
+//                         'virtualrecognition@wustl.edu' => t('Virtual Recognition'),
+//                         'slavery@wustl.edu' => t('WashU and Slavery'),
+//                         'wc@wustl.edu' => t('Weidenbaum Center'),
+//                         'wgss@wustl.edu' => t('Women and Gender'),
+//                         'johnmaxwulfing@wustl.edu' => t('Wulfing Collection'),
+//
+//
+//                     ),
+//                     '#default_value' => 'none',
+//                     '#multiple' => TRUE,
+//                 );
+//
+//                 // This container will be used to store the whole form for our custom
+//                 // settings. This way, showing/hiding the form using javascript is easier,
+//                 // as only one element should be set visible.
+//                 $form['shared_content_tab']['shared_content_tabcontainer'] = array(
+//                     '#type' => 'container',
+//                     '#parents' => array('shared_content_tab'),
+//                     '#states' => array(
+//                         'invisible' => array(
+//                             // If the checkbox is not enabled, show the container.
+//                             'input[name="shared_content_tab[shared_content_enabled]"]' => array('checked' => FALSE),
+//                         ),
+//                     ),
+//                 );
+//
+//                 $form['actions']['submit']['#submit'][] = 'shared_content_tab_form_submit';
+//
+//             }// XML field must be empty to display shareable config
+//
+//         }// If the correct node type
+//     }
+// }
+
+function shared_content_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Load the current user
+  $current_user = \Drupal::currentUser();
+
+  // Check if the form is a node form and if the correct content type
+  if (isset($form['#node']) && $form['#node'] instanceof Node) {
+    $node = $form['#node'];
+    $node_type = $node->bundle();
+
+    if (in_array($node_type, ['faculty_staff', 'events', 'article', 'book'])) {
+      // Define fields that should still be editable
+      $editable_fields = [
+        'field_search',
+        'field_content_type',
+        'field_type',
+        'field_faculty_areas_of_study',
+        'field_feature_article',
+        'field_article_featured_image',
+        'field_featured_image',
+        'field_category',
+        'field_article_home_slideshow',
+        'field_featured_home_slideshow',
+        'field_type_of_staff',
+        'field_areas_of_interest',
+        'field_event_category',
+        'field_feature_event',
+        'field_faculty_and_staff',
+        'field_shared_content_subscribers',
+        'field_byline_options',
+        'field_byline_names',
+        'field_featured_book',
+        'field_department',
+      ];
+
+      // If the user is not an administrator, restrict field access
+      if (!$current_user->hasPermission('administer nodes')) {
+        if ($node->get('field_is_shared')->value) {
+          foreach ($form as $field_name => &$field) {
+            if (preg_match("/^field_/", $field_name) || $field_name == 'body') {
+              if (!in_array($field_name, $editable_fields)) {
+                $form[$field_name]['#access'] = FALSE;
+              }
+            }
+          }
+        }
+
+        // Hide fields that should not be accessible
+        $form['field_shared_content_xml']['#access'] = FALSE;
+        $form['field_shared_content']['#access'] = FALSE;
+        $form['field_is_shared']['#access'] = TRUE;  // Allow viewing of this field.
+      }
+    }
+  }
+
+  // Handle specific book node form fields
+  if (isset($form['#node']) && $form['#node'] instanceof Node && $form['#node']->bundle() == 'book') {
+    if ($form['#node']->get('field_is_shared')->value) {
+      $form['field_thumbnail'][0]['#required'] = FALSE;
+    }
+  }
+
+  // Add vertical tabs and custom fieldset for shared content settings
+  if (isset($form['#node']) && in_array($form['#node']->bundle(), [
+      'article',
+      'events',
+      'faculty_staff',
+      'book',
+    ])) {
+    $xml = $form_state->getValue(['field_shared_content_xml', 0, 'value'], '');
+
+    if ($xml == '') {
+      if (!$current_user->hasPermission('administer nodes')) {
+        $form['field_shared_content_xml']['#access'] = FALSE;
+        $form['field_shared_content_subscribers']['#access'] = FALSE;
+      }
+
+      // Add shared content vertical tab
+      $form['shared_content_tab'] = [
+        '#type' => 'fieldset',
+        '#title' => t('Shared content settings'),
+        '#collapsible' => TRUE,
+        '#collapsed' => FALSE,
+        '#weight' => -99,
+        '#group' => 'additional_settings',
+        '#description' => t('Checking this box will allow other sites to import this content on their site.'),
+        '#attributes' => ['class' => ['shared_content-settings-form']],
+      ];
+
+      // Shared content enabled checkbox
+      $default_value = in_array(\Drupal::config('system.site')
+        ->get('name'), ['Arts & Sciences', 'Arts &amp; Sciences']);
+      $form['shared_content_tab']['shared_content_enabled'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Shareable'),
+        '#default_value' => $default_value,
+      ];
+
+      // Email notifications select field
+      $form['shared_content_tab']['shared_content_notify'] = [
+        '#type' => 'select',
+        '#title' => t('Email Notifications'),
+        '#description' => t('Select all sites that should be notified of this content creation. Hold Control (Command on Mac) to select multiple.'),
+        '#options' => [
+          'none' => t('None'),
+          'afas@wustl.edu' => t('AFAS'),
+          'amcs@wustl.edu' => t('AmCS'),
+          'anthro@wustl.edu' => t('Anthropology'),
+          'artarch@wustl.edu' => t('Art History'),
+          'artsci-comm@wustl.edu' => t('ArtSci'),
+          // Add more options as needed...
+        ],
+        '#default_value' => 'none',
+        '#multiple' => TRUE,
+      ];
+
+      // Create a container for enabling/disabling custom settings with JavaScript
+      $form['shared_content_tab']['shared_content_tabcontainer'] = [
+        '#type' => 'container',
+        '#parents' => ['shared_content_tab'],
+        '#states' => [
+          'invisible' => [
+            ':input[name="shared_content_tab[shared_content_enabled]"]' => ['checked' => FALSE],
+          ],
+        ],
+      ];
+
+      // Add submit handler for custom shared content settings
+      $form['actions']['submit']['#submit'][] = 'shared_content_tab_form_submit';
+    }
+  }
+}
+
+/**
+ * Function to retrieve all remote client configurations and their URLs.
+ */
+// function shared_content_get_remote_client_urls() {
+//   // Get all configuration names that start with 'entity_share_client.remote.'.
+//   $config_names = \Drupal::configFactory()
+//     ->listAll('entity_share_client.remote.');
+//
+//   $urls = [];
+//
+//   // Loop through the configuration names.
+//   foreach ($config_names as $config_name) {
+//     // Load the configuration.
+//     $config = \Drupal::config($config_name);
+//
+//     // Get the URL field from the configuration (assuming 'url' is the field name).
+//     $url = $config->get('url');
+//
+//     // Add the URL to the list.
+//     if ($url) {
+//       $urls[$config_name] = $url;
+//     }
+//   }
+//
+//   return $urls;
+// }
+
+/**
+ * Example usage: print out the URLs from the configurations.
+ */
+// function shared_content_print_remote_client_urls() {
+//   $urls = shared_content_get_remote_client_urls();
+//
+//   // Print out the configuration name and URL.
+//   foreach ($urls as $config_name => $url) {
+//     \Drupal::messenger()
+//       ->addMessage(t('Config: @config, URL: @url', [
+//         '@config' => $config_name,
+//         '@url' => $url,
+//       ]));
+//   }
+// }
+//
+// function shared_content_tab_form_submit(array &$form, FormStateInterface $form_state) {
+//   // Mapping email to their respective edit URLs.
+//   $editArray = [
+//     'artsci-comm@wustl.edu' => 'http://artsci.washu.edu/admin/shared-content',
+//     'buildingartsci@wustl.edu' => 'http://buildingartsci.wustl.edu/admin/shared-content',
+//     'afas@wustl.edu' => 'http://afas.wustl.edu/admin/shared-content',
+//     'amcs@wustl.edu' => 'http://amcs.wustl.edu/admin/shared-content',
+//     'anthro@wustl.edu' => 'http://anthropology.wustl.edu/admin/shared-content',
+//     'artarch@wustl.edu' => 'http://artarch.wustl.edu/admin/shared-content',
+//     'biology@wustl.edu' => 'http://biology.wustl.edu/admin/shared-content',
+//     'cenhum@wustl.edu' => 'http://humanities.wustl.edu/admin/shared-content',
+//     'quantumleaps@wustl.edu' => 'http://quantumleaps.wustl.edu/admin/shared-content',
+//     'chemistry@wustl.edu' => 'http://chemistry.wustl.edu/admin/shared-content',
+//     'classics@wustl.edu' => 'http://classics.wustl.edu/admin/shared-content',
+//     'collegewriting@wustl.edu' => 'http://collegewriting.wustl.edu/admin/shared-content',
+//     'complit@wustl.edu' => 'http://complit.wustl.edu/admin/shared-content',
+//     'artscihelp@wustl.edu' => 'http://it.artsci.wustl.edu/admin/shared-content',
+//     'eeps@wustl.edu' => 'http://eeps.wustl.edu/admin/shared-content',
+//     'ealc@wustl.edu' => 'http://ealc.wustl.edu/admin/shared-content',
+//     'economics@wustl.edu' => 'http://economics.wustl.edu/admin/shared-content',
+//     'education@wustl.edu' => 'http://education.wustl.edu/admin/shared-content',
+//     'english@wustl.edu' => 'http://english.wustl.edu/admin/shared-content',
+//     'environmental@wustl.edu' => 'http://enst.wustl.edu/admin/shared-content',
+//     'fms@wustl.edu' => 'http://fms.wustl.edu/admin/shared-content',
+//     'german@wustl.edu' => 'http://german.wustl.edu/admin/shared-content',
+//     'globalstudies@wustl.edu' => 'http://globalstudies.wustl.edu/admin/shared-content',
+//     'artscigrads@wustl.edu' => 'http://gradstudies.artsci.wustl.edu/admin/shared-content',
+//     'hdw@wustl.edu' => 'http://hdw.wustl.edu/admin/shared-content',
+//     'history@wustl.edu' => 'http://history.wustl.edu/admin/shared-content',
+//     'artsci-comm@wustl.edu' => 'http://insideartsci.wustl.edu/admin/shared-content',
+//     'jimes@wustl.edu' => 'http://jimes.wustl.edu/admin/shared-content',
+//     'lasprogram@wustl.edu' => 'http://lasprogram.wustl.edu/admin/shared-content',
+//     'linguistics@wustl.edu' => 'http://linguistics.wustl.edu/admin/shared-content',
+//     'literaryarts@wustl.edu' => 'http://literaryarts.wustl.edu/admin/shared-content',
+//     'math@wustl.edu' => 'http://math.wustl.edu/admin/shared-content',
+//     'spacesciences@wustl.edu' => 'http://mcss.wustl.edu/admin/shared-content',
+//     'music@wustl.edu' => 'http://music.wustl.edu/admin/shared-content',
+//     'overseas@wustl.edu' => 'http://overseas.wustl.edu/admin/shared-content',
+//     'philosophy@wustl.edu' => 'http://philosophy.wustl.edu/admin/shared-content',
+//     'physics@wustl.edu' => 'http://physics.wustl.edu/admin/shared-content',
+//     'pnp@wustl.edu' => 'http://pnp.wustl.edu/admin/shared-content',
+//     'polisci@wustl.edu' => 'http://polisci.wustl.edu/admin/shared-content',
+//     'postbaccpremed@wustl.edu' => 'http://postbaccpremed.wustl.edu/admin/shared-content',
+//     'precollege@wustl.edu' => 'http://precollege.wustl.edu/admin/shared-content',
+//     'prehealth@wustl.edu' => 'http://prehealth.wustl.edu/admin/shared-content',
+//     'psych@wustl.edu' => 'http://psych.wustl.edu/admin/shared-content',
+//     'religiousstudies@wustl.edu' => 'http://religiousstudies.wustl.edu/admin/shared-content',
+//     'rll@wustl.edu' => 'http://rll.wustl.edu/admin/shared-content',
+//     'sociology@wustl.edu' => 'http://sociology.wustl.edu/admin/shared-content',
+//     'strategicplan@wustl.edu' => 'http://strategicplan.artsci.wustl.edu/admin/shared-content',
+//     'summersession@wustl.edu' => 'http://summersession.wustl.edu/admin/shared-content',
+//     'transdisciplinaryfutures@wustl.edu' => 'http://transdisciplinaryfutures.wustl.edu/admin/shared-content',
+//     'triads@wustl.edu' => 'http://triads.wustl.edu/admin/shared-content',
+//     'undergradresearch@wustl.edu' => 'http://undergradresearch.wustl.edu/admin/shared-content',
+//     'artsci-comm@wustl.edu' => 'http://graduation.wustl.edu/admin/shared-content',
+//     'slavery@wustl.edu' => 'http://slavery.wustl.edu/admin/shared-content',
+//     'wc@wustl.edu' => 'http://wc.wustl.edu/admin/shared-content',
+//     'wgss@wustl.edu' => 'http://wgss.wustl.edu/admin/shared-content',
+//     'johnmaxwulfing@wustl.edu' => 'http://johnmaxwulfing.wustl.edu/admin/shared-content',
+//   ];
+//
+//   // Store the value of the "shared content enabled" checkbox.
+//   $enabled = $form_state->getValue('shared_content_enabled');
+//   \Drupal::state()
+//     ->set('shared_content_type_' . $form_state->getValue('type') . '_' . $form_state->getValue('nid') . '_shared_content_enabled', $enabled);
+//
+//   // Retrieve notification email selection.
+//   $notify_emails = $form_state->getValue('shared_content_notify');
+//
+//   // Send emails to the selected addresses.
+//   if (!empty($notify_emails)) {
+//     foreach ($notify_emails as $notify_email) {
+//       if ($notify_email !== 'none') {
+//         // Build the mail parameters.
+//         $params = [
+//           'account' => $notify_email,
+//           'title' => $form_state->getValue('title'),
+//           'editlink' => Url::fromUri($editArray[$notify_email], ['absolute' => TRUE])
+//             ->toString(),
+//           'link' => Url::fromRoute('entity.node.canonical', ['node' => $form_state->getValue('nid')], ['absolute' => TRUE])
+//             ->toString(),
+//         ];
+//
+//         // Send the mail.
+//         \Drupal::service('plugin.manager.mail')
+//           ->mail('shared_content', 'notice', $notify_email, \Drupal::languageManager()
+//             ->getDefaultLanguage()
+//             ->getId(), $params);
+//       }
+//     }
+//   }
+// }
+
+// hook_form_submit()
+// Sub form declared in form_two - shared_content_form_alter - shared_content_callback
+// function shared_content_tab_form_submit(&$form, &$form_state) {
+//
+//     $editArray = array(
+//         'artsci-comm@wustl.edu' => 'http://artsci.washu.edu/admin/shared-content',
+//         'buildingartsci@wustl.edu' => 'http://buildingartsci.wustl.edu/admin/shared-content',
+//         'afas@wustl.edu' => 'http://afas.wustl.edu/admin/shared-content',
+//         'amcs@wustl.edu' => 'http://amcs.wustl.edu/admin/shared-content',
+//         'anthro@wustl.edu' => 'http://anthropology.wustl.edu/admin/shared-content',
+//         'artarch@wustl.edu' => 'http://artarch.wustl.edu/admin/shared-content',
+//         'biology@wustl.edu' => 'http://biology.wustl.edu/admin/shared-content',
+//         'cenhum@wustl.edu' => 'http://humanities.wustl.edu/admin/shared-content',
+//         'quantumleaps@wustl.edu' => 'http://quantumleaps.wustl.edu/admin/shared-content',
+//         'chemistry@wustl.edu' => 'http://chemistry.wustl.edu/admin/shared-content',
+//         'classics@wustl.edu' => 'http://classics.wustl.edu/admin/shared-content',
+//         'collegewriting@wustl.edu' => 'http://collegewriting.wustl.edu/admin/shared-content',
+//         'complit@wustl.edu' => 'http://complitandthought.wustl.edu',
+//         'artscihelp@wustl.edu' => 'http:// it.artsci.wustl.edu/shared-content',
+//         'eeps@wustl.edu' => 'http://eeps.wustl.edu/admin/shared-content',
+//         'ealc@wustl.edu' => 'http://ealc.wustl.edu/admin/shared-content',
+//         'economics@wustl.edu' => 'http://economics.wustl.edu/admin/shared-content',
+//         'education@wustl.edu' => 'http://education.wustl.edu/admin/shared-content',
+//         'english@wustl.edu' => 'http://english.wustl.edu/admin/shared-content',
+//         'environmental@wustl.edu' => 'http://enst.wustl.edu/admin/shared-content',
+//         'fms@wustl.edu' => 'http://fms.wustl.edu/admin/shared-content',
+//         'german@wustl.edu' => 'http://german.wustl.edu/admin/shared-content',
+//         'globalstudies@wustl.edu' => 'http://globalstudies.wustl.edu/admin/shared-content',
+//         'artscigrads@wustl.edu' => 'http://gradstudies.artsci.wustl.edu/admin/shared-content',
+//         'hdw@wustl.edu' => 'http://hdw.wustl.edu/admin/shared-content',
+//         'history@wustl.edu' => 'http://history.wustl.edu/admin/shared-content',
+//         'artsci-comm@wustl.edu' => 'http://insideartsci.wustl.edu/admin/shared-content',
+//         'jimes@wustl.edu' => 'http://jimes.wustl.edu/admin/shared-content',
+//         'lasprogram@wustl.edu' => 'http://lasprogram.wustl.edu/admin/shared-content',
+//         'linguistics@wustl.edu' => 'http://linguistics.wustl.edu/admin/shared-content',
+//         'literaryarts@wustl.edu' => 'http://literaryarts.wustl.edu/admin/shared-content',
+//         'math@wustl.edu' => 'http://math.wustl.edu/admin/shared-content',
+//         'linguistics@wustl.edu' => 'http://mcss.wustl.edu/admin/shared-content',
+//         'music@wustl.edu' => 'http://music.wustl.edu/admin/shared-content',
+//         'overseas@wustl.edu' => 'http://overseas.wustl.edu/admin/shared-content',
+//         'pad@wustl.edu' => 'http://pad.wustl.edu/admin/shared-content',
+//         'philosophy@wustl.edu' => 'http://philosophy.wustl.edu/admin/shared-content',
+//         'physics@wustl.edu' => 'http://physics.wustl.edu/admin/shared-content',
+//         'pnp@wustl.edu' => 'http://pnp.wustl.edu/admin/shared-content',
+//         'polisci@wustl.edu' => 'http://polisci.wustl.edu/admin/shared-content',
+//         'postbaccpremed@wustl.edu' => 'http://postbaccpremed.wustl.edu/admin/shared-content',
+//         'precollege@wustl.edu' => 'http://precollege.wustl.edu/admin/shared-content',
+//         'prehealth@wustl.edu' => 'http://prehealth.wustl.edu/admin/shared-content',
+//         'psych@wustl.edu' => 'http://psych.wustl.edu/admin/shared-content',
+//         'religiousstudies@wustl.edu' => 'http://religiousstudies.wustl.edu/admin/shared-content',
+//         'rll@wustl.edu' => 'http://rll.wustl.edu/admin/shared-content',
+//         'sociology@wustl.edu' => 'http://sociology.wustl.edu/admin/shared-content',
+//         'strategicplan@wustl.edu' => 'http://strategicplan.artsci.wustl.edu/admin/shared-content',
+//         'summersession@wustl.edu' => 'http://summersession.wustl.edu/admin/shared-content',
+//         'transdisciplinaryfutures@wustl.edu' => 'http://transdisciplinaryfutures.wustl.edu/admin/shared-content',
+//         'triads@wustl.edu' => 'http://triads.wustl.edu/admin/shared-content',
+//         'undergradresearch@wustl.edu' => 'http://undergradresearch.wustl.edu/admin/shared-content',
+//         'artsci-comm@wustl.edu' => 'http://graduation.wustl.edu/admin/shared-content',
+//         'slavery@wustl.edu' => 'http://slavery.wustl.edu/admin/shared-content',
+//         'wc@wustl.edu' => 'http://wc.wustl.edu/admin/shared-content',
+//         'wgss@wustl.edu' => 'http://wgss.wustl.edu/admin/shared-content',
+//         'johnmaxwulfing@wustl.edu' => 'http://johnmaxwulfing.wustl.edu/admin/shared-content',
+//     );
+//
+//     $val = $form_state['values']['shared_content_enabled'];
+//     variable_set('shared_content_type_' . $form_state['values']['type'].'_'.$form_state['nid'] . '_shared_content_enabled', $val);
+//     $autoval = $form_state['values']['shared_content_notify'];
+//     // We don't need to set this variable since we aren't accessing it later--this should always reset to None
+//     // so that we don't spam our users with update emails
+//     //variable_set('shared_content_type_' . $form_state['values']['type'].'_'.$form_state['nid'] . '_shared_content_notify', $autoval);
+//
+//
+//     // Send email for each notification
+//     if (!empty($autoval)) {
+//         foreach ($autoval as $notify) {
+//             // Title
+//             // Link to view the content (done)
+//             // Link to edit it on their site.
+//             if ($notify != 'none') {
+//                 $params['account'] = $notify;
+//                 $params['title'] = $form_state['node']->title;
+//                 $params['editlink'] = $editArray[$notify];
+//                 $params['link'] = drupal_get_path_alias('node/'.$form_state['nid']);
+//                 drupal_mail('shared_content', 'notice', $notify, language_default(), $params);
+//             }
+//         }
+//     }
+// }
+
+// Found function empty - left in appropriate in sequence of function calls
+// function shared_content_form_validate($form, &$form_state) {}
+//
+// function shared_content_form_submit(array &$form, FormStateInterface $form_state) {
+//   if ($form['#form_id'] == 'shared_content_form') {
+//     $user = \Drupal::currentUser();
+//     // $config = parse_ini_file('config.ini');
+//     $counter = 0;
+//
+//     foreach ($form_state->getValue('nodes') as $n) {
+//       $type = $form_state->getValue('type_' . $n);
+//       if ($type == 'person') {
+//         $type = 'faculty_staff';
+//       }
+//
+//       $guidURL = explode(' at ', $form_state->getValue('guid_' . $n));
+//       $guid = $guidURL[0];
+//       $title = $form_state->getValue('title_' . $n);
+//       $sharedURL = $guidURL[1] . '/xml/' . $type . '/' . $guid . '/rss.xml';
+//
+//       // Check if the node already exists in the database
+//       $database = \Drupal::database();
+//       $existing = $database->select('shared_content_items', 's')
+//         ->fields('s', ['url', 'orig_nid', 'nid'])
+//         ->condition('s.orig_nid', $guid)
+//         ->condition('s.url', $guidURL[1])
+//         ->execute()
+//         ->fetchAssoc();
+//
+//       if (empty($existing)) {
+//         // Create a new node
+//         $values = [
+//           'type' => $type,
+//           'uid' => $user->id(),
+//           'status' => 1,
+//           'comment' => 0,
+//           'promote' => 0,
+//         ];
+//
+//         $node = Node::create($values);
+//         $node->setTitle($title);
+//         $node->set('field_shared_content_xml', $sharedURL);
+//
+//         // Additional field handling
+//         $cuid = $node->id();
+//         // $token = shared_content_services_csrf($guidURL[1]);
+//         // $auth = shared_content_services_login($config['username'], $config['password'], $guidURL[1]);
+//
+//         // \Drupal::logger('shared_content')->info(
+//         //   'Attempting to send subscriber info. auth0 = @auth0, auth1 = @auth1, guid = @guid, guidURL = @guidURL, cuid = @cuid, base_url = @base_url, token = @token',
+//         //   [
+//         //     '@auth0' => $auth[0],
+//         //     '@auth1' => $auth[1],
+//         //     '@guid' => $guid,
+//         //     '@guidURL' => $guidURL[1],
+//         //     '@cuid' => $cuid,
+//         //     '@base_url' => \Drupal::request()->getSchemeAndHttpHost(),
+//         //     '@token' => $token,
+//         //   ]
+//         // );
+// //
+// //         shared_content_send_subscriber_update($guid, $guidURL[1], $cuid, \Drupal::request()
+// //           ->getSchemeAndHttpHost(), $auth[1], $auth[0]);
+//
+//         // Grab the XML content for the node
+//         $path = $sharedURL;
+//         $xml = shared_content_get_XML($path);
+//
+//         if ($type == 'article') {
+//           $postDate = $xml->node->postDate;
+//           [$month, $day, $year] = explode('.', $postDate);
+//           $createdDate = mktime(0, 0, 0, $month, $day, $year);
+//           $node->set('created', $createdDate);
+//         }
+//
+//         // Set fields based on content type
+//         // $node->set('field_is_shared', TRUE);
+//         $node->set('field_shared_content', base64_encode($xml->asXML()));
+//
+//         if ($type == 'events') {
+//         $dateField = (string) $xml->node->eventDate;
+//           $dates = explode(',', $dateField);
+//           // $repeatingRule = $xml->node->eventDateRepeatingRule ?: NULL;
+//
+//           foreach ($dates as $key => $date) {
+//             if (strpos($date, ' to ') !== FALSE) {
+//               [$dateStart, $dateEnd] = explode(' to ', $date);
+//             }
+//             else {
+//               $dateStart = $dateEnd = $date;
+//             }
+//
+//             $node->set('field_event_smart_date', [
+//               'value' => str_replace(' ', 'T', trim($dateStart)),
+//               'end_value' => str_replace(' ', 'T', trim($dateEnd)),
+//             ]);
+//           }
+//         }
+//         elseif ($type == 'faculty_staff') {
+//           if ($xml->node->drupalVersion) {
+//             $firstName = (string) $xml->node->firstName;
+//             $lastName = (string) $xml->node->lastName;
+//             $node->set('field_first_name', $firstName);
+//             $node->set('field_last_name', $lastName);
+//             $title = $firstName . ' ' . $lastName;
+//             $node->setTitle($title);
+//           }
+//           else {
+//             $firstName = (string) $xml->node->firstName;
+//             $lastName = (string) $xml->node->lastName;
+//             $node->set('field_first_name', $firstName);
+//             $node->set('field_last_name', $lastName);
+//             $title = $firstName . ' ' . $lastName;
+//             $node->setTitle($title);
+//           }
+//         }
+//
+//         $node->save();
+//
+//         // Insert the new node into the shared content database
+//         $url = parse_url($sharedURL, PHP_URL_SCHEME) . '://' . parse_url($sharedURL, PHP_URL_HOST);
+//         $database->insert('shared_content_items')
+//           ->fields([
+//             'iid' => $n,
+//             'nid' => $node->id(),
+//             'url' => $url,
+//             'orig_nid' => $guid,
+//           ])
+//           ->execute();
+//
+//         $counter++;
+//       }
+//     }
+//
+//     if ($counter > 0) {
+//       \Drupal::messenger()
+//         ->addMessage(t('@count items were successfully imported.', ['@count' => $counter]));
+//     }
+//     else {
+//       \Drupal::messenger()->addMessage(t('No items were imported.'));
+//     }
+//   }
+// }
+
+// Linked through hook_menu
+// This function contains the configuration options for the Shared Content module
+// Includes three forms, one variable setting form, and two buttons that activates functions:
+// function shared_content_settings_form($form, &$form_state) {
+//   $form['shared_content_staging_debug'] = [
+//     '#type' => 'select',
+//     '#options' => [1 => 'No', 2 => 'Yes'],
+//     '#title' => t('Staging Debug'),
+//     '#default_value' => variable_get('shared_content_staging_debug', 1),
+//     '#description' => t('Should we maintain the "newstage.", "newtest." and "newtestaws." subdomains in the subscriber lists? If "No", the "newstage.", "newtest." and "newtestaws." subdomains will be removed from the subscriber lists. If "Yes", no action will be taken. Leave this as "No" on production sites unless debugging, as it will break content sharing for nodes when moving to production. Leave this as "Yes" on staging and test sites.'),
+//   ];
+//
+//   $form['shared_content_clean_subs'] = [
+//     '#type' => 'submit',
+//     '#value' => 'Clean Subscriber Lists',
+//     '#prefix' => '<p>Remove any testing or staging subdomains from the subscriber lists of shared nodes.</p>',
+//     '#submit' => ['shared_content_clean_subs'],
+//   ];
+//
+//   $form['shared_content_repair_imports'] = [
+//     '#type' => 'submit',
+//     '#value' => 'Repair Imported Nodes',
+//     '#prefix' => '<p>Attempt to fix any missing imported content for imported nodes, and delete any rogue listings in our Shared Content database table.</p>',
+//     '#submit' => ['shared_content_repair_imports'],
+//   ];
+//
+//   return system_settings_form($form);
+// }
+//
+// function shared_content_clean_subs() {
+//   // Query to fetch node IDs of specific content types
+//   $database = \Drupal::database();
+//   $nids = $database->query("SELECT nid FROM {node_field_data} WHERE type IN ('faculty_staff', 'article', 'events', 'book')")
+//     ->fetchCol();
+//
+//   foreach ($nids as $nid) {
+//     // Load the node by its ID
+//     $node = Node::load($nid);
+//     if ($node) {
+//       // Check if the node is of the specific types
+//       $type = $node->bundle();
+//       if (in_array($type, ['events', 'article', 'faculty_staff', 'book'])) {
+//         // Get the value of the 'field_shared_content_subscribers'
+//         if (!$node->get('field_shared_content_subscribers')->isEmpty()) {
+//           $subs = $node->get('field_shared_content_subscribers')->value;
+//
+//           // Clean the subscriber list by removing 'new(stage|test).' prefixes
+//           $cleaned_subs = preg_replace('/new(stage|test)\./', '', $subs);
+//
+//           // Update the field with the cleaned value
+//           $node->set('field_shared_content_subscribers', $cleaned_subs);
+//           $node->save();
+//         }
+//       }
+//     }
+//   }
+//
+//   \Drupal::messenger()
+//     ->addMessage(t('All subscriber lists have been cleaned.'));
+// }
+
+// function shared_content_repair_imports() {
+//   $deletions = 0;
+//   // Query to fetch node IDs from the 'shared_content_items' table
+//   $database = \Drupal::database();
+//   $nids = $database->query("SELECT nid FROM {shared_content_items}")
+//     ->fetchCol();
+//
+//   foreach ($nids as $nid) {
+//     // Load the node by its ID
+//     $node = Node::load($nid);
+//
+//     if ($node) {
+//       // Check if the node is of the specific types
+//       $type = $node->bundle();
+//       if (in_array($type, ['events', 'article', 'faculty_staff', 'book'])) {
+//         // Call the custom function to fix the shared node
+//         shared_content_fix_shared_node($node);
+//       }
+//       else {
+//         // If the node isn't one of the shared content types, delete it
+//         $node->delete();
+//
+//         // Also delete the record from the 'shared_content_items' table
+//         $database->delete('shared_content_items')
+//           ->condition('nid', $nid)
+//           ->execute();
+//         $deletions++;
+//       }
+//     }
+//     else {
+//       // If the nid doesn't correspond to an existing node, delete the record
+//       $database->delete('shared_content_items')
+//         ->condition('nid', $nid)
+//         ->execute();
+//       $deletions++;
+//     }
+//   }
+//
+//   // Use Drupal messenger to display feedback
+//   \Drupal::messenger()
+//     ->addMessage(t('All imported nodes have been repaired. @count rogue nodes were deleted.', ['@count' => $deletions]));
+// }
+
+//                         - END - hook_menu() components
+
+//                         HOOKS
+
+// hook_uninstall()
+// The uninstall hook must be implemented in the module's .install file. It will fire when
+// the module gets uninstalled but before the module's database tables are removed,
+// allowing your module to query its own tables during this routine.
+
+// Drops shared_content_items table from database.
+// function shared_content_uninstall() {
+//   db_drop_table('shared_content_items');
+// }
+
+// hook_update_N()
+// Can only be used to update between minor versions of a module.
+// Perform a single update between minor versions.
+
+// Update the database shared_content_items table to include the url and orig_nid tables
+// function shared_content_update_7905(&$sandbox) {
+//   // Add the url column
+//   if (!db_field_exists('shared_content_items', 'url')) {
+//     $spec = [
+//       'type' => 'text',
+//       'description' => 'The URL of the original node.',
+//     ];
+//     db_add_field('shared_content_items', 'url', $spec);
+//   }
+//
+//   // Add the original node id column
+//   if (!db_field_exists('shared_content_items', 'orig_nid')) {
+//     $spec = [
+//       'type' => 'int',
+//       'description' => 'The node ID of the original node.',
+//     ];
+//     db_add_field('shared_content_items', 'orig_nid', $spec);
+//   }
+//
+//   // Update existing nodes
+//
+//   // Get all shared nodes
+//   $nodes_query = db_query("SELECT nid FROM shared_content_items")->fetchCol();
+//
+//   // Iterate through each node
+//   foreach ($nodes_query as $nid) {
+//     // Load node id for processing
+//     $node = node_load($nid);
+//
+//     // If valid node id
+//     if ($node != 0) {
+//       // Get node type
+//       $type = $node->type;
+//
+//       // if node is an event, article, faculty staff or book
+//       if ($type == 'events' || $type == 'article' || $type == 'faculty_staff' || $type = 'book') {
+//         // https://www.drupal.org/docs/7/api/entity-api/entity-metadata-wrappers
+//         // Wrappers make it easier to get and set the values of fields and properties as well as to
+//         // programmatically retrieve additional information about these elements and iterate over
+//         // lists of values in a consistent manner.
+//
+//         $wrapper = entity_metadata_wrapper('node', $node);
+//
+//         // Set node field_is_shared to true
+//         $wrapper->field_is_shared->set(1);
+//         $wrapper->save();
+//
+//         // Get shared URL
+//         $sharedURL = $wrapper->field_shared_content_xml->value();
+//
+//         // If shared URL is not null
+//         if ($sharedURL != '') {
+//           // build url up to https://afas.wustl.edu or https://education.wustl.edu
+//           $url = parse_url($sharedURL, PHP_URL_SCHEME) . '://' . parse_url($sharedURL, PHP_URL_HOST);
+//
+//           // Get original node id from the shared URL
+//           $orig_nid = [];
+//           preg_match('/\d*\/rss.xml/', $sharedURL, $orig_nid);
+//           $orig_nid = preg_replace('/\/rss\.xml/', '', $orig_nid[0]);
+//
+//           // Update shared_content_items table - set url, that is, the source site base url
+//           db_update('shared_content_items')
+//             ->fields(['url' => $url])
+//             ->condition('nid', $nid, '=')
+//             ->execute();
+//           // Update original node id column
+//           db_update('shared_content_items')
+//             ->fields(['orig_nid' => $orig_nid])
+//             ->condition('nid', $nid, '=')
+//             ->execute();
+//
+//           // If field_shared_content is null - fix node:
+//           // Note: field_shared_content->value() is a hash - the same hash is used for each row.
+//           // Check table field_data_field_shared_content for that value.
+//           if ($wrapper->field_shared_content->value() == '') {
+//             shared_content_fix_shared_node($node);
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// hook_node_update()
+// This hook is invoked from node_save() after the database query that will update
+// node in the node table is scheduled for execution, after the type-specific hook_update()
+// is invoked, and after field_attach_update() is called.
+/**
+ * This hooks into our node updates to make sure we send updates to subscribers
+ *
+ * If any of our shared nodes have subscribers, then this function schedules
+ * our helper function
+ * _shared_content_update_content to run after our node has its changes written
+ * to the database.
+ *
+ * @param string $node The node object from the Drupal hook
+ */
+
+// function shared_content_node_update(EntityInterface $node) {
+//   // Ensure we are working with a Node entity.
+//   if ($node instanceof Node) {
+//     $nid = $node->id();
+//     $type = $node->bundle();
+//
+//     // Check if the node is of specific content types.
+//     if (in_array($type, [
+//       'article',
+//       'events',
+//       'person',
+//       'faculty_staff',
+//       'book',
+//     ])) {
+//       $subs = $node->get('field_shared_content_subscribers')->value;
+//
+//       // If there are subscribers, register a shutdown function to update content.
+//       if (!empty($subs)) {
+//         // Use the shutdown function to trigger the update after the request.
+//         register_shutdown_function('_shared_content_update_content', $node, $subs);
+//       }
+//     }
+//   }
+// }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function shared_content_form_aggregator_feed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Set the minimum feed refresh to match our hourly cron job so that
+  // users aren't confused as to why it's not refreshing sooner. Admins can
+  // set this to whatever assuming they set up a custom job to run more often.
+  foreach ($form['refresh']['widget']['#options'] as $key => $value) {
+    if ($key !== 0 && $key < 3600) {
+      unset($form['refresh']['widget']['#options'][$key]);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *    this is used to check to see if the link in the view argument that matches the bulk operation
+ *    has already been imported. The arrays are indexed by numerical keys, so for extra safety I added a
+ *    redundancy to make sure the titles match between the two
+ */
+function shared_content_form_views_form_aggregator_item_page_1_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Check if the VBO form section exists and is an array.
+  if (!empty($form['views_bulk_operations_bulk_form']) && is_array($form['views_bulk_operations_bulk_form'])) {
+    foreach ($form['views_bulk_operations_bulk_form'] as $key => $values) {
+      // Only process numeric keys (which represent rows).
+      if (!is_int($key)) {
+        continue;
+      }
+
+      // Ensure the output rows are set and valid.
+      if (isset($form['output'][0]['#rows'][$key]->_entity) && checkExistingNode($form['output'][0]['#rows'][$key]->_entity, $values['#title'])) {
+        $form['views_bulk_operations_bulk_form'][$key]['#disabled'] = TRUE;
+      }
+    }
+  }
+}
+
+
+/**
+ * Checks if a node with the given shared URL already exists.
+ */
+
+/**
+ * Checks if a node with the given shared URL already exists.
+ */
+function checkExistingNode($entity,$title) {
+
+  $guid = $entity->get('guid')->value;
+  $fid_title = $entity->get('fid')->entity->label();
+  $entity_title = $entity->get('title')->value;
+  // Split the GUID to extract parts, with validation to avoid undefined array keys.
+  $guid_parts = explode(' at ', $guid);
+  $node_id = $guid_parts[0] ?? NULL;
+  $base_url = $guid_parts[1] ?? NULL;
+
+  // Only proceed if $node_id and $base_url are available.
+  if ( (!($node_id && $base_url)) || ($title != $entity_title) ){
+    return false;
+  }
+
+  // Determine content type based on the Feed Title.
+  $fid_parts = explode(' ', $fid_title);
+  $fid_test = isset($fid_parts[1]) ? getContentType($fid_parts[1]) : '';
+
+  // Construct the shared URL.
+  $sharedURL = $base_url . '/xml/' . strtolower($fid_test) . '/' . $node_id . '/rss.xml';
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('field_shared_content_xml', $sharedURL)
+    ->range(0, 1);
+  $nids = $query->execute();
+  return !empty($nids);
+}
+
+/**
+ * Helper function to determine content type based on fid title.
+ */
+function getContentType($fid_part) {
+  switch ($fid_part) {
+    case 'Articles':
+      return 'article';
+
+    case 'Events':
+      return 'events';
+
+    case 'Person':
+      return 'faculty_staff';
+
+    case 'Books':
+      return 'book';
+
+    default:
+      return '';
+  }
+}
+
+//  hook_node_delete()
+// This hook is invoked from node_delete_multiple() after the type-specific hook_delete() has been
+// invoked, but before hook_entity_delete and field_attach_delete() are called, and before the node
+// is removed from the node table in the database.
+//
+//
+// function shared_content_node_delete(EntityInterface $node) {
+//   // Load our authentication credentials
+//   $config = parse_ini_file('config.ini');
+//
+//   // Ensure we are working with a Node entity.
+//   if ($node instanceof Node) {
+//     $type = $node->bundle();
+//
+//     // Check if the node is one of the shared content types
+//     if (in_array($type, ['article', 'events', 'person', 'faculty_staff', 'book'])) {
+//
+//       // Check if the node is shared and notify the original site to remove from their subscriber list
+//       if ($node->get('field_is_shared')->value) {
+//         $shared_content_xml = $node->get('field_shared_content_xml')->value;
+//         $site = parse_url($shared_content_xml);
+//         $path = $site['path'];
+//         $site = $site['scheme'] . '://' . $site['host'];
+//         $node_id = preg_replace('/\D/', '', $path);
+//         $cnode_id = $node->id();
+//
+//         // Perform authentication and update the subscriber list
+//         $auth = shared_content_services_login($config['username'], $config['password'], $site);
+//         shared_content_send_subscriber_update($node_id, $site, $cnode_id, \Drupal::request()->getSchemeAndHttpHost(), $auth[1], $auth[0], true);
+//       }
+//
+//       // Remove the node from the shared_content_items table if it exists
+//       $database = \Drupal::database();
+//       $database->delete('shared_content_items')
+//         ->condition('nid', $node->id(), '=')
+//         ->execute();
+//     }
+//   }
+// }
+/**
+ * Implements hook_cron().
+ *
+ * Queues news feeds for updates once their refresh interval has elapsed.
+ */
+// function shared_content_cron() {
+//   // Rebuild routes to ensure all services and routes are loaded.
+//   \Drupal::service('router.builder')->rebuild();
+//
+//   $batch = [
+//     'title' => t('Processing shared content...'),
+//     'operations' => [],
+//     'finished' => 'shared_content_cron_finished',
+//   ];
+//
+//   // Operation to import feeds from OPML.
+//   $batch['operations'][] = ['shared_content_process_opml_import', []];
+//
+//   // Operation to queue aggregator feeds.
+//   $ids = \Drupal::entityTypeManager()->getStorage('aggregator_feed')->getFeedIdsToRefresh();
+//   if (!empty($ids)) {
+//     $batch['operations'][] = ['shared_content_queue_aggregator_feeds', [$ids]];
+//   }
+//
+//   // Operation to reset old queued timestamps.
+//   $batch['operations'][] = ['shared_content_reset_queued_timestamps', []];
+//
+//   // Start the batch.
+//   batch_set($batch);
+//   batch_process();
+// }
+
+/**
+ * Refreshes all existing Aggregator feeds using Batch API.
+ */
+// function shared_content_refresh_all_feeds() {
+//   $entity_type_manager = \Drupal::entityTypeManager();
+//   $feed_storage = $entity_type_manager->getStorage('aggregator_feed');
+//
+//   $feed_ids = $feed_storage->getQuery()->execute();
+//   if (empty($feed_ids)) {
+//     \Drupal::messenger()->addMessage(t('No aggregator feeds found to refresh.'), 'status');
+//     return;
+//   }
+//
+//   $feeds = Feed::loadMultiple($feed_ids);
+//
+//   $batch = (new BatchBuilder())
+//     ->setTitle(t('Refreshing Aggregator Feeds'))
+//     ->setFinishCallback('shared_content_refresh_feeds_finished');
+//
+//   foreach ($feeds as $feed) {
+//     $batch->addOperation('shared_content_refresh_feed_batch', [$feed->id()]);
+//   }
+//
+//   batch_set($batch->toArray());
+// }
+
+/**
+ * Batch process callback to refresh a single feed.
+ */
+// function shared_content_refresh_feed_batch($feed_id, &$context) {
+//   $feed = Feed::load($feed_id);
+//   if ($feed) {
+//     try {
+//       $feed->refresh();
+//       $context['message'] = t('Refreshing feed: @title', ['@title' => $feed->label()]);
+//       \Drupal::logger('aggregator')->notice('Feed @title refreshed.', ['@title' => $feed->label()]);
+//     }
+//     catch (\Exception $e) {
+//       \Drupal::logger('aggregator')->error('Error refreshing feed @title: @message', [
+//         '@title' => $feed->label(),
+//         '@message' => $e->getMessage(),
+//       ]);
+//     }
+//   }
+// }
+
+/**
+ * Batch finish callback.
+ */
+// function shared_content_refresh_feeds_finished($success, $results, $operations) {
+//   if ($success) {
+//     \Drupal::messenger()->addMessage(t('All aggregator feeds have been refreshed.'));
+//   }
+//   else {
+//     \Drupal::messenger()->addError(t('An error occurred while refreshing feeds.'));
+//   }
+// }
+/**
+ * Implements hook_cron().
+ */
+function shared_content_cron() {
+  \Drupal::service('shared_content.feed_refresher')->run();
+}
+
+  /**
+   * Fetches XML content from the provided URL using curl.
+   */
+  // function sharedContentGetXml($sharedURL) {
+  //   $ch = curl_init();
+  //   curl_setopt($ch, CURLOPT_URL, $sharedURL);
+  //   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  //   curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+  //   $returned = curl_exec($ch);
+  //   curl_close($ch);
+  //   return simplexml_load_string($returned);
+  // }
+
+  /**
+ * Refreshes all queued feeds and checks for existing nodes.
+ */
+
+/**
+ * Refreshes all queued feeds and updates field_shared_content.
+ */
+// function refreshQueuedFeeds() {
+//   $query = \Drupal::entityQuery('node')
+//     ->accessCheck(FALSE)
+//     ->condition('type', ['faculty_staff', 'events', 'article', 'book'], 'IN')
+//     ->condition('field_shared_content_xml', NULL, 'IS NOT NULL');
+//
+//   $nids = $query->execute();
+//
+//   if (!empty($nids)) {
+//     $nodes = Node::loadMultiple($nids);
+//     foreach ($nodes as $node) {
+//       $sharedURL = $node->get('field_shared_content_xml')->value;
+//       $oldSharedContent = $node->get('field_shared_content')->value;
+//       if (!empty($sharedURL)) {
+//         // Fetch XML content from the shared URL
+//         $xml = $this->sharedContentGetXml($sharedURL);
+//
+//         if ($xml) {
+//           // Convert XML to string and encode it
+//           $xml_string = $xml->asXML();
+//           if ($xml_string) {
+//             $encoded_xml = base64_encode($xml_string);
+//             if ($encoded_xml !== $oldSharedContent) {
+//               // Set field_shared_content with the encoded XML
+//               $node->set('field_shared_content', $encoded_xml);
+//               $node->save();
+//
+//               \Drupal::logger('shared_content')
+//                 ->info('Updated node @nid with refreshed XML content.', [
+//                   '@nid' => $node->id(),
+//                 ]);
+//             }
+//           }
+//           else {
+//             \Drupal::logger('shared_content')
+//               ->warning('Failed to fetch XML for node @nid from URL: @url', [
+//                 '@nid' => $node->id(),
+//                 '@url' => $sharedURL,
+//               ]);
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+
+/**
+ * Allowed values callback for shared_content_feeds field.
+ */
+// function _shared_content_get_feeds() {
+//   $feeds = \Drupal::entityTypeManager()
+//     ->getStorage('aggregator_feed')
+//     ->loadMultiple();
+//   $options = [];
+//
+//   foreach ($feeds as $feed) {
+//     $options[$feed->id()] = $feed->label();
+//   }
+//
+//   return $options;
+// }
+
+// hook_permissions()
+// This hook can supply permissions that the module defines, so that they can be selected on the user
+// permissions page and used to grant or restrict access to actions the module performs.
+// function shared_content_permission() {
+//   return [
+//     'access shared_content content' => [
+//       'title' => t('Shared Content'),
+//       'description' => t('View and import shared content.'),
+//     ],
+//   ];
+// }
+
+// hook_entity_view_alter()
+// This hook is called after the content has been assembled in a structured array and may be used
+// // for doing processing which requires that the complete entity content structure has been built.
+// function shared_content_metatag_metatags_view_alter(&$output, $instance, $options) {
+//   // If this is a shared content, change canonical to originating site.
+//   if (isset($options['entity']->nid)) {
+//     $nid = $options['entity']->nid;
+//     $query = db_select('shared_content_items', 's');
+//     $query->leftJoin('aggregator_item', 'i', 'i.iid = s.iid');
+//     $results = $query->fields('s', ['iid', 'nid'])
+//       ->fields('i', ['iid', 'link'])
+//       ->condition('s.nid', $nid, '=')
+//       ->execute()
+//       ->fetchAll();
+//
+//     //print_r($results);
+//     if (!empty($results)) {
+//       $canonical = $results[0]->link;
+//       $output['canonical']['#attached']['drupal_add_html_head'][0][0]['#value'] = $canonical;
+//     }
+//   }
+// }
+
+//                                     MAIL
+// hook_mail()
+// Prepares a message based on parameters;
+// This hook is called from MailManagerInterface->mail(). Note that hook_mail(), unlike
+// hook_mail_alter(), is only called on the $module argument to MailManagerInterface->mail(),
+// not all modules.
+// function shared_content_mail($key, &$message, $params) {
+//   $domain = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+//   $link = $domain . '/' . $params['link'];
+//   $options['language'] = $message['language'];
+//   $contenttitle = $params['title'];
+//   $contentlink = $link;
+//
+//   $mybody = '<p>Hello!</p><p>You are receiving this message because we think you may be interested in the following content from another website in Arts & Sciences:</p><p>' . $contenttitle . '<br/>' . $contentlink . '</p><p>If you\'d like to publish this content to your site, please login and then follow these steps:</p><br><p>1) Select "Shared Content" in the top navigation menu.<br>2) Search for the title of this flagged content within the "Title" field<br/>3) Click on the checkbox to the left of the content<br/>4) Click "import", on the bottom left<br/>5) Once you receive the message that your content was successfully imported, click over to the "Content" tab<br/>6) If you\'re searching all content, recently imported content will always show up first; otherwise, you can search for your content again to be sure it has successfully imported.</p><p>Note: The items available for import within "Shared Content" will automatically update daily.</p><p>Please do not respond to this message or send email to this address. This message is for information purposes only.</p><p>Enjoy!</p>';
+//
+//   switch ($key) {
+//     case 'notice':
+//       $site = variable_get('site_name', "Default site name");
+//       $langcode = $message['language']->language;
+//       $message['subject'] = 'Arts & Sciences Content Share Notification';
+//       $message['body'][] = $mybody;
+//       $headers = [
+//         'MIME-Version' => '1.0',
+//         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+//         'Content-Transfer-Encoding' => '8Bit',
+//         'X-Mailer' => 'Drupal',
+//       ];
+//       $message['headers'] = $headers;
+//       break;
+//   }
+// }
+
+// hook_mail()
+// Prepares a message based on parameters;
+// This hook is called from MailManagerInterface->mail(). Note that hook_mail(), unlike
+// hook_mail_alter(), is only called on the $module argument to MailManagerInterface->mail(),
+// not all modules.
+// function shared_content_delete_mail($key, &$message, $params) {
+//   $options['language'] = $message['language'];
+//   $content = $params['content'];
+//
+//   $mybody = '<p>Hello,</p><p>You are receiving this message because you were subscribed to a piece of content that has been deleted. If you wish to create the content on your site you will find the deleted content below.</p>' . $content;
+//
+//   $message['headers'] = [
+//     'MIME-Version' => '1.0',
+//     'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+//     'Content-Transfer-Encoding' => '8Bit',
+//     'X-Mailer' => 'Drupal',
+//   ];
+//
+//   switch ($key) {
+//     case 'notice':
+//       $site = variable_get('site_name', "Default site name");
+//       $langcode = $message['language']->language;
+//       $message['subject'] = 'Arts & Sciences Content Share Notification of Content Removal';
+//       $message['body'][] = $mybody;
+//       $headers = [
+//         'MIME-Version' => '1.0',
+//         'Content-Type' => 'text/html; charset=UTF-8; format=flowed',
+//         'Content-Transfer-Encoding' => '8Bit',
+//         'X-Mailer' => 'Drupal',
+//       ];
+//       $message['headers'] = $headers;
+//       break;
+//   }
+// }
+
+//                                    TESTING
+
+// hook_block_info()
+// Define all blocks provided by the module.
+// This hook declares to Drupal what blocks are provided by your module and can optionally specify
+// initial block configuration settings.
+// function shared_content_block_info() {
+//   $blocks['shared_content_testing'] = ['info' => t('Shared Content Testing')];
+//   return $blocks;
+// }
+
+// hook_block_view()
+// Return a rendered or renderable view of a block.
+// function shared_content_block_view($delta = '') {}
+
+//                         - END - Hooks
+
+//                         Helper functions:
+
+// Shared content get XML ($path)
+// Used in:
+//  shared_content_form_submit()
+//  _shared_content_update_content()
+//  shared_content_fix_shared_node()
+
+// function shared_content_get_XML($path) {
+//   //Grab the xml for the node
+//   $ch = curl_init();
+//   curl_setopt($ch, CURLOPT_URL, $path);
+//   // if (strpos($_SERVER['HTTP_HOST'], 'wustl.edu') === false) {
+//   $proxy = NULL;
+//   // } else {
+//   //     $proxy = 'http://chevron.artsci.washu.edu:8080';
+//   // }
+//   curl_setopt($ch, CURLOPT_PROXY, $proxy);
+//   curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+//
+//   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//   $returned = curl_exec($ch);
+//   curl_close($ch);
+//   $xml = simplexml_load_string($returned);
+//   return $xml;
+// }
+
+// Shared content fix shared node ($node)
+// Used in:
+//  shared_content_update_7905()
+//  shared_content_repair_imports()
+
+// function shared_content_fix_shared_node($node) {
+//   //Assemble all the variables we need for updating the subscriber list
+//   //and filling in the shared_content field--nid, orig_nid, url, and auth settings
+//   // $config = parse_ini_file('config.ini');
+//
+//   $nid = $node->nid;
+//   $wrapper = entity_metadata_wrapper('node', $node);
+//   $sharedURL = $wrapper->field_shared_content_xml->value();
+//   $url = parse_url($sharedURL, PHP_URL_SCHEME) . '://' . parse_url($sharedURL, PHP_URL_HOST);
+//   $orig_nid = [];
+//   preg_match('/\d*\/rss.xml/', $sharedURL, $orig_nid);
+//   $orig_nid = preg_replace('/\/rss\.xml/', '', $orig_nid[0]);
+//   $shared_content = $wrapper->field_shared_content;
+//
+//   //Make sure the boolean is set to true
+//   $wrapper->field_is_shared->set(1);
+//
+//   // $token = shared_content_services_csrf($url);
+//   // $auth = shared_content_services_login($config['username'], $config['password'], $url);
+//   // shared_content_send_subscriber_update($orig_nid, $url, $nid, $GLOBALS['base_url'], $auth[1], $auth[0]);
+//
+//   //If the shared_content field is empty, then grab the correct contents from the
+//   //original site and then set the value of the field to the base64-encoded contents
+//   if ($shared_content->value() == '') {
+//     $xml = shared_content_get_XML($sharedURL);
+//     if (is_object($xml)) {
+//       $xml_string = $xml->asXML();
+//       $shared_content->set(base64_encode($xml_string));
+//     }
+//     $wrapper->save();
+//   }
+// }
+
+//  Used in:
+// shared_content_node_update ()
+/**
+ * Construct and then send a json update to a subscriber site's node
+ *
+ * This function gets the contents of the Shared Content view for the node,
+ * encodes the XML contents in base64 to ensure proper HTML passage, and then
+ * sends the update to API node endpoint.
+ *
+ * @param object $node The node object, simply passed by the node_update hook
+ * @param string $subscribers The string contents of the node's subscriber list
+ *   field
+ */
+
+// function _shared_content_update_content($node, $subscribers) {
+//   $client = \Drupal::httpClient(); // Get the Guzzle HTTP client.
+//   global $base_url;
+//   $subscribers = explode(',', $subscribers);
+//   $rssx = $base_url . '/xml/' . $node->getType() . '/' . $node->id() . '/rss.xml';
+//
+//   // Fetch shared content as XML and hash it
+//   $getXML = shared_content_get_XML($rssx);
+//   $result = $getXML->asXML();
+//   $result = base64_encode($result);
+//
+//   foreach ($subscribers as $subscriber) {
+//     // Define the subscriber base URLs
+//     $subscriber = 'https://' . $subscriber;
+//     $subsNodeID = parse_url($subscriber, PHP_URL_PATH);
+//     $subHostURL = 'https://' . parse_url($subscriber, PHP_URL_HOST);
+//
+//     // Fetch subscriber's authentication token
+//     // $config = parse_ini_file('config.ini');
+//     // $auth = shared_content_services_login($config['username'], $config['password'], $subHostURL);
+//
+//     // Prepare the payload and define which fields to update when contents change
+//     // if ($getXML->item->drupalVersion) {
+//     //   $title = $getXML->item->title;
+//     // } else {
+//         $title = $getXML->node->title;
+//       // }
+//     $data = [
+//       "title" => str_replace('"', '\"', $title),
+//       "field_shared_content" => [
+//         "und" => [
+//           "0" => [
+//             "value" => $result,
+//           ],
+//         ],
+//       ],
+//     ];
+//
+//     // Impacts people/faculty staff subscribers
+//     if ($node->getType() == 'faculty_staff') {
+//       // if ($getXML->item->drupalVersion) {
+//       //   $firstName = $getXML->item->firstName;
+//       //   $lastName = $getXML->item->lastName;
+//       //   $biography = $getXML->item->biography;
+//       //   $emailAddress = $getXML->item->emailAddress;
+//       // } else {
+//         $firstName = $getXML->node->firstName;
+//         $lastName = $getXML->node->lastName;
+//         $biography = $getXML->node->biography;
+//         $emailAddress = $getXML->node->emailAddress;
+//       // }
+//       $data['field_first_name'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $firstName,
+//           ],
+//         ],
+//       ];
+//       $data['field_last_name'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $lastName,
+//           ],
+//         ],
+//       ];
+//       $data['field_biography'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $biography,
+//           ],
+//         ],
+//       ];
+//       $data['field_email_address'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $emailAddress,
+//           ],
+//         ],
+//       ];
+//     }
+//     if ($node->getType() == 'article') {
+//       // if ($getXML->item->drupalVersion) {
+//       //   $description = $getXML->item->description;
+//       //   $lastName = $getXML->item->lastName;
+//       //   $reverseHeader = $getXML->item->reverseHeader;
+//       //   $emailAddress = $getXML->item->emailAddress;
+//       // } else {
+//         $description = $getXML->node->description;
+//         $lastName = $getXML->node->lastName;
+//         $reverseHeader = $getXML->node->reverseHeader;
+//         $emailAddress = $getXML->node->emailAddress;
+//       // }
+//       $data['body'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $description,
+//           ],
+//         ],
+//       ];
+//
+//       $data['field_author'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $lastName,
+//           ],
+//         ],
+//       ];
+//       $data['field_reverse_header'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $reverseHeader,
+//           ],
+//         ],
+//       ];
+//       $data['field_reverse_header'] = [
+//         "und" => [
+//           "0" => [
+//             "value" => $description,
+//           ],
+//         ],
+//       ];
+//     }
+/**
+ * Implements hook_action_info_alter().
+ */
+// function shared_content_action_info_alter(array &$actions) {
+//   $actions['import_aggregator_feed_item_action'] = [
+//     'type' => 'aggregator_item',
+//     'label' => t('Import selected feed items as content'),
+//     'callback' => 'Drupal\shared_content\Plugin\Action\ImportAggregatorFeedItemAction',
+//     'configurable' => FALSE,
+//   ];
+// }
+
+    // Define the request options for the PUT request
+    // $options = [
+    //   'headers' => [
+    //     'Content-Type' => 'application/json',
+    //     'Cookie' => $auth[0],
+    //     'X-CSRF-Token' => $auth[1],
+    //   ],
+    //   'body' => json_encode($data),
+    // ];
+
+    // $subsApiURL = $subHostURL . '/csapi/node' . $subsNodeID . '.json';
+
+    // Try sending the PUT request using Guzzle
+//     try {
+//       if ($subsApiURL != "https:///csapi/node.json") {
+//         // First, check the subscription with a GET request
+//         $response_check_subscription = $client->get($subsApiURL, [
+//           'headers' => [
+//             'Content-Type' => 'application/json',
+//             'Cookie' => $auth[0],
+//             'X-CSRF-Token' => $auth[1],
+//           ],
+//         ]);
+//
+//         // Check if the response contains the field_shared_content_xml
+//         $data = json_decode($response_check_subscription->getBody()
+//           ->getContents(), TRUE);
+//         $source = isset($data['field_shared_content_xml']['und'][0]['value']) ? $data['field_shared_content_xml']['und'][0]['value'] : '';
+//
+//         // If the source matches the RSS feed URL, send the update with a PUT request
+//         if (trim($source) == trim($rssx)) {
+//           $response = $client->put($subsApiURL, $options);
+//         }
+//
+//         watchdog(
+//           'Shared Content',
+//           'Update attempt - Subscriber @subsApiURL - Source Return @options - RSS @rssx - Source Return and RSS Match @boolean',
+//           [
+//             '@subsApiURL' => $subsApiURL,
+//             '@options' => $source,
+//             '@rssx' => $rssx,
+//             '@boolean' => (trim($source) == trim($rssx)),
+//           ],
+//           WATCHDOG_NOTICE
+//         );
+//       }
+//     }
+//     catch (RequestException $e) {
+//       // Handle Guzzle exceptions
+//       watchdog(
+//         'Shared Content',
+//         'Error: @message',
+//         ['@message' => $e->getMessage()],
+//         WATCHDOG_ERROR
+//       );
+//     }
+//   }
+// }
+
+//  Used in:
+//  shared_content_send_subscriber_update()
+/**
+ * Get the contents of the subscriber list for a node
+ *
+ * This function queries the subscriber list field of a shared node
+ *
+ * @param string $nid The id of the node in question
+ * @param string $url The base url of the node's parent site
+ * @param string $cookie The cookie for our authenticated session
+ *
+ * @return array   An array with a comma-separated string with the contents of
+ *   the subscribers field, and a conditional second parameter date, just for
+ *   Events (handles an idiosyncracy with Date field)
+ */
+
+// function shared_content_get_subscriber_list($nid, $url, $cookie) {
+//   $client = \Drupal::httpClient(); // Get the Guzzle HTTP client.
+//
+//   // Enforce HTTPS
+//   $url = str_replace('http://', 'https://', $url);
+//   $request_url = $url . '/csapi/node/' . $nid . '.json';
+//   $subscriber = parse_url($url, PHP_URL_HOST);
+//
+//   // Prepare the request options
+//   $options = [
+//     'headers' => [
+//       'Content-Type' => 'application/json',
+//       'Cookie' => $cookie,
+//     ],
+//   ];
+//
+//   try {
+//     // Send the GET request using Guzzle
+//     $response = $client->get($request_url, $options);
+//
+//     // Decode the response body
+//     $data = json_decode($response->getBody()->getContents(), TRUE);
+//
+//     // Get the field_shared_content_subscribers field data
+//     $subscribers = $data['field_shared_content_subscribers'] ?? [];
+//
+//     // Check if the node type is 'events' and get the event date if it exists
+//     $date = ($data['type'] == 'events') ? $data['field_event_date'] : NULL;
+//
+//     return [$subscribers, $date];
+//   }
+//   catch (RequestException $e) {
+//     // Log an error if the request fails
+//     \Drupal::logger('shared_content')
+//       ->error('Error fetching subscriber list: @message', [
+//         '@message' => $e->getMessage(),
+//       ]);
+//
+//     // Return an empty result in case of failure
+//     return [[], NULL];
+//   }
+// }
+
+//  Used in:
+//  shared_content_node_delete()
+//  shared_content_form_submit()
+//  shared_content_fix_shared_node()
+/**
+ * Send an update to the subscribers field of a shared content node
+ *
+ * This function sends an update to the original node on the sharing site
+ * when the client site either imports or deletes -- in the former,
+ * we tell the original site to add us to their list of subscribers
+ * and in the latter case we tell the original site to remove us.
+ *
+ * @param string $guid The node id of the original node
+ * @param string $host_url The base url of the original site, with http(s)
+ * @param string $cuid The node id of the client node
+ * @param string $client_url The base url of our client site, with http(s)
+ * @param string $token The CSRF token for our authenticated session
+ * @param string $cookie The cookie for our authenticated session
+ * @param boolean $delete Optional parameter--if true, delete our URL from the
+ *   subscriber list
+ */
+
+// function shared_content_send_subscriber_update($guid, $host_url, $cuid, $client_url, $token, $cookie, $delete = FALSE) {
+//   $client = \Drupal::httpClient(); // Get the Guzzle HTTP client.
+//
+//   // First, we need to grab the existing subscriber list
+//   $current_subs = shared_content_get_subscriber_list($guid, $host_url, $cookie);
+//
+//   // If we're dealing with an event, grab the current date.
+//   // We have to pass the current date otherwise the Date field
+//   // throws us an error, which breaks the whole subscriber list update.
+//   if ($current_subs[1]) {
+//     $date = shared_content_tidy_date($current_subs[1]);
+//   }
+//   else {
+//     $date = '';
+//   }
+//
+//   // Get rid of the Date part of current_subs, leaving just the subscribers list
+//   $current_subs = $current_subs[0];
+//
+//   $subs_array = [];
+//   if (array_key_exists('und', $current_subs)) {
+//     $subs_array = explode(',', $current_subs['und'][0]['value']);
+//   }
+//
+//   // Create our simplified host-only subscriber URL
+//   $subscriber = parse_url($client_url, PHP_URL_HOST) . '/' . $cuid;
+//
+//   // If our configuration option for debugging newstage/newtest URLs is set,
+//   // then maintain the newstage/newtest subdomain. Otherwise, remove it.
+//   $stage_debug = \Drupal::config('shared_content.settings')
+//     ->get('staging_debug');
+//   if ($stage_debug == 1) {
+//     $subscriber = preg_replace('/new(stage|test|testaws)\./', '', $subscriber);
+//   }
+//
+//   // If $delete is true, then delete the URL if it exists; otherwise, add it.
+//   if ($delete) {
+//     // If our URL exists already, delete it.
+//     if (in_array($subscriber, $subs_array)) {
+//       $subs_array = array_diff($subs_array, [$subscriber]);
+//     }
+//   }
+//   else {
+//     // Check if it already exists -- this shouldn't happen.
+//     if (!in_array($subscriber, $subs_array)) {
+//       $subs_array[] = $subscriber;
+//     }
+//   }
+//
+//   // Logging for debugging purposes
+//   \Drupal::logger('shared_content')
+//     ->notice('Update attempt - Subscriber = @subscriber, subs_array = @subs_array', [
+//       '@subscriber' => $subscriber,
+//       '@subs_array' => implode(',', $subs_array),
+//     ]);
+//
+//   $new_subs = !empty($subs_array) ? implode(',', $subs_array) : '';
+//
+//   \Drupal::logger('shared_content')
+//     ->notice('Update attempt - $new_subs = @new_subs', [
+//       '@new_subs' => $new_subs,
+//     ]);
+//
+//   // Enforce HTTPS if not already
+//   $request_url = str_replace('http://', 'https://', $host_url);
+//   $request_url = $request_url . '/csapi/node/' . $guid . '.json';
+//
+//   // Prepare the data payload
+//   $data = json_encode([
+//     $date,
+//     'field_shared_content_subscribers' => [
+//       'und' => [
+//         [
+//           'value' => $new_subs,
+//         ],
+//       ],
+//     ],
+//   ]);
+//
+//   // Prepare the request options for Guzzle
+//   $options = [
+//     'headers' => [
+//       'Content-Type' => 'application/json',
+//       'Cookie' => $cookie,
+//       'X-CSRF-Token' => $token,
+//     ],
+//     'body' => $data,
+//   ];
+//
+//   // Perform the PUT request using Guzzle
+//   try {
+//     $response = $client->put($request_url, $options);
+//     return $response;
+//   }
+//   catch (RequestException $e) {
+//     // Log the error if the request fails
+//     \Drupal::logger('shared_content')
+//       ->error('Error updating subscriber: @message', [
+//         '@message' => $e->getMessage(),
+//       ]);
+//     return FALSE;
+//   }
+// }
+
+//  Used in:
+//  shared_content_fix_shared_node()
+//  shared_content_form_submit()
+//  shared_content_services_login()
+/**
+ * Query the Services API for a CSRF Token to begin authentication
+ *
+ * This function simply queries the user/token.json API path
+ * in order to get a CSRF Token which we can use to login
+ *
+ * @param string $site The base url of the site, with http(s)
+ *
+ * @return string   The CSRF token
+ */
+
+// function shared_content_services_csrf($site) {
+//     $site = parse_url($site, PHP_URL_HOST);
+//     $options = array(
+//         'headers' => array('Content-Type' => 'application/json'),
+//         'method' => 'POST'
+//     );
+//
+//     $response = drupal_http_request('https://'.$site.'/csapi/user/token.json', $options);
+//     $token = json_decode($response->data);
+//
+//     $token = $token->token;
+//     return $token;
+// }
+
+//  Used in:
+//  shared_content_form_submit()
+//  shared_content_node_delete()
+//  shared_content_fix_shared_node()
+//  _shared_content_update_content()
+/**
+ * Authenticate the Services API session
+ *
+ * This function first asks the API for a CSRF token,
+ * then uses that token along with a username and password
+ * to authenticate a session and recieve a session id and
+ * session name.
+ *
+ * @param string $username A valid username
+ * @param string $password The passoword for the username
+ * @param string $site The base url of the site, with http(s)
+ *
+ * @return string   The authenticated cookie value
+ */
+
+// function shared_content_services_login($username, $password, $site) {
+//   $login_url = $site . '/csapi/user/login.json';
+//   $token = shared_content_services_csrf($site);
+//
+//   // If we already have a valid session, don't start a new one
+//   //    if (isset($_COOKIE['drupal_session_name']) && isset($_COOKIE['drupal_session_id'])) {
+//   //        return $_COOKIE['drupal_session_name'] . '=' . $_COOKIE['drupal_session_id'];
+//   //    } else {
+//
+//   $user_data = '{
+//     "username" : "' . $username . '",
+//         "password" : "' . $password . '"
+// }';
+//
+//   $user_options = [
+//     'headers' => [
+//       'Content-Type' => 'application/json',
+//       'X-CSRF-Token' => $token,
+//     ],
+//     'method' => 'POST',
+//     'data' => $user_data,
+//   ];
+// }
+
+/*
+    Useful debugging dpm to make sure authentication worked.
+    dpm($login_url);
+    dpm($user_options);
+*/
+// $result = drupal_http_request($login_url, $user_options);
+// //   dpm($result);
+//     // If our login response is OK, then build the cookie string and return it
+//     if ($result->code == 200) {
+//         $user_data = json_decode($result->data);
+//
+//         setcookie('drupal_session_name', $user_data->session_name);
+//         setcookie('drupal_session_id', $user_data->sessid);
+//         $cookie = $user_data->session_name . '=' . $user_data->sessid;
+//         $token = $user_data->token;
+//         return array($cookie, $token);
+//     } else return FALSE;
+//
+// }
+
+// Used in:
+//  shared_content_send_subscriber_update()
+// function shared_content_tidy_date($date_field) {
+//   $date1 = strtotime($date_field['und']['0']['value']);
+//   $date2 = strtotime($date_field['und']['0']['value2']);
+//   $time1 = date("g:iA", $date1);
+//   $time2 = date("g:iA", $date2);
+//   $date1 = date("m/d/Y", $date1);
+//   $date2 = date("m/d/Y", $date2);
+//   $date_json = '
+//     "field_event_date" : {
+//         "und" : {
+//             "0" : {
+//                 "value" : {
+//                     "date" : "' . $date1 . '",
+//                     "time" : "' . $time1 . '"
+//                 },
+//                 "value2" : {
+//                     "date" : "' . $date2 . '",
+//                     "time" : "' . $time2 . '"
+//                 }
+//             }
+//         }
+//     },';
+//
+//   return $date_json;
+// }
+//
+// function shared_content_services_csrf($site) {
+//   $client = new Client();
+//   $url = 'https://' . parse_url($site, PHP_URL_HOST) . '/csapi/user/token.json';
+//   try {
+//     $response = $client->post($url, ['headers' => ['Content-Type' => 'application/json']]);
+//     $data = json_decode($response->getBody()->getContents());
+//     return $data->token;
+//   }
+//   catch (\Exception $e) {
+//     \Drupal::logger('shared_content')->error($e->getMessage());
+//     return NULL;
+//   }
+// }
+
+//
+// function _shared_content_update_content(Node $node, $subscribers) {
+//   $subscribers = explode(',', $subscribers);
+//   $rssx = \Drupal::request()->getSchemeAndHttpHost() . '/xml/' . $node->bundle() . '/' . $node->id() . '/rss.xml';
+//
+//   $getXML = shared_content_get_XML($rssx);
+//   if ($getXML) {
+//     $result = base64_encode($getXML->asXML());
+//
+//     foreach ($subscribers as $subscriber) {
+//       $subHostURL = 'https://' . parse_url($subscriber, PHP_URL_HOST);
+//       $subsNodeID = parse_url($subscriber, PHP_URL_PATH);
+//
+//       // Prepare payload
+//       $data = [
+//         'title' => (string) $getXML->node->title,
+//         'field_shared_content' => [
+//           'und' => [
+//             '0' => ['value' => $result],
+//           ],
+//         ],
+//       ];
+//
+//       if ($node->bundle() == 'faculty_staff') {
+//         $data['field_first_name'] = [
+//           'und' => ['0' => ['value' => (string) $getXML->node->firstName]],
+//         ];
+//         $data['field_last_name'] = [
+//           'und' => ['0' => ['value' => (string) $getXML->node->lastName]],
+//         ];
+//       }
+//
+//       // Send request
+//       $client = new Client();
+//       try {
+//         $auth = shared_content_services_login($config['username'], $config['password'], $subHostURL);
+//         $client->put($subHostURL . '/csapi/node' . $subsNodeID . '.json', [
+//           'headers' => [
+//             'Content-Type' => 'application/json',
+//             'Cookie' => $auth[0],
+//             'X-CSRF-Token' => $auth[1],
+//           ],
+//           'body' => json_encode($data),
+//         ]);
+//       }
+//       catch (\Exception $e) {
+//         \Drupal::logger('shared_content')->error($e->getMessage());
+//       }
+//     }
+//   }
+// }
+
+// function shared_content_fix_shared_node(Node $node) {
+//   $sharedURL = $node->get('field_shared_content_xml')->value;
+//   $url = parse_url($sharedURL, PHP_URL_SCHEME) . '://' . parse_url($sharedURL, PHP_URL_HOST);
+//
+//   preg_match('/\d*\/rss.xml/', $sharedURL, $orig_nid);
+//   $orig_nid = preg_replace('/\/rss\.xml/', '', $orig_nid[0]);
+//
+//   // Ensure the 'field_is_shared' field is set to TRUE
+//   $node->set('field_is_shared', 1);
+//
+//   // Obtain shared content if empty
+//   if ($node->get('field_shared_content')->isEmpty()) {
+//     $xml = shared_content_get_XML($sharedURL);
+//     if ($xml) {
+//       $xml_string = $xml->asXML();
+//       $node->set('field_shared_content', base64_encode($xml_string));
+//     }
+//     $node->save();
+//   }
+// }
+
+// function shared_content_services_login($username, $password, $site) {
+//   $token = shared_content_services_csrf($site);
+//   $client = new Client();
+//   $login_url = $site . '/csapi/user/login.json';
+//   try {
+//     $response = $client->post($login_url, [
+//       'headers' => ['X-CSRF-Token' => $token],
+//       'json' => ['username' => $username, 'password' => $password],
+//     ]);
+//     $user_data = json_decode($response->getBody()->getContents());
+//     return [$user_data->session_name . '=' . $user_data->sessid, $user_data->token];
+//   }
+//   catch (\Exception $e) {
+//     \Drupal::logger('shared_content')->error($e->getMessage());
+//     return NULL;
+//   }
+// }
+
+// function shared_content_get_XML($path) {
+//   // Create a Guzzle client
+//   $client = new Client();
+//   try {
+//     $response = $client->get($path, [
+//       'headers' => ['Accept' => 'application/xml'],
+//     ]);
+//
+//     if ($response->getStatusCode() == 200) {
+//       $body = $response->getBody()->getContents();
+//       $xml = simplexml_load_string($body);
+//       return $xml;
+//     }
+//   }
+//   catch (\Exception $e) {
+//     \Drupal::logger('shared_content')->error($e->getMessage());
+//     return NULL;
+//   }
+// }
+/**
+ * Helper function convert exposed filter to select dropdown.
+ */
+function shared_content_config_entity_filter_select(array &$form, $entity_id) {
+
+  $storage = Drupal::getContainer()->get('entity_type.manager')->getStorage($entity_id);
+  $entities = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->exists('field_feed_source')
+    ->sort('field_feed_source')
+    ->execute();
+
+  // Build a list of options.
+  $options = [];
+  $config_entities = $storage->loadMultiple($entities);
+  foreach ($config_entities as $item) {
+
+    $source = $item->get('field_feed_source')->value;
+          if (!empty($source)) {
+//            $options[$item->id()] = $source;
+            $options[$source] = $source;
+          }
+    // $options[$item->id()] = $item->label();
+  }
+  asort($options);
+
+  // Rebuild the text filter as select list dropdown.
+  $form['#type'] = 'select';
+  $form['#multiple'] = FALSE;
+  $form['#empty_option'] = t('All');
+  $form['#options'] = $options;
+  unset($form['#size']);
+}
+/**
+ * Helper function convert exposed filter to select dropdown.
+ */
+function shared_content_config_user_filter_select(array &$form, $entity_id) {
+
+  $storage = Drupal::getContainer()->get('entity_type.manager')->getStorage($entity_id);
+  $entities = $storage->getQuery()
+    ->accessCheck(FALSE)
+    ->exists('author')
+    ->sort('author')
+    ->execute();
+
+  // Build a list of options.
+  $options = [];
+  $config_entities = $storage->loadMultiple($entities);
+  foreach ($config_entities as $item) {
+
+    $source = $item->get('author')->value;
+          if (!empty($source)) {
+//            $options[$item->id()] = $source;
+            $options[$source] = $source;
+          }
+    // $options[$item->id()] = $item->label();
+  }
+  asort($options);
+
+  // Rebuild the text filter as select list dropdown.
+  $form['#type'] = 'select';
+  $form['#multiple'] = FALSE;
+  $form['#empty_option'] = t('All');
+  $form['#options'] = $options;
+  unset($form['#size']);
+}
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function shared_content_form_views_exposed_form_alter(&$form, &$form_state, $form_id) {
+  $view = $form_state->get('view');
+  if ($view->id() === 'aggregator_item') {
+        $feed_filter = 'feed';
+        if (isset($form[$feed_filter])) {
+          shared_content_config_entity_filter_select($form[$feed_filter], 'aggregator_feed');
+          $form[$feed_filter]['#process'] = [
+        [
+          'Drupal\Core\Render\Element\Select',
+          'processSelect',
+        ],
+        [
+          'Drupal\Core\Render\Element\Select',
+          'processAjaxForm',
+        ],
+        [
+          'Drupal\inline_form_errors\RenderElementHelper',
+          'processElement',
+        ],
+        [
+          '\Drupal\Core\Render\Element\RenderElement',
+          'processGroup',
+        ],
+      ];
+      $form[$feed_filter]['#pre_render'] = [
+        [
+          'Drupal\Core\Render\Element\Select',
+          'preRenderSelect',
+        ],
+        [
+          '\Drupal\Core\Render\Element\RenderElement',
+          'preRenderGroup',
+        ],
+      ];
+  }
+        $user_filter = 'author';
+        if (isset($form[$user_filter])) {
+          shared_content_config_user_filter_select($form[$user_filter], 'aggregator_item');
+          $form[$user_filter]['#process'] = [
+        [
+          'Drupal\Core\Render\Element\Select',
+          'processSelect',
+        ],
+        [
+          'Drupal\Core\Render\Element\Select',
+          'processAjaxForm',
+        ],
+        [
+          'Drupal\inline_form_errors\RenderElementHelper',
+          'processElement',
+        ],
+        [
+          '\Drupal\Core\Render\Element\RenderElement',
+          'processGroup',
+        ],
+      ];
+      $form[$user_filter]['#pre_render'] = [
+        [
+          'Drupal\Core\Render\Element\Select',
+          'preRenderSelect',
+        ],
+        [
+          '\Drupal\Core\Render\Element\RenderElement',
+          'preRenderGroup',
+        ],
+      ];
+  }
+//   if (strpos($form_id, 'views_exposed_form') !== FALSE) {
+//     if ($form['#id'] === 'views-exposed-form-aggregator-item-page-1') { // Change to your view's form ID
+//       $options = [];
+//
+//       // Query all unique field_feed_source values
+//       $query = \Drupal::entityQuery('aggregator_feed')
+//         ->exists('field_feed_source')
+//         ->accessCheck(FALSE)
+//         ->execute();
+//
+//       if (!empty($query)) {
+      //   $items = \Drupal\aggregator\Entity\Feed::loadMultiple($query);
+      //   foreach ($items as $item) {
+      //     $source = $item->get('field_feed_source')->value;
+      //     if (!empty($source)) {
+      //       $options[$source] = $source;
+      //     }
+      //   }
+      // }
+
+      // Set options in the select list
+      // if (!empty($options)) {
+      //   $form['feed']['#type'] = 'select';
+      //   $form['feed']['#options'] = ['' => t('All')] + $options;
+      // }
+    // }
+  }
+}
+/**
+ * Implements hook_views_data_alter().
+ */
+function shared_content_views_data_alter(&$data) {
+  $data['views']['shared_content_site_name'] = [
+    'title' => t('Department'),
+    'help' => t('Display Shared Content Site Name.'),
+    'field' => [
+      'id' => 'shared_content_site_name',
+    ],
+  ];
+  $data['views']['shared_content_site_image'] = [
+    'title' => t('Department Image'),
+    'help' => t('Display Department Image.'),
+    'field' => [
+      'id' => 'shared_content_site_image',
+    ],
+  ];
+    $data['aggregator_item']['imported_status'] = [
+    'title' => t('Imported Status'),
+    'help' => t('Shows whether this item has been imported.'),
+    'field' => [
+      'id' => 'imported_status',
+    ],
+  ];
+}
+// function shared_content_preprocess_views_view_field(&$variables) {
+//   if (
+//     $variables['view']->id() === 'shared_content' &&
+//     $variables['view']->current_display === 'views_data_export_3' &&
+//     $variables['field']->field === 'field_award_1'
+//   ) {
+//     // Decode so &amp; becomes &
+//     $variables['output'] = html_entity_decode($variables['output'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+//   }
+// }

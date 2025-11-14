@@ -1,0 +1,53 @@
+uuid: bb8bbef2-0b04-4e31-bb61-0b75284b410b
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_publication_call_to_action
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Publication Call to Action Section)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_call_to_action
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_background_color_cta:
+    -
+      plugin: get
+      source: field_background_color_cta
+  field_call_to_action_description:
+    -
+      plugin: get
+      source: field_call_to_action_description
+  field_call_to_action_button:
+    plugin: field_link_custom
+    source: field_callout_button_url
+    title_source: field_call_to_action_button_text
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_call_to_action_title:
+    -
+      plugin: get
+      source: field_call_to_action_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_call_to_action
+migration_dependencies: {  }

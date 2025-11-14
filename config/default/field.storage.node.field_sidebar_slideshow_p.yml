@@ -1,0 +1,21 @@
+uuid: fa868d49-6372-45c6-9f1b-4c71dcc0356a
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_sidebar_slideshow_p
+field_name: field_sidebar_slideshow_p
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

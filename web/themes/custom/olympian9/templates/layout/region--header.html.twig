@@ -1,0 +1,43 @@
+{#
+/**
+ * @file
+ * Olympian's theme override to display the header region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+{{ attach_library('olympian9/region--header') }}
+
+    {% set dark = 'light' %}
+    {% set color = '-color' %}
+
+
+  <a class="logo" href="{% if '2' in header_logo %}https://washu.edu{% else %}https://artsci.washu.edu{% endif %}">
+    <picture>
+
+      {% if '2' in header_logo %}
+        <source media="(min-width: 767px)" srcset="{{ base_path ~ directory }}/images/wustllogocolor.png">
+        <img src="{{ base_path ~ directory }}/images/wustllogocolormobile.png" alt="Washington University in St. Louis">
+      {% else %}
+        <source media="(min-width: 767px)" srcset="{{ base_path ~ directory }}/svg/logo-art-sci-vert{{ color }}.svg">
+        <img src="{{ base_path ~ directory }}/svg/logo-art-sci{{ color }}.svg" alt="Washington University in St. Louis">
+      {% endif %}
+    </picture>
+  </a>
+
+  <div class="department {{ dark }}">
+
+          {% if site_has_parent %}
+<div class="header_subtitle"><span alt="{{ site_parent_name }} front page">{{ site_parent_name }}</span> </div>
+{% endif %}
+    <a alt="{{ site_name }} front page" href="/">{{ site_name }}</a>
+
+  </div>
+
+  <div class="header-nav-overlay" data-drupal-selector="header-nav-overlay"></div>

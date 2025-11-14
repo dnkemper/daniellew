@@ -1,0 +1,19 @@
+uuid: 12ac0a75-f4b8-415b-8a9a-3683b4eac138
+langcode: en
+status: true
+dependencies: {  }
+id: local
+label: Local
+description: ''
+weight: 90
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/envs/local
+module:
+  devel: 0
+theme: {  }
+complete_list:
+  - 'devel.*'
+partial_list:
+  - simplesamlphp_auth.settings

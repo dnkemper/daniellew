@@ -1,0 +1,35 @@
+uuid: 6a975f60-a6f4-48b3-b4bc-00129eae3896
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.links.field_button_link
+    - field.field.paragraph.links.field_new_window
+    - paragraphs.paragraphs_type.links
+  module:
+    - linkit
+id: paragraph.links.default
+targetEntityType: paragraph
+bundle: links
+mode: default
+content:
+  field_button_link:
+    type: linkit
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_new_window:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

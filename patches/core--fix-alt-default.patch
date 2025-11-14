@@ -1,0 +1,13 @@
+diff --git a/core/modules/image/src/Plugin/Field/FieldWidget/ImageWidget.php b/core/modules/image/src/Plugin/Field/FieldWidget/ImageWidget.php
+index 299f6b24ac5..6ad4955e57b 100644
+--- a/core/modules/image/src/Plugin/Field/FieldWidget/ImageWidget.php
++++ b/core/modules/image/src/Plugin/Field/FieldWidget/ImageWidget.php
+@@ -243,7 +243,7 @@ public static function process($element, FormStateInterface $form_state, $form)
+     $element['alt'] = [
+       '#title' => new TranslatableMarkup('Alternative text'),
+       '#type' => 'textfield',
+-      '#default_value' => $item['alt'] ?? '',
++      '#default_value' => $item['alt'] ?? '""',
+       '#description' => new TranslatableMarkup('Short description of the image used by screen readers and displayed when the image is not loaded. This is important for accessibility.'),
+       // @see https://www.drupal.org/node/465106#alt-text
+       '#maxlength' => 512,

@@ -1,0 +1,42 @@
+id: paragraph_article_spotlight
+label: 'Article Spotlight Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: article_spotlight
+
+process:
+  type:
+    plugin: default_value
+    default_value: article_spotlight
+
+  # Entity reference field mappings for content (node) without target_revision_id
+  field_spot_articles:
+    plugin: sub_process
+    source: field_spot_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  field_second_article:
+    plugin: sub_process
+    source: field_second_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: article_spotlight
+
+migration_dependencies:
+  required:
+    - node_articles
+  optional: {}

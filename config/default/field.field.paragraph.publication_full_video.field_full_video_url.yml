@@ -1,0 +1,29 @@
+uuid: a05ae910-e88d-4dc1-b92a-454cb8d32d93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_full_video_url
+    - media.type.remote_video
+    - paragraphs.paragraphs_type.publication_full_video
+id: paragraph.publication_full_video.field_full_video_url
+field_name: field_full_video_url
+entity_type: paragraph
+bundle: publication_full_video
+label: 'Full Video URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      remote_video: remote_video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

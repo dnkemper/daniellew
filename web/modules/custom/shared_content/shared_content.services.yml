@@ -1,0 +1,63 @@
+services:
+  shared_content.create_node:
+    class: \Drupal\shared_content\Controller\SharedContentController
+    path: '/admin/content/shared-content/create-node/{item_id}'
+    defaults:
+      _controller: '\Drupal\shared_content\Controller\SharedContentController::createNode'
+      _title: 'Create Node from Aggregator Item'
+    requirements:
+      _permission: 'access content'
+
+  shared_content.route_subscriber:
+    class: Drupal\shared_content\EventSubscriber\RouteSubscriber
+    arguments: ['@current_user']
+    tags:
+      - { name: event_subscriber }
+
+  shared_content.controller_alter:
+    class: Drupal\shared_content\EventSubscriber\ControllerAlterSubscriber
+    arguments: ['@config.factory', '@date.formatter']
+    tags:
+      - { name: event_subscriber }
+  # shared_content.custom_items_import:
+  #   class: Drupal\shared_content\ItemsImporterOverride
+    # decorates: aggregator.items.importer
+    # decoration_priority: 9
+    # public: false
+    # arguments: ['@shared_content.custom_items_import.inner', '@config.factory', '@plugin.manager.aggregator.fetcher', '@plugin.manager.aggregator.parser', '@plugin.manager.aggregator.processor', '@logger.channel.aggregator', '@keyvalue.aggregator']
+  shared_content.opml_importer:
+    class: Drupal\shared_content\Service\OPMLImporter
+    arguments: ['@entity_type.manager', '@logger.factory', '@file_system']
+  shared_content.remote_form:
+    class: Drupal\shared_content\Form\RemoteForm
+    arguments: ['@entity_type.manager', '@http_client', '@date.formatter']
+  shared_content.service_opml_importer:
+    class: Drupal\shared_content\Service\ServiceOPMLImporter
+    arguments: ['@entity_type.manager', '@http_client', '@logger.factory']
+  shared_content.feed_item_update_subscriber:
+    class: 'Drupal\shared_content\EventSubscriber\FeedItemUpdateSubscriber'
+    arguments: ['@logger.factory']
+    tags:
+      - { name: event_subscriber }
+  shared_content.rss_response_relative_url_filter:
+    class: Drupal\shared_content\EventSubscriber\RssResponseRelativeUrlFilter
+    tags:
+      - { name: event_subscriber }
+  shared_content.feed_refresher:
+    class: Drupal\shared_content\Service\SharedContentFeedRefresher
+    arguments:
+      - '@database'
+      - '@entity_type.manager'
+      - '@http_client'
+  shared_content.feed_refresher_force:
+    class: Drupal\shared_content\Service\SharedContentFeedRefresherForce
+    arguments:
+      - '@database'
+      - '@entity_type.manager'
+      - '@http_client'
+      - '@queue'
+      - '@state'
+      - '@logger.channel.shared_content'
+  logger.channel.shared_content:
+    parent: logger.channel_base
+    arguments: ['shared_content']

@@ -1,0 +1,19 @@
+uuid: 4d5d5c45-8a19-4750-b2a3-7e08fa4f9894
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_optional_header
+    - paragraphs.paragraphs_type.featured_full_w_text
+id: paragraph.featured_full_w_text.field_optional_header
+field_name: field_optional_header
+entity_type: paragraph
+bundle: featured_full_w_text
+label: 'Optional Header'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

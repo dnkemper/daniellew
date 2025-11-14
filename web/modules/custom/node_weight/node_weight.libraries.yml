@@ -1,0 +1,7 @@
+nodeweight:
+  js:
+    js/site-load-more.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once

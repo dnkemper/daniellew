@@ -1,0 +1,29 @@
+uuid: f5cffde0-f6f7-41ef-ba9e-dd0c8c874fda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_video_url
+    - media.type.remote_video
+    - paragraphs.paragraphs_type.spotlights
+id: paragraph.spotlights.field_spotlight_video_url
+field_name: field_spotlight_video_url
+entity_type: paragraph
+bundle: spotlights
+label: 'Video URL'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      remote_video: remote_video
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

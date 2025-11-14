@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: aggregator.ddev.site
+    protocol: https
+  machine_name: aggregator
+  human_name: aggregator.artsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: aggregator.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/aggregator.artsci.wustl.edu/files'
+    origin: 'https://aggregator.artsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_aggregator
+system:
+  site:
+    contact_us_url: 'https://aggregator.artsci.wustl.edu/contact-us'
+    name: aggregator
+    email: aggregator@wustl.edu

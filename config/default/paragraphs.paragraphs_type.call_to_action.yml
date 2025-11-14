@@ -1,0 +1,10 @@
+uuid: 4eddc438-56c4-4f4a-8531-05edc8d353f2
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_action
+label: 'Call to Action'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Call to Action'
+behavior_plugins: {  }

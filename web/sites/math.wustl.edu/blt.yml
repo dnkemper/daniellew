@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: math.ddev.site
+    protocol: https
+  machine_name: math
+  human_name: math.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: math.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/math.wustl.edu/files'
+    origin: 'https://math.wustl.edu'
+drupal:
+  db:
+    database: drupal_math
+system:
+  site:
+    contact_us_url: 'https://math.wustl.edu/contact-us'
+    name: math
+    email: math@wustl.edu

@@ -1,0 +1,101 @@
+scss_files:
+  - 'web/themes/custom/olympian9/scss/**/*.scss'
+
+linters:
+  BangFormat:
+    enabled: true
+    space_before_bang: true
+    space_after_bang: false
+  BorderZero:
+    enabled: true
+  ColorKeyword:
+    enabled: true
+  ColorVariable:
+    enabled: true
+  Comment:
+    enabled: true
+    style: silent
+  DeclarationOrder:
+    enabled: true
+    ignore_unspecified: true
+  DisableLinterReason:
+    enabled: true
+  EmptyLineBetweenBlocks:
+    enabled: true
+  FinalNewline:
+    enabled: true
+  HexLength:
+    enabled: true
+    style: short
+  HexNotation:
+    enabled: true
+    style: lowercase
+  HexValidation:
+    enabled: true
+  IdSelector:
+    enabled: true
+  ImportantRule:
+    enabled: true
+    ignore_shorthand: false
+  ImportPath:
+    enabled: true
+  Indentation:
+    enabled: true
+    character: space
+    width: 2
+  LeadingZero:
+    enabled: true
+  NameFormat:
+    enabled: true
+    convention: hyphenated_lowercase
+  NestingDepth:
+    enabled: true
+    max_depth: 3
+  PlaceholderInExtend:
+    enabled: true
+  PropertySortOrder:
+    enabled: true
+    ignore_custom_properties: true
+  PseudoElement:
+    enabled: true
+  SelectorDepth:
+    enabled: true
+    max_depth: 3
+  SelectorFormat:
+    enabled: true
+    allow_leading_underscore: true
+  Shorthand:
+    enabled: true
+  SingleLinePerProperty:
+    enabled: true
+    allow_single_line_rule_sets: true
+  SpaceAfterComma:
+    enabled: true
+  SpaceAfterPropertyColon:
+    enabled: true
+    space_before: false
+    space_after: true
+  SpaceAfterPropertyName:
+    enabled: true
+  SpaceBeforeBrace:
+    enabled: true
+    style: space
+  SpaceBetweenParens:
+    enabled: true
+    spaces: 0
+  TrailingSemicolon:
+    enabled: true
+  TrailingWhitespace:
+    enabled: true
+  UnnecessaryMantissa:
+    enabled: true
+  UnnecessaryParentReference:
+    enabled: true
+  UrlFormat:
+    enabled: true
+  UrlQuotes:
+    enabled: true
+  VendorPrefix:
+    enabled: true
+    identifier_list: true
+    property_list: true

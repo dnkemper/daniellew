@@ -1,0 +1,10 @@
+uuid: 7d4443f3-1f4d-4f87-af4a-4e622e93728c
+langcode: en
+status: true
+dependencies: {  }
+id: content_2
+label: 'Content 2'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Content 2'
+behavior_plugins: {  }

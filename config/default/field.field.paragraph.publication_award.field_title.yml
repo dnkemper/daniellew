@@ -1,0 +1,19 @@
+uuid: 2193f412-e4e3-4132-a79d-66ae2eaf6fdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.publication_award
+id: paragraph.publication_award.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: publication_award
+label: 'Recipient Name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

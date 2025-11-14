@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8644d0bd-30ea-4639-9a47-9e87cc9139aa
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    acbdd300-952b-4ed3-b50e-fb42a8affe29: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: past-events.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /past-eventsjpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: acbdd300-952b-4ed3-b50e-fb42a8affe29
+      alt: 'past events header image'
+      title: ''
+      width: 2560
+      height: 1687

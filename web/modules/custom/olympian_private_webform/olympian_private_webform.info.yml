@@ -1,0 +1,5 @@
+name: 'olympian private webform'
+type: module
+description: 'Private webform custom module'
+package: Custom
+core_version_requirement: ^10 || ^11

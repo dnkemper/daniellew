@@ -1,0 +1,23 @@
+uuid: 45c4769d-708d-402e-968a-ea40dbfa1d4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.coin_collection_landing_page.field_coin_introduction
+    - node.type.coin_collection_landing_page
+  module:
+    - user
+id: node.coin_collection_landing_page.teaser
+targetEntityType: node
+bundle: coin_collection_landing_page
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_coin_introduction: true
+  search_api_excerpt: true

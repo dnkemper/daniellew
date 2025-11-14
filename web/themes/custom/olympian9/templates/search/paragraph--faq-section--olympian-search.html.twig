@@ -1,0 +1,15 @@
+{% block paragraph %}
+{% set numTitles = content.field_faq['#items']|length %}
+{% set count = 0 %}
+<div class="flex-search">
+    <h4>{{ content.field_title.0 }}
+    </h4>
+    {% for item in content.field_faq %}
+        {% if item['#paragraph'].field_title.value is not empty %}
+            {{ item['#paragraph'].field_title.value }}{% if count < numTitles - 1 %}, {% endif %}
+            {% set count = count + 1 %}
+        {% endif %}
+    {% endfor %}
+
+</div>
+{% endblock %}

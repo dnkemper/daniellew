@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 89869e3f-6696-4e72-9aff-f09ddd401a49
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    b7275f1e-1a4e-4e90-b0a0-66e09840b54c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: page-not-found.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /page-not-foundjpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: b7275f1e-1a4e-4e90-b0a0-66e09840b54c
+      alt: 'page not found background image'
+      title: ''
+      width: 3000
+      height: 1937

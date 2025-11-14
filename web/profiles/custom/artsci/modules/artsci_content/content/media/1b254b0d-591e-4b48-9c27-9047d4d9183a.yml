@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1b254b0d-591e-4b48-9c27-9047d4d9183a
+  bundle: image
+  default_langcode: en
+  depends:
+    878dfafe-3450-45d8-aa29-4eb2133e096f: taxonomy_term
+    50740092-11b7-4823-bf53-5047d203b7c3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: registration101_420x420.png
+  created:
+    -
+      value: 1701521698
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /registration101420x420png
+      langcode: en
+      pathauto: 1
+  field_media_directory:
+    -
+      entity: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  field_media_image:
+    -
+      entity: 50740092-11b7-4823-bf53-5047d203b7c3
+      alt: '""'
+      title: ''
+      width: 876
+      height: 875

@@ -1,0 +1,21 @@
+uuid: 721b061b-72f9-4a53-a712-afb09e61e503
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faculty_column_layout
+    - node.type.faculty_landing_page
+  module:
+    - options
+id: node.faculty_landing_page.field_faculty_column_layout
+field_name: field_faculty_column_layout
+entity_type: node
+bundle: faculty_landing_page
+label: 'Person Filter Column Layout'
+description: 'Change this to 2 - Column on sites that use the Areas of Interest to filter on the People page.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

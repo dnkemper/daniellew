@@ -1,0 +1,78 @@
+uuid: 1b4d031f-cf8a-40c4-b871-873cd504d6de
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_news.field_feat_artice_bkg_color
+    - field.field.paragraph.featured_news.field_feat_article_button
+    - field.field.paragraph.featured_news.field_feat_article_image
+    - field.field.paragraph.featured_news.field_feat_article_title
+    - field.field.paragraph.featured_news.field_news_link_new_window
+    - field.field.paragraph.featured_news.field_title_and_body
+    - paragraphs.paragraphs_type.featured_news
+  module:
+    - entity_reference_revisions
+    - link
+    - options
+id: paragraph.featured_news.default
+targetEntityType: paragraph
+bundle: featured_news
+mode: default
+content:
+  field_feat_artice_bkg_color:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_feat_article_button:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_feat_article_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_feat_article_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_link_new_window:
+    type: boolean
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_title_and_body:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

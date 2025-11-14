@@ -1,0 +1,29 @@
+uuid: 46708ad5-9e63-490a-9d40-a4e86709c3aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_feat_image
+    - media.type.image
+    - paragraphs.paragraphs_type.featured_with_caption
+id: paragraph.featured_with_caption.field_background_feat_image
+field_name: field_background_feat_image
+entity_type: paragraph
+bundle: featured_with_caption
+label: 'Background Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

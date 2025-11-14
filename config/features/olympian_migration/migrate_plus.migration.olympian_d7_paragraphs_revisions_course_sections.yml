@@ -1,0 +1,107 @@
+uuid: a952c91f-efeb-4464-a660-cb9ab749b539
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_course_sections
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Course Sections)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: course_sections
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_course_semester:
+    plugin: sub_process
+    source: field_course_semester
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_semester
+        source: tid
+  field_section_building:
+    -
+      plugin: get
+      source: field_section_building
+  field_section_concentration:
+    -
+      plugin: get
+      source: field_section_concentration
+  field_section_credits:
+    -
+      plugin: get
+      source: field_section_credits
+  field_section_day:
+    -
+      plugin: get
+      source: field_section_day
+  field_section_do_not_delete:
+    -
+      plugin: get
+      source: field_section_do_not_delete
+  field_section_end_time:
+    -
+      plugin: get
+      source: field_section_end_time
+  field_section_grad_undergrad:
+    -
+      plugin: get
+      source: field_section_grad_undergrad
+  field_section_instructors:
+    -
+      plugin: get
+      source: field_section_instructors
+  field_section_number:
+    -
+      plugin: get
+      source: field_section_number
+  field_section_requirements:
+    -
+      plugin: get
+      source: field_section_requirements
+  field_section_room:
+    -
+      plugin: get
+      source: field_section_room
+  field_section_start_time:
+    -
+      plugin: get
+      source: field_section_start_time
+  field_section_title:
+    -
+      plugin: get
+      source: field_section_title
+  field_section_topic:
+    -
+      plugin: get
+      source: field_section_topic
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: course_sections
+migration_dependencies:
+  required: {}
+  optional: {  }

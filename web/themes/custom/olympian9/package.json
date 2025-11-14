@@ -1,0 +1,102 @@
+{
+  "name": "olympian",
+  "version": "1.0.0",
+  "license": "ISC",
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "dependencies": {
+    "@percy/cli": "^1.27.3",
+    "dropzone": "^6.0.0-beta.2",
+    "jquery-datetimepicker": "^2.5.21"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@eslint/js": "^9.9.0",
+    "@percy/cypress": "^3.1.2",
+    "autoprefixer": "^10.4.20",
+    "babel-preset-minify": "^0.5.2",
+    "chokidar-cli": "^3.0.0",
+    "copy-folder-util": "^1.1.4",
+    "cssnano": "^7.0.5",
+    "cypress": "^13.13.3",
+    "del": "^7.1.0",
+    "del-cli": "^5.1.0",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
+    "imagemin": "^8.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.41",
+    "postcss-cli": "^11.0.0",
+    "prettier": "^3.3.3",
+    "sass": "^1.77.8",
+    "stylelint": "^16.8.1",
+    "stylelint-config-recommended-scss": "^14.1.0",
+    "stylelint-scss": "^6.5.0",
+    "svg-sprite": "^2.0.4",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.1.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "comments": true,
+    "env": {
+      "minified": {
+        "presets": [
+          "@babel/preset-env",
+          [
+            "minify",
+            {
+              "builtIns": false,
+              "mangle": true
+            }
+          ]
+        ],
+        "comments": false
+      }
+    }
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "scripts": {
+    "start": "yarn run watch",
+    "cypresstests": "yarn cypress run",
+    "watch-all": "yarn run watch",
+    "__COMMENT__TS_BUILD": "---------- TypeScript Build ----------",
+    "cleanfolder-typescript": "del-cli \"assets/ts/*\"",
+    "lint-typescript": "eslint \"ts/**/*.ts\"",
+    "compile-typescript": "tsc",
+    "build-typescript": "npm-run-all --print-label lint-typescript cleanfolder-typescript compile-typescript",
+    "__COMMENT__JS_MINIFY": "---------- JavaScript Babel transpile and minify ----------",
+    "__COMMENT__JS_LINT": "--TODO: when code is lint-free, add lint-js to build-js",
+    "cleanfolder-js": "del-cli \"assets/js/*\"",
+    "lint-js": "eslint \"js/**/*.js\"",
+    "compile-minify-js": "BABEL_ENV=minified babel js --out-dir assets/js --extensions .js --source-maps",
+    "build-js": "npm-run-all --print-label cleanfolder-js compile-minify-js",
+    "__COMMENT__SASS_BUILD": "---------- SASS Build ----------",
+    "__COMMENT__SASS_DEPRECATIONS": "--TODO: when mixed-decls errors have been resolved, remove the '--silence-deprecation=mixed-decls' from compile-sass.",
+    "prettier": "prettier \"scss/**/*.scss\" --write --log-level error",
+    "cleanfolder-sass": "del-cli \"assets/css/*\"",
+    "compile-sass": "sass scss:assets/css --embed-sources --quiet-deps --silence-deprecation=mixed-decls",
+    "postcss-sass": "postcss \"assets/css/**/*.css\" --env minifycss --replace --map",
+    "build-sass": "npm-run-all --print-label --continue-on-error prettier cleanfolder-sass compile-sass postcss-sass",
+    "__COMMENT__SVG": "---------- SVG ----------",
+    "__COMMENT__SVG_NOCOPY": "--Note: unlike researchbase, there is no copy-svg step used here",
+    "buildsprite-svg": "svg-sprite --symbol --symbol-sprite=sprite.svg --symbol-dest=assets/svg/symbol \"svg/./**/*.svg\"",
+    "build-svg": "npm-run-all --print-label buildsprite-svg",
+    "__COMMENT__BUILD_ALL": "---------- Build-All ----------",
+    "__COMMENT__BUILD_TYPESCRIPT_TODO": "--TODO: when we have TypeScript code, add build-typescript to build-all",
+    "build": "npm-run-all --print-label --continue-on-error build-sass build-js build-svg",
+    "__COMMENT__WATCH": "---------- Watch ----------",
+    "__COMMENT__WATCH_TYPESCRIPT_TODO": "--TODO: when we have TypeScript code, add watch-typescript to watch-all",
+    "watch-sass": "chokidar \"scss/**/*.scss\" --command \"yarn run build-sass\"",
+    "watch-cypress": "chokidar \"cypress/**/*.js\" --command \"yarn run cypresstests\"",
+    "watch-typescript": "tsc --watch",
+    "watch": "npm-run-all --print-label --continue-on-error build-js build-sass build-svg --parallel --race watch-sass \"compile-minify-js --watch\" watch-cypress"
+  }
+}

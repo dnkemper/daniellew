@@ -1,0 +1,20 @@
+uuid: 513f0d20-7c55-4763-8d79-abbaae4abbcd
+langcode: en
+status: false
+dependencies:
+  module:
+    - olympian_core
+  theme:
+    - olympian9
+id: olympian9_instagramfeedbyusername
+theme: olympian9
+region: content
+weight: 0
+provider: null
+plugin: instagram_feed_by_username_block
+settings:
+  id: instagram_feed_by_username_block
+  label: 'Instagram Feed By Username'
+  label_display: '0'
+  provider: olympian_core
+visibility: {  }

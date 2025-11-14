@@ -1,0 +1,36 @@
+id: media_document_migration
+label: 'Media CV Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+source:
+  plugin: filtered_file_d7
+  scheme: public
+  filetype: 
+    - 'document'
+  constants:
+    source_uri_prefix: 'dynamic'
+    dest_uri_prefix: 'public://'
+    source_base_path: ''
+process:
+  uid:
+    plugin: migration_lookup
+    migration: d7_user
+    source: uid
+    no_stub: true
+  field_media_document/target_id:
+    plugin: migration_lookup
+    migration: file_migration
+    source: fid
+  status: status
+  # Drupal 7 didn't keep track of the file's creation or update time.
+  # All it had was the vague "timestamp" column. So we'll use it
+  # for both.
+  created: timestamp
+  changed: timestamp
+destination:
+  plugin: 'entity:media'
+  default_bundle: document
+migration_dependencies:
+  required:
+    - file_migration
+  optional: {}

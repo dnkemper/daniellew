@@ -1,0 +1,29 @@
+uuid: 3760e801-106a-4142-a84c-6bbca6d60f30
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_material
+    - node.type.coin
+    - taxonomy.vocabulary.coin_material
+id: node.coin.field_coin_material
+field_name: field_coin_material
+entity_type: node
+bundle: coin
+label: Material
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_material: coin_material
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

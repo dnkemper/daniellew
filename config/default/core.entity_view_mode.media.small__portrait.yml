@@ -1,0 +1,11 @@
+uuid: d0519703-debf-4aa2-a6c2-a7d70d637440
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.small__portrait
+label: 'small portrait'
+description: ''
+targetEntityType: media
+cache: true

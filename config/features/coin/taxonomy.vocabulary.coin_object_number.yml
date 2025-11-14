@@ -1,0 +1,8 @@
+uuid: 26490775-410e-44a4-81c9-ff8d0e49fe9e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Object Number'
+vid: coin_object_number
+description: 'Acquisition Year, Lot Number, Object Number of a Collection Item'
+weight: 0

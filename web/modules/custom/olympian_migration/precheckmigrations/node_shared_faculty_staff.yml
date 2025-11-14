@@ -1,0 +1,39 @@
+id: node_shared_faculty_staff
+label: 'Migrate Borrowed Shared Person Nodes'
+migration_tags:
+  - shared_content
+source:
+  plugin: d7_node
+  node_type: faculty_staff
+
+process:
+  skip_on_empty:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+      negate: false
+    source: field_shared_content_xml
+    method: row
+  # Fields that are editable on borrowing site
+  field_search: field_search
+  field_type_of_staff:
+    plugin: sub_process
+    source: field_type_of_staff
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_leadership_administrative_staff
+        source: tid
+  field_areas_of_interest:
+    plugin: sub_process
+    source: field_areas_of_interest
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_areas_of_interest
+        source: tid
+  
+destination:
+  plugin: shared_entity
+  entity_type: 'node'  # Specify the entity type here
+  bundle: 'faculty_staff'

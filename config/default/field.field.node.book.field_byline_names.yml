@@ -1,0 +1,19 @@
+uuid: 6faba06e-df7b-403a-9577-322760fedf96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_byline_names
+    - node.type.book
+id: node.book.field_byline_names
+field_name: field_byline_names
+entity_type: node
+bundle: book
+label: 'Byline Names'
+description: 'If this field is used, it will display INSTEAD OF the the name selected in "Faculty and Staff." Use this field when there are multiple authors. Include all authors in this field. You can still use the faculty/staff field to tag the faculty member.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

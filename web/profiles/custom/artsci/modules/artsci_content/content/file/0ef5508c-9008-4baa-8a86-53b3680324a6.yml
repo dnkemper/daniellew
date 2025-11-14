@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0ef5508c-9008-4baa-8a86-53b3680324a6
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: bookstore_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/bookstore_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 37858
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

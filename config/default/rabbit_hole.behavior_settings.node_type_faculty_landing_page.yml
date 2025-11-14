@@ -1,0 +1,14 @@
+uuid: f1658574-9075-4076-8ee6-9240824d79ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.faculty_landing_page
+id: node_type_faculty_landing_page
+entity_type_id: node_type
+entity_id: faculty_landing_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

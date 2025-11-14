@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: education.ddev.site
+    protocol: https
+  machine_name: education
+  human_name: education.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: education.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/education.wustl.edu/files'
+    origin: 'https://education.wustl.edu'
+drupal:
+  db:
+    database: drupal_education
+system:
+  site:
+    contact_us_url: 'https://education.wustl.edu/contact-us'
+    name: education
+    email: education@wustl.edu

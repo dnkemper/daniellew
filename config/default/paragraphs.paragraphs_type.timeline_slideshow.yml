@@ -1,0 +1,10 @@
+uuid: 9d9f3265-023e-46d5-aa20-60d7fc9eee04
+langcode: en
+status: true
+dependencies: {  }
+id: timeline_slideshow
+label: 'Timeline Slideshow'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Timeline Slideshow'
+behavior_plugins: {  }

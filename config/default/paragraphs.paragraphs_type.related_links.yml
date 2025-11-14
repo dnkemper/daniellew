@@ -1,0 +1,10 @@
+uuid: 22ce824b-f978-4e9d-b068-609001e0eacf
+langcode: en
+status: true
+dependencies: {  }
+id: related_links
+label: 'Related Links'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Related Links'
+behavior_plugins: {  }

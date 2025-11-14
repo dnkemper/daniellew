@@ -1,0 +1,47 @@
+uuid: b979ca2f-dfe3-426b-aa0d-1017b16976f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.faculty_landing_page.field_areas_of_interest_title
+    - field.field.node.faculty_landing_page.field_default_person_type
+    - field.field.node.faculty_landing_page.field_faculty_column_layout
+    - field.field.node.faculty_landing_page.field_introduction_p
+    - field.field.node.faculty_landing_page.field_meta_tags
+    - field.field.node.faculty_landing_page.field_search
+    - node.type.faculty_landing_page
+  module:
+    - user
+id: node.faculty_landing_page.olympian_search
+targetEntityType: node
+bundle: faculty_landing_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  content_moderation_control: true
+  field_areas_of_interest_title: true
+  field_default_person_type: true
+  field_faculty_column_layout: true
+  field_introduction_p: true
+  field_meta_tags: true
+  links: true

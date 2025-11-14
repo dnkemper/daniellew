@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 311b3272-4624-4317-8eae-19c6ea4bda9d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: civiccommunity_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/civiccommunity_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 28495
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

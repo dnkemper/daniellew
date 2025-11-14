@@ -1,0 +1,53 @@
+uuid: f4513654-9a4a-4cd9-8a1c-d469db211093
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.events.field_event_only_image
+    - field.field.paragraph.events.field_first_event
+    - field.field.paragraph.events.field_second_event
+    - field.field.paragraph.events.field_third_event
+    - paragraphs.paragraphs_type.events
+id: paragraph.events.default
+targetEntityType: paragraph
+bundle: events
+mode: default
+content:
+  field_event_only_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_first_event:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: events_only
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_second_event:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: events_only
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_third_event:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: events_only
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

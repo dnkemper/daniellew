@@ -1,0 +1,43 @@
+uuid: 277f78af-02ed-4513-9849-c0deefb817e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.intro_with_tob.field_anchors
+    - field.field.paragraph.intro_with_tob.field_custom_section_text
+    - field.field.paragraph.intro_with_tob.field_custom_section_title
+    - paragraphs.paragraphs_type.intro_with_tob
+  module:
+    - entity_reference_revisions
+    - text
+id: paragraph.intro_with_tob.default
+targetEntityType: paragraph
+bundle: intro_with_tob
+mode: default
+content:
+  field_anchors:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_custom_section_text:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_custom_section_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,199 @@
+id: node_courses
+migration_group: olympian_migration
+label: 'Courses Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - shared-dep
+  # field_course_attributes                   entity_reference_revisions   -1
+  # field_course_concentration                entity_reference             -1
+  # field_course_credits                      string                       1
+  # field_course_department_name              string                       1
+  # field_course_dept_code                    string                       1
+  # field_course_description                  string_long                  1
+  # field_course_do_not_delete                boolean                      1
+  # field_course_featured                     boolean                      1
+  # field_course_featured_image               entity_reference             1
+  # field_course_frequency                    string                       1
+  # field_course_graduate                     boolean                      1
+  # field_course_id                           string                       1
+  # field_course_instructors                  entity_reference             -1
+  # field_course_level                        entity_reference             1
+  # field_course_links                        link                         5
+  # field_course_requirements                 entity_reference             -1
+  # field_course_sections                     entity_reference_revisions   -1
+  # field_course_semester                     entity_reference             -1
+  # field_course_undergrad                    boolean                      1
+  # field_featured_weight                     integer                      1
+  # field_meta_tags                           metatag                      1
+  # field_search                              string_long                  1
+source:
+  plugin: d7_node_with_alias
+  node_type: courses  # Replace with the machine name of your node type in Drupal 7
+idMap:
+  plugin: smart_sql
+process:
+  type:
+    plugin: default_value
+    default_value: courses  # Replace with the machine name of your node type in Drupal 10
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+
+  # Paragraphs fields
+
+  field_course_attributes:
+    plugin: sub_process
+    source: field_course_attributes
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_course_attributes
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_course_sections:
+    plugin: sub_process
+    source: field_course_sections
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_course_sections
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # Text and text long field mappings
+  field_search: field_search
+  field_course_credits: field_course_credits
+  field_course_department_name: field_course_department_name
+  field_course_dept_code: field_course_dept_code
+  field_course_description: field_course_description
+  field_course_frequency: field_course_frequency
+  field_course_id: field_course_id
+
+  # Boolean field mappings
+  field_course_do_not_delete: field_course_do_not_delete
+  field_course_featured: field_course_featured
+
+  # Image field mapping using sub_process
+  field_course_featured_image:
+    plugin: sub_process
+    source: field_course_featured_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # Taxonomy term reference field mappings
+  field_course_concentration:
+    plugin: migration_lookup
+    migration: taxonomy_concentration
+    source: field_course_concentration
+  field_course_level:
+    plugin: migration_lookup
+    migration: taxonomy_course_level
+    source: field_course_level
+  field_course_requirements:
+    plugin: migration_lookup
+    migration: taxonomy_requirements
+    source: field_course_requirements
+  field_course_semester:
+    plugin: migration_lookup
+    migration: taxonomy_semester
+    source: field_course_semester
+
+  # Entity reference field mappings
+  field_course_instructors:
+    plugin: migration_lookup
+    migration: node_faculty_staff
+    source: field_course_instructors
+
+  # Link field mappings
+  field_course_links:
+    plugin: sub_process
+    source: field_course_links
+    process:
+      uri: uri
+      title: title
+      options: attributes
+
+  # Integer field mapping
+  field_featured_weight: field_featured_weight
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: courses
+migration_dependencies:
+  required:
+    - paragraph_course_attributes
+    - paragraph_course_sections
+    - node_faculty_staff
+  optional: {}

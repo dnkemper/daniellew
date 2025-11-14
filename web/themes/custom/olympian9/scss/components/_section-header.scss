@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+# Section Heading
+--------------------------------------------------------------*/
+.section-header {
+  text-align: center;
+  padding: 60px 0 70px;
+
+  .container {
+    max-width: 880px;
+  }
+
+  h2 {
+    color: var(--dark-red);
+    margin-bottom: 0.5em;
+
+    em {
+      font-style: normal;
+      color: var(--red);
+    }
+  }
+
+  &.red {
+    background-color: var(--red);
+    color: var(--white);
+
+    h2 {
+      color: var(--white);
+
+      em {
+        color: var(--white);
+      }
+    }
+  }
+
+  &.dark {
+    background-color: #231f20;
+    color: var(--white);
+
+    h2 {
+      color: var(--light-blue);
+    }
+
+    a.button {
+      border-color: var(--white);
+    }
+  }
+}

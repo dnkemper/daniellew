@@ -1,0 +1,117 @@
+uuid: 72245a8f-69b8-47f1-913b-50ec40f0a002
+langcode: en
+status: true
+dependencies:
+  module:
+    - aggregator
+id: source
+label: Source
+module: views
+description: ''
+tag: default
+base_table: aggregator_item
+base_field: iid
+display:
+  default:
+    id: default
+    display_title: Master
+    display_plugin: default
+    position: 1
+    display_options:
+      title: Source
+      fields:
+        title:
+          id: title
+          table: aggregator_item
+          field: title
+          plugin_id: field
+          label: ''
+          element_type: h3
+          element_label_colon: false
+          display_as_link: false
+        description:
+          id: description
+          table: aggregator_item
+          field: description
+          plugin_id: field
+          label: ''
+          alter:
+            max_length: 60
+            strip_tags: true
+            trim: true
+          element_type: p
+          element_label_colon: false
+          element_default_classes: false
+        link:
+          id: link
+          table: aggregator_item
+          field: link
+          plugin_id: field
+          label: ''
+          alter:
+            alter_text: true
+            text: '<a href="{{ link }}">Read more</a>'
+            path: '{{ link }}'
+          element_label_colon: false
+          element_default_classes: false
+      pager:
+        type: none
+        options:
+          offset: 0
+      exposed_form:
+        type: basic
+      access:
+        type: none
+      cache:
+        type: none
+      sorts:
+        timestamp:
+          id: timestamp
+          table: aggregator_item
+          field: timestamp
+          plugin_id: date
+          order: DESC
+          granularity: hour
+      filters:
+        fid:
+          id: fid
+          table: aggregator_feed
+          field: fid
+          plugin_id: numeric
+          operator: or
+          value:
+            value: '1'
+      style:
+        type: default
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+      query:
+        type: views_query
+        options: {  }
+      use_more_always: false
+      display_extenders: {  }
+      style_plugin: default
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+      tags: {  }
+  block:
+    id: block
+    display_title: Block
+    display_plugin: block
+    position: 2
+    display_options:
+      query:
+        type: views_query
+        options: {  }
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+      tags: {  }

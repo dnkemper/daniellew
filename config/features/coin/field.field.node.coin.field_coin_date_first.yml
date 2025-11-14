@@ -1,0 +1,29 @@
+uuid: aa0d2252-9bb0-41bf-8a63-686d3637d3eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_date_first
+    - node.type.coin
+    - taxonomy.vocabulary.coin_date_first
+id: node.coin.field_coin_date_first
+field_name: field_coin_date_first
+entity_type: node
+bundle: coin
+label: 'Date (first)'
+description: 'Enter only a year, no months/days. If the year is BC, mark this as negative.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_date_first: coin_date_first
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

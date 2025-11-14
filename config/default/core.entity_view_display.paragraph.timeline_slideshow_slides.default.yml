@@ -1,0 +1,72 @@
+uuid: e8838a68-2735-4728-ba96-66035281e0c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.timeline_slideshow_slides.field_background_image
+    - field.field.paragraph.timeline_slideshow_slides.field_date_display
+    - field.field.paragraph.timeline_slideshow_slides.field_description
+    - field.field.paragraph.timeline_slideshow_slides.field_show_date_on_timeline
+    - field.field.paragraph.timeline_slideshow_slides.field_timeline_date
+    - field.field.paragraph.timeline_slideshow_slides.field_title
+    - paragraphs.paragraphs_type.timeline_slideshow_slides
+  module:
+    - datetime
+    - options
+id: paragraph.timeline_slideshow_slides.default
+targetEntityType: paragraph
+bundle: timeline_slideshow_slides
+mode: default
+content:
+  field_background_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_date_display:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_show_date_on_timeline:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_timeline_date:
+    type: datetime_custom
+    label: visually_hidden
+    settings:
+      timezone_override: ''
+      date_format: 'F j,Y'
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

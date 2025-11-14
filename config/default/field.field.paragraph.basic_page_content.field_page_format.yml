@@ -1,0 +1,23 @@
+uuid: 48f29c42-e331-4055-882f-5276f687c679
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_page_format
+    - paragraphs.paragraphs_type.basic_page_content
+  module:
+    - options
+id: paragraph.basic_page_content.field_page_format
+field_name: field_page_format
+entity_type: paragraph
+bundle: basic_page_content
+label: 'Page Format'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 'Single Column'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

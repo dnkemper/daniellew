@@ -1,0 +1,10 @@
+uuid: 8a78f297-5dae-40ff-b59b-c1b84700e857
+langcode: en
+status: true
+dependencies: {  }
+id: callout
+label: Callout
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Callout'
+behavior_plugins: {  }

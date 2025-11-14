@@ -1,0 +1,10 @@
+uuid: e1fa4022-24a7-4430-a290-8c160e8184c0
+langcode: en
+status: true
+dependencies: {  }
+id: publication_announcement_feature
+label: 'Publication Announcement Featured'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Announcement Featured'
+behavior_plugins: {  }

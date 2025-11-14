@@ -1,0 +1,35 @@
+uuid: be8c5b21-045d-48e0-9586-a56c3d448a08
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.button.field_call_to_action_button
+    - field.field.paragraph.button.field_new_window
+    - paragraphs.paragraphs_type.button
+  module:
+    - linkit
+id: paragraph.button.default
+targetEntityType: paragraph
+bundle: button
+mode: default
+content:
+  field_call_to_action_button:
+    type: linkit
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_new_window:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: pad.ddev.site
+    protocol: https
+  machine_name: pad
+  human_name: pad.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: pad.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/pad.wustl.edu/files'
+    origin: 'https://pad.wustl.edu'
+drupal:
+  db:
+    database: drupal_pad
+system:
+  site:
+    contact_us_url: 'https://pad.wustl.edu/contact-us'
+    name: pad
+    email: pad@wustl.edu

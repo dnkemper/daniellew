@@ -1,0 +1,46 @@
+uuid: cc755400-a0e2-469e-9fb5-d005ed4f66ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image_gallery.field_gallery_images
+    - field.field.paragraph.image_gallery.field_introduction_exerpt
+    - paragraphs.paragraphs_type.image_gallery
+  module:
+    - paragraphs
+    - text
+id: paragraph.image_gallery.default
+targetEntityType: paragraph
+bundle: image_gallery
+mode: default
+content:
+  field_gallery_images:
+    type: paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: Image
+      title_plural: Images
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings: {  }
+  field_introduction_exerpt:
+    type: text_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

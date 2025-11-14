@@ -1,0 +1,22 @@
+uuid: e0911c06-3d7c-4101-9fa3-4046e2c6a637
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: home
+label: Home
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:home]'
+selection_criteria:
+  ddaa7e09-80a1-4175-8c7f-77ba05a56ad1:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: ddaa7e09-80a1-4175-8c7f-77ba05a56ad1
+    context_mapping:
+      node: node
+    bundles:
+      home_page: home_page
+selection_logic: and
+weight: -5
+relationships: {  }

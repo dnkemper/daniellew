@@ -1,0 +1,20 @@
+uuid: 096701a3-fa8a-4feb-a8cd-cc4d46db8539
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.field_testimonial
+field_name: field_testimonial
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

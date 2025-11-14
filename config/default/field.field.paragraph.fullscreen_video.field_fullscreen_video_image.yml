@@ -1,0 +1,29 @@
+uuid: 76d022a2-6cfe-4f78-b914-bf7e4a0aa81c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_fullscreen_video_image
+    - media.type.image
+    - paragraphs.paragraphs_type.fullscreen_video
+id: paragraph.fullscreen_video.field_fullscreen_video_image
+field_name: field_fullscreen_video_image
+entity_type: paragraph
+bundle: fullscreen_video
+label: 'Video Image'
+description: 'An image is required for your video.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

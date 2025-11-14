@@ -1,0 +1,8 @@
+uuid: 52a08579-bced-46d6-a53e-ca3529b84fdd
+langcode: en
+status: true
+dependencies: {  }
+name: 'Object type'
+vid: coin_object_type
+description: ''
+weight: 0

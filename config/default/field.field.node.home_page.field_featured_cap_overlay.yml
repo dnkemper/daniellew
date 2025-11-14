@@ -1,0 +1,21 @@
+uuid: cbdb4bfd-3d1f-453a-bb0f-dcc524a4ec41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_cap_overlay
+    - node.type.home_page
+id: node.home_page.field_featured_cap_overlay
+field_name: field_featured_cap_overlay
+entity_type: node
+bundle: home_page
+label: 'Featured Caption Overlay'
+description: 'Hiding the overlay will display one slide with no overlay or caption'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: Hide
+  off_label: Show
+field_type: boolean

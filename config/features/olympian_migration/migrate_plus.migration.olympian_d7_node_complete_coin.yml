@@ -1,0 +1,349 @@
+uuid: b089eec5-11f8-455d-a160-f3e93afa5bae
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_coin
+class: Drupal\node\Plugin\migrate\D7NodeTranslation
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+idMap:
+  plugin: smart_sql
+migration_group: olympian_d7
+label: 'Node complete (Collection Item)'
+source:
+  plugin: olympian_node
+  node_type: coin
+  ids:
+    nid:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: coin
+  nid: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  moderation_state: moderation_state
+  title:
+    -
+      plugin: get
+      source: title
+  uid: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_additional_image:
+    plugin: sub_process
+    source: field_additional_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_coin_authority_issuer:
+    -
+      plugin: sub_process
+      source: field_authority_issuer
+      process:
+        target_id: tid
+  field_coin_authority_ruler:
+    -
+      plugin: sub_process
+      source: field_authority_ruler
+      process:
+        target_id: tid
+  field_coin_collection:
+    -
+      plugin: sub_process
+      source: field_collection
+      process:
+        target_id: tid
+  field_coin_collection_number:
+    -
+      plugin: get
+      source: field_collection_number
+  field_coin_conservation:
+    -
+      plugin: get
+      source: field_conservation
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_curators_comment:
+    -
+      plugin: get
+      source: field_curators_comment
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_denomination:
+    -
+      plugin: sub_process
+      source: field_denomination
+      process:
+        target_id: tid
+  field_coin_die_axis:
+    -
+      plugin: get
+      source: field_die_axis
+  field_coin_inscription_comment:
+    -
+      plugin: get
+      source: field_inscription_comment
+  field_coin_material:
+    -
+      plugin: sub_process
+      source: field_material
+      process:
+        target_id: tid
+  field_coin_object_type:
+    -
+      plugin: sub_process
+      source: field_object_type
+      process:
+        target_id: tid
+  field_coin_obverse_image:
+    plugin: sub_process
+    source: field_obverse_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_coin_obverse_inscription_langua:
+    -
+      plugin: sub_process
+      source: field_obverse_inscription_langua
+      process:
+        target_id: tid
+  field_coin_original_ticket:
+    -
+      plugin: get
+      source: field_original_ticket
+  field_coin_original_ticket_photo:
+    plugin: sub_process
+    source: field_original_ticket_photo
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_coin_permanent_location:
+    -
+      plugin: get
+      source: field_permanent_location
+  field_coin_portrayed:
+    -
+      plugin: sub_process
+      source: field_portrayed
+      process:
+        target_id: tid
+  field_coin_provenance:
+    -
+      plugin: get
+      source: field_provenance
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_purchase_information:
+    -
+      plugin: get
+      source: field_purchase_information
+  field_coin_reverse_image:
+    plugin: sub_process
+    source: field_reverse_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_coin_reverse_inscription_commen:
+    -
+      plugin: get
+      source: field_reverse_inscription_commen
+  field_coin_reverse_inscription_langua:
+    -
+      plugin: sub_process
+      source: field_reverse_inscription_langua
+      process:
+        target_id: tid
+  field_coin_status:
+    -
+      plugin: sub_process
+      source: field_status
+      process:
+        target_id: tid
+  field_coin_temporary_location:
+    -
+      plugin: get
+      source: field_temporary_location
+  field_coin_value:
+    -
+      plugin: get
+      source: field_value
+  field_coin_mint1:
+    -
+      plugin: sub_process
+      source: field_mint1
+      process:
+        target_id: tid
+  field_coin_bibliography:
+    -
+      plugin: get
+      source: field_bibliography
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_language:
+    -
+      plugin: sub_process
+      source: field_language
+      process:
+        target_id: tid
+  field_coin_weight:
+    -
+      plugin: get
+      source: field_weight
+  field_coin_acquisition_y:
+    -
+      plugin: get
+      source: field_acquisition_y
+  field_coin_lot_num:
+    -
+      plugin: get
+      source: field_lot_num
+  field_coin_object_num:
+    -
+      plugin: get
+      source: field_object_num
+  field_coin_obverse_description_new:
+    -
+      plugin: get
+      source: field_obverse_description_new
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_reverse_description_new:
+    -
+      plugin: get
+      source: field_reverse_description_new
+    -
+      plugin: media_wysiwyg_filter
+    -
+      plugin: img_tag_to_embed
+  field_coin_obverse_legend_new:
+    -
+      plugin: get
+      source: field_obverse_legend_new
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_obverse_mintmarks_new:
+    -
+      plugin: get
+      source: field_obverse_mintmarks_new
+    -
+      plugin: media_wysiwyg_filter
+  field_coin_reverse_legend_new:
+    -
+      plugin: get
+      source: field_reverse_legend_new
+    -
+      plugin: media_wysiwyg_filter
+    -
+      plugin: img_tag_to_embed
+  field_coin_reverse_mintmarks_new:
+    -
+      plugin: get
+      source: field_reverse_mintmarks_new
+    -
+      plugin: media_wysiwyg_filter
+    -
+      plugin: img_tag_to_embed
+  field_coin_date_first_new:
+    -
+      plugin: get
+      source: field_date_first_new
+  field_coin_date_last_new:
+    -
+      plugin: get
+      source: field_date_last_new
+  field_coin_dimensions_1:
+    -
+      plugin: get
+      source: field_dimensions_1
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+  alias: alias
+  path/pathauto: pathauto_state
+destination:
+  plugin: 'entity_complete:node'
+  translations: true
+  default_bundle: coin
+migration_dependencies:
+  required:
+    - olympian_d7_user
+  optional:
+    - olympian_d7_user

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 58a023a0-8b8c-40b7-a57b-0e70059af460
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: forms_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/forms_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 40025
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

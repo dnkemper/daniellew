@@ -1,0 +1,19 @@
+uuid: beabf444-f844-46b2-acf5-525dcb7a6eba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subtitle
+    - paragraphs.paragraphs_type.publication_announcement_feature
+id: paragraph.publication_announcement_feature.field_subtitle
+field_name: field_subtitle
+entity_type: paragraph
+bundle: publication_announcement_feature
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

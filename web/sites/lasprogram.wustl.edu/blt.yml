@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: lasprogram.ddev.site
+    protocol: https
+  machine_name: lasprogram
+  human_name: lasprogram.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: lasprogram.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/lasprogram.wustl.edu/files'
+    origin: 'https://lasprogram.wustl.edu'
+drupal:
+  db:
+    database: drupal_lasprogram
+system:
+  site:
+    contact_us_url: 'https://lasprogram.wustl.edu/contact-us'
+    name: lasprogram
+    email: lasprogram@wustl.edu

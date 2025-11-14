@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a3fd3001-c863-4eb7-acb3-b4d9f385b0d3
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    ca9e38e0-177f-4d63-9726-86ff677c547a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: contact-landing.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /contact-landingjpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: ca9e38e0-177f-4d63-9726-86ff677c547a
+      alt: contact-landing-page
+      title: ''
+      width: 1280
+      height: 799

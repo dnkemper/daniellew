@@ -1,0 +1,234 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ * - field_spotlight_video_short = text field
+ * - field_spotlight_video_title - text
+ * - field_test_title - text
+ * @see template_preprocess_paragraph()
+ */
+#}
+{% set label = 'modal' ~ id %}
+{% set labels = 'anchor-group-' ~ id %}
+{{ attach_library('olympian9/modal') }}
+{{ attach_library('olympian9/upcoming-events') }}
+
+{% block paragraph %}
+
+  {% if content.field_spotlight_type[0]['#markup'] == 'News & Events' %}
+    <div class="news-and-events">
+      {# <section class="combo flex" id="spotlight" aria-label="spotlight"> #}
+        {% if content.field_spot_event_category.0 %}
+          {% set vcnt = drupal_view_result('events', 'upcoming_events_feed', paragraph.field_spot_event_category.entity.tid.value)|length %}
+          {% set view = drupal_view('events', 'upcoming_events_feed', paragraph.field_spot_event_category.entity.tid.value) %}
+        {% else %}
+          {% set vcnt = drupal_view_result('events', 'upcoming_events_feed')|length %}
+          {% set view = drupal_view('events', 'upcoming_events_feed') %}
+        {% endif %}
+        {% if vcnt > 0 %}
+        <section class="combo flex" aria-label="spotlight">
+          <div class="column forty event-feed upcoming-events-section">
+            <div class="upcoming-events">
+              <header>
+                <h2>upcoming <br>events</h2>
+                {% if paragraph.field_spot_event_category.value is not empty %}
+                  <div class="cat">
+                    For {{ content.field_spot_event_category }}</div>
+                {% endif %}
+                <a class="more" href="{{ landing_page_alias }}">See More Events</a>
+              </header>
+              <div class="slideshow dot-slideshow">
+                {{ view }}
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <section class="combo no-events flex" aria-label="spotlight">
+        {% endif %}
+
+        <div
+          class="{{ ( vcnt > 0 ) ? 'column sixty' : 'column' }} blog-feed flex">
+          {% if content.field_spot_news_category %}
+            {{ drupal_view('related_news', 'block_related_news', paragraph.field_spot_news_category.entity.tid.value) }}
+          {% else %}
+            {{ drupal_view('related_news', 'block_related_news') }}
+          {% endif %}
+        </div>
+      </section>
+    </div>
+
+  {% elseif content.field_spotlight_type[0]['#markup'] == 'Static Image' %}
+    <section class="combo flex" id="spotlight" aria-label="spotlight">
+      <div class="column forty">
+        <div class="container wysiwyg center">
+          <div
+            class="wysiwyg-editor-text">{{ content.field_spotlight_description.0 }}</div>
+          {% if '1' in content.field_new_window[0] and content.field_button_link[0]['#url'] and content.field_button_link[0]['#title']|render %}
+            <a class="button" href="{{ content.field_button_link[0]['#url'] }}"
+              aria-label="{{ content.field_button_link[0]['#title']|render }} - link originates outside of WashU">
+              {{ content.field_button_link[0]['#title']|render }}
+              <svg class="icon">
+                <use xlink:href="#link-out"></use>
+              </svg>
+            </a>
+          {% elseif content.field_button_link[0]['#url'] and content.field_button_link[0]['#title']|render %}
+            <a class="button" href="{{ content.field_button_link[0]['#url'] }}"
+              aria-label="Navigate to {{ content.field_button_link[0]['#title']|render }}">
+              {{ content.field_button_link[0]['#title']|render }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="column sixty single-image"
+           style="background-image: url('{{ file_url(paragraph.field_spot_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_944w')) }}');">
+
+        <picture>
+          <source
+            srcset="{{ file_url(paragraph.field_spot_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_944w')) }}"
+            media="(min-width: 600px)">
+          <img
+            src="{{ file_url(paragraph.field_spot_image.entity.field_media_image.entity.fileuri|image_style('landscape_16_9_600w')) }}">
+        </picture>
+
+      </div>
+    </section>
+
+  {% elseif content.field_spotlight_type[0]['#markup'] == 'Fullscreen Video' and content.field_fullscreen_video_image.0 and content.field_spotlight_video_url.0 %}
+    <section class="combo" id="spotlight" aria-label="spotlight">
+      <div class="column single-video"
+           style="background-image: url('{{ file_url(paragraph.field_fullscreen_video_image.entity.field_media_image.entity.fileuri|image_style('fullscreen_video')) }}');">
+        <div class="youtube-modal">
+
+          <a href="#" class="js-open-modal" data-modal="{{ paragraph.id() }}">
+
+            <svg class="icon" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 512 512">
+              <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+              <path
+                d="M188.3 147.1C195.8 142.8 205.1 142.1 212.5 147.5L356.5 235.5C363.6 239.9 368 247.6 368 256C368 264.4 363.6 272.1 356.5 276.5L212.5 364.5C205.1 369 195.8 369.2 188.3 364.9C180.7 360.7 176 352.7 176 344V167.1C176 159.3 180.7 151.3 188.3 147.1V147.1zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 48C141.1 48 48 141.1 48 256C48 370.9 141.1 464 256 464C370.9 464 464 370.9 464 256C464 141.1 370.9 48 256 48z"/>
+            </svg>
+            <picture>
+            <source
+                srcset="{{ file_url(paragraph.field_fullscreen_video_image.entity.field_media_image.entity.fileuri|image_style('fullscreen_video')) }}"
+                media="(min-width: 600px)">
+              <img
+                src="{{ file_url(paragraph.field_fullscreen_video_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_480w')) }}">
+
+            </picture>
+            {% if content.field_spotlight_video_title.0 or content.field_spotlight_video_short.0 %}
+              <div class="caption">
+                {% if content.field_spotlight_video_title.0 %}
+                  <h2>{{ content.field_spotlight_video_title.0 }}</h2>
+                {% endif %}
+                {% if content.field_spotlight_video_short.0 %}
+                  <p>{{ content.field_spotlight_video_short.0 }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          </a>
+          <div class="modal" data-modal="{{ paragraph.id() }}">
+            <svg class="modal__cross js-modal-close">
+              <use xlink:href="#close"></use>
+            </svg>
+            <p
+              class="modal__title">{{ content.field_spotlight_video_url.0 }}</p>
+          </div>
+          <div class="overlay js-overlay-modal" data-modal="{{ paragraph.id() }}"></div>
+        </div>
+      </div>
+    </section>
+  {% elseif content.field_spotlight_type[0]['#markup'] == 'Video' and content.field_spotlight_image.0 and content.field_spotlight_video_url.0 %}
+    {# <div class="video-spotlight"> #}
+    <section class="combo flex" id="spotlight" aria-label="spotlight">
+      <div class="column forty">
+        <div class="container wysiwyg center">
+          <div class="wysiwyg-editor-text">
+            {{ content.field_spotlight_description.0 }}
+          </div>
+          {% if content.field_button_link[0]['#url'] and content.field_button_link[0]['#title']|render %}
+            {% if '1' in content.field_new_window[0] %}
+              <a class="button"
+                 href="{{ content.field_button_link[0]['#url'] }}"
+                 target="_blank"
+                 aria-label="{{ content.field_button_link[0]['#title']|render }} - opens external link in new window">{{ content.field_button_link[0]['#title']|render }}
+              </a>
+            {% else %}
+              <a class="button"
+                 href="{{ content.field_button_link[0]['#url'] }}"
+                 aria-label="Navigate to {{ content.field_button_link[0]['#title']|render }}">{{ content.field_button_link[0]['#title']|render }}</a>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="column sixty blog-feed flex">
+        <article class="post video-post flex"
+                 style="background-image: url('{{ file_url(paragraph.field_spotlight_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_944w')) }}');">
+          <div class="youtube-modal">
+            <a href="#" class="js-open-modal" data-modal="{{ paragraph.id() }}">
+              <picture>
+                <source
+                  srcset="{{ file_url(paragraph.field_spotlight_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_944w')) }}"
+                  media="(min-width: 600px)">
+                <img src="{{ file_url(paragraph.field_spotlight_image.entity.field_media_image.entity.fileuri|image_style('landscape_16_9_600w')) }}">
+              </picture>
+
+              <svg>
+                <use xlink:href="#video"></use>
+              </svg>
+              {% if content.field_spotlight_video_title.0 or content.field_spotlight_video_short.0 %}
+                <div class="post-details">
+                  {% if content.field_spotlight_video_title.0 %}
+                    <h3>{{ content.field_spotlight_video_title.0 }}</h3>
+                  {% endif %}
+                  {% if content.field_spotlight_video_short.0 %}
+                    <p>{{ content.field_spotlight_video_short.0 }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+            </a>
+            <div class="modal" data-modal="{{ paragraph.id() }}">
+              <svg class="modal__cross js-modal-close">
+                <use xlink:href="#close"></use>
+              </svg>
+              <p
+                class="modal__title">{{ content.field_spotlight_video_url.0 }}</p>
+            </div>
+            <div class="overlay js-overlay-modal"
+                 data-modal="{{ paragraph.id() }}"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  {% endif %}
+
+{% endblock paragraph %}

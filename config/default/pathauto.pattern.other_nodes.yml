@@ -1,0 +1,27 @@
+uuid: 0c926c08-785f-416a-9a0c-580f1351f2f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: other_nodes
+label: 'Other nodes'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  b07732ae-f7a2-47df-9439-d759be933d94:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: b07732ae-f7a2-47df-9439-d759be933d94
+    context_mapping:
+      node: node
+    bundles:
+      book: book
+      faq: faq
+      generic_page: generic_page
+      page: page
+      publication_page: publication_page
+      testimonial: testimonial
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -1,0 +1,19 @@
+uuid: 28192298-9e80-4f19-9810-e2bd7c1d16c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_related_links_title
+    - paragraphs.paragraphs_type.intro_with_links
+id: paragraph.intro_with_links.field_related_links_title
+field_name: field_related_links_title
+entity_type: paragraph
+bundle: intro_with_links
+label: 'Related Links Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

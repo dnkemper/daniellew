@@ -1,0 +1,20 @@
+uuid: 4842ff87-9b4c-49e6-aa30-561b2a539373
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - taxonomy
+id: paragraph.field_spot_event_category
+field_name: field_spot_event_category
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

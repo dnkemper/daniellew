@@ -1,0 +1,79 @@
+uuid: d4810d05-1345-419f-9b9d-6eed421f9e37
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_video_spotlights_and_articles
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Video Spotlights and Articles)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: video_spotlights_and_articles
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_spotlights:
+    plugin: sub_process
+    source: field_spotlights
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_spotlights
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_category:
+    plugin: sub_process
+    source: field_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_article_categories
+        source: tid
+  field_articles:
+    plugin: sub_process
+    source: field_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_second_article:
+    plugin: sub_process
+    source: field_second_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: video_spotlights_and_articles
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_spotlights

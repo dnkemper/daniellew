@@ -1,0 +1,24 @@
+uuid: 8d62e4e8-7210-43ba-8ddc-4a58a8d44c38
+langcode: en
+status: true
+dependencies: {  }
+id: node__article
+label: 'Content: Article'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:field_introduction_excerpt]'
+  keywords: '[node:field_category],news-article'
+  og_description: '[node:field_link_excerpt]'
+  og_image: '[node:field_link_thumbnail:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: article
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'
+  twitter_cards_creator: '@washuartsci'
+  twitter_cards_description: '[node:field_link_excerpt]'
+  twitter_cards_image: '[node:field_link_thumbnail:entity:field_media_image:fullscreen_video:url]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

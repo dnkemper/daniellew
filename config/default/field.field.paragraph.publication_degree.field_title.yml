@@ -1,0 +1,19 @@
+uuid: 799c5a8d-1bba-443c-91ec-ff7fe8b81881
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.publication_degree
+id: paragraph.publication_degree.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: publication_degree
+label: 'Degree Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

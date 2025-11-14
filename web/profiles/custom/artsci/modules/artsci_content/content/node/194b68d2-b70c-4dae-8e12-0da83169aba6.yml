@@ -1,0 +1,77 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 194b68d2-b70c-4dae-8e12-0da83169aba6
+  bundle: resources
+  default_langcode: en
+  depends:
+    01678052-fffb-44f0-875f-872f1f2681d4: media
+    582f1150-9852-415c-b671-332a2006f4e9: taxonomy_term
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Academic Integrity '
+  created:
+    -
+      value: 1690897465
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/academic-integrity
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://wustl.edu/about/compliance-policies/academic-policies/undergraduate-student-academic-integrity-policy/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: 01678052-fffb-44f0-875f-872f1f2681d4
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 582f1150-9852-415c-b671-332a2006f4e9
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'review WashU academic-integrity policies and procedures'
+  field_title:
+    -
+      value: 'Academic Integrity '

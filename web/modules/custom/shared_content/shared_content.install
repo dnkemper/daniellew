@@ -1,0 +1,191 @@
+<?php
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Config\FileStorage;
+use Symfony\Component\Yaml\Yaml;
+
+/**
+ * Implements hook_schema().
+ */
+function shared_content_schema() {
+  return [
+    'shared_content_items' => [
+      'description' => 'Stores items imported for shared content.',
+      'fields' => [
+        'id' => [
+          'type' => 'serial',
+          'not null' => TRUE,
+          'description' => 'Primary Key: Unique ID.',
+        ],
+        'iid' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+          'description' => 'The Aggregator item ID.',
+        ],
+        'nid' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+          'description' => 'The node ID in the current site.',
+        ],
+        'url' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'description' => 'The URL of the original node.',
+        ],
+        'orig_nid' => [
+          'type' => 'int',
+          'description' => 'The node ID of the original node.',
+        ],
+      ],
+      'primary key' => ['id'],
+    ],
+  ];
+}
+
+/**
+ * Lazy way to force run all cron jobs.
+ */
+function shared_content_update_9000() {
+  shared_content_cron();
+  aggregator_cron();
+  feeds_cron();
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function shared_content_update_9001() {
+  // Query for nodes of the "webform" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'webform' with your content type machine name.
+    ->condition('type',  'shared_item')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function shared_content_update_9002() {
+  // Load the storage handler for feeds.
+  $feed_storage = \Drupal::entityTypeManager()->getStorage('feeds_feed');
+
+  // Query all feeds of type 'aggregated_shared_item_importer'.
+  $feed_ids = \Drupal::entityQuery('feeds_feed')
+    ->condition('type', 'aggregated_shared_item_importer')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  // Check if there are any feeds to delete.
+  if (!empty($feed_ids)) {
+    // Load and delete the feeds.
+    $feeds = $feed_storage->loadMultiple($feed_ids);
+    foreach ($feeds as $feed) {
+      $feed->delete();
+    }
+    \Drupal::logger('shared_content')->info('Deleted @count feeds of type "aggregated_shared_item_importer".', ['@count' => count($feed_ids)]);
+  }
+  else {
+    \Drupal::logger('shared_content')->info('No feeds of type "aggregated_shared_item_importer" were found to delete.');
+  }
+}
+
+/**
+ * Lazy way to force run all cron jobs.
+ */
+function shared_content_update_9003() {
+  shared_content_cron();
+  aggregator_cron();
+  feeds_cron();
+}
+/**
+ * This copies the rsvpLink url over to the new field rsvp_form_link
+ * so that we are able to use that instead of the link from the form since
+ * we do not have access in shared content to that value given permissions
+ */
+function shared_content_update_10001() {
+
+  $config_path = DRUPAL_ROOT . '/../config/default';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+
+  // Check if field storage already exists before creating it
+  $field_storage = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config')
+    ->load('node.field_rsvp_form_link');
+
+  if (!$field_storage) {
+    \Drupal::entityTypeManager()
+      ->getStorage('field_storage_config')
+      ->create($source->read('field.storage.node.field_rsvp_form_link'))
+      ->save();
+  }
+
+  // Check if field instance already exists before creating it
+  $field_config = \Drupal::entityTypeManager()
+    ->getStorage('field_config')
+    ->load('node.events.field_rsvp_form_link');
+
+  if (!$field_config) {
+    \Drupal::entityTypeManager()->getStorage('field_config')
+      ->create($source->read('field.field.node.events.field_rsvp_form_link'))
+      ->save();
+  }
+
+  // Write configs to config storage
+  $config_names = [
+    'field.storage.node.field_rsvp_form_link',
+    'field.field.node.events.field_rsvp_form_link',
+  ];
+
+  foreach ($config_names as $config_name) {
+    $config_storage->write($config_name, $source->read($config_name));
+  }
+
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  $query = $node_storage->getQuery()
+    ->condition('type', 'events')
+    ->accessCheck(FALSE);
+
+  $nodeIds = $query->execute();
+
+  if (empty($nodeIds)) {
+    return t('There are no events to update');
+  }
+
+  $nodes = $node_storage->loadMultiple($nodeIds);
+  $updated_count = 0;
+
+  foreach ($nodes as $node) {
+    if ($node->hasField('field_rsvp_form') && !$node->get('field_rsvp_form')->isEmpty()) {
+      $query_params = [
+        'source_entity_type' => $node->getEntityTypeId(),
+        'source_entity_id' => $node->id(),
+      ];
+
+      $rsvpFormId = $node->get('field_rsvp_form')->target_id;
+      if (!empty($rsvpFormId)) {
+        $rsvpForm = \Drupal::entityTypeManager()->getStorage('webform')->load($rsvpFormId);
+        if ($rsvpForm) {
+          $rsvpLink = $rsvpForm->toUrl('canonical', ['query' => $query_params])->setAbsolute()->toString();
+          $node->set('field_rsvp_form_link', $rsvpLink);
+          $node->save();
+          $updated_count++;
+        }
+      }
+    }
+  }
+
+  return t('Updated @count event nodes with RSVP form links', ['@count' => $updated_count]);
+}

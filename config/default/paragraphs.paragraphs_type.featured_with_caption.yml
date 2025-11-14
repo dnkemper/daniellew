@@ -1,0 +1,10 @@
+uuid: 06f99c50-9d02-4e49-90e2-ad44374748a2
+langcode: en
+status: true
+dependencies: {  }
+id: featured_with_caption
+label: 'Featured with Caption'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Featured with Caption'
+behavior_plugins: {  }

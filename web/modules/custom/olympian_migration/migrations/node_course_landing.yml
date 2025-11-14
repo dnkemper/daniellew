@@ -1,0 +1,122 @@
+id: node_course_landing
+migration_group: olympian_migration
+label: Migrate course landing page content from Drupal 7
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: course_landing
+  # field_concentration_category                  string                       1
+  # field_course_landing_banner_img               entity_reference             1
+  # field_course_landing_heading                  string                       1
+  # field_course_landing_sub_heading              string                       1
+  # field_default_course_semester                 list_string                  1
+  # field_department_links                        link                         3
+  # field_dept_links                              entity_reference_revisions   3
+  # field_hide_course_filters                     list_string                  -1
+  # field_meta_tags                               metatag                      1
+  # field_search                                  string_long                  1
+  # field_show_course_button           ✔          boolean                      1
+process:
+  type:
+    plugin: default_value
+    default_value: course_landing
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_concentration_category:
+    plugin: get
+    source: field_concentration_category
+  field_course_landing_banner_img:
+    plugin: sub_process
+    source: field_course_landing_banner_img
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_course_landing_heading:
+    plugin: get
+    source: field_course_landing_heading
+  field_course_landing_sub_heading:
+    plugin: get
+    source: field_course_landing_sub_heading
+  field_default_course_semester:
+    plugin: get
+    source: field_default_course_semester
+  field_department_links:
+    plugin: get
+    source: field_department_links
+  field_hide_course_filters:
+    plugin: get
+    source: field_hide_course_filters
+  field_search:
+    plugin: get
+    source: field_search
+  field_show_course_button:
+    plugin: get
+    source: field_show_course_button
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: course_landing
+migration_dependencies:
+  required: {  }
+  optional: {  }

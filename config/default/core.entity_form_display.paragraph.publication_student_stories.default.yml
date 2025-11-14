@@ -1,0 +1,42 @@
+uuid: 7c2136c6-e9ad-4494-8da2-67ea4b797093
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_student_stories.field_story
+    - paragraphs.paragraphs_type.publication_student_stories
+  module:
+    - paragraphs
+    - paragraphs_features
+id: paragraph.publication_student_stories.default
+targetEntityType: paragraph
+bundle: publication_student_stories
+mode: default
+content:
+  field_story:
+    type: paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: Story
+      title_plural: Stories
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+hidden:
+  created: true
+  status: true

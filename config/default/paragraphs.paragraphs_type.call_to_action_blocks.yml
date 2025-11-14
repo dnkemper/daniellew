@@ -1,0 +1,10 @@
+uuid: e60d05d5-954a-4833-b5cb-16975e9bd3de
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_action_blocks
+label: 'Call to Action Blocks'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Call to Action Blocks'
+behavior_plugins: {  }

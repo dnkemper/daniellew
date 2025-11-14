@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: b7275f1e-1a4e-4e90-b0a0-66e09840b54c
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: page-not-found.jpg
+  uri:
+    -
+      value: 'public://2023-12/page-not-found_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 2492439
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

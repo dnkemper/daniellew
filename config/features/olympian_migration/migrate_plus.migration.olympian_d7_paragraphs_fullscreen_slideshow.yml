@@ -1,0 +1,81 @@
+uuid: 0825d3fc-e625-467b-9a2c-909426207e8e
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_fullscreen_slideshow
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Fullscreen Slideshow)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: fullscreen_slideshow
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  parent_type: parent_type
+  field_introduction_exerpt:
+    -
+      plugin: get
+      source: field_introduction_excerpt
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_fullscreen_images:
+    plugin: sub_process
+    source: field_fullscreen_images
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_fullscreen_image
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_background:
+    -
+      plugin: get
+      source: field_background
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: fullscreen_slideshow
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_fullscreen_image

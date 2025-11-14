@@ -1,0 +1,23 @@
+uuid: b910250d-5c6e-4106-a9d0-433ad3d79ef7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_new_window
+    - paragraphs.paragraphs_type.intro_with_links
+id: paragraph.intro_with_links.field_new_window
+field_name: field_new_window
+entity_type: paragraph
+bundle: intro_with_links
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

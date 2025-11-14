@@ -1,0 +1,19 @@
+uuid: 40d7133c-aecb-4868-a0f7-e4a888654afb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search
+    - node.type.article
+id: node.article.field_search
+field_name: field_search
+entity_type: node
+bundle: article
+label: Search
+description: 'You can add keywords here to help bump pages within the site search.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

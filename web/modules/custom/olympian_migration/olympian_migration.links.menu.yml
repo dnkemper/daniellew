@@ -1,0 +1,10 @@
+olympian_migration.settings_form:
+  title: 'Migrate'
+  parent: system.admin_config_olympian
+  description: 'Customize migration settings.'
+  route_name: olympian_migration.settings_form
+olympian_migration.list:
+  title: 'Paragraphs usage'
+  description: 'Overview of paragraphs on all entity types.'
+  route_name: olympian_migration.list
+  parent: entity.field_storage_config.collection

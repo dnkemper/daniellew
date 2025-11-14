@@ -1,0 +1,10 @@
+uuid: 37914f28-5302-4597-86b0-fbcddb1db000
+langcode: en
+status: true
+dependencies: {  }
+id: publication_degree
+label: 'Publication Degree'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Degree'
+behavior_plugins: {  }

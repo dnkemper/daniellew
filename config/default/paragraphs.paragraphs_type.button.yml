@@ -1,0 +1,10 @@
+uuid: f6b975ba-aa09-4155-bf01-8b70eb6265f5
+langcode: en
+status: true
+dependencies: {  }
+id: button
+label: Button
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Button'
+behavior_plugins: {  }

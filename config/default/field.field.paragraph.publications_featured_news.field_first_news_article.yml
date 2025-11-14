@@ -1,0 +1,25 @@
+uuid: 7273fe70-a609-4aa5-b616-a7ea69a3f529
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_first_news_article
+    - paragraphs.paragraphs_type.publications_featured_news
+id: paragraph.publications_featured_news.field_first_news_article
+field_name: field_first_news_article
+entity_type: paragraph
+bundle: publications_featured_news
+label: 'First Article'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_article
+      arguments: {  }
+field_type: entity_reference

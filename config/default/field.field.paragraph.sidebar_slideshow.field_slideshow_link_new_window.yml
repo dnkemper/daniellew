@@ -1,0 +1,23 @@
+uuid: e3ff92df-d9bd-485e-ad53-dc0f6e529f93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_slideshow_link_new_window
+    - paragraphs.paragraphs_type.sidebar_slideshow
+id: paragraph.sidebar_slideshow.field_slideshow_link_new_window
+field_name: field_slideshow_link_new_window
+entity_type: paragraph
+bundle: sidebar_slideshow
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

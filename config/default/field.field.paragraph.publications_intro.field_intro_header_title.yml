@@ -1,0 +1,19 @@
+uuid: 592cf4c0-f35b-4bf2-ac2c-351c0659aa00
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_intro_header_title
+    - paragraphs.paragraphs_type.publications_intro
+id: paragraph.publications_intro.field_intro_header_title
+field_name: field_intro_header_title
+entity_type: paragraph
+bundle: publications_intro
+label: 'Intro Header Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

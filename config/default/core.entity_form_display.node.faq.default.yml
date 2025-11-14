@@ -1,0 +1,186 @@
+uuid: 0a9c130b-3aa8-4705-aca8-dc2a30b30799
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.faq.field_faqs
+    - field.field.node.faq.field_footer_callout_p
+    - field.field.node.faq.field_introduction_p
+    - field.field.node.faq.field_meta_tags
+    - field.field.node.faq.field_search
+    - node.type.faq
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - metatag
+    - paragraphs
+    - paragraphs_features
+    - path
+    - private_content
+id: node.faq.default
+targetEntityType: node
+bundle: faq
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_faqs:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: 'FAQ Section'
+      title_plural: FAQs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_footer_callout_p:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: 'Footer Callout'
+      title_plural: 'Footer Callouts'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_introduction_p:
+    type: paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: Introduction
+      title_plural: Introductions
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 13
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_search:
+    type: string_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  promote: true
+  sticky: true

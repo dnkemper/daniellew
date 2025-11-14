@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
++------------------------+----------+------------------+-------------+
+| Field name             | Required | Field type       | Cardinality |
++------------------------+----------+------------------+-------------+
+| field_event_only_image |          | entity_reference | 1           |
+| field_first_event      |          | entity_reference | 1           |
+| field_second_event     |          | entity_reference | 1           |
+| field_third_event      |          | entity_reference | 1           |
++------------------------+----------+------------------+-------------+
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% block paragraph %}
+  {% if content.field_first_event.0 and content.field_second_event.0 and content.field_third_event.0 %}
+    {% set hclass = 'one-fourth' %}
+    {% set class = 'three-fourths' %}
+    {% set rclass = 'multiple' %}
+    {% set xclass = 'count-3' %}
+  {% elseif content.field_first_event.0 and content.field_second_event.0 %}
+    {% set hclass = 'one-fourth' %}
+    {% set class = 'three-fourths' %}
+    {% set rclass = 'multiple' %}
+    {% set xclass = 'count-2' %}
+  {% elseif content.field_first_event.0 %}
+    {% set hclass = 'half' %}
+    {% set class = 'half' %}
+    {% set rclass = 'single' %}
+    {% set xclass = '' %}
+  {% else %}
+    {% set hclass = 'one-fourth' %}
+    {% set class = 'three-fourths' %}
+    {% set rclass = 'multiple' %}
+    {% set xclass = 'count-3' %}
+  {% endif %}
+
+  <section class="event-feed event-feed--row flex reveal" aria-label="events">
+    <header class="column {{ hclass }} event-feed--row-header">
+      <h2>upcoming <br>events</h2>
+      <div class="image"
+           style="background-image: url('{{ content.field_event_only_image.0 ? file_url(paragraph.field_event_only_image.entity.field_media_image.entity.fileuri|image_style('square_1_1_680w')) : base_path ~ directory~"/images/default-event.png" }}');">
+        <a href="{{ landing_page_alias }}" class="more">See More Events</a>
+      </div>
+    </header>
+    <div class="column event-holder {{ class }} event-feed--{{ rclass }} {{ xclass }}">
+      {% if content.field_first_event.0 %}
+        {{ content.field_first_event }}
+      {% endif %}
+      {% if content.field_second_event.0 %}
+        {{ content.field_second_event }}
+      {% endif %}
+      {% if content.field_third_event.0 %}
+        {{ content.field_third_event }}
+      {% endif %}
+    </div>
+  </section>
+  {# </div> #}
+{% endblock paragraph %}

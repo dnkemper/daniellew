@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: philosophy.ddev.site
+    protocol: https
+  machine_name: philosophy
+  human_name: philosophy.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: philosophy.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/philosophy.wustl.edu/files'
+    origin: 'https://philosophy.wustl.edu'
+drupal:
+  db:
+    database: drupal_philosophy
+system:
+  site:
+    contact_us_url: 'https://philosophy.wustl.edu/contact-us'
+    name: philosophy
+    email: philosophy@wustl.edu

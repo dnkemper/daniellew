@@ -1,0 +1,23 @@
+uuid: 6e2bfcd1-9fd5-4540-980a-9e55e2e836d8
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.past_events_landing_page
+  module:
+    - views
+  theme:
+    - olympian9
+id: olympian9_exposedform_past_events_block
+theme: olympian9
+region: featured
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:past_events_landing_page-past_events_block'
+settings:
+  id: 'views_exposed_filter_block:past_events_landing_page-past_events_block'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+visibility: {  }

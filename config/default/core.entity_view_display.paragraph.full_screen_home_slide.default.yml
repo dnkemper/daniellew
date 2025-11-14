@@ -1,0 +1,32 @@
+uuid: 32b4cbb4-41d1-4ddd-9606-e612af11b111
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.full_screen_home_slide.field_home_caption
+    - field.field.paragraph.full_screen_home_slide.field_home_slide
+    - paragraphs.paragraphs_type.full_screen_home_slide
+id: paragraph.full_screen_home_slide.default
+targetEntityType: paragraph
+bundle: full_screen_home_slide
+mode: default
+content:
+  field_home_caption:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_home_slide:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: fullscreen_video
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

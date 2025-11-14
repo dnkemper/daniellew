@@ -1,0 +1,29 @@
+uuid: f2f9eaae-1f91-4ba8-868c-b25acf3f0b89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_optional_text
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.fullscreen_image
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.fullscreen_image.field_optional_text
+field_name: field_optional_text
+entity_type: paragraph
+bundle: fullscreen_image
+label: 'Image Caption'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

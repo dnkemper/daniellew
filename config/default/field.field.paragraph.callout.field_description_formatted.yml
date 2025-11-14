@@ -1,0 +1,29 @@
+uuid: f7856c16-e823-4651-ba88-fc64cdfb0119
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description_formatted
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.callout
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.callout.field_description_formatted
+field_name: field_description_formatted
+entity_type: paragraph
+bundle: callout
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

@@ -1,0 +1,19 @@
+uuid: 45fe2b4c-f54b-4e27-aa4d-6f8d1062c90a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_gallery_caption
+    - paragraphs.paragraphs_type.publication_gallery_image
+id: paragraph.publication_gallery_image.field_gallery_caption
+field_name: field_gallery_caption
+entity_type: paragraph
+bundle: publication_gallery_image
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

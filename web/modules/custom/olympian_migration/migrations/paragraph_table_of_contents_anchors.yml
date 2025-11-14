@@ -1,0 +1,26 @@
+id: paragraph_table_of_contents_anchors
+label: 'Table of Contents Anchors Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: table_of_contents_anchors  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: table_of_contents_anchors  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # List string field mapping
+  field_anchor_section: field_anchor_section
+
+  # Text field mapping
+  field_anchor_title: field_anchor_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: table_of_contents_anchors
+migration_dependencies:
+  required: {}
+  optional: {}

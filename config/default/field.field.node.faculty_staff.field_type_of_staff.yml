@@ -1,0 +1,26 @@
+uuid: eaf6ae0f-451b-4af7-a83f-637441d25663
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_of_staff
+    - node.type.faculty_staff
+    - taxonomy.vocabulary.leadership_administrative_staf
+id: node.faculty_staff.field_type_of_staff
+field_name: field_type_of_staff
+entity_type: node
+bundle: faculty_staff
+label: 'Type of Person'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      leadership_administrative_staf: leadership_administrative_staf
+    sort:
+      field: _none
+field_type: entity_reference

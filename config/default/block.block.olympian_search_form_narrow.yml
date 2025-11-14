@@ -1,0 +1,28 @@
+uuid: cae3693f-c7dd-4f18-a0ac-48acdb6e42bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - olympian_core
+  theme:
+    - olympian9
+id: olympian_search_form_narrow
+theme: olympian9
+region: search
+weight: -13
+provider: null
+plugin: olympian_search_api_form_block
+settings:
+  id: olympian_search_api_form_block
+  label: 'Olympian Search API form'
+  label_display: '0'
+  provider: olympian_core
+  action_url: /search
+  input_name: keys
+  endpoint: /search
+  query_parameter: search
+  query_prepend: ''
+  additional_parameters: ''
+  button_text: ''
+  search_label: ''
+visibility: {  }

@@ -1,0 +1,26 @@
+uuid: f936009b-6c8c-4b19-b269-23e2733f423b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image_card_terms
+    - node.type.image_cards
+    - taxonomy.vocabulary.image_cards
+id: node.image_cards.field_image_card_terms
+field_name: field_image_card_terms
+entity_type: node
+bundle: image_cards
+label: 'Image Card Terms'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      image_cards: image_cards
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: 3a29ca9d-1efa-420f-847b-9b8f8449fa7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_lot_num
+    - node.type.coin
+id: node.coin.field_coin_lot_num
+field_name: field_coin_lot_num
+entity_type: node
+bundle: coin
+label: 'Lot Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

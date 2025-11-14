@@ -1,0 +1,18 @@
+uuid: 89891f23-6e80-4629-b208-f5c86e573276
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_event_date_tbd
+field_name: field_event_date_tbd
+entity_type: node
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: be1319b1-2d9a-43fa-b490-f80f83d0a7d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_news_header_title
+    - paragraphs.paragraphs_type.publications_featured_news
+id: paragraph.publications_featured_news.field_news_header_title
+field_name: field_news_header_title
+entity_type: paragraph
+bundle: publications_featured_news
+label: 'News Header Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

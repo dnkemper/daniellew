@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - private_content
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+      - menu-quick-links
+      - menu-secondary-navigation
+    parent: 'main:'
+  node_revision_delete:
+    amount:
+      status: false
+      settings:
+        amount: 0
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+  private_content:
+    private: 1
+_core:
+  default_config_hash: iZ40mzY8FNxQoltpv81my8BULWHcdxqNlUDdQUPwUeQ
+name: 'Ampersand Landing Page'
+type: ampersand_landing_page
+description: 'This should only be used once and is designed specifically for the Ampersand landing page.'
+help: null
+new_revision: false
+preview_mode: 0
+display_submitted: false

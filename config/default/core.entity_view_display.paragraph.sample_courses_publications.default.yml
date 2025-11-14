@@ -1,0 +1,44 @@
+uuid: 33047d79-b2ad-4bf1-9b53-c63ef4ca12ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sample_courses_publications.field_course_samples_p
+    - field.field.paragraph.sample_courses_publications.field_slideshow
+    - field.field.paragraph.sample_courses_publications.field_title
+    - paragraphs.paragraphs_type.sample_courses_publications
+  module:
+    - entity_reference_revisions
+id: paragraph.sample_courses_publications.default
+targetEntityType: paragraph
+bundle: sample_courses_publications
+mode: default
+content:
+  field_course_samples_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_slideshow:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,29 @@
+uuid: b60ebf35-4ddf-4a2b-ac5a-84b0f53f5746
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_testimonial_image
+    - media.type.image
+    - node.type.testimonial
+id: node.testimonial.field_testimonial_image
+field_name: field_testimonial_image
+entity_type: node
+bundle: testimonial
+label: 'Testimonial Image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: rev.ddev.site
+    protocol: https
+  machine_name: rev
+  human_name: rev.wustl.edu
+drush:
+  aliases:
+    local: rev.local
+    remote: rev.remote
+drupal:
+  db:
+    database: drupal_rev
+artsci:
+  stage_file_proxy:
+    origin: 'https://rev.wustl.edu'
+    origin_dir: sites/rev.wustl.edu/files
+system:
+  site:
+    contact_us_url: 'https://rev.wustl.edu/contact-us'
+    name: 'Race-based Violence in American History'
+    email: dflowe@wustl.edu

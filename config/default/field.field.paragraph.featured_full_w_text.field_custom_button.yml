@@ -1,0 +1,28 @@
+uuid: e2d3272c-66c9-4eb4-b0b7-b164a2ce0169
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_button
+    - paragraphs.paragraphs_type.featured_full_w_text
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: paragraph.featured_full_w_text.field_custom_button
+field_name: field_custom_button
+entity_type: paragraph
+bundle: featured_full_w_text
+label: 'Custom Button'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

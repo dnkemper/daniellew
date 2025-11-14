@@ -1,0 +1,51 @@
+uuid: 9a2916d6-8e66-46e3-b5b0-a31ade97a679
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_article_spotlight
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Articles Spotlight)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: article_spotlight
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_spot_articles:
+    plugin: sub_process
+    source: field_spot_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_second_article:
+    plugin: sub_process
+    source: field_second_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: article_spotlight
+migration_dependencies: {  }

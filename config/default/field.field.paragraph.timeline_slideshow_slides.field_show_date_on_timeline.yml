@@ -1,0 +1,23 @@
+uuid: 949ec205-37ef-487a-bf8d-4cba4fa72d78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_date_on_timeline
+    - paragraphs.paragraphs_type.timeline_slideshow_slides
+id: paragraph.timeline_slideshow_slides.field_show_date_on_timeline
+field_name: field_show_date_on_timeline
+entity_type: paragraph
+bundle: timeline_slideshow_slides
+label: 'Show Date on Timeline'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

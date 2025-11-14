@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a5ee581e-d591-4971-9567-4d86f19040c1
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: scholarships_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/scholarships_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 38953
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

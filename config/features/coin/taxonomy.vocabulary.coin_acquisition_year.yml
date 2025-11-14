@@ -1,0 +1,8 @@
+uuid: 6b36e4c9-9418-4b6c-a85a-7b597cb7d2c1
+langcode: en
+status: true
+dependencies: {  }
+name: 'Acquisition Year'
+vid: coin_acquisition_year
+description: 'Year a Collection Item was acquired'
+weight: 0

@@ -1,0 +1,14 @@
+uuid: 100309b4-7d35-4d4b-b880-0df70428dd64
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.image_cards_landing
+id: node_type_image_cards_landing
+entity_type_id: node_type
+entity_id: image_cards_landing
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

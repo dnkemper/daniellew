@@ -1,0 +1,43 @@
+---
+- name: "Clean Old Files"
+  hosts: all
+  vars:
+    release_current: "{{ site_root }}/current"
+    releases_path: "{{site_root}}/releases"
+    backup_path: "/tmp/{{site_slug}}"
+
+  tasks:
+    - name: Retrieve List of Old Backups
+      find:
+        age: 5d
+        paths: "{{backup_path}}"
+      register: old_backups
+
+    - name: Remove Old Backups
+      file:
+        path: "{{ item.path}}"
+        state: absent
+      with_items: "{{ old_backups.files }}"
+
+    # Retrieve the current release directory
+    # so that we don't accidentally delete it
+    - name: Get Current Release Directory
+      stat:
+        path: "{{ release_current }}"
+      register: release_current_stat
+
+    # Get a list of old releases, we make sure
+    # to exclude the current release
+    - name: Retrieve List of Old Release Directories
+      find:
+        age: 1d
+        exclude: "{{ release_current_stat.stat.lnk_target | basename }}"
+        paths: "{{ releases_path }}"
+        file_type: directory
+      register: releases
+
+    - name: Remove Old Releases
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ releases.files }}"

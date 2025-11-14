@@ -1,0 +1,100 @@
+entity_type_groups:
+  node:
+    article:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    book:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    contact_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    events:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    events_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    faculty_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    faculty_staff:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    faq:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    generic_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    home_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      site_verification: site_verification
+    image_cards:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    image_cards_landing:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    news_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    past_events_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    publication_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    resources:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+    resources_landing_page:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+    testimonial:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      twitter_cards: twitter_cards
+separator: ','
+tag_trim_method: beforeValue
+use_maxlength: true
+tag_trim_maxlength:
+  metatag_maxlength_title: null
+  metatag_maxlength_description: null
+  metatag_maxlength_abstract: null
+  metatag_maxlength_og_site_name: null
+  metatag_maxlength_og_title: null
+  metatag_maxlength_og_description: null
+  metatag_maxlength_twitter_cards_description: null
+  metatag_maxlength_twitter_cards_title: null
+tag_scroll_max_height: ''
+tag_trim_end: ''

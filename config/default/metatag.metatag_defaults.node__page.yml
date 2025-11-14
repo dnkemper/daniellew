@@ -1,0 +1,22 @@
+uuid: b4472333-f34d-42a7-8ed7-1e1c9603d84d
+langcode: en
+status: true
+dependencies: {  }
+id: node__page
+label: 'Content: Basic Page'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:field_introduction_p:entity:field_description]'
+  og_description: '[node:field_introduction_p:entity:field_description]'
+  og_image: '[node:field_introduction_p:entity:field_background_image:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: website
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'
+  twitter_cards_creator: '@washuartsci'
+  twitter_cards_description: '[node:field_introduction_p:entity:field_description]'
+  twitter_cards_image: '[node:field_introduction_p:entity:field_background_image:entity:field_media_image:fullscreen_video:url]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

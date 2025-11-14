@@ -1,0 +1,32 @@
+gin:
+  css:
+    component:
+      css/gin.css: {}
+admin-overrides:
+  css:
+    theme:
+      css/admin-overrides.css: {}
+  js:
+    js/slick.min.js: {}
+chosen:
+  css:
+    theme:
+      /libraries/chosen/chosen.css: {}
+  js:
+    js/once.js: {}
+    js/chosen.jquery.js: {}
+    js/chosen.behaviors.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+modal:
+  js:
+    js/modal.js: {}
+instagram:
+  version: VERSION
+  js:
+    https://www.instagram.com/embed.js:
+      type: external
+      attributes:
+        async: true
+        crossorigin: anonymous

@@ -1,0 +1,255 @@
+id: node_articles
+migration_group: olympian_migration
+label: Migrate article content from Drupal 7
+migration_tags:
+  - artsci
+  - shared-node-type
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: article
+process:
+  type:
+    plugin: default_value
+    default_value: article
+  # skip_on_not_empty:
+  #   plugin: skip_on_condition
+  #   condition:
+  #     plugin: empty
+  #     negate: true
+  #   source: field_shared_content_xml
+  #   method: row
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_article_comments/0/status:
+    -
+      plugin: get
+      source: comment
+
+
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_introduction_excerpt:
+    -
+      plugin: get
+      source: field_introduction_excerpt
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_link_excerpt:
+    plugin: get
+    source: field_link_excerpt
+  field_link_thumbnail:
+    plugin: sub_process
+    source: field_link_thumbnail
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_header_image:
+    plugin: sub_process
+    source: field_header_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_category:
+    plugin: sub_process
+    source: field_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: tid
+        migration: taxonomy_article_categories
+  field_soundcloud:
+    plugin: get
+    source: field_soundcloud
+
+  temp_soundcloud_url:
+    plugin: extract_soundcloud_url
+    source: field_soundcloud  # This is the D7 long text field
+
+  # Create or lookup the media entity for SoundCloud using the URL
+  field_soundcloud_media:
+    plugin: entity_generate
+    value_key: field_media_soundcloud
+    entity_type: media
+    bundle_key: bundle
+    bundle: soundcloud
+    source: '@temp_soundcloud_url'
+    values:
+      field_media_soundcloud: '@temp_soundcloud_url'
+      created: created
+      changed: changed
+      uid: uid
+      
+  field_feature_article:
+    plugin: get
+    source: field_feature_article
+  # Paragraphs field mapping
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_reverse_header:
+    plugin: get
+    source: field_reverse_header
+  field_shared_content_subscribers: field_shared_content_subscribers
+  field_shared_content: field_shared_content
+  field_shared_content_xml: field_shared_content_xml
+  field_is_shared:
+    plugin: get
+    source: shared_content_enabled
+  field_direct_link:
+    -
+      plugin: sub_process
+      source: field_direct_link
+      process:
+        uri: value
+  field_author:
+    plugin: get
+    source: field_author
+  field_faculty_and_staff:
+    plugin: sub_process
+    source: field_faculty_and_staff
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_faculty_staff
+        source: target_id
+  field_article_home_slideshow:
+    plugin: get
+    source: field_article_home_slideshow
+  # Paragraphs field mapping
+  field_video_p:
+    plugin: sub_process
+    source: field_video_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_fullscreen_video
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_search:
+    plugin: get
+    source: field_search
+destination:
+  plugin: 'entity:node'
+  default_bundle: article
+migration_dependencies:
+  required:
+    - paragraph_fullscreen_video
+    - paragraph_footer_callout
+    - node_faculty_staff
+    - taxonomy_article_categories
+  optional: {  }

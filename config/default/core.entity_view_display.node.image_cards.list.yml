@@ -1,0 +1,90 @@
+uuid: 483a46a5-e258-4534-919d-59a84e533db8
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.list
+    - field.field.node.image_cards.field_call_to_action_button_url
+    - field.field.node.image_cards.field_description
+    - field.field.node.image_cards.field_image_card_terms
+    - field.field.node.image_cards.field_meta_tags
+    - field.field.node.image_cards.field_new_window
+    - field.field.node.image_cards.field_optional_callout_p
+    - field.field.node.image_cards.field_people_teaser
+    - field.field.node.image_cards.field_related_links_p
+    - field.field.node.image_cards.field_sample_courses_p
+    - field.field.node.image_cards.field_search
+    - field.field.node.image_cards.field_select_testimonials
+    - field.field.node.image_cards.field_thumbnail
+    - node.type.image_cards
+  module:
+    - link
+    - user
+id: node.image_cards.list
+targetEntityType: node
+bundle: image_cards
+mode: list
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_call_to_action_button_url:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image_card_terms:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_description: true
+  field_meta_tags: true
+  field_optional_callout_p: true
+  field_people_teaser: true
+  field_related_links_p: true
+  field_sample_courses_p: true
+  field_search: true
+  field_select_testimonials: true
+  field_thumbnail: true
+  search_api_excerpt: true

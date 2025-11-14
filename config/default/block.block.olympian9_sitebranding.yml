@@ -1,0 +1,23 @@
+uuid: fb43541c-845e-4c69-ba65-a7fb64a10590
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - olympian9
+id: olympian9_sitebranding
+theme: olympian9
+region: header
+weight: -15
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: false
+visibility: {  }

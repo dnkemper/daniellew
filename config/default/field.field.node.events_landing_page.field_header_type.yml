@@ -1,0 +1,23 @@
+uuid: 81dc1a60-ad4c-47d0-85bb-47cf8c3279ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.events_landing_page
+  module:
+    - options
+id: node.events_landing_page.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: events_landing_page
+label: 'Header Type'
+description: 'Slideshow header shows events that have been tagged "Featured." Static header will show your selected image with a subtitle.'
+required: true
+translatable: false
+default_value:
+  -
+    value: Static
+default_value_callback: ''
+settings: {  }
+field_type: list_string

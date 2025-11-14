@@ -1,0 +1,19 @@
+uuid: a002248e-8bcb-47d5-b9db-fe1f328db339
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_coin_reverse_mintmarks
+field_name: field_coin_reverse_mintmarks
+entity_type: node
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

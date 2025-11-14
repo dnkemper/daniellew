@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: buildingartsci.ddev.site
+    protocol: https
+  machine_name: buildingartsci
+  human_name: buildingartsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: buildingartsci.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/buildingartsci.wustl.edu/files'
+    origin: 'https://buildingartsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_buildingartsci
+system:
+  site:
+    contact_us_url: 'https://buildingartsci.wustl.edu/contact-us'
+    name: buildingartsci
+    email: buildingartsci@wustl.edu

@@ -1,0 +1,304 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+
+{{ attach_library('olympian9/modal') }}
+{% block content %}
+<div class="element-invisible">{{ sharedURL }}</div>
+<div class="element-invisible">{{ node.id() }}</div>
+
+  {% if is_shared_content == 1 %}
+
+  <article class="single-blog-post {{ node.id }} ">
+    {% if video %}
+      {{ video|raw }}
+      <div class="post-header no-image">
+    {% elseif reverse == 'reverse' %}
+      <div class="post-header no-image reverse">
+    {% elseif headerImageDesktop %}
+      <div class="post-header">
+      {% if drupalVersion %}
+      <div class="image" style="background-image: url('{{ headerImageDesktop }}');">
+  <picture>
+    <source srcset="{{ headerImageDesktop }}" media="(min-width: 600px)">
+    <img src="{{ headerImageMobile }}" alt="{{ nodetitle }}">
+  </picture>
+</div>
+      {% else %}
+        {{ headerImageArticle|raw }}
+      {% endif %}
+    {% else %}
+      <div class="post-header">
+    {% endif %}
+        <div class="container reveal">
+          <h1>{{ nodetitle|raw }}</h1>
+          <div class="post-meta">
+            {% if author %}
+              <div class="byline">By
+                {{ author }}
+              </div>
+            {% endif %}
+            <div class="date">
+              <time>{{ postdate|raw }}</time>
+              {% if category %} | {{ category|raw }}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="post-body">
+        <div class="share">
+          <div class="share-widget">
+            <div class="share-title">
+              Share
+            </div>
+            <div class="social-sharing-buttons">
+
+            <a href="{{ social_share.facebook.url }}"
+
+              target="_blank" title="Share to Facebook"
+              aria-label="Share to Facebook" class="share-facebook"
+              rel="noopener">
+                <svg id="share-facebook" viewBox="0 0 64 64">
+                  <path d="M27.397 53.72v-19.723h-6.647v-8.052h6.647v-6.762c0-4.918 3.987-8.904 8.904-8.904h6.949v7.24h-4.972c-1.563 0-2.829 1.267-2.829 2.829v5.597h7.677l-1.061 8.052h-6.616v19.723z"></path>
+                </svg>
+            </a>
+            <a href="{{ social_share.twitter.url }}"
+              target="_blank" title="Share to X"
+              aria-label="Share to X" class="share-twitter"
+              rel="noopener">
+              <svg id="twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+            </a>
+            <a href="{{ social_share.email.url }}"
+              title="Share to Email" aria-label="Share to Email"
+              class="share-email" target="_blank" rel="noopener">
+              <svg id="email" viewBox="0 0 64 64">
+                <path d="M32 35.077l18.462-16h-36.924zM27.013 33.307l4.987 4.091 4.909-4.093 13.553 11.617h-36.924zM12.307 43.693v-23.386l13.539 11.693zM51.693 43.693v-23.386l-13.539 11.693z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% if introText %}
+        <div class="post-excerpt">
+         {{ introText|raw }}
+        </div>
+      {% endif %}
+      <div class="post-content wysiwyg">
+        {% if soundcloud %}
+          {{ soundcloud|raw }}
+        {% endif %}
+        {# <div class="wysiwyg-editor-text"> #}
+          {# {{ articlebody|raw }} #}
+          <div class="wysiwyg-editor-text">{{ body|replace({'<![CDATA[': ''})|replace({']]>': ''})|trim|raw }}</div>
+        {# </div> #}
+      </div>
+      <br>
+      <div class="post-footer post-meta">
+        {% if content.field_tags %}
+          <div class="tags">Tags: {{ content.field_tags }}</div>
+        {% endif %}
+        <div class="post-nav">
+          <a href="#header">{{ 'Jump to Top'|t }} </a> | <a href="/news">{{ 'Back to All' |t }}</a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+{% else %}
+  <article class="single-blog-post">
+        {% if content.field_video_p.0 %}
+        {{ content.field_video_p }}
+        {% if '1' in content.field_reverse_header.0 %}
+          <div class="post-header no-image reverse">
+        {% else %}
+          <div class="post-header no-image">
+        {% endif %}
+          {% elseif '1' in content.field_reverse_header.0 %}
+          <div class="post-header no-image reverse">
+            {% elseif content.field_header_image.0 %}
+            <div class="post-header has-image">
+              <div class="image"
+                  style="background-image: url({{ file_url(node.field_header_image.entity.field_media_image.entity.fileuri|image_style('background_image')) }});">
+                <picture>
+                  <source srcset="{{ file_url(node.field_header_image.entity.field_media_image.entity.fileuri|image_style('landscape_16_9_600w')) }}"
+                          media="(min-width: 600px)">
+                  <img src="{{ file_url(node.field_header_image.entity.field_media_image.entity.fileuri|image_style('landscape_16_9_600w')) }}">
+                </picture>
+              </div>
+              {% else %}
+              <div class="post-header no-image">
+                {% endif %}
+                <div class="container reveal">
+                  {{ title_prefix }}
+                  {% if label %}
+                    <h1{{ title_attributes }}>{{ label }}</h1>
+                  {% endif %}
+                  {{ title_suffix }}
+                  <div class="post-meta">
+                    {% if content.field_author.0 %}
+                      <div class="byline">By
+                        {{ content.field_author.0 }}
+                      </div>
+                    {% endif %}
+                    <div class="date">
+                      {{ node.created.value|date('n.j.y') }}
+                      {% if node.field_category.0 %} |
+                        {% for item in node.field_category %}
+                          <a href="/news?tid={{ item.target_id }}">
+                            {{ item.entity.label }}</a>
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="post-body">
+                <div class="share">
+                  <div class="share-widget">
+                    <div class="share-title">
+                      Share
+                    </div>
+                                    <div class="social-sharing-buttons">
+
+                    <a href="{{ social_share.facebook.url }}"
+                      target="_blank" title="Share to Facebook"
+                      aria-label="Share to Facebook" class="share-facebook"
+                      rel="noopener">
+                        <svg id="share-facebook" viewBox="0 0 64 64">
+                          <path d="M27.397 53.72v-19.723h-6.647v-8.052h6.647v-6.762c0-4.918 3.987-8.904 8.904-8.904h6.949v7.24h-4.972c-1.563 0-2.829 1.267-2.829 2.829v5.597h7.677l-1.061 8.052h-6.616v19.723z"></path>
+                        </svg>
+                    </a>
+                    <a href="{{ social_share.twitter.url }}"
+                      target="_blank" title="Share to X"
+                      aria-label="Share to X" class="share-twitter"
+                      rel="noopener">
+                      <svg id="twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                    </a>
+                    <a href="{{ social_share.email.url }}"
+                      title="Share to Email" aria-label="Share to Email"
+                      class="share-email" target="_blank" rel="noopener">
+                      <svg id="email" viewBox="0 0 64 64">
+                        <path d="M32 35.077l18.462-16h-36.924zM27.013 33.307l4.987 4.091 4.909-4.093 13.553 11.617h-36.924zM12.307 43.693v-23.386l13.539 11.693zM51.693 43.693v-23.386l-13.539 11.693z"></path>
+                      </svg>
+                    </a>
+                  </div>
+                  </div>
+                </div>
+                {% if content.field_introduction_excerpt.0 %}
+                  <div class="post-excerpt">
+                    <p>{{ content.field_introduction_excerpt.0 }}</p>
+                  </div>
+                {% endif %}
+                <div class="post-content wysiwyg">
+                  {% if content.field_soundcloud_media %}
+                    {{ content.field_soundcloud_media }}
+                  {% endif %}
+                  <br>
+                  <div class="wysiwyg-editor-text">{{ content.body }}</div>
+                </div>
+                <br>
+                <div class="post-footer post-meta">
+                  <div class="tags"></div>
+                  <div class="post-nav">
+                    <a href="#header">{{ 'Jump to Top'|t }} </a> | <a href="/news">{{ 'Back to All' |t }}</a>
+                  </div>
+                </div>
+              </div>
+      </article>
+      <br>
+      {% endif %}
+
+
+      {% set view = drupal_view_result('news_slideshow', 'upcoming_articles')|length %}
+      {% if view > 0 %}
+        <section class="more-posts flex">
+          <div class="column twenty heading flex">
+            <h2>in the news:</h2>
+            <div class="ampersand" aria-label="related news articles section">
+              <svg>
+                <use xlink:href="#ampersand"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="column eighty posts-feed flex">
+            <div class="slideshow more-posts-slideshow dots-below">
+              {{ drupal_view('news_slideshow', 'upcoming_articles') }}
+              <a href="/news" class="slide post">
+                <div class="back-post">Read more news</div>
+              </a>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+      {% if content.field_footer_callout_p|render %}
+        {{ content.field_footer_callout_p }}
+      {% endif %}
+{% endblock %}

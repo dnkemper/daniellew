@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 12f1d326-94c8-4bce-a7a9-0500614e99fd
+  bundle: resources
+  default_langcode: en
+  depends:
+    f27d4c7b-1a88-4600-85a9-84ecb927e547: media
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Career Center'
+  created:
+    -
+      value: 1690897193
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/career-center
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://students.wustl.edu/career-center/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: f27d4c7b-1a88-4600-85a9-84ecb927e547
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'prepare for career success'
+  field_title:
+    -
+      value: 'Career Center'

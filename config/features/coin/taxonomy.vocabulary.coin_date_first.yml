@@ -1,0 +1,8 @@
+uuid: ae06c3b4-de77-4835-816d-ef60a03bc9b4
+langcode: en
+status: true
+dependencies: {  }
+name: 'Date First'
+vid: coin_date_first
+description: ''
+weight: 0

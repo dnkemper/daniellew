@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - field_full_video_image - ER
+ * - field_full_video_url - ER
+ * - field_full_video_subtitle - text plain
+ * - field_full_video_title - text plain
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{{ attach_library('olympian9/fancybox') }}
+
+{% block paragraph %}
+  <section class="dept-ampersand-video" id="pubvideo">
+    <a class="dept-ampersand-video__link js-gallery" data-fancybox-href="#lb-{{ paragraph.id() }}">
+      <div class="dept-ampersand-video__image" style="background-image: url({{ file_url(paragraph.field_full_video_image.entity.field_media_image.entity.fileuri|image_style('fullscreen_video')) }});">
+      </div>
+      <div class="container">
+        <div class="dept-ampersand-video__text">
+          <svg class="icon"><use xlink:href="#video"></use></svg>
+          <div class="">
+            {% if content.field_full_video_subtitle.0 %}
+              <div class="cat">{{ content.field_full_video_subtitle.0 }}</div>
+            {% endif %}
+            {% if content.field_full_video_title.0 %}
+              <h3>{{ content.field_full_video_title.0 }}</h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="modal" data-modal="lb-{{ paragraph.id() }}">
+        <figure>{{ content.field_full_video_url.0 }}</figure>
+      </div>
+    </a>
+  </section>
+{% endblock paragraph %}

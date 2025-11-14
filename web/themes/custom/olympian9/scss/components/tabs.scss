@@ -1,0 +1,540 @@
+@import '../base/variables.scss';
+
+.tabs {
+  background: var(--light-gray);
+  font-size: 16px;
+  p {
+    margin: 5px 0;
+  }
+  .columns.wysiwig a {
+    color: var(--dark-red);
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .columns.wysiwig a:hover {
+    color: var(--red);
+  }
+
+  #primary,
+  #secondary {
+    padding: 60px 0 40px;
+    background: var(--light-gray);
+  }
+
+  #primary.white,
+  #secondary.white {
+    background: var(--white);
+  }
+
+  #primary .container,
+  #secondary .container {
+    max-width: 1100px;
+  }
+
+  #primary .column,
+  #secondary .column {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #primary h2,
+  #secondary h2 {
+    text-align: center;
+    color: var(--dark-red);
+    max-width: 800px;
+    margin: 0 0 60px 0;
+  }
+
+  #primary h2 em,
+  #secondary h2 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  #primary h3,
+  #secondary h3 {
+    color: var(--dark-red);
+  }
+
+  #primary h3.caps,
+  #secondary h3.caps {
+    color: var(--dark-gray);
+  }
+
+  @media all and (min-width: 768px) {
+    #primary,
+    #secondary {
+      padding: 100px 0;
+    }
+
+    #primary .columns,
+    #secondary .columns {
+      column-count: 2;
+      column-gap: 50px;
+    }
+
+    #primary h2,
+    #secondary h2 {
+      margin: 0 auto 50px;
+    }
+  }
+
+  @media all and (min-width: 1030px) {
+    #primary .columns {
+      -webkit-column-gap: 100px;
+      -moz-column-gap: 100px;
+      column-gap: 100px;
+
+      &.wysiwig {
+        font-size: 1rem;
+      }
+
+      p {
+        margin: 1rem 0;
+      }
+    }
+    p {
+      margin: 1rem 0;
+    }
+  }
+
+  header {
+    background: var(--white);
+    text-align: center;
+    padding: 70px 0 50px;
+    h2 {
+      width: 85%;
+      margin: 0 auto;
+      color: var(--dark-red);
+    }
+  }
+}
+
+.tab-nav {
+  background: var(--white);
+  box-sizing: border-box;
+  .container {
+    max-width: 1006px;
+  }
+  .tab-heading {
+    width: 25%;
+    box-sizing: border-box;
+    border-right: 1px solid var(--white);
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.tab-heading {
+  cursor: pointer;
+  position: relative;
+  color: var(--white);
+  font-family: var(--sans-serif);
+  text-align: center;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  margin-bottom: 0;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  box-sizing: border-box;
+  // display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  &:hover {
+    .inner {
+      background: var(--red);
+    }
+  }
+  .inner {
+    // display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    background: #949494;
+    padding: 18px 12px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+}
+
+.tab-heading.active {
+  .inner {
+    background: var(--red);
+  }
+}
+
+.tab-content {
+  position: relative;
+  background: var(--white);
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.tab {
+  position: relative;
+  padding-top: 40px;
+  .tab-inner {
+    display: none;
+  }
+  .legend {
+    margin: 0 auto;
+    max-width: 725px;
+    font-weight: 600;
+    padding: 0 7.5%;
+  }
+  .webform-submission-contact-add-form {
+    padding: 60px 7.5% 0;
+  }
+  .tab-heading {
+    border-bottom: 1px solid var(--white);
+  }
+}
+
+.tab.active {
+  .tab-inner {
+    display: block;
+    position: relative;
+    visibility: visible;
+    opacity: 1;
+  }
+  .tab-heading {
+    .inner {
+      background: var(--red);
+    }
+  }
+}
+
+@media all and (min-width: 600px) {
+  .tab {
+    .tab-heading {
+      display: none;
+    }
+
+    .tab-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      visibility: hidden;
+      opacity: 0;
+      -webkit-transition: 0.2s;
+      transition: 0.2s;
+    }
+  }
+}
+
+@media all and (min-width: 1030px) {
+  .tabs {
+    padding-bottom: 90px;
+  }
+  .contact {
+    .tabs {
+      margin-top: -40px;
+    }
+  }
+}
+
+@media all and (max-width: 599px) {
+  .tab-nav {
+    display: none;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .tab-nav {
+    .tab-heading {
+      padding: 0 8px;
+      border: none;
+    }
+  }
+}
+
+//Style the tab.
+.tab {
+  overflow: hidden;
+  // border: 1px solid #ccc;
+  z-index: 3;
+  padding-top: unset;
+}
+
+// Style the buttons inside the tab.
+.tab button {
+  background-color: inherit;
+  float: right;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+  margin-left: 15px;
+  &:hover {
+    fill: var(--red);
+    svg,
+    svg.icon {
+      fill: var(--red);
+    }
+  }
+}
+
+//Change background color of buttons on hover
+
+// Create an active/current tablink class.
+.tab button.active {
+  fill: var(--red);
+}
+
+// Style the tab content.
+.tabcontent {
+  // display: none;
+  //padding: 6px 12px;
+  // border: 1px solid #ccc;
+  border-top: none;
+}
+
+.badge {
+  border: 2px solid var(--white);
+  margin: 15px;
+  padding: 7px 15px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+  color: var(--red);
+  background: var(--light-gray);
+  text-align: center;
+  font-size: 14px !important;
+}
+
+.categories-list .views-row {
+  background: var(--light-gray);
+}
+
+.tab {
+  padding: 0px 20px 20px 20px;
+  // float: right;
+  button.tablinks.active {
+    color: var(--red);
+  }
+}
+
+button.collapsible,
+button.upcoming {
+  color: var(--red);
+  background: var(--white);
+  border-color: var(--white);
+  padding: 20px !important;
+  font-size: 14px !important;
+  letter-spacing: 0.16em;
+  font-weight: 900;
+  float: right;
+  width: fit-content;
+}
+
+#List h1,
+#Grid h1 {
+  color: white;
+  font-size: 0;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: var(--light-gray);
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+
+.tabs-collection {
+  margin: 0;
+  list-style-type: none;
+
+  &::after,
+  &::before {
+    display: table;
+    content: ' ';
+  }
+
+  [role='tablist'] {
+    margin: 0 0 -0.1rem;
+    overflow: visible;
+    font-size: 0;
+  }
+
+  [role='tab'] {
+    position: relative;
+    margin: 0;
+    padding: 1rem 1rem 1.3rem;
+    border: none;
+    overflow: visible;
+    font-family: var(--sans-serif);
+    // font-size: $content-font-size;
+    font-weight: var(--bold);
+    background: none;
+    transition: background 0.8s ease-out;
+    cursor: pointer;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 5px;
+      content: '';
+      transition: 0.3s;
+      z-index: 1;
+    }
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 5px;
+      content: '';
+      transition: 0.3s;
+    }
+
+    &:focus-visible::before,
+    &:hover::before {
+      background: var(--gray);
+      width: 100%;
+
+      [class*='bg--gold'] & {
+        background: var(--gray);
+      }
+    }
+
+    &:active,
+    &:focus,
+    &:hover {
+      outline: 0;
+    }
+  }
+
+  [role='tabpanel'] {
+    position: relative;
+    z-index: 2;
+    // padding: $mobile-height-gutter 0;
+
+    &.is-hidden {
+      display: none;
+    }
+  }
+
+  [role='tabpanel'] * + p {
+    margin-top: 1rem;
+  }
+}
+button#inactive-tab svg {
+  color: #767676;
+}
+button#list-tab svg,
+button#grid-tab svg {
+  fill: var(--red);
+  &:hover {
+    fill: var(--red);
+  }
+}
+
+.toggle-list-class #List,
+.toggle-grid-class #Grid,
+#List .resource-card {
+  display: none;
+}
+button#active-grid-icon-tab:hover svg,
+button#active-list-icon-tab:hover svg {
+  fill: var(--red);
+}
+.toggle-list-class {
+  button#active-grid-icon-tab svg {
+    fill: var(--red);
+  }
+}
+.toggle-grid-class {
+  button#active-list-icon-tab svg {
+    fill: var(--red);
+  }
+}
+#List {
+  .view-empty {
+    display: none;
+  }
+}
+.list-class {
+  #List {
+    display: none;
+  }
+}
+.grid-class {
+  #Grid {
+    display: none;
+  }
+}
+.toggle-grid-class {
+  div#card-display {
+    display: none;
+  }
+}

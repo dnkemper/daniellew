@@ -1,0 +1,20 @@
+uuid: 1c5893ec-eb3c-4b78-a1a1-fd0d0acdb132
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.field_timeline_slides_p
+field_name: field_timeline_slides_p
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 5
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

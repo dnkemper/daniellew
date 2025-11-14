@@ -1,0 +1,354 @@
+environments:
+  - name: develop
+    suffix: washu-d9.dev.sprydigital.com
+    drush_template: site-spry-ec2.yml
+    host: washu-d9.dev.sprydigital.com
+  - name: qa
+    suffix: washu-d9.qa.sprydigital.com
+    drush_template: site-spry-ec2.yml
+    host: washu-d9.qa.sprydigital.com
+  - name: uat
+    suffix: washu-d9.uat.sprydigital.com
+    drush_template: site-spry-ec2.yml
+    host: washu-d9.uat.sprydigital.com
+  - name: lando
+    suffix: artscidev.lndo.site
+    drush_template: site-lando.yml
+    host: appserver
+  - name: prod
+    drush_template: site-lando.yml
+    suffix: wustl.edu
+  - name: server-local
+    suffix: local
+    drush_template: site-lando.yml
+  - name: ddev
+    suffix: artscidev.ddev.site
+    drush_template: site-lando.yml
+    host: web
+  - name: dev
+    suffix: artscidev.wustl.edu
+    drush_template: site-spry-ec2.yml
+    host: artscidev.wustl.edu
+  - name: stage
+    suffix: artscistage.wustl.edu
+    drush_template: site-spry-ec2.yml
+    host: artscistage.wustl.edu
+db:
+  d9user: drupal9
+  d7user: drupal7
+sites:
+  - name: afas
+    db: drupal_afas
+    db_d7: drupal7_afas
+    migrate: full
+    source_url: https://afas.wustl.edu/
+  - name: amcs
+    db: drupal_amcs
+    db_d7: drupal7_amcs
+    migrate: full
+    source_url: https://amcs.wustl.edu/
+  - name: anthropology
+    db: drupal_anthropology
+    db_d7: drupal7_anthropology
+    migrate: full
+    source_url: https://anthropology.wustl.edu/
+  - name: arthistory
+    db: drupal_arthistory
+    db_d7: drupal7_arthistory
+    migrate: full
+    source_url: https://arthistory.wustl.edu/
+  - name: artsciadvising
+    db: drupal_artsciadvising
+    db_d7: drupal7_artsciadvising
+    migrate: full
+    source_url: https://artsciadvising.wustl.edu/
+  - name: artsciportal
+    db: drupal_artsciportal
+    db_d7: drupal7_artsciportal
+    migrate: full
+    source_url: https://artsciportal.wustl.edu/
+  - name: biology
+    db: drupal_biology
+    db_d7: drupal7_biology
+    migrate: full
+    source_url: https://biology.wustl.edu/
+  - name: buildingartsci
+    db: drupal_buildingartsci
+    db_d7: drupal7_buildingartsci
+    migrate: full
+    source_url: https://buildingartsci.wustl.edu/
+  - name: chemistry
+    db: drupal_chemistry
+    db_d7: drupal7_chemistry
+    migrate: full
+    source_url: https://chemistry.wustl.edu/
+  - name: classics
+    db: drupal_classics
+    db_d7: drupal7_classics
+    migrate: full
+    source_url: https://classics.wustl.edu/
+  - name: collegewriting
+    db: drupal_collegewriting
+    db_d7: drupal7_collegewriting
+    migrate: full
+    source_url: https://collegewriting.wustl.edu/
+  - name: complitandthought
+    db: drupal_complitandthought
+    db_d7: drupal7_complitandthought
+    migrate: full
+    source_url: https://complitandthought.wustl.edu/
+  - name: it
+    db: drupal_it
+    db_d7: drupal7_it
+    migrate: full
+    source_url: https://it.artsci.wustl.edu/
+  - name: ealc
+    db: drupal_ealc
+    db_d7: drupal7_ealc
+    migrate: full
+    source_url: https://ealc.wustl.edu/
+  - name: economics
+    db: drupal_economics
+    db_d7: drupal7_economics
+    migrate: full
+    source_url: https://economics.wustl.edu/
+  - name: education
+    db: drupal_education
+    db_d7: drupal7_education
+    migrate: full
+    source_url: https://education.wustl.edu/
+  - name: eeps
+    db: drupal_eeps
+    db_d7: drupal7_eeps
+    migrate: full
+    source_url: https://eeps.wustl.edu/
+  - name: english
+    db: drupal_english
+    db_d7: drupal7_english
+    migrate: full
+    source_url: https://english.wustl.edu/
+  - name: enst
+    db: drupal_enst
+    db_d7: drupal7_enst
+    migrate: full
+    source_url: https://enst.wustl.edu/
+  - name: fellowshipsoffice
+    db: drupal_fellowshipsoffice
+    db_d7: drupal7_fellowshipsoffice
+    migrate: full
+    source_url: https://fellowshipsoffice.wustl.edu/
+  - name: fms
+    db: drupal_fms
+    db_d7: drupal7_fms
+    migrate: full
+    source_url: https://fms.wustl.edu/
+  - name: german
+    db: drupal_german
+    db_d7: drupal7_german
+    migrate: full
+    source_url: https://german.wustl.edu/
+  - name: globalstudies
+    db: drupal_globalstudies
+    db_d7: drupal7_globalstudies
+    migrate: full
+    source_url: https://globalstudies.wustl.edu/
+  - name: gradstudies
+    db: drupal_gradstudies
+    db_d7: drupal7_gradstudies
+    migrate: full
+    source_url: https://gradstudies.artsci.wustl.edu/
+  - name: hdw
+    db: drupal_hdw
+    db_d7: drupal7_hdw
+    migrate: full
+    source_url: https://hdw.wustl.edu/
+  - name: history
+    db: drupal_history
+    db_d7: drupal7_history
+    migrate: full
+    source_url: https://history.wustl.edu/
+  - name: holdthatthought
+    db: drupal_holdthatthought
+    db_d7: drupal7_holdthatthought
+    migrate: full
+    source_url: https://holdthatthought.wustl.edu/
+  - name: humanities
+    db: drupal_humanities
+    db_d7: drupal7_humanities
+    migrate: full
+    source_url: https://humanities.wustl.edu/
+  - name: insideartsci
+    db: drupal_insideartsci
+    db_d7: drupal7_insideartsci
+    migrate: full
+    source_url: https://insideartsci.wustl.edu/
+  - name: jimes
+    db: drupal_jimes
+    db_d7: drupal7_jimes
+    migrate: full
+    source_url: https://jimes.wustl.edu/
+  - name: johnmaxwulfing
+    db: drupal_johnmaxwulfing
+    db_d7: drupal7_johnmaxwulfing
+    migrate: full
+    source_url: https://johnmaxwulfing.wustl.edu/
+  - name: lasprogram
+    db: drupal_lasprogram
+    db_d7: drupal7_lasprogram
+    migrate: full
+    source_url: https://lasprogram.wustl.edu/
+  - name: linguistics
+    db: drupal_linguistics
+    db_d7: drupal7_linguistics
+    migrate: full
+    source_url: https://linguistics.wustl.edu/
+  - name: literaryarts
+    db: drupal_literaryarts
+    db_d7: drupal7_literaryarts
+    migrate: full
+    source_url: https://literaryarts.wustl.edu/
+  - name: math
+    db: drupal_math
+    db_d7: drupal7_math
+    migrate: full
+    source_url: https://math.wustl.edu/
+  - name: movingstories
+    db: drupal_movingstories
+    db_d7: drupal7_movingstories
+    migrate: full
+    source_url: https://movingstories.wustl.edu/
+  - name: music
+    db: drupal_music
+    db_d7: drupal7_music
+    migrate: full
+    source_url: https://music.wustl.edu/
+  - name: overseas
+    db: drupal_overseas
+    db_d7: drupal7_overseas
+    migrate: full
+    source_url: https://overseas.wustl.edu/
+  - name: pad
+    db: drupal_pad
+    db_d7: drupal7_pad
+    migrate: full
+    source_url: https://pad.wustl.edu/
+  - name: philosophy
+    db: drupal_philosophy
+    db_d7: drupal7_philosophy
+    migrate: full
+    source_url: https://philosophy.wustl.edu/
+  - name: physics
+    db: drupal_physics
+    db_d7: drupal7_physics
+    migrate: full
+    source_url: https://physics.wustl.edu/
+  - name: pnp
+    db: drupal_pnp
+    db_d7: drupal7_pnp
+    migrate: full
+    source_url: https://pnp.wustl.edu/
+  - name: polisci
+    db: drupal_polisci
+    db_d7: drupal7_polisci
+    migrate: full
+    source_url: https://polisci.wustl.edu/
+  - name: postbaccpremed
+    db: drupal_postbaccpremed
+    db_d7: drupal7_postbaccpremed
+    migrate: full
+    source_url: https://postbaccpremed.wustl.edu/
+  - name: precollege
+    db: drupal_precollege
+    db_d7: drupal7_precollege
+    migrate: full
+    source_url: https://precollege.wustl.edu/
+  - name: prehealth
+    db: drupal_prehealth
+    db_d7: drupal7_prehealth
+    migrate: full
+    source_url: https://prehealth.wustl.edu/
+  - name: psych
+    db: drupal_psych
+    db_d7: drupal7_psych
+    migrate: full
+    source_url: https://psych.wustl.edu/
+  - name: publichealthandsociety
+    db: drupal_publichealthandsociety
+    db_d7: drupal7_publichealthandsociety
+    migrate: full
+    source_url: https://publichealthandsociety.wustl.edu/
+  - name: quantumleaps
+    db: drupal_quantumleaps
+    db_d7: drupal7_quantumleaps
+    migrate: full
+    source_url: https://quantumleaps.wustl.edu/
+  - name: religiousstudies
+    db: drupal_religiousstudies
+    db_d7: drupal7_religiousstudies
+    migrate: full
+    source_url: https://religiousstudies.wustl.edu/
+  - name: rll
+    db: drupal_rll
+    db_d7: drupal7_rll
+    migrate: full
+    source_url: https://rll.wustl.edu/
+  - name: sds
+    db: drupal_sds
+    db_d7: drupal7_sds
+    migrate: full
+    source_url: https://sds.wustl.edu/
+  - name: slavery
+    db: drupal_slavery
+    db_d7: drupal7_slavery
+    migrate: full
+    source_url: https://slavery.wustl.edu/
+  - name: sociology
+    db: drupal_sociology
+    db_d7: drupal7_sociology
+    migrate: full
+    source_url: https://sociology.wustl.edu/
+  - name: strategicplan
+    db: drupal_strategicplan
+    db_d7: drupal7_strategicplan
+    migrate: full
+    source_url: https://strategicplan.artsci.wustl.edu/
+  - name: summersession
+    db: drupal_summersession
+    db_d7: drupal7_summersession
+    migrate: full
+    source_url: https://summersession.wustl.edu/
+  - name: transdisciplinaryfutures
+    db: drupal_transdisciplinaryfutures
+    db_d7: drupal7_transdisciplinaryfutures
+    migrate: full
+    source_url: https://transdisciplinaryfutures.wustl.edu/
+  - name: triads
+    db: drupal_triads
+    db_d7: drupal7_triads
+    migrate: full
+    source_url: https://triads.wustl.edu/
+  - name: undergradresearch
+    db: drupal_undergradresearch
+    db_d7: drupal7_undergradresearch
+    migrate: full
+    source_url: https://undergradresearch.wustl.edu/
+  - name: wc
+    db: drupal_wc
+    db_d7: drupal7_wc
+    migrate: full
+    source_url: https://wc.wustl.edu/
+  - name: wgss
+    db: drupal_wgss
+    db_d7: drupal7_wgss
+    migrate: full
+    source_url: https://wgss.wustl.edu/
+  - name: migrate
+    db: migrate
+    db_d7: migrate_d7
+    migrate: false
+    source_url: n/a
+# content aggregator should be last as it doesn't have a db_d7 and the parser doesn't like that
+  - name: aggregator
+    db: drupal_aggregator
+    migrate: false
+    source_url: n/a

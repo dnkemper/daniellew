@@ -1,0 +1,29 @@
+uuid: eb740948-d6f4-446c-a566-b4a42b224aae
+langcode: en
+status: true
+dependencies:
+  module:
+    - masquerade
+    - user
+  theme:
+    - gin
+id: gin_masquerade
+theme: gin
+region: breadcrumb
+weight: -2
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: Masquerade
+  label_display: '0'
+  provider: masquerade
+  show_unmasquerade_link: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

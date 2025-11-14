@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4454c20e-0c17-49ea-a370-0ae27c71ffc7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: costofliving_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/costofliving_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 34580
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

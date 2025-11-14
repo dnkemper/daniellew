@@ -1,0 +1,10 @@
+uuid: ea90ba16-e5d5-4bf0-8b6f-98e7cb5043f4
+langcode: en
+status: true
+dependencies: {  }
+id: publication_student_stories
+label: 'Publication Student Stories'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Student Stories'
+behavior_plugins: {  }

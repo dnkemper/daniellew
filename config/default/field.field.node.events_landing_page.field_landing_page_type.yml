@@ -1,0 +1,21 @@
+uuid: b2d351e9-6718-4bb1-bf94-6e45ea54da97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_page_type
+    - node.type.events_landing_page
+  module:
+    - options
+id: node.events_landing_page.field_landing_page_type
+field_name: field_landing_page_type
+entity_type: node
+bundle: events_landing_page
+label: 'Landing Page Type'
+description: 'Select whether the Events Landing Page shows cards with images, or a list of flat boxes.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

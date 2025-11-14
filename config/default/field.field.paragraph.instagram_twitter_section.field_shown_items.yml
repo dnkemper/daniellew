@@ -1,0 +1,23 @@
+uuid: c5783188-dd9b-4e97-ab96-fc49c262799d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_shown_items
+    - paragraphs.paragraphs_type.instagram_twitter_section
+  module:
+    - options
+id: paragraph.instagram_twitter_section.field_shown_items
+field_name: field_shown_items
+entity_type: paragraph
+bundle: instagram_twitter_section
+label: 'Shown Items'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '2'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

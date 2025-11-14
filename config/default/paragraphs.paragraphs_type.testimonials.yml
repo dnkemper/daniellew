@@ -1,0 +1,10 @@
+uuid: fb1d2312-e538-40f7-8afe-115e138f43d9
+langcode: en
+status: true
+dependencies: {  }
+id: testimonials
+label: Testimonials
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Testimonials'
+behavior_plugins: {  }

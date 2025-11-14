@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1f657f4a-e828-498d-ba68-56c4e72622e2
+  bundle: resources
+  default_langcode: en
+  depends:
+    feb61ebe-0b75-48ab-9745-9c65d78a8458: media
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'The Learning Center'
+  created:
+    -
+      value: 1690896574
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/learning-center
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://learningcenter.wustl.edu/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: feb61ebe-0b75-48ab-9745-9c65d78a8458
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'receive support through academic mentoring and skills coaching'
+  field_title:
+    -
+      value: 'The Learning Center'

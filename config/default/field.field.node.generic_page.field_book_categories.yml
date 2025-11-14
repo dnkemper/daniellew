@@ -1,0 +1,26 @@
+uuid: b95f7425-216b-408b-92f1-3f7b9ada33e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_book_categories
+    - node.type.generic_page
+    - taxonomy.vocabulary.book_
+id: node.generic_page.field_book_categories
+field_name: field_book_categories
+entity_type: node
+bundle: generic_page
+label: 'Book Categories'
+description: 'If no category is selected, all books will show.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      book_: book_
+    sort:
+      field: _none
+field_type: entity_reference

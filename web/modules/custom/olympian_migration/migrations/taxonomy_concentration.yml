@@ -1,0 +1,50 @@
+id: taxonomy_concentration
+migration_tags:
+  - artsci
+field_plugin_method: null
+cck_plugin_method: null
+migration_group: olympian_migration
+label: 'Taxonomy terms (concentrationcategories)'
+source:
+  plugin: d7_taxonomy_term
+  bundle: concentration
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  vid:
+    plugin: default_value
+    default_value: concentration
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  langcode:
+    -
+      plugin: get
+      source: language
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: concentration
+migration_dependencies:
+  required: {}
+  optional:
+    - taxonomy_concentration

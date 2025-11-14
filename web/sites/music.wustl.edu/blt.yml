@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: music.ddev.site
+    protocol: https
+  machine_name: music
+  human_name: music.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: music.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/music.wustl.edu/files'
+    origin: 'https://music.wustl.edu'
+drupal:
+  db:
+    database: drupal_music
+system:
+  site:
+    contact_us_url: 'https://music.wustl.edu/contact-us'
+    name: music
+    email: music@wustl.edu

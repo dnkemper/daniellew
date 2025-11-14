@@ -1,0 +1,9 @@
+uuid: bff2f720-5ad1-4707-bb2c-12659945e72f
+langcode: en
+status: true
+dependencies: {  }
+id: appearance
+label: Appearance
+weight: null
+menu: appearance
+rewrite_label: false

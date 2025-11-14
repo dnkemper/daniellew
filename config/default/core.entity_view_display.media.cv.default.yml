@@ -1,0 +1,38 @@
+uuid: 5a7261fd-1f93-4a2f-80f8-9b3e1a1115f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.cv.field_media_directory
+    - field.field.media.cv.field_media_file
+    - media.type.cv
+  module:
+    - olympian_core
+id: media.cv.default
+targetEntityType: media
+bundle: cv
+mode: default
+content:
+  field_media_file:
+    type: media_entity_download_download_link
+    label: hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      disposition: attachment
+      link_text: 'Download CV'
+      show_icon: '1'
+      url_only: ''
+      url_plain: ''
+      rel: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

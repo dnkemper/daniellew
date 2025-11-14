@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: artsciadvising.ddev.site
+    protocol: https
+  machine_name: artsciadvising
+  human_name: artsciadvising.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: artsciadvising.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/artsciadvising.wustl.edu/files'
+    origin: 'https://artsciadvising.wustl.edu'
+drupal:
+  db:
+    database: drupal_artsciadvising
+system:
+  site:
+    contact_us_url: 'https://artsciadvising.wustl.edu/contact-us'
+    name: artsciadvising
+    email: artsciadvising@wustl.edu

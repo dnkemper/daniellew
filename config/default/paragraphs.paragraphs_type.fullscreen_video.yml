@@ -1,0 +1,10 @@
+uuid: 8cd2d29c-f4f0-4d8d-bdb2-dbf0ef979f20
+langcode: en
+status: true
+dependencies: {  }
+id: fullscreen_video
+label: 'Fullscreen Video'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Fullscreen Video'
+behavior_plugins: {  }

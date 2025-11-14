@@ -1,0 +1,19 @@
+uuid: b9e77e2a-4b2a-4386-ad09-5f6f0cc5e0f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.timeline_slides
+id: paragraph.timeline_slides.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: timeline_slides
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

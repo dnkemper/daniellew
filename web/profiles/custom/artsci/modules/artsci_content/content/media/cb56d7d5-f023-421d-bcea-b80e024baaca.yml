@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cb56d7d5-f023-421d-bcea-b80e024baaca
+  bundle: image
+  default_langcode: en
+  depends:
+    878dfafe-3450-45d8-aa29-4eb2133e096f: taxonomy_term
+    3bccba62-dd07-4f95-988f-40729aa41f98: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: universityregistrar_420x420.png
+  created:
+    -
+      value: 1701521698
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /universityregistrar420x420png
+      langcode: en
+      pathauto: 1
+  field_media_directory:
+    -
+      entity: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  field_media_image:
+    -
+      entity: 3bccba62-dd07-4f95-988f-40729aa41f98
+      alt: '""'
+      title: ''
+      width: 876
+      height: 876

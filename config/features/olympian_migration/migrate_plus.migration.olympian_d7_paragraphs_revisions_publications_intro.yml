@@ -1,0 +1,83 @@
+uuid: 7d63988a-0376-4186-b059-804409cf048d
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publications_intro
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Intro)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publications_intro
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_article_two:
+    plugin: sub_process
+    source: field_article_two
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_first_article:
+    plugin: sub_process
+    source: field_first_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_fourth_article:
+    plugin: sub_process
+    source: field_fourth_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_third_article:
+    plugin: sub_process
+    source: field_third_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_intro_header_subtitle:
+    -
+      plugin: get
+      source: field_intro_header_subtitle
+  field_intro_header_title:
+    -
+      plugin: get
+      source: field_intro_header_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publications_intro
+migration_dependencies:
+  required: {}
+  optional: {  }

@@ -1,0 +1,11 @@
+uuid: 494885d0-e17f-43dd-b311-ebf4eb418ee0
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.shared_default
+label: 'Shared Book Cover'
+description: ''
+targetEntityType: media
+cache: true

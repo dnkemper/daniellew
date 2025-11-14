@@ -1,0 +1,22 @@
+uuid: b4ea883c-c809-46c7-a6e9-1a7a3ad7ba8f
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: article_categories
+label: 'Article Categories'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[olympian_seo:newslanding][olympian_seo:tid][term:tid]'
+selection_criteria:
+  411aa6d6-f85b-423b-acff-f7df5b89ab67:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 411aa6d6-f85b-423b-acff-f7df5b89ab67
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      article_categories: article_categories
+selection_logic: and
+weight: -5
+relationships: {  }

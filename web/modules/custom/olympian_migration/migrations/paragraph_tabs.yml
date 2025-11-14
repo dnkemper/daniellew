@@ -1,0 +1,40 @@
+id: paragraph_tabs
+label: 'Tabs Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: tabs
+
+process:
+  type:
+    plugin: default_value
+    default_value: tabs
+
+  # Text long field mapping
+  field_introduction_exerpt:
+    plugin: get
+    source: field_introduction_excerpt
+
+  # Boolean field mapping
+  field_single_column:
+    plugin: get
+    source: field_single_column
+
+  # Webform entity reference field mapping
+  # Note: You will need a custom process to handle webform migration
+  field_tab_1:
+    plugin: migration_lookup
+    migration: webform_migration
+    source: field_tab_1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: tabs
+
+migration_dependencies:
+  required:
+    - webform_migration  # Replace with the actual migration ID for webforms if applicable
+  optional: {}

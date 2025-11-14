@@ -1,0 +1,10 @@
+uuid: 9a67027f-b805-4355-88db-7d7fd10593e2
+langcode: en
+status: true
+dependencies: {  }
+id: intro_with_tob
+label: 'Intro with TOB'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Intro with TOB'
+behavior_plugins: {  }

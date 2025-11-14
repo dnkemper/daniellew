@@ -1,0 +1,399 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ * - field_location: text plain
+ * - field_event_date_tbd: boolean
+ * - field_event_date: date range
+ * - field_thumbnail: image media type
+ * @see template_preprocess_node()
+ */
+#}
+
+{{ attach_library('olympian9/modal') }}
+
+<article class="single-event-post">
+<div class="element-invisible">{{ sharedURL }}</div>
+<div class="element-invisible">{{ node.id() }}</div>
+  {% if content.field_event_smart_date[0]['#value']|date("g:i a") != "12:00 am" %}
+    {% if content.field_event_smart_date[0]['#value']|date("g:i a") == content.field_event_smart_date[0]['#end_value']|date("g:i a") %}
+      {% set start_date_time = content.field_event_smart_date[0]['#value']|date("g:i a") %}
+      {% set to_time = '' %}
+      {% set end_date_time = '' %}
+    {% else %}
+      {% set start_date_time = content.field_event_smart_date[0]['#value']|date("g:i a") %}
+      {% set to_time = 'to' %}
+      {% set end_date_time = content.field_event_smart_date[0]['#end_value']|date("g:i a") %}
+    {% endif %}
+  {% else %}
+    {% set start_date_time = '' %}
+    {% set to_time = '' %}
+    {% set end_date_time = '' %}
+  {% endif %}
+
+  <div class="container post-header">
+    {% if is_shared_content == 1 %}
+      {% if headerImage %}
+        <div class="container post-header">
+          <div class="image">
+            <img src="{{ headerImage|raw }}">
+          </div>
+      {% else %}
+          <div class="container post-header no-image">
+      {% endif %}
+    {% else %}
+    {# NOT SHARED CONTENT #}
+      {% if content.field_header_image.0 %}
+        <div class="image">
+          {{ content.field_header_image.0 }}
+        </div>
+      {% else %}
+        <div class="container post-header no-image">
+      {% endif %}
+    {% endif %}
+      {% if '1' in content.field_event_date_tbd[0] %}
+        <div class="event-date">
+          EVENT DATE: TBD
+        </div>
+      {% else %}
+
+        {% if '1' in content.field_show_end_date[0] and content.field_event_smart_date[0]['#value']|date("d m") == content.field_event_smart_date[0]['#end_value']|date("d m") %}
+          <div class="event-date">
+            <time
+              class="day">{{ content.field_event_smart_date[0]['#value']|date("d") }}</time>
+            <time
+              class="month">{{ content.field_event_smart_date[0]['#value']|date("F") }}</time>
+          </div>
+        {% elseif '1' in content.field_show_end_date[0] %}
+          <div class="event-date multi-day">
+            <span><time>{{ content.field_event_smart_date[0]['#value']|date("M d") }}</time>-</span>
+            <time>{{ content.field_event_smart_date[0]['#end_value']|date("M d") }}</time>
+          </div>
+        {% else %}
+          <div class="event-date">
+            <time
+              class="day">{{ content.field_event_smart_date[0]['#value']|date("d") }}</time>
+            <time
+              class="month">{{ content.field_event_smart_date[0]['#value']|date("F") }}</time>
+          </div>
+        {% endif %}
+
+
+      {% endif %}
+    </div>
+    <div class="container post-body">
+      <div class="post-content wysiwyg">
+        <div class="category">
+          {% if node.field_event_category.0 %}
+            {% for item in node.field_event_category %}
+              <a href="{{ landing_page_alias }}?tid={{ item.target_id }}">
+                {{ item.entity.label }}{% if not loop.last %},{% endif %}</a>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div id="modal-social-share">
+          <a href="#" class="js-open-modal" data-modal="modal1"
+             aria-label="opens sharing option buttons"
+             alt="social sharing buttons">
+            <div class="share-icon">
+              <svg class="icon">
+                <use xlink:href="#share"></use>
+              </svg>
+            </div>
+          </a>
+          <div class="modal" data-modal="modal1">
+            <div class="share-icons">
+
+              <svg class="modal__cross js-modal-close"
+                   xmlns="http://www.w3.org/2000/svg"
+                   viewBox="0 0 24 24">
+                <use xlink:href="#close"></use>
+              </svg>
+              <p class="modal__title">
+              <div class="share"><h2> Share this Event</h2>
+                <div class="social-sharing-buttons">
+                  <a href="{{ social_share.facebook.url }}"
+                     target="_blank" title="Share to Facebook"
+                     aria-label="Share to Facebook" class="share-facebook"
+                     rel="noopener">
+                      <svg id="facebook" viewBox="0 0 64 64">
+                        <path d="M27.397 53.72v-19.723h-6.647v-8.052h6.647v-6.762c0-4.918 3.987-8.904 8.904-8.904h6.949v7.24h-4.972c-1.563 0-2.829 1.267-2.829 2.829v5.597h7.677l-1.061 8.052h-6.616v19.723z"></path>
+                      </svg>
+                  </a>
+                  <a href="{{ social_share.twitter.url }}"
+                     target="_blank" title="Share to X"
+                     aria-label="Share to X" class="share-twitter"
+                     rel="noopener">
+                    <svg id="twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                  </a>
+                  <a href="{{ social_share.email.url }}"
+                     title="Share to Email" aria-label="Share to Email"
+                     class="share-email" target="_blank" rel="noopener">
+                    <svg id="email" viewBox="0 0 64 64">
+                      <path d="M32 35.077l18.462-16h-36.924zM27.013 33.307l4.987 4.091 4.909-4.093 13.553 11.617h-36.924zM12.307 43.693v-23.386l13.539 11.693zM51.693 43.693v-23.386l-13.539 11.693z"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              </p>
+            </div>
+          </div>
+          <div class="overlay js-overlay-modal" data-modal="modal1"></div>
+        </div>
+        {{ title_prefix }}
+        {% if label %}
+          <h1{{ title_attributes }}>{{ label }}</h1>
+        {% endif %}
+        {{ title_suffix }}
+        <div class="post-excerpt">
+          {% if content.field_introduction_excerpt.0 %}
+            {{ content.field_introduction_excerpt.0 }}
+          {% endif %}
+        </div>
+        {{ content.body.0|raw }}
+        <div class="button-group">
+          {% if content.field_rsvp_form[0] %}
+            {{ content.field_rsvp_form[0] }}
+          {% endif %}
+          {% if is_shared_content == 1 %}
+            {% if rsvpLink is not empty %}<a href="{{ rsvpLink|raw }}" class="button">RSVP</a>{% endif %}
+          {% if buttonURL %}
+            <a href="{{ buttonURL }}"
+                  class="button"
+                  aria-label="Open button link in new window">
+                  {{ buttonText }}
+                </a>
+          {% endif %}
+          {% else %}
+            {% if content.field_button_url[0]['#url'] and content.field_call_to_action_button_text.0 %}
+              {% if content.field_button_url.0.url.external or node.field_button_url.0.url.external %}
+                <a href="{{ content.field_button_url[0]['#url'] }}"
+                  class="button" target="_blank"
+                  aria-label="Open button link in new window">
+                  {{ content.field_call_to_action_button_text.0 }}
+                </a>
+              {% else %}
+                <a href="{{ content.field_button_url[0]['#url'] }}"
+                  class="button"
+                  aria-label="Navigate to RSVP link on site">
+                  {{ content.field_call_to_action_button_text.0 }}
+                </a>
+              {% endif %}
+            {% elseif content.field_button_url[0]['#url'] %}
+              {% if content.field_button_url.0.url.external or paragraph.field_button_url.0.url.external %}
+                <a href="{{ content.field_button_url[0]['#url'] }}"
+                  class="button"
+                  aria-label="Opens button link in new window">
+                  MORE INFO
+                </a>
+              {% else %}
+                <a href="{{ content.field_button_url[0]['#url'] }}"
+                  class="button" aria-label="View Event">
+                  MORE INFO
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      {% if is_shared_content == 1 %}
+      {% else %}
+        {% if content.field_rsvp_form[0] %}
+          <div id="rsvp" style="display: none;">
+            <header>
+              <div class="heading">Please RSVP to:</div>
+              {{ title_prefix }}
+              {% if label %}
+                <h3{{ title_attributes }}>{{ label }}</h3>
+              {% endif %}
+              {{ title_suffix }}
+              <time>
+                {% if '0' in content.field_event_date_tbd[0] %}
+                  {% if content.field_event_smart_date[0]['#value']|date("l, F d") == content.field_event_smart_date[0]['#end_value']|date("l, F d") %}
+                    {{ content.field_event_smart_date[0]['#end_value']|date("l, F d") }} |
+                    {{ start_date_time }} {{ to_time }} {{ end_date_time }}
+                  {% else %}
+                    {{ content.field_event_smart_date[0]['#value']|date("l, F d") }} - {{ content.field_event_smart_date[0]['#end_value']|date("l, F d, Y") }} |
+                    {{ start_date_time }} {{ to_time }} {{ end_date_time }}
+                  {% endif %}
+                {% else %}
+                  EVENT DATE: TBD
+                {% endif %}
+              </time>
+            </header>
+
+            {{ content.field_rsvp_form[0]['#title']|render }}
+
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+</article>
+<aside class="event-details">
+  <div class="container reveal">
+    <div class="inner">
+      <div class="heading">Event Details</div>
+      <h2>
+        {% if '0' in content.field_event_date_tbd[0] %}
+          {% if '1' in content.field_show_end_date[0] %}
+            {% if content.field_event_smart_date[0]['#value']|date("d m") == content.field_event_smart_date[0]['#end_value']|date("d m") %}
+              {{ content.field_event_smart_date[0]['#value']|date("l, F d, Y") }}
+            {% else %}
+              {{ content.field_event_smart_date[0]['#value']|date("l, F d") }} - {{ content.field_event_smart_date[0]['#end_value']|date("l, F d, Y") }}
+            {% endif %}
+          {% else %}
+            {{ content.field_event_smart_date[0]['#value']|date("l, F d, Y") }}
+          {% endif %}
+        {% else %}
+          EVENT DATE: TBD
+        {% endif %}
+      </h2>
+      <div class="cal-details">
+        {# print $timedisplay; #}
+        <div class="time flex">
+          {% if '0' in content.field_event_date_tbd[0] %}
+            {% if '1' in content.field_show_end_date[0] and start_date_time is empty %}
+              {# <svg class="icon">
+                    <use xlink:href="#time"></use>
+                  </svg>
+                  {{ start_date_time }} {{ content.field_event_smart_date[0]['#value']|date("l") }} - {{ content.field_event_smart_date[0]['#end_value']|date("g:i a") }} {{ content.field_event_smart_date[0]['#end_value']|date("l") }} #}
+              {% elseif start_date_time is empty %}
+              {% elseif '1' in content.field_show_end_date[0] and content.field_event_smart_date[0]['#value']|date("d m") == content.field_event_smart_date[0]['#end_value']|date("d m") %}
+              <svg class="icon">
+                <use xlink:href="#time"></use>
+              </svg>
+              <time> {{ start_date_time }} {{ to_time }} {{ end_date_time }}</time>
+            {% elseif '1' in content.field_show_end_date[0] %}
+              <svg class="icon">
+                <use xlink:href="#time"></use>
+              </svg>
+              <time>{{ content.field_event_smart_date[0]['#value']|date("g:i A l") }} to {{ content.field_event_smart_date[0]['#end_value']|date("g:i A l") }}</time>
+            {% else %}
+              <svg class="icon">
+                <use xlink:href="#time"></use>
+              </svg>
+              <time>{{ start_date_time }}</time>
+            {% endif %}
+          {% endif %}
+        </div>
+        {% if content.field_location.0 %}
+        <div class="address flex">
+          <svg class="icon">
+            <use xlink:href="#location"></use>
+          </svg>
+          <address>{{ content.field_location.0 }}
+            {% if content.field_additional_location_inform.0 %}
+              | {{ content.field_additional_location_inform.0 }}
+            {% endif %}
+          </address>
+          {{ drupal_view('event_slideshows', 'block_geolocation_address') }}
+          {% if lat and long %}
+          <br><a class="directions"
+                 href="http://maps.google.com/?q={{ lat }}, {{ long }}"
+                 target="_blank">Get Directions</a></div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if '0' in content.field_event_date_tbd[0] %}
+        {% if content.field_event_smart_date[0]['#value'] > date_today %}
+          <div class="add-to-cal flex">
+            <svg class="icon">
+              <use xlink:href="#calendar"></use>
+            </svg>{{ content.addtocal }}
+          </div>
+        {% endif %}
+      {% endif %}
+      {% if content.field_event_contact.0 %}
+        <div class="add-to-cal flex">
+          <img src="{{ base_path ~ directory }}/images/email-contact.png"
+               class="event contact image"
+               alt="Washington University in St. Louis"
+               width="15px"
+               height="15px">
+          <div class="event-contact">{{ content.field_event_contact.0 }}</div>
+        </div>
+      {% else %}
+        <div class="add-to-cal flex">
+          <img src="{{ base_path ~ directory }}/images/email-contact.png"
+               class="event contact image"
+               alt="Washington University in St. Louis"
+               width="15px" height="15px">
+          <div class="event-contact">{{ site_mail }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if content.field_event_geolocation.0 %}
+    <div id="map">
+      {{ content.field_event_geolocation.0 }}
+    </div>
+  {% endif %}
+  <div class="container back-events">
+    <a href="{{ landing_page_alias }}" title="Return to All Events">
+      <svg class="icon">
+        <use xlink:href="#nav-arrow"></use>
+      </svg>
+      Return to all Events</a>
+  </div>
+</aside>

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cd .ddev/homeadditions/
+ln -sf ~/.ssh

@@ -1,0 +1,69 @@
+uuid: 8e823ac0-ce9a-42b8-ac14-2b3082b74712
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.introduction.field_ampersand
+    - field.field.paragraph.introduction.field_background
+    - field.field.paragraph.introduction.field_background_image
+    - field.field.paragraph.introduction.field_description
+    - field.field.paragraph.introduction.field_headline
+    - field.field.paragraph.introduction.field_introduction_text_color
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - options
+id: paragraph.introduction.default
+targetEntityType: paragraph
+bundle: introduction
+mode: default
+content:
+  field_ampersand:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_background:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_background_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: background_image
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_headline:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_introduction_text_color:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  search_api_excerpt: true

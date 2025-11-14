@@ -1,0 +1,41 @@
+uuid: 8d81c00b-3852-4cbe-ad90-f5b5913ff92a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - private_content
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 10
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    minimum_age_to_delete: 0
+    minimum_revisions_to_keep: 10
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+    when_to_delete: 0
+  private_content:
+    private: 1
+name: Person
+type: faculty_staff
+description: 'Used to list information about faculty and staff members in your department.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

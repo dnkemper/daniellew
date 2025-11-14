@@ -1,0 +1,45 @@
+id: paragraph_publication_gallery
+label: 'Publication Gallery Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_gallery  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_gallery  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Paragraphs field mapping for 'field_gallery_image'
+  field_gallery_image:
+    plugin: sub_process
+    source: field_gallery_image
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_gallery_image  # Replace with the ID of your 'publication_gallery_image' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # Text field mappings
+  field_subtitle: field_subtitle
+  field_title: field_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_gallery
+migration_dependencies:
+  required:
+    - paragraph_publication_gallery_image  # Ensure this is the correct ID of your 'publication_gallery_image' paragraph migration
+  optional: {}

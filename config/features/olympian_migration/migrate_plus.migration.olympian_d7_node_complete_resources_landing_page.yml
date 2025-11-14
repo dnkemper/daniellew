@@ -1,0 +1,231 @@
+uuid: f66ca917-5643-4252-ac99-218b8291de9f
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_resources_landing_page
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: olympian_d7
+label: 'Node complete (Resources Landing Page)'
+source:
+  plugin: olympian_node
+  node_type: resources_landing_page
+  ids:
+    nid:
+      type: integer
+    vid:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: resources_landing_page
+  nid: nid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  vid: vid
+  uid: node_uid
+  title: title
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_category_display:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: resources_category_display
+    -
+      plugin: static_map
+      map:
+        1: collapsed
+        2: hidden
+        3: expanded
+  field_footer_callout_p:
+    -
+      plugin: sub_process
+      source: field_footer_callout_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_testimonials_p:
+    -
+      plugin: sub_process
+      source: field_testimonials_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_introduction_p:
+    -
+      plugin: sub_process
+      source: field_introduction_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_jump_to_p:
+    -
+      plugin: sub_process
+      source: field_jump_to_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_search:
+    -
+      plugin: get
+      source: field_search
+    -
+      plugin: custom_media_wysiwyg_filter
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+  alias: alias
+  path/pathauto: pathauto_state
+destination:
+  plugin: 'entity:node'
+  default_bundle: resources_landing_page
+idMap:
+  plugin: smart_sql
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_jump_to
+    - olympian_d7_node_complete_testimonial
+    - olympian_d7_paragraphs_testimonials
+  optional:
+    - olympian_d7_user
+    - olympian_d7_taxonomy_term_resource_categories
+    - olympian_d7_paragraphs_introduction
+    - olympian_d7_paragraphs_footer_callout
+    - olympian_d7_paragraphs_revisions_button
+    - olympian_d7_paragraphs_revisions_social_media_links
+    - olympian_d7_paragraphs_revisions_introduction
+    - olympian_d7_paragraphs_revisions_footer_callout
+    - olympian_d7_paragraphs_revisions_jump_to
+    - olympian_d7_paragraphs_revisions_testimonials

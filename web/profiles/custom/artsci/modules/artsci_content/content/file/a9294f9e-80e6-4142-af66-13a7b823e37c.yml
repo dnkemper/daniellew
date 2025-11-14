@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a9294f9e-80e6-4142-af66-13a7b823e37c
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: courselisting_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/courselisting_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 42730
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

@@ -1,0 +1,71 @@
+uuid: 8ad85260-d5e8-4815-ac41-3ff631587bdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.media_entity_browser
+    - entity_browser.browser.media_entity_browser_modal
+    - filter.format.restricted_html
+  module:
+    - actions_permissions
+    - entity_browser
+    - file
+    - filter
+    - media
+    - node_view_permissions
+    - olympian_core
+    - system
+_core:
+  default_config_hash: I44QAB4es39lNzMQWiJLq2dfjX7VRSOzT_5KzAcUq_M
+id: authenticated
+label: 'authenticated user'
+weight: -4
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access media_entity_browser entity browser pages'
+  - 'access media_entity_browser_modal entity browser pages'
+  - 'delete own files'
+  - 'download media'
+  - 'update any media'
+  - 'update media'
+  - 'use text format restricted_html'
+  - 'view any article content'
+  - 'view any book content'
+  - 'view any contact_landing_page content'
+  - 'view any events content'
+  - 'view any events_landing_page content'
+  - 'view any faculty_landing_page content'
+  - 'view any faculty_staff content'
+  - 'view any faq content'
+  - 'view any generic_page content'
+  - 'view any home_page content'
+  - 'view any image_cards content'
+  - 'view any image_cards_landing content'
+  - 'view any news_landing_page content'
+  - 'view any page content'
+  - 'view any past_events_landing_page content'
+  - 'view any publication_page content'
+  - 'view any resources content'
+  - 'view any resources_landing_page content'
+  - 'view any testimonial content'
+  - 'view media'
+  - 'view own article content'
+  - 'view own book content'
+  - 'view own contact_landing_page content'
+  - 'view own events content'
+  - 'view own events_landing_page content'
+  - 'view own faculty_landing_page content'
+  - 'view own faculty_staff content'
+  - 'view own faq content'
+  - 'view own generic_page content'
+  - 'view own home_page content'
+  - 'view own image_cards content'
+  - 'view own image_cards_landing content'
+  - 'view own news_landing_page content'
+  - 'view own page content'
+  - 'view own past_events_landing_page content'
+  - 'view own publication_page content'
+  - 'view own resources content'
+  - 'view own resources_landing_page content'
+  - 'view own testimonial content'

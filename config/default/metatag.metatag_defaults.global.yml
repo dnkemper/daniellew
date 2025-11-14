@@ -1,0 +1,22 @@
+uuid: 930ae5b1-36b1-49a8-9f57-0b6e444485ce
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:body]'
+  generator: 'Drupal 10 (http://drupal.org)'
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_type: article
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[current-page:title] | [current-page:pager][site:name]'
+  twitter_cards_creator: '@washuartsci'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary

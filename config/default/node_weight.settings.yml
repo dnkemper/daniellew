@@ -1,0 +1,6 @@
+check_edit_access: 0
+entity_types:
+  - node
+node_weight:
+  checked_node_types:
+    - resources

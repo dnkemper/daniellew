@@ -1,0 +1,140 @@
+uuid: 17168e72-0ea2-44de-b97c-10e9ad86efe0
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.spotlight
+    - field.field.node.faculty_staff.field_additional_titles
+    - field.field.node.faculty_staff.field_advisor
+    - field.field.node.faculty_staff.field_advisor_url
+    - field.field.node.faculty_staff.field_areas_of_interest
+    - field.field.node.faculty_staff.field_author_headshot
+    - field.field.node.faculty_staff.field_award
+    - field.field.node.faculty_staff.field_biography
+    - field.field.node.faculty_staff.field_building_name_and_room_num
+    - field.field.node.faculty_staff.field_content_hash
+    - field.field.node.faculty_staff.field_content_type
+    - field.field.node.faculty_staff.field_cv
+    - field.field.node.faculty_staff.field_deans_title
+    - field.field.node.faculty_staff.field_description
+    - field.field.node.faculty_staff.field_education
+    - field.field.node.faculty_staff.field_email_address
+    - field.field.node.faculty_staff.field_external_profile_link
+    - field.field.node.faculty_staff.field_external_url
+    - field.field.node.faculty_staff.field_faculty_areas_of_study
+    - field.field.node.faculty_staff.field_fax_number
+    - field.field.node.faculty_staff.field_field_advisor_url
+    - field.field.node.faculty_staff.field_first_name
+    - field.field.node.faculty_staff.field_interests
+    - field.field.node.faculty_staff.field_intro_text
+    - field.field.node.faculty_staff.field_is_shared
+    - field.field.node.faculty_staff.field_last_fetch
+    - field.field.node.faculty_staff.field_last_name
+    - field.field.node.faculty_staff.field_link_excerpt
+    - field.field.node.faculty_staff.field_links_p
+    - field.field.node.faculty_staff.field_mailing_address
+    - field.field.node.faculty_staff.field_meta_tags
+    - field.field.node.faculty_staff.field_office_hours
+    - field.field.node.faculty_staff.field_phone_number
+    - field.field.node.faculty_staff.field_position
+    - field.field.node.faculty_staff.field_pronouns
+    - field.field.node.faculty_staff.field_sample_c_and_p_p
+    - field.field.node.faculty_staff.field_search
+    - field.field.node.faculty_staff.field_shared_content
+    - field.field.node.faculty_staff.field_shared_content_notify
+    - field.field.node.faculty_staff.field_shared_content_subscribers
+    - field.field.node.faculty_staff.field_shared_content_xml
+    - field.field.node.faculty_staff.field_social_media_links_p
+    - field.field.node.faculty_staff.field_type_of_staff
+    - node.type.faculty_staff
+  module:
+    - private_content
+    - user
+id: node.faculty_staff.spotlight
+targetEntityType: node
+bundle: faculty_staff
+mode: spotlight
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_is_shared:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_link_excerpt:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_shared_content_xml:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_additional_titles: true
+  field_advisor: true
+  field_advisor_url: true
+  field_areas_of_interest: true
+  field_author_headshot: true
+  field_award: true
+  field_biography: true
+  field_building_name_and_room_num: true
+  field_content_hash: true
+  field_content_type: true
+  field_cv: true
+  field_deans_title: true
+  field_description: true
+  field_education: true
+  field_email_address: true
+  field_external_profile_link: true
+  field_external_url: true
+  field_faculty_areas_of_study: true
+  field_fax_number: true
+  field_field_advisor_url: true
+  field_first_name: true
+  field_interests: true
+  field_intro_text: true
+  field_last_fetch: true
+  field_last_name: true
+  field_links_p: true
+  field_mailing_address: true
+  field_meta_tags: true
+  field_office_hours: true
+  field_phone_number: true
+  field_position: true
+  field_pronouns: true
+  field_sample_c_and_p_p: true
+  field_search: true
+  field_shared_content: true
+  field_shared_content_notify: true
+  field_shared_content_subscribers: true
+  field_social_media_links_p: true
+  field_type_of_staff: true
+  search_api_excerpt: true

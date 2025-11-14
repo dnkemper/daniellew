@@ -1,0 +1,103 @@
+id: node_page_not_found
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - Content
+label: 'Node complete (Page Not Found)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: page_not_found
+#  ----------------------------- ---------- ------------------ -------------
+#   Field name                    Required   Field type         Cardinality
+#  ----------------------------- ---------- ------------------ -------------
+#   field_background_image                   entity_reference   1
+#   field_meta_tags                          metatag            1
+#   field_new_window                         boolean            1
+#   field_new_window_option_two              boolean            1
+#   field_page_not_found_one                 link               1
+#   field_page_not_found_two                 link               1
+#   field_search                             string_long        1
+#   field_subtitle                           string             1
+#  ----------------------------- ---------- ------------------ -------------
+process:
+  type:
+    plugin: default_value
+    default_value: page_not_found
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  # Image field mapping using sub_process
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_search:
+    plugin: get
+    source: field_search
+destination:
+  plugin: 'entity:node'
+  default_bundle: page_not_found
+migration_dependencies:
+  required: {}
+  optional: {  }

@@ -1,0 +1,20 @@
+uuid: 49195e33-9d87-48cf-8ecc-0bd2e3795683
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_coin_object_num
+field_name: field_coin_object_num
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

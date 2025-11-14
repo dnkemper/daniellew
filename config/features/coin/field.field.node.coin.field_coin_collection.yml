@@ -1,0 +1,29 @@
+uuid: 3c5133b7-d176-4f6d-bbb9-341f2ccfc2fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_collection
+    - node.type.coin
+    - taxonomy.vocabulary.coin_collection
+id: node.coin.field_coin_collection
+field_name: field_coin_collection
+entity_type: node
+bundle: coin
+label: Collection
+description: 'List whichever collections this item is a part of. If the Collection already exists in the system, it will autocomplete as you type it in. Otherwise, any new Collection you type in will be added to the system.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_collection: coin_collection
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: physics.ddev.site
+    protocol: https
+  machine_name: physics
+  human_name: physics.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: physics.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/physics.wustl.edu/files'
+    origin: 'https://physics.wustl.edu'
+drupal:
+  db:
+    database: drupal_physics
+system:
+  site:
+    contact_us_url: 'https://physics.wustl.edu/contact-us'
+    name: physics
+    email: physics@wustl.edu

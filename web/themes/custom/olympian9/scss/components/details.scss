@@ -1,0 +1,273 @@
+summary.olympian-details__summary {
+  position: relative;
+  font-size: 15px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  vertical-align: middle;
+  // border-right: 2px solid var(--light-gray);
+  // padding-right: 30px;
+
+  .title {
+    color: var(--dark-red);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.075em;
+    // margin-top: -30px;
+    // margin-bottom: 10px;
+  }
+}
+.js-form-item.form-item.js-form-type-select.form-item-tid.js-form-item-tid ul {
+  padding: 25px 80px;
+  background: var(--light-gray);
+  color: var(--red);
+  .bef-link {
+    &:hover {
+      background: var(--red);
+      color: white;
+    }
+  }
+  .bef-link--selected {
+    background: var(--red);
+    color: white;
+  }
+}
+.olympian-details__wrapper.details-wrapper {
+  position: absolute;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  .pretty-element label {
+    &:hover {
+      background-color: var(--dark-red);
+      color: var(--light-gray);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .pretty-element label {
+      font-family: var(--sans-serif);
+      display: inline-block;
+      text-align: center;
+      width: 27px;
+      height: 27px;
+      line-height: 27px;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--light-gray);
+      color: var(--dark-red);
+    }
+  }
+}
+summary[aria-expanded='false'] {
+  .title {
+    position: relative;
+    font-size: 15px;
+    color: var(--dark-red);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    vertical-align: middle;
+    text-align: right;
+    line-height: 2;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: currentColor;
+      height: 14px;
+      top: 50%;
+      margin-top: -7px;
+      transition: 0.2s;
+    }
+
+    &:before {
+      right: -20px;
+      transform: rotate(45deg);
+      transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      right: -10px;
+      transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+summary[aria-expanded='true'] {
+  .title {
+    position: relative;
+    font-size: 15px;
+    color: var(--dark-red);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    vertical-align: middle;
+    text-align: right;
+    line-height: 3;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: currentColor;
+      height: 14px;
+      top: 50%;
+      margin-top: -7px;
+      transition: 0.2s;
+    }
+
+    &:before {
+      right: -15px;
+      transform: rotate(45deg);
+      transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      right: -15px;
+      transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}
+form#views-exposed-form-resources-block-resources-grid,
+form#views-exposed-form-resources-resources-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+  .js-form-item.form-item.js-form-type-textfield.form-item-keys.js-form-item-keys {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-flex-grow: 1;
+    width: 100%;
+    // background: var(--light-gray);
+    padding: 10px 15px;
+    box-sizing: border-box;
+    margin-bottom: 0;
+
+    background: none;
+    padding: 19px 0;
+    margin-left: 45px;
+    svg.icon {
+      width: 22px;
+      height: 22px;
+    }
+    input[type='text'] {
+      margin-bottom: 0;
+      padding-left: 45px;
+      background: none;
+      transition: 0.2s;
+      border: none;
+      box-sizing: border-box;
+      width: 100%;
+      -webkit-appearance: none;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 21px;
+      border-radius: 0;
+      &:focus {
+        outline: 0;
+        background: var(--light-gray);
+      }
+    }
+    input[type='search']::placeholder {
+      font-size: 1em;
+      text-transform: none;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+  }
+  summary.olympian-details__summary {
+    background: var(--red);
+    color: #fff;
+    // height: 87px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    // padding-left: 45px;
+    // padding-right: 80px;
+    margin-bottom: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  .title {
+    color: white;
+  }
+}
+@media (min-width: 768px) {
+  .js-form-item.form-item.js-form-type-textfield.form-item-keys.js-form-item-keys {
+    width: auto !important;
+    margin-bottom: 0;
+    background: none;
+    padding: 19px 0;
+    // margin-left: 45px;
+  }
+}
+button.olympian-search-button {
+  position: absolute;
+  cursor: pointer;
+  left: 5px;
+  top: 50%;
+  margin-top: -25px;
+  height: 50px;
+  width: 30px;
+  font-size: 0;
+  background: none;
+  z-index: 99;
+}
+.form-text {
+  position: relative;
+  margin-right: 45px;
+}
+.js-form-item.form-item.js-form-type-select.form-item-tid.js-form-item-tid {
+  display: inline-block;
+  width: 100%;
+  ul {
+    padding: 25px 80px;
+    li {
+      display: inline-block;
+    }
+  }
+}
+.bef-link {
+  border: 2px solid #fff;
+  margin-right: 15px;
+  margin: 5px 15px 5px 0;
+  padding: 7px 15px;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.075em;
+  font-size: 0.95em;
+}
+
+form#views-exposed-form-news-list-block,
+form#views-exposed-form-news-cards,
+form#views-exposed-form-image-cards-image-card-list,
+form#views-exposed-form-image-cards-image-card-grid {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,26 @@
+uuid: 03f7dd1e-855c-4920-98f9-102fa2623434
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_reverse_mintmarks
+    - filter.format.full_html
+    - node.type.coin
+  module:
+    - text
+id: node.coin.field_coin_reverse_mintmarks
+field_name: field_coin_reverse_mintmarks
+entity_type: node
+bundle: coin
+label: 'Reverse Mintmarks'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

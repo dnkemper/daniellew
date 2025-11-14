@@ -1,0 +1,238 @@
+/*--------------------------------------------------------------
+# Multipurpose List
+--------------------------------------------------------------*/
+
+.multipurpose-list {
+  padding: 50px 7.5% 100px;
+  background: var(--dark-gray);
+  color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+.multipurpose-list .icon {
+  fill: var(--light-gray);
+  margin-left: 10px;
+}
+
+.multipurpose-list .slide {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+}
+
+.multipurpose-list .slick-dots {
+  bottom: -60px;
+  left: 0;
+  right: 0;
+  top: auto;
+}
+
+.multipurpose-list h2 {
+  font-family: var(--sans-serif);
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.075em;
+  color: #fff;
+  border: 2px solid var(--red);
+  display: inline-block;
+  padding: 15px 25px;
+  margin-bottom: 50px;
+}
+
+.multipurpose-list h3 {
+  color: var(--gold);
+  font-size: 26px;
+}
+
+.multipurpose-list p {
+  margin-bottom: 2em;
+}
+
+.multipurpose-list a {
+  color: var(--light-blue);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.025em;
+  &:hover {
+    color: var(--white);
+  }
+}
+
+.multipurpose-list .course {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.025em;
+  line-height: 1.2;
+  color: var(--light-blue);
+}
+
+.multipurpose-list .course li {
+  display: inline-block;
+  border-right: 1px solid var(--light-blue);
+  padding-right: 6px;
+  margin-right: 4px;
+}
+
+.multipurpose-list .course li:last-child {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.multipurpose-list .course a:hover {
+  color: #fff;
+}
+
+@media all and (min-width: 600px) {
+  .multipurpose-list {
+    padding: 100px 7.5% 140px;
+  }
+}
+
+@media all and (min-width: 1030px) {
+  .page-node-type-faculty-staff .multipurpose-list .slide {
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+  }
+}
+
+/*--------------------------------------------------------------
+# Multipurpose Slideshow
+--------------------------------------------------------------*/
+
+.multipurpose-slideshow {
+  position: relative;
+  background: var(--light-gray);
+  background: var(--dark-gray);
+  color: #fff;
+  text-align: center;
+}
+
+.multipurpose-slideshow header {
+  background: #fff;
+}
+
+.multipurpose-slideshow h2 {
+  font-family: var(--sans-serif);
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.075em;
+  border: 2px solid var(--red);
+  display: inline-block;
+  padding: 15px 25px;
+  margin-bottom: 0;
+  margin: 40px 0;
+  color: var(--darkest-gray);
+}
+
+.multipurpose-slideshow .image {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.multipurpose-slideshow .text {
+  padding: 30px 0;
+}
+
+.multipurpose-slideshow .inner {
+  width: 85%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.multipurpose-slideshow h3 {
+  color: var(--gold);
+  font-size: 26px;
+}
+
+.multipurpose-slideshow p {
+  margin-bottom: 1.5em;
+}
+
+.multipurpose-slideshow a {
+  color: var(--light-blue);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.075em;
+  &:hover {
+    color: var(--white);
+  }
+}
+
+.multipurpose-slideshow a .icon {
+  fill: currentColor;
+  margin-left: 5px;
+}
+.multipurpose-slideshow .slick-dots {
+  width: 100%;
+}
+
+.multipurpose-slideshow {
+  .dot-slideshow:has(.slick-track > .slide:only-child) .slick-dots {
+    display: none;
+  }
+}
+
+@media all and (min-width: 600px) {
+  .multipurpose-slideshow .text {
+    padding-top: 50px;
+  }
+  .multipurpose-slideshow .image img {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media all and (min-width: 1030px) {
+  .multipurpose-slideshow header {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    left: 50%;
+    background: none;
+  }
+  .multipurpose-slideshow h2 {
+    margin: 0;
+    color: #fff;
+  }
+  .multipurpose-slideshow .image {
+    max-height: 680px;
+  }
+  .multipurpose-slideshow .text {
+    display: -ms-flexbox;
+    display: flex;
+    display: -webkit-flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    padding: 160px 0 70px;
+  }
+  .multipurpose-slideshow img {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .multipurpose-slideshow .slick-dots {
+    left: 25%;
+    right: 0;
+    top: unset;
+  }
+}
+
+@media all and (min-width: 1300px) {
+  .multipurpose-slideshow header {
+    top: 90px;
+  }
+  .multipurpose-slideshow .text {
+    padding-top: 200px;
+  }
+}

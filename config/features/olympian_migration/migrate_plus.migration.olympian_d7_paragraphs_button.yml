@@ -1,0 +1,41 @@
+uuid: 20fef34b-6435-49df-aa18-a5475b6b25a3
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_button
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Button)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: button
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_type: parent_type
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_call_to_action_button:
+    plugin: field_link_custom
+    source: field_call_to_action_button_url
+    title_source: field_call_to_action_button_text
+  field_new_window:
+    plugin: get
+    source: field_new_window
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: button
+migration_dependencies: {  }

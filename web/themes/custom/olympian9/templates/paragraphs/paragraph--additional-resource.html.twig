@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - field_button_link - link
+ * - field_new_window - boolean
+ * - field_subtitle - text plain
+ * - field_title - text plain
+ +-------------------+----------+------------+-------------+
+| Field name        | Required | Field type | Cardinality |
++-------------------+----------+------------+-------------+
+| field_button_link |          | link       | 1           |
+| field_new_window  |          | boolean    | 1           |
+| field_subtitle    |          | string     | 1           |
+| field_title       |          | string     | 1           |
++-------------------+----------+------------+-------------+
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% block paragraph %}
+
+    {% if content.field_button_link[0]['#url'] or content.field_title.0 or content.field_subtitle.0 %}
+      <li>
+        {% if '1' in content.field_new_window[0] and content.field_button_link[0]['#url'] %}
+          <h3>
+            <a href="{{ content.field_button_link[0]['#url'] }}"  aria-label="{{ content.field_title.0 }} - link originates outside of WashU">
+              {{ content.field_title.0 }}
+              <svg class="icon"><use xlink:href="#link-out"></use></svg>
+            </a>
+          </h3>
+        {% elseif content.field_button_link[0]['#url'] %}
+          <h3>
+            <a href="{{ content.field_button_link[0]['#url'] }}" aria-label="Go to {{ content.field_title.0 }}">
+              {{ content.field_title.0 }}
+            </a>
+          </h3>
+        {% endif %}
+        {% if content.field_subtitle.0 %}
+          <p>{{ content.field_subtitle.0 }}</p>
+        {% endif %}
+      </li>
+    {% endif %}
+  {% endblock paragraph %}

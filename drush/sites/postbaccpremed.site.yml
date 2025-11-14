@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://postbaccpremed.ddev.site
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+dev:
+  uri: https://postbaccpremed.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://postbaccpremed.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://postbaccpremed.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

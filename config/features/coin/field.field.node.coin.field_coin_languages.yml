@@ -1,0 +1,29 @@
+uuid: ff55d9f3-10b2-4fac-a6b8-e65195ed0367
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_languages
+    - node.type.coin
+    - taxonomy.vocabulary.coin_language
+id: node.coin.field_coin_languages
+field_name: field_coin_languages
+entity_type: node
+bundle: coin
+label: Languages
+description: 'Separate entries with a comma.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_language: coin_language
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

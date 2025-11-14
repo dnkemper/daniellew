@@ -1,0 +1,21 @@
+uuid: be3766ec-1e33-4a49-b766-c9c307a9c2cc
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_additional_resources
+field_name: field_additional_resources
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,38 @@
+node_weight.form:
+  path: '/admin/structure/node-weight'
+  defaults:
+    _form: 'Drupal\node_weight\Form\NodeWeightForm'
+    _title: 'Node Weight'
+  requirements:
+    _permission: 'administer node weight'
+  options:
+    _admin_route: TRUE
+node_weight.order:
+  path: '/admin/structure/types/manage/{node_type}/order'
+  defaults:
+    _form: 'Drupal\node_weight\Form\NodeOrderForm'
+    _title: 'Manage order'
+  requirements:
+    _permission: 'assign node weight'
+  options:
+    _admin_route: TRUE
+    parameters:
+      node_type:
+        type: node_type
+node_weight.settings:
+  path: '/admin/config/content/weight'
+  defaults:
+    _title: 'Weight'
+    _form: \Drupal\node_weight\Form\NodeWeightUISettingsForm
+  requirements:
+    _permission: 'administer site configuration'
+entity.node.weight:
+  path: '/node/{node}/weight'
+  defaults:
+    _form: 'Drupal\node_weight\Form\NodeOrderForm'
+    _title: 'Manage order'
+    node_type: 'resources'
+  requirements:
+    _permission: 'assign node weight'
+  options:
+    _admin_route: TRUE

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0306f4dd-1a98-4d37-80e6-238ff007b4cb
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: parkingtransportation_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/parkingtransportation_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 43869
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

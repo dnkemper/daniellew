@@ -1,0 +1,40 @@
+uuid: 5056ef09-59d9-4c80-8b5f-3483de9c8b2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publications.field_button_url
+    - field.field.paragraph.publications.field_subtitle
+    - field.field.paragraph.publications.field_title
+    - paragraphs.paragraphs_type.publications
+id: paragraph.publications.default
+targetEntityType: paragraph
+bundle: publications
+mode: default
+content:
+  field_button_url:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

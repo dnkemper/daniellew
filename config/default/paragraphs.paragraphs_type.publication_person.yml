@@ -1,0 +1,10 @@
+uuid: 4db4b9c6-8d99-4db1-9e0f-ce7cfc0fb7e4
+langcode: en
+status: true
+dependencies: {  }
+id: publication_person
+label: 'Publication Person'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Person'
+behavior_plugins: {  }

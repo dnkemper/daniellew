@@ -1,0 +1,10 @@
+uuid: 2aba7219-c635-4948-b54a-ae1fe06e6970
+langcode: en
+status: true
+dependencies: {  }
+id: full_screen_home_slide
+label: 'Full Screen Home Slide'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Full Screen Home Slide'
+behavior_plugins: {  }

@@ -1,0 +1,19 @@
+uuid: 25410ce3-10d1-42a5-b8c7-166efcd2885d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_video_title
+    - paragraphs.paragraphs_type.fullscreen_video
+id: paragraph.fullscreen_video.field_spotlight_video_title
+field_name: field_spotlight_video_title
+entity_type: paragraph
+bundle: fullscreen_video
+label: 'Video/Image Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

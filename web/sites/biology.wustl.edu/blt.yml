@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: biology.ddev.site
+    protocol: https
+  machine_name: biology
+  human_name: biology.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: biology.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/biology.wustl.edu/files'
+    origin: 'https://biology.wustl.edu'
+drupal:
+  db:
+    database: drupal_biology
+system:
+  site:
+    contact_us_url: 'https://biology.wustl.edu/contact-us'
+    name: biology
+    email: biology@wustl.edu

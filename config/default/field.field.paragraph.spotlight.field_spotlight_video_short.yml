@@ -1,0 +1,19 @@
+uuid: d53da1f3-b307-4c97-88f9-6367d0193cb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spotlight_video_short
+    - paragraphs.paragraphs_type.spotlight
+id: paragraph.spotlight.field_spotlight_video_short
+field_name: field_spotlight_video_short
+entity_type: paragraph
+bundle: spotlight
+label: 'Video/Image Short Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

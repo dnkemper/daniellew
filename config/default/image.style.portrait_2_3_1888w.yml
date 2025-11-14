@@ -1,0 +1,23 @@
+uuid: 7a947549-2ab6-4f3f-a752-ef92a7ea973b
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_2_3_1888w
+label: 'portrait 2:3 (1888w)'
+effects:
+  a99eff3e-7273-46a9-a9d6-11870b28658c:
+    uuid: a99eff3e-7273-46a9-a9d6-11870b28658c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1888
+      height: 2832
+      crop_type: focal_point
+  09999f29-1175-4c55-9a78-42e60361703b:
+    uuid: 09999f29-1175-4c55-9a78-42e60361703b
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

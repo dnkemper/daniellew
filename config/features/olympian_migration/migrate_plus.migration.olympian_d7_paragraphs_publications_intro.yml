@@ -1,0 +1,78 @@
+uuid: 99753f7d-c624-4663-97c2-def11148dbee
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_publications_intro
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Publication Intro)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: publications_intro
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_article_two:
+    plugin: sub_process
+    source: field_article_two
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_first_article:
+    plugin: sub_process
+    source: field_first_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_fourth_article:
+    plugin: sub_process
+    source: field_fourth_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_third_article:
+    plugin: sub_process
+    source: field_third_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_intro_header_subtitle:
+    -
+      plugin: get
+      source: field_intro_header_subtitle
+  field_intro_header_title:
+    -
+      plugin: get
+      source: field_intro_header_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publications_intro
+idMap:
+  plugin: smart_sql
+migration_dependencies:
+  required:
+    - olympian_d7_node_complete_article  # Ensure this is the correct ID of your 'article' node migration
+  optional: {}

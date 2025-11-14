@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 25cf0897-a4f1-4da3-b44b-812469bd2c1c
+  bundle: image
+  default_langcode: en
+  depends:
+    878dfafe-3450-45d8-aa29-4eb2133e096f: taxonomy_term
+    378ca24d-1d84-4b59-8d64-8e1f26a85f0a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: leaveofabsence_420x420.png
+  created:
+    -
+      value: 1701521698
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /leaveofabsence420x420png
+      langcode: en
+      pathauto: 1
+  field_media_directory:
+    -
+      entity: 878dfafe-3450-45d8-aa29-4eb2133e096f
+  field_media_image:
+    -
+      entity: 378ca24d-1d84-4b59-8d64-8e1f26a85f0a
+      alt: '""'
+      title: ''
+      width: 876
+      height: 876

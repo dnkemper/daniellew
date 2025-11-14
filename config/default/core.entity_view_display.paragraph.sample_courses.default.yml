@@ -1,0 +1,39 @@
+uuid: 801de87d-b437-4fb2-990c-6a3d8e4aed19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sample_courses.field_description
+    - field.field.paragraph.sample_courses.field_subtitle
+    - field.field.paragraph.sample_courses.field_title
+    - paragraphs.paragraphs_type.sample_courses
+id: paragraph.sample_courses.default
+targetEntityType: paragraph
+bundle: sample_courses
+mode: default
+content:
+  field_description:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_subtitle:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

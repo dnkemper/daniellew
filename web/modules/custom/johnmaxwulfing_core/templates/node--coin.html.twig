@@ -1,0 +1,180 @@
+
+
+    {# {{ content.field_coin_reverse_header }} = (render($content['field_reverse_header']) == 1) ? 'reverse' : ' #}
+
+
+
+{# Variables #}
+<collectionItem class="single-blog-post collectionItem">
+<div class="post-header reverse">
+<div class="container reveal">
+<div class="coinImage">{{ content.field_coin_obverse_image }}</div>
+<div class="coinImage">{{ content.field_coin_reverse_image }}</div>
+
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+
+<div class="post-meta">
+
+
+
+
+<div class="baseInfo">
+{% if content.field_coin_object_type %}
+{{ content.field_coin_object_type }}
+{% endif %}
+{% if content.field_coin_material %}
+{{ content.field_coin_material }}
+{% endif %}
+{% if content.field_coin_authority_issuer %}
+{{ content.field_coin_authority_issuer }}
+{% endif %}
+</div>
+
+</div>
+</div>
+</div>
+<div class="post-body">
+{# Introduction excerpt #}
+{% if content.field_coin_introduction_excerpt %}
+    <div class="post-excerpt">
+    <p>{{ content.field_coin_introduction_excerpt }}</p>
+    </div>
+{% endif %}
+{# Main Collection Item Content #}
+<div class="post-content wysiwyg">
+<h3>Description</h3>
+{{ content.body }}
+
+<div class="coin_main">
+<div><strong>Collection Number: </strong>{{ content.field_coin_collection_number }}</div>
+
+
+ {# OBJECT NUMBER #}
+<div><strong>Object Number: </strong>
+{{ content.field_coin_acquisition_y }}
+{% if content.field_coin_lot_num and content.field_coin_acquisition_y %}
+  {{ content.field_coin_lot_num }}
+{% elseif content.field_coin_lot_num %}
+{{ content.field_coin_lot_num }}
+{% endif %}
+{% if content.field_coin_object_num and content.field_coin_lot_num or content.field_coin_lot_num or content.field_coin_acquisition_y %}
+  {{ content.field_coin_object_num }}
+{% elseif content.field_coin_object_num %}
+{{ content.field_coin_object_num }}
+{% endif %}
+</div>
+
+{# DATES #}
+{% if content.field_coin_date_first < 0 %}
+    {{ content.field_coin_date_first }} *= -1
+    {{ content.field_coin_date_first }} .=  " BC"
+{% endif %}
+{% if content.field_coin_date_last < 0 %}
+    {{ content.field_coin_date_last }} *= -1
+    {{ content.field_coin_date_last }} .=  " BC"
+{% endif %}
+{% if content.field_coin_date_first or content.field_coin_date_last %}
+    <div><strong>Dates: </strong>
+{% endif %}
+{% if content.field_coin_date_first and content.field_coin_date_last %}
+  {{ content.field_coin_date_first }}&nbsp;-&nbsp;{{ content.field_coin_date_last }}
+{% elseif content.field_coin_date_first %}
+  {{ content.field_coin_date_first }}
+{% elseif content.field_coin_date_last %}
+  {{ content.field_coin_date_last }}
+{% endif %}
+
+</div>
+
+{% if content.field_coin_denomination %}
+<div class="termref"><strong>Denomination: </strong>{{ content.field_coin_denomination }}</div>
+{% endif %}
+{% if content.field_coin_dimensions_1 %}
+<div><strong>Dimensions: </strong>{{ content.field_coin_dimensions_1 }}</div>
+{% endif %}
+{% if content.field_coin_weight %}
+<div><strong>Weight: </strong>{{ content.field_coin_weight }}</div>
+{% endif %}
+{% if content.field_coin_authority_ruler %}
+<div class="termref"><strong>Authority: </strong>{{ content.field_coin_authority_ruler }}</div>
+{% endif %}
+{% if content.field_coin_mint1 %}
+<div class="termref"><strong>Mint: </strong>{{ content.field_coin_mint1 }}</div>
+{% endif %}
+{% if content.field_coin_language %}
+<div class="termref"><strong>Languages: </strong>{{ content.field_coin_language }}</div>
+{% endif %}
+{% if content.field_coin_collection %}
+<div class="termref"><strong>Collection: </strong>{{ content.field_coin_collection }}</div>
+{% endif %}
+</br>
+
+
+{% if content.field_coin_obverse_description %}
+<div><strong>Obverse Type: </strong>{{ content.field_coin_obverse_description }}</div>
+{% endif %}
+{% if content.field_coin_obverse_legend %}
+{{ content.field_coin_obverse_legend }}<div class="coin_legend"><strong>Obverse Legend: </strong>{{ content.field_coin_obverse_legend }}</div>
+{% endif %}
+{% if content.field_coin_obverse_languages %}
+{{ content.field_coin_obverse_languages }}<div class="termref"><strong>Obverse Inscription Languages: </strong>{{ content.field_coin_obverse_languages }}</div>
+{% endif %}
+{% if content.field_coin_obverse_mintmarks %}
+{{ content.field_coin_obverse_mintmarks }}<div class="coin_legend"><strong>Obverse Mintmarks: </strong>{{ content.field_coin_obverse_mintmarks }}</div>
+{% endif %}
+{% if content.field_coin_obverse_comment %}
+{{ content.field_coin_obverse_comment }}<div><strong>Obverse Inscription Comment: </strong>{{ content.field_coin_obverse_comment }}</div>
+{% endif %}
+</br>
+
+{% if content.field_coin_reverse_description %}
+<div><strong>Reverse Type: </strong>{{ content.field_coin_reverse_description }}</div>
+{% endif %}
+{% if content.field_coin_reverse_legend %}
+<div class="coin_legend"><strong>Reverse Legend: </strong>{{ content.field_coin_reverse_legend }}</div>
+{% endif %}
+{% if content.field_coin_reverse_languages %}
+<div class="termref"><strong>Reverse Inscription Languages: </strong>{{ content.field_coin_reverse_languages }}</div>
+{% endif %}
+{% if content.field_coin_reverse_mintmarks %}
+<div class="coin_legend"><strong>Reverse Mintmarks: </strong>{{ content.field_coin_reverse_mintmarks }}</div>
+{% endif %}
+{% if content.field_coin_reverse_comment %}
+<div><strong>Reverse Inscription Comments: </strong>{{ content.field_coin_reverse_comment }}</div>
+{% endif %}
+</div>
+</br>
+
+{% if content.field_coin_provenance %}
+    <div><h3>Provenance</h3>{{ content.field_coin_provenance }}</div>
+    </br>
+{% endif %}
+
+{# BIBLIOGRAPHY #}
+<h3>Bibliography</h3>
+<div>{{ content.field_coin_bibliography }}</div>
+<a href="/bibliography">Full Reference List</a>
+</br>
+</br>
+
+{# Footer content #}
+</div>
+<div class="post-footer post-meta">
+<div class="tags">
+{% if content.field_coin_tags %}
+Tags: {{ content.field_coin_tags }}
+{% endif %}
+</div>
+</div>
+</div>
+</collectionItem>
+{% if content.field_coin_footer_callout_p|render %}
+{{ content.field_coin_footer_callout_p }}
+{% else %}
+{{ drupal_view('news_footer', 'block') }}
+{% endif %}

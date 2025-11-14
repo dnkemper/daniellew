@@ -1,0 +1,19 @@
+uuid: 8bd98d78-84b2-41e4-8a57-811336c581da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_half_text_title
+    - paragraphs.paragraphs_type.text_link_with_testimonial
+id: paragraph.text_link_with_testimonial.field_half_text_title
+field_name: field_half_text_title
+entity_type: paragraph
+bundle: text_link_with_testimonial
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

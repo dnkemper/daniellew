@@ -1,0 +1,10 @@
+uuid: 2d3b180c-6954-4991-9114-b533bff2a91d
+langcode: en
+status: true
+dependencies: {  }
+id: fullscreen_slideshow
+label: 'Fullscreen Slideshow'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Fullscreen Slideshow'
+behavior_plugins: {  }

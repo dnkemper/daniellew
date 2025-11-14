@@ -1,0 +1,23 @@
+uuid: 24db3e2c-1970-4bfb-accd-f985f2124fd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_article
+    - node.type.article
+id: node.article.field_feature_article
+field_name: field_feature_article
+entity_type: node
+bundle: article
+label: 'Feature on News Landing Page'
+description: 'Check to feature the article on the news landing page slideshow.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

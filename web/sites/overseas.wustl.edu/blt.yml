@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: overseas.ddev.site
+    protocol: https
+  machine_name: overseas
+  human_name: overseas.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: overseas.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/overseas.wustl.edu/files'
+    origin: 'https://overseas.wustl.edu'
+drupal:
+  db:
+    database: drupal_overseas
+system:
+  site:
+    contact_us_url: 'https://overseas.wustl.edu/contact-us'
+    name: overseas
+    email: overseas@wustl.edu

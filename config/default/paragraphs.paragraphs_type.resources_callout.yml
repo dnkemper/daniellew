@@ -1,0 +1,10 @@
+uuid: bbf08b2a-ff29-4e2f-92f3-385126a7d8ec
+langcode: en
+status: true
+dependencies: {  }
+id: resources_callout
+label: 'Resources Callout'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Resources Callout'
+behavior_plugins: {  }

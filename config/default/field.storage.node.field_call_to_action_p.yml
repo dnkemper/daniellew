@@ -1,0 +1,21 @@
+uuid: 93928938-b30c-462a-ab04-a630baa29e08
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_call_to_action_p
+field_name: field_call_to_action_p
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

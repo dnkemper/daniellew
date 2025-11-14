@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: chemistry.ddev.site
+    protocol: https
+  machine_name: chemistry
+  human_name: chemistry.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: chemistry.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/chemistry.wustl.edu/files'
+    origin: 'https://chemistry.wustl.edu'
+drupal:
+  db:
+    database: drupal_chemistry
+system:
+  site:
+    contact_us_url: 'https://chemistry.wustl.edu/contact-us'
+    name: chemistry
+    email: chemistry@wustl.edu

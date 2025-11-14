@@ -1,0 +1,56 @@
+uuid: ffc892ec-020b-4c00-a9db-59bd2c919ad1
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_image_cards_landing_redirects
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - redirects
+migration_group: olympian_d7
+label: 'Image Cards Landing Page Redirects'
+source:
+  plugin: d7_path_redirect
+  node_type: image_cards_landing
+process:
+  rid:
+    -
+      plugin: get
+      source: rid
+  uid:
+    -
+      plugin: get
+      source: uid
+  redirect_source/path:
+    -
+      plugin: get
+      source: source
+  redirect_source/query:
+    -
+      plugin: d7_redirect_source_query
+      source: source_options
+  redirect_redirect/uri:
+    -
+      plugin: d7_path_redirect
+      source:
+        - redirect
+        - redirect_options
+  language:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  status_code:
+    -
+      plugin: get
+      source: status_code
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:redirect'
+migration_dependencies:
+  required:
+    - olympian_d7_node_complete_image_cards_landing

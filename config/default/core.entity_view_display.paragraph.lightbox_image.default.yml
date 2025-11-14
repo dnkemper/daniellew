@@ -1,0 +1,52 @@
+uuid: 2790d19e-b6e0-43f2-89b5-18043c31a369
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.lightbox_image.field_description_formatted
+    - field.field.paragraph.lightbox_image.field_featured_image
+    - field.field.paragraph.lightbox_image.field_subtitle
+    - field.field.paragraph.lightbox_image.field_title
+    - paragraphs.paragraphs_type.lightbox_image
+  module:
+    - text
+id: paragraph.lightbox_image.default
+targetEntityType: paragraph
+bundle: lightbox_image
+mode: default
+content:
+  field_description_formatted:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_featured_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: testimonial_desktop
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_description: true
+  search_api_excerpt: true

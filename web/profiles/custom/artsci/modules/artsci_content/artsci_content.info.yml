@@ -1,0 +1,116 @@
+name: 'Artsci Default Content'
+type: module
+description: 'default content for artsci profile'
+package: Custom
+core_version_requirement: ^10
+default_content:
+  file:
+    - 04f0648b-93e1-4b16-a97a-2c02724b67ba
+    - 8f03db14-30ed-49c6-a177-cb7d03948e31
+    - 162162e0-5616-443d-a447-9f592cbfbaed
+    - 8f7ee5d3-280c-4a78-a96d-a93d65e14c8b
+    - 17228f97-7ce1-43ff-8808-78bad07fd005
+    - 97d80d2e-7961-4686-8e2e-8f09832b9664
+    - 1ca1a7f4-29b9-4c2e-aa98-84f959957fe7
+    - 1ccb7936-b035-423d-b9f8-e3c82a7e4806
+    - acbdd300-952b-4ed3-b50e-fb42a8affe29
+    - 1d9eb986-128f-42e3-9ed1-8121beb1c904
+    - b7275f1e-1a4e-4e90-b0a0-66e09840b54c
+    - 2242b29f-1c1d-475b-b37d-1f184dd748e0
+    - b8ea6eb4-d3da-48b6-b79f-59a896d14861
+    - 44113bd5-d9a7-4277-afb7-9d184373ecd7
+    - b9c15cd0-94e5-4aad-bf66-7b15f58e58a6
+    - 4ad4eb07-e585-403f-a9bd-9e1e1c1c38c3
+    - bb291135-c7a0-4f81-a3b3-cea294a74810
+    - 552349d3-0473-4f3e-8679-4856aced7118
+    - bd972dec-b72f-4141-8fc5-740aedc9366b
+    - 607cb7ac-47db-4f78-8af8-d0659918e0ec
+    - c1d752ed-2956-45a3-8eb6-7ed114061171
+    - 70adf0c7-9f80-4cde-87a9-5320162dbcb0
+    - ca9e38e0-177f-4d63-9726-86ff677c547a
+    - 74aaeeb5-aae9-44cc-aaef-ce152a900a0b
+    - ce3ef464-0e69-44fe-8c5d-ac3499d87321
+    - 7e5fafed-bb46-43d4-befc-3ed7bd5a745f
+    - d3c70afd-1a1a-4634-9547-9d854bcfa8d4
+    - 82964927-4ae8-4a88-824a-ebe759f176df
+    - db3cea7e-b20a-4b6a-86b4-063bbdc8a51a
+    - 84b0be07-bf92-4496-88da-bdddf4069060
+    - e2294d17-f1a7-4415-a76a-4923027e503f
+    - 89c0cd32-4606-446e-95a6-3bc7d3b5832b
+    - ea20eeba-6374-4199-99ad-c04abf0e25e8
+    - 8b9bee41-9c36-4241-b350-09b322610883
+  media:
+    - 01678052-fffb-44f0-875f-872f1f2681d4
+    - 8f75df49-275c-4de4-9d0e-58d77f6b8083
+    - 1171fd86-7b93-4b29-9c66-52a665789279
+    - 9db368f2-e208-4e7c-8815-0938c165ece9
+    - 131128c4-9baa-4781-9210-be4344e64fbf
+    - a3fd3001-c863-4eb7-acb3-b4d9f385b0d3
+    - 4d43ed8c-649b-448d-8284-3a1aa580a591
+    - a487df98-8c7f-4467-9271-019c308bee57
+    - 58d62119-6842-41d9-8f42-4b89e63165d9
+    - b83ccde6-1e7d-460b-bcf8-1982122fcc0d
+    - 5ab90bd7-310e-405a-85a5-666a3ec3413f
+    - b914ea7d-1c04-412e-ab2a-e69b90905bc2
+    - 5b2e046b-20fb-438e-87d2-d0f5e3d7c724
+    - bf519e97-73a7-4c2d-9d91-d58bb766c703
+    - 7c77cd72-7640-434c-a342-e4b898ed0c56
+    - cc162dfd-0c8e-4e46-92a9-0397504d9c2e
+    - 825125c1-99d9-4d2b-860d-ab10bb27a204
+    - df6e47f3-2e3d-4ab7-b935-cb1172a6a602
+    - 8644d0bd-30ea-4639-9a47-9e87cc9139aa
+    - f27d4c7b-1a88-4600-85a9-84ecb927e547
+    - 89869e3f-6696-4e72-9aff-f09ddd401a49
+    - feb61ebe-0b75-48ab-9745-9c65d78a8458
+  menu_link_content:
+    - 03730145-9df2-47f8-940c-99377927d6d5
+    - abe202f5-0507-4ac4-8a4b-cba1f4d9f13e
+    - 3043ec05-56b1-4044-8abf-a792baaff768
+    - af1231f8-40cd-46c2-a13b-4f15dfad316c
+    - 385ff5ce-8366-48b7-95e2-d02780286e05
+    - b9cef432-9f87-4895-a6df-09027a793222
+    - 4d216e21-4fb5-4218-8eb3-94e564ff16da
+    - bc9a35a9-b69a-49a1-9491-677fa7425798
+    - 645772b3-e1e7-4adc-93a3-d47cb3e0c791
+    - d4b7a345-539f-4ee4-abe7-42242085e232
+    - 966bb039-f547-4ad2-851c-64f6a08ed07e
+    - ef63a9ce-8f3f-4303-b39b-aba540e72169
+    - a22f2390-1e74-489a-90de-4101d96f0fe9
+  node:
+    - 12f1d326-94c8-4bce-a7a9-0500614e99fd
+    - 89203585-c230-43d9-a9d7-ae124a7cc0c1
+    - 14edb167-7d80-47b1-b581-a2959454eb7b
+    - 98d035c6-646a-476d-a75f-389a4d96573a
+    - 194b68d2-b70c-4dae-8e12-0da83169aba6
+    - 9c2ccd23-e6e0-4077-b826-cf2a1688c076
+    - 1f657f4a-e828-498d-ba68-56c4e72622e2
+    - a0eaf66b-c903-44a0-a357-d138be9021c6
+    - 37d8a3cb-90dd-4570-8fce-28c9a5055604
+    - a2847f27-5021-4baf-bb33-6780ae29b65e
+    - 3ece3eb1-eb9e-449c-aedc-83382dfe7b40
+    - a54f9442-b4c4-4e04-bb41-fa69c2ca85c2
+    - 4ca99d96-db59-47c1-ab9f-7e2c22fde05d
+    - a5c76629-6706-47dd-a4a1-549d31675571
+    - 4e366210-4fcb-4b7b-a7dc-83d6c394a66b
+    - b68cd562-cd0a-4aac-8c35-bed89111cfa4
+    - 62513129-3edf-489a-87c6-75e348a74ad5
+    - bc3cd6df-02a7-4ed4-ba05-f79587b631dc
+    - 668cc49b-51e2-41ac-9631-a397da5fc30a
+    - de35723c-a947-4fa0-8961-398f58ff253c
+    - 7d3ba7c6-fa84-49b1-8cf9-ff9540bf163e
+    - e0f77bb4-f2b7-4520-8995-3c786a5b93b9
+    - 7ed09833-c325-42a5-a1ea-e8e0a28d9461
+    - e351fe53-1219-4d95-bb0e-c540c7f6aab1
+    - 81dec73a-f869-4b0a-a603-95ccbdfad768
+    - fb1a456c-3764-49bc-ab09-b67b6648ae35
+    - 82ba4f60-ea4d-415c-9ff2-f95d5dc2d84d
+  taxonomy_term:
+    - 105bbaf4-5324-432b-958a-507d18b3f01b
+    - 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    - 231e1bf8-6389-4750-a357-7da34624cfc2
+    - 6c34862c-bdd3-490e-b8c8-a05f2b770380
+    - 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+    - a5171302-b2f8-4204-b19f-752fe953ef3c
+    - 582f1150-9852-415c-b671-332a2006f4e9
+dependencies:
+  - default_content:default_content

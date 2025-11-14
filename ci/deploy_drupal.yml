@@ -1,0 +1,106 @@
+---
+- name: "WAAAGH!"
+  hosts: all
+  vars:
+    # Grab a number of CI related variables
+    commit_sha: "{{ lookup('env', 'CI_COMMIT_SHA') }}"
+    commit_tag: "{{ lookup('env', 'CI_COMMIT_TAG') }}"
+    commit_ref: "{{ commit_tag | default(commit_sha, true) }}"
+    job_id: "{{ lookup('env', 'CI_JOB_ID') }}"
+    project_dir: "{{ lookup('env', 'CI_PROJECT_DIR')}}"
+
+    # Set endpoint release related variables
+    release_path: "{{ site_root }}/releases/{{ commit_ref }}"
+    release_shared_path: "{{ site_root }}/shared"
+    release_current: "{{ site_root }}/current"
+    release_current_web: "{{ release_current }}/web"
+
+    release_shared_children:
+    - path: web/sites
+      src: sites
+    - path: private
+      src: private
+
+    # Setup backup related variables
+    backup_path: "/tmp/{{site_slug}}"
+    backup_name: "{{site_slug}}-backup-job-{{job_id}}-{{ ansible_date_time.iso8601_basic }}.sql.gz"
+
+
+  tasks:
+    # Create a directory for this release
+    - name: Create release directory
+      file:
+        path: "{{ release_path }}"
+        state: directory
+
+    # Upload the build directory created from
+    # previous CI steps
+    - name: Upload site build
+      synchronize:
+        # The last slash is important as it causes rsync to use
+        # the contents of the directory as opposed to the directory itself
+        src: "{{ project_dir }}/"
+        dest: "{{ release_path }}"
+        rsync_opts:
+          - "--exclude=.git"
+          - "--quiet"
+
+    # Update release directory permissions
+    - name: Update release permissions
+      file:
+        path: "{{ release_path }}"
+        mode: 0755
+        recurse: yes
+
+    # remove the private directory if checked in accidently
+    #- name: Delete private content & directory
+    #  file:
+    #    state: absent
+    #    path: "{{ release_path }}/web/sites/default"
+
+
+    # Create shared resource symlinks
+    - name: Create Shared Resource Links
+      file:
+        path: "{{ release_path }}/{{ item.path }}"
+        src: "{{ release_shared_path }}/{{ item.src }}"
+        state: link
+      with_items: "{{ release_shared_children }}"
+
+    # Make sure the directory for backups exists
+    - name: Create Backup Directory
+      file:
+        path: "{{ backup_path }}"
+        state: directory
+
+    # Create a database backup
+    - name: Create a database backup
+      shell: "drush sql:dump --gzip > {{ backup_path }}/{{ backup_name }}"
+      args:
+        chdir: "{{ release_current_web }}"
+      ignore_errors: true
+
+    # Make the current release live
+    - name: Make the new release live
+      file:
+        path: "{{ release_current }}"
+        src: "{{ release_path }}"
+        state: link
+
+    # Update the database
+    # This should always happen before a config import
+    # See: https://drupal.stackexchange.com/a/188844
+    - name: Update database
+      command: drush updb -y --root={{ release_current_web }}
+
+    # Import configuration
+    - name: Import Configuration
+      command: drush cim -y --root={{ release_current_web }}
+    # Out with the old in with the new
+    - name: Clear Drupal Caches
+      command: drush cr --root={{ release_current_web }}
+    # Run monitoring crom
+    - name: Run system check
+      command: drush cron:run olympian_monitor_cron --root={{ release_current_web }}
+      environment:
+        DRUSH_OPTIONS_URI: "{{ lookup('env', 'CI_ENVIRONMENT_SLUG') }}"

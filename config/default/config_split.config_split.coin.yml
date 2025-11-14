@@ -1,0 +1,37 @@
+uuid: c471952d-ba39-46f7-a9ca-8a03885a1ffb
+langcode: en
+status: false
+dependencies: {  }
+id: coin
+label: 'Coin Collection'
+description: 'Coin feature associated with d7 johnmaxwulfing.wustl.edu'
+weight: 80
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/features/coin
+module:
+  johnmaxwulfing_core: 0
+theme: {  }
+complete_list:
+  - block.block.coin_collection
+  - core.entity_form_display.node.coin.default
+  - core.entity_form_display.node.coin_collection_landing_page.default
+  - core.entity_form_display.taxonomy_term.coin_date_first.default
+  - node.type.coin
+  - node.type.coin_collection_landing_page
+  - rabbit_hole.behavior_settings.node_type_coin
+  - rabbit_hole.behavior_settings.node_type_coin_collection_landing_page
+  - simple_sitemap.bundle_settings.default.node.coin
+  - user.role.coin_curator
+  - views.view.coin_collection
+  - 'core.base_field_override.node.coin.*'
+  - 'core.entity_form_display.taxonomy_term.coin*'
+  - 'taxonomy.vocabulary.coin*'
+  - 'field.field.node.coin.*'
+  - 'field.storage.node.field_coin_*'
+  - 'core.entity_view_display.node.coin*'
+partial_list:
+  - administerusersbyrole.settings
+  - olympian_core.settings
+  - workflows.workflow.editorial

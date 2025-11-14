@@ -1,0 +1,61 @@
+uuid: b819184d-e248-47a5-861f-6ee9388d426f
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_course_page_header
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Course Page Header)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: course_page_header
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_course_image:
+    -
+      plugin: sub_process
+      source: field_course_image
+      process:
+        target_id: fid
+        alt: alt
+        title: title
+        width: width
+        height: height
+  field_course_image_title:
+    -
+      plugin: get
+      source: field_course_image_title
+  field_image_subtitle_and_descrip:
+    -
+      plugin: get
+      source: field_image_subtitle_and_descrip
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: course_page_header
+migration_dependencies:
+  required: {}
+  optional: {  }

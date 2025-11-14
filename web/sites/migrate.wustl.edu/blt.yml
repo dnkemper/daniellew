@@ -1,0 +1,23 @@
+project:
+  local:
+    hostname: migrate.ddev.site
+    protocol: https
+  machine_name: migrate
+  human_name: migrate.wustl.edu
+drush:
+  aliases:
+    local: migrate.local
+    remote: migrate.remote
+drupal:
+  db:
+    database: drupal_migrate
+artsci:
+  stage_file_proxy:
+    origin: 'https://migrate.wustl.edu'
+    origin_dir: sites/migrate.wustl.edu/files
+system:
+  site:
+    contact_us_url: 'https://migrate.wustl.edu/contact-us'
+    name: migrate
+    email: migrate@wustl.edu
+olympian_migration_source_uri_prefix: 'https://migrate.wustl.edu'

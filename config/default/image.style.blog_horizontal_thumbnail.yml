@@ -1,0 +1,23 @@
+uuid: 52b15a68-3045-4ffc-a9b0-ba402d713ed3
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: blog_horizontal_thumbnail
+label: 'Blog Horizontal Thumbnail (1300 x 580)'
+effects:
+  875c3d24-a7b0-41b7-a822-f8f3ccd880e7:
+    uuid: 875c3d24-a7b0-41b7-a822-f8f3ccd880e7
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1300
+      height: 580
+      crop_type: focal_point
+  2bb2516b-97db-459c-9a7e-0277579f367f:
+    uuid: 2bb2516b-97db-459c-9a7e-0277579f367f
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

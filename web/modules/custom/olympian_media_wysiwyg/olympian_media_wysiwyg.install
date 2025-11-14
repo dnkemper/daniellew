@@ -1,0 +1,515 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Media Embed Extra module.
+ */
+use Drupal\redirect\Entity\Redirect;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\node\Entity\Node;
+/**
+ * Update view modes.
+ */
+function olympian_media_wysiwyg_update_8001() {
+  $config = \Drupal::config('olympian_media_wysiwyg.settings');
+
+  if ($config->get('mem_allowed_view_modes') !== NULL) {
+    $view_mode_options = \Drupal::service('entity_display.repository')->getViewModeOptions('media');
+    $config->set('mem_allowed_view_modes', $view_mode_options);
+    $config->save();
+  }
+}
+
+/**
+ * Update view modes.
+ */
+function olympian_media_wysiwyg_update_8002() {
+  $config = \Drupal::config('olympian_media_wysiwyg.settings');
+
+  if ($config->get('mem_allowed_view_modes') !== NULL) {
+    $view_mode_options = \Drupal::service('entity_display.repository')->getViewModeOptions('media');
+    $config->set('mem_allowed_view_modes', $view_mode_options);
+    $config->save();
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ * Delete a specific URL redirect.
+ */
+function olympian_media_wysiwyg_update_8003() {
+  // Remove media redirect
+  $sources = 'admin/content/media';
+
+  $ids = \Drupal::entityQuery('redirect')
+  ->accessCheck(FALSE)
+  ->condition('redirect_source__path', $sources, 'IN')
+  ->execute();
+
+$entities = Redirect::loadMultiple($ids);
+
+\Drupal::entityTypeManager()->getStorage('redirect')->delete($entities);
+}
+
+/**
+ * Implements hook_update_N().
+ * Revoke removed perms to prevent import issues.
+ */
+function olympian_media_wysiwyg_update_8004() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $permissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+  /** @var \Drupal\user\RoleInterface[] $roles */
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  foreach ($roles as $role) {
+    $role_permissions = $role->getPermissions();
+    $differences = array_diff($role_permissions, $permissions);
+    if ($differences) {
+      foreach ($differences as $permission) {
+        $role->revokePermission($permission);
+      }
+      $role->save();
+    }
+  }
+}
+/**
+ * Update user permission changes for sites that split role configuration.
+ */
+function olympian_media_wysiwyg_update_8005() {
+
+  // An array of role IDs to update
+  $roleIds = ['communications', 'account_manager', 'authenticated', 'site_staff', 'editor', 'web_forms', 'viewer'];
+
+  // Permissions to revoke
+  $brokenPermissions = [
+    'access media directories ui browser',
+    'access media_directories_document_widget entity browser pages',
+    'access media_directories_editor_browser entity browser pages',
+    'access media_directories_modal entity browser pages',
+    'access media_directories_overview entity browser pages',
+    'access media_directories_soundcloud entity browser pages',
+    'access media_directories_video entity browser pages',
+  ];
+
+  // Loop through each role ID
+  foreach ($roleIds as $roleId) {
+    $role = \Drupal::entityTypeManager()->getStorage('user_role')->load($roleId);
+
+    if ($role) {
+      // Revoke existing permissions
+      foreach ($brokenPermissions as $permission) {
+        // Check if the role has the permission before revoking it
+        if ($role->hasPermission($permission)) {
+          $role->revokePermission($permission);
+        }
+      }
+
+      $role->save();
+    }
+  }
+}
+/**
+ * Delete all course-related configuration.
+ */
+function olympian_media_wysiwyg_update_9010() {
+  $config_storage = \Drupal::service('config.storage');
+
+  // Define all config names to delete.
+  $configs_to_delete = [
+    // Node types
+    'node.type.course_landing',
+    'node.type.courses',
+
+    // Paragraph types
+    'paragraphs.paragraphs_type.course_attributes',
+    'paragraphs.paragraphs_type.course_sections',
+    'paragraphs.paragraphs_type.room_schedule',
+
+    // Taxonomy vocabularies
+    'taxonomy.vocabulary.concentration',
+    'taxonomy.vocabulary.course_level',
+    'taxonomy.vocabulary.grad_undergrad',
+    'taxonomy.vocabulary.requirements',
+    'taxonomy.vocabulary.semester',
+
+    // Views
+    'views.view.courses',
+
+    // Blocks
+    'block.block.exposedformcoursesblock',
+
+    // Captcha points
+    'captcha.captcha_point.node_course_landing_form',
+    'captcha.captcha_point.node_courses_form',
+
+    // Pathauto patterns
+    'pathauto.pattern.content_course_landing',
+    'pathauto.pattern.courses',
+
+    // Rabbit hole
+    'rabbit_hole.behavior_settings.node_type_course_landing',
+    'rabbit_hole.behavior_settings.node_type_courses',
+
+    // Metatag
+    'metatag.metatag_defaults.node__courses',
+
+    // Simple sitemap
+    'simple_sitemap.bundle_settings.default.node.course_landing',
+    'simple_sitemap.bundle_settings.default.node.courses',
+    'simple_sitemap.bundle_settings.default.taxonomy_term.concentration',
+    'simple_sitemap.bundle_settings.default.taxonomy_term.course_level',
+    'simple_sitemap.bundle_settings.default.taxonomy_term.requirements',
+    'simple_sitemap.bundle_settings.default.taxonomy_term.semester',
+  ];
+
+  // Entity form displays
+  $form_displays = [
+    'core.entity_form_display.node.course_landing.default',
+    'core.entity_form_display.node.courses.default',
+    'core.entity_form_display.paragraph.course_attributes.default',
+    'core.entity_form_display.paragraph.course_sections.default',
+    'core.entity_form_display.paragraph.room_schedule.default',
+    'core.entity_form_display.taxonomy_term.semester.default',
+  ];
+
+  // Entity view displays
+  $view_displays = [
+    'core.entity_view_display.node.course_landing.default',
+    'core.entity_view_display.node.course_landing.olympian_search',
+    'core.entity_view_display.node.courses.default',
+    'core.entity_view_display.node.courses.feature_home',
+    'core.entity_view_display.node.courses.instructor',
+    'core.entity_view_display.node.courses.olympian_search',
+    'core.entity_view_display.node.courses.teaser',
+    'core.entity_view_display.paragraph.course_attributes.default',
+    'core.entity_view_display.paragraph.course_attributes.token',
+    'core.entity_view_display.paragraph.course_sections.default',
+    'core.entity_view_display.paragraph.course_sections.token',
+    'core.entity_view_display.paragraph.room_schedule.default',
+    'core.entity_view_display.taxonomy_term.semester.default',
+  ];
+
+  // Field configs (field.field.*)
+  $field_configs = [
+    // Node: course_landing fields
+    'field.field.node.course_landing.field_concentration_category',
+    'field.field.node.course_landing.field_course_landing_banner_img',
+    'field.field.node.course_landing.field_course_landing_heading',
+    'field.field.node.course_landing.field_course_landing_sub_heading',
+    'field.field.node.course_landing.field_default_course_semester',
+    'field.field.node.course_landing.field_department_links',
+    'field.field.node.course_landing.field_dept_links',
+    'field.field.node.course_landing.field_hide_course_filters',
+    'field.field.node.course_landing.field_meta_tags',
+    'field.field.node.course_landing.field_search',
+    'field.field.node.course_landing.field_show_course_button',
+
+    // Node: courses fields
+    'field.field.node.courses.field_course_attributes',
+    'field.field.node.courses.field_course_concentration',
+    'field.field.node.courses.field_course_credits',
+    'field.field.node.courses.field_course_department_name',
+    'field.field.node.courses.field_course_dept_code',
+    'field.field.node.courses.field_course_description',
+    'field.field.node.courses.field_course_do_not_delete',
+    'field.field.node.courses.field_course_featured',
+    'field.field.node.courses.field_course_featured_image',
+    'field.field.node.courses.field_course_frequency',
+    'field.field.node.courses.field_course_graduate',
+    'field.field.node.courses.field_course_id',
+    'field.field.node.courses.field_course_instructors',
+    'field.field.node.courses.field_course_level',
+    'field.field.node.courses.field_course_links',
+    'field.field.node.courses.field_course_new_window',
+    'field.field.node.courses.field_course_requirements',
+    'field.field.node.courses.field_course_sections',
+    'field.field.node.courses.field_course_semester',
+    'field.field.node.courses.field_course_undergrad',
+    'field.field.node.courses.field_featured_weight',
+    'field.field.node.courses.field_meta_tags',
+    'field.field.node.courses.field_search',
+
+    // Paragraph: course_attributes fields
+    'field.field.paragraph.course_attributes.field_ca_full_name',
+    'field.field.paragraph.course_attributes.field_ca_group',
+    'field.field.paragraph.course_attributes.field_ca_owner_full_name',
+    'field.field.paragraph.course_attributes.field_ca_owner_short_name',
+    'field.field.paragraph.course_attributes.field_ca_print_code',
+    'field.field.paragraph.course_attributes.field_ca_short_name',
+    'field.field.paragraph.course_attributes.field_ca_title',
+
+    // Paragraph: course_sections fields
+    'field.field.paragraph.course_sections.field_course_semester',
+    'field.field.paragraph.course_sections.field_room_schedules',
+    'field.field.paragraph.course_sections.field_section_course_id',
+    'field.field.paragraph.course_sections.field_section_dept_code',
+    'field.field.paragraph.course_sections.field_section_do_not_delete',
+    'field.field.paragraph.course_sections.field_section_instructors',
+    'field.field.paragraph.course_sections.field_section_number',
+    'field.field.paragraph.course_sections.field_section_title',
+
+    // Paragraph: room_schedule fields
+    'field.field.paragraph.room_schedule.field_building',
+    'field.field.paragraph.room_schedule.field_day',
+    'field.field.paragraph.room_schedule.field_end_time',
+    'field.field.paragraph.room_schedule.field_room',
+    'field.field.paragraph.room_schedule.field_start_time',
+
+    // Taxonomy: semester fields
+    'field.field.taxonomy_term.semester.field_active_date',
+    'field.field.taxonomy_term.semester.field_display_semester',
+  ];
+
+  // Field storage configs (field.storage.*)
+  $field_storages = [
+    'field.storage.node.field_concentration_category',
+    'field.storage.node.field_course_attributes',
+    'field.storage.node.field_course_concentration',
+    'field.storage.node.field_course_credits',
+    'field.storage.node.field_course_department_name',
+    'field.storage.node.field_course_dept_code',
+    'field.storage.node.field_course_description',
+    'field.storage.node.field_course_do_not_delete',
+    'field.storage.node.field_course_featured',
+    'field.storage.node.field_course_featured_image',
+    'field.storage.node.field_course_frequency',
+    'field.storage.node.field_course_graduate',
+    'field.storage.node.field_course_id',
+    'field.storage.node.field_course_instructors',
+    'field.storage.node.field_course_landing_banner_img',
+    'field.storage.node.field_course_landing_heading',
+    'field.storage.node.field_course_landing_sub_heading',
+    'field.storage.node.field_course_level',
+    'field.storage.node.field_course_links',
+    'field.storage.node.field_course_new_window',
+    'field.storage.node.field_course_requirements',
+    'field.storage.node.field_course_sections',
+    'field.storage.node.field_course_semester',
+    'field.storage.node.field_course_undergrad',
+    'field.storage.node.field_default_course_semester',
+    'field.storage.node.field_department_links',
+    'field.storage.node.field_dept_links',
+    'field.storage.node.field_featured_weight',
+    'field.storage.node.field_hide_course_filters',
+    'field.storage.node.field_show_course_button',
+    'field.storage.paragraph.field_building',
+    'field.storage.paragraph.field_ca_full_name',
+    'field.storage.paragraph.field_ca_group',
+    'field.storage.paragraph.field_ca_owner_full_name',
+    'field.storage.paragraph.field_ca_owner_short_name',
+    'field.storage.paragraph.field_ca_print_code',
+    'field.storage.paragraph.field_ca_short_name',
+    'field.storage.paragraph.field_ca_title',
+    'field.storage.paragraph.field_course_semester',
+    'field.storage.paragraph.field_day',
+    'field.storage.paragraph.field_end_time',
+    'field.storage.paragraph.field_room',
+    'field.storage.paragraph.field_room_schedules',
+    'field.storage.paragraph.field_section_course_id',
+    'field.storage.paragraph.field_section_dept_code',
+    'field.storage.paragraph.field_section_do_not_delete',
+    'field.storage.paragraph.field_section_instructors',
+    'field.storage.paragraph.field_section_number',
+    'field.storage.paragraph.field_section_title',
+    'field.storage.paragraph.field_start_time',
+    'field.storage.taxonomy_term.field_active_date',
+    'field.storage.taxonomy_term.field_display_semester',
+  ];
+
+  // Combine all configs
+  $all_configs = array_merge(
+    $configs_to_delete,
+    $form_displays,
+    $view_displays,
+    $field_configs,
+    $field_storages
+  );
+
+  // Delete each config
+  foreach ($all_configs as $config_name) {
+    if ($config_storage->exists($config_name)) {
+      $config_storage->delete($config_name);
+      \Drupal::logger('olympian_core')->notice('Deleted config: @config', [
+        '@config' => $config_name,
+      ]);
+    }
+  }
+
+  return t('Deleted all course-related configuration.');
+}
+/**
+ * Delete Courses node entities.
+ */
+function olympian_media_wysiwyg_update_9011() {
+ // Query for nodes of the "page_not_found" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'page_not_found' with your content type machine name.
+    ->condition('type',  'courses')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+/**
+ * Delete Courses node entities.
+ */
+function olympian_media_wysiwyg_update_9012() {
+ // Query for nodes of the "page_not_found" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'page_not_found' with your content type machine name.
+    ->condition('type',  'course_landing')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+
+/**
+ * Delete course_level, semester, and grad_undergrad taxonomy vocabularies and their terms.
+ */
+function olympian_media_wysiwyg_update_9013() {
+  // Define the vocabularies to delete.
+  $vocabularies = [
+    'course_level',
+    'semester',
+    'grad_undergrad',
+  ];
+
+  foreach ($vocabularies as $vid) {
+    // First, delete all terms in the vocabulary.
+    $term_ids = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', $vid)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if ($term_ids) {
+      $terms = Term::loadMultiple($term_ids);
+      foreach ($terms as $term) {
+        $term->delete();
+      }
+
+      \Drupal::logger('olympian_core')->notice('Deleted @count terms from @vocab vocabulary.', [
+        '@count' => count($term_ids),
+        '@vocab' => $vid,
+      ]);
+    }
+
+    // Then delete the vocabulary itself.
+    $vocabulary = Vocabulary::load($vid);
+    if ($vocabulary) {
+      $vocabulary->delete();
+      \Drupal::logger('olympian_core')->notice('Deleted @vocab vocabulary.', [
+        '@vocab' => $vid,
+      ]);
+    }
+  }
+}
+
+
+/**
+ * Delete course_attributes, course_sections, and room_schedule paragraph entities.
+ */
+function olympian_media_wysiwyg_update_9014() {
+  // Define the paragraph types to delete.
+  $paragraph_types = [
+    'course_attributes',
+    'course_sections',
+    'room_schedule',
+  ];
+
+  foreach ($paragraph_types as $type) {
+    // Query for paragraphs of the specified type.
+    $entity_ids = \Drupal::entityQuery('paragraph')
+      ->condition('type', $type)
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if ($entity_ids) {
+      // Load and delete the paragraphs.
+      $paragraphs = Paragraph::loadMultiple($entity_ids);
+      foreach ($paragraphs as $paragraph) {
+        $paragraph->delete();
+      }
+
+      \Drupal::logger('olympian_core')->notice('Deleted @count @type paragraphs.', [
+        '@count' => count($entity_ids),
+        '@type' => $type,
+      ]);
+    }
+  }
+}
+
+/**
+ * Force re-migration of all system.site values to olympian_core.settings.
+ */
+function olympian_media_wysiwyg_update_9015() {
+  $site_config = \Drupal::configFactory()->get('system.site');
+  $olympian_config = \Drupal::configFactory()->getEditable('olympian_core.settings');
+
+  // Force overwrite all values from system.site.
+  $olympian_config
+    // Core site info.
+    ->set('name', $site_config->get('name'))
+    ->set('site_slogan', 'Arts & Sciences at Washington University in St. Louis')
+    ->set('mail', $site_config->get('mail'))
+
+    // Page paths.
+    ->set('page.front', $site_config->get('page.front'))
+    ->set('page.403', $site_config->get('page.403'))
+    ->set('page.404', $site_config->get('page.404'))
+
+    // Parent organization.
+    ->set('has_parent', $site_config->get('has_parent'))
+    ->set('parent.name', $site_config->get('parent.name'))
+    ->set('parent.url', $site_config->get('parent.url'))
+
+    // Contact.
+    ->set('contact_us_url', $site_config->get('contact_us_url'))
+
+    // Social media - prioritize paragraph_social namespace.
+    ->set('social_media.twitter_username',
+      $site_config->get('paragraph_social.twitter_username') ?: $site_config->get('paragraph_twitter_username'))
+    ->set('social_media.instagram_username',
+      $site_config->get('paragraph_social.instagram_username') ?: $site_config->get('paragraph_instagram_username'))
+    ->set('social_media.facebook_username',
+      $site_config->get('paragraph_facebook_username') ?: $site_config->get('paragraph.facebook_username'))
+    ->set('social_media.youtube_username',
+      $site_config->get('paragraph_youtube_username'))
+    ->set('social_media.linkedin_username',
+      $site_config->get('paragraph_linkedin_username'))
+
+    // Custom 403.
+    ->set('custom_403_display', $site_config->get('custom_403.display'))
+    ->set('custom_403_message', $site_config->get('custom_403.message'))
+
+    ->save();
+
+  return t('Successfully force-migrated all system.site configuration to olympian_core.settings.');
+}
+/**
+ * Set production_url config value in new settings form.
+ *
+ * WARNING: Only run this after confirming migration was successful!
+ */
+function olympian_media_wysiwyg_update_9016() {
+  $site_config = \Drupal::configFactory()->getEditable('stage_file_proxy.settings');
+  $olympian_config = \Drupal::configFactory()->getEditable('olympian_core.settings');
+    if (empty($olympian_config->get('production_url')) && !empty($site_config->get('origin'))) {
+    $olympian_config->set('production_url', $site_config->get('origin'))->save();
+      return t('Successfully set origin url to the stage file proxy value');
+    }
+}
+

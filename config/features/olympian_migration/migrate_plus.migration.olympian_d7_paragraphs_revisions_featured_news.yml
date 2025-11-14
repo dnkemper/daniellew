@@ -1,0 +1,97 @@
+uuid: 8fc9fc98-be9a-4579-ac7f-671e4db85337
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_featured_news
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Featured News)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: featured_news
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_feat_article_title:
+    -
+      plugin: get
+      source: field_feat_article_title
+  field_feat_article_button:
+    plugin: field_link_custom
+    source: field_feat_article_button_url
+    title_source: field_feat_article_button_text
+  field_feat_article_image:
+    plugin: sub_process
+    source: field_feat_article_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_title_and_body:
+    -
+      plugin: sub_process
+      source: field_title_and_body
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_feat_artice_bkg_color:
+    -
+      plugin: get
+      source: field_feat_artice_bkg_color
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: featured_news
+migration_dependencies:
+  required: {}
+  optional: {  }

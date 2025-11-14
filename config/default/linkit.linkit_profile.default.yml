@@ -1,0 +1,39 @@
+uuid: 3a145e62-cde3-410d-a9b6-9ee4b94d48fe
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - webform
+_core:
+  default_config_hash: Tt8DtxZ3Nooo0PoWPpJvszA3R_5d8MmpUW7LM_R-BzY
+label: Default
+id: default
+description: 'A default Linkit profile'
+matchers:
+  360efa09-6142-4912-8b3f-6353fe311324:
+    id: 'entity:node'
+    uuid: 360efa09-6142-4912-8b3f-6353fe311324
+    settings:
+      metadata: '[node:title] | [node:content-type]'
+      bundles: {  }
+      group_by_bundle: false
+      substitution_type: canonical
+      limit: 50
+      include_unpublished: false
+    weight: -10
+  5d9303ce-dc05-46c5-bae3-b86c7de9b486:
+    id: 'entity:webform'
+    uuid: 5d9303ce-dc05-46c5-bae3-b86c7de9b486
+    settings:
+      metadata: ''
+      bundles: null
+      group_by_bundle: null
+      substitution_type: canonical
+      limit: 20
+    weight: -8
+  d27d7975-51b3-418f-8c40-8eb0d81ba96e:
+    id: external
+    uuid: d27d7975-51b3-418f-8c40-8eb0d81ba96e
+    settings: {  }
+    weight: -7

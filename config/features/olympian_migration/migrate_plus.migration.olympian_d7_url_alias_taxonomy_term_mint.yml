@@ -1,0 +1,47 @@
+uuid: e08efeea-a0f0-4744-844f-2867188fcfe0
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_url_alias_taxonomy_term_mint
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'URL aliases of Mint taxonomy terms'
+source:
+  plugin: d7_url_alias
+  constants:
+    slash: /
+  entity_type_id: taxonomy_term
+  bundle: mint
+process:
+  id:
+    -
+      plugin: get
+      source: pid
+  alias:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - alias
+  langcode:
+    -
+      plugin: get
+      source: language
+  path:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - source
+destination:
+  plugin: 'entity:path_alias'
+migration_dependencies:
+  required:
+    - olympian_d7_taxonomy_term_mint
+  optional:
+    - olympian_d7_taxonomy_term_mint

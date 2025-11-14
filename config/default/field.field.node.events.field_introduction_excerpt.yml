@@ -1,0 +1,19 @@
+uuid: 44180ce5-7f72-4191-a680-8dda089d4cd9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_introduction_excerpt
+    - node.type.events
+id: node.events.field_introduction_excerpt
+field_name: field_introduction_excerpt
+entity_type: node
+bundle: events
+label: 'Intro Text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,48 @@
+uuid: 4af5268e-6d81-43d6-bd54-b0bbc45cb8da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.events.field_event_only_image
+    - field.field.paragraph.events.field_first_event
+    - field.field.paragraph.events.field_second_event
+    - field.field.paragraph.events.field_third_event
+    - paragraphs.paragraphs_type.events
+  module:
+    - media_library
+    - media_library_edit
+id: paragraph.events.default
+targetEntityType: paragraph
+bundle: events
+mode: default
+content:
+  field_event_only_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_first_event:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_second_event:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_third_event:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,141 @@
+uuid: 7ef712c1-2c55-43c6-bf66-6fc6e953837b
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_spotlight
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Spotlight)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: spotlight
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_spotlight_type:
+    -
+      plugin: get
+      source: field_spotlight_type
+  field_spotlight_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_spotlight_description
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+  field_spotlight_video_title:
+    -
+      plugin: get
+      source: field_spotlight_video_title
+  field_spotlight_video_short:
+    -
+      plugin: get
+      source: field_spotlight_video_short
+  field_spotlight_video_url:
+    plugin: sub_process
+    source: field_spotlight_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+  field_spotlight_image:
+    plugin: sub_process
+    source: field_spotlight_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_spot_event_category:
+    plugin: sub_process
+    source: field_spot_event_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_event_categories
+        source: tid
+  # Taxonomy field mapping
+  field_spot_news_category:
+    plugin: sub_process
+    source: field_spot_news_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_article_categories
+        source: tid
+
+  field_spot_image:
+    plugin: sub_process
+    source: field_spot_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_fullscreen_video_image:
+    plugin: sub_process
+    source: field_fullscreen_video_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: spotlight
+migration_dependencies:
+  required: {}
+  optional: {  }

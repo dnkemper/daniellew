@@ -1,0 +1,43 @@
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
+mode: intermediate
+ignored_config_entities:
+  import:
+    - 'config_split.config_split.dev:status'
+    - 'config_split.config_split.live:status'
+    - 'config_split.config_split.local:status'
+    - 'config_split.config_split.olympian_migration:status'
+    - 'config_split.config_split.secure_content:status'
+    - 'config_split.config_split.site:status'
+    - 'config_split.config_split.webform_upload:status'
+    - core.menu.static_menu_link_overrides
+    - 'google_tag.*'
+    - 'login_destination.*'
+    - olympian9.settings
+    - olympian_core.settings
+    - olympian_seo.settings
+    - 'simplesamlphp_auth.settings:activate'
+    - 'stage_file_proxy.settings:origin'
+    - 'stage_file_proxy.settings:origin_dir'
+    - system.site
+    - 'webform.webform.*'
+  export:
+    - 'config_split.config_split.dev:status'
+    - 'config_split.config_split.live:status'
+    - 'config_split.config_split.local:status'
+    - 'config_split.config_split.olympian_migration:status'
+    - 'config_split.config_split.secure_content:status'
+    - 'config_split.config_split.site:status'
+    - 'config_split.config_split.webform_upload:status'
+    - core.menu.static_menu_link_overrides
+    - 'google_tag.*'
+    - 'login_destination.*'
+    - olympian9.settings
+    - olympian_core.settings
+    - olympian_seo.settings
+    - 'simplesamlphp_auth.settings:activate'
+    - 'stage_file_proxy.settings:origin'
+    - 'stage_file_proxy.settings:origin_dir'
+    - system.site
+    - 'webform.webform.*'
+enable_export_filtering: null

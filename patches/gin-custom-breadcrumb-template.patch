@@ -1,0 +1,27 @@
+diff --git a/includes/breadcrumb.theme b/includes/breadcrumb.theme
+index c136c94..c003f4b 100644
+--- a/includes/breadcrumb.theme
++++ b/includes/breadcrumb.theme
+@@ -22,8 +22,8 @@ function gin_preprocess_breadcrumb(&$variables) {
+ 
+       // Back to site item.
+       if ($key === 0) {
+-        $variables['breadcrumb'][$key]['text'] = t('Back to site');
+-        $variables['breadcrumb'][$key]['attributes']['title'] = t('Return to site content');
++        // $variables['breadcrumb'][$key]['text'] = t('Back to site');
++        // $variables['breadcrumb'][$key]['attributes']['title'] = t('Return to site content');
+ 
+         // Media handling.
+         if ($entity_id === 'media' && !\Drupal::config('media.settings')->get('standalone_url')) {
+diff --git a/templates/navigation/breadcrumb.html.twig b/templates/navigation/breadcrumb.html.twig
+index e6871ce..8edffea 100644
+--- a/templates/navigation/breadcrumb.html.twig
++++ b/templates/navigation/breadcrumb.html.twig
+@@ -11,6 +11,7 @@
+   <nav class="gin-breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+     <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+     <ol class="gin-breadcrumb__list">
++   <li class="gin-breadcrumb__item">{{ drupal_entity('block', 'olympian9_browserbackbuttonblock', check_access=false) }}  | </li><li class="gin-breadcrumb__item"><button id="custom-back-button"><a href="/" class="home">Home</a></button></li>
+     {% for item in breadcrumb %}
+       {% if item.text %}
+       <li class="gin-breadcrumb__item">

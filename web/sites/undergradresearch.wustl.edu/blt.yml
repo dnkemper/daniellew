@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: undergradresearch.ddev.site
+    protocol: https
+  machine_name: undergradresearch
+  human_name: undergradresearch.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: undergradresearch.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/undergradresearch.wustl.edu/files'
+    origin: 'https://undergradresearch.wustl.edu'
+drupal:
+  db:
+    database: drupal_undergradresearch
+system:
+  site:
+    contact_us_url: 'https://undergradresearch.wustl.edu/contact-us'
+    name: undergradresearch
+    email: undergradresearch@wustl.edu

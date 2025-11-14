@@ -1,0 +1,71 @@
+uuid: 44a2f4e3-437a-4435-afa3-81ebc8d110c0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.timeline_slideshow_slides.field_background_image
+    - field.field.paragraph.timeline_slideshow_slides.field_date_display
+    - field.field.paragraph.timeline_slideshow_slides.field_description
+    - field.field.paragraph.timeline_slideshow_slides.field_show_date_on_timeline
+    - field.field.paragraph.timeline_slideshow_slides.field_timeline_date
+    - field.field.paragraph.timeline_slideshow_slides.field_title
+    - paragraphs.paragraphs_type.timeline_slideshow_slides
+  module:
+    - datetime
+    - datetimehideseconds
+    - media_library
+    - media_library_edit
+id: paragraph.timeline_slideshow_slides.default
+targetEntityType: paragraph
+bundle: timeline_slideshow_slides
+mode: default
+content:
+  field_background_image:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_date_display:
+    type: options_buttons
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_description:
+    type: string_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_show_date_on_timeline:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_timeline_date:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings:
+      datetimehideseconds:
+        hide: true
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

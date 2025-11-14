@@ -1,0 +1,29 @@
+uuid: 9e38f4fa-8ac6-4a21-ada9-92af6bbee21b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_denomination
+    - node.type.coin
+    - taxonomy.vocabulary.coin_denomination
+id: node.coin.field_coin_denomination
+field_name: field_coin_denomination
+entity_type: node
+bundle: coin
+label: Denomination
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_denomination: coin_denomination
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

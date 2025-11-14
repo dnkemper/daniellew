@@ -1,0 +1,5 @@
+name: 'johnmaxwulfing_core'
+type: module
+description: 'custom module for johnmaxwulfing.wustl.edu'
+package: Custom
+core_version_requirement: ^10 || ^11

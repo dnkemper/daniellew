@@ -1,0 +1,10 @@
+uuid: f7efbf08-cd67-4e2c-9395-d273fa53c687
+langcode: en
+status: true
+dependencies: {  }
+id: people_teaser
+label: 'People teaser'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle People teaser'
+behavior_plugins: {  }

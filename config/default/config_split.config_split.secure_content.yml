@@ -1,0 +1,17 @@
+uuid: 10a4e6a0-b292-4ff9-840b-59ed3adac11b
+langcode: en
+status: false
+dependencies: {  }
+id: secure_content
+label: 'Secure Content'
+description: 'Used to add the ability to make nodes visible behind a login.'
+weight: 80
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/features/secure_content
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list:
+  - 'node.type.*'

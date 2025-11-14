@@ -1,0 +1,37 @@
+uuid: 60e528a2-2d6a-4fd7-a2fe-8d937ce7a28d
+langcode: en
+status: true
+migration_group: olympian_d7
+dependencies: {  }
+id: olympian_d7_paragraphs_timeline_slides_links
+label: 'Timeline Slides Links Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: olympian_d7_paragraphs_timeline_slides
+process:
+  type:
+    plugin: default_value
+    default_value: links  # This creates paragraphs of type "links" in D10
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  # Example field mappings (adjust field names as per your D7 structure)
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+  field_new_window:
+    plugin: get
+    source: field_new_window
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: links  # This is the target paragraph type in D10
+
+migration_dependencies:
+  required: {}
+  optional: {}

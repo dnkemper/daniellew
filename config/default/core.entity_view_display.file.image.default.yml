@@ -1,0 +1,26 @@
+uuid: db360994-87a4-4366-a31a-28d3033be408
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.file.image.field_file_image_alt_text
+    - field.field.file.image.field_file_image_title_text
+    - field.field.file.image.field_folder
+  module:
+    - file
+id: file.image.default
+targetEntityType: file
+bundle: image
+mode: default
+content:
+  field_folder:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_file_image_alt_text: true
+  field_file_image_title_text: true

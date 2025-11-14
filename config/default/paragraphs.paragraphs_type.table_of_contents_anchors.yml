@@ -1,0 +1,10 @@
+uuid: 7ffce2a6-bfe0-4fbb-86da-47052b1210ef
+langcode: en
+status: true
+dependencies: {  }
+id: table_of_contents_anchors
+label: 'Table of contents anchors'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

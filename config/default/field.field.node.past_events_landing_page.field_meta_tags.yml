@@ -1,0 +1,21 @@
+uuid: bc4b271f-b456-46eb-b1ca-8e48ec7d9158
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.past_events_landing_page
+  module:
+    - metatag
+id: node.past_events_landing_page.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: past_events_landing_page
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

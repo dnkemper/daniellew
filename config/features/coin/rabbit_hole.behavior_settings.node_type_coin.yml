@@ -1,0 +1,14 @@
+uuid: 7a80952a-6ef3-49e7-a33f-0de587a0237a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.coin
+id: node_type_coin
+entity_type_id: node_type
+entity_id: coin
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

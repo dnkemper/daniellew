@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 9f4921aa-38f6-4af1-bdfc-9675a0f758b2
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: emergencynotifications_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/emergencynotifications_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 40331
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

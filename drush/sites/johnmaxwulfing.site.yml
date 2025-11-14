@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://johnmaxwulfing.ddev.site
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+dev:
+  uri: https://johnmaxwulfing.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://johnmaxwulfing.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://johnmaxwulfing.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

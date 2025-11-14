@@ -1,0 +1,105 @@
+{#
+/**
+ * @file
+ * Theme override of a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{% if q is not empty %}
+  {#
+  This ensures that, if clean URLs are off, the 'q' is added first,
+  as a hidden form element, so that it shows up first in the POST URL.
+  #}
+  {{ q }}
+{% endif %}
+
+
+{# basic filters #}
+{{ form.advanced }}
+<br>{{ form.filter }}
+<section id="filter" class="search with-filter" aria-label="faculty search">
+<div class="container reveal">
+<h2>Search the Collection</h2>
+<div class="search-form">
+<div>
+      <svg class="icon">
+        <use xlink:href="#icon-search"></use>
+      </svg>{{ form.keys }}
+</div>
+</div>
+
+<div class="filter-options flex" id="collection_filter">
+<legend class="no-text">Select the types of Collection Items you would like to list</legend>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label" id="object_radios">{{ form.type['#title'] }}</h3>
+  <div class="selector" id="objType">{{ form.type }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label" id="material_radios">{{ form.material['#title'] }}</h3>
+  <div class="selector" id="material">{{ form.material }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">{{ form.mint['#title'] }}</h3>
+  <div class="selector" id="mint">{{ form.mint }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">{{ form.lang['#title'] }}</h3>
+  <div class="selector" id="language">{{ form.lang }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">{{ form.issuer['#title'] }}</h3>
+  <div class="selector" id="issuingAuth">{{ form.issuer }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">{{ form.denom['#title'] }}</h3>
+  <div class="selector" id="denomination">{{ form.denom }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">{{ form.date['#title'] }}</h3>
+  <div class="selector" id="issuingAuth">{{ form.date }}</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">Weight (g)</h3>
+  <div class="range-filter-container">
+  <div class="column-half">
+  <div class="min-weight">Min-Weight:&nbsp; </div><div class="range_filter">{{ form.weight }}</div>
+  </div>
+  <div class="column-half">
+  <div class="max-weight">Max-Weight:&nbsp; </div><div class="range_filter">{{ form.weight_max }}</div>
+  </div>
+</div>
+</div>
+</div>
+<div class="column one-third">
+<div class="options-list collection-options">
+  <h3 class="collection_filter_label">Size (mm)</h3>
+  <div class="range-filter-container">
+  <div class="column-half">
+  <div class="min-size">Min-Size:&nbsp; </div><div class="range_filter">{{ form.dim }}</div>
+  </div>
+  <div class="column-half">
+  <div class="max-size">Max-Size:&nbsp; </div><div class="range_filter">{{ form.dim_max }}</div>
+  </div>
+</div>
+</div>
+</div>
+ </section>

@@ -1,0 +1,60 @@
+uuid: 2f2c3ea0-4d2d-4e45-bfa3-b09937d7122c
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_additional_resources
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Additional Resources)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: additional_resources
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_resource:
+    plugin: sub_process
+    source: field_resource
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_additional_resource
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: additional_resources
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_additional_resource
+

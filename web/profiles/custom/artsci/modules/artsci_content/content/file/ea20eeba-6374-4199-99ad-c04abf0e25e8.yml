@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ea20eeba-6374-4199-99ad-c04abf0e25e8
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: courses-landing-page.jpg
+  uri:
+    -
+      value: 'public://2023-12/courses-landing-page_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 908875
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

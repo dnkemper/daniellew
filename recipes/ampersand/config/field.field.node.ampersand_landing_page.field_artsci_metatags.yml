@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_artsci_metatags
+    - node.type.ampersand_landing_page
+  module:
+    - metatag
+_core:
+  default_config_hash: tkt3Am_Xml1QbxbuR9PSSFBNCL4Fc0ubElSnuYUUKEQ
+id: node.ampersand_landing_page.field_artsci_metatags
+field_name: field_artsci_metatags
+entity_type: node
+bundle: ampersand_landing_page
+label: Metatags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

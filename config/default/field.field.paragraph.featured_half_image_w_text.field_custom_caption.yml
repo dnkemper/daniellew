@@ -1,0 +1,19 @@
+uuid: c37f4ce5-2480-46a1-b3c1-cf7a1c177c36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_caption
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+id: paragraph.featured_half_image_w_text.field_custom_caption
+field_name: field_custom_caption
+entity_type: paragraph
+bundle: featured_half_image_w_text
+label: 'Custom Caption'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

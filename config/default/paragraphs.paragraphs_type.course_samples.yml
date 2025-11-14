@@ -1,0 +1,10 @@
+uuid: 6e2c347c-60dc-446c-be83-9c66c26f2edd
+langcode: en
+status: true
+dependencies: {  }
+id: course_samples
+label: 'Dark Slideshow'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Dark Slideshow'
+behavior_plugins: {  }

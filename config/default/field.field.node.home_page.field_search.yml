@@ -1,0 +1,19 @@
+uuid: 4f1c353d-5810-4654-9a49-3412cb2afae5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search
+    - node.type.home_page
+id: node.home_page.field_search
+field_name: field_search
+entity_type: node
+bundle: home_page
+label: Search
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

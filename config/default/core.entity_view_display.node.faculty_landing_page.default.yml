@@ -1,0 +1,86 @@
+uuid: f1dc38d4-cb91-4546-a1c3-f797d61eb82c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.faculty_landing_page.field_areas_of_interest_title
+    - field.field.node.faculty_landing_page.field_default_person_type
+    - field.field.node.faculty_landing_page.field_faculty_column_layout
+    - field.field.node.faculty_landing_page.field_introduction_p
+    - field.field.node.faculty_landing_page.field_meta_tags
+    - field.field.node.faculty_landing_page.field_search
+    - node.type.faculty_landing_page
+  module:
+    - entity_reference_revisions
+    - metatag
+    - options
+    - user
+id: node.faculty_landing_page.default
+targetEntityType: node
+bundle: faculty_landing_page
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  field_areas_of_interest_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_default_person_type:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_faculty_column_layout:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_introduction_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

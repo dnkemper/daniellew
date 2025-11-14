@@ -1,0 +1,82 @@
+uuid: 5e709a0b-d62e-49b4-a0ad-5db5787f8ba6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.social_media_links.field_facebook_link
+    - field.field.paragraph.social_media_links.field_flickr_link
+    - field.field.paragraph.social_media_links.field_instagram_link
+    - field.field.paragraph.social_media_links.field_linkedin_link
+    - field.field.paragraph.social_media_links.field_twitter_link
+    - field.field.paragraph.social_media_links.field_youtube_link
+    - paragraphs.paragraphs_type.social_media_links
+  module:
+    - linkit
+id: paragraph.social_media_links.default
+targetEntityType: paragraph
+bundle: social_media_links
+mode: default
+content:
+  field_facebook_link:
+    type: linkit
+    weight: 7
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_flickr_link:
+    type: linkit
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_instagram_link:
+    type: linkit
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_linkedin_link:
+    type: linkit
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_twitter_link:
+    type: linkit
+    weight: 9
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_youtube_link:
+    type: linkit
+    weight: 11
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

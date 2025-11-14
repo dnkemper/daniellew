@@ -1,0 +1,23 @@
+uuid: 52b12d56-7864-438f-b4bd-26f9f478fef3
+langcode: en
+status: true
+dependencies: {  }
+id: node__events
+label: 'Content: Event'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:field_introduction_excerpt]'
+  keywords: '[node:field_event_category],event'
+  og_description: '[node:field_introduction_excerpt]'
+  og_image: '[node:field_thumbnail:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: article
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'
+  twitter_cards_creator: '@washuartsci'
+  twitter_cards_description: '[node:field_introduction_excerpt]'
+  twitter_cards_image: '[node:field_thumbnail:entity:field_media_image:fullscreen_video:url]'
+  twitter_cards_title: '[node:title]'
+  twitter_cards_type: summary_large_image

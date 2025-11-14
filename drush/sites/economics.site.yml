@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://economics.ddev.site
+  paths:
+    files: sites/economics.wustl.edu/files
+dev:
+  uri: https://economics.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/economics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://economics.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/economics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://economics.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/economics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

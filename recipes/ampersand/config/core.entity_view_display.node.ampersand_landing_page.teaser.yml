@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.ampersand_landing_page.field_artsci_bookshelf_callout
+    - field.field.node.ampersand_landing_page.field_artsci_footer_callout_p
+    - field.field.node.ampersand_landing_page.field_artsci_in_the_news
+    - field.field.node.ampersand_landing_page.field_artsci_introduction_p
+    - field.field.node.ampersand_landing_page.field_artsci_metatags
+    - field.field.node.ampersand_landing_page.field_artsci_search
+    - field.field.node.ampersand_landing_page.field_artsci_spotlights_p
+    - node.type.ampersand_landing_page
+  module:
+    - user
+_core:
+  default_config_hash: 6o27vEQtlYdDB9cwructfcI835ePHPxjkBCxWJDxY04
+id: node.ampersand_landing_page.teaser
+targetEntityType: node
+bundle: ampersand_landing_page
+mode: teaser
+content: {  }
+hidden:
+  field_artsci_bookshelf_callout: true
+  field_artsci_footer_callout_p: true
+  field_artsci_in_the_news: true
+  field_artsci_introduction_p: true
+  field_artsci_metatags: true
+  field_artsci_search: true
+  field_artsci_spotlights_p: true
+  links: true
+  private: true
+  search_api_excerpt: true

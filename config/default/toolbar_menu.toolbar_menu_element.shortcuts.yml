@@ -1,0 +1,9 @@
+uuid: 9e78a736-9a69-4299-8113-51bd10a12262
+langcode: en
+status: true
+dependencies: {  }
+id: shortcuts
+label: Shortcuts
+weight: null
+menu: shortcuts
+rewrite_label: false

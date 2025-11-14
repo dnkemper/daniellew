@@ -1,0 +1,47 @@
+uuid: 7342cba5-2ab9-4a02-81cd-a8cffa6ab113
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.header
+    - field.field.node.past_events_landing_page.date_repeat_entity_clone_state
+    - field.field.node.past_events_landing_page.date_repeat_entity_master_uuid
+    - field.field.node.past_events_landing_page.field_category_display
+    - field.field.node.past_events_landing_page.field_event_header_image
+    - field.field.node.past_events_landing_page.field_footer_callout_p
+    - field.field.node.past_events_landing_page.field_meta_tags
+    - field.field.node.past_events_landing_page.field_search
+    - node.type.past_events_landing_page
+  module:
+    - user
+id: node.past_events_landing_page.header
+targetEntityType: node
+bundle: past_events_landing_page
+mode: header
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  field_category_display: true
+  field_event_header_image: true
+  field_footer_callout_p: true
+  field_meta_tags: true
+  field_search: true
+  search_api_excerpt: true

@@ -1,0 +1,34 @@
+services:
+  olympian_core.route_subscriber:
+    class: 'Drupal\olympian_core\Routing\OlympianCoreRouteSubscriber'
+    tags:
+      - { name: event_subscriber }
+
+  olympian_core.olympian_route_subscriber:
+    class: Drupal\olympian_core\EventSubscriber\OlympianRouteSubscriber
+    tags:
+      - { name: event_subscriber }
+
+  olympian_core.access_checker:
+    class: Drupal\olympian_core\Access\OlympianCoreAccess
+    arguments: ['@current_user']
+    tags:
+      - { name: access_check, applies_to: _olympian_core_access_check }
+  olympian_core.access_checker_content:
+    class: Drupal\olympian_core\Access\OlympianCoreAccessContent
+    arguments: ['@current_user']
+    tags:
+      - { name: access_check, applies_to: _olympian_core_access_check_content }
+  olympian_core.addtocal_service:
+    class: Drupal\olympian_core\Plugin\DateAugmenter\AddToCal
+    arguments: ['@config.factory']
+  olympian_core.simple_sitemap_override:
+    class: Drupal\olympian_core\ConfigOverride\SimpleSitemapOverride
+    arguments: [ '@request_stack' ]
+    tags:
+      - { name: config.factory.override }
+  olympian_core.twig_extension:
+    class: Drupal\olympian_core\TwigExtension\AbsoluteUrlExtension
+    arguments: ['@file_url_generator']
+    tags:
+      - { name: twig.extension }

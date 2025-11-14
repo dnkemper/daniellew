@@ -1,0 +1,77 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 81dec73a-f869-4b0a-a603-95ccbdfad768
+  bundle: resources
+  default_langcode: en
+  depends:
+    5b2e046b-20fb-438e-87d2-d0f5e3d7c724: media
+    582f1150-9852-415c-b671-332a2006f4e9: taxonomy_term
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Center for Diversity & Inclusion'
+  created:
+    -
+      value: 1690897400
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/center-diversity-inclusion
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://diversityinclusion.wustl.edu/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: 5b2e046b-20fb-438e-87d2-d0f5e3d7c724
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 582f1150-9852-415c-b671-332a2006f4e9
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'discover programs, resources, and events related to diversity'
+  field_title:
+    -
+      value: 'Center for Diversity & Inclusion'

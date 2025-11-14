@@ -1,0 +1,28 @@
+uuid: bda0fde3-f9db-48bb-bdaf-5b2692fcbc7b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_testimonial_section.field_testimoni_background_color
+    - field.field.paragraph.publication_testimonial_section.field_testimonial_publication_
+    - paragraphs.paragraphs_type.publication_testimonial_section
+id: paragraph.publication_testimonial_section.default
+targetEntityType: paragraph
+bundle: publication_testimonial_section
+mode: default
+content:
+  field_testimoni_background_color:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_testimonial_publication_:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

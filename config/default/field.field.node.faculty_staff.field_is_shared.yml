@@ -1,0 +1,23 @@
+uuid: edc3d6c9-0e37-4107-8a15-86f97a34577a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_is_shared
+    - node.type.faculty_staff
+id: node.faculty_staff.field_is_shared
+field_name: field_is_shared
+entity_type: node
+bundle: faculty_staff
+label: 'Is Shared Content'
+description: 'Share to other sites using content sharing'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Is Shared Content'
+  off_label: 'Is Not Shared Content'
+field_type: boolean

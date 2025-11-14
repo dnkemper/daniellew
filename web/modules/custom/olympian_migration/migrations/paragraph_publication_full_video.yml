@@ -1,0 +1,44 @@
+id: paragraph_publication_full_video
+label: 'Publication Full Video Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_full_video  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_full_video  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Image field mapping
+  field_full_video_image:
+    plugin: sub_process
+    source: field_full_video_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # Text field mappings
+  field_full_video_subtitle: field_full_video_subtitle
+  field_full_video_title: field_full_video_title
+
+  # Video URL converted to media entity reference
+  # Assuming a separate migration or process plugin exists for converting URLs to media entities
+  field_full_video_url:
+    plugin: sub_process
+    source: field_full_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_full_video
+migration_dependencies:
+  required: {}
+  optional: {}

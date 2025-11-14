@@ -1,0 +1,16 @@
+uuid: 2474906a-dd3b-4c30-8651-84ed060b0651
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_1_1_944w
+id: spotlight_desktop
+label: 'Spotlight Desktop'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: square_1_1_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_944w

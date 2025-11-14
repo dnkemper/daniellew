@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: english.ddev.site
+    protocol: https
+  machine_name: english
+  human_name: english.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: english.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/english.wustl.edu/files'
+    origin: 'https://english.wustl.edu'
+drupal:
+  db:
+    database: drupal_english
+system:
+  site:
+    contact_us_url: 'https://english.wustl.edu/contact-us'
+    name: english
+    email: english@wustl.edu

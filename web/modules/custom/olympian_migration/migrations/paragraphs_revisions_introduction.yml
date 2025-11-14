@@ -1,0 +1,63 @@
+id: paragraphs_revisions_introduction
+migration_tags:
+  - artsci
+  - paragraph
+  - paragraph-revision
+migration_group: olympian_migration
+label: 'Paragraphs Revisions (Introduction)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: introduction
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_headline:
+    -
+      plugin: get
+      source: field_headline
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  # Image field mapping using sub_process
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_ampersand:
+    -
+      plugin: get
+      source: field_ampersand
+  field_background:
+    -
+      plugin: get
+      source: field_background
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: introduction
+migration_dependencies:
+  required: {}
+  optional: {}

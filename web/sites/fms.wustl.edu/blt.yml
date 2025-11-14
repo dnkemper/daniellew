@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: fms.ddev.site
+    protocol: https
+  machine_name: fms
+  human_name: fms.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: fms.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/fms.wustl.edu/files'
+    origin: 'https://fms.wustl.edu'
+drupal:
+  db:
+    database: drupal_fms
+system:
+  site:
+    contact_us_url: 'https://fms.wustl.edu/contact-us'
+    name: fms
+    email: fms@wustl.edu

@@ -1,0 +1,25 @@
+uuid: 7095f26a-63c0-475f-ac35-e48dc5ae3640
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_1_1_190w
+    - image.style.square_1_1_320w
+    - image.style.square_1_1_480w
+    - image.style.square_1_1_944w
+id: resp_square_medium
+label: 'resp square medium'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 428px'
+      sizes_image_styles:
+        - square_1_1_190w
+        - square_1_1_320w
+        - square_1_1_480w
+        - square_1_1_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_480w

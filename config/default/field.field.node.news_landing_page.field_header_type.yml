@@ -1,0 +1,23 @@
+uuid: fa69189a-9011-4ec0-ac1f-529e0d0424ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_header_type
+    - node.type.news_landing_page
+  module:
+    - options
+id: node.news_landing_page.field_header_type
+field_name: field_header_type
+entity_type: node
+bundle: news_landing_page
+label: 'Header Type'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Slideshow
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,42 @@
+uuid: fc182463-e5f9-40b4-8745-4ebbef4c7464
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_media_directory
+    - field.field.media.image.field_media_image
+    - media.type.image
+    - responsive_image.styles.resp_default_aspect
+  module:
+    - lazy
+    - responsive_image
+_core:
+  default_config_hash: whJrNezqUJ7Qhg7raMQj2Hz9JPiWxijezhWIEN9BVVk
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: resp_default_aspect
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      lazy:
+        lazy_image: '0'
+        placeholder_style: ''
+        data_uri: false
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

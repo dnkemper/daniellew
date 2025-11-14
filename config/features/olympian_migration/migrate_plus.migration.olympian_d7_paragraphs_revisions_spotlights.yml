@@ -1,0 +1,70 @@
+uuid: 36e89b93-4df6-49af-b348-a46c82cd7f8f
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_spotlights
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Spotlights)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: spotlights
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_spotlight_image:
+    plugin: sub_process
+    source: field_spotlight_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_spotlight_video_url:
+    plugin: sub_process
+    source: field_spotlight_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+  field_spotlight_video_title:
+    -
+      plugin: get
+      source: field_spotlight_video_title
+  field_spotlight_video_short:
+    -
+      plugin: get
+      source: field_spotlight_video_short
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: spotlights
+migration_dependencies:
+  required: {}
+  optional: {  }

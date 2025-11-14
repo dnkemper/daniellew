@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://sds.ddev.site
+  paths:
+    files: sites/sds.wustl.edu/files
+dev:
+  uri: https://sds.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/sds.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://sds.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/sds.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://sds.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/sds.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

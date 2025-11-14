@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f98edd0b-ace0-42c8-8652-b4ad7302c6b7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: olinlibrary_420x420.png
+  uri:
+    -
+      value: 'public://2023-07/olinlibrary_420x420_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 37983
+  status:
+    -
+      value: false
+  created:
+    -
+      value: 1690613279

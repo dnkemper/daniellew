@@ -1,0 +1,21 @@
+uuid: 69aeca09-c77c-40fa-8654-bf8d4ebe5070
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_timeline_date
+    - paragraphs.paragraphs_type.timeline_slideshow_slides
+  module:
+    - datetime
+id: paragraph.timeline_slideshow_slides.field_timeline_date
+field_name: field_timeline_date
+entity_type: paragraph
+bundle: timeline_slideshow_slides
+label: 'Timeline Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

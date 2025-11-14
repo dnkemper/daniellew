@@ -1,0 +1,57 @@
+uuid: dff940a5-6f79-43d0-a9e4-4c621fad719c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.link_title_and_body.field_article_body
+    - field.field.paragraph.link_title_and_body.field_link_title
+    - field.field.paragraph.link_title_and_body.field_link_title_new_window
+    - field.field.paragraph.link_title_and_body.field_link_title_url
+    - paragraphs.paragraphs_type.link_title_and_body
+  module:
+    - linkit
+    - text
+id: paragraph.link_title_and_body.default
+targetEntityType: paragraph
+bundle: link_title_and_body
+mode: default
+content:
+  field_article_body:
+    type: text_textarea_with_summary
+    weight: 3
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_link_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link_title_new_window:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_link_title_url:
+    type: linkit
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_title_link: true
+  status: true

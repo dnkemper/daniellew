@@ -1,0 +1,28 @@
+favicon:
+  use_default: true
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  use_default: true
+font_size: 16
+header:
+  toppage: 1
+alerts_feed: '1'
+department_image: {  }
+header_color: '1'
+header_logo: '1'
+top_button_title_custom_text: 'Let your curiosity lead the way'
+apply_button: '1'
+apply_button_text: 'Contact Us'
+apply_button_link: 'https://artsci.washu.edu/apply'
+apply_button_external: '1'
+additional_link_artsci: '1'
+additional_link_graduate: '1'
+instagram_username: wustlartci
+twitter_username: wustlartci
+facebook_username: ''
+youtube_username: ''
+copyright: 'Arts & Sciences at Washington University in St. Louis'

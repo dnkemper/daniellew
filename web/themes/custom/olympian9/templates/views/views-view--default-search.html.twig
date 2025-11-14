@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * Theme override to display a view of unformatted rows.
+ *
+ * Available variables:
+ * - title: The title of this group of rows. May be empty.
+ * - rows: A list of the view's row items.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's content.
+ * - view: The view object.
+ * - default_row_class: A flag indicating whether default classes should be
+ *   used on rows.
+ *
+ * @see template_preprocess_views_view_unformatted()
+ */
+#}
+{%
+  set classes = [
+    'view',
+    'view-' ~ id|clean_class,
+    'view-display-id-' ~ display_id,
+    'search-results',
+  ]
+%}
+{{ attach_library('olympian9/node--search') }}
+<div{{ attributes.addClass(classes) }}>
+
+  <section class="search-heading">
+    <div class="container center">
+      <h1>Search Results</h1>
+      {% if view.getExposedInput.search is not empty %}
+        <div class="default-search-result">
+          <div class="search-term">
+            <a class="cancel" href="/search"></a> You searched for:  <div class="exposed-input-search">{{ view.getExposedInput.search }}</div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+  {% if exposed %}
+        {{ exposed }}
+  {% endif %}
+	<div class="container results flex layout">
+  		<div class="column seventy js-load-container">
+  {% if rows %}
+
+      {{ rows }}
+    {% elseif empty %}
+
+
+      <div class="no-results">{{ empty }}</div>
+
+  {% endif %}
+
+  {% if pager %}
+    {{ pager }}
+  {% endif %}
+  {% if attachment_after %}
+    <div class="attachment attachment-after">
+      {{ attachment_after }}
+    </div>
+  {% endif %}
+  {% if more %}
+    {{ more }}
+  {% endif %}
+  {% if footer %}
+    <div class="view-footer">
+      {{ footer }}
+    </div>
+  {% endif %}
+  {% if feed_icons %}
+    <div class="feed-icons">
+      <div class="olympian-feed">{{ feed_icons }}</div>
+    </div>
+  {% endif %}
+		</div>
+    		<aside class="column thirty">
+
+			<div class="related-resources">
+				<h3>Resources:</h3>
+				<a href="{{ landing_page_alias }}" class="more" title="See All Related Resources">See All</a>
+        {% set view = drupal_view_result('resources', 'related_resources')|length %}
+          {% if view > 0 %}
+				{{ drupal_view('resources', 'related_resources') }}
+        {% else %}
+        {% include '@olympian9/partials/contact-us-card.html.twig' %}
+        {% endif %}
+			</div>
+		</aside>
+
+	</div>
+</div>
+</div>

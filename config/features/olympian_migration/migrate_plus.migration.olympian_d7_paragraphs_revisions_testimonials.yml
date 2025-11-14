@@ -1,0 +1,51 @@
+uuid: e9441be4-8665-403c-a0a2-7a89dc0d1a67
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_testimonials
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Testimonials)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: testimonials
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_select_testimonials:
+    plugin: sub_process
+    source: field_select_testimonials
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_testimonial
+        source: target_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: testimonials
+migration_dependencies:
+  required: {}
+  optional: {  }

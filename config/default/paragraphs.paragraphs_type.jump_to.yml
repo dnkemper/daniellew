@@ -1,0 +1,10 @@
+uuid: 38565f7c-400d-4517-9067-9d83f23b2605
+langcode: en
+status: true
+dependencies: {  }
+id: jump_to
+label: 'Jump To'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Jump To'
+behavior_plugins: {  }

@@ -1,0 +1,21 @@
+uuid: 33d37915-7576-4d2d-8cdb-ce5346c2409d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_introduction_text_color
+    - paragraphs.paragraphs_type.introduction
+  module:
+    - options
+id: paragraph.introduction.field_introduction_text_color
+field_name: field_introduction_text_color
+entity_type: paragraph
+bundle: introduction
+label: 'Text Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

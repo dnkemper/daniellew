@@ -1,0 +1,11 @@
+uuid: 4cce2a7a-4f12-442a-9d9c-fd551e93c976
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.feature_home
+label: feature_home
+description: ''
+targetEntityType: node
+cache: true

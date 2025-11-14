@@ -1,0 +1,23 @@
+uuid: 708cc28d-b35b-419c-8584-27e572470b14
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_1_1_680w
+label: 'square 1:1 (680w)'
+effects:
+  cd09d634-9751-4301-988f-64b582d4f9bb:
+    uuid: cd09d634-9751-4301-988f-64b582d4f9bb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 680
+      height: 680
+      crop_type: focal_point
+  9b3c8822-9307-4b4b-af30-e00157f3195e:
+    uuid: 9b3c8822-9307-4b4b-af30-e00157f3195e
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

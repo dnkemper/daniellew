@@ -1,0 +1,23 @@
+uuid: 09226f7e-e33d-4d72-92f2-973e51c81daf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_dimensions_1
+    - node.type.coin
+id: node.coin.field_coin_dimensions_1
+field_name: field_coin_dimensions_1
+entity_type: node
+bundle: coin
+label: Dimensions
+description: '(max ø, mm)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: mm
+field_type: decimal

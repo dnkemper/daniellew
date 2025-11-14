@@ -1,0 +1,16 @@
+uuid: 130b0b10-f7b1-4af3-8432-b071bd5364ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.blog_horizontal_thumbnail
+id: blog_horizontal_thumbnail
+label: 'Blog Horizontal Thumbnail (1300 x 580)'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: blog_horizontal_thumbnail
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: blog_horizontal_thumbnail

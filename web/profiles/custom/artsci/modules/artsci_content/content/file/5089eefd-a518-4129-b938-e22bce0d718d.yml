@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 5089eefd-a518-4129-b938-e22bce0d718d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: nonwashucourse_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/nonwashucourse_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 14041
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

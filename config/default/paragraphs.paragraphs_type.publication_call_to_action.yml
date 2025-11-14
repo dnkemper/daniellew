@@ -1,0 +1,10 @@
+uuid: b45ddb9b-274d-405a-8662-faa29463e6fb
+langcode: en
+status: true
+dependencies: {  }
+id: publication_call_to_action
+label: 'Publication Call to Action Section'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Call to Action Section'
+behavior_plugins: {  }

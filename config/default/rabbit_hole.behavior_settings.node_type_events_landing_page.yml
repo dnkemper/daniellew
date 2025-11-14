@@ -1,0 +1,14 @@
+uuid: 397a1e2d-1bc3-4656-8490-cd6b2abe019f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.events_landing_page
+id: node_type_events_landing_page
+entity_type_id: node_type
+entity_id: events_landing_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

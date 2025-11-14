@@ -1,0 +1,22 @@
+uuid: 56b73376-ac3b-45cc-aafd-246baeac2573
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_twitter_section.field_twitter_description
+    - paragraphs.paragraphs_type.publication_twitter_section
+id: paragraph.publication_twitter_section.default
+targetEntityType: paragraph
+bundle: publication_twitter_section
+mode: default
+content:
+  field_twitter_description:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

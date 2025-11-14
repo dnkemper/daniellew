@@ -1,0 +1,25 @@
+uuid: ba72612e-b917-4469-9ef3-7784a0195a4e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_tab_1
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - webform
+id: paragraph.tabs.field_tab_1
+field_name: field_tab_1
+entity_type: paragraph
+bundle: tabs
+label: Webform
+description: 'Webforms must first be <a href="/admin/structure/webform/add">created</a> before referencing them.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: true
+field_type: webform

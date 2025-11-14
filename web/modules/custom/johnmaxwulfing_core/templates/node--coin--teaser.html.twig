@@ -1,0 +1,88 @@
+
+{# THE TEASER INFO #}
+<div class="collection-coin">
+<div class="collection-teaser">
+
+{# Title with link #}
+<h2 class="collection-teaser--title">
+<a href="{{ url }}" target="_blank">
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+</a>
+</h2>
+{# // Middle Information #}
+<div class="collection-teaser--information">
+{% if content.field_coin_acquisition_y or content.field_coin_lot_num or content.field_coin_object_num %}
+  <p class="collection-teaser--object-number"><strong>Object Number:</strong> 
+
+{{ content.field_coin_acquisition_y }}
+{% endif %}
+{% if content.field_coin_acquisition_y and content.field_coin_lot_num %}
+    ,{{ content.field_coin_lot_num }}
+  {% elseif content.field_coin_lot_num %}
+        {{ content.field_coin_lot_num }}
+  {% endif %}
+{% if content.field_coin_object_num and content.field_coin_lot_num or content.field_coin_lot_num or content.field_coin_acquisition_y %}
+   ,{{ content.field_coin_object_num }}
+{% elseif content.field_coin_object_num %}
+        {{ content.field_coin_object_num }}
+  {% endif %}
+
+{% if content.field_coin_object_type %}
+  <p class="collection-teaser--object-type"><strong>Object Type:</strong>{{ content.field_coin_object_type }}</p>
+{% endif %}
+{% if content.field_coin_material %}
+  <p class="collection-teaser--material"><strong>Material:</strong>{{ content.field_coin_material }}</p>
+{% endif %}
+{% if content.field_coin_mint1 %}
+  <p class="collection-teaser--mint termref"><strong>Mint:</strong>{{ content.field_coin_mint1 }}</p>
+{% endif %}
+
+{% if content.field_coin_language %}
+  <p class="collection-teaser--language termref"><strong>Languages:</strong>{{ content.field_coin_language }}</p>
+{% endif %}
+{% if content.field_coin_authority_issuer %}
+  <p class="collection-teaser--issuer termref"><strong>Issuing Authority:</strong>{{ content.field_coin_authority_issuer }}</p>
+{% endif %}
+{% if content.field_coin_denomination %}
+  <p class="collection-teaser--denomination termref"><strong>Denomination:</strong>{{ content.field_coin_denomination }}</p>
+{% endif %}
+{% if content.field_coin_weight %}
+  <p class="collection-teaser--weight termref"><strong>Weight:</strong>{{ content.field_coin_weight }}</p>
+{% endif %}
+{% if content.field_coin_dimensions_1 %}
+  <p class="collection-teaser--size termref"><strong>Size:</strong>{{ content.field_coin_dimensions_1 }}</p>
+{% endif %}
+
+{# DATES #}
+{# {% if content.field_coin_date_first < 0 %}
+    {{ content.field_coin_date_first }} *= -1
+    {{ content.field_coin_date_first }} .=  " BC"
+{% endif %}
+{% if content.field_coin_date_last < 0 %}
+    {{ content.field_coin_date_last }} *= -1
+    {{ content.field_coin_date_last }} .=  " BC"
+{% endif %} #}
+{% if content.field_coin_date_first or content.field_coin_date_last %}
+    <div><strong>Dates: </strong>
+{% endif %}
+{% if content.field_coin_date_first and content.field_coin_date_last %}
+  {{ content.field_coin_date_first }}&nbsp-&nbsp{{ content.field_coin_date_last }}
+{% elseif content.field_coin_date_first %}
+  {{ content.field_coin_date_first }}
+{% elseif content.field_coin_date_last %}
+  {{ content.field_coin_date_last }}
+{% endif %}
+
+</div>
+
+{# Image with link #}
+{# <a href="'.url("node/$node->nid")" class="collection-teaser--image" target="_blank">
+    {{ content.field_obverse_image }}
+</a> #}
+
+</div>
+</div>

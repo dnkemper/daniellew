@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 89c0cd32-4606-446e-95a6-3bc7d3b5832b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: events.jpg
+  uri:
+    -
+      value: 'public://2023-12/events_1_1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 6779942
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

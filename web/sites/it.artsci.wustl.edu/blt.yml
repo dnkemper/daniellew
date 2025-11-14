@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: it.ddev.site
+    protocol: https
+  machine_name: it
+  human_name: it.artsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: it.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/it.artsci.wustl.edu/files'
+    origin: 'https://it.artsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_it
+system:
+  site:
+    contact_us_url: 'https://it.artsci.wustl.edu/contact-us'
+    name: it
+    email: it@wustl.edu

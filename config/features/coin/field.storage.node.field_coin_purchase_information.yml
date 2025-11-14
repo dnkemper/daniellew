@@ -1,0 +1,21 @@
+uuid: 3ccc54f8-066b-44d6-ace1-8166bb78e75c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_coin_purchase_information
+field_name: field_coin_purchase_information
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

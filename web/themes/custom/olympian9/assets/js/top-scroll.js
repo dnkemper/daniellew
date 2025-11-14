@@ -1,0 +1,2 @@
+"use strict";(function(a,b){"use strict";b.behaviors.backToTopButton={attach:function(){function a(){c.style.display=20<document.body.scrollTop||20<document.documentElement.scrollTop?"block":"none"}function b(){document.body.scrollTop=0,document.documentElement.scrollTop=0}var c=document.getElementById("top-scroll");window.onscroll=function(){a()},c.addEventListener("click",function(){b()})}}})(jQuery,Drupal);
+//# sourceMappingURL=top-scroll.js.map

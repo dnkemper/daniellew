@@ -1,0 +1,36 @@
+_core:
+  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
+langcode: en
+uuid: 0ceced7f-d4cb-41b3-bbec-56eb5e14d767
+name: 'Arts & Sciences Web theme'
+mail: artsci-webteam@wustl.edu
+slogan: 'Arts & Sciences at Washington University in St. Louis'
+page:
+  403: /404
+  404: /404
+  front: /node/12
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en
+has_parent: 0
+parent:
+  name: ''
+  url: ''
+social:
+  instagram_username: washuartsci
+  twitter_username: washuartsci
+  facebook_username: washuartsci
+  youtube_username: washuartsci
+paragraph_youtube_username: washuartsci
+paragraph_twitter_username: washuartsci
+paragraph_facebook_username: washuartsci
+paragraph_instagram_username: washuartsci
+paragraph_social:
+  twitter_username: washuartsci
+  instagram_username: washuartsci
+contact_us_url: '/contact-us'
+site_slogan: 'Arts & Sciences at Washington University in St. Louis'
+paragraph_linkedin_username: /showcase/washu-arts-sciences
+custom_403:
+  display: true
+  message: '<h3>Please click here to log in</h3><p><a class="button" href="/user">login here</a></p>'

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 52f34486-6c62-42e4-8e2e-629acdd74cf1
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: returnloa_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/returnloa_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 19657
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

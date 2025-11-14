@@ -1,0 +1,382 @@
+uuid: 17104550-5160-4f86-895c-226efa85f99e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_image_and_text
+    - node.type.home_page
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+  module:
+    - entity_reference_revisions
+id: node.home_page.field_featured_image_and_text
+field_name: field_featured_image_and_text
+entity_type: node
+bundle: home_page
+label: 'Featured Half Image and Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      featured_half_image_w_text: featured_half_image_w_text
+    negate: 0
+    target_bundles_drag_drop:
+      additional_addresses:
+        weight: 2
+        enabled: false
+      additional_faculty_information:
+        weight: 3
+        enabled: false
+      additional_resource:
+        weight: 4
+        enabled: false
+      additional_resources:
+        weight: 5
+        enabled: false
+      additional_resources_section:
+        weight: 78
+        enabled: false
+      alert:
+        weight: 6
+        enabled: false
+      ampersand_callout:
+        weight: 7
+        enabled: false
+      anchor_link:
+        weight: 8
+        enabled: false
+      announcements:
+        weight: 9
+        enabled: false
+      article_spotlight:
+        weight: 83
+        enabled: false
+      basic_page_content:
+        weight: 84
+        enabled: false
+      button:
+        weight: 10
+        enabled: false
+      call_to_action:
+        weight: 12
+        enabled: false
+      call_to_action_blocks:
+        weight: 88
+        enabled: false
+      callout:
+        weight: 11
+        enabled: false
+      contact_header:
+        weight: 13
+        enabled: false
+      contact_highlights:
+        weight: 14
+        enabled: false
+      contact_highlights_repeat:
+        weight: 15
+        enabled: false
+      content_2:
+        weight: 92
+        enabled: false
+      content_repeats:
+        weight: 16
+        enabled: false
+      course_attributes:
+        weight: 157
+        enabled: false
+      course_page_header:
+        weight: 95
+        enabled: false
+      course_samples:
+        weight: 17
+        enabled: false
+      course_sections:
+        weight: 158
+        enabled: false
+      courses_image:
+        weight: 94
+        enabled: false
+      dark_callout:
+        weight: 18
+        enabled: false
+      dark_callouts:
+        weight: 19
+        enabled: false
+      departments_programs:
+        weight: 20
+        enabled: false
+      description_body:
+        weight: 21
+        enabled: false
+      email_signup:
+        weight: 22
+        enabled: false
+      embedded_webform:
+        weight: 102
+        enabled: false
+      events:
+        weight: 159
+        enabled: false
+      faq:
+        weight: 23
+        enabled: false
+      faq_section:
+        weight: 24
+        enabled: false
+      featured_event:
+        weight: 25
+        enabled: false
+      featured_full_w_text:
+        weight: 26
+        enabled: false
+      featured_half_image_w_text:
+        weight: 27
+        enabled: true
+      featured_news:
+        weight: 108
+        enabled: false
+      featured_news_slide:
+        weight: 28
+        enabled: false
+      featured_slideshow:
+        weight: 29
+        enabled: false
+      featured_with_caption:
+        weight: 30
+        enabled: false
+      footer_callout:
+        weight: 31
+        enabled: false
+      full_screen_home_slide:
+        weight: 115
+        enabled: false
+      full_width_video:
+        weight: 116
+        enabled: false
+      fullscreen_image:
+        weight: 32
+        enabled: false
+      fullscreen_slideshow:
+        weight: 33
+        enabled: false
+      fullscreen_video:
+        weight: 160
+        enabled: false
+      get_to_know_the_deans:
+        weight: 34
+        enabled: false
+      grants_awards:
+        weight: 35
+        enabled: false
+      header:
+        weight: 36
+        enabled: false
+      honors:
+        weight: 37
+        enabled: false
+      horizontal_slide:
+        weight: 121
+        enabled: false
+      image_block:
+        weight: 38
+        enabled: false
+      image_blocks:
+        weight: 39
+        enabled: false
+      image_gallery:
+        weight: 40
+        enabled: false
+      important_dates:
+        weight: 41
+        enabled: false
+      in_the_news:
+        weight: 44
+        enabled: false
+      infographics:
+        weight: 42
+        enabled: false
+      instagram_twitter_section:
+        weight: 127
+        enabled: false
+      intro_text_with_image:
+        weight: 129
+        enabled: false
+      intro_with_links:
+        weight: 130
+        enabled: false
+      intro_with_tob:
+        weight: 161
+        enabled: false
+      introduction:
+        weight: 43
+        enabled: false
+      jump_to:
+        weight: 45
+        enabled: false
+      lightbox_image:
+        weight: 46
+        enabled: false
+      link_title_and_body:
+        weight: 135
+        enabled: false
+      links:
+        weight: 47
+        enabled: false
+      main_content_repeater:
+        weight: 48
+        enabled: false
+      main_content_with_image:
+        weight: 49
+        enabled: false
+      multipurpose_slideshow:
+        weight: 138
+        enabled: false
+      optional_callout:
+        weight: 50
+        enabled: false
+      people_teaser:
+        weight: 162
+        enabled: false
+      programs_callout:
+        weight: 51
+        enabled: false
+      publication_announcement:
+        weight: 165
+        enabled: false
+      publication_announcement_feature:
+        weight: 167
+        enabled: false
+      publication_announcements:
+        weight: 166
+        enabled: false
+      publication_award:
+        weight: 168
+        enabled: false
+      publication_awards_section:
+        weight: 169
+        enabled: false
+      publication_call_to_action:
+        weight: 170
+        enabled: false
+      publication_degree:
+        weight: 171
+        enabled: false
+      publication_degree_holder:
+        weight: 174
+        enabled: false
+      publication_degrees_section:
+        weight: 172
+        enabled: false
+      publication_degrees_subsection:
+        weight: 173
+        enabled: false
+      publication_featured_people:
+        weight: 175
+        enabled: false
+      publication_full_video:
+        weight: 176
+        enabled: false
+      publication_gallery:
+        weight: 177
+        enabled: false
+      publication_gallery_image:
+        weight: 178
+        enabled: false
+      publication_person:
+        weight: 179
+        enabled: false
+      publication_student_stories:
+        weight: 180
+        enabled: false
+      publication_student_story:
+        weight: 181
+        enabled: false
+      publication_testimonial_section:
+        weight: 182
+        enabled: false
+      publication_twitter_section:
+        weight: 183
+        enabled: false
+      publications:
+        weight: 52
+        enabled: false
+      publications_featured_news:
+        weight: 163
+        enabled: false
+      publications_intro:
+        weight: 164
+        enabled: false
+      related_links:
+        weight: 53
+        enabled: false
+      resources_callout:
+        weight: 54
+        enabled: false
+      sample_courses:
+        weight: 55
+        enabled: false
+      sample_courses_publications:
+        weight: 56
+        enabled: false
+      school_structure:
+        weight: 57
+        enabled: false
+      sidebar_callout:
+        weight: 58
+        enabled: false
+      sidebar_slideshow:
+        weight: 59
+        enabled: false
+      slideshow:
+        weight: 60
+        enabled: false
+      social_media_links:
+        weight: 61
+        enabled: false
+      spotlight:
+        weight: 62
+        enabled: false
+      spotlights:
+        weight: 63
+        enabled: false
+      table_of_contents_anchors:
+        weight: 184
+        enabled: false
+      tabs:
+        weight: 64
+        enabled: false
+      testimonial:
+        weight: 154
+        enabled: false
+      testimonials:
+        weight: 65
+        enabled: false
+      text_link_with_testimonial:
+        weight: 156
+        enabled: false
+      timeline_slides:
+        weight: 66
+        enabled: false
+      timeline_slideshow:
+        weight: 67
+        enabled: false
+      timeline_slideshow_slides:
+        weight: 68
+        enabled: false
+      two_column_content:
+        weight: 69
+        enabled: false
+      video_spotlights:
+        weight: 70
+        enabled: false
+      video_spotlights_and_articles:
+        weight: 71
+        enabled: false
+      video_spotlights_with_articles:
+        weight: 72
+        enabled: false
+field_type: entity_reference_revisions

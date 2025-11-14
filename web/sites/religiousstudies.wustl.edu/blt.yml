@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: religiousstudies.ddev.site
+    protocol: https
+  machine_name: religiousstudies
+  human_name: religiousstudies.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: religiousstudies.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/religiousstudies.wustl.edu/files'
+    origin: 'https://religiousstudies.wustl.edu'
+drupal:
+  db:
+    database: drupal_religiousstudies
+system:
+  site:
+    contact_us_url: 'https://religiousstudies.wustl.edu/contact-us'
+    name: religiousstudies
+    email: religiousstudies@wustl.edu

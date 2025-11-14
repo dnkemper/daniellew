@@ -1,0 +1,19 @@
+uuid: ed6effe8-2b77-4625-ae0e-48fbe1212c44
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content_subscribers
+    - node.type.faculty_staff
+id: node.faculty_staff.field_shared_content_subscribers
+field_name: field_shared_content_subscribers
+entity_type: node
+bundle: faculty_staff
+label: shared_content_subscribers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,60 @@
+{#
+/**
+ * @file
+ * Theme override of a views exposed form.
+ *
+ * Available variables:
+ * - form: A render element representing the form.
+ *
+ * @see template_preprocess_views_exposed_form()
+ */
+#}
+{{ attach_library('olympian9/tabs') }}
+{#
+{{ attach_library('olympian9/datepicker') }}
+#}
+
+{% if q is not empty %}
+  {#
+  This ensures that, if clean URLs are off, the 'q' is added first,
+  as a hidden form element, so that it shows up first in the POST URL.
+  #}
+  {{ q }}
+{% endif %}
+
+<section
+  class="search with-categories toggle-wrap {{ hidden_toggle }} {{ expanded }}">
+  <div class="inner flex collapsed-category-display">
+    <div class="search-form">
+      <svg class="icon">
+        <use xlink:href="#icon-search"></use>
+      </svg> {{ form.keys }}
+    </div>
+    {% if hidden == 'false' %}
+      <div class="toggle">
+        <div class="filter-category-text"
+             data-drupal-selector="primary-nav-submenu-toggle-button"
+             id="toggle-button" href="#">Categories
+        </div>
+      </div>
+    {% endif %}
+    {# MIG-1907: comment-out browse-by-date because not working and not being used much (?) when it was on D7.
+      See branch MIG-1907-event-browse-by-date-broken for a fixed/working version.
+    <div onclick="dateFunction()" class="toggle-date-button" id="toggle-date-button">
+      Browse By Date
+    </div>
+    #}
+    <div class="cal-link">
+      <a href="{{ past }}">PAST EVENTS
+        <svg class="icon">
+          <use xlink:href="#past-events"></use>
+        </svg>
+      </a>
+    </div>
+
+    <div class="categories-list togglee" style="display: {{ expanded_toggle }}">
+      {{ form.tid }}
+    </div>
+  </div>
+  {{ form.actions }}
+</section>

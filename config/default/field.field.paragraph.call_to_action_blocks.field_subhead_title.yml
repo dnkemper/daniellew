@@ -1,0 +1,19 @@
+uuid: c5631a7f-aece-4006-8cfe-682053a12593
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subhead_title
+    - paragraphs.paragraphs_type.call_to_action_blocks
+id: paragraph.call_to_action_blocks.field_subhead_title
+field_name: field_subhead_title
+entity_type: paragraph
+bundle: call_to_action_blocks
+label: 'Subhead Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,78 @@
+uuid: 0b58987d-3498-484e-a695-bc2477b44a94
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_section
+field_name: field_section
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Main Content and Sidebar'
+      label: 'Main Content and Sidebar'
+    -
+      value: 'Video Spotlight with Articles'
+      label: 'Video Spotlight with Articles'
+    -
+      value: 'Dotted Line'
+      label: 'Dotted Line'
+    -
+      value: 'Dark Callout'
+      label: 'Single Image Callout'
+    -
+      value: 'Multi Image Callout'
+      label: 'Multi Image Callout'
+    -
+      value: 'Call to Action'
+      label: 'Call to Action'
+    -
+      value: Content
+      label: 'First Content Block'
+    -
+      value: people
+      label: 'People Teaser'
+    -
+      value: Spotlight
+      label: Spotlight
+    -
+      value: 'Fullscreen Slideshow'
+      label: 'Fullscreen Slideshow'
+    -
+      value: 'Resources Callout'
+      label: 'Resources Callout'
+    -
+      value: 'Second Content'
+      label: 'Second Content Block'
+    -
+      value: 'About History'
+      label: Timeline
+    -
+      value: Gallery
+      label: Gallery
+    -
+      value: 'Faculty Bookshelf'
+      label: 'Faculty Bookshelf'
+    -
+      value: 'Additional Resources'
+      label: 'Additional Resources'
+    -
+      value: Testimonials
+      label: Testimonials
+    -
+      value: 'Embedded Webform'
+      label: 'Embedded Webform'
+    -
+      value: 'Footer Callout'
+      label: 'Footer Callout'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 45fe075e-2a57-4aae-a458-4691cdf08c96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_full_description
+    - paragraphs.paragraphs_type.publication_gallery_image
+id: paragraph.publication_gallery_image.field_full_description
+field_name: field_full_description
+entity_type: paragraph
+bundle: publication_gallery_image
+label: 'Full Description'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

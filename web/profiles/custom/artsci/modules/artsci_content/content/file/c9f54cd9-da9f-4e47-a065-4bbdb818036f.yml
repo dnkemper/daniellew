@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c9f54cd9-da9f-4e47-a065-4bbdb818036f
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: transferstudent_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/transferstudent_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 32795
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

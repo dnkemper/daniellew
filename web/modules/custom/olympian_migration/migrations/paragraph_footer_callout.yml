@@ -1,0 +1,96 @@
+id: paragraph_footer_callout
+label: 'Footer Callout Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: footer_callout  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: footer_callout  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Text field with summary mapping
+  field_footer_callout_content:
+    -
+      plugin: get
+      source: field_footer_callout_content
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+
+  # List (text) field mapping
+  field_footer_callout_bg: field_footer_callout_bg
+
+  # Boolean field mapping
+  field_ampersand:
+    plugin: get
+    source: field_ampersand
+
+  # Nested paragraphs field mapping for 'field_button'
+  field_button:
+    plugin: sub_process
+    source: field_button
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_button
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # Nested paragraphs field mapping for 'field_social_media'
+  field_social_media:
+    plugin: sub_process
+    source: field_social_media
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_social_media_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: footer_callout
+migration_dependencies:
+  required:
+    - paragraph_button
+    - paragraph_social_media_links
+  optional: {}

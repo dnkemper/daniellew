@@ -1,0 +1,22 @@
+uuid: 060e6d6b-3dbd-48bf-84bf-fe784019b31e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: image_card_landing_alias
+label: 'Image Card Landing Page Alias'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:imagecardlanding]'
+selection_criteria:
+  dd7e30a5-02bb-4f25-9a6f-855522ac75f5:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: dd7e30a5-02bb-4f25-9a6f-855522ac75f5
+    context_mapping:
+      node: node
+    bundles:
+      image_cards_landing: image_cards_landing
+selection_logic: and
+weight: -5
+relationships: {  }

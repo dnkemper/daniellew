@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * Theme override to display a toolbar menu.
+ *
+ * If Claro is the admin theme, this template will be used by the active theme
+ * even if the active theme is not Claro.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link URL, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see https://twig.symfony.com/doc/3.x/tags/macro.html
+#}
+{% import _self as menus %}
+
+{#
+  We call a macro which calls itself to render the full tree.
+  @see https://twig.symfony.com/doc/1.x/tags/macro.html
+#}
+{% set attributes = attributes.addClass('menu') %}
+{{ menus.menu_links(items, attributes, 0) }}
+ {% if '1' in additional_link_artsci  or '1' in additional_link_graduate %}
+      <div class="column half">
+        <h3>Additional information</h3>
+        <ul class="additional-links">
+          {% if '1' in additional_link_artsci %}
+            <li>
+              <a href="https://artsci.washu.edu" target="_blank">
+                <svg class="icon"><use xlink:href="#link-out"></use></svg>
+                Arts & Sciences
+              </a>
+            </li>
+          {% endif %}
+
+          {% if '1' in additional_link_graduate %}
+            <li>
+              <a href="https://gradstudies.artsci.wustl.edu/" target="_blank">
+                <svg class="icon"><use xlink:href="#link-out"></use></svg>
+                Graduate Studies in A&S
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+        <p class="copyright">© {{ "now"|date("Y") }} {{ copyright }}</p>
+      </div>
+      {% else %}
+      <div class="column half flex-align-end">
+        <p class="copyright">© {{ "now"|date("Y") }} {{ copyright }}</p>
+      </div>
+      {% endif %}
+  

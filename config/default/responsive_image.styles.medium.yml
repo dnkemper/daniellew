@@ -1,0 +1,16 @@
+uuid: 5994b004-6cb1-44ed-9814-756d327adbaa
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_1_1_320w
+id: medium
+label: Medium
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: square_1_1_320w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_320w

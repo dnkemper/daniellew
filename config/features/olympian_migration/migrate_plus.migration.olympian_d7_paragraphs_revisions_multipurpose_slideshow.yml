@@ -1,0 +1,77 @@
+uuid: ed2ae24f-f125-49d2-8b01-563dc7964984
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_multipurpose_slideshow
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Multipurpose Slideshow)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: multipurpose_slideshow
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_slides:
+    -
+      plugin: sub_process
+      source: field_slides
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: multipurpose_slideshow
+migration_dependencies:
+  required: {}
+  optional: {  }

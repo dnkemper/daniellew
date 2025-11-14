@@ -1,0 +1,55 @@
+uuid: 5db47834-3cd6-4812-a017-c10467ca4608
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_full_video.field_full_video_image
+    - field.field.paragraph.publication_full_video.field_full_video_subtitle
+    - field.field.paragraph.publication_full_video.field_full_video_title
+    - field.field.paragraph.publication_full_video.field_full_video_url
+    - paragraphs.paragraphs_type.publication_full_video
+  module:
+    - media_library
+    - media_library_edit
+id: paragraph.publication_full_video.default
+targetEntityType: paragraph
+bundle: publication_full_video
+mode: default
+content:
+  field_full_video_image:
+    type: media_library_widget
+    weight: 3
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_full_video_subtitle:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_full_video_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_full_video_url:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,26 @@
+uuid: 58c36d5d-b5ca-4ac3-87e0-aacc90a0fb1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_reverse_description
+    - filter.format.full_html
+    - node.type.coin
+  module:
+    - text
+id: node.coin.field_coin_reverse_description
+field_name: field_coin_reverse_description
+entity_type: node
+bundle: coin
+label: 'Reverse Type'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

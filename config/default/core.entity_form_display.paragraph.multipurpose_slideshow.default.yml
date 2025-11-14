@@ -1,0 +1,51 @@
+uuid: 3b0da63f-79d5-4e0c-8a71-c25670252710
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.multipurpose_slideshow.field_slides
+    - field.field.paragraph.multipurpose_slideshow.field_title
+    - paragraphs.paragraphs_type.multipurpose_slideshow
+  module:
+    - paragraphs
+    - paragraphs_features
+id: paragraph.multipurpose_slideshow.default
+targetEntityType: paragraph
+bundle: multipurpose_slideshow
+mode: default
+content:
+  field_slides:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: Slide
+      title_plural: Slides
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

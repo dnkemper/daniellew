@@ -1,0 +1,20 @@
+uuid: d0eb37b4-488e-49c3-aef2-97338bc13610
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+id: paragraph.field_fullscreen_video_image
+field_name: field_fullscreen_video_image
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,43 @@
+uuid: 58b85f08-1566-4272-80c7-acf998c27905
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.blog_thumbnail
+    - field.field.media.image.field_media_directory
+    - field.field.media.image.field_media_image
+    - media.type.image
+    - responsive_image.styles.blog_thumbnail
+  module:
+    - lazy
+    - responsive_image
+_core:
+  default_config_hash: whJrNezqUJ7Qhg7raMQj2Hz9JPiWxijezhWIEN9BVVk
+id: media.image.blog_thumbnail
+targetEntityType: media
+bundle: image
+mode: blog_thumbnail
+content:
+  field_media_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: blog_thumbnail
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      lazy:
+        lazy_image: '0'
+        placeholder_style: blog_thumbnail
+        data_uri: true
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 72fe86ff-85ea-4de7-b2b0-5348fcf03e7a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: natlscholarships_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/natlscholarships_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 41748
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

@@ -1,0 +1,77 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - field_ampersand = boolean ( Show Ampersand / Hide Ampersand )
+ * - field_background = list text field
+ * -Red|Red
+ * -Dark|Dark
+ * - White|White
+ * - field_background_image = image
+ * - field_description = text plain long
+ * - field_headline = text plain
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{{ attach_library('olympian9/introduction') }}
+
+{% block paragraph %}
+  <div class="introduction-header-img">
+    <section id="photo-header" class="{{ content.field_background.0|render|lower|replace({' ':''}) }}"
+             aria-label="introduction header with image">
+      {% if content.field_background_image.0 %}
+        <div class="image">
+          {# use eager loading for this case, because it is above the fold #}
+          {{ drupal_image(
+              paragraph.field_background_image.entity.field_media_image.entity.fileuri, 'background_image', {
+                alt: paragraph.field_background_image.entity.field_media_image.0.alt,
+                loading: 'eager'
+              }, responsive=true
+          ) }}
+        </div>
+      {% endif %}
+      {% if content.field_background.0|render|lower|replace({' ':''}) == 'nooverlay'%}
+        <div class="container {{ content.field_introduction_text_color.0|render|lower|replace({' ':''}) }}">
+      {% else %}
+        <div class="container">
+      {% endif %}
+      {% if content.field_headline.0 %}
+          <h1>{{ content.field_headline.0 }}</h1>
+        {% else %}
+         <h1>{{ current_title }}</h1>
+        {% endif %}
+
+        {% if content.field_description.0 %}
+          <p>{{ content.field_description.0 }}</p>
+        {% endif %}
+      </div>
+      {% if content.field_ampersand[0]['#markup'] == 'Show Ampersand' %}
+        <div class="ampersand">
+          <svg>
+            <use xlink:href="#ampersand"></use>
+          </svg>
+        </div>
+      {% endif %}
+    </section>
+  </div>
+{% endblock paragraph %}

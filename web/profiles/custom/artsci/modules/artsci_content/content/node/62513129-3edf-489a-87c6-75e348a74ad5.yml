@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 62513129-3edf-489a-87c6-75e348a74ad5
+  bundle: resources
+  default_langcode: en
+  depends:
+    b914ea7d-1c04-412e-ab2a-e69b90905bc2: media
+    582f1150-9852-415c-b671-332a2006f4e9: taxonomy_term
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'The Center for Teaching and Learning'
+  created:
+    -
+      value: 1690897605
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/center-teaching-and-learning
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'http://teachingcenter.wustl.edu/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: b914ea7d-1c04-412e-ab2a-e69b90905bc2
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 582f1150-9852-415c-b671-332a2006f4e9
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+  field_subtitle:
+    -
+      value: 'find information about teaching & learning'
+  field_title:
+    -
+      value: 'The Center for Teaching and Learning'

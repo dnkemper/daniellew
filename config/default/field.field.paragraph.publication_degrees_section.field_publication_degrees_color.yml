@@ -1,0 +1,23 @@
+uuid: 02117630-3b78-4cff-a1d2-2e1257dad184
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_publication_degrees_color
+    - paragraphs.paragraphs_type.publication_degrees_section
+  module:
+    - options
+id: paragraph.publication_degrees_section.field_publication_degrees_color
+field_name: field_publication_degrees_color
+entity_type: paragraph
+bundle: publication_degrees_section
+label: Color
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Red
+default_value_callback: ''
+settings: {  }
+field_type: list_string

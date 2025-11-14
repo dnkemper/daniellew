@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: HLvyaMdyHcWRKzECc-3WvinF8M71mRrfn-POgkDw2us
+id: in_the_news
+label: 'In the News'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

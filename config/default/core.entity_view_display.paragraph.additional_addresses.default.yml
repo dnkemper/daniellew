@@ -1,0 +1,30 @@
+uuid: 748bda6c-db45-49ea-a2f0-8c67ae878710
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.additional_addresses.field_description
+    - field.field.paragraph.additional_addresses.field_title
+    - paragraphs.paragraphs_type.additional_addresses
+id: paragraph.additional_addresses.default
+targetEntityType: paragraph
+bundle: additional_addresses
+mode: default
+content:
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

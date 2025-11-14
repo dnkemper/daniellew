@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: a590db33-fa0c-47ac-aeeb-b8b2c8e1fcf1
+  bundle: media_folders
+  default_langcode: und
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Home Slides'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: und
+      pathauto: 0

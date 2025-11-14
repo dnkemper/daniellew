@@ -1,0 +1,150 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+#sast:
+#  stage: test
+#include:
+#- template: Security/SAST.gitlab-ci.yml
+variables:
+  FONTAWESOME_NPM_AUTH_TOKEN: NDZDOUJFOTYtNkVFMi00MDIyLUIyMzYtNEQ3RjVGNERFMzhE
+
+# Build the application
+# Deploy it, and then do some cleanups
+stages:
+  - build
+  - deploy_drupal
+  - clean_up
+#  - test
+# .gitlab-ci.yml
+
+# Get composer dependencies for the site
+build_composer:
+  image: composer:latest
+  stage: build
+  only:
+    - develop
+    - uat
+    - qa
+  except:
+    - schedules
+  cache:
+    key:
+      files:
+        - composer.lock
+        - composer.json
+    paths:
+      - vendor
+      - web/core
+      - web/modules/contrib
+      - web/profiles/contrib
+      - web/themes/contrib
+      - web/libraries
+  before_script:
+    - composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+    - composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+  script:
+    - '[ -d "vendor" ] || composer install --ignore-platform-reqs --no-dev'
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - vendor
+      - web/core
+      - web/modules/contrib
+      - web/themes/contrib
+      - web/libraries
+build_theme:
+  image: node:16
+  stage: build
+  only:
+    - develop
+    - uat
+    - qa
+  cache:
+    key: 
+      files:
+        - web/themes/custom/olympian9/yarn.lock
+    paths:
+      - web/themes/custom/olympian9/node_modules/
+  script:
+    - cd web/themes/custom/olympian9
+    - '[ -d "web/themes/custom/olympian9/node_modules" ] || yarn install'
+    - yarn run build
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - web/themes/custom/olympian9/assets/css
+  except:
+    - schedules
+
+deploy_drupal:
+  image: williamyeh/ansible:ubuntu18.04
+  stage: deploy_drupal
+
+  rules:
+    - if: ($CI_COMMIT_BRANCH == "qa" || $CI_COMMIT_BRANCH == "develop") && $CI_PIPELINE_SOURCE != "schedule"
+    - if: $CI_COMMIT_BRANCH == "uat" && $CI_PIPELINE_SOURCE == "web"
+    - if: $CI_COMMIT_BRANCH == "uat" && $CI_PIPELINE_SOURCE != "schedule"
+      when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    url: https://d9.artsandscience.$CI_ENVIRONMENT_SLUG.sprydigital.com
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DEPLOY_PKEY_2" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - apt-get update -y
+    - apt-get install rsync -y
+  script:
+    # This directory is going to be linked to a shared
+    # directory so we want to remove it before deploying
+    - rm -rf web/sites
+    - ansible-playbook -vv -l "$CI_COMMIT_REF_NAME" -i ci/hosts.ini ci/deploy_drupal.yml
+
+# Clean up any old deployments/backups from the server
+clean_up:
+  image: williamyeh/ansible:ubuntu16.04
+  stage: clean_up
+  rules:
+    - if: ($CI_COMMIT_BRANCH == "uat" || $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "qa") && $CI_PIPELINE_SOURCE == "schedule"
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DEPLOY_PKEY_2" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ansible-playbook -vv -l "$CI_COMMIT_REF_NAME" -i ci/hosts.ini ci/clean.yml
+    
+
+auto_maintenance:
+  image: composer:latest
+  stage: build
+  rules:
+    - if: $SCHEDULE_TYPE == "AUTO_MAINT"
+  before_script:
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    # Remove the CI job's authentication credentials from CI_REPOSITORY_URL
+    - REPO_URL=$(echo "$CI_REPOSITORY_URL" | sed 's|https://gitlab-ci-token:[^@]*@|https://|g')
+    # Add a new remote with the project token for authentication
+    - git remote add auth_origin https://${CI_GIT_USER}:${CI_GIT_TOKEN}@${REPO_URL#https://}
+  script:
+    - CI_ENVIRONMENT_SLUG=${CI_ENVIRONMENT_SLUG:-uat}
+    - CI_COMMIT_MESSAGE="Auto maintenance for $(date +%Y-%m-%d) - $CI_ENVIRONMENT_SLUG"
+    - CI_BRANCH_NAME="AUTOMNT-$(date +%Y-%m-%d)"
+    - composer update --ignore-platform-reqs
+    - git add composer.lock
+    - git commit -m "$CI_COMMIT_MESSAGE"
+    # Create the branch if it doesn't exist
+    - git checkout -b $CI_BRANCH_NAME || git checkout $CI_BRANCH_NAME
+    # Use the 'auth_origin' remote for pushing
+    - git push auth_origin HEAD:$CI_BRANCH_NAME -o merge_request.create -o merge_request.target=$CI_ENVIRONMENT_SLUG
+
+

@@ -1,0 +1,19 @@
+uuid: 4ae06293-8554-4e9e-83ed-9bf7a77fb890
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_distinction
+    - paragraphs.paragraphs_type.publication_degree_holder
+id: paragraph.publication_degree_holder.field_distinction
+field_name: field_distinction
+entity_type: paragraph
+bundle: publication_degree_holder
+label: Distinction
+description: 'Example: cum laude, magna cum laude, etc.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,18 @@
+uuid: 5408373d-006d-430a-9174-3d08162f1dee
+langcode: en
+status: false
+dependencies:
+  theme:
+    - olympian9
+id: olympian_primary_admin_actions
+theme: olympian9
+region: header
+weight: -14
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primary admin actions'
+  label_display: '0'
+  provider: core
+visibility: {  }

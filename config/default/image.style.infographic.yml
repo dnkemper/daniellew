@@ -1,0 +1,26 @@
+uuid: 7a0d14ff-29e8-4d9d-a883-79e06fac0051
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: infographic
+label: 'Infographic (420x300)'
+effects:
+  c48357ea-12d9-4a26-adee-b34a714bca67:
+    uuid: c48357ea-12d9-4a26-adee-b34a714bca67
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 420
+      height: 300
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  122ec124-3b86-4a44-a9e4-ed0a8b236ee6:
+    uuid: 122ec124-3b86-4a44-a9e4-ed0a8b236ee6
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

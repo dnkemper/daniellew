@@ -1,0 +1,19 @@
+uuid: 673f7bfa-62d9-4aee-92bc-efcf1f7f5aba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_search
+    - node.type.image_cards
+id: node.image_cards.field_search
+field_name: field_search
+entity_type: node
+bundle: image_cards
+label: Search
+description: 'You can add keywords here to help bump pages within the site search.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

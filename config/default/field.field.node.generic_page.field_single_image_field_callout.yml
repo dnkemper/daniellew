@@ -1,0 +1,21 @@
+uuid: 4824e53b-4e80-4c94-af73-e675a5188017
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_single_image_field_callout
+    - node.type.generic_page
+  module:
+    - options
+id: node.generic_page.field_single_image_field_callout
+field_name: field_single_image_field_callout
+entity_type: node
+bundle: generic_page
+label: 'Callout Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

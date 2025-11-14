@@ -1,0 +1,23 @@
+uuid: 22411393-569d-49d7-be2a-d0fc9add3ed2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background
+    - paragraphs.paragraphs_type.fullscreen_slideshow
+  module:
+    - options
+id: paragraph.fullscreen_slideshow.field_background
+field_name: field_background
+entity_type: paragraph
+bundle: fullscreen_slideshow
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Dark
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,21 @@
+uuid: 9d22ff19-ec42-4268-af2c-09b803fd32ba
+langcode: en
+status: true
+dependencies: {  }
+name: focal_point_preview
+label: 'Focal Point Preview'
+effects:
+  a9c1535f-aee7-44df-b9b9-335a0a7a3fa8:
+    uuid: a9c1535f-aee7-44df-b9b9-335a0a7a3fa8
+    id: image_scale
+    weight: 0
+    data:
+      width: 250
+      height: null
+      upscale: true
+  cb8b3f74-0868-42cf-930c-ef28dcfe2a49:
+    uuid: cb8b3f74-0868-42cf-930c-ef28dcfe2a49
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

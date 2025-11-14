@@ -1,0 +1,85 @@
+uuid: 6a920084-fac1-4785-9892-a23d53a6c83b
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publication_degrees_section
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Degrees Section)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publication_degrees_section
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_degrees:
+    -
+      plugin: sub_process
+      source: field_degrees
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_publication_degrees_color:
+    -
+      plugin: get
+      source: field_publication_degrees_color
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publication_degrees_section
+migration_dependencies:
+  required: {}
+  optional: {  }

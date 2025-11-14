@@ -1,0 +1,23 @@
+uuid: 75440f33-0c71-4517-9b27-33a1665e21ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.date_repeat_entity_clone_state
+    - node.type.past_events_landing_page
+id: node.past_events_landing_page.date_repeat_entity_clone_state
+field_name: date_repeat_entity_clone_state
+entity_type: node
+bundle: past_events_landing_page
+label: 'Clone state (do not change)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

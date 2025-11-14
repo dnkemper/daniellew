@@ -1,0 +1,29 @@
+uuid: f9f06a0d-9c01-49a5-9392-510c2fdd2a48
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_half_image
+    - media.type.image
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+id: paragraph.featured_half_image_w_text.field_half_image
+field_name: field_half_image
+entity_type: paragraph
+bundle: featured_half_image_w_text
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

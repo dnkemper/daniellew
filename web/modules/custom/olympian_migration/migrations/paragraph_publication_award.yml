@@ -1,0 +1,36 @@
+id: paragraph_publication_award
+label: 'Publication Award Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_award  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_award  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Text long field mapping
+  field_awards_description: field_awards_description
+
+  # Link field mapping
+  field_read_the_story_link_url:
+    plugin: sub_process
+    source: field_read_the_story_link_url
+    process:
+      uri:
+        plugin: get
+        source: value
+
+  # Text field mappings
+  field_recipient_title: field_recipient_title
+  field_title: field_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_award
+migration_dependencies:
+  required: {}
+  optional: {}

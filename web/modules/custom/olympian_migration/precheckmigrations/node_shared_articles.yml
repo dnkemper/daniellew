@@ -1,0 +1,39 @@
+id: node_shared_articles
+label: 'Migrate Borrowed Shared Article Nodes'
+migration_tags:
+  - shared_content
+source:
+  plugin: d7_node
+  node_type: article
+
+process:
+  skip_on_empty:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+      negate: false
+    source: field_shared_content_xml
+    method: row
+  # Assuming 'field_shared_content_xml' exists in the source and needs no transformation.
+  #field_shared_content_xml: field_shared_content_xml
+  field_article_home_slideshow:
+    plugin: get
+    source: field_article_home_slideshow
+  field_reverse_header:
+    plugin: get
+    source: field_reverse_header
+  field_search:
+    plugin: get
+    source: field_search
+  field_category:
+    plugin: sub_process
+    source: field_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_article_categories
+        source: tid
+destination:
+  plugin: shared_entity
+  entity_type: 'node'  # Specify the entity type here
+  bundle: 'article'

@@ -1,0 +1,10 @@
+uuid: 5dbe44ac-f3f2-4b89-ad84-00248908ebc7
+langcode: en
+status: true
+dependencies: {  }
+id: slideshow
+label: Slideshow
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Slideshow'
+behavior_plugins: {  }

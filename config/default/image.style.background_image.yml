@@ -1,0 +1,26 @@
+uuid: dea1ae09-6918-4700-a77e-8a015de41d39
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: background_image
+label: 'Background Image (1366x480)'
+effects:
+  81e94f2d-914e-429c-b165-c0f841e55963:
+    uuid: 81e94f2d-914e-429c-b165-c0f841e55963
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 1366
+      height: 480
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  affe95ca-0c97-45ba-bb1c-88b7b454e035:
+    uuid: affe95ca-0c97-45ba-bb1c-88b7b454e035
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

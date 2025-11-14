@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: gradstudies.ddev.site
+    protocol: https
+  machine_name: gradstudies
+  human_name: gradstudies.artsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: gradstudies.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/gradstudies.artsci.wustl.edu/files'
+    origin: 'https://gradstudies.artsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_gradstudies
+system:
+  site:
+    contact_us_url: 'https://gradstudies.artsci.wustl.edu/contact-us'
+    name: gradstudies
+    email: gradstudies@wustl.edu

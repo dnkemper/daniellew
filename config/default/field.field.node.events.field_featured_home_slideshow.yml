@@ -1,0 +1,23 @@
+uuid: b1aa68eb-a406-4e67-bebc-60aa520800c3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_home_slideshow
+    - node.type.events
+id: node.events.field_featured_home_slideshow
+field_name: field_featured_home_slideshow
+entity_type: node
+bundle: events
+label: 'Feature on Home Page'
+description: 'Check to feature the event on the homepage slideshow.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

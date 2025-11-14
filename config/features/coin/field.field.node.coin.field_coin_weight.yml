@@ -1,0 +1,23 @@
+uuid: e616238e-e719-4628-86b7-13347a4146a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_weight
+    - node.type.coin
+id: node.coin.field_coin_weight
+field_name: field_coin_weight
+entity_type: node
+bundle: coin
+label: Weight
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: g
+field_type: decimal

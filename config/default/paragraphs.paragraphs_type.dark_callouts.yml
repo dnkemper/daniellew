@@ -1,0 +1,10 @@
+uuid: 68995d65-a1de-4b8b-a69a-382e78740958
+langcode: en
+status: true
+dependencies: {  }
+id: dark_callouts
+label: 'Dark Callouts'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Dark Callouts'
+behavior_plugins: {  }

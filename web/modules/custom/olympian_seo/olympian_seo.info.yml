@@ -1,0 +1,8 @@
+name: Olympian SEO
+type: module
+description: 'SEO functionality for the Olympian platform.'
+core_version_requirement: ^8.8 || ^9 || ^10
+package: Olympian
+dependencies:
+  - metatag:metatag
+  - metatag:metatag_extended_perms

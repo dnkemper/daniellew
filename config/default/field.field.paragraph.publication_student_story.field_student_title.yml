@@ -1,0 +1,19 @@
+uuid: 75cda632-12f3-4ce3-a0ef-f218fde2e088
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_student_title
+    - paragraphs.paragraphs_type.publication_student_story
+id: paragraph.publication_student_story.field_student_title
+field_name: field_student_title
+entity_type: paragraph
+bundle: publication_student_story
+label: 'Student Title'
+description: 'Examples: Alumni, Graduate Student, etc.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

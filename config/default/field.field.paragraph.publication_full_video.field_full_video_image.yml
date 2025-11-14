@@ -1,0 +1,29 @@
+uuid: 97afdf0c-0760-4cf4-90e2-8dd2b8531256
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_full_video_image
+    - media.type.image
+    - paragraphs.paragraphs_type.publication_full_video
+id: paragraph.publication_full_video.field_full_video_image
+field_name: field_full_video_image
+entity_type: paragraph
+bundle: publication_full_video
+label: 'Full Video Image'
+description: 'Please add an image to your video in order for the video to display correctly.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

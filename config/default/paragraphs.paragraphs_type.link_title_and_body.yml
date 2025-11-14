@@ -1,0 +1,10 @@
+uuid: 3df4cb7d-9609-4187-964c-e8e19bdb9c93
+langcode: en
+status: true
+dependencies: {  }
+id: link_title_and_body
+label: 'Link Title and Body'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Link Title and Body'
+behavior_plugins: {  }

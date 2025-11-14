@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 08174722-da5f-4e75-8782-53afde886586
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: undergradadvising_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/undergradadvising_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 51271
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

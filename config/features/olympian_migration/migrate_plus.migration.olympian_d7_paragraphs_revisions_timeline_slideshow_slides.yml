@@ -1,0 +1,98 @@
+uuid: e0c29678-d18f-4733-a145-22f1e4673dac
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_timeline_slideshow_slides
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Timeline Slideshow Slides)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: timeline_slideshow_slides
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_description
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_timeline_date:
+    -
+      plugin: sub_process
+      source: field_timeline_date
+      process:
+        value:
+          plugin: format_date
+          from_format: 'Y-m-d H:i:s'
+          to_format: Y-m-d
+          source: value
+  field_date_display:
+    -
+      plugin: get
+      source: field_date_display
+  field_show_date_on_timeline:
+    -
+      plugin: get
+      source: field_show_date_on_timeline
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: timeline_slideshow_slides
+migration_dependencies:
+  required: {}
+  optional: {  }

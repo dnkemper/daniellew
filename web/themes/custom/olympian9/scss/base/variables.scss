@@ -1,0 +1,127 @@
+@import '../base/breakpoints';
+@import '../base/utilities';
+@import '../base/viewmodes';
+
+//responsive
+$xl: 'all and (min-width: 1440px)';
+$lg: 'all and (min-width: 1300px)';
+$md: 'all and (min-width: 10var(--lg))';
+$tablet-lg: 'all and (min-width: 900px)';
+$tablet: 'all and (min-width: 768px)';
+$min-sm: 'all and (min-width: 600px)';
+$mobile-m: 'all and (min-width: 360px)';
+@viewport {
+  width: device-width;
+  zoom: 1.1;
+  min-zoom: 0.4;
+  max-zoom: 2;
+  user-zoom: fixed;
+}
+$max-sm: 'all and (max-width: 599px)';
+$max-tablet: 'all and (max-width: 767px)';
+$max-md: 'all and (max-width: 1019px)';
+
+//fonts
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,700,700i);
+
+:root {
+  --serif: 'Libre Baskerville', serif;
+  --sans-serif: 'Source Sans Pro', sans-serif;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #6c7373;
+  --light-gray: #f1f1f1;
+  --lightest-gray: #e4e4e4;
+  --dark-gray: #2b2b2b;
+  --darkest-gray: #231f20;
+  --feed-gray: #393939;
+  --light-blue: #67c8c7;
+  --dark-blue: #00a5a4;
+  --darker-blue: #005f85;
+  --blue: #007a7a;
+  --turquoise: #2b8282;
+  --red: #d01c29;
+  --dark-red: #a51417;
+  --gold: #f5bd18;
+  --kern-sm: 0.025em;
+  --kern-md: 0.075em;
+  --kern-lg: 0.16em;
+  --gutter: 1.25rem;
+  --desktop-width-gutter: 3rem;
+  --xsm: 0.325rem;
+  --sm: 0.625rem;
+  --sm-md: 0.9rem;
+  --md: 1.05rem;
+  --lg: 1.875rem;
+  --xlg: 2.5rem; // 40px
+  --xxlg: 3.15rem;
+  --font-weight-bold: 700;
+  --font-weight-medium-bold: 600;
+  --font-weight-normal: 400;
+  --warning: #f5bd18;
+  --warning-light: lighten(#f5bd18, 45%);
+  --danger: #d01c29;
+  --danger-light: lighten(#d01c29, 45%);
+  --info: #00558c;
+  --info-light: lighten(#00558c, 70%);
+  --success: #00664f;
+  --success-light: lighten(#00664f, 76%);
+  /* Gin admin styles for modals  - DOT-224 */
+  --gin-bg-layer: #fff;
+  --gin-bg-layer2: #edeff5;
+  --gin-border-m: 0.5rem;
+  --gin-spacing-1: 1.5rem;
+  --gin-spacing-m: 1rem;
+  --gin-spacing-l: 1.5rem;
+  --gin-spacing-xl: 2rem;
+  --gin-font-weight-normal: 400;
+  --gin-icon-size-close: 20px;
+}
+
+//mixins
+@mixin flexbox() {
+  display: flex;
+  flex-wrap: wrap;
+}
+@mixin flex-direction($direction) {
+  flex-direction: $direction;
+}
+
+@mixin align-items($align) {
+  align-items: $align;
+}
+
+// img path
+$imgpath: '../../images' !default;
+
+// Container
+$container-width: 81.875em;
+
+// Drop shadow.
+$soft-drop-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+
+@mixin fullwidth-container {
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// vertical center mixin
+@mixin center($position) {
+  display: flex;
+
+  @if $position== 'both' {
+    align-items: center;
+    justify-content: center;
+  } @else if $position== 'vertical' {
+    align-items: center;
+  } @else if $position== 'horizontal' {
+    justify-content: center;
+  } @else if $position== 'none' {
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+}

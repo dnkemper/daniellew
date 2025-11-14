@@ -1,0 +1,29 @@
+uuid: 7c111ff5-6346-4928-a021-268b78faa548
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_obverse_image
+    - media.type.image
+    - node.type.coin
+id: node.coin.field_coin_obverse_image
+field_name: field_coin_obverse_image
+entity_type: node
+bundle: coin
+label: 'Obverse Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

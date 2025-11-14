@@ -1,0 +1,1689 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Olympian Core module.
+ */
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Database\Query\AlterableInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\user\Entity\User;
+use Drupal\aggregator\Entity\Feed;
+
+/**
+ * Implements hook_page_attachments()
+ */
+function olympian_core_page_attachments(array &$attachments) {
+  $config = \Drupal::config('gin.settings');
+  $toolbar = $config->get('classic_toolbar');
+  $libraryName = 'olympian_core/gin';
+
+  // Attach the base library if the horizontal toolbar is set.
+  if ($toolbar === 'classic' || $toolbar === 'horizontal') {
+    $attachments['#attached']['library'][] = $libraryName;
+  }
+
+  // Define an array of route names to check.
+  $adminRoutes = ['diff.revisions_diff', 'user.pass', 'user.register'];
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  // Attach the library if the current route is in the adminRoutes array.
+  if (in_array($route, $adminRoutes)) {
+    $attachments['#attached']['library'][] = $libraryName;
+  }
+
+  // Attach the library if the active route is an admin one.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = $libraryName;
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function olympian_core_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface $cacheability) {
+  $logged_in = \Drupal::currentUser()->isAuthenticated();
+  if ($logged_in) {
+    $data['tabs'][0]['access_unpublished.local_tasks:entity.node.access_tokens']['#link']['title'] = 'Unpublished hashed link';
+    $data['tabs'][0]['entity.media.canonical']['#link']['title'] = t('View');
+    $data['tabs'][0]['entity.node.canonical']['#link']['title'] = t('View');
+    $data['tabs'][0]['entity.node.edit_form']['#link']['title'] = 'Edit';
+    $data['tabs'][0]['entity.node.delete_form']['#access'] = FALSE;
+    $data['tabs'][0]['entityqueue.entities:entity.node.entityqueue']['#access'] = FALSE;
+    $data['tabs'][0]['replicate_ui.local_tasks:entity.node.replicate']['#link']['title'] = t('Clone');
+    $data['tabs'][0]['entity.media.collection']['#weight'] = -1;
+
+    // Check for webform node key
+    // Otherwise, this results in a wsod when redirecting to a webform
+    // from a node with a webform link with query params attached.
+    if (array_key_exists("entity.node.webform.results", $data['tabs'][0])) {
+      $data['tabs'][0]['entity.node.webform.results']['#access'] = FALSE;
+    }
+
+    if (array_key_exists("entity.node.webform.test_form", $data['tabs'][0])) {
+      $data['tabs'][0]['entity.node.webform.test_form']['#access'] = FALSE;
+    }
+
+  }
+ // Check if the 'replicate_ui.local_tasks:entity.node.replicate' tab exists.
+  if (isset($data['tabs'][0]['replicate_ui.local_tasks:entity.node.replicate'])) {
+    // Get the 'node' parameter from the current route.
+    $node = \Drupal::routeMatch()->getParameter('node');
+
+    // Ensure $node is a valid entity object; if it's a string, load the entity.
+    if (is_string($node)) {
+      $node = \Drupal::entityTypeManager()->getStorage('node')->load($node);
+    }
+
+    // Check if $node is an object before calling methods on it.
+    if ($node && is_object($node)) {
+      // Get the allowed replicate entity types from configuration.
+      $allowed_types = \Drupal::config('olympian_core.settings')->get('olympian_core_replicate_allowed');
+
+      // Ensure $allowed_types is an array.
+      $allowed_types = is_array($allowed_types) ? $allowed_types : [];
+
+      $node_type = $node->bundle();
+      $allowed_weights = ['resources', 'resources_landing_page'];
+      if (!in_array($node_type, $allowed_weights)) {
+        $data['tabs'][0]['node_weight.local_tasks:entity.node.weight']['#access'] = FALSE;
+      }
+      // Remove the replicate menu item if the node type is not allowed.
+      if (!in_array($node_type, $allowed_types)) {
+        $data['tabs'][0]['replicate_ui.local_tasks:entity.node.replicate']['#access'] = FALSE;
+      }
+    }
+  }
+}
+
+/**
+ *  Implements hook_entity_operation_alter().
+ */
+function olympian_core_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  if ($entity->getEntityTypeId() == 'node') {
+    $operations['edit']['url'] = Url::fromRoute('entity.node.edit_form', ['node' => $entity->id()]);
+  }
+  // If we're using the replicate module, check if it's available.
+  // Also check if we are operating on a node.
+  if (isset($operations['replicate']) && $entity instanceof NodeInterface) {
+    // Pull our allowed types, and check against the given entity.
+    $allowed_types = \Drupal::config('olympian_core.settings')
+      ->get('olympian_core_replicate_allowed');
+    $type = $entity->getType();
+    // If it's not an allowed type, then remove
+    // the replicate operation.
+    if (!in_array($type, $allowed_types)) {
+      unset($operations['replicate']);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olympian_core_form_aggregator_admin_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Remove never from aggregator cleanup options. Keeping items forever has
+  // potential to create very large database tables. Add additional options.
+  unset($form['processors']['aggregator']['aggregator_clear']['#options'][0]);
+  $form['processors']['aggregator']['aggregator_clear']['#options'][15552000] = t('6 months');
+  $form['processors']['aggregator']['aggregator_clear']['#options'][31557600] = t('1 year');
+  $form['processors']['aggregator']['aggregator_clear']['#options'][157788000] = t('5 years');
+  $form['processors']['aggregator']['aggregator_clear']['#options'][315576000] = t('10 years');
+
+
+  // Remove access to aggregator teaser length as it does nothing!
+  // @see: https://www.drupal.org/project/drupal/issues/2283877
+  $form['processors']['aggregator']['aggregator_teaser_length']['#access'] = FALSE;
+}
+/**
+ * Implements hook_preprocess_block().
+ */
+function olympian_core_preprocess_block(&$variables) {
+  $classes = $variables['elements']['#configuration']['block_classes'] ?? FALSE;
+  if ($classes) {
+    $variables['attributes']['class'] = array_merge($variables['attributes']['class'], $classes);
+  }
+  switch ($variables['elements']['#plugin_id']) {
+    case 'olympian9_instagramfeedbyusername':
+    case 'instagram_feed_by_username':
+    case 'instagram_feed_by_username_block':
+      $variables['#attached']['library'][] = 'olympian_core/instagram';
+      break;
+  }
+}
+/**
+ * Implementation of hook_form_ID_alter()
+ * Note that there is an implementation of this in olympian9 theme
+ */
+function olympian_core_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  $view = $form_state->get('view');
+  if ($view->id() === 'faculty') {
+    if ($view->current_display === 'block_grid2' || $view->current_display === 'block_list2') {
+      $exposed_input = $view->getExposedInput();
+      $variables['exposed_input'] = $exposed_input;
+    }
+  }
+
+  if ($view && $view->id() === 'administerusersbyrole_people') {
+    /** @var Drupal\olympian_core\Access\OlympianCoreAccess $check */
+    $check = \Drupal::service('olympian_core.access_checker');
+
+    /** @var Drupal\Core\Access\AccessResultInterface $access */
+    $access = $check->access(\Drupal::currentUser()->getAccount());
+
+    if ($access->isForbidden()) {
+      unset($form['role']['#options']['administrator']);
+    }
+  }
+  switch ($form['#id']) {
+    case 'views-exposed-form-faculty-block-grid2':
+    case 'views-exposed-form-faculty-block-list2':
+    case 'views-exposed-form-faculty-block-grid1':
+    case 'views-exposed-form-faculty-block-list1':
+      $form['#attributes']['class'][] = 'people-filter';
+      // Set default person type based on theme setting OR current value.
+      $has_stored_values = isset($_SESSION['views']['faculty']['grid2']);
+      $request = \Drupal::request();
+      // Get the current course_landing node
+      // We store it in a hidden field to allow it to persist past clearing filters.
+      if ($nid = $request->get('contextual_node_id')) {
+        $node = Node::load($nid);
+      }
+      else {
+        // This loads the node from the path, but this won't work in an ajax call for the form.
+        $node = \Drupal::routeMatch()->getParameter('node');
+      }
+      if ($node) {
+        $form['contextual_node_id'] = [
+          '#type' => 'hidden',
+          '#value' => $node->id(),
+        ];
+      }
+
+      // If the user hasn't overridden.
+      if ($request->get('reset') || (!$has_stored_values && is_null($request->get('cat')))) {
+        // dpm($form);
+        // dpm($form_state);
+        $defaultsetting = (($node && $node->field_default_person_type) ? $node->field_default_person_type->value : 'current') ?? 'current';
+        $input = $form_state->getUserInput();
+        if ($defaultsetting == 'current') {
+          $input['cat'] = 'All';
+          $form['cat']['#default_value'] = 'All';
+        }
+        else {
+          $form['cat']['#default_value'] = $defaultsetting;
+          $input['cat'] = $defaultsetting;
+        }
+        // $input['field_advisor_id'] = \Drupal::currentUser()->id();
+        $form_state->setUserInput($input);
+      }
+
+      $hidden_filters = (isset($node) ? $node->field_faculty_column_layout : []) ?? [];
+      foreach ($hidden_filters as $filter => $value) {
+        if (isset($form[$value->value])) {
+          $form[$value->value]['#access'] = FALSE;
+        }
+      }
+
+      break;
+
+    case 'views_exposed_form':
+
+      // Fixes a bug with BEF, details here:
+      // https://www.drupal.org/project/better_exposed_filters/issues/3264403#comment-14803047
+      foreach ($form as $k => $v) {
+        if (str_contains($k, '_collapsible')) {
+          $form[$k]['#open'] = FALSE;
+        }
+      }
+      break;
+  }
+}
+function olympian_core_form_node_events_form_alter(&$form, FormStateInterface $form_state, $form_id){
+  $form['field_event_contact']['widget'][0]['value']['#default_value'] =  Drupal::token()->replace($form['field_event_contact']['widget'][0]['value']['#default_value']);;
+}
+/**
+ * Implements hook_element_info_alter().
+ */
+function olympian_core_element_info_alter(array &$types) {
+  // The elements to be processed to turn them into a pretty element.
+  $candidate_elements = ['checkboxes', 'radios', 'checkbox', 'radio'];
+
+  // Add a process function to each candidate element to modify it.
+  foreach ($candidate_elements as $element) {
+    if (isset($types[$element])) {
+      $types[$element]['#process'][] = [
+        'Drupal\olympian_core\PrettyElement',
+        'process',
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function olympian_core_theme($existing, $type, $theme, $path) {
+  return [
+    'elements__pretty_options' => [
+      'render element' => 'element',
+    ],
+    'addtocal_links' => [
+      'variables' => [
+        'label' => NULL,
+        'ical' => NULL,
+        'google' => NULL,
+        'id' => NULL,
+      ],
+    ],
+    'addtocal_links__modal' => [
+      'variables' => [
+        'label' => NULL,
+        'ical' => NULL,
+        'google' => NULL,
+        'id' => NULL,
+      ],
+    ],
+    'page__admin__structure__types__manage__resources' => [
+      'base hook' => 'page__admin',
+      'template' => 'page--admin--structure--types--manage--resources',
+    ],
+    'youtube_embed_formatter' => [
+      'variables' => [
+        'video_id' => NULL,
+        'width' => 560,
+        'height' => 315,
+        'responsive' => TRUE,
+        'parameters' => [],
+        'show_url' => FALSE,
+      ],
+      'template' => 'youtube-embed-formatter',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian_core_preprocess_page_title(&$variables) {
+  $admin_context = \Drupal::service('router.admin_context');
+  if (!$admin_context->isAdminRoute()) {
+    $route_name = \Drupal::routeMatch()->getRouteName();
+    if ($route_name == 'entity.node.canonical') {
+      $node = \Drupal::routeMatch()->getParameter('node');
+    }
+    elseif ($route_name == 'entity.node.preview') {
+      $node = \Drupal::routeMatch()->getParameter('node_preview');
+    }
+  }
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function olympian_core_views_data_alter(array &$data) {
+  $data['node_field_data']['people_az_filter'] = [
+    'group' => 'People View Filters',
+    'title' => t('People AZ filter'),
+    'filter' => [
+      'title' => t('People AZ filter'),
+      'help' => t('Filter nodes given A-Z'),
+      'field' => 'title',
+      'id' => 'people_az_filter',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian_core_preprocess_paragraph(&$variables) {
+  /** @var Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var Drupal\Core\Routing\AdminContext $admin_context */
+  $admin_context = \Drupal::service('router.admin_context');
+
+  if (!$admin_context->isAdminRoute()) {
+    switch ($paragraph->bundle()) {
+      case 'faq_section':
+      case 'faq':
+      case 'publication_degrees_section':
+      case 'publication_degrees_subsection':
+        $variables['accordion_parent'] = 'accordion-' . $paragraph->getParentEntity()
+          ->id();
+        $variables['id'] = $paragraph->id();
+
+        break;
+
+      case 'publications_featured_news':
+        $parent = $paragraph->getParentEntity();
+        if ($parent instanceof NodeInterface) {
+          // This is a node.
+          $variables['intro_selection_type'] = $parent->field_intro_selection_type->value;
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_cron().
+ *
+ * Queues news feeds for updates once their refresh interval has elapsed.
+ */
+function olympian_core_cron() {
+   // Load all aggregator feeds and update them.
+  $feeds = \Drupal::entityTypeManager()->getStorage('aggregator_feed')->loadMultiple();
+
+    foreach ($feeds as $feed) {
+      // $feed->updateItems();
+      $feed->refreshItems();
+    }
+//   // $feeds = \Drupal::entityTypeManager()->getStorage('aggregator_feed')->loadMultiple();
+}
+
+/**
+ * Allowed values callback for uiowa_aggregator_feeds field.
+ */
+function _olympian_core_get_feeds() {
+  $feeds = \Drupal::entityTypeManager()->getStorage('aggregator_feed')->loadMultiple();
+  $options = [];
+
+  foreach ($feeds as $feed) {
+    $options[$feed->id()] = $feed->label();
+  }
+
+  return $options;
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function olympian_core_preprocess_html(&$variables) {
+  $variables['#attached']['library'][] = 'olympian_core/slick';
+  $variables['#attached']['library'][] = 'olympian_core/admin-overrides';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function olympian_core_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  $current_route = \Drupal::routeMatch();
+  $route_name = $current_route->getRouteName();
+  // $form["rabbit_hole"]['#access'] = FALSE;
+  // Only allow certain types to be replicated.
+  // Ignored config that can be custom to a site.
+  if ($route_name === 'entity.node.replicate') {
+    // Get allowed replicate entity types.
+    $allowed_types = \Drupal::config('olympian_core.settings')
+      ->get('olympian_core_replicate_allowed');
+
+    $form_object = $form_state->getFormObject();
+    if ($form_object instanceof EntityFormInterface) {
+      /** @var Drupal\Core\Entity\EntityInterface $entity */
+      $entity = $form_object->getEntity();
+
+      $node_type = $entity->bundle();
+      $node_title = $entity->getTitle();
+      // Set message and prevent replicate.
+      if (!in_array($node_type, $allowed_types)) {
+        \Drupal::messenger()
+          ->addWarning(t('Cloning content of this type is not allowed. Please contact the Web Team about enabling this functionality for this content.'));
+        $form['actions']['submit']['#disabled'] = TRUE;
+      }
+
+      // Customize the replicate confirm dialog to our
+      // use case (pages with titles)
+      $bundle_label = \Drupal::entityTypeManager()
+        ->getStorage('node_type')
+        ->load($entity->bundle())
+        ->label();
+
+      // Changes title to match the "Edit" action title
+      // (e.g. "<em>Edit</em> Home").
+      $form['#title'] = t('<em>Clone @type</em> @title',
+        ['@type' => $bundle_label, '@title' => $node_title]);
+
+      // Lowercase for the rest of the form.
+      $bundle_label = strtolower($bundle_label);
+      $form['new_label_en']['#title'] = t("Cloned @type content's title", ['@type' => $bundle_label]);
+      $form['new_label_en']['#description'] = t('This text will be used as the title of the newly-cloned @type.', ['@type' => $bundle_label]);
+      $form['description'] = ['#markup' => ''];
+    }
+  }
+
+  switch ($form_id) {
+    case 'menu_link_content_menu_link_content_form':
+      $form['expanded']['widget']['value']['#default_value'] = TRUE;
+      break;
+    case 'node_article_form':
+    case 'node_article_edit_form':
+      _olympian_node_form_defaults($form, $form_state);
+      _olympian_shared_form_defaults($form, $form_state);
+      $form['field_direct_link']['widget'][0]['title']['#title'] = 'Name of Publication';
+
+      break;
+
+    case 'node_faq_form':
+    case 'node_faq_edit_form':
+    case 'node_page_form':
+    case 'node_page_edit_form':
+      _olympian_node_form_defaults($form, $form_state);
+      break;
+    case 'media_image_edit_form':
+    case 'media_image_add_form':
+    case 'media_cv_edit_form':
+    case 'media_cv_add_form':
+    case 'media_document_edit_form':
+    case 'media_document_add_form':
+      unset($form['field_media_directory']['widget']['#options']['_none']);
+      break;
+    case 'node_contact_landing_page_edit_form':
+    case 'node_contact_landing_page_form':
+      unset($form['moderation_state']['widget'][0]['state']['#options']['archived']);
+      _olympian_node_form_defaults($form, $form_state);
+      unset($form['actions']['delete']);
+      break;
+
+    case 'node_image_cards_form':
+    case 'node_image_cards_edit_form':
+    case 'node_testimonial_form':
+    case 'node_testimonial_edit_form':
+    case 'node_resources_form':
+    case 'node_resources_edit_form':
+      _olympian_node_form_defaults($form, $form_state);
+      break;
+
+    case 'node_book_edit_form':
+    case 'node_book_form':
+      _olympian_node_form_defaults($form, $form_state);
+      _olympian_shared_form_defaults($form, $form_state);
+
+      break;
+
+    // Course landing.
+    case 'node_faculty_landing_page_form':
+    case 'node_faculty_landing_page_edit_form':
+    case 'node_image_cards_landing_edit_form':
+    case 'node_image_cards_landing_form':
+    case 'node_news_landing_page_edit_form':
+    case 'node_news_landing_page_form':
+    case 'node_past_events_landing_page_edit_form':
+    case 'node_past_events_landing_page_form':
+    case 'node_events_landing_page_edit_form':
+    case 'node_events_landing_page_form':
+      _olympian_node_form_defaults($form, $form_state);
+      _olympian_landing_form_defaults($form, $form_state);
+      break;
+
+    case 'node_events_edit_form':
+    case 'node_events_form':
+      _olympian_node_form_defaults($form, $form_state);
+      $fieldRsvpFormWidget = &$form['field_rsvp_form']['widget'][0];
+_olympian_shared_form_defaults($form, $form_state);
+      if (isset($fieldRsvpFormWidget['target_id']['#default_value'])) {
+        $fieldRsvpFormWidget['target_id']['#ajax'] = [
+          'callback' => 'olympian_core_update_webform_edit_link',
+          'event' => 'change',
+          'wrapper' => 'edit-webform',
+          'progress' => [
+            'type' => 'throbber',
+            'message' => NULL,
+          ],
+        ];
+
+        $webform_id = $fieldRsvpFormWidget['target_id']['#default_value'];
+        $fieldRsvpFormWidget['target_id']['#suffix'] = t(
+          '<div id="edit-webform">Select an existing webform to place. <a class="link" target="new_blank" href="/admin/structure/webform/manage/@webform_id">Edit selected webform.</a></div>',
+          ['@webform_id' => $webform_id]
+        );
+      }
+
+      break;
+
+    case 'node_faculty_staff_form':
+    case 'node_faculty_staff_edit_form':
+      _olympian_shared_form_defaults($form, $form_state);
+      _olympian_node_form_defaults($form, $form_state);
+//       $visibility_states = [
+//         'visible' => [
+//           ':input[name="field_content_type"]' => [['value' => 'Long']],
+//         ],
+//       ];
+//
+//       $form['field_award']['#states'] = $visibility_states;
+//       $form['field_education']['#states'] = $visibility_states;
+//       $form['field_cv']['#states'] = $visibility_states;
+//       $form['field_social_media_links_p']['#states'] = $visibility_states;
+//       $form['field_description']['#states'] = $visibility_states;
+
+
+      break;
+
+    case 'node_generic_page_form':
+    case 'node_generic_page_edit_form':
+      _olympian_node_form_defaults($form, $form_state);
+      $slideshow_visibility = [
+        'visible' => [
+          ':input[name="field_slideshow_type"]' => [
+            ['value' => 'Featured Half Image w/Text'],
+            'or',
+            ['value' => 'text_image'],
+          ],
+        ],
+      ];
+      $intro_image = [
+        'visible' => [
+          ':input[name="field_intro_type"]' => [['value' => 'Intro Text with Side Image']],
+        ],
+      ];
+      $intro_links = [
+        'visible' => [
+          ':input[name="field_intro_type"]' => [['value' => 'Intro Text with Related Links']],
+        ],
+      ];
+      $image_visibility = [
+        'visible' => [
+          ':input[name="field_single_image_field_callout"]' => [
+            ['value' => 'single'],
+            'or',
+            ['value' => 'Single Image Callout'],
+          ],
+        ],
+      ];
+      $multi_image_visibility = [
+        'visible' => [
+          ':input[name="field_single_image_field_callout"]' => [
+            ['value' => 'multi'],
+            'or',
+            ['value' => 'Multi Image Callout'],
+          ],
+        ],
+      ];
+
+      $form['field_featured_image_and_text']['#states'] = $slideshow_visibility;
+      $form['field_featured_full_w_text']['#states'] = $slideshow_visibility;
+      $form['field_generic_intro_with_image']['#states'] = $intro_image;
+      $form['field_generic_intro_with_side_it']['#states'] = $intro_links;
+      $form['field_multipurpose_slideshow_p']['#states'] = $multi_image_visibility;
+      $form['field_dark_callout']['#states'] = $image_visibility;
+      break;
+
+    // Publication page.
+    case 'node_publication_page_edit_form':
+    case 'node_publication_page_form':
+      _olympian_node_form_defaults($form, $form_state);
+      $standardIntroConditions = [
+        ':input[name="field_intro_selection_type"]' => [
+          ['value' => 'Standard Intro'],
+          'or',
+          ['value' => 'standard'],
+        ],
+      ];
+      $form['field_featured_pub_news']['widget'][0]['subform']['field_news_header_title']['#states']['visible'] = $standardIntroConditions;
+      $form['field_intro_section']['#states']['visible'] = $standardIntroConditions;
+      break;
+
+    case 'node_resources_landing_page_form':
+    case 'node_resources_landing_page_edit_form':
+      _olympian_node_form_defaults($form, $form_state);
+      _olympian_landing_form_defaults($form, $form_state);
+      $user = User::load(\Drupal::currentUser()->id());
+      if ($user->hasPermission('Administer basic site settings')) {
+        $form['contact_us_settings'] = [
+          '#type' => 'details',
+          '#title' => t('Contact Us Link'),
+          '#collapsed' => TRUE,
+          '#collapsible' => TRUE,
+          '#tree' => FALSE,
+          '#weight' => -10,
+          '#group' => 'advanced',
+          '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+        ];
+
+        $form['contact_us_settings']['contact_us_link'] = [
+          '#type' => 'textfield',
+          '#title' => t('Contact Us URL'),
+          // Use t() for translation if necessary.
+          '#default_value' => Drupal::config('system.site')
+            ->get('contact_us_url'),
+          '#description' => t('URL of Contact Us link on Resources Landing Page. You can edit this value in the <a href="/admin/config/system/site-information" target="_blank">basic site settings form</a>'),
+          '#disabled' => TRUE,
+        ];
+      }
+      break;
+
+    case 'node_home_page_form':
+    case 'node_home_page_edit_form':
+      unset($form['moderation_state']['widget'][0]['state']['#options']['archived']);
+      _olympian_node_form_defaults($form, $form_state);
+      $form_elements = [
+        'field_featured_image_and_text' => [
+          'visible' => [
+            ':input[name="field_slideshow_type"]' => [
+              ['value' => 'Featured Half Image w/Text'],
+              'or',
+              ['value' => 'text_image'],
+            ],
+          ],
+        ],
+        'caption_settings' => [
+          'visible' => [
+            ':input[name="field_slideshow_type"]' => [
+              ['value' => 'caption'],
+              'or',
+              ['value' => 'Featured Full w/Caption'],
+            ],
+          ],
+        ],
+        'field_featured_cap_overlay' => [
+          'visible' => [
+            ':input[name="field_slideshow_type"]' => [
+              ['value' => 'caption'],
+              'or',
+              ['value' => 'Featured Full w/Caption'],
+            ],
+          ],
+          '#default_value' => 0,
+        ],
+        'field_featured_with_caption' => [
+          'visible' => [
+            ':input[name="field_featured_cap_overlay"]' => ['value' => 0],
+          ],
+        ],
+
+        'field_featured_without_caption' => [
+          'visible' => [
+            ':input[name="field_featured_cap_overlay"]' => ['value' => 1],
+          ],
+        ],
+
+        'field_featured_full_w_text' => [
+          'visible' => [
+            ':input[name="field_slideshow_type"]' => [
+              ['value' => 'Featured Full w/Text'],
+              'or',
+              ['value' => 'text'],
+            ],
+          ],
+        ],
+        'field_generic_intro_with_image' => [
+          'visible' => [
+            ':input[name="field_intro_type"]' => [['value' => 'Intro Text with Side Image']],
+          ],
+        ],
+        'field_generic_intro_with_side_it' => [
+          'visible' => [
+            ':input[name="field_intro_type"]' => [['value' => 'Intro Text with Related Links']],
+          ],
+        ],
+      ];
+
+      foreach ($form_elements as $element_name => $element_states) {
+        $form[$element_name]['#states'] = $element_states;
+      }
+      $form['field_featured_with_caption']['#group'] = 'caption_settings';
+      $form['field_featured_without_caption']['#group'] = 'caption_settings';
+
+      // Additional modifications.
+      unset($form['actions']['delete'], $form['field_featured_cap_overlay']['widget']['#options']['_none']);
+
+      break;
+  }
+}
+
+/**
+ * Custom node content type form defaults.
+ */
+function _olympian_node_form_defaults(&$form, $form_state) {
+  if (isset($form['field_featured_cap_overlay']) && $form['field_featured_cap_overlay']) {
+    $form['caption_settings'] = [
+      '#type' => 'container',
+      '#title' => 'Caption',
+      '#collapsed' => FALSE,
+      '#collapsible' => FALSE,
+      '#tree' => FALSE,
+      '#weight' => 5,
+      '#group' => 'caption',
+      '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+    ];
+  }
+  $form['authoring_settings'] = [
+    '#type' => 'details',
+    '#title' => 'Authoring Information',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#tree' => FALSE,
+    '#weight' => 10,
+    '#group' => 'advanced',
+    '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+  ];
+  $form['search_settings'] = [
+    '#type' => 'details',
+    '#title' => 'Search',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#tree' => FALSE,
+    '#weight' => -10,
+    '#group' => 'advanced',
+    '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+  ];
+  $form['field_search']['#group'] = 'search_settings';
+  $form['author']['#group'] = 'authoring_settings';
+  $form['created']['#group'] = 'authoring_settings';
+  $form['uid']['#group'] = 'authoring_settings';
+  $form['field_event_date_alias']['#access'] = FALSE;
+  $form["rabbit_hole"]['#access'] = FALSE;
+  $form['path']['widget'][0]['#open'] = FALSE;
+  $form['field_meta_tags']['widget'][0]['#weight'] = 25;
+  $form['field_meta_tags']['widget'][0]['basic']['#open'] = FALSE;
+  $form['field_meta_tags']['widget'][0]['advanced']['#open'] = FALSE;
+  $form['field_meta_tags']['widget'][0]['open_graph']['#open'] = FALSE;
+  $form['field_meta_tags']['widget'][0]['twitter_cards']['#open'] = FALSE;
+  $form['menu']['#open'] = FALSE;
+  $user = Drupal::currentUser()->getRoles();
+
+  if (in_array('authenticated', $user)) {
+    $form['meta']['published']['#access'] = FALSE;
+    $form['authoring_settings']['#access'] = TRUE;
+    $form['author']['#access'] = TRUE;
+    $form['uid']['#access'] = TRUE;
+    $form['created']['#access'] = TRUE;
+  }
+  return $form;
+}
+
+/**
+ * Custom shared content type form defaults.
+ */
+function _olympian_shared_form_defaults(&$form, $form_state) {
+
+  $editable_fields = [
+    'field_shared_content_xml',
+    'field_shared_content',
+    'field_shared_content_subscribers',
+    'field_is_shared',
+    //generic
+    'actions',
+    'title',
+    'field_search',
+    //book
+    'field_book_categories',
+    'field_faculty_and_staff',
+    'field_byline_names',
+    'field_byline_options',
+    //event
+    'field_event_category',
+    'field_featured_home_slideshow',
+    'field_feature_event',
+    //article
+    'field_article_home_slideshow',
+    'field_feature_article',
+    'field_reverse_header',
+    'field_category',
+    'field_faculty_and_staff',
+    //faculty_staff
+    'field_areas_of_interest',
+    'field_type_of_staff',
+  ];
+
+  // Iterate over the form elements.
+  foreach ($form as $key => &$element) {
+      // \Drupal::messenger()
+      //       ->addMessage(t('This is shared content. You may not have access to edit all of the fields.'));
+    // Check if the key is a field and not in the editable fields list.
+    if (is_array($element) && isset($element['#type']) && strpos($key, 'field_') === 0) {
+      if (!in_array($key, $editable_fields)) {
+        // Apply #states conditions for invisibility if field_shared_content_xml is filled and field_is_shared is checked.
+        $form[$key]['#states'] = [
+          'invisible' => [
+            // Combine both conditions: field_shared_content_xml is filled AND field_is_shared is checked.
+            [':input[name="field_shared_content_xml[0][value]"]' => ['filled' => TRUE]],
+          ],
+        ];
+      }
+    }
+  }
+  $form['field_is_shared']['#states'] = [
+          'invisible' => [
+            // Combine both conditions: field_shared_content_xml is filled AND field_is_shared is checked.
+            [':input[name="field_shared_content_xml[0][value]"]' => ['filled' => TRUE]],
+          ],
+        ];
+
+  $form['field_shared_content_notify']['#states'] = [
+    'visible' => [
+      ':input[name="field_is_shared[value]"]' => ['checked' => TRUE],
+      ':input[name="field_shared_content_xml[0][value]"]' => ['filled' => FALSE],
+    ],
+  ];
+
+  $commonAccess = TRUE;
+  $form['shared_settings'] = [
+    '#type' => 'details',
+    '#title' => 'Shared Settings',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#tree' => FALSE,
+    '#weight' => -10,
+    '#group' => 'advanced',
+    '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+  ];
+  $form['field_shared_content_xml']['#group'] = 'shared_settings';
+  $form['field_shared_content_subscribers']['#group'] = 'shared_settings';
+  $form['field_shared_content']['#group'] = 'shared_settings';
+    $user = Drupal::currentUser();
+
+  if (!$user->hasPermission('administer basic site settings')) {
+    $commonAccess = FALSE;
+  }
+if (!$commonAccess) {
+
+  $form['shared_settings']['#access'] = FALSE;
+if (isset($form['field_shared_content_xml'])) {
+        $form['field_shared_content_xml']['#states'] = [
+          'visible' => [
+            ':input[name="field_is_shared[value]"]' => ['checked' => TRUE],
+          ],
+        ];
+      }
+      if (isset($form['field_shared_content_subscribers'])) {
+        $form['field_shared_content_subscribers']['#states'] = [
+          'visible' => [
+            ':input[name="field_is_shared[value]"]' => ['checked' => TRUE],
+          ],
+        ];
+      }
+      if (isset($form['field_shared_content'])) {
+        $form['field_shared_content']['#states'] = [
+          'visible' => [
+            ':input[name="field_is_shared[value]"]' => ['checked' => TRUE],
+          ],
+        ];
+      }
+    }
+}
+/**
+ * Custom node content type form defaults.
+ */
+function _olympian_landing_form_defaults(&$form, $form_state) {
+
+  $commonAccess = TRUE;
+  unset($form['moderation_state']['widget'][0]['state']['#options']['archived']);
+
+  unset($form['actions']['delete']);
+  $form['landing_settings'] = [
+    '#type' => 'details',
+    '#title' => 'Landing Page Settings',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#tree' => FALSE,
+    '#weight' => -10,
+    '#group' => 'advanced',
+    '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+  ];
+  $form['search_settings'] = [
+    '#type' => 'details',
+    '#title' => 'Search',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE,
+    '#tree' => FALSE,
+    '#weight' => -10,
+    '#group' => 'advanced',
+    '#attributes' => ['class' => ['rabbit-hole-settings-form']],
+  ];
+  $form['field_search']['#group'] = 'search_settings';
+
+  $user = Drupal::currentUser();
+
+  if (!$user->hasPermission('administer basic site settings')) {
+    $commonAccess = FALSE;
+  }
+
+  if (!$commonAccess) {
+    $form['pathauto_settings']['#disabled'] = TRUE;
+    $form['path']['widget'][0]['pathauto']['#attributes']['disabled'] = 'disabled';
+    $form['path']['widget'][0]['alias']['#attributes']['disabled'] = 'is-disabled';
+    $form['path'][0]['alias']['#attributes']['disabled'] = 'is-disabled';
+
+    $form['path']['widget'][0]['alias']['#states'] = [
+      'disabled' => [
+        ':input[name="revision"]' => [
+          'checked' => TRUE,
+        ],
+      ],
+    ];
+
+    // Setting this to be disabled when false so that admins can change it.
+    $form['path']['widget'][0]['pathauto']['#states'] = [
+      'disabled' => [
+        ':input[name="revision"]' => [
+          'checked' => TRUE,
+        ],
+      ],
+    ];
+  }
+
+  $form['field_category_display']['#group'] = 'landing_settings';
+  $form['field_landing_page_type']['#group'] = 'landing_settings';
+  $form['field_faculty_column_layout']['#group'] = 'landing_settings';
+  $form['field_default_person_type']['#group'] = 'landing_settings';
+  $form['field_areas_of_interest_title']['#group'] = 'landing_settings';
+  $form['contact_us_settings']['#access'] = $commonAccess;
+  $form['landing_settings']['#access'] = $commonAccess;
+  $form['pathauto_settings']['#access'] = $commonAccess;
+  $form['field_default_person_type']['#access'] = $commonAccess;
+  $form['field_areas_of_interest_title']['#access'] = $commonAccess;
+
+  return $form;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function olympian_core_token_info(): array {
+  $info = [];
+  $info['types']['olympian_core'] = [
+    'name' => t('Olympian Core tokens'),
+    'description' => t('Tokens for the olympian theme.'),
+  ];
+  $info['tokens']['olympian_core']['geolocation'] = [
+    'name' => 'Event Geolocation',
+    'description' => 'A token to display for event geolocation ics file.',
+  ];
+  $info['tokens']['olympian_core']['location'] = [
+    'name' => 'Event Location',
+    'description' => 'A token to display for event location ics file.',
+  ];
+  $info['tokens']['olympian_core']['imagecard'] = [
+    'name' => 'Image Card Token',
+    'description' => 'A token to display for image card landing page.',
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function olympian_core_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+  if ($type === 'olympian_core') {
+    foreach ($tokens as $name => $original) {
+      // Find the desired token by name.
+      switch ($name) {
+        case 'geolocation':
+          $replacements[$original] = _olympian_core_geolocation_token_value();
+          break;
+
+        case 'location':
+          $replacements[$original] = _olympian_core_location_token_value();
+          break;
+
+        case 'imagecard':
+          $replacements[$original] = 'browse';
+      }
+    }
+  }
+  return $replacements;
+}
+
+/**
+ * Callback to get the artsci People view path.
+ */
+function _olympian_core_geolocation_token_value() {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = Drupal::routeMatch()->getParameter('node');
+
+  if ($node instanceof NodeInterface && $node->getType() === 'events') {
+
+    if ($node->hasField('field_event_geolocation') && !$node->get('field_event_geolocation')
+      ->isEmpty()) {
+      $text = $node->field_event_geolocation->value;
+    }
+    elseif ($node->hasField('field_location') && !$node->get('field_location')
+      ->isEmpty()) {
+      $text = $node->field_location->value;
+    }
+    else {
+      $text = '';
+    }
+    return $text;
+
+  }
+}
+
+/**
+ *
+ */
+function _olympian_core_location_token_value() {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = Drupal::routeMatch()->getParameter('node');
+
+  if ($node instanceof NodeInterface && $node->getType() === 'events') {
+    $text = '';
+    if ($node->hasField('field_location') && !$node->get('field_location')
+      ->isEmpty()) {
+      $text .= $node->field_location->value;
+
+      if ($node->hasField('field_additional_location_inform') && !$node->get('field_additional_location_inform')
+        ->isEmpty()) {
+        $text .= '|' . $node->field_additional_location_inform->value;
+      }
+    }
+    return $text;
+  }
+
+}
+
+/**
+ * Helper function to get select list options based on the radio value.
+ */
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function olympian_core_field_widget_single_element_paragraphs_form_alter(&$element, &$form_state, $context) {
+  if ($element['#paragraph_type'] === 'embedded_webform') {
+    if (isset($element['subform']['field_form']['widget'][0]['target_id']['#default_value'])) {
+      $element['subform']['field_form']['widget'][0]['target_id']['#ajax'] = [
+        'callback' => 'olympian_core_update_webform_edit_link',
+        'event' => 'change',
+        'wrapper' => 'edit-webform',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => NULL,
+        ],
+      ];
+      $webform_id = $element['subform']['field_form']['widget'][0]['target_id']['#default_value'];
+      $element['subform']['field_form']['widget'][0]['target_id']['#suffix'] =
+        t('<div id="edit-webform">Select an existing webform to place. <a class="link" target="new_blank" href="/admin/structure/webform/manage/@webform_id">Edit selected webform.</a></div>', [
+          '@webform_id' => $webform_id,
+        ]);
+    }
+  }
+  if ($element['#paragraph_type'] === 'tabs') {
+    if (isset($element['subform']['field_tab_1']['widget'][0]['target_id']['#default_value'])) {
+      $element['subform']['field_tab_1']['widget'][0]['target_id']['#ajax'] = [
+        'callback' => 'olympian_core_update_webform_edit_link',
+        'event' => 'change',
+        'wrapper' => 'edit-webform',
+        'progress' => [
+          'type' => 'throbber',
+          'message' => NULL,
+        ],
+      ];
+      $webform_id = $element['subform']['field_tab_1']['widget'][0]['target_id']['#default_value'];
+      $element['subform']['field_tab_1']['widget'][0]['target_id']['#suffix'] =
+        t('<div id="edit-webform">Select an existing webform to place. <a class="link" target="new_blank" href="/admin/structure/webform/manage/@webform_id">Edit selected webform.</a></div>', [
+          '@webform_id' => $webform_id,
+        ]);
+    }
+  }
+  if (($element['#paragraph_type'] == 'content_2') && !empty($element['subform']['field_footer_callout_bg'])) {
+    unset($element['subform']['field_footer_callout_bg']['widget']['#options']['_none']);
+  }
+  // if ($element['#bundle'] == 'generic_page') {
+    if (($element['#paragraph_type'] == 'introduction') && !empty($element['subform']['field_background'])) {
+      $user = Drupal::currentUser()->getRoles();
+
+      if (in_array('communications', $user) || in_array('administrator', $user)) {
+        unset($element['subform']['field_introduction_text_color']['widget']['#options']['_none']);
+        $parents_array = $element['subform']['#parents'];
+        $parents = array_shift($parents_array) . '[' . implode('][', $parents_array) . ']';
+        $element['subform']['field_introduction_text_color']['#states'] = [
+          'visible' => [
+            ':input[name="' . $parents . '[field_background]"]' => [
+              ['value' => 'no_overlay'],
+              'or',
+              ['value' => 'No Overlay'],
+            ],
+          ],
+        ];
+      }
+      else {
+        unset($element['subform']['field_background']['widget']['#options']['no_overlay']);
+        unset($element['subform']['field_introduction_text_color']);
+      }
+    }
+  // }
+  else {
+    unset($element['subform']['field_background']['widget']['#options']['no_overlay']);
+    unset($element['subform']['field_introduction_text_color']);
+  }
+  // dpm($element['subform']);
+  if (($element['#paragraph_type'] == 'people_teaser') && !empty($element['subform']['field_people_teaser_views'])) {
+    $parents_array = $element['subform']['#parents'];
+    $parents = array_shift($parents_array) . '[' . implode('][', $parents_array) . ']';
+    $element['subform']['field_display_research_interests']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_people_teaser_views]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'List'],
+          'or',
+          ['value' => 'List-Gray Background'],
+          'or',
+          ['value' => '1'],
+          'or',
+          ['value' => '2'],
+        ],
+      ],
+    ];
+  }
+  if (($element['#paragraph_type'] == 'basic_page_content') && !empty($element['subform']['field_footer_callout_bg'])) {
+    unset($element['subform']['field_footer_callout_bg']['widget']['#options']['_none']);
+  }
+  if (($element['#paragraph_type'] == 'spotlight') && !empty($element['subform']['field_spotlight_type'])) {
+    $parents_array = $element['subform']['#parents'];
+    $parents = array_shift($parents_array) . '[' . implode('][', $parents_array) . ']';
+    $element['subform']['field_spotlight_video_title']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Fullscreen Video'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spotlight_video_short']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Fullscreen Video'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spotlight_video_url']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Fullscreen Video'],
+        ],
+      ],
+    ];
+    $element['subform']['field_fullscreen_video_image']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Fullscreen Video'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spotlight_image']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spot_image']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Static Image'],
+        ],
+      ],
+    ];
+    $element['subform']['field_button_link']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Static Image'],
+        ],
+      ],
+    ];
+    $element['subform']['field_new_window']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Static Image'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spotlight_description']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'Default'],
+          'or',
+          ['value' => 'Static Image'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spot_news_category']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'News & Events'],
+        ],
+      ],
+    ];
+    $element['subform']['field_spot_event_category']['#states'] = [
+      'visible' => [
+        ':input[name="' . $parents . '[field_spotlight_type]"]' => [
+          ['value' => 'News & Events'],
+        ],
+      ],
+    ];
+  }
+}
+
+/**
+ * @param \Drupal\field\Entity\FieldStorageConfig $definition
+ * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+ * @param unknown $cacheable
+ *
+ * @return string[]|\Drupal\Core\StringTranslation\TranslatableMarkup[]
+ */
+function olympian_core_person_type_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, &$cacheable) {
+  $people_vocab = Vocabulary::load('leadership_administrative_staf');
+  foreach (\Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadTree($people_vocab->id()) as $item) {
+    $people_options[$item->tid] = str_repeat('-', $item->depth) . $item->name;
+  }
+  return $people_options;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Need to don't see the parameters 'form_build_id' and 'form_id' in the url
+ * in order to make the search work.
+ */
+function olympian_core_form_search_api_form_alter(&$form, FormStateInterface $form_state) {
+  $form['form_build_id']['#access'] = FALSE;
+  $form['form_token']['#access'] = FALSE;
+  $form['form_id']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olympian_core_form_config_split_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Enable themes to be blacklisted.
+  $form['blacklist_fieldset']['theme']['#access'] = TRUE;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_prepare_form().
+ */
+function olympian_core_config_split_prepare_form(EntityInterface $entity, $operation, FormStateInterface $form_state) {
+  // Set a state variable to ensure config_split uses our Chosen
+  // select implementation instead of checkboxes.
+  if (!\Drupal::state()->get('config_split_use_select')) {
+    \Drupal::state()->set('config_split_use_select', TRUE);
+  }
+}
+
+/**
+ * Implements hook_preprocess_select().
+ */
+function olympian_core_preprocess_select(&$variables) {
+  $admin_context = \Drupal::service('router.admin_context');
+  if ($admin_context->isAdminRoute()) {
+    if ($variables['element']['#multiple'] === TRUE) {
+      // Use chosen for multi-selects.
+      $variables['#attached']['library'][] = 'olympian_core/chosen';
+      if (isset($variables['options'], $variables['options'][0], $variables['options'][0]['value'])) {
+        if ($variables['options'][0]['value'] === '_none' || $variables['options'][0]['value'] === '') {
+          unset($variables['options'][0]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Helper function to clean up html tags.
+ */
+function olympian_core_html_cleanup($string, $allowed_tags = NULL): string {
+  return trim(strip_tags($string, $allowed_tags));
+}
+
+/**
+ * Helper function to determine if empty.
+ */
+function olympian_core_html_empty_after_cleanup($string, $allowed_tags = NULL): bool {
+  return olympian_core_html_cleanup($string, $allowed_tags) === '';
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function olympian_core_entity_presave(EntityInterface $entity) {
+
+  switch ($entity->bundle()) {
+
+    case 'article':
+      // Check for rabbit_hole functionality.
+      if (\Drupal::moduleHandler()
+        ->moduleExists('rabbit_hole') && $entity->hasField('rh_action')) {
+        // $link_direct = (int) $entity->get('field_direct_link')->value;
+        $source_link = $entity->get('field_direct_link')->uri;
+        // If direct link is set,
+        // change the rabbit hole setting to redirect
+        // and set the url to the source link token.
+        if (isset($source_link) && !empty($source_link)) {
+          $entity->rh_action->value = 'page_redirect';
+          $entity->rh_redirect->value = '[node:field_direct_link:uri]';
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'display_page';
+        }
+        else {
+          // Match content type settings.
+          $entity->rh_action->value = 'display_page';
+          $entity->rh_redirect->value = NULL;
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'bundle_default';
+        }
+      }
+      // if ($entity->hasField('field_shared_content_xml')) {
+      //   $shared = $entity->get('field_shared_content_xml')->value;
+      //   if (!empty($shared)) {
+      //     $entity->set('field_is_shared', TRUE);
+      //   }
+      // }
+      break;
+
+    // case 'book':
+    //   if ($entity->hasField('field_shared_content_xml')) {
+    //     $shared = $entity->get('field_shared_content_xml')->value;
+    //     if (!empty($shared)) {
+    //       $entity->set('field_is_shared', TRUE);
+    //     }
+    //   }
+    //   break;
+
+    case 'events':
+      // Check for rabbit_hole functionality.
+      if (\Drupal::moduleHandler()
+        ->moduleExists('rabbit_hole') && $entity->hasField('rh_action')) {
+        $source_link = $entity->get('field_external_url')->uri;
+        // If external link is set,
+        // change the rabbit hole setting to redirect
+        // and set the url to the source link token.
+        if (isset($source_link) && !empty($source_link)) {
+          $entity->rh_action->value = 'page_redirect';
+          $entity->rh_redirect->value = '[node:field_external_url:uri]';
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'display_page';
+        }
+        else {
+          // Match content type settings.
+          $entity->rh_action->value = 'display_page';
+          $entity->rh_redirect->value = NULL;
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'bundle_default';
+        }
+      }
+      // if ($entity->hasField('field_shared_content_xml')) {
+      //   $shared = $entity->get('field_shared_content_xml')->value;
+      //   if (!empty($shared)) {
+      //     $entity->set('field_is_shared', TRUE);
+      //   }
+      // }
+      //get the id of the webform we want the rsvp button to link to
+      $rsvpFormId = ($entity->hasField('field_rsvp_form')) ? $entity->get('field_rsvp_form')->target_id : NULL;
+      if ( !empty($rsvpFormId) ){
+        //set the query parameters we want to include on our link
+        $query_params = [
+          'source_entity_type' => $entity->getEntityTypeId(),
+          'source_entity_id' => $entity->id(),
+        ];
+
+        $rsvpForm = \Drupal::entityTypeManager()->getStorage('webform')->load($rsvpFormId);
+        $entity->field_rsvp_form_link->value = $rsvpForm->toUrl('canonical', ['query' => $query_params])->setAbsolute()->toString();
+      }
+      //
+      break;
+
+    case 'faculty_staff':
+      // Setting the title with the first/last name values.
+      $output = $entity->get('field_first_name')->value . " " . $entity->get('field_last_name')->value;
+      $entity->setTitle($output);
+      // Check for rabbit_hole functionality.
+      if (\Drupal::moduleHandler()
+        ->moduleExists('rabbit_hole') && $entity->hasField('rh_action')) {
+        $source_link = $entity->get('field_external_profile_link')->uri;
+        // If external profile link is set,
+        // change the rabbit hole setting to redirect
+        // and set the url to the source link token.
+        if (isset($source_link) && !empty($source_link)) {
+          $entity->rh_action->value = 'page_redirect';
+          $entity->rh_redirect->value = '[node:field_external_profile_link:uri]';
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'display_page';
+        }
+        else {
+          // Match content type settings.
+          $entity->rh_action->value = 'display_page';
+          $entity->rh_redirect->value = NULL;
+          $entity->rh_redirect_response->value = '301';
+          $entity->rh_redirect_fallback_action->value = 'bundle_default';
+        }
+      }
+      // if ($entity->hasField('field_shared_content_xml')) {
+      //   $shared = $entity->get('field_shared_content_xml')->value;
+      //   if (!empty($shared)) {
+      //     $entity->set('field_is_shared', TRUE);
+      //   }
+      // }
+      break;
+
+    case 'faculty_landing_page':
+      $source_link = $entity->get('field_areas_of_interest_title')->value;
+      if (empty($source_link)) {
+        $source_link = 'Areas of Interest';
+      }
+      $variables['areas_of_interest'] = $source_link;
+      break;
+
+    case 'resources':
+      $output = $entity->get('field_title')->value;
+      if (!empty($output)) {
+        $entity->setTitle($output);
+      }
+      break;
+
+    case 'resources_landing_page':
+      $contact_url = \Drupal::config('system.site')->get('contact_us_url');
+      if (!empty($contact_url)) {
+        $entity->set('field_contact_us_link', $contact_url);
+      }
+      else {
+        $entity->set('field_contact_us_link', 'contact-us');
+      }
+
+      break;
+
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function olympian_core_module_implements_alter(&$implementations, $hook) {
+  // Unset administerusersbyrole query alter which over-filters the people page.
+  if ($hook === 'query_alter' && isset($implementations['administerusersbyrole'])) {
+    unset($implementations['administerusersbyrole']);
+  }
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ *
+ * Override the administerusersbyrole query alter to only exclude admins.
+ */
+function olympian_core_query_administerusersbyrole_edit_access_alter(AlterableInterface $query) {
+  /** @var Drupal\olympian_core\Access\OlympianCoreAccess $check */
+  $check = \Drupal::service('olympian_core.access_checker');
+
+  /** @var Drupal\Core\Access\AccessResultInterface $access */
+  $access = $check->access(\Drupal::currentUser()->getAccount());
+
+  if ($access->isForbidden()) {
+    // Exclude the root user.
+    if ($query instanceof SelectInterface) {
+      $query->condition('users_field_data.uid', 1, '<>');
+
+      // Get a list of uids with the administrator role.
+      $subquery = \Drupal::database()->select('user__roles', 'ur2');
+      $subquery->fields('ur2', ['entity_id']);
+      $subquery->condition('ur2.roles_target_id', 'administrator');
+
+      // Exclude those uids from the result list.
+      $query->condition('users_field_data.uid', $subquery, 'NOT IN');
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olympian_core_form_views_form_administerusersbyrole_people_page_1_alter(&$form, FormStateInterface $form_state, $form_id) {
+  /** @var Drupal\olympian_core\Access\OlympianCoreAccess $check */
+  $check = \Drupal::service('olympian_core.access_checker');
+
+  /** @var Drupal\Core\Access\AccessResultInterface $access */
+  $access = $check->access(\Drupal::currentUser()->getAccount());
+
+  if ($access->isForbidden()) {
+    foreach ($form['header']['user_bulk_form']['action']['#options'] as $key => $option) {
+      if (stristr($option, 'administrator')) {
+        unset($form['header']['user_bulk_form']['action']['#options'][$key]);
+      }
+    }
+  }
+
+  // Hide the bulk operations form from users who do not have one of these
+  // permissions since it is then not that useful. Ideally, this would be
+  // removed and handled in the administerusersbyrole module.
+  $permissions = [
+    'assign roles',
+    'cancel users by role',
+    'edit users by role',
+  ];
+
+  $hide = FALSE;
+
+  foreach ($permissions as $permission) {
+    if (\Drupal::currentUser()->hasPermission($permission) === FALSE) {
+      $hide = TRUE;
+    }
+  }
+
+  if ($hide) {
+    $form['header']['#access'] = FALSE;
+    $form['actions']['submit']['#access'] = FALSE;
+  }
+}
+
+/**
+ *
+ */
+function olympian_core_introduction_text_color_allowed_values(FieldStorageConfig $definition, ContentEntityInterface $entity = NULL, $cacheable) {
+  $options = [
+    'white' => 'White',
+    'gold' => 'Gold',
+    'black' => 'Black',
+  ];
+  return $options;
+}
+
+/**
+ * AJAX function to update webform edit link to the current selection.
+ */
+function olympian_core_update_webform_edit_link($form, FormStateInterface $form_state) {
+  $selectedValue = $form_state->getTriggeringElement()['#value'];
+  $markup =
+    t('<div id="edit-webform">Select an existing webform to place. <a target="new_blank" href="/admin/structure/webform/manage/@webform_id">Edit this webform.</a></div>', [
+      '@webform_id' => $selectedValue,
+    ]);
+  return ['#markup' => $markup];
+}
+
+/**
+ * Implements hook_allowed_values_function().
+ */
+function olympian_core_emails_allowed_values_function(FieldStorageConfig $definition, ?ContentEntityInterface $entity, $cacheable) {
+  // Available degree abbreviations.
+  // Can be moved to store in a config file later.
+  $options = [
+    'none' => 'None',
+    'afas@wustl.edu' => t('AFAS'),
+    'amcs@wustl.edu' => t('AmCS'),
+    'anthro@wustl.edu' => t('Anthropology'),
+    'artarch@wustl.edu' => t('Art History'),
+    'artsci-comm@wustl.edu' => t('ArtSci'),
+    'artscihelp@wustl.edu' => t('Artsci Computing'),
+    'biology@wustl.edu' => t('Biology'),
+    'cenhum@wustl.edu' => t('Center for Humanities'),
+    'quantumleaps@wustl.edu' => t('Center for Quantum Leaps'),
+    'chemistry@wustl.edu' => t('Chemistry'),
+    'classics@wustl.edu' => t('Classics'),
+    'collegewriting@wustl.edu' => t('College Writing'),
+    'complit@wustl.edu' => t('Comparative Literature'),
+    'eeps@wustl.edu' => t('Earth and Planetary'),
+    'ealc@wustl.edu' => t('EALC'),
+    'economics@wustl.edu' => t('Economics'),
+    'education@wustl.edu' => t('Education'),
+    'english@wustl.edu' => t('English'),
+    'environmental@wustl.edu' => t('Environmental Studies'),
+    'fellowshipsoffice@wustl.edu' => t('Washington University Fellowships Advising'),
+    'fms@wustl.edu' => t('Film and Media'),
+    'german@wustl.edu' => t('German'),
+    'globalstudies@wustl.edu' => t('Global Studies'),
+    'artscigrads@wustl.edu' => t('Grad Studies'),
+    'hdw@wustl.edu' => t('HDW'),
+    'history@wustl.edu' => t('History'),
+    'artsci-comm@wustl.edu' => t('Inside Artsci'),
+    'jimes@wustl.edu' => t('JIMES'),
+    'lasprogram@wustl.edu' => t('Latin American'),
+    'linguistics@wustl.edu' => t('Linguistics'),
+    'literaryarts@wustl.edu' => t('Literary Arts'),
+    'literacies@wustl.edu' => t('Literacies for Life and Career'),
+    'math@wustl.edu' => t('Math'),
+    'spacesciences@wustl.edu' => t('MCSS'),
+    'movingstories@wustl.edu' => t('Moving Stories'),
+    'music@wustl.edu' => t('Music'),
+    'buildingartsci@wustl.edu' => t('New Arts & Sciences Building'),
+    'overseas@wustl.edu' => t('Overseas Programs'),
+    'pad@wustl.edu' => t('Performing Arts'),
+    'philosophy@wustl.edu' => t('Philosophy'),
+    'physics@wustl.edu' => t('Physics'),
+    'pnp@wustl.edu' => t('PNP'),
+    'polisci@wustl.edu' => t('Political Science'),
+    'postbaccpremed@wustl.edu' => t('Post-Bacc Premed'),
+    'summerexperiences@wustl.edu' => t('Pre-College'),
+    'prehealth@wustl.edu' => t('Pre-Health'),
+    'publichealthandsociety@wustl.edu' => t('Program in Public Health & Society'),
+    'psych@wustl.edu' => t('Psychology'),
+    'religiousstudies@wustl.edu' => t('Religious Studies'),
+    'rll@wustl.edu' => t('Romance Languages'),
+    'sociology@wustl.edu' => t('Sociology'),
+    'strategicplan@wustl.edu' => t('Strategic Plan'),
+    'summersession@wustl.edu' => t('Summer Session'),
+    'transdisciplinaryfutures@wustl.edu' => t('Transdisciplinary Futures'),
+    'triads@wustl.edu' => t('TRIADS'),
+    'undergradresearch@wustl.edu' => t('Undergraduate Research'),
+    'artsci-comm@wustl.edu' => t('Graduation'),
+    'slavery@wustl.edu' => t('WashU and Slavery'),
+    'wc@wustl.edu' => t('Weidenbaum Center'),
+    'wgss@wustl.edu' => t('Women and Gender'),
+    'johnmaxwulfing@wustl.edu' => t('Wulfing Collection'),
+  ];
+  return $options;
+}

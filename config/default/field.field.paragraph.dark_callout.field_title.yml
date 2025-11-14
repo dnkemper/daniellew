@@ -1,0 +1,19 @@
+uuid: 8c600b99-0d68-4bb8-a081-48f2c33d0872
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.dark_callout
+id: paragraph.dark_callout.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: dark_callout
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

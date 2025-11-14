@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: mindfulness.ddev.site
+    protocol: https
+  machine_name: mindfulness
+  human_name: mindfulness.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: mindfulness.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/mindfulness.wustl.edu/files'
+    origin: 'https://mindfulness.wustl.edu'
+drupal:
+  db:
+    database: drupal_mindfulness
+system:
+  site:
+    contact_us_url: 'https://mindfulness.wustl.edu/contact-us'
+    name: mindfulness
+    email: mindfulness@wustl.edu

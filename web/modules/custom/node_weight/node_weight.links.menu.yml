@@ -1,0 +1,9 @@
+node_weight.content:
+  title: 'Node weights'
+  route_name: node_weight.form
+  description: 'Manage node weight field for node content types.'
+  parent: 'system.admin_structure'
+
+node_weight.menu_links:
+  class: Drupal\node_weight\Plugin\Menu\NodeWeightMenuLink
+  deriver: Drupal\node_weight\Plugin\Derivative\NodeWeightMenuLink

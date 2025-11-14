@@ -1,0 +1,30 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - system.menu.menu-secondary-navigation
+  module:
+    - menu_block
+  theme:
+    - olympian9
+id: menu_secondary_navigation
+theme: olympian9
+region: secondary_menu
+weight: -13
+provider: null
+plugin: 'menu_block:menu-secondary-navigation'
+settings:
+  id: 'menu_block:menu-secondary-navigation'
+  label: 'Secondary Navigation'
+  label_display: '0'
+  provider: menu_block
+  follow: false
+  follow_parent: child
+  label_link: false
+  label_type: block
+  level: 1
+  depth: 0
+  expand_all_items: false
+  parent: 'menu-secondary-navigation:'
+  suggestion: menu_secondary_navigation
+visibility: {  }

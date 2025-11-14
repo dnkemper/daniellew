@@ -1,0 +1,18 @@
+uuid: 306c5ea1-f461-4579-abbe-7e11ab0dc0f1
+langcode: en
+status: true
+dependencies: {  }
+id: node__faculty_landing_page
+label: 'Content: People Landing Page'
+tags:
+  canonical_url: '[current-page:url:absolute] '
+  description: '[node:field_introduction_p:entity:field_description]'
+  og_description: '[node:field_introduction_p:entity:field_description]'
+  og_image: '[node:field_introduction_p:entity:field_background_image:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: profile
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'

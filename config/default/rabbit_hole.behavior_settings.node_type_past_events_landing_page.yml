@@ -1,0 +1,14 @@
+uuid: 3f89ad1a-93db-442c-bc5c-1a5edb7f61e8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.past_events_landing_page
+id: node_type_past_events_landing_page
+entity_type_id: node_type
+entity_id: past_events_landing_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

@@ -1,0 +1,63 @@
+uuid: 9145df06-55bc-4ad1-910d-82adda0f6eb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.testimonial.body
+    - field.field.node.testimonial.field_author
+    - field.field.node.testimonial.field_author_description
+    - field.field.node.testimonial.field_color
+    - field.field.node.testimonial.field_meta_tags
+    - field.field.node.testimonial.field_search
+    - field.field.node.testimonial.field_testimonial_image
+    - node.type.testimonial
+  module:
+    - user
+id: node.testimonial.olympian_search
+targetEntityType: node
+bundle: testimonial
+mode: olympian_search
+content:
+  field_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_author_description:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  body: true
+  content_moderation_control: true
+  field_color: true
+  field_meta_tags: true
+  field_testimonial_image: true
+  links: true

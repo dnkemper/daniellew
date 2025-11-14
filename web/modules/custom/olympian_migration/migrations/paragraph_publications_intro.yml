@@ -1,0 +1,61 @@
+id: paragraph_publications_intro
+label: 'Publications Intro Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+  - shared-dep
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publications_intro  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publications_intro  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Entity reference fields mapping
+  field_article_two:
+    plugin: sub_process
+    source: field_article_two
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+  field_first_article:
+    plugin: sub_process
+    source: field_first_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+  field_fourth_article:
+    plugin: sub_process
+    source: field_fourth_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+  field_third_article:
+    plugin: sub_process
+    source: field_third_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  # Text fields mapping
+  field_intro_header_subtitle: field_intro_header_subtitle
+  field_intro_header_title: field_intro_header_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publications_intro
+migration_dependencies:
+  required:
+    - node_articles  # Ensure this is the correct ID of your 'article' node migration
+  optional: {}

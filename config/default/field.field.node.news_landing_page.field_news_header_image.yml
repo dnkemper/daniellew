@@ -1,0 +1,29 @@
+uuid: 950638a2-c1ea-4679-bb81-3f6f23ac7f70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_news_header_image
+    - media.type.image
+    - node.type.news_landing_page
+id: node.news_landing_page.field_news_header_image
+field_name: field_news_header_image
+entity_type: node
+bundle: news_landing_page
+label: 'Header Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

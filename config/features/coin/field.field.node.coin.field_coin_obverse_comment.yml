@@ -1,0 +1,19 @@
+uuid: c02a9f33-4244-449e-a97f-bf6c424d9f2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_obverse_comment
+    - node.type.coin
+id: node.coin.field_coin_obverse_comment
+field_name: field_coin_obverse_comment
+entity_type: node
+bundle: coin
+label: 'Obverse inscription comment'
+description: '(retrograde, inwards, monogram)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

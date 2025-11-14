@@ -1,0 +1,11 @@
+uuid: 61a270b4-3bee-4190-8a60-728896c2c92b
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.x_small__square
+label: 'x-small square'
+description: ''
+targetEntityType: media
+cache: true

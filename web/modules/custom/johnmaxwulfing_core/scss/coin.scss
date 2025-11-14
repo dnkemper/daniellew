@@ -1,0 +1,218 @@
+.page-node-type-coin-collection-landing-page,
+.page-node-type-coin {
+/* Adding commas inbetween term references on Wulfing */
+.termref a:after {
+ content: ', ';
+}
+.termref a:last-child:after {
+ content: '';
+}
+
+/* Wulfing Filter CSS */
+form.collection-form {
+ padding: 50px;
+}
+
+.filter-options .options-list {
+ width: 85% !important;
+}
+
+/* Fieldset fixes */
+fieldset {
+ width: 100%;
+ margin-top: 0;
+}
+.form-container fieldset {
+ padding: 0;
+}
+.fieldset-wrapper {
+ margin: 1.8em;
+}
+fieldset legend {
+ margin-left: 1.2em;
+ margin-top: 1em;
+}
+.access-denied-container {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ margin-top: 100px;
+ margin-bottom: 100px;
+ text-align: center;
+}
+/* Coin Teaser */
+.collection-teaser {
+ // width: 100%;
+ border-bottom: 2px solid #bdbfc0;
+ display: flex;
+ align-items: center;
+ align-content: stretch;
+ flex-direction: row;
+ justify-content: center;
+ padding-top: 50px;
+ padding-bottom: 50px;
+ padding-left: 70px;
+ padding-right: 70px;
+}
+.collection-teaser--title {
+ width: 33%;
+}
+.collection-teaser--title a {
+ font-size: 30px;
+ color: #d01c29;
+}
+.collection-teaser--title a:hover {
+ color: #a51417;
+}
+.collection-teaser--information {
+ width: 33%;
+ margin: auto;
+}
+.collection-teaser--information p a {
+ color: #d01c29;
+}
+.collection-teaser--information p a:hover {
+ color: #a51417;
+}
+.collection-teaser--image {
+ margin: auto;
+ width: 200px;
+ height: 200px;
+}
+.collection-teaser--image a {
+ display: none;
+}
+.filter-options .collection-options {
+ width: 100%;
+}
+
+/* Coin Teaser */
+.collection-teaser {
+ width: 100%;
+ border-bottom: 2px solid #bdbfc0;
+ display: flex;
+ align-items: center;
+ align-content: stretch;
+ flex-direction: row;
+ justify-content: center;
+ padding-top: 50px;
+ padding-bottom: 50px;
+ padding-left: 70px;
+ padding-right: 70px;
+}
+.collection-teaser--title {
+ width: 33%;
+}
+.collection-teaser--title a {
+ font-size: 30px;
+ color: #d01c29;
+}
+.collection-teaser--title a:hover {
+ color: #a51417;
+}
+.collection-teaser--information {
+ width: 33%;
+ margin: auto;
+}
+.collection-teaser--information p a {
+ color: #d01c29;
+}
+.collection-teaser--information p a:hover {
+ color: #a51417;
+}
+.collection-teaser--image {
+ margin: auto;
+ width: 200px;
+ height: 200px;
+}
+.collection-teaser--image a {
+ display: none;
+}
+.filter-options .collection-options {
+ width: 100%;
+}
+
+/* Collection Item */
+.collectionItem .post-header.reverse {
+ padding: 0;
+ margin: 0;
+}
+.collection-coin {
+ width: 100%;
+}
+.coinImage {
+ display: inline-flex;
+ margin: auto;
+ padding-left: 10px;
+ padding-right: 10px;
+ padding-bottom: 30px;
+ flex: 50%;
+ max-width: 50%;
+}
+.baseInfo {
+ display: inline-flex;
+ max-width: 50%;
+ color: #a51417;
+ margin: 30px;
+}
+.baseInfo > a:hover {
+ color: #d01c29;
+}
+.dates {
+ display: inline-flex;
+ max-width: 50%;
+ margin: 30px;
+}
+.bib-section {
+ display: flex;
+ flex-direction: row;
+ width: 50%;
+}
+.bib-item {
+ width: 25%;
+ margin-left: 0;
+ margin-right: 20px;
+}
+@media all and (max-width: 600px) {
+ .bib-section {
+   width: 100%;
+ }
+
+ .bib-item {
+   margin-right: 10px;
+ }
+}
+.js-form-item.form-item {
+ label {
+   display: none;
+ }
+}
+/* Wulfing Filter CSS */
+form.collection-form {
+ padding: 50px;
+}
+.range-filter-container {
+ display: flex;
+}
+.range_filter {
+ max-width: 30%;
+}
+.filter-options .collection-options {
+ padding: 20px 10%;
+}
+#collection_filter {
+ padding: 30px;
+}
+.column-half {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.search input[type=text] {
+ padding-left: unset !important;
+}
+.search input#edit-keys--2 {
+ padding-left: 45px !important;
+}
+}

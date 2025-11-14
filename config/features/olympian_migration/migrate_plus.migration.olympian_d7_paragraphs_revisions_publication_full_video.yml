@@ -1,0 +1,70 @@
+uuid: 1372acf3-6ab8-4859-93c8-18107b4360c0
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publication_full_video
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Full Video)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publication_full_video
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_full_video_image:
+    plugin: sub_process
+    source: field_full_video_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_full_video_subtitle:
+    -
+      plugin: get
+      source: field_full_video_subtitle
+  field_full_video_title:
+    -
+      plugin: get
+      source: field_full_video_title
+  field_full_video_url:
+    plugin: sub_process
+    source: field_full_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publication_full_video
+migration_dependencies:
+  required: {}
+  optional: {  }

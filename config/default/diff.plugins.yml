@@ -1,0 +1,2652 @@
+fields:
+  content_moderation_state:
+    langcode:
+      type: hidden
+      settings: {  }
+    uid:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    workflow:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    moderation_state:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    content_entity_type_id:
+      type: hidden
+      settings: {  }
+    content_entity_id:
+      type: hidden
+      settings: {  }
+    content_entity_revision_id:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+  crop:
+    langcode:
+      type: hidden
+      settings: {  }
+    entity_id:
+      type: hidden
+      settings: {  }
+    entity_type:
+      type: hidden
+      settings: {  }
+    uri:
+      type: hidden
+      settings: {  }
+    height:
+      type: hidden
+      settings: {  }
+    width:
+      type: hidden
+      settings: {  }
+    x:
+      type: hidden
+      settings: {  }
+    'y':
+      type: hidden
+      settings: {  }
+    revision_timestamp:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+  entity_subqueue:
+    langcode:
+      type: hidden
+      settings: {  }
+    revision_created:
+      type: hidden
+      settings: {  }
+    revision_user:
+      type: hidden
+      settings: {  }
+    revision_log_message:
+      type: hidden
+      settings: {  }
+    status:
+      type: hidden
+      settings: {  }
+    uid:
+      type: hidden
+      settings: {  }
+    title:
+      type: hidden
+      settings: {  }
+    items:
+      type: hidden
+      settings: {  }
+    created:
+      type: hidden
+      settings: {  }
+    changed:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+  media:
+    langcode:
+      type: hidden
+      settings: {  }
+    revision_created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    revision_user:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    revision_log_message:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    status:
+      type: hidden
+      settings: {  }
+    uid:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    thumbnail:
+      type: image_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        show_id: 0
+        compare_alt_field: 1
+        compare_title_field: 1
+        property_separator: nl
+        show_thumbnail: 1
+    created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    changed:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+    field_media_document:
+      type: file_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        show_id: 1
+        compare_description_field: 0
+        compare_display_field: 0
+        property_separator: nl
+    field_media_file:
+      type: file_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        show_id: 1
+        compare_description_field: 0
+        compare_display_field: 0
+        property_separator: nl
+    field_media_image:
+      type: image_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        show_id: 0
+        compare_alt_field: 1
+        compare_title_field: 1
+        property_separator: nl
+        show_thumbnail: 1
+    field_media_oembed_video:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_media_soundcloud:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_thumbnail:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_media_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+  menu_link_content:
+    langcode:
+      type: hidden
+      settings: {  }
+    revision_created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    revision_user:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    revision_log_message:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    enabled:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    external:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    changed:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+  node:
+    langcode:
+      type: hidden
+      settings: {  }
+    revision_timestamp:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    status:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    uid:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    changed:
+      type: hidden
+      settings: {  }
+    promote:
+      type: hidden
+      settings: {  }
+    sticky:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+    body:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    date_repeat_entity_clone_state:
+      type: hidden
+      settings: {  }
+    date_repeat_entity_master_uuid:
+      type: hidden
+      settings: {  }
+    field_add_resources:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_additional_location_inform:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_additional_resources:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_additional_titles:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_advisor:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_advisor_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_anchor_links:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_announcements:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_areas_of_interest:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_article_home_slideshow:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_articles_spot:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_author:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_author_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_author_headshot:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_award:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_awards:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_background_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_basic_page_content:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_biography:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_book_categories:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_building_name_and_room_num:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_button_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_byline_names:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_byline_options:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_call_to_action:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_call_to_action_button_text:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_call_to_action_button_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_call_to_action_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_callout_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_concentration_category:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_content_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_course_attributes:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_concentration:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_credits:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_department_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_dept_code:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_do_not_delete:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_featured:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_featured_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_frequency:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_graduate:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_id:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_instructors:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_landing_banner_img:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_landing_heading:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_landing_sub_heading:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_links:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_course_requirements:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_sections:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_course_semester:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_undergrad:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_cv:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_dark_callout:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_date_all_day:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_default_course_semester:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_department_links:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_dept_links:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_description:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_direct_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_dotted_line:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_education:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_email_address:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_embedded_webform:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_event_and_article_spotligh:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_event_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_event_contact:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_event_date:
+      type: hidden
+      settings: {  }
+    field_event_date_tbd:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_event_geolocation:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_events:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_events_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_external_profile_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_external_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_extra_two_column_content_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_faculty_and_staff:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_faculty_bookshelf_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_faqs:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_fax_number:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_feature_article:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_feature_event:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_full_w_text:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_home_slideshow:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_image_and_text:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_news:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_people:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_pub_news:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_weight:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_with_caption:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_first_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_footer_callout_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_full_screen_video:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_full_width_slide:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_fullscreen_slideshow:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_gallery:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_generic_intro_with_image:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_generic_intro_with_side_it:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_half_text_and_half_testimo:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_header_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_header_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_header_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_hide_course_filters:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_home_testimonial:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_image_card_terms:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_infographic:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_instagram_and_twitter:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_interests:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_intro_section:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_intro_selection_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_intro_text:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_intro_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_intro_with_table_of_conten:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_introduction_excerpt:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_introduction_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_is_shared:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_jump_to_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_last_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_link_excerpt:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_link_thumbnail:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_links_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_location:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_mailing_address:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_meta_tags:
+      type: metatag_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_multipurpose_slideshow_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_new_window:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_office_hours:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_optional_callout_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_people_teaser:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_phone_number:
+      type: hidden
+      settings: {  }
+    field_position:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_pronouns:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_publication_call_to_action:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_publication_degrees:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_publication_gallery:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_publication_testimonial:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_related_links_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_resource_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_resources_callout_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_reverse_header:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_rsvp_form:
+      type: hidden
+      settings: {  }
+    field_sample_courses_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_search:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_second_spotlight:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_select_testimonials:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_shared_content:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_shared_content_subscribers:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_shared_content_xml:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_show_course_button:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_show_end_date:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_show_faculty_bookshelf:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_sidebar_slideshow_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_single_image_field_callout:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_slideshow_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_social_media_links_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_soundcloud:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_soundcloud_media:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spotlight_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_spotlights_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_student_stories:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_tabs_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_testimonial_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_testimonials_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_thumbnail:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_timeline:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_twitter_section:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_two_column_content_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_type_of_staff:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_video:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_video_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_video_spotlight_and_articl:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_video_url:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_areas_of_interest_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_category_display:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_contact_us_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_default_person_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_event_header_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_faculty_column_layout:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_landing_page_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_new_window_option_two:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    feeds_item:
+      type: hidden
+      settings: {  }
+    field_featured_caption_overlay:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_featured_without_caption:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_imported_node:
+      type: hidden
+      settings: {  }
+    field_jsonapi_url:
+      type: hidden
+      settings: {  }
+    field_node_weight:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_original_content_type:
+      type: hidden
+      settings: {  }
+    field_original_created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_original_modified:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_original_uuid:
+      type: hidden
+      settings: {  }
+    field_site_base_url:
+      type: hidden
+      settings: {  }
+  path_alias:
+    langcode:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    path:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    alias:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    status:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    revision_default:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+  taxonomy_term:
+    langcode:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    revision_created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    revision_user:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    revision_log_message:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    status:
+      type: hidden
+      settings: {  }
+    name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    description:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    parent:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    changed:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+    field_active_date:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_display_semester:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+  paragraph:
+    langcode:
+      type: hidden
+      settings: {  }
+    status:
+      type: hidden
+      settings: {  }
+    created:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    parent_id:
+      type: hidden
+      settings: {  }
+    parent_type:
+      type: hidden
+      settings: {  }
+    parent_field_name:
+      type: hidden
+      settings: {  }
+    behavior_settings:
+      type: hidden
+      settings: {  }
+    default_langcode:
+      type: hidden
+      settings: {  }
+    revision_default:
+      type: hidden
+      settings: {  }
+    revision_translation_affected:
+      type: hidden
+      settings: {  }
+    field__gen_image_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field__home_testimonial:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field__text_new_window:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_additional_information:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ampersand:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_anchor_section:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_anchor_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_anchors:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_announcement:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_announcement_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_article_body:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_article_two:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_articles:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_awards_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_back_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_background:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_background_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_background_color_announce:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_background_color_cta:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_background_feat_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_background_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_bkg_clr:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_building:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_button:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_button_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_button_link_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_button_url:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_full_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_group:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_owner_full_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_owner_short_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_print_code:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_short_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_ca_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_call_to_action_button:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_call_to_action_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_call_to_action_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_callout_button:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_callout_button_text:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_callout_button_url:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_callout_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_caption:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_course_semester:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_cta_background_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_cta_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_custom_button:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_custom_button_:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_custom_caption:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_custom_section:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_custom_section_text:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_custom_section_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_dark_callouts:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_date_display:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_day:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_degree:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_degree_holders:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_degrees:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_description_formatted:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_distinction:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_end_time:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_event_only_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_facebook_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_faq:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_feat_artice_bkg_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_feat_article_button:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_feat_article_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_feat_article_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_feat_full_background_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_featured_announcement:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_featured_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_first_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_first_event:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_first_news_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_flickr_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_footer_callout_bg:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_footer_callout_content:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_form:
+      type: hidden
+      settings: {  }
+    field_fourth_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_full_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_full_video_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_full_video_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_full_video_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_full_video_url:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_fullscreen_images:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_fullscreen_video_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_gallery_caption:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_gallery_image:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_gallery_images:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_gen_image_intro:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_generic_intro:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_generic_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_half_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_half_image_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_half_image_main_titl:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_half_image_optional_header:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_half_test_bkg_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_half_text_body:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_half_text_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_header_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_headline:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_holder_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_home_caption:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_home_slide:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_infographic:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_infographic_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_instagram_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_intro_header_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_intro_header_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_introduction_excerpt:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_introduction_exerpt:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_left_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_link_title_new_window:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_linkedin_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_links_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: filter_xss_all
+    field_main_content:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_main_title:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_new_window:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_news_header_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_news_header_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_open_in_new_window:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_optional_header:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_optional_link_text:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_optional_link_url:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_optional_text:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_page_format:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_page_format2:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_people_teaser_titles:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_people_teaser_views:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_person:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_person_selector:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_publication_award:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_publication_button:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_publication_degrees_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_publication_gallery_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_publication_person_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_quote:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_read_more_link_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_read_the_story_link_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_recipient_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_related_link_out:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_related_links:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_related_links_:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_related_links_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_resource:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_resources:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_room:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_room_schedules:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_second_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_second_event:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_second_news_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_section:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_section_course_id:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_section_dept_code:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_section_do_not_delete:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_section_instructors:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_section_number:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_section_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_select_testimonials:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_show_date_on_timeline:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_shown_items:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_single_column:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_slides:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_slideshow:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_slideshow_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_social_media:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_spot_articles:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spot_event_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spot_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spot_news_category:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spotlight_description:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_spotlight_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spotlight_type:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_spotlight_video_short:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_spotlight_video_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_spotlight_video_url:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_spotlights:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_start_time:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_story:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_student_image:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_student_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_student_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_subhead_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_subtitle:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_tab_1:
+      type: hidden
+      settings: {  }
+    field_taxonomy_term:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_test_name:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_test_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_testimoni_background_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_testimonial:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_testimonial_publication_:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_text_bkg_color:
+      type: list_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare: key
+    field_third_article:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_third_event:
+      type: entity_reference_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_entity_reference: 1
+    field_timeline_date:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_timeline_slides_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_timeline_slideshow_slide_p:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_title_and_body:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_title_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_twitter_description:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_twitter_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_two_col_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_two_col_wysiwyg:
+      type: text_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_format: 0
+    field_youtube_link:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_link_title:
+      type: core_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+    field_link_title_url:
+      type: link_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text
+        compare_title: 0
+        compare_uri: 1
+    field_dotted_link:
+      type: entity_reference_revisions_field_diff_builder
+      settings:
+        show_header: 1
+        markdown: drupal_html_to_text

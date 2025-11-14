@@ -1,0 +1,75 @@
+uuid: 1247ac38-3424-4419-b002-4559b975d3d6
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publication_announcement
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Announcement)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publication_announcement
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_announcement_image:
+    plugin: sub_process
+    source: field_announcement_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_background_color_announce:
+    -
+      plugin: get
+      source: field_background_color_announce
+  field_description:
+    -
+      plugin: get
+      source: field_description
+    -
+      plugin: custom_media_wysiwyg_filter
+    -
+      plugin: custom_img_tag_to_embed
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publication_announcement
+migration_dependencies:
+  required: {}
+  optional: {  }

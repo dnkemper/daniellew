@@ -1,0 +1,73 @@
+id: paragraph_publication_announcements
+label: 'Publication Award Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_announcements
+process:
+  type:
+    plugin: default_value
+    default_value: publication_announcements  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Nested paragraphs field mapping for 'field_button'
+  field_announcement:
+    plugin: sub_process
+    source: field_announcement
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_announcement
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  # Nested paragraphs field mapping for 'field_button'
+  field_featured_announcement:
+    plugin: sub_process
+    source: field_featured_announcement
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_announcement_feature
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_announcements
+migration_dependencies:
+  required:
+    - paragraph_publication_announcement
+    - paragraph_publication_announcement_feature
+  optional: {}

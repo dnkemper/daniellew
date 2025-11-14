@@ -1,0 +1,10 @@
+uuid: 29ce8a0b-6751-499a-8b97-cc1eb797a32a
+langcode: en
+status: true
+dependencies: {  }
+id: multipurpose_slideshow
+label: 'Multipurpose Slideshow'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Multipurpose Slideshow'
+behavior_plugins: {  }

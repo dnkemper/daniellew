@@ -1,0 +1,23 @@
+uuid: bfe061f9-312f-41a7-b450-fe93a754878a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_new_window
+    - node.type.events
+id: node.events.field_event_new_window
+field_name: field_event_new_window
+entity_type: node
+bundle: events
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

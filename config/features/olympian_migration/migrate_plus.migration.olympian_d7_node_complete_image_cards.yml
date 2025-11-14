@@ -1,0 +1,275 @@
+uuid: 15f00679-2f98-48f7-a970-0f615cafb9cb
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_image_cards
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: olympian_d7
+label: 'Node complete (Image Cards)'
+source:
+  plugin: olympian_node
+  node_type: image_cards
+  ids:
+    nid:
+      type: integer
+    vid:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: image_cards
+  nid: nid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  vid: vid
+  uid: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  moderation_state: moderation_state
+  field_thumbnail:
+    plugin: sub_process
+    source: field_thumbnail
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_select_testimonials:
+    plugin: sub_process
+    source: field_select_testimonials
+    process:
+      target_id:
+        plugin: migmag_lookup
+        migration: olympian_d7_node_complete_testimonial
+        source: target_id
+  field_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_description
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_call_to_action_button_url:
+    plugin: field_link_custom
+    source: field_call_to_action_button_url
+    title_source: field_call_to_action_button_text
+  field_sample_courses_p:
+    -
+      plugin: sub_process
+      source: field_sample_courses_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_optional_callout_p:
+    -
+      plugin: sub_process
+      source: field_optional_callout_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_related_links_p:
+    -
+      plugin: sub_process
+      source: field_related_links_p
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_search:
+    -
+      plugin: get
+      source: field_search
+    -
+      plugin: custom_media_wysiwyg_filter
+  field_image_card_terms:
+    plugin: sub_process
+    source: field_image_card_terms
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_image_cards
+        source: tid
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_people_teaser:
+    -
+      plugin: sub_process
+      source: field_people_teaser
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+  alias: alias
+  path/pathauto: pathauto_state
+destination:
+  plugin: 'entity:node'
+  default_bundle: image_cards
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_sample_courses
+    - olympian_d7_paragraphs_optional_callout
+    - olympian_d7_paragraphs_related_links
+    - olympian_d7_paragraphs_people_teaser
+  optional:
+    - olympian_d7_node_complete_faculty_staff
+    - olympian_d7_paragraphs_revisions_sample_courses
+    - olympian_d7_paragraphs_revisions_optional_callout
+    - olympian_d7_paragraphs_revisions_people_teaser
+    - olympian_d7_paragraphs_revisions_related_links

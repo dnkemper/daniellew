@@ -1,0 +1,21 @@
+uuid: 6010e19a-bbb2-4f5a-9a9c-9bf75e50036d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_slideshow_type
+    - node.type.home_page
+  module:
+    - options
+id: node.home_page.field_slideshow_type
+field_name: field_slideshow_type
+entity_type: node
+bundle: home_page
+label: 'Slideshow Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

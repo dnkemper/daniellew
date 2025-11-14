@@ -1,0 +1,21 @@
+uuid: 79c211f0-2b29-412b-b5ae-68be01e413ec
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_publication_testimonial
+field_name: field_publication_testimonial
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

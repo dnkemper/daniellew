@@ -1,0 +1,647 @@
+@import '../base/viewmodes';
+
+:root {
+  --serif: 'Libre Baskerville', serif;
+  --sans-serif: 'Source Sans Pro', sans-serif;
+  --black: #000000;
+  --white: #ffffff;
+  --gray: #6c7373;
+  --light-gray: #f1f1f1;
+  --lightest-gray: #e4e4e4;
+  --dark-gray: #2b2b2b;
+  --darkest-gray: #231f20;
+  --feed-gray: #393939;
+  --light-blue: #67c8c7;
+  --dark-blue: #00a5a4;
+  --blue: #007a7a;
+  --red: #d01c29;
+  --dark-red: #a51417;
+  --gold: #f5bd18;
+  --kern-sm: 0.025em;
+  --kern-md: 0.075em;
+  --kern-lg: 0.16em;
+  --gutter: 1.25rem;
+  --desktop-width-gutter: 3rem;
+  --xsm: 0.325rem;
+  --sm: 0.625rem;
+  --sm-md: 0.9rem;
+  --md: 1.05rem;
+  --lg: 1.875rem;
+  --xlg: 2.5rem; // 40px
+  --xxlg: 3.15rem;
+  --font-weight-bold: 700;
+  --font-weight-medium-bold: 600;
+  --font-weight-normal: 400;
+  --warning: #f5bd18;
+  --warning-light: lighten(#f5bd18, 45%);
+  --danger: #d01c29;
+  --danger-light: lighten(#d01c29, 45%);
+  --info: #00558c;
+  --info-light: lighten(#00558c, 70%);
+  --success: #00664f;
+  --success-light: lighten(#00664f, 76%);
+}
+h2.red {
+  color: var(--dark-red);
+  font-size: 40px;
+}
+.ck.ckeditor__main {
+  li {
+    line-height: 1.6 !important;
+    margin-bottom: 0.5em !important;
+  }
+
+  li:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  img {
+    display: inline-block !important;
+    margin-top: var(--sm-md) !important;
+    margin-bottom: var(--lg) !important;
+  }
+
+  img:first-child {
+    margin-top: 0 !important;
+  }
+
+  figure {
+    display: inline-block !important;
+    margin-top: var(--sm-md) !important;
+    margin-bottom: 40px !important;
+  }
+
+  figure img {
+    margin: 0 0 10px !important;
+  }
+
+  figcaption {
+    font-family: var(--serif) !important;
+    color: var(--gray) !important;
+    font-size: var(--sm-md) !important;
+  }
+
+  table {
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+    margin-bottom: 1.5em !important;
+  }
+
+  table p:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  th {
+    background: #eeeeee !important;
+    text-align: left !important;
+    font-weight: normal !important;
+  }
+
+  td,
+  th {
+    padding: 10px !important;
+  }
+  a:hover {
+    color: var(--red) !important;
+  }
+
+  p {
+    margin-bottom: 1.5em !important;
+    line-height: 1.8 !important;
+  }
+  br {
+    display: block !important;
+  }
+
+  a {
+    color: var(--dark-red) !important;
+    font-weight: var(--font-weight-medium-bold) !important;
+    text-decoration: underline !important;
+  }
+  blockquote {
+    font-size: 1.8em !important;
+    max-width: 650px !important;
+    margin: var(--xxlg) auto !important;
+    text-align: center !important;
+    font-size: 24px !important;
+    line-height: 1.4 !important;
+    padding: var(--xxlg) 0 !important;
+    position: relative !important;
+  }
+
+  blockquote:before,
+  blockquote:after {
+    content: '' !important;
+    position: absolute !important;
+    left: 50% !important;
+    margin-left: -125px !important;
+    width: 250px !important;
+    height: 2px !important;
+    background: var(--darkest-gray) !important;
+  }
+
+  a.button {
+    color: var(--red) !important;
+    border: 2px solid var(--dark-red) !important;
+    letter-spacing: var(--kern-md) !important;
+    text-transform: uppercase !important;
+    font-family: var(--sans-serif) !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    padding: 7px 10px 6px !important;
+    display: inline-block !important;
+    text-decoration: none !important;
+  }
+}
+.ck.ck-heading_heading3,
+.ck h3,
+.ck.ck-editor__main h3 {
+  font-size: 21px !important;
+  font-family: var(--serif) !important;
+  margin-bottom: 1em !important;
+  line-height: 1.4 !important;
+  font-weight: bold !important;
+}
+.ck.ck-heading_heading1 {
+  font-size: 32px !important;
+  margin-bottom: 0.65em !important;
+  font-family: var(--serif) !important;
+  margin-bottom: 1em !important;
+  line-height: 1.4 !important;
+}
+
+.ck.ck-heading_heading2,
+.ck.ck-editor__main h2 {
+  font-family: var(--serif) !important;
+  margin-bottom: 1em !important;
+  line-height: 1.4 !important;
+  color: var(--dark-red) !important;
+  font-weight: bold !important;
+  font-size: 40px;
+}
+.ck h3,
+.ck.ck-editor__main h3,
+.ck.ck-heading_heading3 {
+  color: var(--dark-red) !important;
+  font-family: var(--serif) !important;
+  font-size: 21px;
+}
+.ck.ck-editor__main a {
+  color: var(--dark-red) !important;
+  font-weight: var(--font-weight-medium-bold) !important;
+  text-decoration: underline !important;
+}
+.ck.ck-editor__main h4 {
+  font-size: 17px !important;
+  margin-bottom: 1em !important;
+  font-family: var(--serif) !important;
+  margin-bottom: 1em !important;
+  line-height: 1.4 !important;
+}
+div.ck.ck-editor__main > div > p {
+  color: var(--feed-gray) !important;
+  font-size: 16px !important;
+  margin-bottom: 1.5em !important;
+  line-height: 1.8 !important;
+  font-family: var(--serif);
+}
+// .ck {
+//  font-family: 'Libre Baskertville', serif !important;
+// }
+.ck.ck-editor__main,
+.ck-content {
+  ul,
+  ol {
+    padding-left: 1em;
+    margin-left: 1.5em;
+    margin-top: 0.25em;
+    margin-bottom: 1em;
+    line-height: 1.8 !important;
+    padding-left: 1em !important;
+  }
+
+  a:not(.button),
+  a:not(.ck-anchor) {
+    color: var(--dark-red) !important;
+    font-weight: var(--font-weight-medium-bold) !important;
+    text-decoration: underline !important;
+  }
+  a.ck-anchor {
+    color: var(--dark-red) !important;
+    font-weight: var(--font-weight-medium-bold) !important;
+    text-decoration: underline !important;
+    &:before {
+      content: url(../../svg/anchor.png);
+      background-image: url(../images/anchor.png);
+    }
+  }
+
+  p,
+  ol,
+  ul {
+    font-size: 16px !important;
+    // margin-bottom: 1.5em !important;
+    line-height: 1.6 !important;
+  }
+
+  blockquote {
+    max-width: 650px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    font-size: 24px !important;
+    line-height: 1.4 !important;
+    margin-bottom: var(--xxlg) !important;
+    margin-top: var(--xxlg) !important;
+    padding: var(--xxlg) 0 !important;
+    position: relative !important;
+
+    &:before,
+    &:after {
+      content: '' !important;
+      position: absolute !important;
+      left: 50% !important;
+      margin-left: -125px !important;
+      width: 250px !important;
+      height: 2px !important;
+      background: var(--darkest-gray) !important;
+    }
+
+    &:before {
+      top: 0 !important;
+    }
+
+    p {
+      font-size: 24px !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    blockquote p {
+      font-size: var(--lg) !important;
+    }
+  }
+
+  a[target='_blank'].button:after {
+    margin: auto !important;
+    text-align: center !important;
+    background-color: var(--red) !important;
+    color: var(--red) !important;
+    fill: var(--red) !important;
+    border: 2px solid var(--red) !important;
+    background: var(--red) !important;
+    text-decoration: underline !important;
+    font-size: 13px !important;
+    -webkit-mask-size: 70px 16px !important;
+    mask-size: 16px 16px !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    margin-left: 5px !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
+    -webkit-mask-image: url(../../svg/sprite.svg#link-out) !important;
+    mask-image: url(../../svg/sprite.svg#link-out) !important;
+    -webkit-mask-repeat: no-repeat !important;
+    mask-repeat: no-repeat !important;
+    -webkit-mask-position: center center !important;
+    mask-position: center left !important;
+    content: '' !important;
+    width: 12px !important;
+    height: 12px !important;
+
+    &:hover {
+      color: var(--red) !important;
+    }
+  }
+
+  p .button {
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.975px !important;
+    padding: 6px 10px 6px !important;
+    font-size: 13px !important;
+    line-height: 1.7 !important;
+    margin-bottom: unset !important;
+    font-weight: bold !important;
+    color: var(--red) !important;
+    border: 2px solid !important;
+    border-color: var(--dark-red) !important;
+    font-family: var(--sans-serif) !important;
+  }
+
+  a[target='_blank'] {
+    display: inline-flex !important;
+    justify-content: flex-start !important;
+    align-content: space-between !important;
+    width: fit-content !important;
+    align-items: flex-start !important;
+  }
+  .ck.ck-editor__main {
+    border: 1px solid var(--ck-color-toolbar-border);
+  }
+  a.button {
+    color: var(--red) !important;
+    border: 2px solid !important;
+    border-color: var(--dark-red) !important;
+    font-family: var(--sans-serif) !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    letter-spacing: 0.975px !important;
+    margin-bottom: unset !important;
+    padding: 6px 10px 6px !important;
+    text-decoration: none !important;
+    line-height: 1.7 !important;
+    text-transform: uppercase !important;
+    border-radius: unset;
+
+    &:hover {
+      background-color: var(--lightest-gray) !important;
+    }
+
+    li {
+      line-height: 1.6 !important;
+      margin-bottom: 0.5em !important;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    img {
+      display: inline-block !important;
+      margin-bottom: var(--lg) !important;
+      margin-top: var(--sm-md) !important;
+
+      &:first-child {
+        margin-top: 0 !important;
+      }
+    }
+
+    figure {
+      display: inline-block !important;
+      margin-bottom: 40px !important;
+      margin-top: var(--sm-md) !important;
+
+      img {
+        margin: 0 0 10px !important;
+      }
+    }
+
+    figcaption {
+      color: var(--gray) !important;
+      font-family: var(--sans-serif) !important;
+      font-size: var(--sm-md) !important;
+    }
+
+    table {
+      border-collapse: collapse !important;
+      border-spacing: 0 !important;
+      margin-bottom: 0em !important;
+
+      p:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    th {
+      background: #eeeeee !important;
+      font-weight: normal !important;
+      text-align: left !important;
+    }
+
+    td,
+    th {
+      padding: 10px !important;
+    }
+  }
+}
+.editor__editable_inline.ck-blurred,
+.ck.ck-editor__main > .ck {
+  min-height: 260px;
+  // background: #f1f0f0 !important;
+  &:focus {
+    border: 2px solid var(--dark-red);
+    outline: 0;
+  }
+}
+.ck.ck-list__item .ck-button {
+  padding: 2px !important;
+}
+.ck.ck-list__item .ck-button .ck-button__label {
+  line-height: 1.6;
+}
+.ck.ck-editor__top.ck-reset_all {
+  position: sticky;
+  top: 0;
+}
+div#edit-body-wrapper {
+  .filter-help {
+    display: none;
+  }
+}
+.ck-content .table table {
+  border: 1px solid #bfbfbf;
+  margin-top: 0px !important;
+}
+.ck-editor__main > :is(.ck-editor__editable, .ck-source-editing-area) {
+  max-height: calc(
+    100vh - var(--drupal-displace-offset-top, 0px) - var(
+        --drupal-displace-offset-bottom,
+        0px
+      ) - 200px
+  ) !important;
+}
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  outline: 0 !important;
+}
+div.ck.ck-editor__top.ck-reset_all
+  > div
+  > div.ck.ck-sticky-panel__content
+  > div
+  > div
+  > button:nth-child(18) {
+  font-size: 25px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.ck-content .table {
+  border-spacing: 0;
+  width: 90%;
+  border-collapse: collapse;
+  font-family: var(--serif);
+  background-color: #fff;
+  color: #151515;
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-top: 0 !important;
+  line-height: 1.6;
+}
+.ck-content .table > figcaption {
+  text-align: center !important;
+  font-size: 1rem !important;
+  color: #fff !important;
+  text-transform: uppercase;
+  background-color: #333 !important;
+  font-weight: 700 !important;
+  padding: var(--md) !important;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #333;
+}
+.ck-content .table table thead th {
+  background-color: var(--dark-red) !important;
+  border: 1px solid #bfbfbf;
+  text-transform: uppercase;
+  color: var(--white);
+  padding: var(--md) !important;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.paragraphs-tabs-wrapper .field-multiple-table .draggable td {
+  padding: var(--gin-spacing-xxs);
+}
+.ck-content .table table td,
+.ck-content .table table th {
+  padding: 10px;
+  border: #ddd 1px solid;
+}
+.ck-content .table table tbody {
+  tr:last-child {
+    border-bottom: 1px solid #bfbfbf;
+  }
+}
+.ck-content ol,
+ol {
+  // list-style-type: decimal;
+
+  & ol {
+    list-style-type: lower-latin;
+
+    & ol {
+      list-style-type: lower-roman;
+
+      & ol {
+        list-style-type: upper-latin;
+
+        & ol {
+          list-style-type: upper-roman;
+        }
+      }
+    }
+  }
+}
+.ck-content {
+  // Disc
+  ul[type='disc'] {
+    list-style-type: disc;
+    ul {
+      list-style-type: disc;
+      ul {
+        list-style-type: disc;
+      }
+    }
+  }
+  // Circle
+  ul[type='circle'] {
+    list-style-type: circle;
+  }
+  // Square
+  ul[type='square'] {
+    list-style-type: square;
+  }
+}
+
+.ck-content {
+  // set .hasviewmode styles during edit mode
+  @include image-viewmodes;
+  .hasviewmode {
+    margin-bottom: 0;
+  }
+
+  // Adjust media spacing during edit mode
+  .drupal-media {
+    @include image-hasviewmode-maxwidths(100%);
+
+    &.drupal-media-style-align-right,
+    &.drupal-media-style-align-left {
+      // to match figure max-width in _single-post.scss
+      @include image-hasviewmode-maxwidths(45%);
+      margin-top: 1em;
+      margin-bottom: 1em;
+
+      // Set table-layout:fixed so it will respect the max-width
+      table-layout: fixed;
+      width: fit-content;
+
+      figcaption {
+        margin-bottom: 1em;
+      }
+    }
+    &.drupal-media-style-align-left {
+      margin-left: 0;
+      margin-right: 2em;
+    }
+    &.drupal-media-style-align-right {
+      margin-left: 2em;
+      margin-right: 0;
+    }
+
+    // Fix for when figure is inside a list
+    // (it also generates a list INSIDE the figure for some reason)
+    ul {
+      margin: 0;
+      padding: 0 !important;
+      list-style: none;
+    }
+  }
+
+  // Adjust video player size during edit mode.
+  // Videos only have default size, and that takes up 100% of the width
+  // when they're not floated.
+  .drupal-media:has(.media--type-remote-video) {
+    width: 100%;
+
+    &:not(.drupal-media-style-align-right, .drupal-media-style-align-left) {
+      margin: 0 0 1.5em;
+    }
+
+    .media--type-remote-video {
+      width: 100%;
+    }
+  }
+}
+
+// Disable the max-width:45% on images (not on videos) if they're in a single-column wysiwyg.
+// (See DOT-150 comment https://washuartsci.atlassian.net/browse/DOT-150?focusedCommentId=42896.)
+// In view mode, the ".columns" class is set for two-column mode.
+// For edit mode, we need to see if the single-column checkbox/toggle is checked.
+// Limit the width of floated images only for two-column wysiwyg.
+.paragraph-type--two-column-content:has(
+    .field--name-field-single-column input:checked
+  ) {
+  .ck-content {
+    .drupal-media-style-align-left,
+    .drupal-media-style-align-right {
+      @include image-hasviewmode-maxwidths(100%);
+    }
+  }
+}
+
+ol[type='1'] {
+  list-style-type: decimal !important;
+}
+
+ol[type='i' s] {
+  list-style-type: lower-roman !important;
+}
+
+ol[type='I' s] {
+  list-style-type: upper-roman !important;
+}
+ol[type='a' s] {
+  list-style-type: lower-latin !important;
+}
+
+ol[type='A' s] {
+  list-style-type: upper-latin !important;
+}

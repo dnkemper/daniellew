@@ -1,0 +1,48 @@
+olympian9.mobile_extra_small:
+  label: mobile_extra_small
+  mediaQuery: 'all and (min-width: 0px) and (max-width: 374px)'
+  weight: 0
+  multipliers:
+    - 1x
+olympian9.mobile_small:
+  label: mobile_small
+  mediaQuery: 'all and (min-width: 375px)'
+  weight: 1
+  multipliers:
+    - 1x
+olympian9.mobile_medium:
+  label: mobile_medium
+  mediaQuery: 'all and (min-width: 425px)'
+  weight: 2
+  multipliers:
+    - 1x
+olympian9.mobile_large:
+  label: mobile_large
+  mediaQuery: 'all and (min-width: 600px)'
+  weight: 3
+  multipliers:
+    - 1x
+olympian9.tablet:
+  label: tablet
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 4
+  multipliers:
+    - 1x
+olympian9.desktop_small:
+  label: desktop_small
+  mediaQuery: 'all and (min-width: 1030px)'
+  weight: 5
+  multipliers:
+    - 1x
+olympian9.desktop_medium:
+  label: desktop_medium
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 6
+  multipliers:
+    - 1x
+olympian9.desktop_large:
+  label: desktop_large
+  mediaQuery: 'all and (min-width: 1400px)'
+  weight: 7
+  multipliers:
+    - 1x

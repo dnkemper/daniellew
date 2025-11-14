@@ -1,0 +1,23 @@
+uuid: 9cba8c8f-a75c-4007-bce5-6e803edd878c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_link_new_window
+    - paragraphs.paragraphs_type.publication_awards_section
+id: paragraph.publication_awards_section.field_link_new_window
+field_name: field_link_new_window
+entity_type: paragraph
+bundle: publication_awards_section
+label: 'Link originates outside of WashU'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,29 @@
+uuid: 6c2e7c45-50e3-45d9-a0d1-02b8b8c7a950
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_cv
+    - media.type.cv
+    - node.type.faculty_staff
+id: node.faculty_staff.field_cv
+field_name: field_cv
+entity_type: node
+bundle: faculty_staff
+label: CV
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      cv: cv
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: cv
+field_type: entity_reference

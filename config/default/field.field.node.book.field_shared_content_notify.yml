@@ -1,0 +1,21 @@
+uuid: 2cb37e78-152f-4fed-86ac-9b0675aad7c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content_notify
+    - node.type.book
+  module:
+    - options
+id: node.book.field_shared_content_notify
+field_name: field_shared_content_notify
+entity_type: node
+bundle: book
+label: 'Email Notifications'
+description: 'Select all sites that should be notified of this content creation. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

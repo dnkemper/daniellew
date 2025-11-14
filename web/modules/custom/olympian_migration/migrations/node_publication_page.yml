@@ -1,0 +1,350 @@
+id: node_publication_page
+migration_group: olympian_migration
+label: 'Publication Page Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: publication_page  # Replace with the machine name of your node type in Drupal 7
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   Field name                         Required   Field type                   Cardinality
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   field_announcements                           entity_reference_revisions   1
+#   field_awards                                  entity_reference_revisions   1
+#   field_featured_people                         entity_reference_revisions   1
+#   field_featured_pub_news                       entity_reference_revisions   1
+#   field_full_screen_video                       entity_reference_revisions   1
+#   field_intro_section                           entity_reference_revisions   1
+#   field_intro_selection_type         ✔          list_string                  1
+#   field_intro_with_table_of_conten              entity_reference_revisions   1
+#   field_meta_tags                               metatag                      1
+#   field_publication_call_to_action              entity_reference_revisions   1
+#   field_publication_degrees                     entity_reference_revisions   1
+#   field_publication_gallery                     entity_reference_revisions   1
+#   field_publication_testimonial                 entity_reference_revisions   1
+#   field_search                                  string_long                  1
+#   field_student_stories                         entity_reference_revisions   1
+#   field_twitter_section                         entity_reference_revisions   1
+#  ---------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: publication_page  # Replace with the machine name of your node type in Drupal 10
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+
+  # Paragraphs fields
+  field_announcements:
+    plugin: sub_process
+    source: field_announcements
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_announcements
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_awards:
+    plugin: sub_process
+    source: field_awards
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_awards_section
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_featured_people:
+    plugin: sub_process
+    source: field_featured_people
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_featured_people
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_featured_pub_news:
+    plugin: sub_process
+    source: field_featured_pub_news
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publications_featured_news
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_full_screen_video:
+    plugin: sub_process
+    source: field_full_screen_video
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_full_video
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_intro_section:
+    plugin: sub_process
+    source: field_intro_section
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publications_intro
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_intro_with_table_of_conten:
+    plugin: sub_process
+    source: field_intro_with_table_of_conten:
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_intro_with_tob
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_publication_call_to_action:
+    plugin: sub_process
+    source: field_publication_call_to_action
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_call_to_action
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_publication_degrees:
+    plugin: sub_process
+    source: field_publication_degrees
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_degrees_section
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_publication_gallery:
+    plugin: sub_process
+    source: field_publication_gallery
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_gallery
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_publication_testimonial:
+    plugin: sub_process
+    source: field_publication_testimonial
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_testimonial_section
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_student_stories:
+    plugin: sub_process
+    source: field_student_stories
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_student_stories
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+
+  # List (text) field mapping
+  field_intro_selection_type: field_intro_selection_type
+
+  # Text field mapping
+  field_search: field_search
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: publication_page
+migration_dependencies:
+  required:
+    - paragraph_publication_award
+    - paragraph_publication_person
+    - paragraph_publication_student_story
+    - paragraph_publication_testimonial_section
+    - paragraph_publications_intro
+    - paragraph_publication_announcements
+    - paragraph_publication_awards_section
+    - paragraph_publication_featured_people
+    - paragraph_publications_featured_news
+    - paragraph_publication_degrees_section
+    - paragraph_publication_gallery
+    - paragraph_publication_student_stories
+    - paragraph_publication_full_video
+    - paragraph_publication_call_to_action
+    - paragraph_intro_with_tob
+
+  optional: {}

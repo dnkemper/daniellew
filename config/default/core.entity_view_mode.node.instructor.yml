@@ -1,0 +1,11 @@
+uuid: 8951da48-e921-423f-a6c2-e39f81312ac2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.instructor
+label: Instructor
+description: ''
+targetEntityType: node
+cache: true

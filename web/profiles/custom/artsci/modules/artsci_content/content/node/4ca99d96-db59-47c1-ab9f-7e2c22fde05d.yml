@@ -1,0 +1,71 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 4ca99d96-db59-47c1-ab9f-7e2c22fde05d
+  bundle: resources
+  default_langcode: en
+  depends:
+    8f75df49-275c-4de4-9d0e-58d77f6b8083: media
+    582f1150-9852-415c-b671-332a2006f4e9: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Arts & Sciences IT'
+  created:
+    -
+      value: 1690545431
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/arts-sciences-computing
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://it.artsci.wustl.edu'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: 8f75df49-275c-4de4-9d0e-58d77f6b8083
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 582f1150-9852-415c-b671-332a2006f4e9
+  field_subtitle:
+    -
+      value: 'technical, web, canvas, and research support for A&S faculty and staff'
+  field_title:
+    -
+      value: 'Arts & Sciences IT'

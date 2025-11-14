@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://artsciadvising.ddev.site
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+dev:
+  uri: https://artsciadvising.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://artsciadvising.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://artsciadvising.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

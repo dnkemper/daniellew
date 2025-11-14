@@ -1,0 +1,56 @@
+uuid: 0dd7662b-b277-4a22-9f72-56b74fe9f46b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.timeline_slides.field_button_link
+    - field.field.paragraph.timeline_slides.field_description
+    - field.field.paragraph.timeline_slides.field_new_window
+    - field.field.paragraph.timeline_slides.field_title
+    - paragraphs.paragraphs_type.timeline_slides
+  module:
+    - link
+id: paragraph.timeline_slides.default
+targetEntityType: paragraph
+bundle: timeline_slides
+mode: default
+content:
+  field_button_link:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

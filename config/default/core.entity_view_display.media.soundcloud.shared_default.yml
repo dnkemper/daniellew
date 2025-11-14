@@ -1,0 +1,30 @@
+uuid: 3dd26f45-74b3-4e45-bad6-ff414526a211
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.shared_default
+    - field.field.media.soundcloud.field_media_directory
+    - field.field.media.soundcloud.field_media_soundcloud
+    - media.type.soundcloud
+id: media.soundcloud.shared_default
+targetEntityType: media
+bundle: soundcloud
+mode: shared_default
+content:
+  field_media_soundcloud:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

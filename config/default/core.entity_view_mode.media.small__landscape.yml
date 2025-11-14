@@ -1,0 +1,11 @@
+uuid: 51d83a01-520f-48fe-ab0c-de3349af834f
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.small__landscape
+label: 'small landscape'
+description: ''
+targetEntityType: media
+cache: true

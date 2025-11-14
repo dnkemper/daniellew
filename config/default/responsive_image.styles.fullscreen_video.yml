@@ -1,0 +1,16 @@
+uuid: f8811bec-6280-455c-974b-f15e2c049136
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.fullscreen_video
+id: fullscreen_video
+label: 'Fullscreen Video'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: fullscreen_video
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: fullscreen_video

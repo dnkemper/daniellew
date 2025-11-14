@@ -1,0 +1,23 @@
+uuid: b0c906bb-8959-4e71-9d40-f4359a0dea2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_new_window
+    - node.type.image_cards
+id: node.image_cards.field_new_window
+field_name: field_new_window
+entity_type: node
+bundle: image_cards
+label: 'link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

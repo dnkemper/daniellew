@@ -1,0 +1,26 @@
+uuid: 22acdd6f-41a9-4c76-af26-6c3f194be4a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: fullscreen_video
+label: 'Fullscreen Video (1366x800)'
+effects:
+  b1acae35-594e-443d-8ee8-fcefefa165f8:
+    uuid: b1acae35-594e-443d-8ee8-fcefefa165f8
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 1366
+      height: 800
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  0ab03d7a-70a7-4581-af32-0e4f7479f927:
+    uuid: 0ab03d7a-70a7-4581-af32-0e4f7479f927
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

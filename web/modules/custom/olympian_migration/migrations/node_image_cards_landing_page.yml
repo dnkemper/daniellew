@@ -1,0 +1,222 @@
+id: node_image_cards_landing_page
+migration_group: olympian_migration
+label: Migrate image cards landing page content from Drupal 7
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: image_cards_landing
+#  --------------------------- ---------- ---------------------------- -------------
+#   Field name                  Required   Field type                   Cardinality
+#  --------------------------- ---------- ---------------------------- -------------
+#   field_callout_p                        entity_reference_revisions   1
+#   field_category_display      ✔          list_string                  1
+#   field_dotted_line                      entity_reference_revisions   1
+#   field_footer_callout_p                 entity_reference_revisions   1
+#   field_header_p                         entity_reference_revisions   1
+#   field_meta_tags                        metatag                      1
+#   field_resources_callout_p              entity_reference_revisions   1
+#   field_search                           string_long                  1
+#   field_testimonials_p                   entity_reference_revisions   1
+#  --------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: image_cards_landing
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_testimonials_p:
+    plugin: sub_process
+    source: field_testimonials_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_testimonials
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_header_p:
+    plugin: sub_process
+    source: field_header_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_callout_p:
+    plugin: sub_process
+    source: field_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_resources_callout_p:
+    plugin: sub_process
+    source: field_resources_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_resources_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_dotted_line:
+    plugin: sub_process
+    source: field_dotted_line
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_school_structure
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_category_display:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: image_cards_category_display
+    -
+      plugin: static_map
+      map:
+        '1': 'collapsed'
+        '2': 'hidden'
+        '3': 'expanded'
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: image_cards_landing
+migration_dependencies:
+  required:
+    - paragraph_links
+    - paragraph_social_media_links
+    - node_testimonial
+    - node_resources
+    - paragraph_button
+    - paragraph_timeline_slides
+    - paragraph_testimonials
+    - paragraph_footer_callout
+    - paragraph_resources_callout
+    - paragraph_callout
+    - paragraph_school_structure
+  optional: {}

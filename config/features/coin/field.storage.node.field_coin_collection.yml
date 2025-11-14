@@ -1,0 +1,20 @@
+uuid: c3f13f9a-e35a-400e-abf6-117e79a92163
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_coin_collection
+field_name: field_coin_collection
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

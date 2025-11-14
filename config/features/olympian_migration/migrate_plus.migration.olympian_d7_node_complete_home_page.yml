@@ -1,0 +1,480 @@
+uuid: 2a1e0e62-ab74-4b0c-8d69-9a343e809e62
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_complete_home_page
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: olympian_d7
+label: 'Node complete (Home Page)'
+source:
+  plugin: olympian_node
+  node_type: home_page
+  ids:
+    nid:
+      type: integer
+    vid:
+      type: integer
+process:
+  type:
+    plugin: default_value
+    default_value: home_page
+  nid: nid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  tnid: tnid
+  path/pathauto: pathauto_state
+  alias: alias
+  vid:
+    -
+      plugin: get
+      source: vid
+  title:
+    -
+      plugin: get
+      source: title
+  uid: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_spotlights_p:
+    plugin: sub_process
+    source: field_spotlights_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_spotlights
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_second_spotlight:
+    plugin: sub_process
+    source: field_second_spotlight
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_video:
+    plugin: sub_process
+    source: field_video
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_search:
+    -
+      plugin: get
+      source: field_search
+    -
+      plugin: custom_media_wysiwyg_filter
+  field_slideshow_type:
+    -
+      plugin: get
+      source: field_slideshow_type
+  field_featured_cap_overlay:
+    -
+      plugin: default_value
+      default_value: '0'
+  field_featured_with_caption:
+    plugin: sub_process
+    source: field_featured_with_caption
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_featured_with_caption
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_featured_image_and_text:
+    plugin: sub_process
+    source: field_featured_image_and_text
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_featured_half_image_w_text
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_call_to_action:
+    plugin: sub_process
+    source: field_call_to_action
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_call_to_action_blocks
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_generic_intro_with_side_it:
+    plugin: sub_process
+    source: field_generic_intro_with_side_it
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_intro_with_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_generic_intro_with_image:
+    plugin: sub_process
+    source: field_generic_intro_with_image
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_intro_text_with_image
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_intro_type:
+    -
+      plugin: get
+      source: field_intro_type
+  field_full_width_slide:
+    plugin: sub_process
+    source: field_full_width_slide
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_full_screen_home_slide
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_home_testimonial:
+    plugin: sub_process
+    source: field_home_testimonial
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_testimonials
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_add_resources:
+    plugin: sub_process
+    source: field_add_resources
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_additional_resources
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_event_and_article_spotligh:
+    plugin: sub_process
+    source: field_event_and_article_spotligh
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_article_spotlight
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_events:
+    plugin: sub_process
+    source: field_events
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_events
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_featured_full_w_text:
+    plugin: sub_process
+    source: field_featured_full_w_text
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_featured_full_w_text
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_half_text_and_half_testimo:
+    plugin: sub_process
+    source: field_half_text_and_half_testimo
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_text_link_with_testimonial
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_featured_news:
+    plugin: sub_process
+    source: field_featured_news
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_featured_news
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_video_spotlight_and_articl:
+    plugin: sub_process
+    source: field_video_spotlight_and_articl
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_video_spotlights_and_articles
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_instagram_and_twitter:
+    plugin: sub_process
+    source: field_instagram_and_twitter
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_instagram_twitter_section
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  date_repeat_entity_clone_state:
+    -
+      plugin: get
+      source: date_repeat_entity_clone_state
+  date_repeat_entity_master_uuid:
+    -
+      plugin: get
+      source: date_repeat_entity_master_uuid
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: home_page
+idMap:
+  plugin: smart_sql
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_links
+    - olympian_d7_paragraphs_testimonial
+    - olympian_d7_paragraphs_events
+    - olympian_d7_paragraphs_spotlight
+    - olympian_d7_paragraphs_spotlights
+    - olympian_d7_paragraphs_featured_full_w_text
+    - olympian_d7_paragraphs_featured_with_caption
+    - olympian_d7_paragraphs_featured_half_image_w_text
+    - olympian_d7_paragraphs_intro_text_with_image
+    - olympian_d7_paragraphs_instagram_twitter_section
+    - olympian_d7_paragraphs_related_links
+    - olympian_d7_paragraphs_intro_with_links
+    - olympian_d7_paragraphs_full_screen_home_slide
+    - olympian_d7_paragraphs_testimonials
+    - olympian_d7_paragraphs_additional_resource
+    - olympian_d7_paragraphs_additional_resources
+    - olympian_d7_paragraphs_text_link_with_testimonial
+    - olympian_d7_paragraphs_call_to_action_blocks
+    - olympian_d7_paragraphs_link_title_and_body
+    - olympian_d7_paragraphs_featured_news
+    - olympian_d7_paragraphs_article_spotlight
+    - olympian_d7_paragraphs_video_spotlights_and_articles
+  optional:
+    - olympian_d7_field_instance
+    - olympian_d7_comment_field_instance

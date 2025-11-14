@@ -1,0 +1,18 @@
+uuid: d7645e7c-5b0b-4520-a21b-63161a77a9ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.faculty_staff
+id: node.faculty_staff.title
+field_name: title
+entity_type: node
+bundle: faculty_staff
+label: 'Page Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

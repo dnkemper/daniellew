@@ -1,0 +1,43 @@
+<?php
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function olympian_migration_migration_plugins_alter(&$definitions) {
+  // Retrieve the custom source_uri_prefix.
+  $custom_source_uri_prefix = Settings::get('olympian_migration_source_uri_prefix');
+
+  // Check if the setting is defined in settings.php.
+  if ($custom_source_uri_prefix) {
+    // Loop through all migration definitions.
+    foreach (array_keys($definitions) as $plugin_id) {
+      $definitions[$plugin_id]['idMap'] = ['plugin' => 'smart_sql'];
+      // Check if source_uri_prefix is set to 'dynamic' in the constants.
+      if (isset($definitions[$plugin_id]['source']['constants']['source_uri_prefix']) && $definitions[$plugin_id]['source']['constants']['source_uri_prefix'] === 'dynamic') {
+        // Override the source_uri_prefix with the value from settings.php.
+        $definitions[$plugin_id]['source']['constants']['source_uri_prefix'] = $custom_source_uri_prefix;
+      }
+    }
+  }
+}
+
+/**
+ * Return '1' if $value is not empty, otherwise '0'.
+ */
+function olympian_migration_set_new_window($value) {
+  return !empty($value) ? '1' : '0';
+}
+
+/**
+ * Custom callback to compare the Y-m-d part of two Unix timestamps.
+ */
+function olympian_migration_compare_dates($value, $end_value) {
+  // Convert Unix timestamps to 'Y-m-d' format
+  $value_date = date('Y-m-d', $value);  // Convert Unix timestamp to 'Y-m-d'
+  $end_value_date = date('Y-m-d', $end_value);  // Convert Unix timestamp to 'Y-m-d'
+  
+  // Compare the Y-m-d parts
+  return ($value_date != $end_value_date) ? TRUE : FALSE;
+}

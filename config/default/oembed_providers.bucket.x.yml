@@ -1,0 +1,10 @@
+uuid: 1777e21f-2363-41b7-b104-cee25f38f29d
+langcode: en
+status: true
+dependencies: {  }
+id: x
+label: X
+description: ''
+providers:
+  - Twitter
+  - X

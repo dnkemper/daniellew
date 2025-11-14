@@ -1,0 +1,29 @@
+uuid: 4897756e-514b-48d1-9c59-ca47eb0a1877
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_introduction_exerpt
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.image_gallery
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.image_gallery.field_introduction_exerpt
+field_name: field_introduction_exerpt
+entity_type: paragraph
+bundle: image_gallery
+label: 'Intro Text and Title'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

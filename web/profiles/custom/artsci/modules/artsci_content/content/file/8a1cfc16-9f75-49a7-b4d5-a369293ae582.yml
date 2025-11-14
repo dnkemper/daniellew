@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8a1cfc16-9f75-49a7-b4d5-a369293ae582
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: explorediscovery_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/explorediscovery_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 34688
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

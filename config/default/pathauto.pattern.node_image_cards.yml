@@ -1,0 +1,21 @@
+uuid: b45a6031-a6db-417a-aa0e-9632e354d9b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_image_cards
+label: 'Content - Image Cards'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  -
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      image_cards: image_cards
+selection_logic: and
+weight: 0
+relationships: {  }

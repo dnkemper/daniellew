@@ -1,0 +1,15 @@
+download media:
+  title: 'Download media'
+  description: 'Allow user to download media'
+administer basic site settings:
+  title: 'Administer basic site settings'
+  description: 'Change basic information such as the site name, slogan, and email address.'
+administer olympian core:
+  title: 'Administer Olympian Core'
+  description: 'Perform administration tasks for the Olympian Core module.'
+administer olympian core content:
+  title: 'Administer Olympian Core Content'
+  description: 'Perform top level tasks for the Olympian Core content.'
+change introduction background color:
+  title: 'Change introduction background color'
+  description: 'Select no overlay as a color list option for introduction paragraph'

@@ -1,0 +1,25 @@
+uuid: 0bfb1af2-abf0-495b-a8f1-0dae35fb811c
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.portrait_2_3_1888w
+    - image.style.portrait_2_3_320w
+    - image.style.portrait_2_3_448w
+    - image.style.portrait_2_3_944w
+id: resp_portrait
+label: 'resp portrait'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 930px'
+      sizes_image_styles:
+        - portrait_2_3_1888w
+        - portrait_2_3_320w
+        - portrait_2_3_448w
+        - portrait_2_3_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: portrait_2_3_944w

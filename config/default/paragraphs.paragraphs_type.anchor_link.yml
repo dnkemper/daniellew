@@ -1,0 +1,10 @@
+uuid: f6d42085-355b-4190-8fc4-504076757915
+langcode: en
+status: true
+dependencies: {  }
+id: anchor_link
+label: 'Anchor Link'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Anchor Link'
+behavior_plugins: {  }

@@ -1,0 +1,29 @@
+uuid: 882e6978-2fa0-49f4-b38c-1bac2b0ebfe0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro_text
+    - filter.format.full_html
+    - node.type.faculty_staff
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: node.faculty_staff.field_intro_text
+field_name: field_intro_text
+entity_type: node
+bundle: faculty_staff
+label: 'Intro Text'
+description: field_intro_text
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

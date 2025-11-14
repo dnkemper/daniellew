@@ -1,0 +1,16 @@
+uuid: d7f59d52-d8eb-414f-a448-f7872536f673
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_1_1_680w
+id: blog_thumbnail
+label: 'Blog Thumbnail (680 x 680)'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: square_1_1_680w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_680w

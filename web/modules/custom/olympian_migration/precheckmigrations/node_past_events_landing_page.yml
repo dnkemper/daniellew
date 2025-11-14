@@ -1,0 +1,100 @@
+id: node_past_events_landing_page
+label: 'Past Events Landing Page Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+source:
+  plugin: d7_node
+  node_type: past_events_landing_page
+
+process:
+  nid: tnid
+  vid: vid
+  title: title
+  uid: node_uid
+  created: created
+  changed: changed
+  status: status
+  promote: promote
+  sticky: sticky
+  type:
+    plugin: default_value
+    default_value: past_events_landing_page
+
+  # Text fields
+  field_events_subtitle:
+    plugin: get
+    source: field_events_subtitle
+
+  # Boolean and string fields (changed types in D10)
+  date_repeat_entity_clone_state:
+    plugin: get
+    source: date_repeat_entity_clone_state
+  date_repeat_entity_master_uuid:
+    plugin: get
+    source: date_repeat_entity_master_uuid
+
+  # Image field mapping (D7 image to D10 entity reference)
+  field_event_header_image:
+    plugin: sub_process
+    source: field_header_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  field_category_display:
+    plugin: get
+    source: field_category_display
+
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    plugin: get
+    source: field_meta_tags
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: past_events_landing_page
+
+migration_dependencies:
+  required:
+    - media_image_migration  # Assuming this is the migration ID for images
+  optional: {}

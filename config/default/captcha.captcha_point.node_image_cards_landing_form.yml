@@ -1,0 +1,7 @@
+uuid: 8b1c1b3f-64f1-4185-b90b-39025c1100a3
+langcode: en
+status: false
+dependencies: {  }
+formId: node_image_cards_landing_form
+captchaType: default
+label: node_image_cards_landing_form

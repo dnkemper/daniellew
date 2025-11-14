@@ -1,0 +1,5 @@
+{# Pass resultType override.  Otherwise it will display "Generic Page" on the result card. #}
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultType: 'Page',
+  resultUrl: url,
+} %}

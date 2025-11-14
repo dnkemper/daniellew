@@ -1,0 +1,14 @@
+uuid: 0950d7a9-f70e-4699-bc9a-2b54670c631e
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_staff
+  module:
+    - user
+id: user_add_role_action.site_staff
+label: 'Add the site staff role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: site_staff

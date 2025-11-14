@@ -1,0 +1,31 @@
+uuid: 8d7ecd9d-6a4b-4817-a36e-7cdddf4dc329
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_with_caption.field_background_feat_image
+    - field.field.paragraph.featured_with_caption.field_caption
+    - paragraphs.paragraphs_type.featured_with_caption
+id: paragraph.featured_with_caption.default
+targetEntityType: paragraph
+bundle: featured_with_caption
+mode: default
+content:
+  field_background_feat_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: background_image
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_caption:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

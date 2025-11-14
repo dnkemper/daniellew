@@ -1,0 +1,9 @@
+uuid: 27cb0814-85bc-4112-8039-50e6595a5d82
+langcode: en
+status: true
+dependencies: {  }
+name: 'Areas of Study'
+vid: areas_of_study
+description: null
+weight: 0
+new_revision: false

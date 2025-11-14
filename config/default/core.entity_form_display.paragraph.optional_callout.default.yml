@@ -1,0 +1,35 @@
+uuid: 61919099-cc85-4169-bcec-939ca17d65c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.optional_callout.field_description_formatted
+    - field.field.paragraph.optional_callout.field_title
+    - paragraphs.paragraphs_type.optional_callout
+  module:
+    - text
+id: paragraph.optional_callout.default
+targetEntityType: paragraph
+bundle: optional_callout
+mode: default
+content:
+  field_description_formatted:
+    type: text_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_description: true
+  status: true

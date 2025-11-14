@@ -1,0 +1,25 @@
+uuid: bd40c931-87e9-4753-8995-26956ca49beb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faculty_and_staff
+    - node.type.article
+id: node.article.field_faculty_and_staff
+field_name: field_faculty_and_staff
+entity_type: node
+bundle: article
+label: 'Display this article on these profiles:'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_people
+      arguments: {  }
+field_type: entity_reference

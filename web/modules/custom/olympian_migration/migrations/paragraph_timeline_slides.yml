@@ -1,0 +1,68 @@
+id: paragraph_timeline_slides
+label: 'Timeline Slides Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: timeline_slides
+
+process:
+  type:
+    plugin: default_value
+    default_value: timeline_slides
+
+  # String field mappings
+  field_title:
+    plugin: get
+    source: field_title
+  field_description:
+    plugin: get
+    source: field_description
+
+  # Boolean field mapping
+  field_new_window:
+    plugin: get
+    source: field_new_window
+
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+  # This works only for single value fields
+  field_dotted_link:
+    plugin: sub_process
+    source: field_optional_link_url
+    include_source: true
+    source_key: root
+    process:
+      dotted_link_ids:
+        plugin: migration_lookup
+        migration: paragraph_timeline_slides_links
+        source: root/item_id
+      target_id:
+        plugin: extract
+        source: '@dotted_link_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@dotted_link_ids'
+        index:
+          - 1
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: timeline_slides
+
+migration_dependencies:
+  required:
+    - paragraph_links
+    - paragraph_timeline_slides_links
+  optional: {}

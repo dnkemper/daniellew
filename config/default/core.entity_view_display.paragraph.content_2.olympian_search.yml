@@ -1,0 +1,41 @@
+uuid: 4981f058-bf24-413a-919e-19219fc40c85
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.olympian_search
+    - field.field.paragraph.content_2.field_footer_callout_bg
+    - field.field.paragraph.content_2.field_page_format2
+    - field.field.paragraph.content_2.field_two_col_title
+    - field.field.paragraph.content_2.field_two_col_wysiwyg
+    - paragraphs.paragraphs_type.content_2
+  module:
+    - text
+id: paragraph.content_2.olympian_search
+targetEntityType: paragraph
+bundle: content_2
+mode: olympian_search
+content:
+  field_two_col_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_two_col_wysiwyg:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_footer_callout_bg: true
+  field_page_format2: true

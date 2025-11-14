@@ -1,0 +1,19 @@
+uuid: 01ffded2-3da5-4e76-9f57-24184c31db15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_anchor_title
+    - paragraphs.paragraphs_type.table_of_contents_anchors
+id: paragraph.table_of_contents_anchors.field_anchor_title
+field_name: field_anchor_title
+entity_type: paragraph
+bundle: table_of_contents_anchors
+label: 'Anchor Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

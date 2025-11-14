@@ -1,0 +1,6 @@
+{% set authors = content.field_byline_names.0 ?? content.field_faculty_and_staff.0 %}
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultUrl: url,
+  descriptionField: content.search_api_excerpt,
+  details: authors ? [{ 'label':content.field_byline_options.0, 'value': authors }] : null
+} %}

@@ -1,0 +1,44 @@
+id: paragraph_publication_degrees_subsection
+label: 'Publication Degrees Subsection Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_degrees_subsection  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_degrees_subsection  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Paragraphs field mapping for 'field_degree'
+  field_degree:
+    plugin: sub_process
+    source: field_degree
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_degree  # Replace with the ID of your 'publication_degree' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # Text field mapping
+  field_title: field_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_degrees_subsection
+migration_dependencies:
+  required:
+    - paragraph_publication_degree  # Ensure this is the correct ID of your 'publication_degree' paragraph migration
+  optional: {}

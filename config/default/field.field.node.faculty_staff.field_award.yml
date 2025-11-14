@@ -1,0 +1,19 @@
+uuid: 2699af4f-6036-44c4-8bbe-dd3bc9aa9e94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_award
+    - node.type.faculty_staff
+id: node.faculty_staff.field_award
+field_name: field_award
+entity_type: node
+bundle: faculty_staff
+label: 'Endowed Professorship'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

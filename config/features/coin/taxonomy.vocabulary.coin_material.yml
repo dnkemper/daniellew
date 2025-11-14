@@ -1,0 +1,8 @@
+uuid: 5abb72f0-5e88-4fba-95f9-31c6dc5ba725
+langcode: en
+status: true
+dependencies: {  }
+name: Material
+vid: coin_material
+description: ''
+weight: 0

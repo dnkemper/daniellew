@@ -1,0 +1,189 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the johnmaxwulfing_core module.
+ */
+
+
+use Drupal\taxonomy\Entity\Term;
+/**
+ * Implements hook_install().
+ */
+function johnmaxwulfing_core_install() {
+  \Drupal::messenger()->addStatus(__FUNCTION__);
+
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('olympian_core.settings');
+  $replicate_allowed = $config->get('olympian_core_replicate_allowed');
+  $replicate_allowed[] = 'coin';
+  $config
+    ->set('olympian_core_replicate_allowed', $replicate_allowed)
+    ->save();
+
+  // Populate coin_object_type Categories.
+  $object_type_categories = ['Coin',  'Con'];
+  foreach ($object_type_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_object_type',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  //  Populate denomination Categories.
+  $denomination_categories = ['1/2 Follis',  '1/4 follis',  '1/5 tetradrakhma',  '1/8 follis',  'AE',  'AE 25',  'AE1',  'AE2',  'AE2/3',  'AE3',  'AE4',  'Antoninianus',  'As',  'Asper',  'Aspron Trachy Nomisma',  'Assaria',  'Aureus',  'Basilicon',  'Cistophorus',  'Decanummium',  'Denarius',  'Denarius Serratus',  'denomination B',  'Didrachm',  'Diobol',  'Diocletian',  'Dupondius',  'Follaro',  'Follis',  'Fraction',  'Half stavrata',  'Half Tetarteron',  'Heavy siliqua 1/2',  'hemidrakhma',  'hemilitron',  'hemiobol',  'hemistater',  'Hercules',  'Hexagram',  'Histamenon',  'Hyperpyra',  'Hyperpyron',  'Hyperpyron Nomisma',  'Jupiter',  'Light miliarensis',  'Light siliqua 1/2',  'litra',  'Miliaresion',  'Minimus',  'Nerva',  'Nomisma Histamenon',  'nomos',  'nomos-(but ancient counterfeit)',  'nomos-(but ancient counterfeit: fourrée)',  'nomos-ancient counterfeit',  'Nummus',  'Nummus (large AE2)',  'Nummus 10',  'Nummus 12',  'Nummus 16',  'Nummus 2 1/2',  'Nummus 20',  'Nummus 21',  'Nummus 220',  'Nummus 30',  'Nummus 4',  'Nummus 40',  'Nummus 5',  'Nummus 6',  'obol',  'Octodrachm',  'Quadrans',  'Quadrigate',  'Quinarius',  'Radiate',  'Reduced AE2',  'Reduced Siliqua',  'Semis',  'Semissis',  'Sestertius',  'Sextans',  'Siliqua',  'Siliqua 1/4',  'Small AE2',  'Solidus',  'stater',  'Tetarteron',  'Tetarteron Nomisma (Debased)',  'Tetarteron Noummion',  'Tetradrachm',  'tetradrakhma',  'tetrakhalkon',  'Trachy',  'Tremissis',  'Triens',  'triobol',  'uncertain',  'Uncertain value',  'unknown',  'Victoria',  'Victoriatus',  'Victory',  'xx'];
+  foreach ($denomination_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_denomination',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate inscription_language Categories.
+  $inscription_language_categories = ['Arabic',  'English',  'Greek',  'Iberian',  'Latin',  'Latine',  'Latinn/A',  'LatinVICROE',  'N/A',  'none',  'Oscan',  'Oscan',  'Punic',  'xx'];
+  foreach ($inscription_language_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_inscription_language',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate issuer Categories.
+  $issuer_categories = ['(Atilius) Saranus',  '(Caecilius) Metellus',  '(Lollius) Palicanus',  '(Pinarius) Nat(ta)',  '(Pinarius) Natta',  'A. Licinius Nerva',  'A. Plautius',  'A. Postumius Albinus',  'Abd al-Malik',  'Aelia Flacilla',  'Alexander III of Macedon',  'Alexius I Comnenus',  'Alexius III',  'Alexius III Angelus',  'Alexius IV',  'Allectus',  'Amorion',  'Anastasius I',  'Andronicus I Comnenus',  'Andronicus II',  'Andronicus III',  'Anonymous',  'Anthemius',  'Antioch',  'Antoninus Pius',  'Arcadius',  'Argos',  'Athalaric',  'Athens',  'Augustus',  'B. Autronia',  'B. Minucia',  'Baduila',  'Basil I',  'Basil II',  'Brutus',  'C Fonteius',  'C. (Iuventius) Thalna',  'C. Aburius Geminus',  'C. Aelius',  'C. Antistius Vetus',  'C. Caecilius Metellus Caprarius',  'C. Calpurnius Piso Frugi',  'C. Cassius',  'C. Claudius Marcellus',  'C. Considius Nonianus',  'C. Considius Paetus',  'C. Cossutius Maridianus',  'C. Curiatius',  'C. Egnatius Maximus',  'C. Fabius',  'C. Font',  'C. Fonteius',  'C. Gargonius',  'C. Hosidius Geta',  'C. Licinius Macer',  'C. Maianius',  'C. Mamilius Limetanus',  'C. Marcius Censorinus',  'C. Memmius',  'C. Memmius Gal',  'C. Minucius Augurinus',  'C. Norbanus',  'C. Porcius Cato',  'C. Postumius',  'C. Scribonius',  'C. Servilius',  'C. Sulpicius',  'C. Valerius Flaccus',  'C. Vibius Pansa',  'C. Vibius Pansa Caetronianus',  'C. Vibius Varus',  'CA',  'Carausius',  'Carinus',  'Carus',  'Castulo',  'Claudius',  'Claudius II',  'Cn. Cornelius Blasio',  'Cn. Cornelius Lentulus Marcellinus',  'Cn. Domitius',  'Cn. Lucretius Trio',  'Cn. Papirius Carbo',  'Cn. Plancius',  'Commodus',  'Constans',  'Constans II',  'Constantine I',  'Constantine II',  'Constantine III',  'Constantine IV',  'Constantine IX',  'Constantine V',  'Constantine VI',  'Constantine VII',  'Constantine VIII',  'Constantine X',  'Constantius Chlorus',  'Constantius II',  'Cossus Cornelius Lentulus',  'D. Iunius Brutus Albinus',  'Decentius',  'Diocletia',  'Diocletian',  'Domitian',  'Domitius Domitianus',  'Ephesos',  'Eppius',  'Eugenius',  'Gaiseric Gelimer',  'Gaius/Caligula',  'Galba',  'Galerius',  'Gallienus',  'Gelimer Gaiseric',  'Godescalc',  'Gordian III',  'Gratian',  'Hadrian',  'Heraclius',  'Heraclonas (Constans II)',  'Honorius',  'House of Constantine',  'House of Theodosius',  'House of Valentinian',  'Huneric',  'Imitative',  'Imitative?',  'Isaac I',  'Isaac II Angelus',  'John I',  'John II',  'John II Comnenus',  'John VII',  'John VIII',  'Jovianus',  'Jovinus',  'Julian the Apostate',  'Julius Caesar',  'Julius Nepos',  'Justin I',  'Justin II',  'Justinian I',  'Justinian I to Maurice Tiberius',  'Justinian II',  'Kalkhedon',  'Kassander',  'Kassander or successors',  'Kroton',  'L. Aemilius Buca',  'L. Aemilius Lepidus Paullus',  'L. Aurelius Cotta',  'L. Autronius',  'L. Caecilius Metellus',  'L. Caesius',  'L. Calpurnius Piso Frugi',  'L. Cassius Caecianus',  'L. Cassius Longinus',  'L. Coelius',  'L. Cornelius Scipio Asiaticus',  'L. Farsuleius Mensor',  'L. Furius Brocchus',  'L. Hostilius Saserna',  'L. Iulius',  'L. Iulius Bursio',  'L. Iulius Caesar',  'L. Licinius Crassus',  'L. Livineius Regulus',  'L. Lucretius Trio',  'L. Manlius Torquatus',  'L. Marcius Censorinus',  'L. Marcius Philippus',  'L. Memmius',  'L. Memmius Gal',  'L. Minucius',  'L. Mussidius Longus',  'L. Opimius',  'L. Plautius Plancus',  'L. Pomponius Molo',  'L. Roscius Fabatus',  'L. Rubrius Dossenus',  'L. Rustius',  'L. Saufeius',  'L. Scribonius Libo',  'L. Sempronius Pitio',  'L. Thorius Balbus',  'L. Titurius Sabinus',  'L. Valerius Acisculus',  'L. Vinicius',  'Latin States',  'Leo I',  'Leo III',  'Leo IV',  'Leo V',  'Leo VI',  'Leontius',  'Libius Severus',  'Licinius',  'Lombardic Kingdom',  'Longobardic King',  'Longobardic Kingdom',  'Lysimakhos',  'M. Aemilius Scaurus',  'M. Atilius Saranus',  'M. Baebius Tampilus',  'M. Caecilius Metellus',  'M. Fannius',  'M. Furius Philus',  'M. Iunius',  'M. Marcius',  'M. Nonius Sufenas',  'M. Opimius',  'M. Plaetorius Cestianus',  'M. Porcius Cato',  'M. Porcius Laeca',  'M. Vargunteius',  'M. Volteius',  'Macedonia',  'Magnentius',  'Magnus Maximus',  'Manuel I',  'Manuel I Comnenus',  'Marc Antony',  'Marcian',  'Marcus Aurelius',  'Mark Antony',  'Markianopolis',  'Massalia',  'Maurice Tiberius',  'Maxentius',  'Maximian',  'Maximianus',  'Maximinus Daia',  'Maximinus II (Daia)',  'Maximinus Thrax',  'Michael I',  'Michael II',  'Michael III',  'Michael VII',  'Michael VIII',  'Mn. Acilius',  'Mn. Acilius Balbus',  'Mn. Aemilius Lepidus',  'Mn. Aquillius',  'Mn. Fonteius',  'Muawiya',  'N. Fabi Pictor',  'N. Fabius Pictor',  'Nero',  'Nerva',  'Nicephorus I',  'Nicephorus II',  'Nicephorus III',  'Octavian',  'Olynthos',  'Ostrogoths',  'Otho',  'P. Accoleius Lariscolus',  'P. Clodius',  'P. Cornelius Lentulus Marcellinus',  'P. Crepusius',  'P. Fonteius Capito',  'P. Furius Crassipes',  'P. Licinius Crassus',  'P. Licinius Nerva',  'P. Maenius Ant[ias]',  'P. Petronius Turpillianus',  'P. Plautius Hypsaeus',  'P. Satrienus',  'P. Sepullius Macer',  'Petillius Capitolinus',  'Philip II of Macedon',  'Philip III',  'Philip of Macedon',  'Phocas',  'Phokis',  'Pompey',  'Pompey the Younger',  'Procopius',  'Ptolemy I Soter',  'Q. (Marcius) Philippus',  'Q. Antonius Balbus',  'Q. Caecilius Metellus Pius',  'Q. Cassius Longinus',  'Q. Crepereius Rocus',  'Q. Fabius Maximus',  'Q. Fufius Calenus',  'Q. Minucius Thermus',  'Q. Pompeius Rufus',  'Q. Pomponius Musa',  'Q. Rustius',  'Q. Servilius Caepio',  'Q. Sicinius',  'Q. Titius',  'Q. Voconius Vitulus',  'Roger of Salerno',  'Roman Republic',  'Romanus I',  'Romanus III',  'Romanus IV',  'Safra',  'Seleukos I',  'Seleukos II',  'Severus II',  'Sextus Pompeius',  'Sextus Pompey',  'Smyrna',  'Social War',  'Sulla',  'Syracuse',  'T. Annius Rufus',  'T. Carisius',  'T. Quinctius Flamininus',  'Tancred',  'Taras',  'Theodahad',  'Theoderic',  'Theodora',  'Theodore I',  'Theodosius',  'Theodosius I',  'Theodosius II',  'Theophilus I',  'Thourioi',  'Ti. Q[uinctius?]',  'Ti. Sempronius Gracchus',  'Tiberius',  'Tiberius II',  'Tiberius Minucius',  'Tiberius Veturius',  'Titus',  'Titus as Caesar',  'Trajan',  'Trajan Decius',  'Uncertain',  'Valens',  'Valentinian I',  'Valentinian II',  'Valentinian III',  'VB (B. Vibia)',  'Vespasian',  'Visigoths',  'Vitellius',  'Witigis',  'xx',  'Zeno'];
+  foreach ($issuer_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_issuer',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate material Categories.
+  $material_categories = ['AE',  'AE (leaded bronze)',  'AE(orichalcum)',  'AR',  'AV',  'Bil',  'Billon',  'bronze',  'Coin',  'El',  'gold',  'Nerva',  'Pb',  'silver',  'silver and bronze (fourrée)'];
+  foreach ($material_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_material',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate mint Categories.
+  $mint_categories = ['Acmoneia',  'Africa',  'Alexandria',  'Ambianum',  'Amiens',  'Amorion',  'Amphipolis',  'Amphipolis?',  'Antioch',  'Antiochia',  'Apollonia Mordiaeum(?)',  'Aquileia',  'Arelate',  'Argos',  'Arles',  'Asia',  'associated with Antioch',  'Athens',  'Augustus',  'Baalbek',  'Babylon I',  'Beneventum',  'Berytos',  'Bruttium',  'Caesaraugusta',  'Caesarea in Cappadocia',  'Camulodunum',  'Canusium',  'Carthage',  'Carthagine',  'Carthago',  'Castulo',  'Catania',  'Cathage',  'Cherson',  'Colonia Patricia',  'Constantinople',  'Constantinopolis',  'Constantinopolis(?)',  'Corfinium(?)',  'Cyrenaica',  'Cyzicus',  'Damascus',  'DEL mint',  'Eastern Mint',  'Emerita Augusta',  'Ephesos',  'Ephesus',  'Heliopolis',  'Heraclea',  'Hispania',  'Hispania (uncertain)',  'Imitative mint(?)',  'Italy (North)',  'Italy (uncertain)',  'Kalkhedon',  'Kroton',  'Lampsakos',  'Lombardy mint',  'Londinium',  'London',  'Luceria',  'Lugdunum',  'Lyon',  'Macedonia Amphipolis',  'Macedonia Amphopolis',  'Markianopolis',  'Massalia',  'Mediolanum',  'Memphis or Alexandria',  'Metapontum',  'Milan',  'Moneta Militaris Imitativa',  'Narbo',  'Nemausus',  'Nicaea',  'Nicomedia',  'Nicomedia(?)',  'Olynthos',  'Ostia',  'Pella',  'Peloponnesus',  'Pergamum',  'Perinthus',  'Phokis',  'Ravenna',  'Ravenna(?)',  'Roma',  'Rome',  'Salona',  'Samos',  'Samosata',  'Segovia',  'Serdica',  'Sicilia',  'Sicily',  'Sicily (uncertain)',  'Sicily 2',  'Sicily(?)',  'Sirmium',  'Siscia',  'Siscia(?)',  'Smyrna',  'Syracuse',  'Tabariya',  'Taras',  'Tarraco',  'Thessalonica',  'Thessaloniki',  'Thourioi',  'Tiberias',  'Ticinum',  'Treveri',  'Treveri?',  'Trier',  'Tripolis',  'Uncertain',  'Uncertain (Carthage or Syracuse)',  'Uncertain (Eastern mint)',  'Uncertain (Gallia)',  'Uncertain (Greece?)',  'Uncertain (Ticinum)',  'Uncertain Italian mint',  'uncertain Macedonian mint (Amphipolis?)',  'uncertain mint in Macedonia',  'Uncertain mint in Syria or southeastern Asia Minor',  'xx'];
+  foreach ($mint_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_mint',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate mintmarks Categories.
+  $mintmarks_categories = ['M',  'N/A',  'N/A',  'ROMA'];
+  foreach ($mintmarks_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_mintmarks',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate Portrayed Categories.
+  $coin_portrayed = ['--',  'Abundantia',  'Achaea',  'Aelia Anastasia',  'Aelia Eudoxia',  'Aelia Flacilla',  'Aelia Verina',  'Aeneas',  'Aequitas',  'Aeternitas',  'Africa',  'Agrippa',  'Agrippina the Elder',  'Agrippina the Younger',  'Alexander',  'Alexander III',  'Alexander the Great',  'Alexandria',  'Alexius',  'Alexius I Comnenus',  'Alexius III',  'Alexius III Angelus',  'Alexius IV',  'Allectus',  'Amphitrite',  'Anastasius I',  'Anchises',  'Ancus Marcius',  'Andronicus I Comnenus',  'Andronicus II',  'Andronicus III',  'Annona',  'Anthemius',  'Antoninus Pius',  'Aphrodite',  'Apollo',  'Arachangel Michael',  'Arcadius',  'Arethousa',  'Artemis',  'Asia',  'Athalaric',  'Athena',  'Athena and Nike',  'Athena/bull',  'Augustus',  'Baduila',  'Basil I',  'Basil II',  'bee',  'Bonus Eventus',  'Britannicus',  'C. Servilius Ahala',  'Caesar',  'Calliope',  'Carausius',  'Carinus',  'Carthago',  'Carus',  'Castor',  'Ceres',  'Christ',  'Christ Antiphonetes',  'Christ Pantocrator',  'Christopher',  'Claudius',  'Claudius II',  'Commodus',  'Concordia',  'Constans',  'Constans II',  'Constantine',  'Constantine I',  'Constantine II',  'Constantine III',  'Constantine IV',  'Constantine IX',  'Constantine V',  'Constantine VI',  'Constantine VII',  'Constantine VIII',  'Constantine X',  'Constantinopolis',  'Constantius',  'Constantius Chlorus',  'Constantius Gallus',  'Constantius II',  'Cornelia Salonina',  'Crispus',  'Cupid',  'Cybele',  'Dalmatius',  'Danuvius',  'Decentius',  'Diana',  'Diana Nemorensis',  'Diocletian',  'Dioscuri',  'dolphin',  'Domitian',  'Domitius Domitianus',  'Drusus the Elder',  'Egypt',  'Elagabalus',  'Emperor',  'Eudocia',  'Eudoxia',  'Eugenius',  'Fabi Pictor',  'Fausta',  'Faustina the Elder',  'Faustina the Younger',  'Felicitas',  'Fides',  'Flavius Victor',  'Flora',  'Fortuna',  'Fortuna Felix',  'Fortuna Victrix',  'Gaius/Caligula',  'Galba',  'Galeria Valeria',  'Galerius',  'Genius',  'Germania',  'Godescalc',  'Gordian III',  'Gratian',  'Hadrian',  'Hannibalianus',  'Hecate',  'Helena',  'Hera',  'Heraclius',  'Heraclius Constantine',  'Heraclius the Elder',  'Heraclonas',  'Herakles',  'Herakles/Zeus',  'Hercules',  'Hispania',  'Honoria',  'Honorius',  'Honos',  'horseman',  'House of Constantine',  'House of Theodosius',  'House of Valentinian',  'Huneric',  'Irene',  'Isaac I',  'Isaac II Angelus',  'Isis',  'Italia',  'Janus',  'John I',  'John II',  'John II Comnenus',  'John VII',  'John VIII',  'Jovianus',  'Jovinus',  'Judaea',  'Julian the Apostate',  'Julius Caesar',  'Julius Nepos',  'Juno',  'Juno Moneta',  'Juno Sospita',  'Jupiter',  'Jupiter Ammon',  'Justin I',  'Justin II',  'Justinian I',  'Justinian II',  'King Sohaemus',  'King Tatius',  'kithara',  'L. Antonius',  'L. Junius Brutus',  'L. Regulus Praetor',  'Laetitia',  'Leo',  'Leo I',  'Leo III',  'Leo IV',  'Leo V',  'Leo VI',  'Leontia',  'Leontius',  'Liber',  'Liberalitas',  'Libertas',  'Libius Severus',  'Licinius',  'Licinius II',  'Livia(?)',  'Lucius Aelius',  'Lucius Verus',  'Luna',  'Lupa',  'M. Antonius',  'M. Claudius Marcellus',  'Magnentius',  'Magnus Maximus',  'Majoran',  'Manuel I',  'Marc Antony',  'Marcian',  'Marcus Aurelius',  'Marcus Ulpius Traianus',  'Mark Antony',  'Mars',  'Martina',  'Maurice Tiberius',  'Maxentius',  'Maximian',  'Maximinus Daia',  'Maximinus II (Daia)',  'Maximinus Thrax',  'Maximus',  'Medusa',  'Mercury',  'Michael',  'Michael',  'Michael I',  'Michael III',  'Michael IX',  'Michael VII',  'Minerva',  'Moneta',  'Muse',  'N/A',  'Nemesis',  'Neptune',  'Nero',  'Nerva',  'Nicephorus I',  'Nicephorus II',  'Nicephorus III',  'Nilus',  'Numa Pompilius',  'Octavian',  'Otho',  'Pan',  'Parthian',  'Pax',  'Penates',  'Perseus',  'Phocas',  'Pietas',  'piglet',  'Pollux',  'Pompey the Great',  'Procopius',  'Providentia',  'Ptolemy I Soter',  'Q. Fabius Pictor',  'Q. Pompeius Rufus',  'Quies',  'Quirinus',  'Ravenna',  'Remus',  'Roma',  'Romanus I',  'Romanus II',  'Romanus III',  'Romanus IV',  'Rome',  'Romulus',  'Sabina',  'Saint Constantine',  'Saint Demetrius',  'Saint Eugenius',  'Saint George',  'Saint Michael',  'Saint Peter',  'Saint Theodore',  'Salonina',  'Salus',  'Saturn',  'Securitas',  'Selene',  'Serapis',  'Severus II',  'shell',  'Sol',  'Sophia',  'Spes',  'Stauracius',  'Sulla',  'Sybil',  'Tanit-Demeter',  'Tarpeia',  'Theodora',  'Theodore I',  'Theodosius I',  'Theodosius II',  'Theophilus',  'Theophilus I',  'Theophylact',  'Tiber',  'Tiberius',  'Tiberius II',  'Titus',  'Trajan',  'Triptolemos',  'Twins',  'Tyche',  'Tykhe',  'Tykhe(?)',  'Ulysses',  'Uncertain',  'unknown',  'Valens',  'Valentinian I',  'Valentinian II',  'Valentinian III',  'Valerian',  'Valetudo',  'Venus',  'Vespasian',  'Vesta',  'Vetranio',  'Victoria',  'Victories',  'Victories facing',  'Victory',  'Virgin Mary',  'Virtus',  'Vitellius',  'Vulcan',  'Wolf',  'xx',  'Zeno',  'Zeus',  'Zoe'];
+  foreach ($coin_portrayed as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_portrayed',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate Ruler Categories.
+  $ruler_categories = ['Abd al-Malik',  'Alexander III of Macedon',  'Alexios III',  'Alexius I Comnenus',  'Alexius III',  'Alexius III Angelus',  'Alexius IV',  'Alexiux I Comnenus',  'Allectus',  'Anastasius I',  'Andronicus I Comnenus',  'Andronicus II',  'Andronicus III',  'Anonymous Folles',  'Anonymous Issues',  'Anthemius',  'Antoninus Pius',  'Arcadius',  'Argos',  'Athalaric',  'Athens',  'Augustus',  'Augustus Emperor of Rome',  'Baduila',  'Basil I',  'Basil II',  'Bulgarian Imitative',  'Carausius',  'Carinus',  'Carthaginian Occupation',  'Carus',  'Ceasar',  'Chalkidian League',  'Claudius',  'Claudius II',  'Commodus',  'Constans',  'Constans II',  'Constantine I',  'Constantine II',  'Constantine III',  'Constantine IV',  'Constantine IX',  'Constantine V',  'Constantine VI',  'Constantine VII',  'Constantine VIII',  'Constantine X',  'Constantinus Chlorus',  'Constantius Chlorus',  'Constantius II',  'Diocletian',  'Domitian',  'Elagabalus',  'Ephesos',  'Eugenius',  'Gaiseric',  'Gaius/Caligula',  'Galba',  'Galerius',  'Gallienus',  'Gelimer',  'Georgian Imitation',  'Gordian III',  'Gratian',  'Hadrian',  'Heraclius',  'Heraclonas',  'Hieron I',  'Honorius',  'House of Constantine',  'House of Theodosius',  'House of Valentinian',  'Huneric',  'Imitative',  'Isaac I',  'Isaac II Angelus',  'John I',  'John II',  'John II Comnenus',  'John VII',  'John VIII',  'Jovianus',  'Jovinus',  'Julian the Apostate',  'Julius Nepos',  'Justin I',  'Justin II',  'Justinian',  'Justinian I',  'Justinian I to Maurice Tiberius',  'Justinian II',  'Justinian II (Second Reign)',  'Kalkhedon',  'King of the Lombards',  'Kroton',  'Latin States',  'Leo I',  'Leo III',  'Leo IV',  'Leo V',  'Leo VI',  'Leontius',  'Libius Severus',  'Licinius',  'Longobardic King',  'Lysimakhos',  'Magnentius',  'Magnus Maximus',  'Manuel I',  'Manuel I Comnenus',  'Marcian',  'Marcus Aurelius',  'Massalia',  'Maurice Tiberius',  'Maxentius',  'Maximian',  'Maximianus',  'Maximinian Daia',  'Maximinus Daia',  'Maximinus II (Daia)',  'Maximinus Thrax',  'Michael I',  'Michael II',  'Michael III',  'Michael IX',  'Michael VII',  'Michael VIII',  'Muawiya',  'Nero',  'Nerva',  'Nicephorus I',  'Nicephorus I-Leo V',  'Nicephorus II',  'Nicephorus III',  'Numerian',  'Ostrogoths',  'Otho',  'Philipp II of Macedon',  'Phocas',  'Phokis',  'Procopius',  'Ptolemy I Soter',  'Revolt of Heraclii',  'Roger of Salerno',  'Roman Republic',  'Romanus II',  'Romanus III',  'Romanus IV',  'Rome',  'Seleukos II',  'Severus II',  'Smyrna',  'Social War',  'Tancred',  'Taras',  'Theodahad',  'Theodora',  'Theodore I',  'Theodosius',  'Theodosius I',  'Theodosius II',  'Theophilus',  'Theophilus I',  'Thourioi',  'Tiberius',  'Tiberius II',  'Titus',  'Trajan',  'Trajan Decius',  'Uncertain',  'Valens',  'Valentinian I',  'Valentinian II',  'Valentinian III',  'Valerian',  'Vespasian',  'Visigoths',  'Vitellius',  'Witigis',  'xx',  'Zeno'];
+  foreach ($ruler_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_ruler',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+// Populate Status Categories.
+  $status_categories = ['Deaccessioned',  'In Collection',  'In Conservation',  'In Process',  'On Loan'];
+  foreach ($status_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_status',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+
+  // Populate Language Categories.
+  $language_categories = ['Anepigraphic',  'Arabic',  'Greek',  'Greek; Latin',  'Iberian',  'Laitin',  'Language',  'Latin',  'N/A',  'none',  'Oscan',  'Punic',  'xx'];
+  foreach ($language_categories as $category) {
+    $term = Term::create([
+      'parent' => [],
+      'name' => $category,
+      'vid' => 'coin_language',
+    ]);
+    $term->enforceIsNew();
+    $term->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function johnmaxwulfing_core_preuninstall() {
+
+
+
+    // Delete terms for specific taxonomy vocabularies.
+    $vocabularies = [
+      'coin_object_type',
+      'coin_denomination',
+      'coin_inscription_language',
+      'coin_issuer',
+      'coin_material',
+      'coin_mint',
+      'coin_mintmarks',
+      'coin_portrayed',
+      'coin_ruler',
+      'coin_status',
+      'coin_language',
+  ];
+
+  foreach ($vocabularies as $vocabulary) {
+  $tids = \Drupal::entityQuery('taxonomy_term')
+  ->condition('vid', $vocabulary)
+  ->accessCheck(FALSE)
+  ->execute();
+
+$controller = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+$entities = $controller->loadMultiple($tids);
+$controller->delete($entities);
+  }
+}

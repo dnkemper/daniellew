@@ -1,0 +1,63 @@
+id: paragraph_course_sections
+label: 'Course Sections Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: course_sections  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: course_sections  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Text field mappings
+  field_section_concentration: field_section_concentration
+  field_section_credits: field_section_credits
+  field_section_grad_undergrad: field_section_grad_undergrad
+  field_section_instructors: field_section_instructors
+  field_section_number: field_section_number
+  field_section_requirements: field_section_requirements
+  field_section_title: field_section_title
+  field_section_topic: field_section_topic
+  field_section_course_id: field_section_course_id
+  field_section_dept_code: field_section_dept_code
+
+  # Boolean field mapping
+  field_section_do_not_delete: field_section_do_not_delete
+
+  # Taxonomy term reference field mapping
+  field_course_semester:
+    plugin: migration_lookup
+    migration: taxonomy_course_semester  # Replace with the ID of your taxonomy term migration
+    source: field_course_semester
+
+  # Paragraphs field mapping for 'field_room_schedules'
+  field_room_schedules:
+    plugin: sub_process
+    source: field_room_schedules
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_room_schedule  # Corrected to the ID of your 'room_schedule' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: course_sections
+migration_dependencies:
+  required:
+    - paragraph_room_schedule  # Corrected to the ID of your room schedule paragraph migration
+  optional: {}

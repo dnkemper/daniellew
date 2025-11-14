@@ -1,0 +1,10 @@
+uuid: 67640adc-6390-410b-aa56-c5ab78cb3e09
+langcode: en
+status: true
+dependencies: {  }
+id: publication_twitter_section
+label: 'Publication X Section'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication X Section'
+behavior_plugins: {  }

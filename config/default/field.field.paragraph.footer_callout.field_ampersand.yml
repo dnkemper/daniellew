@@ -1,0 +1,23 @@
+uuid: f13e3402-ed9b-46b2-997e-2a234733cd18
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_ampersand
+    - paragraphs.paragraphs_type.footer_callout
+id: paragraph.footer_callout.field_ampersand
+field_name: field_ampersand
+entity_type: paragraph
+bundle: footer_callout
+label: 'Show Ampersand'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Show Ampersand'
+  off_label: 'Hide Ampersand'
+field_type: boolean

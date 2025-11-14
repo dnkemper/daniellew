@@ -1,0 +1,16 @@
+uuid: f730000b-711c-4fb1-bc05-21bc6fffd762
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.media_thumbnail
+id: thumbnail
+label: Thumbnail
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: media_thumbnail
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: media_thumbnail

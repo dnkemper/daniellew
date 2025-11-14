@@ -1,0 +1,24 @@
+uuid: f8313f35-54cb-43c7-b474-d2d876be6f0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_curators_comment
+    - filter.format.full_html
+    - node.type.coin
+  module:
+    - text
+id: node.coin.field_coin_curators_comment
+field_name: field_coin_curators_comment
+entity_type: node
+bundle: coin
+label: "Curator's Comment"
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

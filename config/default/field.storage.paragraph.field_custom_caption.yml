@@ -1,0 +1,19 @@
+uuid: 756866a9-bc47-4e6b-952e-9d32c80ff1d4
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_custom_caption
+field_name: field_custom_caption
+entity_type: paragraph
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

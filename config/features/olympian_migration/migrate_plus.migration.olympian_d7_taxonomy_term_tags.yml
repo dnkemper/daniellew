@@ -1,0 +1,61 @@
+uuid: e7e3d672-22f5-482e-a33e-116c8311e45a
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_taxonomy_term_tags
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - olympian_taxonomy
+  - Content
+migration_group: olympian_d7
+label: 'Taxonomy terms (Tags)'
+source:
+  plugin: d7_taxonomy_term
+  bundle: tags
+  ids:
+    tid:
+      type: integer
+    vid:
+      type: integer
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  vid:
+    plugin: default_value
+    default_value: tags
+  revision_id:
+    -
+      plugin: get
+      source: tid
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: tags
+idMap:
+  plugin: smart_sql
+migration_dependencies: null

@@ -1,0 +1,79 @@
+uuid: 5ea01666-9948-48ae-834d-28246baba10d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.page.field_basic_page_content
+    - field.field.node.page.field_call_to_action_p
+    - field.field.node.page.field_footer_callout_p
+    - field.field.node.page.field_introduction_p
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_search
+    - field.field.node.page.field_two_column_content_p
+    - node.type.page
+  module:
+    - entity_reference_revisions
+    - private_content
+    - user
+_core:
+  default_config_hash: M_Y8L5tfmhx7DR143E05YyZSpvgil6VFvqcfBWykalg
+id: node.page.olympian_search
+targetEntityType: node
+bundle: page
+mode: olympian_search
+content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_basic_page_content:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: olympian_search
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_two_column_content_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: olympian_search
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+hidden:
+  content_moderation_control: true
+  field_call_to_action_p: true
+  field_footer_callout_p: true
+  field_introduction_p: true
+  field_meta_tags: true
+  links: true

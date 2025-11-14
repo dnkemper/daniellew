@@ -1,0 +1,36 @@
+media_entity_download.download:
+  path: '/media/{media}/download'
+  defaults:
+    _controller: '\Drupal\olympian_core\Controller\DownloadController::download'
+    _title: 'Download Media'
+  requirements:
+    _entity_access: media.view
+system.site_information_settings:
+  path: '/admin/config/olympian/site-information'
+  defaults:
+    _title: 'Olympian site information'
+    _form: 'Drupal\olympian_core\Form\SettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+system.admin_config_olympian:
+  path: '/admin/config/olympian'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Olympian'
+  requirements:
+    _permission: 'administer basic site settings'
+olympian_core.download:
+  path: '/media/{media}/download'
+  defaults:
+    _controller: '\Drupal\olympian_core\Controller\DownloadController::download'
+    _title: 'Download Media'
+  requirements:
+    _entity_access: media.view
+    _permission: 'download media'
+olympian_core.notfound:
+  path: '/404'
+  defaults:
+    _controller: '\Drupal\olympian_core\Controller\PageNotFoundController::notfound'
+    _title: 'Page Not Found'
+  requirements:
+    _permission: 'view content'

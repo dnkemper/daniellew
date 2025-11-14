@@ -1,0 +1,35 @@
+id: paragraph_publication_testimonial_section
+label: 'Publication Testimonial Section Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_testimonial_section  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_testimonial_section  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # List (text) field mapping
+  field_testimoni_background_color: field_testimoni_background_color
+  field_testimonial_publication_:
+    plugin: sub_process
+    source: field_testimonial_publication_
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_testimonial
+        source: target_id
+  # Entity reference field mapping
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_testimonial_section
+migration_dependencies:
+  required:
+    - node_testimonial
+    - paragraph_testimonial
+  optional: {}

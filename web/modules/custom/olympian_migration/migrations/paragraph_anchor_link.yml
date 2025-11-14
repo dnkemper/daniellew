@@ -1,0 +1,35 @@
+id: paragraph_anchor_link
+label: 'Anchor Link Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: anchor_link
+
+process:
+  type:
+    plugin: default_value
+    default_value: anchor_link
+
+  # String field mappings
+  field_title:
+    plugin: get
+    source: field_title
+  field_custom_section:
+    plugin: get
+    source: field_custom_section
+
+  # List string field mapping
+  field_section:
+    plugin: get
+    source: field_section
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: anchor_link
+
+migration_dependencies:
+  required: {}
+  optional: {}

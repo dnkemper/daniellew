@@ -1,0 +1,111 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: b68cd562-cd0a-4aac-8c35-bed89111cfa4
+  bundle: contact_landing_page
+  default_langcode: en
+  depends:
+    a3fd3001-c863-4eb7-acb3-b4d9f385b0d3: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Contact '
+  created:
+    -
+      value: 1690475015
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /contact-us
+      langcode: en
+      pathauto: 0
+  field_introduction_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c4de962b-fd21-4873-946d-95110dba5cf8
+          bundle: introduction
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690475032
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_ampersand:
+            -
+              value: false
+          field_background:
+            -
+              value: Dark
+          field_background_image:
+            -
+              entity: a3fd3001-c863-4eb7-acb3-b4d9f385b0d3
+          field_headline:
+            -
+              value: 'Contact Us'
+  field_tabs_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 689e423c-78ba-46b2-a9b1-cf32e093cf46
+          bundle: tabs
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690820684
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_introduction_exerpt:
+            -
+              value: '<h3>Department Name</h3><p>Washington University in St. Louis<br>1 Brookings Drive<br>St. Louis, MO 63130<br><br>314-555-5555</p>'
+              format: full_html
+          field_single_column:
+            -
+              value: true
+          field_tab_1:
+            -
+              target_id: contact_us
+              default_data: ''
+              status: open
+              open: ''
+              close: ''

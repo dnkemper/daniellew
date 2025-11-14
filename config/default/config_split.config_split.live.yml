@@ -1,0 +1,16 @@
+uuid: 41d028e6-ea06-4e39-b51f-e8300d860d47
+langcode: en
+status: true
+dependencies: {  }
+id: live
+label: Live
+description: 'Configuration split shared across both staging and production environments. '
+weight: 90
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/envs/live
+module: {  }
+theme: {  }
+complete_list: {  }
+partial_list: {  }

@@ -1,0 +1,21 @@
+uuid: 746c371b-1a5e-4977-befe-7447a21aa792
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_anchor_section
+    - paragraphs.paragraphs_type.table_of_contents_anchors
+  module:
+    - options
+id: paragraph.table_of_contents_anchors.field_anchor_section
+field_name: field_anchor_section
+entity_type: paragraph
+bundle: table_of_contents_anchors
+label: 'Anchor Section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

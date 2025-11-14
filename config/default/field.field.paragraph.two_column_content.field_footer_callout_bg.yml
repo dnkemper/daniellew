@@ -1,0 +1,23 @@
+uuid: 9ee7a409-23cc-4128-a186-313f2f3f45c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_footer_callout_bg
+    - paragraphs.paragraphs_type.two_column_content
+  module:
+    - options
+id: paragraph.two_column_content.field_footer_callout_bg
+field_name: field_footer_callout_bg
+entity_type: paragraph
+bundle: two_column_content
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: White
+default_value_callback: ''
+settings: {  }
+field_type: list_string

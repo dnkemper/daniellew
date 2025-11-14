@@ -1,0 +1,45 @@
+uuid: a2a400e4-ea1a-4cbd-9a2f-0053b321b781
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_testimonials
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Testimonials)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: testimonials
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_select_testimonials:
+    plugin: sub_process
+    source: field_select_testimonials
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_testimonial
+        source: target_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: testimonials
+migration_dependencies:
+  required:
+    - olympian_d7_node_complete_testimonial

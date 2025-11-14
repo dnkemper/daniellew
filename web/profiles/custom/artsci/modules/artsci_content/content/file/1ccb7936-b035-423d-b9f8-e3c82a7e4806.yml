@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1ccb7936-b035-423d-b9f8-e3c82a7e4806
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: campus-chapel.jpg
+  uri:
+    -
+      value: 'public://2023-12/campus-chapel_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 4136979
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

@@ -1,0 +1,25 @@
+uuid: f7c99bcc-0062-4ffc-b152-8cd3e95fb3fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_form
+    - paragraphs.paragraphs_type.embedded_webform
+  module:
+    - webform
+id: paragraph.embedded_webform.field_form
+field_name: field_form
+entity_type: paragraph
+bundle: embedded_webform
+label: Form
+description: 'Webforms must first be <a href="/admin/structure/webform/add">created</a> before referencing them.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: true
+field_type: webform

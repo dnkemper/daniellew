@@ -1,0 +1,45 @@
+uuid: 4d4aa34b-c189-4947-a8e4-5c166681d98f
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.footer
+    - field.field.node.faculty_landing_page.field_areas_of_interest_title
+    - field.field.node.faculty_landing_page.field_default_person_type
+    - field.field.node.faculty_landing_page.field_faculty_column_layout
+    - field.field.node.faculty_landing_page.field_introduction_p
+    - field.field.node.faculty_landing_page.field_meta_tags
+    - field.field.node.faculty_landing_page.field_search
+    - node.type.faculty_landing_page
+  module:
+    - user
+id: node.faculty_landing_page.footer
+targetEntityType: node
+bundle: faculty_landing_page
+mode: footer
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_areas_of_interest_title: true
+  field_default_person_type: true
+  field_faculty_column_layout: true
+  field_introduction_p: true
+  field_meta_tags: true
+  field_search: true
+  search_api_excerpt: true

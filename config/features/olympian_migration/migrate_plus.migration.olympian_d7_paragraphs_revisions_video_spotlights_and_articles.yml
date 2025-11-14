@@ -1,0 +1,97 @@
+uuid: 623db700-67f5-4b0f-b412-464e28a20574
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_video_spotlights_and_articles
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Video Spotlights and Articles)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: video_spotlights_and_articles
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_spotlights:
+    -
+      plugin: sub_process
+      source: field_spotlights
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_category:
+    plugin: sub_process
+    source: field_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_taxonomy_term_article_categories
+        source: tid
+  field_articles:
+    plugin: sub_process
+    source: field_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_second_article:
+    plugin: sub_process
+    source: field_second_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: olympian_d7_node_complete_article
+        source: target_id
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: video_spotlights_and_articles
+migration_dependencies:
+  required: {}
+  optional: {  }

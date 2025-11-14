@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: strategicplan.ddev.site
+    protocol: https
+  machine_name: strategicplan
+  human_name: strategicplan.artsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: strategicplan.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/strategicplan.artsci.wustl.edu/files'
+    origin: 'https://strategicplan.artsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_strategicplan
+system:
+  site:
+    contact_us_url: 'https://strategicplan.artsci.wustl.edu/contact-us'
+    name: strategicplan
+    email: strategicplan@wustl.edu

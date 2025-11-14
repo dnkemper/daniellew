@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: df3f7232-8390-4622-99a5-c964ec6521d9
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: guggenheim_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/guggenheim_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 13985
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

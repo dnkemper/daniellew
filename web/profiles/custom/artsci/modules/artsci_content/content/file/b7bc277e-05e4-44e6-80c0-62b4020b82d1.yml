@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: b7bc277e-05e4-44e6-80c0-62b4020b82d1
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: collegecourseswashu_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/collegecourseswashu_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 14280
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

@@ -1,0 +1,21 @@
+local:
+  root: '${env.cwd}/web'
+  uri: https://gradstudies.ddev.site
+dev:
+  uri: https://gradstudies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/gradstudies.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://gradstudies.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/gradstudies.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://gradstudies.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/gradstudies.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 92cf8aa2-cdb2-429b-879f-10453cf16748
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: prehealth_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/prehealth_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 19526
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

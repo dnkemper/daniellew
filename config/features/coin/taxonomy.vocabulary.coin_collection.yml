@@ -1,0 +1,8 @@
+uuid: 0aa8a118-ec1b-4829-ac21-55a73425de14
+langcode: en
+status: true
+dependencies: {  }
+name: Collection
+vid: coin_collection
+description: 'Collections of valuable historical objects'
+weight: 0

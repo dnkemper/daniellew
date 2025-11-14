@@ -1,0 +1,10 @@
+uuid: 494ba403-c6a2-42ab-b2fd-b7e5f3da99cb
+langcode: en
+status: true
+dependencies: {  }
+id: featured_full_w_text
+label: 'Featured Full w/Text'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Featured Full w/Text'
+behavior_plugins: {  }

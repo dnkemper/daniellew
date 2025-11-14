@@ -1,0 +1,29 @@
+uuid: 0e421a53-5dce-4de4-9aad-c46b7acd4592
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_home_slide
+    - media.type.image
+    - paragraphs.paragraphs_type.full_screen_home_slide
+id: paragraph.full_screen_home_slide.field_home_slide
+field_name: field_home_slide
+entity_type: paragraph
+bundle: full_screen_home_slide
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

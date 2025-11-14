@@ -1,0 +1,50 @@
+id: paragraph_publication_announcement
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - artsci-paragraph
+label: 'Paragraphs (Publication Announcement)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_announcement
+process:
+  type:
+    plugin: default_value
+    default_value: publication_announcement  # Replace with the machine name of the paragraph bundle in Drupal 10
+  # Image field mapping
+  field_infographic:
+    plugin: sub_process
+    source: field_infographic
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_background_color_announce:
+    -
+      plugin: get
+      source: field_background_color_announce
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_announcement
+migration_dependencies:
+  required: {}
+  optional: {}

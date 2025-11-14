@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 645772b3-e1e7-4adc-93a3-d47cb3e0c791
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    bc3cd6df-02a7-4ed4-ba05-f79587b631dc: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Upcoming Events'
+  menu_name:
+    -
+      value: menu-secondary-navigation
+  link:
+    -
+      target_uuid: bc3cd6df-02a7-4ed4-ba05-f79587b631dc
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -49
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

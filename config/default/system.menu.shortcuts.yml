@@ -1,0 +1,8 @@
+uuid: a557d408-a18a-4e08-b5be-9e3f08900fe5
+langcode: en
+status: true
+dependencies: {  }
+id: shortcuts
+label: Shortcuts
+description: 'Site Manager short cut menu links'
+locked: false

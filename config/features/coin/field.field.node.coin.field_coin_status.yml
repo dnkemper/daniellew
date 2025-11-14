@@ -1,0 +1,29 @@
+uuid: 9f014f9e-2f2c-4717-933a-742211d2b49d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_status
+    - node.type.coin
+    - taxonomy.vocabulary.coin_status
+id: node.coin.field_coin_status
+field_name: field_coin_status
+entity_type: node
+bundle: coin
+label: Status
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_status: coin_status
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,56 @@
+uuid: dbf74668-4e94-4b29-a43c-8af0517d5b1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.dark_callout.field_callout_button
+    - field.field.paragraph.dark_callout.field_description
+    - field.field.paragraph.dark_callout.field_new_window
+    - field.field.paragraph.dark_callout.field_title
+    - paragraphs.paragraphs_type.dark_callout
+  module:
+    - link
+id: paragraph.dark_callout.default
+targetEntityType: paragraph
+bundle: dark_callout
+mode: default
+content:
+  field_callout_button:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

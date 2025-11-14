@@ -1,0 +1,156 @@
+@import url('https://use.fontawesome.com/releases/v5.8.2/css/all.css');
+@import '../base/utilities';
+
+.block-local-tasks-block {
+  .tabs-wrapper {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .tabs {
+    margin: 0;
+    list-style-type: none;
+    background: var(--white);
+    @extend %no-ul-list;
+  }
+
+  .tabs::after,
+  .tabs::before {
+    display: table;
+    content: ' ';
+    @include flex($fb: 0);
+    @include order($int: 1);
+  }
+
+  .tabs::after {
+    clear: both;
+  }
+
+  .tab,
+  .tabs li {
+    float: left;
+  }
+
+  .tab > a,
+  .tabs li > a {
+    display: block;
+    text-decoration: none;
+    font-family: var(--sans-serif);
+    font-weight: var(--font-weight-medium-bold);
+    color: var(--dark-gray);
+    background: var(--white);
+    font-size: 14px;
+    line-height: 1;
+    padding: 1.05rem 1.575rem;
+  }
+
+  .tabs {
+    li {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+  }
+
+  .tabs > li > a.local-task-icon {
+    &:focus,
+    &:hover {
+      background: #f3f3f3;
+      text-decoration: underline;
+    }
+
+    &.is-active {
+      background: var(--light-gray);
+      position: relative;
+
+      &:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--lightest-gray);
+        content: '';
+      }
+    }
+  }
+
+  .local-task-icon {
+    &.local-task-icon--delete {
+      color: var(--danger);
+    }
+
+    &:focus:before,
+    &:hover:before {
+      color: var(--dark-gray);
+    }
+
+    &:before {
+      @include fas();
+      margin-right: 10px;
+      color: var(--dark-gray);
+      font-size: 13px;
+    }
+
+    &.local-task-icon--view::before,
+    &.local-task-icon--published::before,
+    &.local-task-icon--published_version::before {
+      content: '\f06e';
+    }
+
+    &.local-task-icon--settings::before {
+      content: '\f013';
+    }
+
+    &.local-task-icon--export-form::before {
+      content: '\f019';
+    }
+
+    &.local-task-icon--results::before {
+      content: '\f681';
+    }
+
+    &.local-task-icon--edit::before {
+      content: '\f044';
+    }
+
+    &.local-task-icon--delete::before {
+      content: '\f2ed';
+      color: var(--danger);
+    }
+
+    &.local-task-icon--layout::before {
+      content: '\f009';
+    }
+
+    &.local-task-icon--history::before {
+      content: '\f1da';
+    }
+
+    &.local-task-icon--usage::before {
+      content: '\f0c1';
+    }
+
+    &.local-task-icon--devel::before {
+      content: '\f121';
+    }
+
+    &.local-task-icon--latest_version::before {
+      content: '\f017';
+    }
+
+    &.local-task-icon--token::before {
+      content: '\23';
+    }
+
+    &.local-task-icon--replicate::before,
+    &.local-task-icon--clone::before {
+      content: '\f24d';
+    }
+  }
+}
+.hide-local-task-icon {
+  display: none !important;
+
+  &:before {
+    display: none !important;
+  }
+}

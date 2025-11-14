@@ -1,0 +1,21 @@
+uuid: 25cb925e-3c09-4732-85b1-d8b86952001c
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.no_crop_0190w
+    - image.style.no_crop_0320w
+id: resp_default_aspect_x_small
+label: 'resp default aspect x-small'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 190px'
+      sizes_image_styles:
+        - no_crop_0190w
+        - no_crop_0320w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: no_crop_0190w

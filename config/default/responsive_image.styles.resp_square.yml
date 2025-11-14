@@ -1,0 +1,27 @@
+uuid: 038b893d-8ed7-4507-8aea-afc27a4bb9f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_1_1_1888w
+    - image.style.square_1_1_190w
+    - image.style.square_1_1_320w
+    - image.style.square_1_1_480w
+    - image.style.square_1_1_944w
+id: resp_square
+label: 'resp square'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 930px'
+      sizes_image_styles:
+        - square_1_1_1888w
+        - square_1_1_190w
+        - square_1_1_320w
+        - square_1_1_480w
+        - square_1_1_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: square_1_1_944w

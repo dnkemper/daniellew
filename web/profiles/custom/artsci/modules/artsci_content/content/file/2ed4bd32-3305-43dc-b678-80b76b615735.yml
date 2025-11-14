@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2ed4bd32-3305-43dc-b678-80b76b615735
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: blackboard_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/blackboard_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 21278
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

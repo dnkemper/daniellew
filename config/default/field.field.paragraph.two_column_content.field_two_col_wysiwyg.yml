@@ -1,0 +1,31 @@
+uuid: 9055f1e8-4e1e-4cbe-933c-38edce88da39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_two_col_wysiwyg
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.two_column_content
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.two_column_content.field_two_col_wysiwyg
+field_name: field_two_col_wysiwyg
+entity_type: paragraph
+bundle: two_column_content
+label: Content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

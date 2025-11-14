@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: summersession.ddev.site
+    protocol: https
+  machine_name: summersession
+  human_name: summersession.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: summersession.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/summersession.wustl.edu/files'
+    origin: 'https://summersession.wustl.edu'
+drupal:
+  db:
+    database: drupal_summersession
+system:
+  site:
+    contact_us_url: 'https://summersession.wustl.edu/contact-us'
+    name: summersession
+    email: summersession@wustl.edu

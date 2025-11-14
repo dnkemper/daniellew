@@ -1,0 +1,11 @@
+uuid: 4f92ee10-7f40-47e3-b06c-b6b59917f4ee
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.shared_event_header
+label: 'Shared event header'
+description: ''
+targetEntityType: media
+cache: true

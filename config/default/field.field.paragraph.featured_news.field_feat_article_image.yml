@@ -1,0 +1,29 @@
+uuid: cc4d29ad-5ed0-4f9d-b82c-944cd94dbc0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_feat_article_image
+    - media.type.image
+    - paragraphs.paragraphs_type.featured_news
+id: paragraph.featured_news.field_feat_article_image
+field_name: field_feat_article_image
+entity_type: paragraph
+bundle: featured_news
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

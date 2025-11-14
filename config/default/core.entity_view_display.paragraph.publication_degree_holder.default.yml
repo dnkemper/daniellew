@@ -1,0 +1,31 @@
+uuid: 73608e9d-8436-477b-9781-3dc68600fd90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_degree_holder.field_distinction
+    - field.field.paragraph.publication_degree_holder.field_holder_name
+    - paragraphs.paragraphs_type.publication_degree_holder
+id: paragraph.publication_degree_holder.default
+targetEntityType: paragraph
+bundle: publication_degree_holder
+mode: default
+content:
+  field_distinction:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_holder_name:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

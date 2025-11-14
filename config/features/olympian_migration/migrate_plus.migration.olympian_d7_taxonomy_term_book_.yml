@@ -1,0 +1,61 @@
+uuid: d3813bd7-a11e-4cec-a236-90f9bf5bf322
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_taxonomy_term_book_
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - olympian_taxonomy
+  - Content
+migration_group: olympian_d7
+label: 'Taxonomy terms (Book)'
+source:
+  plugin: d7_taxonomy_term
+  bundle: book_
+  ids:
+    tid:
+      type: integer
+    vid:
+      type: integer
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  vid:
+    plugin: default_value
+    default_value: book_
+  revision_id:
+    -
+      plugin: get
+      source: tid
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: book_
+idMap:
+  plugin: smart_sql
+migration_dependencies: null

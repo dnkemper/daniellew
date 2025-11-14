@@ -1,0 +1,8 @@
+attributes:
+  target:
+    label: 'Link Target'
+    description: 'Opens menu link in a new tab or window. Recommended for external site links'
+    type: checkboxes
+    options:
+      _blank: 'New window'
+    default_value: ''

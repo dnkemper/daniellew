@@ -1,0 +1,24 @@
+uuid: d021ba34-89af-437a-831f-93e77b44b9bb
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_feat_artice_bkg_color
+field_name: field_feat_artice_bkg_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Dark
+      label: Dark
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

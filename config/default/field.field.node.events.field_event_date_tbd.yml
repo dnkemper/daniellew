@@ -1,0 +1,23 @@
+uuid: f2dca67f-deef-48a6-ba86-a02f86d95e8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_date_tbd
+    - node.type.events
+id: node.events.field_event_date_tbd
+field_name: field_event_date_tbd
+entity_type: node
+bundle: events
+label: 'Event Date TBD'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

@@ -1,0 +1,11 @@
+uuid: 229fb45a-ff8c-424f-93c7-c77ab93fbe66
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.publication_intro
+label: publication_intro
+description: ''
+targetEntityType: node
+cache: true

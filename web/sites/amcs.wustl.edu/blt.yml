@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: amcs.ddev.site
+    protocol: https
+  machine_name: amcs
+  human_name: amcs.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: amcs.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/amcs.wustl.edu/files'
+    origin: 'https://amcs.wustl.edu'
+drupal:
+  db:
+    database: drupal_amcs
+system:
+  site:
+    contact_us_url: 'https://amcs.wustl.edu/contact-us'
+    name: amcs
+    email: amcs@wustl.edu

@@ -1,0 +1,25 @@
+uuid: 5dd094bd-c32f-43af-9347-fb0daeab078b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rsvp_form
+    - node.type.events
+  module:
+    - webform
+id: node.events.field_rsvp_form
+field_name: field_rsvp_form
+entity_type: node
+bundle: events
+label: 'RSVP Form'
+description: 'Webforms must first be <a href="/admin/structure/webform/add">created</a> before referencing them.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: true
+field_type: webform

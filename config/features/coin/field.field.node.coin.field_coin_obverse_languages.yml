@@ -1,0 +1,29 @@
+uuid: a357c4c0-75b1-488a-839b-6ffcfbb5afef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_obverse_languages
+    - node.type.coin
+    - taxonomy.vocabulary.coin_inscription_language
+id: node.coin.field_coin_obverse_languages
+field_name: field_coin_obverse_languages
+entity_type: node
+bundle: coin
+label: 'Obverse Inscription Languages'
+description: 'Separate entries with a comma.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_inscription_language: coin_inscription_language
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

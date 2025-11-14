@@ -1,0 +1,192 @@
+id: node_page
+migration_group: olympian_migration
+label: 'Basic page Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: page
+#  ---------------------------- ---------- ---------------------------- -------------
+#   Field name                   Required   Field type                   Cardinality
+#  ---------------------------- ---------- ---------------------------- -------------
+#   field_basic_page_content                entity_reference_revisions   1
+#   field_call_to_action_p                  entity_reference_revisions   1
+#   field_footer_callout_p                  entity_reference_revisions   1
+#   field_introduction_p                    entity_reference_revisions   1
+#   field_meta_tags                         metatag                      1
+#   field_olympian_search                   text_long                    1
+#   field_search                            string_long                  1
+#   field_two_column_content_p              entity_reference_revisions   1
+#  ---------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: page
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  # Updated Paragraph fields mapping
+  field_basic_page_content:
+    plugin: sub_process
+    source: field_basic_page_content
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_basic_page_content
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_call_to_action_p:
+    plugin: sub_process
+    source: field_call_to_action_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_call_to_action
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_two_column_content_p:
+    plugin: sub_process
+    source: field_two_column_content_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_content_2
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  # Text fields mapping
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: page
+migration_dependencies:
+  required:
+    - paragraph_button
+    - paragraph_social_media_links
+    - paragraph_basic_page_content
+    - paragraph_call_to_action
+    - paragraph_footer_callout
+    - paragraph_introduction
+    - paragraph_two_column_content
+    - paragraph_content_2

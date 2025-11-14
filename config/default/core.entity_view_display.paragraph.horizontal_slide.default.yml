@@ -1,0 +1,66 @@
+uuid: 4d8769f5-07c0-4167-b489-569d8b2088be
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.horizontal_slide.field_background_image
+    - field.field.paragraph.horizontal_slide.field_call_to_action_button
+    - field.field.paragraph.horizontal_slide.field_description
+    - field.field.paragraph.horizontal_slide.field_open_in_new_window
+    - field.field.paragraph.horizontal_slide.field_title
+    - paragraphs.paragraphs_type.horizontal_slide
+  module:
+    - link
+id: paragraph.horizontal_slide.default
+targetEntityType: paragraph
+bundle: horizontal_slide
+mode: default
+content:
+  field_background_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight_desktop
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_call_to_action_button:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_open_in_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,10 @@
+uuid: fde77874-10ed-4cda-b35f-b8ddbc8d400d
+langcode: en
+status: true
+dependencies: {  }
+id: publication_gallery
+label: 'Publication Gallery'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Gallery'
+behavior_plugins: {  }

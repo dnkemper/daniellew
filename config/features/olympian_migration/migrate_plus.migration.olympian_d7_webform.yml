@@ -1,0 +1,105 @@
+uuid: bbc9434f-c8c7-4e02-bf04-c5ae880e38db
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_webform
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: olympian_d7
+label: Webform
+source:
+  plugin: d7_webform
+  constants:
+    settings:
+      page: true
+      preview: 0
+      wizard_progress_bar: true
+      page_confirm_path: ''
+process:
+  id:
+    -
+      plugin: get
+      source: webform_id
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  title:
+    -
+      plugin: get
+      source: title
+  status:
+    -
+      plugin: get
+      source: status
+  elements:
+    -
+      plugin: get
+      source: elements
+  handlers:
+    -
+      plugin: get
+      source: handlers
+  access:
+    -
+      plugin: get
+      source: access
+  path/pathauto:
+    -
+      plugin: default_value
+      default_value: 0
+  settings/page:
+    -
+      plugin: get
+      source: constants/settings/page
+  settings/page_submit_path:
+    -
+      plugin: get
+      source: alias
+  settings/page_confirm_path:
+    -
+      plugin: get
+      source: constants/settings/page_confirm_path
+  settings/wizard_progress_bar:
+    -
+      plugin: get
+      source: constants/settings/wizard_progress_bar
+  settings/preview:
+    -
+      plugin: get
+      source: constants/settings/preview
+  settings/draft:
+    -
+      plugin: get
+      source: allow_draft
+  settings/draft_auto_save:
+    -
+      plugin: get
+      source: auto_save
+  settings/confirmation_type:
+    -
+      plugin: get
+      source: confirmation_type
+  settings/confirmation_url:
+    -
+      plugin: get
+      source: redirect_url
+  settings/confirmation_message:
+    -
+      plugin: get
+      source: confirmation
+  settings/limit_total:
+    -
+      plugin: get
+      source: total_submit_limit
+  settings/limit_user:
+    -
+      plugin: get
+      source: submit_limit
+destination:
+  plugin: 'entity:webform'
+migration_dependencies: {  }

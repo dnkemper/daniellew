@@ -1,0 +1,21 @@
+uuid: c4ca9117-7fd9-4db3-9f38-ee7475b04b0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category_display
+    - node.type.events_landing_page
+  module:
+    - options
+id: node.events_landing_page.field_category_display
+field_name: field_category_display
+entity_type: node
+bundle: events_landing_page
+label: 'Category Display'
+description: 'Changes how the Category filter on the Events Landing Page is displayed.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

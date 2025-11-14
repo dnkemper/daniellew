@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: wgss.ddev.site
+    protocol: https
+  machine_name: wgss
+  human_name: wgss.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: wgss.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/wgss.wustl.edu/files'
+    origin: 'https://wgss.wustl.edu'
+drupal:
+  db:
+    database: drupal_wgss
+system:
+  site:
+    contact_us_url: 'https://wgss.wustl.edu/contact-us'
+    name: wgss
+    email: wgss@wustl.edu

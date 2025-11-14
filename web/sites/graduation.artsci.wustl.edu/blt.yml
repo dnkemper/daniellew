@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: graduation.artsci.ddev.site
+    protocol: https
+  machine_name: graduation
+  human_name: graduation.artsci.wustl.edu
+drush:
+  aliases:
+    local: graduation.local
+    remote: graduation.prod
+drupal:
+  db:
+    database: drupal_graduation
+artsci:
+  stage_file_proxy:
+    origin: 'https://graduation.artsci.wustl.edu'
+    origin_dir: sites/graduation.artsci.wustl.edu/files
+system:
+  site:
+    contact_us_url: 'https://graduation.artsci.wustl.edu/contact-us'
+    name: graduation
+    email: graduation@wustl.edu

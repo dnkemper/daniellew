@@ -1,0 +1,14 @@
+uuid: 3e14c8d6-7dfa-43eb-ab6a-b7e0fff0b5b6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.book
+id: node_type_book
+entity_type_id: node_type
+entity_id: book
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

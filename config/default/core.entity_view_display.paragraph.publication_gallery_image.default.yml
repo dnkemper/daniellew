@@ -1,0 +1,40 @@
+uuid: 5dce2b82-5f4a-420c-b9fc-d83171525d96
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_gallery_image.field_full_description
+    - field.field.paragraph.publication_gallery_image.field_gallery_caption
+    - field.field.paragraph.publication_gallery_image.field_publication_gallery_image
+    - paragraphs.paragraphs_type.publication_gallery_image
+id: paragraph.publication_gallery_image.default
+targetEntityType: paragraph
+bundle: publication_gallery_image
+mode: default
+content:
+  field_full_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_gallery_caption:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_publication_gallery_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

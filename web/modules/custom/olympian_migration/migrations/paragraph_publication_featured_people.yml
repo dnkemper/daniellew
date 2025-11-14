@@ -1,0 +1,41 @@
+id: paragraph_publication_featured_people
+label: 'Publication Featured People Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_featured_people 
+process:
+  type:
+    plugin: default_value
+    default_value: publication_featured_people  
+
+  # Paragraphs field mapping for 'field_person'
+  field_person:
+    plugin: sub_process
+    source: field_person
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_person  
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_featured_people
+migration_dependencies:
+  required:
+    - paragraph_publication_person  
+  optional: {}

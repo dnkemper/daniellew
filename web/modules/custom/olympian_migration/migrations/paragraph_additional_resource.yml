@@ -1,0 +1,41 @@
+id: paragraph_additional_resource
+label: 'Button Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: additional_resource  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: additional_resource  # Replace with the machine name of the paragraph bundle in Drupal 10
+  field_button_link:
+    -
+      plugin: sub_process
+      source: field_button_url  # Adjust the source if the field name is different in Drupal 7
+      process:
+        uri: value
+
+  # Link field mapping
+  # field_button_link:
+  #   plugin: field_link_custom
+  #   source: field_button_url
+  #   title_source: field_title
+  # Boolean field mapping
+  field_new_window:
+    plugin: get
+    source: field_new_window
+
+  #Text field mapping
+  field_subtitle: field_subtitle
+  field_title: field_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: additional_resource
+migration_dependencies:
+  required: {}
+  optional: {}

@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: abe202f5-0507-4ac4-8a4b-cba1f4d9f13e
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    de35723c-a947-4fa0-8961-398f58ff253c: node
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Research
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: de35723c-a947-4fa0-8961-398f58ff253c
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 0

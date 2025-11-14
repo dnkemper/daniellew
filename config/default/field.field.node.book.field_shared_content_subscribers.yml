@@ -1,0 +1,19 @@
+uuid: f7539b89-5d0d-4c80-b16e-b6db38873424
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content_subscribers
+    - node.type.book
+id: node.book.field_shared_content_subscribers
+field_name: field_shared_content_subscribers
+entity_type: node
+bundle: book
+label: shared_content_subscribers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

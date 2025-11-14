@@ -1,0 +1,239 @@
+uuid: 8aaeb41c-5e4e-4364-8c19-fd673aee73bd
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_menu_links_node_collection_landing_page
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'Menu links of Collection Landing Page content items'
+source:
+  plugin: menu_link
+  constants:
+    bundle: menu_link_content
+    missing_path_prefix: " (unavailable: '"
+    missing_path_suffix: "')"
+    plugin_prefix: menu_link_content
+  entity_type_id: node
+  bundle: collection_landing_page
+process:
+  skip_translation:
+    -
+      plugin: skip_on_empty
+      method: row
+      source: skip_translation
+  id:
+    -
+      plugin: get
+      source: mlid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  bundle:
+    -
+      plugin: get
+      source: constants/bundle
+  description:
+    -
+      plugin: get
+      source: description
+  menu_name:
+    -
+      plugin: migration_lookup
+      migration: olympian_d7_menu
+      source: menu_name
+    -
+      plugin: skip_on_empty
+      method: row
+  link/uri:
+    -
+      plugin: migmag_try
+      process:
+        plugin: link_uri
+        source: link_path
+      catch:
+        Drupal\migrate\MigrateException: 'route:<current>'
+  path_is_available:
+    -
+      plugin: static_map
+      source: '@link/uri'
+      map:
+        'route:<current>': 0
+      default_value: 1
+  stub:
+    -
+      plugin: default_value
+      source: stub
+      default_value: 0
+  title_suffix:
+    -
+      plugin: static_map
+      source:
+        - '@path_is_available'
+        - '@stub'
+      map:
+        -
+          - 'do not skip'
+      default_value: null
+    -
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: concat
+      source:
+        - constants/missing_path_prefix
+        - link_path
+        - constants/missing_path_suffix
+  original_title:
+    -
+      plugin: get
+      source: link_title
+  title:
+    -
+      plugin: concat
+      source:
+        - '@original_title'
+        - '@title_suffix'
+  link/options:
+    -
+      plugin: get
+      source: options
+  route:
+    -
+      plugin: route
+      source:
+        - link_path
+        - options
+  route_name:
+    -
+      plugin: get
+      source: '@route/route_name'
+  route_parameters:
+    -
+      plugin: get
+      source: '@route/route_parameters'
+  url:
+    -
+      plugin: get
+      source: '@route/url'
+  options:
+    -
+      plugin: get
+      source: '@route/options'
+  external:
+    -
+      plugin: get
+      source: external
+  weight:
+    -
+      plugin: get
+      source: weight
+  expanded:
+    -
+      plugin: get
+      source: expanded
+  original_enabled:
+    -
+      plugin: get
+      source: enabled
+    -
+      plugin: callback
+      callable: intval
+  enabled:
+    -
+      plugin: static_map
+      source:
+        - '@path_is_available'
+        - '@original_enabled'
+      map:
+        1:
+          - 0
+          - 1
+      default_value: 0
+  original_parent:
+    -
+      plugin: migmag_try
+      process:
+        plugin: menu_link_parent
+        source:
+          - plid
+          - '@menu_name'
+          - parent_link_path
+      catch:
+        Drupal\migrate\MigrateSkipRowException: null
+      saveMessage: false
+    -
+      plugin: default_value
+      default_value: null
+  parent_uuid:
+    -
+      plugin: callback
+      callable: is_string
+      source: '@original_parent'
+    -
+      plugin: callback
+      callable: intval
+    -
+      plugin: static_map
+      map:
+        - 1
+        - 0
+    -
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: skip_on_empty
+      source: plid
+      method: process
+    -
+      plugin: migmag_lookup
+      stub_default_values:
+        menu_name: '@menu_name'
+      migration:
+        - d7_menu_links
+        - d7_menu_links_localized
+        - d7_menu_links_translation
+        - node_translation_menu_links
+      fallback_stub_id: migmag_unmigratable_menu_link_trap
+    -
+      plugin: skip_on_empty
+      method: process
+    -
+      plugin: migmag_get_entity_property
+      entity_type_id: menu_link_content
+      property: uuid
+  lookup_stub_parent:
+    -
+      plugin: skip_on_empty
+      source: '@parent_uuid'
+      method: process
+    -
+      plugin: concat
+      source:
+        - constants/plugin_prefix
+        - '@parent_uuid'
+      delimiter: ':'
+  parent:
+    -
+      plugin: null_coalesce
+      source:
+        - '@original_parent'
+        - '@lookup_stub_parent'
+  changed:
+    -
+      plugin: get
+      source: updated
+destination:
+  plugin: 'entity:menu_link_content'
+migration_dependencies:
+  required:
+    - olympian_d7_menu
+    - olympian_d7_node_complete_collection_landing_page
+  optional:
+    - olympian_d7_menu

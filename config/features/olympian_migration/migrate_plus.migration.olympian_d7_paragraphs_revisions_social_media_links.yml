@@ -1,0 +1,79 @@
+uuid: 0781f4f2-3479-44a2-9449-b4bb563c9d65
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_social_media_links
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Social Media Links)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: social_media_links
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_facebook_link:
+    -
+      plugin: sub_process
+      source: field_facebook_url
+      process:
+        uri: value
+  field_twitter_link:
+    -
+      plugin: sub_process
+      source: field_twitter_url
+      process:
+        uri: value
+  field_instagram_link:
+    -
+      plugin: sub_process
+      source: field_instagram_url
+      process:
+        uri: value
+  field_flickr_link:
+    -
+      plugin: sub_process
+      source: field_flickr_url
+      process:
+        uri: value
+  field_linkedin_link:
+    -
+      plugin: sub_process
+      source: field_linkedin_url
+      process:
+        uri: value
+  field_youtube_link:
+    -
+      plugin: sub_process
+      source: field_youtube_url
+      process:
+        uri: value
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: social_media_links
+migration_dependencies:
+  required: {}
+  optional: {  }

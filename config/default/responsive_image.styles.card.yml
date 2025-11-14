@@ -1,0 +1,16 @@
+uuid: 98a0392b-7aae-4b17-9cde-6cd091bf1d84
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.card
+id: card
+label: Card
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: card
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: card

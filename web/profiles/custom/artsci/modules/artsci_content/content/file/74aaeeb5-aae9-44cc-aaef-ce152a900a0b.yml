@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 74aaeeb5-aae9-44cc-aaef-ce152a900a0b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: cornerstone_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/cornerstone_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 63235
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

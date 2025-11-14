@@ -1,0 +1,36 @@
+id: paragraph_links_revision
+label: 'Links Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - paragraph
+  - artsci-revision
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: links
+
+process:
+  type:
+    plugin: default_value
+    default_value: links
+  # Link field mapping
+  field_button_link:
+    plugin: field_link_custom
+    source: field_button_url
+    title_source: field_call_to_action_button_text
+
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: links
+
+migration_dependencies:
+  required: {}
+  optional: {}

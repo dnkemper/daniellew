@@ -1,0 +1,19 @@
+uuid: 56211f88-22c2-4f01-8ed2-590394171f24
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_flickr_link
+field_name: field_flickr_link
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

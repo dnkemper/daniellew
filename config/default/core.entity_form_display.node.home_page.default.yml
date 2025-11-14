@@ -1,0 +1,629 @@
+uuid: 3b4cfd7e-aa3b-4ff3-8af4-37a38c9e6375
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.home_page.date_repeat_entity_clone_state
+    - field.field.node.home_page.date_repeat_entity_master_uuid
+    - field.field.node.home_page.field_add_resources
+    - field.field.node.home_page.field_call_to_action
+    - field.field.node.home_page.field_event_and_article_spotligh
+    - field.field.node.home_page.field_events
+    - field.field.node.home_page.field_featured_cap_overlay
+    - field.field.node.home_page.field_featured_full_w_text
+    - field.field.node.home_page.field_featured_image_and_text
+    - field.field.node.home_page.field_featured_news
+    - field.field.node.home_page.field_featured_with_caption
+    - field.field.node.home_page.field_featured_without_caption
+    - field.field.node.home_page.field_full_width_slide
+    - field.field.node.home_page.field_generic_intro_with_image
+    - field.field.node.home_page.field_generic_intro_with_side_it
+    - field.field.node.home_page.field_half_text_and_half_testimo
+    - field.field.node.home_page.field_home_testimonial
+    - field.field.node.home_page.field_instagram_and_twitter
+    - field.field.node.home_page.field_intro_type
+    - field.field.node.home_page.field_links_p
+    - field.field.node.home_page.field_meta_tags
+    - field.field.node.home_page.field_search
+    - field.field.node.home_page.field_second_spotlight
+    - field.field.node.home_page.field_slideshow_type
+    - field.field.node.home_page.field_spotlights_p
+    - field.field.node.home_page.field_video
+    - field.field.node.home_page.field_video_spotlight_and_articl
+    - node.type.home_page
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - metatag
+    - paragraphs
+    - paragraphs_features
+    - path
+id: node.home_page.default
+targetEntityType: node
+bundle: home_page
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_add_resources:
+    type: paragraphs
+    weight: 20
+    region: content
+    settings:
+      title: 'Additional Resource'
+      title_plural: 'Additional Resources'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_call_to_action:
+    type: paragraphs
+    weight: 24
+    region: content
+    settings:
+      title: 'Call to action'
+      title_plural: 'Call to action'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_event_and_article_spotligh:
+    type: paragraphs
+    weight: 18
+    region: content
+    settings:
+      title: 'Upcoming Event and Two Articles'
+      title_plural: 'Upcoming Event and Two Articles'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_events:
+    type: paragraphs
+    weight: 17
+    region: content
+    settings:
+      title: Events
+      title_plural: Events
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_cap_overlay:
+    type: options_buttons
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_featured_full_w_text:
+    type: paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: 'Featured Full w/Text Slide'
+      title_plural: 'Featured Full w/Text Slide'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_image_and_text:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: 'Half Image and Text Slide'
+      title_plural: 'Half Image and Text Slide'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_news:
+    type: paragraphs
+    weight: 15
+    region: content
+    settings:
+      title: 'Featured News'
+      title_plural: 'Featured News'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_with_caption:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: 'Featured w/Caption'
+      title_plural: 'Featured w/Caption'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_featured_without_caption:
+    type: paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_full_width_slide:
+    type: paragraphs
+    weight: 11
+    region: content
+    settings:
+      title: 'Full width slide'
+      title_plural: 'Full width slide'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_generic_intro_with_image:
+    type: paragraphs
+    weight: 10
+    region: content
+    settings:
+      title: 'Generic intro with image'
+      title_plural: 'Generic intro with image'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_generic_intro_with_side_it:
+    type: paragraphs
+    weight: 9
+    region: content
+    settings:
+      title: 'Generic intro with related links'
+      title_plural: 'Generic intro with related links'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_half_text_and_half_testimo:
+    type: paragraphs
+    weight: 14
+    region: content
+    settings:
+      title: 'Half text and half testimonial'
+      title_plural: 'Half text and half testimonial'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_home_testimonial:
+    type: paragraphs
+    weight: 21
+    region: content
+    settings:
+      title: Testimonial
+      title_plural: Testimonial
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_instagram_and_twitter:
+    type: paragraphs
+    weight: 23
+    region: content
+    settings:
+      title: 'Social Media'
+      title_plural: 'Social Media'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_intro_type:
+    type: options_select
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_links_p:
+    type: paragraphs
+    weight: 7
+    region: content
+    settings:
+      title: Link
+      title_plural: Links
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 31
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_search:
+    type: string_textarea
+    weight: 25
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_second_spotlight:
+    type: paragraphs
+    weight: 22
+    region: content
+    settings:
+      title: Spotlight
+      title_plural: Spotlights
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_slideshow_type:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_spotlights_p:
+    type: paragraphs
+    weight: 16
+    region: content
+    settings:
+      title: 'Video Spotlights and Event'
+      title_plural: 'Video Spotlights and Event'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_video:
+    type: paragraphs
+    weight: 13
+    region: content
+    settings:
+      title: Spotlight
+      title_plural: Spotlight
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_video_spotlight_and_articl:
+    type: paragraphs
+    weight: 19
+    region: content
+    settings:
+      title: 'Video Spotlights and Two Articles'
+      title_plural: 'Video Spotlights and Two Articles'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  moderation_state:
+    type: moderation_state_default
+    weight: 29
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 34
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  promote: true
+  status: true
+  sticky: true

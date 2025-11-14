@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: publichealthandsociety.ddev.site
+    protocol: https
+  machine_name: publichealthandsociety
+  human_name: publichealthandsociety.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: publichealthandsociety.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/publichealthandsociety.wustl.edu/files'
+    origin: 'https://publichealthandsociety.wustl.edu'
+drupal:
+  db:
+    database: drupal_publichealthandsociety
+system:
+  site:
+    contact_us_url: 'https://publichealthandsociety.wustl.edu/contact-us'
+    name: publichealthandsociety
+    email: publichealthandsociety@wustl.edu

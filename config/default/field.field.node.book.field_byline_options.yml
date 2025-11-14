@@ -1,0 +1,23 @@
+uuid: f1ad87de-966e-4387-becd-1e7f5425db84
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_byline_options
+    - node.type.book
+  module:
+    - options
+id: node.book.field_byline_options
+field_name: field_byline_options
+entity_type: node
+bundle: book
+label: 'Byline Options'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: By
+default_value_callback: ''
+settings: {  }
+field_type: list_string

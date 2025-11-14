@@ -1,0 +1,22 @@
+uuid: 15d2cc45-ba06-4b60-a748-bfb2e2eab1b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: image_cards
+label: 'Image Cards'
+type: 'canonical_entities:node'
+pattern: 'browse/[node:title]'
+selection_criteria:
+  6da138de-5661-40e1-8e71-1893506265fe:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 6da138de-5661-40e1-8e71-1893506265fe
+    context_mapping:
+      node: node
+    bundles:
+      image_cards: image_cards
+selection_logic: and
+weight: -5
+relationships: {  }

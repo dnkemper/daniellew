@@ -1,0 +1,26 @@
+uuid: b2962fac-56db-419a-b4f6-7fe1247a4074
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_areas_of_interest
+    - node.type.faculty_staff
+    - taxonomy.vocabulary.areas_of_interest
+id: node.faculty_staff.field_areas_of_interest
+field_name: field_areas_of_interest
+entity_type: node
+bundle: faculty_staff
+label: 'Areas of Interest Filter'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      areas_of_interest: areas_of_interest
+    sort:
+      field: _none
+field_type: entity_reference

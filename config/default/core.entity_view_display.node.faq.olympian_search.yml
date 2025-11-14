@@ -1,0 +1,55 @@
+uuid: 7cf9d8a6-b8bb-4e63-88a4-dfb3a46cb12e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.faq.field_faqs
+    - field.field.node.faq.field_footer_callout_p
+    - field.field.node.faq.field_introduction_p
+    - field.field.node.faq.field_meta_tags
+    - field.field.node.faq.field_search
+    - node.type.faq
+  module:
+    - entity_reference_revisions
+    - private_content
+    - user
+id: node.faq.olympian_search
+targetEntityType: node
+bundle: faq
+mode: olympian_search
+content:
+  field_faqs:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: olympian_search
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  content_moderation_control: true
+  field_footer_callout_p: true
+  field_introduction_p: true
+  field_meta_tags: true
+  links: true

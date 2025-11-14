@@ -1,0 +1,21 @@
+uuid: 10cd924d-931f-4a58-ac9a-1eecd5f34ef3
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_callout_button_text
+field_name: field_callout_button_text
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

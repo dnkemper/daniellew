@@ -1,0 +1,11 @@
+uuid: 97346c08-71a7-4ccb-b7ca-11819cf71525
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.medium__landscape
+label: 'medium landscape'
+description: ''
+targetEntityType: media
+cache: true

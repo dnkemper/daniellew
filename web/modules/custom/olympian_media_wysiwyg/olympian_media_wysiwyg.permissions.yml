@@ -1,0 +1,4 @@
+administer olympian_media_wysiwyg configuration:
+  title: 'Administer olympian_media_wysiwyg configuration'
+  description: 'Optional description.'
+  restrict access: false

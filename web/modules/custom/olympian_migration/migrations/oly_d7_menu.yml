@@ -1,0 +1,25 @@
+id: oly_d7_menu
+label: Menus
+migration_tags:
+  - Drupal 7
+  - Configuration
+migration_group: olympian_migration
+source:
+  plugin: menu
+process:
+  id:
+    plugin: static_map
+    source: menu_name
+    map:
+      main-menu: main
+      menu-quick-links: menu-quick-links
+      menu-secondary-navigation: menu-secondary-navigation
+      menu-related-schools: menu-related-schools
+  label: title
+  description: description
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: en
+destination:
+  plugin: entity:menu

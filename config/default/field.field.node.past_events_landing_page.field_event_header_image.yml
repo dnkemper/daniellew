@@ -1,0 +1,29 @@
+uuid: 5b837e55-c4b7-4ad2-bd7e-e87a274d45b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_header_image
+    - media.type.image
+    - node.type.past_events_landing_page
+id: node.past_events_landing_page.field_event_header_image
+field_name: field_event_header_image
+entity_type: node
+bundle: past_events_landing_page
+label: 'Event Header Image'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

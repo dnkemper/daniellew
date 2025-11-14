@@ -1,0 +1,17 @@
+diff --git a/js/smart_date.js b/js/smart_date.js
+index 2360592..5ffcc9e 100644
+--- a/js/smart_date.js
++++ b/js/smart_date.js
+@@ -24,9 +24,9 @@
+         }
+       });
+       once('smartDateStartChange', '.smartdate--widget .time-start input', context).forEach(function (element) {
+-        element.addEventListener("change", function () {
+-          setEndDate(element);
+-        }, false);
++        // element.addEventListener("change", function () {
++        //   setEndDate(element);
++        // }, false);
+       });
+       once('smartDateEndChange', '.smartdate--widget .time-end', context).forEach(function (element) {
+         element.addEventListener("change", function () {

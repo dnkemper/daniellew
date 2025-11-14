@@ -1,0 +1,59 @@
+uuid: 895ae71e-15cd-42ed-8a62-76261fad1721
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_fullscreen_image
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Fullscreen Image)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: fullscreen_image
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_featured_image:
+    plugin: sub_process
+    source: field_featured_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_description:
+    -
+      plugin: get
+      source: field_description
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: fullscreen_image
+migration_dependencies:
+  required: {}
+  optional: {  }

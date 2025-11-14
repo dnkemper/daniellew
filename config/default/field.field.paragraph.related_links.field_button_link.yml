@@ -1,0 +1,28 @@
+uuid: 5cb319f6-d37d-4512-b45f-982c8f2bd82c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_link
+    - paragraphs.paragraphs_type.related_links
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: paragraph.related_links.field_button_link
+field_name: field_button_link
+entity_type: paragraph
+bundle: related_links
+label: Link
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 17
+field_type: link

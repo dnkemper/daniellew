@@ -1,0 +1,30 @@
+uuid: 01fab628-0407-497d-8565-33beaf3fd2ff
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_bkg_clr
+field_name: field_bkg_clr
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Red
+      label: Red
+    -
+      value: Gray
+      label: Gray
+    -
+      value: White
+      label: White
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

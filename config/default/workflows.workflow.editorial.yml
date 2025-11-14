@@ -1,0 +1,127 @@
+uuid: 19e3e259-028f-4b23-ae8e-84948d0833a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.book
+    - node.type.contact_landing_page
+    - node.type.events
+    - node.type.events_landing_page
+    - node.type.faculty_landing_page
+    - node.type.faculty_staff
+    - node.type.faq
+    - node.type.generic_page
+    - node.type.home_page
+    - node.type.image_cards
+    - node.type.image_cards_landing
+    - node.type.news_landing_page
+    - node.type.page
+    - node.type.past_events_landing_page
+    - node.type.publication_page
+    - node.type.resources
+    - node.type.resources_landing_page
+    - node.type.testimonial
+  module:
+    - content_moderation
+id: editorial
+label: Editorial
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Unpublished
+      weight: 5
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      weight: -5
+      published: false
+      default_revision: false
+    needs_review:
+      label: 'Needs Review'
+      weight: 7
+      published: false
+      default_revision: false
+    published:
+      label: Published
+      weight: 0
+      published: true
+      default_revision: true
+  transitions:
+    archive:
+      label: Unpublish
+      from:
+        - published
+      to: archived
+      weight: 0
+    archived_draft:
+      label: 'Restore to Draft'
+      from:
+        - archived
+      to: draft
+      weight: 1
+    archived_published:
+      label: Restore
+      from:
+        - archived
+      to: published
+      weight: 2
+    create_new_draft:
+      label: 'Create New Draft'
+      from:
+        - draft
+        - published
+      to: draft
+      weight: -4
+    publish:
+      label: Publish
+      from:
+        - draft
+        - needs_review
+        - published
+      to: published
+      weight: -1
+    ready_for_review:
+      label: 'Ready for review'
+      from:
+        - draft
+        - needs_review
+        - published
+      to: needs_review
+      weight: -3
+    restore_to_needs_review:
+      label: 'Restore to Needs Review'
+      from:
+        - archived
+      to: needs_review
+      weight: 3
+    review_declined:
+      label: 'Review Declined'
+      from:
+        - needs_review
+      to: draft
+      weight: -2
+  entity_types:
+    node:
+      - article
+      - book
+      - contact_landing_page
+      - events
+      - events_landing_page
+      - faculty_landing_page
+      - faculty_staff
+      - faq
+      - generic_page
+      - home_page
+      - image_cards
+      - image_cards_landing
+      - news_landing_page
+      - page
+      - past_events_landing_page
+      - publication_page
+      - resources
+      - resources_landing_page
+      - testimonial
+  default_moderation_state: published

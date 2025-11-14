@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c752461e-dbb8-4448-9e8e-7b146283a4ea
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: webstac_420x420_1.png
+  uri:
+    -
+      value: 'public://2024-03/webstac_420x420_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 7622
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1711558657

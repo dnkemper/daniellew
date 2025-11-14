@@ -1,0 +1,49 @@
+uuid: 4922490f-940b-43ce-869a-766848f7637d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_student_story.field_quote
+    - field.field.paragraph.publication_student_story.field_student_image
+    - field.field.paragraph.publication_student_story.field_student_name
+    - field.field.paragraph.publication_student_story.field_student_title
+    - paragraphs.paragraphs_type.publication_student_story
+id: paragraph.publication_student_story.default
+targetEntityType: paragraph
+bundle: publication_student_story
+mode: default
+content:
+  field_quote:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_student_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: blog_thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_student_name:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_student_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

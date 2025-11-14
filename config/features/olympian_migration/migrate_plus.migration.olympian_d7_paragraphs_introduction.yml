@@ -1,0 +1,80 @@
+uuid: 70fb10c8-5fa4-4d7d-b100-a34e05f3b82e
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_introduction
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Introduction)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: introduction
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_headline:
+    -
+      plugin: get
+      source: field_headline
+  field_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_description
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_ampersand:
+    -
+      plugin: get
+      source: field_ampersand
+  field_background:
+    -
+      plugin: get
+      source: field_background
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: introduction
+idMap:
+  plugin: smart_sql
+migration_dependencies: {  }

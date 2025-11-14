@@ -1,0 +1,29 @@
+uuid: 83aeb241-b49d-4b21-8215-4a60529a0626
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_authority_issuer
+    - node.type.coin
+    - taxonomy.vocabulary.coin_issuer
+id: node.coin.field_coin_authority_issuer
+field_name: field_coin_authority_issuer
+entity_type: node
+bundle: coin
+label: 'Authority: Issuer'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      coin_issuer: coin_issuer
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

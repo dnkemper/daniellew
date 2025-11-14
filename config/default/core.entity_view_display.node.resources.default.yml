@@ -1,0 +1,109 @@
+uuid: 088ef599-bd57-4bd2-8e7f-398728e4a523
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.resources.field_button_url
+    - field.field.node.resources.field_infographic
+    - field.field.node.resources.field_meta_tags
+    - field.field.node.resources.field_new_window
+    - field.field.node.resources.field_node_weight
+    - field.field.node.resources.field_resource_category
+    - field.field.node.resources.field_search
+    - field.field.node.resources.field_subtitle
+    - field.field.node.resources.field_title
+    - node.type.resources
+  module:
+    - link
+    - user
+id: node.resources.default
+targetEntityType: node
+bundle: resources
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_button_url:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_infographic:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: infographic
+      link: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_new_window:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_node_weight:
+    type: number_integer
+    label: visually_hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_resource_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_subtitle:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_meta_tags: true
+  field_search: true
+  layout_builder__layout: true
+  search_api_excerpt: true

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: jimes.ddev.site
+    protocol: https
+  machine_name: jimes
+  human_name: jimes.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: jimes.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/jimes.wustl.edu/files'
+    origin: 'https://jimes.wustl.edu'
+drupal:
+  db:
+    database: drupal_jimes
+system:
+  site:
+    contact_us_url: 'https://jimes.wustl.edu/contact-us'
+    name: jimes
+    email: jimes@wustl.edu

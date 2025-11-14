@@ -1,0 +1,23 @@
+uuid: 8ceaabd4-cf2e-43ec-bf33-1584804699e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.date_repeat_entity_clone_state
+    - node.type.generic_page
+id: node.generic_page.date_repeat_entity_clone_state
+field_name: date_repeat_entity_clone_state
+entity_type: node
+bundle: generic_page
+label: 'Clone state (do not change)'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

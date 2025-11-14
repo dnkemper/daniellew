@@ -1,0 +1,9 @@
+
+{% block paragraph %}
+  {% if content.field_two_col_title.0 %}
+    <h4>{{ content.field_two_col_title.0 }}</h4>
+  {% endif %}
+  {% if content.field_two_col_wysiwyg.0 %}
+  {{ content.field_two_col_wysiwyg.0 }}
+  {% endif %}
+{% endblock %}

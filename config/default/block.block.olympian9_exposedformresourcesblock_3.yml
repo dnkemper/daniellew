@@ -1,0 +1,23 @@
+uuid: 5383b76c-bac4-493f-b598-23f737790e8e
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.resources
+  module:
+    - views
+  theme:
+    - olympian9
+id: olympian9_exposedformresourcesblock_3
+theme: olympian9
+region: featured
+weight: 0
+provider: null
+plugin: 'views_exposed_filter_block:resources-block_3'
+settings:
+  id: 'views_exposed_filter_block:resources-block_3'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility: {  }

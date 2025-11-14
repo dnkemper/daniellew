@@ -1,0 +1,11 @@
+uuid: ccc06f74-8c9b-4d96-ac24-d8685fba517f
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+id: file.media_original
+label: media_original
+description: ''
+targetEntityType: file
+cache: true

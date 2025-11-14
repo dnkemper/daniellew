@@ -1,0 +1,108 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - view_mode: View mode; for example, "preview" or "full".
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ * - field_ampersand = boolean ( Show Ampersand / Hide Ampersand )
+ * - field_background = list text field
+ * -Red|Red
+ * -Dark|Dark
+ * - White|White
+ * - field_background_image = image
+ * - field_description = text plain long
+ * - field_headline = text plain
+ *
+ * @see template_preprocess_paragraph()
+ */
+#}
+
+
+{% block paragraph %}
+
+  <br>
+  <ul class="social-links">
+    {% if content.field_facebook_link[0]['#url'] %}
+      <li>
+        <a href="{{ content.field_facebook_link[0]['#url'] }}" class="facebook"
+           aria-label="Opens Facebook link">
+          <div class="social-text"></div>
+          <svg>
+            <use xlink:href="#facebook"></use>
+          </svg>
+        </a>
+      </li>
+    {% endif %}
+    {% if content.field_linkedin_link[0]['#url'] %}
+      <li>
+        <a href="{{ content.field_linkedin_link[0]['#url'] }}" class="linkedin"
+           aria-label="Opens LinkedIn link">
+          <div class="social-text"></div>
+          <svg>
+            <use xlink:href="#linkedin"></use>
+          </svg>
+        </a>
+      </li>
+    {% endif %}
+    {% if content.field_twitter_link[0]['#url'] %}
+      <li>
+        <a href="{{ content.field_twitter_link[0]['#url'] }}" class="twitter"
+           aria-label="Opens X link">
+          <div class="social-text"></div>
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+        </a>
+      </li>
+    {% endif %}
+    {% if content.field_instagram_link[0]['#url'] %}
+      <li>
+        <a href="{{ content.field_instagram_link[0]['#url'] }}" class="instagram"
+           aria-label="Opens Instagram link">
+          <div class="social-text"></div>
+          <svg>
+            <use xlink:href="#instagram"></use>
+          </svg>
+        </a>
+      </li>
+    {% endif %}
+    {% if content.field_youtube_link[0]['#url'] %}
+      <li>
+        <a href="{{ content.field_youtube_link[0]['#url'] }}" class="youtube"
+           aria-label="Opens Youtube link">
+          <div class="social-text"></div>
+          <svg>
+            <use xlink:href="#youtube"></use>
+          </svg>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+
+{% endblock paragraph %}

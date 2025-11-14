@@ -1,0 +1,107 @@
+uuid: a0d43aa8-78a1-4f34-9e5f-e5e81f9e48b5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.list
+    - field.field.node.resources.field_button_url
+    - field.field.node.resources.field_infographic
+    - field.field.node.resources.field_meta_tags
+    - field.field.node.resources.field_new_window
+    - field.field.node.resources.field_node_weight
+    - field.field.node.resources.field_resource_category
+    - field.field.node.resources.field_search
+    - field.field.node.resources.field_subtitle
+    - field.field.node.resources.field_title
+    - node.type.resources
+  module:
+    - link
+    - private_content
+    - user
+id: node.resources.list
+targetEntityType: node
+bundle: resources
+mode: list
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_button_url:
+    type: link_separate
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_new_window:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_node_weight:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_resource_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_subtitle:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_infographic: true
+  field_meta_tags: true
+  field_search: true
+  search_api_excerpt: true

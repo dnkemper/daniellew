@@ -1,0 +1,11 @@
+uuid: 5f0843a8-0166-448c-9d91-1c3a9cdab53c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.spotlight_mobile
+label: 'Spotlight Mobile'
+description: ''
+targetEntityType: media
+cache: true

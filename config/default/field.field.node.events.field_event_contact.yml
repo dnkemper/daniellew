@@ -1,0 +1,21 @@
+uuid: 1408f6c5-2af4-47c7-be32-63cd9b73029e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_event_contact
+    - node.type.events
+id: node.events.field_event_contact
+field_name: field_event_contact
+entity_type: node
+bundle: events
+label: 'Event Contact'
+description: 'This field is required for the University-wide “Happenings” Calendar and for the main Arts & Sciences calendar.'
+required: true
+translatable: false
+default_value:
+  -
+    value: '[site:mail]'
+default_value_callback: ''
+settings: {  }
+field_type: string

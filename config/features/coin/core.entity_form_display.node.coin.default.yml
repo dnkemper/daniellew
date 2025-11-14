@@ -1,0 +1,635 @@
+uuid: 289f5b42-b54b-4e40-ab5a-80f1a76fb65a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.coin.body
+    - field.field.node.coin.field_coin_acquisition_y
+    - field.field.node.coin.field_coin_additional_image
+    - field.field.node.coin.field_coin_authority_issuer
+    - field.field.node.coin.field_coin_authority_ruler
+    - field.field.node.coin.field_coin_bibliography
+    - field.field.node.coin.field_coin_collection
+    - field.field.node.coin.field_coin_collection_number
+    - field.field.node.coin.field_coin_conservation
+    - field.field.node.coin.field_coin_curators_comment
+    - field.field.node.coin.field_coin_date_first
+    - field.field.node.coin.field_coin_date_last
+    - field.field.node.coin.field_coin_denomination
+    - field.field.node.coin.field_coin_die_axis
+    - field.field.node.coin.field_coin_dimensions_1
+    - field.field.node.coin.field_coin_languages
+    - field.field.node.coin.field_coin_lot_num
+    - field.field.node.coin.field_coin_material
+    - field.field.node.coin.field_coin_meta_tags
+    - field.field.node.coin.field_coin_mint1
+    - field.field.node.coin.field_coin_object_num
+    - field.field.node.coin.field_coin_object_type
+    - field.field.node.coin.field_coin_obverse_comment
+    - field.field.node.coin.field_coin_obverse_description
+    - field.field.node.coin.field_coin_obverse_image
+    - field.field.node.coin.field_coin_obverse_languages
+    - field.field.node.coin.field_coin_obverse_legend
+    - field.field.node.coin.field_coin_obverse_mintmarks
+    - field.field.node.coin.field_coin_original_ticket
+    - field.field.node.coin.field_coin_original_ticket_photo
+    - field.field.node.coin.field_coin_permanent_location
+    - field.field.node.coin.field_coin_portrayed
+    - field.field.node.coin.field_coin_provenance
+    - field.field.node.coin.field_coin_purchase_information
+    - field.field.node.coin.field_coin_reverse_comment
+    - field.field.node.coin.field_coin_reverse_description
+    - field.field.node.coin.field_coin_reverse_image
+    - field.field.node.coin.field_coin_reverse_languages
+    - field.field.node.coin.field_coin_reverse_legend
+    - field.field.node.coin.field_coin_reverse_mintmarks
+    - field.field.node.coin.field_coin_status
+    - field.field.node.coin.field_coin_temporary_location
+    - field.field.node.coin.field_coin_value
+    - field.field.node.coin.field_coin_weight
+    - node.type.coin
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - field_group
+    - media_library
+    - media_library_edit
+    - metatag
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_coin_basic_information:
+      children:
+        - title
+        - field_coin_object_type
+        - field_coin_collection_number
+        - group_object_number
+        - group_dates
+        - field_coin_status
+        - field_coin_permanent_location
+        - field_coin_temporary_location
+        - field_coin_material
+        - field_coin_denomination
+        - field_coin_dimensions_1
+        - field_coin_weight
+        - field_coin_die_axis
+        - field_coin_authority_ruler
+        - field_coin_authority_issuer
+        - field_coin_portrayed
+        - field_coin_languages
+        - field_coin_mint1
+        - body
+      label: 'Basic Information'
+      region: content
+      parent_name: ''
+      weight: 6
+      format_type: details
+      format_settings:
+        classes: 'group-basic-information field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_object_number:
+      children:
+        - field_coin_acquisition_y
+        - field_coin_lot_num
+        - field_coin_object_num
+      label: 'Object Number'
+      region: content
+      parent_name: group_coin_basic_information
+      weight: 3
+      format_type: details
+      format_settings:
+        classes: 'group-object-number field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: 'The information in this group should be a unique combination of Acquisition Year, Lot Number, and Object Number'
+        required_fields: true
+    group_dates:
+      children:
+        - field_coin_date_first
+        - field_coin_date_last
+      label: Dates
+      region: content
+      parent_name: group_coin_basic_information
+      weight: 4
+      format_type: details
+      format_settings:
+        classes: 'group-dates field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: true
+        description: ''
+        required_fields: true
+    group_obverse_information:
+      children:
+        - field_coin_obverse_image
+        - field_coin_obverse_description
+        - field_coin_obverse_legend
+        - field_coin_obverse_mintmarks
+        - field_coin_obverse_languages
+        - field_coin_obverse_comment
+      label: 'Obverse Information'
+      region: content
+      parent_name: ''
+      weight: 7
+      format_type: details
+      format_settings:
+        classes: 'group-obverse-information field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_reverse_information:
+      children:
+        - field_coin_reverse_image
+        - field_coin_reverse_description
+        - field_coin_reverse_legend
+        - field_coin_reverse_mintmarks
+        - field_coin_reverse_languages
+        - field_coin_reverse_comment
+      label: 'Reverse Information'
+      region: content
+      parent_name: ''
+      weight: 8
+      format_type: details
+      format_settings:
+        classes: 'group-reverse-information field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+    group_additional_information:
+      children:
+        - field_coin_curators_comment
+        - field_coin_conservation
+        - field_coin_value
+        - field_coin_purchase_information
+        - field_coin_original_ticket
+        - field_coin_original_ticket_photo
+        - field_coin_additional_image
+        - field_coin_collection
+        - field_coin_provenance
+        - field_coin_bibliography
+      label: 'Additional Information'
+      region: content
+      parent_name: ''
+      weight: 9
+      format_type: details
+      format_settings:
+        classes: 'group-additional-information field-group-fieldset'
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
+id: node.coin.default
+targetEntityType: node
+bundle: coin
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 19
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_coin_acquisition_y:
+    type: number
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_additional_image:
+    type: media_library_widget
+    weight: 40
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_coin_authority_issuer:
+    type: entity_reference_autocomplete_tags
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_authority_ruler:
+    type: entity_reference_autocomplete_tags
+    weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_bibliography:
+    type: text_textarea_with_summary
+    weight: 43
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_collection:
+    type: entity_reference_autocomplete_tags
+    weight: 41
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_collection_number:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_conservation:
+    type: text_textarea
+    weight: 35
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_curators_comment:
+    type: text_textarea
+    weight: 34
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_date_first:
+    type: entity_reference_autocomplete_tags
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_date_last:
+    type: entity_reference_autocomplete_tags
+    weight: 12
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_denomination:
+    type: entity_reference_autocomplete_tags
+    weight: 9
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_die_axis:
+    type: string_textfield
+    weight: 13
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_dimensions_1:
+    type: number
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_languages:
+    type: entity_reference_autocomplete_tags
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_lot_num:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_material:
+    type: entity_reference_autocomplete_tags
+    weight: 8
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_meta_tags:
+    type: metatag_firehose
+    weight: 10
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_coin_mint1:
+    type: entity_reference_autocomplete_tags
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_object_num:
+    type: number
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_object_type:
+    type: entity_reference_autocomplete_tags
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_obverse_comment:
+    type: string_textfield
+    weight: 35
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_obverse_description:
+    type: text_textarea_with_summary
+    weight: 29
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_obverse_image:
+    type: media_library_widget
+    weight: 28
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_coin_obverse_languages:
+    type: entity_reference_autocomplete_tags
+    weight: 34
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_obverse_legend:
+    type: text_textarea_with_summary
+    weight: 31
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_obverse_mintmarks:
+    type: text_textarea_with_summary
+    weight: 32
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_original_ticket:
+    type: options_buttons
+    weight: 38
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_coin_original_ticket_photo:
+    type: media_library_widget
+    weight: 39
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_coin_permanent_location:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_portrayed:
+    type: entity_reference_autocomplete_tags
+    weight: 16
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_provenance:
+    type: text_textarea
+    weight: 42
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_purchase_information:
+    type: string_textfield
+    weight: 37
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_reverse_comment:
+    type: string_textfield
+    weight: 30
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_reverse_description:
+    type: text_textarea_with_summary
+    weight: 26
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_reverse_image:
+    type: media_library_widget
+    weight: 25
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_coin_reverse_languages:
+    type: entity_reference_autocomplete_tags
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_reverse_legend:
+    type: text_textarea_with_summary
+    weight: 27
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_reverse_mintmarks:
+    type: text_textarea_with_summary
+    weight: 28
+    region: content
+    settings:
+      rows: 5
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_coin_status:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_coin_temporary_location:
+    type: string_textfield
+    weight: 7
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_value:
+    type: string_textfield
+    weight: 36
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_coin_weight:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  promote: true
+  status: true
+  sticky: true

@@ -1,0 +1,19 @@
+uuid: 2b595b26-92a5-4e47-8ef0-7a5cea28af23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content
+    - node.type.events
+id: node.events.field_shared_content
+field_name: field_shared_content
+entity_type: node
+bundle: events
+label: shared_content
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

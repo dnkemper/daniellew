@@ -1,0 +1,11 @@
+uuid: d2a3bec2-6f88-491f-b5ed-942fed2dd139
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.person_card
+label: 'Person Card'
+description: ''
+targetEntityType: media
+cache: true

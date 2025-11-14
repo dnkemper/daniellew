@@ -1,0 +1,24 @@
+uuid: 847ef944-dcea-4d49-87ec-96a933acbc8f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_additional_image
+    - media.type.image
+    - node.type.coin
+id: node.coin.field_coin_additional_image
+field_name: field_coin_additional_image
+entity_type: node
+bundle: coin
+label: 'Additional Images'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference

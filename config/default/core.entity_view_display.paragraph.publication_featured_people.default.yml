@@ -1,0 +1,25 @@
+uuid: 0878db0d-f87e-4641-b55d-386d0c905a51
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_featured_people.field_person
+    - paragraphs.paragraphs_type.publication_featured_people
+  module:
+    - entity_reference_revisions
+id: paragraph.publication_featured_people.default
+targetEntityType: paragraph
+bundle: publication_featured_people
+mode: default
+content:
+  field_person:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

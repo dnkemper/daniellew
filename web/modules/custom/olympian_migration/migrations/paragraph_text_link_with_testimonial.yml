@@ -1,0 +1,59 @@
+id: paragraph_text_link_with_testimonial
+label: 'Text Link with Testimonial Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: text_link_with_testimonial  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: text_link_with_testimonial  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Boolean field mapping
+  field__text_new_window:
+    plugin: get
+    source: field__text_new_window
+
+  # Text with summary field mapping
+  field_half_text_body: field_half_text_body
+
+  # Text field mappings
+  field_half_text_title: field_half_text_title
+  field_text_bkg_color: field_text_bkg_color
+
+  field_button_link:
+    plugin: field_link_custom
+    source: field_half_text_link
+    title_source: field_link_text
+
+  # Paragraphs field mapping (reference to 'testimonial')
+  field_testimonial:
+    plugin: sub_process
+    source: field_testimonial
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_testimonial
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: text_link_with_testimonial
+migration_dependencies:
+  required:
+    - paragraph_testimonial
+  optional: {}

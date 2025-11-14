@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 01ab92df-8d4d-4c7a-8929-2e4c5cb58a39
+  bundle: leadership_administrative_staf
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Emeriti
+  weight:
+    -
+      value: 5
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /people22
+      langcode: en
+      pathauto: 0

@@ -1,0 +1,74 @@
+id: paragraph_contact_header
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - artsci-paragraph
+  - 'Paragraphs Content'
+label: 'Paragraphs (Contact Header)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: contact_header
+process:
+  type:
+    plugin: default_value
+    default_value: contact_header  # Ensure this matches the D10 machine name.
+  field_background_image:
+    -
+      plugin: get
+      source: field_background_image
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_external_url:
+    -
+      plugin: get
+      source: field_external_url
+  field_phone_number:
+    -
+      plugin: get
+      source: field_phone_number
+  field_email_address:
+    -
+      plugin: get
+      source: field_email_address
+  field_address:
+    -
+      plugin: get
+      source: field_address
+  field_address_2:
+    -
+      plugin: get
+      source: field_address_2
+  field_map:
+    -
+      plugin: get
+      source: field_map
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: contact_header
+migration_dependencies:
+  required: {}
+  optional: {}

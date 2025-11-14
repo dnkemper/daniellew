@@ -1,0 +1,21 @@
+uuid: 5659db44-bf72-4904-aeef-2d740aea9998
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category_display
+    - node.type.past_events_landing_page
+  module:
+    - options
+id: node.past_events_landing_page.field_category_display
+field_name: field_category_display
+entity_type: node
+bundle: past_events_landing_page
+label: 'Category Display'
+description: 'Changes how the Category filter on the Past Events Landing Page is displayed.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

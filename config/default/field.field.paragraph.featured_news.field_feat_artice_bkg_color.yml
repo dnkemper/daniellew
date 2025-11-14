@@ -1,0 +1,21 @@
+uuid: 2b00adbf-3556-4693-9ffc-193c2d2037b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_feat_artice_bkg_color
+    - paragraphs.paragraphs_type.featured_news
+  module:
+    - options
+id: paragraph.featured_news.field_feat_artice_bkg_color
+field_name: field_feat_artice_bkg_color
+entity_type: paragraph
+bundle: featured_news
+label: 'Background Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

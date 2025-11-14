@@ -1,0 +1,66 @@
+uuid: 89e825c7-eba5-41a4-ba15-0bbd22ad624d
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_dark_callout
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+label: 'Paragraphs (Dark Callout)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: dark_callout
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_callout_button:
+    plugin: field_link_custom
+    source: field_callout_button_url
+    title_source: field_callout_button_text
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_description
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: dark_callout
+migration_dependencies: {  }

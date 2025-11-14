@@ -1,0 +1,10 @@
+uuid: 3aeb3b02-1fea-4641-9977-1a04046ed281
+langcode: en
+status: true
+dependencies: {  }
+id: header
+label: Header
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Header'
+behavior_plugins: {  }

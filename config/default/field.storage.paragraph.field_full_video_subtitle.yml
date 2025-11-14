@@ -1,0 +1,21 @@
+uuid: daf1ae40-d217-44e0-85e7-d4b9b2f762eb
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_full_video_subtitle
+field_name: field_full_video_subtitle
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

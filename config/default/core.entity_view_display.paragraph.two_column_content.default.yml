@@ -1,0 +1,52 @@
+uuid: 19c43a8c-27b4-48d2-b14b-1038ffc5ac53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.two_column_content.field_footer_callout_bg
+    - field.field.paragraph.two_column_content.field_single_column
+    - field.field.paragraph.two_column_content.field_two_col_title
+    - field.field.paragraph.two_column_content.field_two_col_wysiwyg
+    - paragraphs.paragraphs_type.two_column_content
+  module:
+    - options
+    - text
+id: paragraph.two_column_content.default
+targetEntityType: paragraph
+bundle: two_column_content
+mode: default
+content:
+  field_footer_callout_bg:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_single_column:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_two_col_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_two_col_wysiwyg:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

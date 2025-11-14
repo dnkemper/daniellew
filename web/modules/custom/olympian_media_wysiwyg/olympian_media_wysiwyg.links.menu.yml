@@ -1,0 +1,224 @@
+olympian_media_wysiwyg.webform:
+  menu_name: main
+  title: 'Webforms'
+  route_name: entity.webform.collection
+  description: 'Webforms'
+  parent: system.admin_content
+  weight: 99
+olympian_media_wysiwyg.webform_add:
+  menu_name: main
+  title: 'Add a Webform'
+  route_name: entity.webform.add_form
+  description: 'Add a Webform'
+  parent: olympian_media_wysiwyg.webforms
+  weight: 99
+olympian_media_wysiwyg.node_find:
+  title: Find content
+  description: Find content.
+  parent: system.admin
+  route_name: system.admin_content
+  weight: -10
+olympian_media_wysiwyg.webforms:
+  title: 'Webforms'
+  route_name: entity.webform.collection
+  parent: system.admin
+  weight: -9
+olympian_media_wysiwyg.main_menu:
+  title: 'Main menu'
+  route_name: entity.menu.edit_form
+  parent: system.admin
+  route_parameters: { menu: 'main' }
+  weight: -8
+olympian_media_wysiwyg.secondary_menu:
+  title: 'Secondary menu'
+  route_name: entity.menu.edit_form
+  parent: system.admin
+  route_parameters: { menu: 'menu-secondary-navigation' }
+  weight: -7
+olympian_media_wysiwyg.quick_menu:
+  title: 'Quick Links'
+  menu_name: shortcuts
+  route_name: entity.menu.edit_form
+  parent: system.admin
+  route_parameters: { menu: 'menu-quick-links' }
+  weight: -7
+olympian_media_wysiwyg.jira_link:
+  title: 'Jira Board'
+  url: 'https://washuartsci.atlassian.net/jira/software/c/projects/DWT/boards/35'
+  menu_name: shortcuts
+  attributes:
+    target: '_blank'
+  weight: 180
+
+olympian_media_wysiwyg.structure_link:
+  title: 'Structure'
+  menu_name: shortcuts
+  route_name: system.admin_structure
+  weight: -10
+olympian_media_wysiwyg.structure_link_2:
+  title: 'Structure'
+  menu_name: features
+  route_name: system.admin_structure
+  weight: -10
+olympian_media_wysiwyg.structure_link_3:
+  title: 'Redirects'
+  menu_name: features
+  route_name: redirect.list
+  weight: -15
+olympian_media_wysiwyg.paragraphs_link:
+  title: 'Paragraphs'
+  menu_name: shortcuts
+  route_name: entity.paragraphs_type.collection
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -2
+olympian_media_wysiwyg.display_mode:
+  title: 'Display Modes'
+  menu_name: shortcuts
+  route_name: field_ui.display_mode
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -2
+olympian_media_wysiwyg.view_mode:
+  title: 'View Modes'
+  menu_name: shortcuts
+  route_name: entity.entity_view_mode.collection
+  parent: olympian_media_wysiwyg.display_mode
+  weight: -7
+olympian_media_wysiwyg.form_mode:
+  title: 'Form Modes'
+  menu_name: shortcuts
+  route_name: entity.entity_form_mode.collection
+  parent: olympian_media_wysiwyg.display_mode
+  weight: -2
+olympian_media_wysiwyg.menu_links:
+  title: 'Menus'
+  menu_name: shortcuts
+  route_name: entity.menu.collection
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -5
+olympian_media_wysiwyg.blocks_link:
+  title: 'Blocks'
+  menu_name: shortcuts
+  route_name: block.admin_display
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -4
+olympian_media_wysiwyg.content_types_link:
+  title: 'Content types'
+  menu_name: shortcuts
+  route_name: entity.node_type.collection
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -3
+olympian_media_wysiwyg.views_link:
+  title: 'Views'
+  route_name: entity.view.collection
+  menu_name: shortcuts
+  parent: olympian_media_wysiwyg.structure_link
+  weight: -2
+olympian_media_wysiwyg.taxonomy_link:
+  title: 'Taxonomy'
+  menu_name: shortcuts
+  route_name: entity.taxonomy_vocabulary.collection
+  parent: olympian_media_wysiwyg.structure_link
+  weight: 30
+olympian_media_wysiwyg.taxonomy_link_2:
+  title: 'Taxonomy'
+  menu_name: features
+  route_name: entity.taxonomy_vocabulary.collection
+  parent: olympian_media_wysiwyg.structure_link_2
+  weight: 30
+olympian_media_wysiwyg.status_report_link:
+  title: 'Status report'
+  menu_name: shortcuts
+  route_name: system.status
+  weight: 10
+olympian_media_wysiwyg.log_messages_link:
+  title: 'Log messages'
+  menu_name: shortcuts
+  route_name: dblog.overview
+  weight: 20
+olympian_media_wysiwyg.user:
+  menu_name: shortcuts
+  class: Drupal\user\Plugin\Menu\LoginLogoutMenuLink
+  weight: 300
+olympian_media_wysiwyg.user_2:
+  menu_name: features
+  class: Drupal\user\Plugin\Menu\LoginLogoutMenuLink
+  weight: 300
+olympian_media_wysiwyg.theme_install:
+  title: Add new theme
+  description: Add new content.
+  menu_name: appearance
+  route_name: update.theme_install
+  weight: 5
+olympian_media_wysiwyg.theme_uninstall:
+  title: Update theme
+  description: Adjust theme.
+  menu_name: appearance
+  route_name: update.theme_update
+  weight: 20
+olympian_media_wysiwyg.olympian:
+  title: Olympian theme settings
+  description: Fix Olympian theme settings.
+  menu_name: appearance
+  route_name: system.theme_settings_theme
+  route_parameters: { theme: 'olympian9' }
+  weight: 1
+olympian_media_wysiwyg.gin:
+  title: Gin theme settings
+  description: Fix Gin theme settings.
+  menu_name: appearance
+  route_name: system.theme_settings_theme
+  route_parameters: { theme: 'gin' }
+  weight: 2
+olympian_media_wysiwyg.modules:
+  title: Install new module
+  description: Add a new module.
+  menu_name: appearance
+  route_name: system.modules_list
+  weight: 6
+olympian_media_wysiwyg.module_uninstall:
+  title: Uninstall module
+  description: Uninstall a module
+  menu_name: appearance
+  route_name: system.modules_uninstall
+  weight: 7
+olympian_media_wysiwyg.module_update:
+  title: Update a module
+  description: Update a module
+  menu_name: appearance
+  route_name: update.module_update
+  weight: 8
+olympian_media_wysiwyg.configuration_link:
+  title: 'Configuration'
+  menu_name: shortcuts
+  route_name: system.admin_config
+  weight: 1
+olympian_media_wysiwyg.system_link:
+  title: 'System'
+  menu_name: shortcuts
+  route_name: system.admin_config_system
+  parent: 'olympian_media_wysiwyg.configuration_link'
+  weight: 0
+olympian_media_wysiwyg.content_authoring_link:
+  title: 'Content Config'
+  menu_name: shortcuts
+  route_name: system.admin_config_content
+  parent: olympian_media_wysiwyg.configuration_link
+  weight: 100
+olympian_media_wysiwyg.user_interface_link:
+  title: 'User interface'
+  menu_name: shortcuts
+  route_name: system.admin_config_ui
+  parent: olympian_media_wysiwyg.configuration_link
+  weight: 300
+olympian_media_wysiwyg.development_link:
+  title: 'Development'
+  menu_name: shortcuts
+  route_name: system.admin_config_development
+  parent: olympian_media_wysiwyg.configuration_link
+  weight: 400
+olympian_media_wysiwyg.search_link:
+  title: 'Search'
+  menu_name: shortcuts
+  route_name: system.admin_config_search
+  parent: olympian_media_wysiwyg.configuration_link
+  weight: 500

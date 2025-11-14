@@ -1,0 +1,29 @@
+uuid: d7e3d384-8d96-4f09-b2c7-adc6522295f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_left_image
+    - media.type.image
+    - paragraphs.paragraphs_type.dark_callouts
+id: paragraph.dark_callouts.field_left_image
+field_name: field_left_image
+entity_type: paragraph
+bundle: dark_callouts
+label: 'Left Image'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

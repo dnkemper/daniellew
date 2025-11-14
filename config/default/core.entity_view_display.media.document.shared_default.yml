@@ -1,0 +1,46 @@
+uuid: 7c065d3c-0e1f-4816-8548-6c050992b5ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.shared_default
+    - field.field.media.document.field_media_directory
+    - field.field.media.document.field_media_document
+    - media.type.document
+  module:
+    - olympian_core
+_core:
+  default_config_hash: XxUyhaTuM0OUUZpr8G6jdrFBEh5eag7auWxBKhm6cvY
+id: media.document.shared_default
+targetEntityType: media
+bundle: document
+mode: shared_default
+content:
+  field_media_directory:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_document:
+    type: media_entity_download_download_link
+    label: visually_hidden
+    settings:
+      trim_length: ''
+      target: _blank
+      disposition: attachment
+      url_only: false
+      url_plain: false
+      rel: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

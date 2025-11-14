@@ -1,0 +1,64 @@
+{
+  "name": "olympian_core",
+  "version": "1.0.0",
+  "description": "Olympian Core",
+  "main": "gulpfile.js",
+  "keywords": [
+    "olympian",
+    "gulp",
+    "scss",
+    "javascript",
+    "image optimization",
+    "svg optimization"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "cypress": "13.13.3"
+  },
+  "//": "'development is the default environment, and legacy is for transpiling the old jQuery codebase",
+  "babel": {
+    "env": {
+      "development": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "commonjs",
+              "targets": {
+                "node": "current"
+              }
+            }
+          ]
+        ]
+      },
+      "legacy": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "scripts": {
+    "build": "yarn run build-sass",
+    "lint": "eslint .",
+    "__COMMENT__SASS_BUILD": "---------- SASS Build ----------",
+    "__COMMENT__SASS_DEPRECATIONS": "--TODO: when mixed-decls errors have been resolved, remove the '--silence-deprecation=mixed-decls' from compile-sass.",
+    "cleanfolder-sass": "del-cli \"css/*\"",
+    "compile-sass": "sass scss:css --embed-sources --quiet-deps --silence-deprecation=mixed-decls",
+    "postcss-sass": "postcss \"css/**/*.css\" --env minifycss --replace --map",
+    "build-sass": "npm-run-all --print-label --continue-on-error cleanfolder-sass compile-sass postcss-sass",
+    "__COMMENT__WATCH": "---------- Watch ----------",
+    "watch-sass": "chokidar \"scss/**/*.scss\" --command \"yarn run build-sass\"",
+    "watch": "npm-run-all --print-label --continue-on-error build-sass watch-sass"
+  }
+}

@@ -1,0 +1,35 @@
+uuid: aa32d9e8-b452-4fbe-ba9f-944202add578
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.shared_default
+    - field.field.media.image.field_media_directory
+    - field.field.media.image.field_media_image
+    - media.type.image
+  module:
+    - image
+_core:
+  default_config_hash: whJrNezqUJ7Qhg7raMQj2Hz9JPiWxijezhWIEN9BVVk
+id: media.image.shared_default
+targetEntityType: media
+bundle: image
+mode: shared_default
+content:
+  field_media_image:
+    type: image_url
+    label: hidden
+    settings:
+      image_style: book_cover
+      show_link_as: absolute
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

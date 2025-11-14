@@ -1,0 +1,29 @@
+uuid: f5e70d0d-c58c-4dd9-afba-70e27cd9c6f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faculty_areas_of_study
+    - node.type.faculty_staff
+    - taxonomy.vocabulary.areas_of_study
+id: node.faculty_staff.field_faculty_areas_of_study
+field_name: field_faculty_areas_of_study
+entity_type: node
+bundle: faculty_staff
+label: 'Areas of Study'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      areas_of_study: areas_of_study
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

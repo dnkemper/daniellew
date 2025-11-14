@@ -1,0 +1,19 @@
+uuid: 4b10fb6b-310f-4a0f-8132-c259e1a5fc9c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_awards_description
+    - paragraphs.paragraphs_type.publication_award
+id: paragraph.publication_award.field_awards_description
+field_name: field_awards_description
+entity_type: paragraph
+bundle: publication_award
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

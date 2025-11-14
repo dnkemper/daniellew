@@ -1,0 +1,13 @@
+{% if content.field_position.0 %}
+{% set position = content.field_position %}
+{% endif %}
+
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultType: 'Profile',
+  resultUrl: content.field_external_profile_link[0]['#url'] ?? url,
+
+
+  details: [
+   { 'label':'Title', 'value':content.field_award.0  ? content.field_award.0 : content.field_position.0}
+  ]
+} %}

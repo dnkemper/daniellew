@@ -1,0 +1,33 @@
+id: paragraph_testimonials
+label: 'Testimonials Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: testimonials
+
+process:
+  type:
+    plugin: default_value
+    default_value: testimonials
+
+  # Entity reference field mapping (assuming the reference is to a node type)
+  field_select_testimonials:
+    plugin: sub_process
+    source: field_select_testimonials
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_testimonial
+        source: target_id
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: testimonials
+
+migration_dependencies:
+  required:
+    - node_testimonial  # Replace with the actual migration ID for the referenced node type
+  optional: {}

@@ -1,0 +1,8 @@
+uuid: eb049fd5-23a2-4efb-b3b4-cfc70c7fac0a
+langcode: en
+status: true
+dependencies: {  }
+name: 'Lot Number'
+vid: coin_lot_number
+description: 'Lot a Collection Item was acquired in'
+weight: 0

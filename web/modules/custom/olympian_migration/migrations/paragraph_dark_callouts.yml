@@ -1,0 +1,53 @@
+id: paragraph_dark_callouts
+label: 'Dark Callouts Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: dark_callouts  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: dark_callouts  # Replace with the machine name of the paragraph bundle in Drupal 10
+  field_title: field_title
+
+  # Image field mapping
+  field_left_image:
+    plugin: sub_process
+    source: field_left_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # Nested paragraphs field mapping
+  field_dark_callouts:
+    plugin: sub_process
+    source: field_dark_callouts
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_dark_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: dark_callouts
+migration_dependencies:
+  required: {}
+  optional: {}

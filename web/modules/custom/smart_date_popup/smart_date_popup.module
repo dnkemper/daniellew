@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Hooks for a bridge between Smart Date and Date Popup.
+ */
+
+/**
+ * Implements hook_views_plugins_filter_alter().
+ *
+ * Replace the core date views filter with one supporting granularity and a date
+ * picker.
+ */
+function smart_date_popup_views_plugins_filter_alter(array &$plugins) {
+  $plugins['date']['class'] = 'Drupal\smart_date_popup\Plugin\views\filter\Date';
+  $plugins['date']['provider'] = 'smart_date_popup';
+}

@@ -1,0 +1,13 @@
+name: olympian_migration
+type: module
+description: Migrations for pulling in content from D7 Multisites
+package: Custom
+core: 8.x
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - migrate
+  - media_migration
+  - migrate_drupal
+  - migrate_conditions
+  - video_filter_migrate
+  - migrate_process_url

@@ -1,0 +1,20 @@
+uuid: 5b6f5c73-52bf-4944-b879-823c52098cf5
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - olympian9
+id: olympian9_messages
+theme: olympian9
+region: alert
+weight: -14
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Messages
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,178 @@
+uuid: 7c4e4104-1784-4ecb-8ef6-edfb93b120d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.article
+    - node.type.book
+    - node.type.contact_landing_page
+    - node.type.events
+    - node.type.events_landing_page
+    - node.type.faculty_landing_page
+    - node.type.faculty_staff
+    - node.type.faq
+    - node.type.generic_page
+    - node.type.home_page
+    - node.type.image_cards
+    - node.type.image_cards_landing
+    - node.type.news_landing_page
+    - node.type.page
+    - node.type.publication_page
+    - node.type.resources
+    - node.type.resources_landing_page
+    - node.type.testimonial
+  module:
+    - actions_permissions
+    - block
+    - filter
+    - honeypot
+    - image
+    - metatag
+    - node
+    - path
+    - pathauto
+    - private_content
+    - redirect
+    - system
+    - taxonomy
+    - toolbar
+    - views_ui
+_core:
+  default_config_hash: OeKGIkmZA_c-t6QLH81WNQx8gDCc1MRmxaTuQgxBByU
+id: administrator
+label: administrator
+weight: -5
+is_admin: true
+permissions:
+  - 'access administration pages'
+  - 'access content'
+  - 'access content overview'
+  - 'access private content'
+  - 'access site in maintenance mode'
+  - 'access site reports'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer actions'
+  - 'administer blocks'
+  - 'administer content types'
+  - 'administer filters'
+  - 'administer honeypot'
+  - 'administer image styles'
+  - 'administer menu'
+  - 'administer meta tags'
+  - 'administer modules'
+  - 'administer nodes'
+  - 'administer pathauto'
+  - 'administer permissions'
+  - 'administer redirects'
+  - 'administer site configuration'
+  - 'administer software updates'
+  - 'administer taxonomy'
+  - 'administer themes'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'administer views'
+  - 'bypass honeypot protection'
+  - 'bypass node access'
+  - 'cancel account'
+  - 'change own username'
+  - 'create article content'
+  - 'create book content'
+  - 'create contact_landing_page content'
+  - 'create events content'
+  - 'create events_landing_page content'
+  - 'create faculty_landing_page content'
+  - 'create faculty_staff content'
+  - 'create faq content'
+  - 'create generic_page content'
+  - 'create home_page content'
+  - 'create image_cards content'
+  - 'create image_cards_landing content'
+  - 'create news_landing_page content'
+  - 'create page content'
+  - 'create resources content'
+  - 'create resources_landing_page content'
+  - 'create testimonial content'
+  - 'create url aliases'
+  - 'delete any article content'
+  - 'delete any book content'
+  - 'delete any contact_landing_page content'
+  - 'delete any events content'
+  - 'delete any events_landing_page content'
+  - 'delete any faculty_landing_page content'
+  - 'delete any faculty_staff content'
+  - 'delete any faq content'
+  - 'delete any generic_page content'
+  - 'delete any home_page content'
+  - 'delete any image_cards content'
+  - 'delete any image_cards_landing content'
+  - 'delete any news_landing_page content'
+  - 'delete any page content'
+  - 'delete any publication_page content'
+  - 'delete any resources content'
+  - 'delete any resources_landing_page content'
+  - 'delete any testimonial content'
+  - 'delete own article content'
+  - 'delete own book content'
+  - 'delete own contact_landing_page content'
+  - 'delete own events content'
+  - 'delete own events_landing_page content'
+  - 'delete own faculty_landing_page content'
+  - 'delete own faculty_staff content'
+  - 'delete own faq content'
+  - 'delete own generic_page content'
+  - 'delete own home_page content'
+  - 'delete own image_cards content'
+  - 'delete own image_cards_landing content'
+  - 'delete own news_landing_page content'
+  - 'delete own page content'
+  - 'delete own publication_page content'
+  - 'delete own resources content'
+  - 'delete own resources_landing_page content'
+  - 'delete own testimonial content'
+  - 'edit any article content'
+  - 'edit any book content'
+  - 'edit any contact_landing_page content'
+  - 'edit any events content'
+  - 'edit any events_landing_page content'
+  - 'edit any faculty_landing_page content'
+  - 'edit any faculty_staff content'
+  - 'edit any faq content'
+  - 'edit any generic_page content'
+  - 'edit any home_page content'
+  - 'edit any image_cards content'
+  - 'edit any image_cards_landing content'
+  - 'edit any news_landing_page content'
+  - 'edit any page content'
+  - 'edit any publication_page content'
+  - 'edit any resources content'
+  - 'edit any resources_landing_page content'
+  - 'edit any testimonial content'
+  - 'edit own article content'
+  - 'edit own book content'
+  - 'edit own contact_landing_page content'
+  - 'edit own events content'
+  - 'edit own events_landing_page content'
+  - 'edit own faculty_landing_page content'
+  - 'edit own faculty_staff content'
+  - 'edit own faq content'
+  - 'edit own generic_page content'
+  - 'edit own home_page content'
+  - 'edit own image_cards content'
+  - 'edit own image_cards_landing content'
+  - 'edit own news_landing_page content'
+  - 'edit own page content'
+  - 'edit own publication_page content'
+  - 'edit own resources content'
+  - 'edit own resources_landing_page content'
+  - 'edit own testimonial content'
+  - 'edit private content'
+  - 'execute private_content_make_private node'
+  - 'execute private_content_make_public node'
+  - 'mark content as private'
+  - 'notify of path changes'
+  - 'select account cancellation method'
+  - 'use text format full_html'
+  - 'view own unpublished content'
+  - 'view the administration theme'

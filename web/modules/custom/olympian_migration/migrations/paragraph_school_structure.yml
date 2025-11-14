@@ -1,0 +1,57 @@
+id: paragraph_school_structure
+label: 'School Structure Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: school_structure
+
+process:
+  type:
+    plugin: default_value
+    default_value: school_structure
+
+  # String field mappings
+  field_title:
+    plugin: get
+    source: field_title
+  field_subtitle:
+    plugin: get
+    source: field_subtitle
+
+  # List string field mapping
+  field_bkg_clr:
+    plugin: get
+    source: field_bkg_clr
+
+  # Entity reference revisions field mapping (to the timeline_slides paragraph)
+  field_timeline_slides_p:
+    plugin: sub_process
+    source: field_timeline_slides_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_timeline_slides
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: school_structure
+
+migration_dependencies:
+  required:
+    - paragraph_timeline_slides
+  optional: {}

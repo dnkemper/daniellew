@@ -1,0 +1,16 @@
+_core:
+  default_config_hash: 4HHP96M4EvFXLlTv2x7sF5zHnLIi_Hw_ckmE76MB6r4
+entity_types:
+  - aggregator_feed
+  - aggregator_item
+  - content_moderation_state
+  - feeds_feed
+  - file
+  - media
+  - menu_link_content
+  - node
+  - search_api_task
+  - taxonomy_term
+  - webform_submission
+  - paragraph
+check_edit_access: true

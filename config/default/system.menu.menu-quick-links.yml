@@ -1,0 +1,8 @@
+uuid: e4f0ed86-9670-4a8f-87fe-375b63444192
+langcode: en
+status: true
+dependencies: {  }
+id: menu-quick-links
+label: 'Quick Links'
+description: 'This menu appears in the footer.'
+locked: false

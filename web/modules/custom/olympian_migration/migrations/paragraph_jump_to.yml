@@ -1,0 +1,48 @@
+id: paragraph_jump_to
+label: 'Jump To Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: jump_to
+
+process:
+  type:
+    plugin: default_value
+    default_value: jump_to
+
+  # Text field mapping
+  field_title:
+    plugin: get
+    source: field_title
+
+  # Paragraphs field mapping
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_links
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: jump_to
+
+migration_dependencies:
+  required:
+    - paragraph_links
+  optional: {}

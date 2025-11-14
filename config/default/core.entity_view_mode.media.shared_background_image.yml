@@ -1,0 +1,11 @@
+uuid: 0cf28bba-af66-4e87-9aa3-6285989ae8d8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.shared_background_image
+label: 'Shared Background Image'
+description: ''
+targetEntityType: media
+cache: true

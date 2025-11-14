@@ -1,0 +1,55 @@
+uuid: e48d6293-73c8-4dd1-a0eb-32d90ea85b8b
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publications
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publications)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publications
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_button_url:
+    -
+      plugin: get
+      source: field_button_url
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publications
+migration_dependencies:
+  required: {}
+  optional: {  }

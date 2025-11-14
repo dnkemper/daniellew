@@ -1,0 +1,20 @@
+uuid: 4abcd1f0-e062-48b9-b046-e618d6d1ec22
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_coin_dimensions_1
+field_name: field_coin_dimensions_1
+entity_type: node
+type: decimal
+settings:
+  precision: 10
+  scale: 2
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

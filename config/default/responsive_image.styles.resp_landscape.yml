@@ -1,0 +1,25 @@
+uuid: 501bd4e3-3eea-4e53-84ce-7e170e1d0aeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.landscape_16_9_1888w
+    - image.style.landscape_16_9_320w
+    - image.style.landscape_16_9_448w
+    - image.style.landscape_16_9_944w
+id: resp_landscape
+label: 'resp landscape'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 930px'
+      sizes_image_styles:
+        - landscape_16_9_1888w
+        - landscape_16_9_320w
+        - landscape_16_9_448w
+        - landscape_16_9_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: landscape_16_9_944w

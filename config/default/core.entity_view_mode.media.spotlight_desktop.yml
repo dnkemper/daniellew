@@ -1,0 +1,11 @@
+uuid: 8b7853c5-4bf2-443e-818c-424a58d49f11
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.spotlight_desktop
+label: 'Spotlight Desktop'
+description: ''
+targetEntityType: media
+cache: true

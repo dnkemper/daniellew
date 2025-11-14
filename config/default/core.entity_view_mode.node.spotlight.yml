@@ -1,0 +1,11 @@
+uuid: d8700eb0-9222-4edb-bc58-37a351a3340f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.spotlight
+label: spotlight
+description: ''
+targetEntityType: node
+cache: true

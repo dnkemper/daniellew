@@ -1,0 +1,28 @@
+uuid: 9907beb0-1fee-4b2b-8797-19b614ce9f79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_direct_link
+    - node.type.article
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: node.article.field_direct_link
+field_name: field_direct_link
+entity_type: node
+bundle: article
+label: 'Direct Link'
+description: 'Articles with this field will take the user directly to that url in a new tab.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

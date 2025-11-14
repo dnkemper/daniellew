@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Olympian's theme override to display the breadcrumb region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+
+{% if breadcrumb %}
+  <nav class="olympian9-breadcrumb" role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <ol class="olympian9-breadcrumb__list">
+    {% for item in breadcrumb %}
+      {% if item.text %}
+      <li class="olympian9-breadcrumb__item">
+        {% if item.url %}
+          <a href="{{ item.url }}" class="olympian9-breadcrumb__link"{% if item.attributes.title %} title="{{ item.attributes.title }}"{% endif %}{% if item.attributes.data %} {{ item.attributes.data }}{% endif %}>{{ item.text }}</a>
+        {% else %}
+          <span class="olympian9-breadcrumb__text">{{ item.text }}</span>
+        {% endif %}
+      </li>
+      {% endif %}
+    {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

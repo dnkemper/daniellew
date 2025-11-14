@@ -1,0 +1,27 @@
+uuid: 3b7cefc5-a252-4304-a86d-c41d0caa5470
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.file.field_folder
+    - taxonomy.vocabulary.media_folders
+  module:
+    - file
+id: file.audio.field_folder
+field_name: field_folder
+entity_type: file
+bundle: audio
+label: 'Media Folder'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      media_folders: media_folders
+    sort:
+      field: _none
+field_type: entity_reference

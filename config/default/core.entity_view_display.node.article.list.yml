@@ -1,0 +1,152 @@
+uuid: 2e7c3845-276c-4adc-8789-dae77df6532b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.list
+    - field.field.node.article.body
+    - field.field.node.article.field_article_home_slideshow
+    - field.field.node.article.field_article_new_window
+    - field.field.node.article.field_author
+    - field.field.node.article.field_category
+    - field.field.node.article.field_content_hash
+    - field.field.node.article.field_direct_link
+    - field.field.node.article.field_faculty_and_staff
+    - field.field.node.article.field_feature_article
+    - field.field.node.article.field_footer_callout_p
+    - field.field.node.article.field_header_image
+    - field.field.node.article.field_introduction_excerpt
+    - field.field.node.article.field_is_shared
+    - field.field.node.article.field_last_fetch
+    - field.field.node.article.field_link_excerpt
+    - field.field.node.article.field_link_thumbnail
+    - field.field.node.article.field_meta_tags
+    - field.field.node.article.field_reverse_header
+    - field.field.node.article.field_search
+    - field.field.node.article.field_shared_content
+    - field.field.node.article.field_shared_content_notify
+    - field.field.node.article.field_shared_content_subscribers
+    - field.field.node.article.field_shared_content_xml
+    - field.field.node.article.field_soundcloud
+    - field.field.node.article.field_soundcloud_media
+    - field.field.node.article.field_video_p
+    - node.type.article
+  module:
+    - link
+    - private_content
+    - user
+id: node.article.list
+targetEntityType: node
+bundle: article
+mode: list
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_article_new_window:
+    type: boolean
+    label: above
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_category:
+    type: entity_reference_label
+    label: visually_hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_direct_link:
+    type: link_separate
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_header_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: background_image
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_is_shared:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_link_excerpt:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_link_thumbnail:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: thumbnail
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_shared_content_xml:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  body: true
+  field_article_home_slideshow: true
+  field_author: true
+  field_content_hash: true
+  field_faculty_and_staff: true
+  field_feature_article: true
+  field_footer_callout_p: true
+  field_introduction_excerpt: true
+  field_last_fetch: true
+  field_meta_tags: true
+  field_reverse_header: true
+  field_search: true
+  field_shared_content: true
+  field_shared_content_notify: true
+  field_shared_content_subscribers: true
+  field_soundcloud: true
+  field_soundcloud_media: true
+  field_video_p: true
+  search_api_excerpt: true

@@ -1,0 +1,25 @@
+uuid: a8d5dd10-6b02-435c-8b14-0aac776c31ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_first_article
+    - paragraphs.paragraphs_type.publications_intro
+id: paragraph.publications_intro.field_first_article
+field_name: field_first_article
+entity_type: paragraph
+bundle: publications_intro
+label: 'First Article'
+description: 'This will be the main article featured in the intro section.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_article
+      arguments: {  }
+field_type: entity_reference

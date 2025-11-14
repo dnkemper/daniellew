@@ -1,0 +1,70 @@
+id: paragraph_timeline_slideshow
+label: 'Timeline Slideshow Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: timeline_slideshow
+
+process:
+  type:
+    plugin: default_value
+    default_value: timeline_slideshow
+  # Image field mapping
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  # Image field mapping
+  field_header_image:
+    plugin: sub_process
+    source: field_header_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  # String field mappings
+  field_title:
+    plugin: get
+    source: field_title
+  field_subtitle:
+    plugin: get
+    source: field_subtitle
+
+
+  # Entity reference revisions field mapping (to the timeline_slides paragraph)
+  field_timeline_slideshow_slide_p:
+    plugin: sub_process
+    source: field_timeline_slideshow_slide_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_timeline_slideshow_slides
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: timeline_slideshow
+
+migration_dependencies:
+  required:
+    - paragraph_timeline_slideshow_slides
+  optional: {}

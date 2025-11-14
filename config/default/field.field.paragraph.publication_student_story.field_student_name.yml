@@ -1,0 +1,19 @@
+uuid: a7960afa-8667-407e-8480-4fa05badd5e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_student_name
+    - paragraphs.paragraphs_type.publication_student_story
+id: paragraph.publication_student_story.field_student_name
+field_name: field_student_name
+entity_type: paragraph
+bundle: publication_student_story
+label: 'Student Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

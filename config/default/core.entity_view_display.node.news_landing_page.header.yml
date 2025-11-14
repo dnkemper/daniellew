@@ -1,0 +1,88 @@
+uuid: 478d5373-a594-4f9d-8bb5-6a1292a588dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.header
+    - field.field.node.news_landing_page.field_category_display
+    - field.field.node.news_landing_page.field_footer_callout_p
+    - field.field.node.news_landing_page.field_header_p
+    - field.field.node.news_landing_page.field_header_type
+    - field.field.node.news_landing_page.field_landing_page_type
+    - field.field.node.news_landing_page.field_meta_tags
+    - field.field.node.news_landing_page.field_news_header_image
+    - field.field.node.news_landing_page.field_search
+    - node.type.news_landing_page
+  module:
+    - entity_reference_revisions
+    - options
+    - user
+id: node.news_landing_page.header
+targetEntityType: node
+bundle: news_landing_page
+mode: header
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_category_display:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_header_type:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_landing_page_type:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_search:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_header_p: true
+  field_meta_tags: true
+  field_news_header_image: true
+  search_api_excerpt: true

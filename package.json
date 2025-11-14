@@ -1,0 +1,25 @@
+{
+  "name": "artsci",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:artsci-webteam/deps.git",
+  "author": "Artsci Webteam",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "web/themes/custom/olympian9",
+      "web/modules/custom/olympian_core"
+    ],
+    "nohoist": [
+      "**/node-sass-glob-importer"
+    ]
+  },
+  "engines": {
+    "node": "^18.0.0"
+  },
+  "dependencies": {
+    "@percy/cli": "^1.27.3"
+  },
+  "devDependencies": {}
+}

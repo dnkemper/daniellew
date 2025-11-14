@@ -1,0 +1,29 @@
+uuid: 656c4a1d-c163-4cc8-8dc6-f2f36fa19e72
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_introduction_exerpt
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.fullscreen_slideshow
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.fullscreen_slideshow.field_introduction_exerpt
+field_name: field_introduction_exerpt
+entity_type: paragraph
+bundle: fullscreen_slideshow
+label: 'Intro Text and Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

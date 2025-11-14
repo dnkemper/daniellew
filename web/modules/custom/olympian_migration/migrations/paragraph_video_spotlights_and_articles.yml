@@ -1,0 +1,75 @@
+id: paragraph_video_spotlights_and_articles
+label: 'Video Spotlights and Articles Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+  - shared-dep
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: video_spotlights_and_articles  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: video_spotlights_and_articles  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Taxonomy field mapping
+  field_category:
+    plugin: sub_process
+    source: field_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_article_categories
+        source: tid
+
+  # Content field mapping
+  field_articles:
+    plugin: sub_process
+    source: field_articles
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  field_second_article:
+    plugin: sub_process
+    source: field_second_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  # Paragraph field mapping
+  field_spotlights:
+    plugin: sub_process
+    source: field_spotlights
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_spotlights
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: video_spotlights_and_articles
+migration_dependencies:
+  required:
+    - node_articles
+    - paragraph_spotlights
+    - taxonomy_article_categories
+  optional: {}

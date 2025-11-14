@@ -1,0 +1,28 @@
+uuid: 67d5bda9-d158-48ba-b7e0-790d461309cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_link
+    - paragraphs.paragraphs_type.intro_with_links
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: paragraph.intro_with_links.field_button_link
+field_name: field_button_link
+entity_type: paragraph
+bundle: intro_with_links
+label: 'Button Link Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

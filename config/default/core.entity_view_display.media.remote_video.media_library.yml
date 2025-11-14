@@ -1,0 +1,42 @@
+uuid: 7e40f7f8-869c-4dae-a353-f38fd4e30912
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.remote_video.field_media_directory
+    - field.field.media.remote_video.field_media_oembed_video
+    - media.type.remote_video
+  module:
+    - olympian_core
+_core:
+  default_config_hash: PGGoP-hVkXe_S-GiJRAub4PHDu0KhMExylclrqjdJb4
+id: media.remote_video.media_library
+targetEntityType: media
+bundle: remote_video
+mode: media_library
+content:
+  field_media_oembed_video:
+    type: youtube_embed
+    label: hidden
+    settings:
+      responsive: '1'
+      width: '560'
+      height: '315'
+      modestbranding: '1'
+      showinfo: '1'
+      show_url: '1'
+      autoplay: 0
+      controls: 0
+      rel: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

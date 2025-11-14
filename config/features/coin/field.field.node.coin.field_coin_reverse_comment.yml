@@ -1,0 +1,19 @@
+uuid: e5f172fd-0870-4181-bd38-aafd9fab474e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_reverse_comment
+    - node.type.coin
+id: node.coin.field_coin_reverse_comment
+field_name: field_coin_reverse_comment
+entity_type: node
+bundle: coin
+label: 'Reverse inscription comment'
+description: '(retrograde, inwards, monogram)'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

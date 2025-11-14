@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: pnp.ddev.site
+    protocol: https
+  machine_name: pnp
+  human_name: pnp.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: pnp.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/pnp.wustl.edu/files'
+    origin: 'https://pnp.wustl.edu'
+drupal:
+  db:
+    database: drupal_pnp
+system:
+  site:
+    contact_us_url: 'https://pnp.wustl.edu/contact-us'
+    name: pnp
+    email: pnp@wustl.edu

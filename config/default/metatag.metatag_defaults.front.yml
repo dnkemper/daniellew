@@ -1,0 +1,17 @@
+uuid: 0976245d-da32-4182-9046-8538616d519b
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 1noCXlegCr5HFehQRF1ViXy1jhU1jZ_sNN99a8Sj5jo
+id: front
+label: 'Front page'
+tags:
+  canonical_url: '[site:url]'
+  og_description: 'Arts & Sciences at Washington University in St. Louis'
+  og_site_name: '[site:name]'
+  og_title: '[site:name]'
+  og_type: website
+  og_url: '[site:url]'
+  shortlink: '[site:url]'
+  title: '[site:name] | Washington University in St. Louis'

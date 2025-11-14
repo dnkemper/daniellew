@@ -1,0 +1,49 @@
+uuid: 62a78039-e6a5-4f36-987c-6866332d0823
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.resources_landing_page.field_call_to_action_p
+    - field.field.node.resources_landing_page.field_category_display
+    - field.field.node.resources_landing_page.field_contact_us_link
+    - field.field.node.resources_landing_page.field_footer_callout_p
+    - field.field.node.resources_landing_page.field_introduction_p
+    - field.field.node.resources_landing_page.field_jump_to_p
+    - field.field.node.resources_landing_page.field_meta_tags
+    - field.field.node.resources_landing_page.field_search
+    - field.field.node.resources_landing_page.field_testimonials_p
+    - node.type.resources_landing_page
+  module:
+    - user
+id: node.resources_landing_page.olympian_search
+targetEntityType: node
+bundle: resources_landing_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  field_call_to_action_p: true
+  field_category_display: true
+  field_contact_us_link: true
+  field_footer_callout_p: true
+  field_introduction_p: true
+  field_jump_to_p: true
+  field_meta_tags: true
+  field_testimonials_p: true
+  links: true
+  search_api_excerpt: true

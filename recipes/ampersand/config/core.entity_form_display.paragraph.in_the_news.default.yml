@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.in_the_news.field_artsci_description
+    - field.field.paragraph.in_the_news.field_artsci_external_url
+    - field.field.paragraph.in_the_news.field_artsci_title
+    - paragraphs.paragraphs_type.in_the_news
+  module:
+    - text
+_core:
+  default_config_hash: CFKXPzsMnmhJlN_OF39BAnXTCCODeCPrLMqu5ufaBNw
+id: paragraph.in_the_news.default
+targetEntityType: paragraph
+bundle: in_the_news
+mode: default
+content:
+  field_artsci_description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_artsci_external_url:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_artsci_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,25 @@
+uuid: 6edcc013-e01f-4924-b785-34fcea287ffc
+langcode: en
+status: false
+dependencies:
+  module:
+    - shared_content
+    - system
+  theme:
+    - olympian9
+id: aggregator_update_block
+theme: olympian9
+region: content
+weight: 0
+provider: null
+plugin: shared_content_refresh_feeds
+settings:
+  id: shared_content_refresh_feeds
+  label: 'Refresh Feeds'
+  label_display: '0'
+  provider: shared_content
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/admin/shared-content\r\n/admin/test/shared-content\r\n/admin/test/shared-content*"

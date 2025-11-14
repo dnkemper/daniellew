@@ -1,0 +1,23 @@
+uuid: abc7fc28-5caa-4fd8-a1a2-f5ffe2916a49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_faculty_bookshelf
+    - node.type.generic_page
+  module:
+    - options
+id: node.generic_page.field_show_faculty_bookshelf
+field_name: field_show_faculty_bookshelf
+entity_type: node
+bundle: generic_page
+label: 'Faculty Bookshelf'
+description: 'Select whether the Faculty Bookshelf is shown or hidden.'
+required: true
+translatable: false
+default_value:
+  -
+    value: '0'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

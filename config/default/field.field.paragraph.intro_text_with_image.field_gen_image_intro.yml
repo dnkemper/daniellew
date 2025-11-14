@@ -1,0 +1,31 @@
+uuid: 80a6780c-a761-437e-a663-d866b490717d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_gen_image_intro
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.intro_text_with_image
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.intro_text_with_image.field_gen_image_intro
+field_name: field_gen_image_intro
+entity_type: paragraph
+bundle: intro_text_with_image
+label: 'Generic Intro'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

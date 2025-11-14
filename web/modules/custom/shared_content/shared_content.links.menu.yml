@@ -1,0 +1,6 @@
+system.admin_config_shared:
+  title: Shared content
+  description: Shared Content
+  parent: system.admin_config_olympian
+  route_name: system.admin_config_shared
+  weight: 10

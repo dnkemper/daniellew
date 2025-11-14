@@ -1,0 +1,46 @@
+id: paragraph_faq_section
+label: 'FAQ Section Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: faq_section  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: faq_section  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Text field mappings
+  field_title: field_title
+  field_description_formatted: field_description
+
+  # Paragraphs field mapping (references to 'faq' paragraphs)
+  field_faq:
+    plugin: sub_process
+    source: field_faq
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_faq  # Replace with the ID of your 'faq' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: faq_section
+migration_dependencies:
+  required:
+    - paragraph_faq  # Ensure this is the correct ID of your 'faq' paragraph migration
+  optional: {}

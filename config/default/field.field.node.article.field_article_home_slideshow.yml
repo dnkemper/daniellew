@@ -1,0 +1,23 @@
+uuid: 5c750d16-908b-46db-b4f0-66725c084e13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_article_home_slideshow
+    - node.type.article
+id: node.article.field_article_home_slideshow
+field_name: field_article_home_slideshow
+entity_type: node
+bundle: article
+label: 'Feature on Home Page'
+description: 'Check to feature this article on the home page slideshow.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

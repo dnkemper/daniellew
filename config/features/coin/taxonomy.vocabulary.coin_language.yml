@@ -1,0 +1,8 @@
+uuid: 4415b3fd-905e-4fbd-8028-48faad4fc1ce
+langcode: en
+status: true
+dependencies: {  }
+name: Language
+vid: coin_language
+description: ''
+weight: 0

@@ -1,0 +1,19 @@
+uuid: e9eadf04-6d54-4122-8428-d8bb7722196f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_url
+    - paragraphs.paragraphs_type.publications
+id: paragraph.publications.field_button_url
+field_name: field_button_url
+entity_type: paragraph
+bundle: publications
+label: 'Link URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

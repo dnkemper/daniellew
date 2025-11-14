@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: fYgyMhi3ifx0bfE-e0cpWx-EQ8jA4tXuWcEEczud2NQ
+olympian_core_replicate_allowed:
+  article: article
+  page: page
+  book: book
+  events: events
+  faq: faq
+  image_cards: image_cards
+  generic_page: generic_page
+  faculty_staff: faculty_staff
+  publication_page: publication_page
+  resources: resources
+  testimonial: testimonial

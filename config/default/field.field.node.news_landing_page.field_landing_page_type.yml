@@ -1,0 +1,21 @@
+uuid: 963c2daf-f12e-4b60-9465-5e2544f5fa05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_landing_page_type
+    - node.type.news_landing_page
+  module:
+    - options
+id: node.news_landing_page.field_landing_page_type
+field_name: field_landing_page_type
+entity_type: node
+bundle: news_landing_page
+label: 'Landing Page Type'
+description: 'Select whether the News Landing Page shows cards with images, or a list of flat boxes.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

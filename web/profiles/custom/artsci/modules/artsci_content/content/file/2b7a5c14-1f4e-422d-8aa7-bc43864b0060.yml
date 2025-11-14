@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2b7a5c14-1f4e-422d-8aa7-bc43864b0060
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: studenthealth_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/studenthealth_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 58306
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

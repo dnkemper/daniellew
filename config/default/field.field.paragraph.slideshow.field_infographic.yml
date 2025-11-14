@@ -1,0 +1,29 @@
+uuid: 0f72f406-9389-4cb8-83e2-17dab4078ec1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_infographic
+    - media.type.image
+    - paragraphs.paragraphs_type.slideshow
+id: paragraph.slideshow.field_infographic
+field_name: field_infographic
+entity_type: paragraph
+bundle: slideshow
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

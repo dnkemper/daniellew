@@ -1,0 +1,20 @@
+uuid: 1caa4e55-6364-4a58-91ce-46176e3a96aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_comments
+  module:
+    - user
+id: user.user.field_comments
+field_name: field_comments
+entity_type: user
+bundle: user
+label: Comments
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

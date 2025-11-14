@@ -1,0 +1,292 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for olympian_media_wysiwyg module.
+ */
+
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+use Drupal\Core\Url;
+use Drupal\olympian_media_wysiwyg\Plugin\CKEditor5Plugin\ListStyle;
+
+/**
+ * Implements hook_editor_js_settings_alter().
+ */
+function olympian_media_wysiwyg_editor_js_settings_alter(array &$settings) {
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $path_resolver */
+  $path_resolver = \Drupal::service('extension.path.resolver');
+
+  foreach (array_keys($settings['editor']['formats']) as $text_format_id) {
+    if ($settings['editor']['formats'][$text_format_id]['editor'] === 'ckeditor') {
+      $settings['editor']['formats'][$text_format_id]['editorSettings']['customConfig'] =
+        base_path() . $path_resolver->getPath('module', 'olympian_media_wysiwyg') . '/js/ckeditor_config.js';
+    }
+  }
+  $config = \Drupal::config('olympian_media_wysiwyg.settings');
+  $data = $config->getRawData();
+  foreach ($settings['editor']['formats'] as $name => $value) {
+    if (isset($data[$name]) && !empty(trim($data[$name]))) {
+      $settings['editor']['formats'][$name]['editorSettings']['disallowedContent'] = trim($data[$name]);
+      $settings['editor']['formats'][$name]['editorSettings']['allowedContent'] = [
+        '' => [
+          "attributes" => TRUE,
+          "styles" => TRUE,
+          "classes" => TRUE,
+        ],
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ */
+function olympian_media_wysiwyg_form_entity_embed_dialog_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Hide the selected entities link.
+  $form['entity']['#access'] = FALSE;
+  // Get the user input.
+  $input = $form_state->getUserInput();
+  // If we are uploading new or selecting from the library.
+  if (isset($input, $input['entity_browser'], $input['entity_browser']['entity_ids'])) {
+    $parts = explode(':', $input['entity_browser']['entity_ids']);
+    $entity_type = $parts[0];
+    $id = $parts[1];
+    $entity = \Drupal::entityTypeManager()->getStorage($entity_type)->load($id);
+  }
+  // If we are modifying an existing media editor object.
+  elseif (isset($input, $input['editor_object'], $input['editor_object']['data-entity-type'], $input['editor_object']['data-entity-uuid'])) {
+    $entity_type = $input['editor_object']['data-entity-type'];
+    $uuid = $input['editor_object']['data-entity-uuid'];
+    $entity = \Drupal::service('entity.repository')
+      ->loadEntityByUuid($entity_type, $uuid);
+  }
+  if (isset($entity, $entity_type) && $entity_type === 'media') {
+    $bundle = $entity->bundle();
+    switch ($bundle) {
+      case 'image':
+      case 'remote_video':
+        $form['attributes']['data-entity-embed-display']['#options']['view_mode:media.full'] = 'Original';
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function olympian_media_wysiwyg_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if ($entity_form["#entity_type"] === 'media' && $entity_form["#bundle"] === 'file') {
+    if ($entity_form["#op"] === 'add') {
+      $entity_form["revision_log_message"]["#access"] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORMID_alter().
+ */
+function olympian_media_wysiwyg_form_editor_media_dialog_alter(&$form, FormStateInterface $form_state) {
+  if (isset($form_state->getUserInput()['editor_object'])) {
+    $editor_object = $form_state->getUserInput()['editor_object'];
+    $media_embed_element = $editor_object['attributes'];
+  }
+  else {
+    // Retrieve the user input from form state.
+    $media_embed_element = $form_state->get('media_embed_element');
+  }
+
+  $form['dimensions'] = [
+    '#type' => 'fieldset',
+    '#title' => 'Dimensions',
+    '#description' => t('Override image type media dimensions. Leave one parameter empty to scale proportionally.'),
+    '#states' => [
+      'visible' => [
+        'select[name="attributes[data-view-mode]"]' => $visible_array,
+      ],
+    ],
+  ];
+
+  $form['dimensions']['width'] = [
+    '#title' => t('Width'),
+    '#type' => 'number',
+    '#step' => '1',
+    '#default_value' => empty($media_embed_element['data-width']) ? '' : $media_embed_element['data-width'],
+    '#parents' => ['attributes', 'data-width'],
+    '#states' => [
+      'visible' => [
+        'select[name="attributes[data-view-mode]"]' => $visible_array,
+      ],
+    ],
+  ];
+
+  $form['dimensions']['height'] = [
+    '#title' => t('Height'),
+    '#type' => 'number',
+    '#step' => '1',
+    '#default_value' => empty($media_embed_element['data-height']) ? '' : $media_embed_element['data-height'],
+    '#parents' => ['attributes', 'data-height'],
+    '#states' => [
+      'visible' => [
+        'select[name="attributes[data-view-mode]"]' => $visible_array,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olympian_media_wysiwyg_form_media_library_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['#attached']['library'][] = 'olympian_media_wysiwyg/media_overrides';
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function olympian_media_wysiwyg_preprocess_html(&$variables) {
+  $variables['#attached']['library'][] = 'olympian_media_wysiwyg/wysiwyg';
+  $host = \Drupal::request()->getSchemeAndHttpHost();
+  $variables['host'] = $host;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian_media_wysiwyg_preprocess_breadcrumb(&$variables) {
+  $admin_context = \Drupal::service('router.admin_context');
+  if (!$admin_context->isAdminRoute()) {
+    $routes = [];
+    foreach ($variables['links'] as $key => $link) {
+      $url = $link->getURL();
+      // Test for external paths.
+      if ($url->isRouted()) {
+        $routes[$key] = $link->getUrl()->getRouteName();
+      }
+    }
+    // For webforms, remove all system routes and the webform route.
+    if (($key = array_search("entity.webform.collection", $routes)) !== FALSE) {
+      unset($variables['breadcrumb'][$key]);
+      foreach ($routes as $key => $value) {
+        if (substr($value, 0, strlen('system')) === 'system') {
+          unset($variables['breadcrumb'][$key]);
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements hook_menu_links_discovered_alter().
+ */
+function olympian_media_wysiwyg_menu_links_discovered_alter(&$links) {
+  $roles = \Drupal::currentUser()->getDisplayName();
+  $links['system.admin_content']['title'] = new TranslatableMarkup('Add Content');
+  $links['toolbar_menu_appearance']['tab']['#title'] = new TranslatableMarkup('Add Content');
+  $links['system.admin_content']['weight'] = -33;
+  unset($links['system.account']);
+  unset($links['system.themes_page']);
+
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function olympian_media_wysiwyg_toolbar() {
+  $items = [];
+  $user = \Drupal::currentUser();
+  $items['toolbar_menu_olympian_media_wysiwyg'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#title' => 'Home',
+      '#url' => Url::fromRoute('<front>'),
+      '#options' => [
+        'attributes' => [
+          'title' => t('Go to front page'),
+          'class' => [
+            'toolbar-item',
+            'toolbar-icon',
+            'toolbar-icon-olympian-media-wysiwyg',
+          ],
+        ],
+      ],
+    ],
+    '#weight' => 0,
+    '#attached' => [
+      'library' => [
+        'olympian_media_wysiwyg/olympian_media_wysiwyg',
+      ],
+    ],
+  ];
+    $user = \Drupal::currentUser();
+    $title = $user->getDisplayName();
+  $items['toolbar_menu_user'] = [
+    '#type' => 'toolbar_item',
+    'tab' => [
+      '#type' => 'link',
+      '#title' => $title,
+      '#url' => Url::fromRoute('user.page'),
+      '#options' => [
+        'attributes' => [
+          'title' => t('Go to front page'),
+          'class' => [
+            'toolbar-item',
+            'toolbar-icon',
+            'toolbar-icon-user',
+          ],
+        ],
+      ],
+    ],
+    '#weight' => 10000,
+    '#attached' => [
+      'library' => [
+        'olympian_media_wysiwyg/olympian_media_wysiwyg',
+      ],
+    ],
+  ];
+  return $items;
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function olympian_media_wysiwyg_toolbar_alter(&$items) {
+  unset($items['help']);
+  unset($items['system.modules_list']);
+  unset($items['system.themes_page']);
+  unset($items['update.theme_update']);
+  unset($items['update.theme_install']);
+  unset($items['system.themes_page']);
+  unset($items['update.theme_install']);
+  unset($items['system.modules_update']);
+  unset($items['system.modules_uninstall']);
+  unset($items['user']);
+  $items['support']['#weight'] = 1000;
+  $items['toolbar_menu_content_sharing']['#weight'] = 1000;
+  unset($items['toolbar_user']);
+  $items['home']['#weight'] = -1;
+  $items['toolbar_menu_appearance']['#weight'] = 1;
+  $items['toolbar_menu_extend']['#weight'] = 2;
+  if (isset($items['user.account'])) {
+    unset($items['user.account']);
+  }
+  $user = \Drupal::currentUser()->getRoles();
+  if (in_array('communications', $user)) {
+    return TRUE;
+  }
+  else {
+    unset($items['toolbar_menu_shortcuts_comm']);
+  }
+}
+
+/**
+ * Implements hook_entity_extra_field_info_alter().
+ */
+function olympian_media_wysiwyg_entity_extra_field_info_alter(&$info) {
+  if (isset($info['user']['user']['form']['account'])) {
+    unset($info['user']['user']['form']['account']);
+  }
+}

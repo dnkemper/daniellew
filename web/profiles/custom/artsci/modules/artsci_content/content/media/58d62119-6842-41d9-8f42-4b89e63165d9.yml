@@ -1,0 +1,39 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 58d62119-6842-41d9-8f42-4b89e63165d9
+  bundle: image
+  default_langcode: en
+  depends:
+    8f7ee5d3-280c-4a78-a96d-a93d65e14c8b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: resources-landing-page.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources-landing-pagejpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 8f7ee5d3-280c-4a78-a96d-a93d65e14c8b
+      alt: resources-landing-page
+      title: ''
+      width: 1366
+      height: 480

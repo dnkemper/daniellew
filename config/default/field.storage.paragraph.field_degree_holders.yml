@@ -1,0 +1,20 @@
+uuid: c5eab3e8-3f52-4f6a-bdff-6fa746ac8ed0
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - paragraphs
+id: paragraph.field_degree_holders
+field_name: field_degree_holders
+entity_type: paragraph
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

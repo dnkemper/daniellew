@@ -1,0 +1,65 @@
+uuid: 445b93a0-73c4-45e3-a8d7-b71f8b2afa72
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.call_to_action.field_background_color
+    - field.field.paragraph.call_to_action.field_call_to_action_button
+    - field.field.paragraph.call_to_action.field_call_to_action_description
+    - field.field.paragraph.call_to_action.field_call_to_action_title
+    - field.field.paragraph.call_to_action.field_new_window
+    - paragraphs.paragraphs_type.call_to_action
+  module:
+    - link
+    - options
+id: paragraph.call_to_action.default
+targetEntityType: paragraph
+bundle: call_to_action
+mode: default
+content:
+  field_background_color:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_call_to_action_button:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_call_to_action_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_call_to_action_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_new_window:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  search_api_excerpt: true

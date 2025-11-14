@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://humanities.ddev.site
+  paths:
+    files: sites/humanities.wustl.edu/files
+dev:
+  uri: https://humanities.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/humanities.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://humanities.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/humanities.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://humanities.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/humanities.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

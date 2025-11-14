@@ -1,0 +1,29 @@
+uuid: 81b0dbed-8ac9-4cf2-999b-efde42d8f3bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - filter.format.full_html
+    - node.type.image_cards
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: node.image_cards.field_description
+field_name: field_description
+entity_type: node
+bundle: image_cards
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

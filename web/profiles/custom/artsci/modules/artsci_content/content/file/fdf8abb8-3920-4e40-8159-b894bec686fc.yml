@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fdf8abb8-3920-4e40-8159-b894bec686fc
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: transferinout_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/transferinout_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 42222
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

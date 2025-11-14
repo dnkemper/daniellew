@@ -1,0 +1,574 @@
+afas:
+  uri: https://afas.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/afas.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+aggregator:
+  uri: https://aggregator.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/aggregator.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+amcs:
+  uri: https://amcs.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/amcs.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+anthropology:
+  uri: https://anthropology.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/anthropology.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+arthistory:
+  uri: https://arthistory.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/arthistory.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+artsciadvising:
+  uri: https://artsciadvising.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/artsciadvising.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+artsciportal:
+  uri: https://artsciportal.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/artsciportal.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+biology:
+  uri: https://biology.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/biology.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+buildingartsci:
+  uri: https://buildingartsci.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/buildingartsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+chemistry:
+  uri: https://chemistry.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/chemistry.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+classics:
+  uri: https://classics.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/classics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+collegewriting:
+  uri: https://collegewriting.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/collegewriting.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+complitandthought:
+  uri: https://complitandthought.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/complitandthought.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+ealc:
+  uri: https://ealc.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/ealc.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+economics:
+  uri: https://economics.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/economics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+education:
+  uri: https://education.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/education.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+eeps:
+  uri: https://eeps.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/eeps.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+english:
+  uri: https://english.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/english.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+enst:
+  uri: https://enst.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/enst.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+fellowshipsoffice:
+  uri: https://fellowshipsoffice.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/fellowshipsoffice.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+fms:
+  uri: https://fms.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/fms.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+globalstudies:
+  uri: https://globalstudies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+gradstudies:
+  uri: https://gradstudies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/gradstudies.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+hdw:
+  uri: https://hdw.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/hdw.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+history:
+  uri: https://history.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/history.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+holdthatthought:
+  uri: https://holdthatthought.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/holdthatthought.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+humanities:
+  uri: https://humanities.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/humanities.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+insideartsci:
+  uri: https://insideartsci.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+jimes:
+  uri: https://jimes.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/jimes.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+johnmaxwulfing:
+  uri: https://johnmaxwulfing.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/johnmaxwulfing.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+lasprogram:
+  uri: https://lasprogram.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/lasprogram.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+linguistics:
+  uri: https://linguistics.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/linguistics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+literaryarts:
+  uri: https://literaryarts.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/literaryarts.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+math:
+  uri: https://math.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/math.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+mcss:
+  uri: https://mcss.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/mcss.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+movingstories:
+  uri: https://movingstories.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/movingstories.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+music:
+  uri: https://music.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/music.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+overseas:
+  uri: https://overseas.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/overseas.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+olympian:
+  uri: https://olympian.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/olympian.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+pad:
+  uri: https://pad.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/pad.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+philosophy:
+  uri: https://philosophy.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/philosophy.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+physics:
+  uri: https://physics.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/physics.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+pnp:
+  uri: https://pnp.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/pnp.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+polisci:
+  uri: https://polisci.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/polisci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+postbaccpremed:
+  uri: https://postbaccpremed.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/postbaccpremed.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+precollege:
+  uri: https://precollege.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/precollege.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prehealth:
+  uri: https://prehealth.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/prehealth.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+psych:
+  uri: https://psych.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/psych.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+publichealthandsociety:
+  uri: https://publichealthandsociety.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/publichealthandsociety.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+quantumleaps:
+  uri: https://quantumleaps.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/quantumleaps.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+religiousstudies:
+  uri: https://religiousstudies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/religiousstudies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+rll:
+  uri: https://rll.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/rll.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+sds:
+  uri: https://sds.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/sds.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+slavery:
+  uri: https://slavery.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/slavery.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+sociology:
+  uri: https://sociology.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/sociology.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+strategicplan:
+  uri: https://strategicplan.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/strategicplan.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+summersession:
+  uri: https://summersession.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/summersession.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+transdisciplinaryfutures:
+  uri: https://transdisciplinaryfutures.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/transdisciplinaryfutures.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+triads:
+  uri: https://triads.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/triads.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+undergradresearch:
+  uri: https://undergradresearch.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/undergradresearch.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+wc:
+  uri: https://wc.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/wc.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+wgss:
+  uri: https://wgss.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/wgss.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+default:
+  uri: https://artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  user: ${drush_user}
+  host: artscidev.wustl.edu
+  paths:
+    files: sites/default/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+mindfulness:
+  uri: https://mindfulness.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+immersivetech:
+  uri: https://immersivetech.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/immersivetech.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+literacies:
+  uri: https://literacies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/literacies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+it:
+  uri: https://it.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/it.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+graduation:
+  uri: https://graduation.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/graduation.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+migrate:
+  uri: https://migrate.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/migrate.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+rev:
+  uri: https://rev.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/rev.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+
+forms:
+  uri: https://forms.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  host: artscidev.wustl.edu
+  user: ${drush_user}
+  paths:
+    files: sites/forms.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

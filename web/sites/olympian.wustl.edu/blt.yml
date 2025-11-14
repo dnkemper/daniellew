@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: olympian.ddev.site
+    protocol: https
+  machine_name: olympian
+  human_name: olympian.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: olympian.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/olympian.wustl.edu/files'
+    origin: 'https://olympian.wustl.edu'
+drupal:
+  db:
+    database: drupal_olympian
+system:
+  site:
+    contact_us_url: 'https://olympian.wustl.edu/contact-us'
+    name: olympian
+    email: olympian@wustl.edu

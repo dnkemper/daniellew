@@ -1,0 +1,8 @@
+uuid: 629560d4-2e38-40cf-913f-4cd3ab5a7dd5
+langcode: en
+status: true
+dependencies: {  }
+name: Status
+vid: coin_status
+description: 'Current status of collection item'
+weight: 0

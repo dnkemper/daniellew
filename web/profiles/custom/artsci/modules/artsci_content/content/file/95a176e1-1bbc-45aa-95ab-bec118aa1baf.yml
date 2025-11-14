@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 95a176e1-1bbc-45aa-95ab-bec118aa1baf
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: policyexception_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/policyexception_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 21228
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

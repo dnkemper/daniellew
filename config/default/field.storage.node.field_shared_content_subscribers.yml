@@ -1,0 +1,19 @@
+uuid: ad6abf7c-50ea-4560-b30f-40c19044d236
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_shared_content_subscribers
+field_name: field_shared_content_subscribers
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

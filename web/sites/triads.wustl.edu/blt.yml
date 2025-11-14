@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: triads.ddev.site
+    protocol: https
+  machine_name: triads
+  human_name: triads.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: triads.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/triads.wustl.edu/files'
+    origin: 'https://triads.wustl.edu'
+drupal:
+  db:
+    database: drupal_triads
+system:
+  site:
+    contact_us_url: 'https://triads.wustl.edu/contact-us'
+    name: triads
+    email: triads@wustl.edu

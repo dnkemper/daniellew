@@ -1,0 +1,18 @@
+uuid: e1b1c147-d210-42f5-b91a-67f35f3845c1
+langcode: en
+status: false
+dependencies: {  }
+id: webform_upload
+label: 'Webform Upload'
+description: 'Config split that allows a site to upload files in webforms'
+weight: 80
+stackable: true
+no_patching: false
+storage: folder
+folder: ../config/features/webform_upload
+module:
+  olympian_private_webform: 0
+theme: {  }
+complete_list: {  }
+partial_list:
+  - webform.settings

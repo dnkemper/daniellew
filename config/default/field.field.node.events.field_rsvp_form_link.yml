@@ -1,0 +1,19 @@
+uuid: 90caebdb-8943-443e-85da-76bde5c006d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_rsvp_form_link
+    - node.type.events
+id: node.events.field_rsvp_form_link
+field_name: field_rsvp_form_link
+entity_type: node
+bundle: events
+label: rsvp_form_link
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

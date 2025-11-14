@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: default.ddev.site
+    protocol: https
+  machine_name: default
+  human_name: default
+drush:
+  aliases:
+    local: self
+    remote: default.prod
+drupal:
+  db:
+    database: drupal_default
+artsci:
+  stage_file_proxy:
+    origin: 'https://it.artsci.wustl.edu'
+    origin_dir: sites/default/files
+system:
+  site:
+    contact_us_url: 'https://it.artsci.wustl.edu/contact-us'
+    name: default
+    email: default@wustl.edu

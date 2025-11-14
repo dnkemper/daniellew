@@ -1,0 +1,32 @@
+id: paragraph_additional_resources_section
+label: 'Paragraphs (Additional Resources Section)'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: additional_resources_section  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: additional_resources_section  # Replace with the machine name of the paragraph bundle in Drupal 10
+  field_resources_link:
+    -
+      plugin: field_link
+      source: field_resources_link
+  field_resources_subtitle:
+    -
+      plugin: get
+      source: field_resources_subtitle
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: additional_resources_section
+migration_dependencies:
+  required: {}
+  optional: {}

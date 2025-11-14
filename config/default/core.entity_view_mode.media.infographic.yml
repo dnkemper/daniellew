@@ -1,0 +1,11 @@
+uuid: 796c40a7-9d6f-4333-937b-8cfdaac55142
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.infographic
+label: Infographic
+description: ''
+targetEntityType: media
+cache: true

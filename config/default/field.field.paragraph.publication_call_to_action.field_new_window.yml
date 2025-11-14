@@ -1,0 +1,23 @@
+uuid: 05de0ae8-53ec-448a-9441-2f19f9f31783
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_new_window
+    - paragraphs.paragraphs_type.publication_call_to_action
+id: paragraph.publication_call_to_action.field_new_window
+field_name: field_new_window
+entity_type: paragraph
+bundle: publication_call_to_action
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

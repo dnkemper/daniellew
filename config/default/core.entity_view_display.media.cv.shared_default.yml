@@ -1,0 +1,32 @@
+uuid: 041c27fd-5266-4082-a52b-f8b0b557dff5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.shared_default
+    - field.field.media.cv.field_media_directory
+    - field.field.media.cv.field_media_file
+    - media.type.cv
+  module:
+    - file
+id: media.cv.shared_default
+targetEntityType: media
+bundle: cv
+mode: shared_default
+content:
+  field_media_file:
+    type: file_url_plain
+    label: hidden
+    settings:
+      show_link_as: absolute
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

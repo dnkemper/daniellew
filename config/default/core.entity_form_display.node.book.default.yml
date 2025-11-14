@@ -1,0 +1,232 @@
+uuid: 5738b841-d32c-4a45-b750-c83627a4337e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.book.field_book_categories
+    - field.field.node.book.field_byline_names
+    - field.field.node.book.field_byline_options
+    - field.field.node.book.field_content_hash
+    - field.field.node.book.field_description
+    - field.field.node.book.field_faculty_and_staff
+    - field.field.node.book.field_featured_book
+    - field.field.node.book.field_is_shared
+    - field.field.node.book.field_last_fetch
+    - field.field.node.book.field_links_p
+    - field.field.node.book.field_meta_tags
+    - field.field.node.book.field_search
+    - field.field.node.book.field_shared_content
+    - field.field.node.book.field_shared_content_notify
+    - field.field.node.book.field_shared_content_subscribers
+    - field.field.node.book.field_shared_content_xml
+    - field.field.node.book.field_thumbnail
+    - node.type.book
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - media_library
+    - media_library_edit
+    - metatag
+    - paragraphs
+    - paragraphs_features
+    - path
+    - private_content
+    - text
+id: node.book.default
+targetEntityType: node
+bundle: book
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_book_categories:
+    type: options_buttons
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_byline_names:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_byline_options:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_description:
+    type: text_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_faculty_and_staff:
+    type: options_select
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_is_shared:
+    type: boolean_checkbox
+    weight: 9
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_links_p:
+    type: paragraphs
+    weight: 7
+    region: content
+    settings:
+      title: Link
+      title_plural: Links
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 17
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_search:
+    type: string_textarea
+    weight: 8
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content:
+    type: string_textarea
+    weight: 18
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content_notify:
+    type: options_select
+    weight: 42
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_shared_content_subscribers:
+    type: string_textarea
+    weight: 19
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content_xml:
+    type: string_textfield
+    weight: 20
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_thumbnail:
+    type: media_library_widget
+    weight: 5
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  moderation_state:
+    type: moderation_state_default
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 15
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_content_hash: true
+  field_featured_book: true
+  field_last_fetch: true
+  promote: true
+  sticky: true

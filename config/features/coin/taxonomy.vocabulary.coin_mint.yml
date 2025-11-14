@@ -1,0 +1,8 @@
+uuid: 3383b95a-8f0a-4ed6-b50b-ae15596d4638
+langcode: en
+status: true
+dependencies: {  }
+name: Mint
+vid: coin_mint
+description: 'Mints of Collection Items'
+weight: 0

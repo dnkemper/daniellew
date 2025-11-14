@@ -1,0 +1,23 @@
+uuid: 7204e1f5-8445-4522-b9a1-7a3add1acf5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_people_teaser_views
+    - paragraphs.paragraphs_type.people_teaser
+  module:
+    - options
+id: paragraph.people_teaser.field_people_teaser_views
+field_name: field_people_teaser_views
+entity_type: paragraph
+bundle: people_teaser
+label: 'People Teaser Views'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

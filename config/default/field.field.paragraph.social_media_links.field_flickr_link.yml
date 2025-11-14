@@ -1,0 +1,23 @@
+uuid: e4839d3f-66d7-4831-8aae-ba36ee304010
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_flickr_link
+    - paragraphs.paragraphs_type.social_media_links
+  module:
+    - link
+id: paragraph.social_media_links.field_flickr_link
+field_name: field_flickr_link
+entity_type: paragraph
+bundle: social_media_links
+label: 'Flickr URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

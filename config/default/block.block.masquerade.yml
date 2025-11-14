@@ -1,0 +1,29 @@
+uuid: d47e1252-97a3-4648-a013-2d1ff0df44a9
+langcode: en
+status: true
+dependencies:
+  module:
+    - masquerade
+    - user
+  theme:
+    - olympian9
+id: masquerade
+theme: olympian9
+region: action_menu
+weight: -14
+provider: null
+plugin: masquerade
+settings:
+  id: masquerade
+  label: Masquerade
+  label_display: '0'
+  provider: masquerade
+  show_unmasquerade_link: true
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

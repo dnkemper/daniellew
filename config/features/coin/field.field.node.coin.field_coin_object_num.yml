@@ -1,0 +1,23 @@
+uuid: 17c80e5a-a685-43c9-b31d-50520b5922c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_object_num
+    - node.type.coin
+id: node.coin.field_coin_object_num
+field_name: field_coin_object_num
+entity_type: node
+bundle: coin
+label: 'Object Number'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

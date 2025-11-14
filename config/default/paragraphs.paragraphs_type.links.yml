@@ -1,0 +1,10 @@
+uuid: 690fd0c3-0469-4674-beed-baddc5bed2cd
+langcode: en
+status: true
+dependencies: {  }
+id: links
+label: Link
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Links'
+behavior_plugins: {  }

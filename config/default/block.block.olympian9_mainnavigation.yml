@@ -1,0 +1,34 @@
+uuid: 747a0ec3-3651-404b-aa73-f0bd52e6ca96
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_block
+  theme:
+    - olympian9
+id: olympian9_mainnavigation
+theme: olympian9
+region: primary_menu
+weight: 0
+provider: null
+plugin: 'menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: menu_block
+  follow: true
+  follow_parent: active
+  display_empty: false
+  label_link: false
+  label_type: block
+  level: 1
+  depth: 2
+  expand_all_items: false
+  parent: 'main:'
+  render_parent: false
+  suggestion: main
+  hide_on_nonactive: false
+visibility: {  }

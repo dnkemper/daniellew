@@ -1,0 +1,21 @@
+uuid: 5ccecc5b-f3a1-43e0-a5a3-e2233871be60
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_faculty_landing_page
+label: 'Content - People Landing Page'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  -
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      faculty_landing_page: faculty_landing_page
+selection_logic: and
+weight: 0
+relationships: {  }

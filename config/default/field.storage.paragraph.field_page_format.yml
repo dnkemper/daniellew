@@ -1,0 +1,27 @@
+uuid: 2d735042-cf9b-4748-83d8-3c0d326b8388
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_page_format
+field_name: field_page_format
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Single Column'
+      label: 'Single Column'
+    -
+      value: 'Two Columns'
+      label: 'Two Columns'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

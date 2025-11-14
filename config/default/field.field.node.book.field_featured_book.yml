@@ -1,0 +1,21 @@
+uuid: efd727b9-ee09-49fa-ac94-a1924cd47c7c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_book
+    - node.type.book
+id: node.book.field_featured_book
+field_name: field_featured_book
+entity_type: node
+bundle: book
+label: 'Featured Book'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

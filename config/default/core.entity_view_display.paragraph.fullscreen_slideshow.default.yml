@@ -1,0 +1,43 @@
+uuid: 18d4b191-01c0-40c8-a395-3d649ba719f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.fullscreen_slideshow.field_background
+    - field.field.paragraph.fullscreen_slideshow.field_fullscreen_images
+    - field.field.paragraph.fullscreen_slideshow.field_introduction_exerpt
+    - paragraphs.paragraphs_type.fullscreen_slideshow
+  module:
+    - entity_reference_revisions
+    - options
+    - text
+id: paragraph.fullscreen_slideshow.default
+targetEntityType: paragraph
+bundle: fullscreen_slideshow
+mode: default
+content:
+  field_background:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_fullscreen_images:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_introduction_exerpt:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

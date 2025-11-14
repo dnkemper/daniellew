@@ -1,0 +1,63 @@
+uuid: 8f32d4cc-bac0-46aa-b961-dc6c31338693
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_publication_gallery_image
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Publication Gallery Image)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: publication_gallery_image
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_full_description:
+    -
+      plugin: get
+      source: field_full_description
+  field_gallery_caption:
+    -
+      plugin: get
+      source: field_gallery_caption
+  field_publication_gallery_image:
+    plugin: sub_process
+    source: field_publication_gallery_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: publication_gallery_image
+migration_dependencies:
+  required: {}
+  optional: {  }

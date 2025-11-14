@@ -1,0 +1,8 @@
+uuid: 828dbd45-d81b-4d97-8133-38c60a005ca8
+langcode: en
+status: true
+dependencies: {  }
+name: Mintmarks
+vid: coin_mintmarks
+description: ''
+weight: 0

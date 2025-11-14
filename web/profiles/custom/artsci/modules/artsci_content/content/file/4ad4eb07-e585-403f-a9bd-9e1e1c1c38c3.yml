@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4ad4eb07-e585-403f-a9bd-9e1e1c1c38c3
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: diversityinclusion_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/diversityinclusion_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 39170
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

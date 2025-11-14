@@ -1,0 +1,19 @@
+uuid: a3b8ba27-e9f6-451c-9c49-c545e34fae19
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.publication_person
+id: paragraph.publication_person.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: publication_person
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

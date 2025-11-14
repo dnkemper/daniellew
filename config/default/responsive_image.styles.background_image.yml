@@ -1,0 +1,27 @@
+uuid: 4c7b257b-5ed2-4e23-9642-52c21897b724
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.background_image
+    - image.style.landscape_16_9_320w
+    - image.style.landscape_16_9_448w
+    - image.style.landscape_16_9_600w
+    - image.style.landscape_16_9_944w
+id: background_image
+label: 'Background Image'
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width:480px) 85vw, 100vw'
+      sizes_image_styles:
+        - background_image
+        - landscape_16_9_320w
+        - landscape_16_9_448w
+        - landscape_16_9_600w
+        - landscape_16_9_944w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: background_image

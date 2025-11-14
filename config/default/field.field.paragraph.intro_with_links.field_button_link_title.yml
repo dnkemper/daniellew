@@ -1,0 +1,19 @@
+uuid: 9cf10d66-a9ae-4780-a791-b3a207f801a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button_link_title
+    - paragraphs.paragraphs_type.intro_with_links
+id: paragraph.intro_with_links.field_button_link_title
+field_name: field_button_link_title
+entity_type: paragraph
+bundle: intro_with_links
+label: 'Button Link Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,22 @@
+uuid: b29e88b7-1f4e-4314-b493-2831f99c3cd1
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: event_categories
+label: 'Event Categories'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[olympian_seo:eventlanding][olympian_seo:tid][term:tid]'
+selection_criteria:
+  c55d8f9a-e327-4ace-9e62-a405527b39bb:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: c55d8f9a-e327-4ace-9e62-a405527b39bb
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      event_categories: event_categories
+selection_logic: and
+weight: -5
+relationships: {  }

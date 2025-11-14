@@ -1,0 +1,64 @@
+media_overrides:
+  css:
+    theme:
+      css/media-overrides.css: {}
+
+wysiwyg:
+  css:
+    theme:
+      css/wysiwyg.css: {}
+
+demobox:
+  js:
+    js/build/demoPlugin.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+
+# Loaded in the text format configuration form to provide styling for the icon
+# used in toolbar config.
+admin.demobox:
+  css:
+    theme:
+      css/demobox.admin.css: { }
+# table:
+#   remote: https://github.com/ckeditor/ckeditor5
+#   version: "35.4.0"
+#   license:
+#     name: GNU-GPL-2.0-or-later
+#     url: https://raw.githubusercontent.com/ckeditor/ckeditor5/v35.4.0/LICENSE.md
+#     gpl-compatible: true
+#   js:
+#     js/build/table.js: { minified: true }
+#   dependencies:
+#     - core/ckeditor5
+#     - core/ckeditor5.translations
+
+admin.table:
+  css:
+    theme:
+      css/table.admin.css: {}
+# This adds the plugin JavaScript to the pages that render CKEditors.
+htmlEmbed:
+  remote: https://github.com/ckeditor/ckeditor5
+  version: "35.4.0"
+  license:
+    name: GNU-GPL-2.0-or-later
+    url: https://github.com/ckeditor/ckeditor5/blob/master/LICENSE.md
+    gpl-compatible: true
+  js:
+    js/build/html-embed.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+    - core/ckeditor5.translations
+
+# Loaded in the text format configuration form to provide styling for the icon
+# used in toolbar config.
+admin.htmlEmbed:
+  css:
+    theme:
+      css/htmlEmbed.admin.css: { }
+editor:
+  js:
+    js/build/list.js: { preprocess: false, minified: true }
+  dependencies:
+    - ckeditor5/ckeditor5

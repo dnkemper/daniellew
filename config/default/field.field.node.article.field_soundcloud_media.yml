@@ -1,0 +1,29 @@
+uuid: 1a7c2666-6406-4e34-ac73-a4bdec0a7c20
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_soundcloud_media
+    - media.type.soundcloud
+    - node.type.article
+id: node.article.field_soundcloud_media
+field_name: field_soundcloud_media
+entity_type: node
+bundle: article
+label: 'Soundcloud Media'
+description: 'Either copy the soundcloud link or click on the option to share it and copy the shared link.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      soundcloud: soundcloud
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: podcast
+field_type: entity_reference

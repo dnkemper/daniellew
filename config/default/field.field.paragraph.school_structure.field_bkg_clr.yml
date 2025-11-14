@@ -1,0 +1,23 @@
+uuid: 8bba0da6-6be4-444f-8a97-5173b9eeb34d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_bkg_clr
+    - paragraphs.paragraphs_type.school_structure
+  module:
+    - options
+id: paragraph.school_structure.field_bkg_clr
+field_name: field_bkg_clr
+entity_type: paragraph
+bundle: school_structure
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Red
+default_value_callback: ''
+settings: {  }
+field_type: list_string

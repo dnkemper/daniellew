@@ -1,0 +1,21 @@
+uuid: afa060da-7d42-4278-999a-4924cd36055e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_generic_page
+label: 'Content - Multipurpose'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  -
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      generic_page: generic_page
+selection_logic: and
+weight: 0
+relationships: {  }

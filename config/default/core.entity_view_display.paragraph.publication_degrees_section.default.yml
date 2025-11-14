@@ -1,0 +1,52 @@
+uuid: d83ac6d0-3cd3-4d4e-8af9-c3d36dc50016
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_degrees_section.field_degrees
+    - field.field.paragraph.publication_degrees_section.field_publication_degrees_color
+    - field.field.paragraph.publication_degrees_section.field_subtitle
+    - field.field.paragraph.publication_degrees_section.field_title
+    - paragraphs.paragraphs_type.publication_degrees_section
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.publication_degrees_section.default
+targetEntityType: paragraph
+bundle: publication_degrees_section
+mode: default
+content:
+  field_degrees:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_publication_degrees_color:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

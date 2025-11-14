@@ -1,0 +1,843 @@
+a,
+a[href^='tel'] {
+  color: inherit;
+  text-decoration: none;
+}
+
+a,
+a[href^='tel'],
+a[href^='tel']:hover {
+  text-decoration: none;
+}
+
+a img,
+hr {
+  border: none;
+}
+
+#content,
+#viewport,
+.video-filter {
+  position: relative;
+}
+
+.cancel,
+svg.icon,
+svg.more,
+svg.top {
+  vertical-align: middle;
+}
+
+#header .logo,
+#viewport,
+.js-gallery,
+.screen-reader-text,
+.takeover,
+.video-filter {
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.6;
+  font-size: 62.5%;
+  font-family: var(--sans-serif);
+  color: var(--feed-gray);
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+#viewport {
+  overflow: hidden;
+  position: relative;
+}
+
+.takeover {
+  overflow: hidden;
+  width: auto;
+}
+
+figure,
+img {
+  max-width: 100%;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.container.full {
+  max-width: 100%;
+  width: 100%;
+}
+
+.container.full-mobile {
+  width: 100%;
+}
+
+.flex-align-end {
+  align-self: flex-end;
+}
+
+@media all and (min-width: 600px) {
+  .container.full-mobile {
+    width: 85%;
+  }
+}
+
+.column,
+.container.full-tablet {
+  width: 100%;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  display: -webkit-flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+
+.column {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media all and (min-width: 1030px) {
+  .column.one-fourth {
+    width: 25%;
+  }
+  .column.one-third {
+    width: 33.333%;
+  }
+  .column.half {
+    width: 50%;
+  }
+  .column.two-thirds {
+    width: 66.666%;
+  }
+  .column.three-fourths {
+    width: 75%;
+  }
+  .column.twenty {
+    width: 20%;
+  }
+  .column.thirty {
+    width: 30%;
+  }
+  .column.forty {
+    width: 40%;
+  }
+  .column.sixty {
+    width: 60%;
+  }
+  .column.seventy {
+    width: 70%;
+  }
+  .column.eighty {
+    width: 80%;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+::-moz-selection {
+  background: var(--red);
+  color: #fff;
+}
+
+::selection {
+  background: var(--red);
+  color: #fff;
+}
+img::selection {
+  background: none !important;
+}
+
+#content {
+  position: relative;
+  font-size: 1.6em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+a[href^='tel'] {
+  cursor: text;
+  color: inherit;
+  text-decoration: none;
+}
+
+a[href^='tel']:hover {
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+ul {
+  list-style: none;
+}
+
+hr {
+  height: 1px;
+  border: none;
+  background: #000;
+  margin-bottom: 1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--serif);
+  margin-bottom: 1em;
+  line-height: 1.4;
+}
+
+.wysiwyg figcaption,
+h3.caps,
+input,
+select,
+textarea {
+  font-family: var(--sans-serif);
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 0.65em;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h3.caps {
+  font-family: var(--sans-serif);
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+
+h4 {
+  font-size: 17px;
+}
+
+@media all and (min-width: 600px) {
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 40px;
+  }
+}
+
+.wysiwyg p,
+.wysiwyg ul,
+.wysiwyg ol {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+}
+
+.wysiwyg br {
+  display: block;
+}
+
+.wysiwyg a {
+  color: var(--dark-red);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.wysiwyg h2,
+.wysiwyg h3 {
+  color: var(--dark-red);
+}
+
+.button,
+.cat,
+.form-submit,
+input.button {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.wysiwyg a:hover {
+  color: var(--red);
+}
+
+.wysiwyg ul,
+.wysiwyg ol {
+  padding-left: 1em;
+  margin-left: 1.5em;
+}
+
+.wysiwyg ul {
+  padding-left: 1em;
+  list-style: disc;
+}
+
+.program-detail ul,
+.social-links {
+  list-style: none;
+}
+.wysiwyg a[target='_blank'].button:after {
+  margin: auto !important;
+  text-align: center !important;
+  background-color: var(--red) !important !important;
+  color: var(--red) !important;
+  fill: var(--red) !important;
+  border: 2px solid var(--red) !important;
+  background: var(--red) !important;
+  text-decoration: underline !important;
+  font-size: 13px !important;
+  -webkit-mask-size: 70px 16px !important;
+  mask-size: 16px 16px !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  margin-left: 5px !important;
+  -webkit-mask-position: center !important;
+  mask-position: center !important;
+  -webkit-mask-image: url(../../svg/sprite.svg#link-out) !important;
+  mask-image: url(../../svg/sprite.svg#link-out) !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-position: center center !important;
+  mask-position: center left !important;
+  content: '' !important;
+  width: 12px !important;
+  display: inline-flex;
+  height: 12px !important;
+
+  &:hover {
+    color: var(--red) !important;
+  }
+}
+.wysiwyg li {
+  line-height: 1.6;
+  margin-bottom: 0.5em;
+}
+
+.wysiwyg li:last-child {
+  margin-bottom: 0;
+}
+
+.wysiwyg img {
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.wysiwyg img:first-child {
+  margin-top: 0;
+}
+
+// Use display:table so the figcaption can be set as table-caption,
+// so that the figcaption is never wider than the image.
+// This only applies to figure elements that do not have have the "hasviewmode" class.
+// (like shared content from D7)
+.wysiwyg figure {
+  display: table;
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+
+  > div {
+    display: table-cell;
+  }
+
+  img {
+    margin: 0;
+    display: block;
+  }
+
+  figcaption {
+    display: table-caption;
+    caption-side: bottom;
+  }
+}
+
+.wysiwyg figcaption {
+  margin-top: 1em;
+  font-family: var(--sans-serif);
+  color: var(--gray);
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.wysiwyg table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+}
+
+.wysiwyg table p:last-child {
+  margin-bottom: 0;
+}
+
+.wysiwyg th {
+  background: #eeeeee;
+  text-align: left;
+  font-weight: normal;
+}
+
+.wysiwyg td,
+.wysiwyg th {
+  padding: 10px;
+}
+
+// Set wysiwyg floated image margins.
+// These include the ones with .hasviewmode.
+.wysiwyg {
+  .align-left,
+  .align-right {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+  }
+
+  @media (min-width: 481px) {
+    .align-left {
+      margin-left: 0;
+      margin-right: 2em;
+    }
+    .align-right {
+      margin-left: 2em;
+      margin-right: 0;
+    }
+  }
+}
+
+// set .hasviewmode styles
+.wysiwyg {
+  @include image-viewmodes;
+
+  // For the case when .hasviewmode is not a figure element.
+  .hasviewmode {
+    img {
+      margin: 0;
+    }
+  }
+
+  // Adjust remote video player styles
+  .media--type-remote-video {
+    width: 100%;
+  }
+
+  // Adjust spacing around non-floated media
+  .hasviewmode,
+  .media--type-remote-video {
+    margin-bottom: 1.5em;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+address {
+  font-style: normal;
+}
+
+figure {
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.social-links {
+  list-style: none;
+  font-size: 0;
+}
+
+.social-links li {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.social-links li.facebook {
+  margin: 0 2px;
+}
+
+.social-links a {
+  display: block;
+}
+
+.social-links svg {
+  fill: currentColor;
+  max-width: 24px;
+  height: 24px;
+}
+
+.cancel,
+svg.icon {
+  display: inline-block;
+}
+
+.social-links.solid a {
+  background: #fff;
+  border-radius: 50%;
+}
+
+iframe {
+  border: none;
+  width: 100%;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.cat {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+}
+
+.video-filter {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  margin-bottom: 20px;
+}
+
+.video-filter iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+// Disc
+ul[type='disc'] {
+  list-style-type: disc;
+}
+// Circle
+ul[type='circle'] {
+  list-style-type: circle;
+}
+// Square
+ul[type='square'] {
+  list-style-type: square;
+}
+
+.wysiwyg {
+  ol {
+    // list-style-type: decimal;
+    & ol {
+      list-style-type: lower-latin;
+      & ol {
+        list-style-type: lower-roman;
+        & ol {
+          list-style-type: upper-latin;
+          & ol {
+            list-style-type: upper-roman;
+          }
+        }
+      }
+    }
+  }
+
+  ol[type='1'] {
+    list-style-type: decimal !important;
+  }
+  ol[type='i' s] {
+    list-style-type: lower-roman !important;
+  }
+  ol[type='I' s] {
+    list-style-type: upper-roman !important;
+  }
+  ol[type='a' s] {
+    list-style-type: lower-latin !important;
+  }
+  ol[type='A' s] {
+    list-style-type: upper-latin !important;
+  }
+  // Disc
+  ul[type='disc'] {
+    list-style-type: disc;
+    ul {
+      list-style-type: disc;
+      ul {
+        list-style-type: disc;
+      }
+    }
+  }
+  ul[type='circle'] {
+    list-style-type: circle;
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: circle;
+      }
+    }
+  }
+  ul[type='square'] {
+    list-style-type: square;
+    ul {
+      list-style-type: square;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  ol[type='1'] {
+    list-style-type: decimal !important;
+  }
+
+  ol[type='i' s] {
+    list-style-type: lower-roman !important;
+  }
+
+  ol[type='I' s] {
+    list-style-type: upper-roman !important;
+  }
+  ol[type='a' s] {
+    list-style-type: lower-latin !important;
+  }
+
+  ol[type='A' s] {
+    list-style-type: upper-latin !important;
+  }
+}
+.wysiwyg-editor-text {
+  .wysiwyg {
+    figure {
+      margin-bottom: unset;
+      margin-top: unset;
+    }
+
+    figcaption {
+      display: inline-block;
+    }
+
+    img {
+      vertical-align: baseline;
+      max-width: 100%;
+      height: auto !important;
+    }
+
+    @media (max-width: 480px) {
+      .align-right,
+      .align-left {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+
+      figure {
+        margin-bottom: unset;
+        margin-top: unset;
+      }
+    }
+
+    @media (min-width: 481px) {
+      .align-left {
+        float: left;
+        margin-right: 1em;
+        width: auto;
+        // max-width: 46%;
+      }
+
+      .align-right {
+        float: right;
+        margin-left: 1em;
+        width: auto;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        // max-width: 46%;
+      }
+
+      figure {
+        margin-bottom: unset;
+        margin-top: unset;
+      }
+    }
+
+    /* Narrow screens & tablets */
+    // @media (min-device-width: 740px) and (min-width: 740px), (max-device-width: 800px) and (min-width: 740px) and (orientation: landscape) {
+    //   .align-left {
+    //     max-width: 40%;
+    //   }
+    //   .align-right {
+    //     max-width: 40%;
+    //   }
+    // }
+    /* Normal screens */
+    // @media (min-device-width: 980px) and (min-width: 980px), (max-device-width: 1024px) and (min-width: 1024px) and (orientation: landscape) {
+    //   .align-left {
+    //     max-width: 30%;
+    //   }
+    //   .align-right {
+    //     max-width: 30%;
+    //   }
+    // }
+    /* Wide screens */
+    // @media (min-width: 1220px) {
+    //   .align-left {
+    //     max-width: 46%;
+    //   }
+    //   .align-right {
+    //     max-width: 46%;
+    //   }
+    // }
+    // }
+  }
+
+  /**
+ * @file
+ * Styles for the format form.
+ *
+ * The display and layout of the Media browser assumes Drupal's Seven theme as
+ * the theme active when this is displayed.
+ */
+
+  #media-wysiwyg-format-form {
+    margin: 20px;
+  }
+
+  #media-wysiwyg-format-form .media-preview-group {
+    float: left;
+    margin-right: 10px;
+  }
+
+  #media-wysiwyg-format-form .media-preview-group .edit-file-link {
+    text-align: center;
+  }
+
+  #media-wysiwyg-format-form .form-item-format label {
+    display: inline;
+  }
+
+  /* Styles for within the WYSIWYG, to support alignment. */
+  .media-wysiwyg-align-left {
+    float: left;
+    margin-right: 20px;
+  }
+
+  .media-wysiwyg-align-right {
+    float: right;
+    margin-left: 20px;
+  }
+
+  .media-wysiwyg-align-center {
+    text-align: center;
+  }
+
+  img.media-wysiwyg-align-center {
+    margin: auto;
+    display: block;
+  }
+
+  /* Default to responsive images */
+  img {
+    vertical-align: baseline;
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  @media (max-width: 480px) {
+    .align-right,
+    .align-left {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  @media (min-width: 481px) {
+    .align-left {
+      float: left;
+      margin-right: 1em;
+      width: auto;
+      max-width: 46%;
+    }
+
+    .align-right {
+      float: right;
+      margin-left: 1em;
+      width: auto;
+      max-width: 46%;
+    }
+  }
+
+  /* Narrow screens & tablets */
+  @media (min-device-width: 740px) and (min-width: 740px),
+    (max-device-width: 800px) and (min-width: 740px) and (orientation: landscape) {
+    .align-left {
+      max-width: 40%;
+    }
+
+    .align-right {
+      max-width: 40%;
+    }
+  }
+
+  /* Normal screens */
+  @media (min-device-width: 980px) and (min-width: 980px),
+    (max-device-width: 1024px) and (min-width: 1024px) and (orientation: landscape) {
+    .align-left {
+      max-width: 30%;
+    }
+
+    .align-right {
+      max-width: 30%;
+    }
+  }
+
+  /* Wide screens */
+  @media (min-width: 1220px) {
+    .align-left {
+      max-width: 46%;
+    }
+
+    .align-right {
+      max-width: 46%;
+    }
+  }
+  .element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    height: 1px;
+  }
+}

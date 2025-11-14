@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 607cb7ac-47db-4f78-8af8-d0659918e0ec
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: requestinformation_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/requestinformation_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 44311
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

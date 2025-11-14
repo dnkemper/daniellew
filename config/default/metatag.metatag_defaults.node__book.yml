@@ -1,0 +1,17 @@
+uuid: 52ede329-29ee-4bce-8242-fe93a246984a
+langcode: en
+status: true
+dependencies: {  }
+id: node__book
+label: 'Content: Book'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:field_description]'
+  og_description: '[node:field_description]'
+  og_image: '[node:field_thumbnail:entity:field_media_image:book_cover:url]'
+  og_title: '[node:title]'
+  og_type: book
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'

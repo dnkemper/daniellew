@@ -1,0 +1,48 @@
+id: paragraph_spotlights
+label: 'Spotlights Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: spotlights  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: spotlights  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Image field mapping
+  field_spotlight_image:
+    plugin: sub_process
+    source: field_spotlight_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  field_spotlight_video_short:
+    plugin: get
+    source: field_spotlight_video_short
+
+  field_spotlight_video_title:
+    plugin: get
+    source: field_spotlight_video_title
+
+  field_spotlight_video_url:
+    plugin: sub_process
+    source: field_spotlight_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: spotlights
+
+migration_dependencies:
+  required: {}
+  optional: { }

@@ -1,0 +1,156 @@
+id: node_books
+migration_group: olympian_migration
+label: 'Node book from Drupal 7'
+migration_tags:
+  - artsci
+  - shared-dep
+  - shared-node-type
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: book
+process:
+  type:
+    plugin: default_value
+    default_value: book
+  skip_on_not_empty:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+      negate: true
+    source: field_shared_content_xml
+    method: row
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    - 
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_description: field_description
+  field_byline_options: field_byline_options
+  field_byline_names: field_byline_names
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_links
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_is_shared:
+    plugin: get
+    source: shared_content_enabled
+  # Faculty and staff field mapping
+  field_faculty_and_staff:
+    plugin: sub_process
+    source: field_faculty_and_staff
+    process:
+      target_id:
+        plugin: migmag_lookup
+        migration: node_faculty_staff
+        source: target_id
+  # Thumbnail field mapping
+  field_thumbnail:
+    plugin: sub_process
+    source: field_thumbnail
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_book_categories:
+    plugin: sub_process
+    source: field_book_categories
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_book_
+        source: tid
+destination:
+  plugin: 'entity:node'
+  default_bundle: book
+migration_dependencies:
+  required:
+    - paragraph_links
+    - taxonomy_book_
+    - node_faculty_staff
+  optional: {}

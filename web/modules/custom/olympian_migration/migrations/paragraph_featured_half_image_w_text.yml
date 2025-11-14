@@ -1,0 +1,59 @@
+id: paragraph_featured_half_image_w_text
+label: 'Featured Half Image with Text Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: featured_half_image_w_text  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: featured_half_image_w_text  # Replace with the machine name of the paragraph bundle in Drupal 10
+  # Link field mapping
+
+  # Link field mapping
+  field_custom_button_:
+    plugin: field_link_custom
+    source: field_custom_button_/0/url
+    title_source: field_custom_button_/0/title
+
+  # String Long field mapping
+  field_custom_caption: field_custom_caption
+
+  # Image field mapping
+  field_half_image:
+    plugin: sub_process
+    source: field_half_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration  # Replace with the actual migration ID for images
+        source: fid
+
+  # String Long field mapping
+  field_half_image_description: field_half_image_description
+  field_half_image_main_titl:
+    plugin: field_link_custom
+    source: field_half_image_main_titl/0/url
+    title_source: field_half_image_main_titl/0/title
+  # field_half_image_main_titl:
+  #   -
+  #     plugin: sub_process
+  #     source: field_half_image_main_titl
+  #     process:
+  #       uri: value
+  #       title: value
+  # Link field mapping
+  # String field mapping
+  field_half_image_optional_header: field_half_image_optional_header
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: featured_half_image_w_text
+migration_dependencies:
+  required: {}
+  optional: {}

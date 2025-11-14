@@ -1,0 +1,19 @@
+uuid: f18a2a07-61a4-41fb-8bfb-cc20a654a8b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - crop
+third_party_settings:
+  crop:
+    image_field: _none
+id: cv
+label: CV
+description: ''
+source: file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_file
+field_map:
+  name: name

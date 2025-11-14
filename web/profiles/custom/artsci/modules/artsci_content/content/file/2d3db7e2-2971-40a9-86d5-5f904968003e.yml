@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2d3db7e2-2971-40a9-86d5-5f904968003e
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: washu_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/washu_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 16858
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

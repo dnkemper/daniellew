@@ -1,0 +1,10 @@
+uuid: 1b601a8b-95a9-42c9-a2ba-1820cb81c020
+langcode: en
+status: true
+dependencies: {  }
+id: publication_full_video
+label: 'Publication Full Video'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Full Video'
+behavior_plugins: {  }

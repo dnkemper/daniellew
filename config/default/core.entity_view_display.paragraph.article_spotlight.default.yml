@@ -1,0 +1,33 @@
+uuid: b0b89b12-747c-4cd2-b558-73333864ab9d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.article_spotlight.field_second_article
+    - field.field.paragraph.article_spotlight.field_spot_articles
+    - paragraphs.paragraphs_type.article_spotlight
+id: paragraph.article_spotlight.default
+targetEntityType: paragraph
+bundle: article_spotlight
+mode: default
+content:
+  field_second_article:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_spot_articles:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: spotlight
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

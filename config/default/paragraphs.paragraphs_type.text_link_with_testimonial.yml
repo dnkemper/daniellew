@@ -1,0 +1,10 @@
+uuid: 1c970bc3-8a09-4f06-bc6b-ada3280dfa63
+langcode: en
+status: true
+dependencies: {  }
+id: text_link_with_testimonial
+label: 'Text Link with Testimonial'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Text Link with Testimonial'
+behavior_plugins: {  }

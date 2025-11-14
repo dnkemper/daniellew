@@ -1,0 +1,52 @@
+uuid: 2fb68f66-91d7-41a4-8e19-1795071d114b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_2.field_footer_callout_bg
+    - field.field.paragraph.content_2.field_page_format2
+    - field.field.paragraph.content_2.field_two_col_title
+    - field.field.paragraph.content_2.field_two_col_wysiwyg
+    - paragraphs.paragraphs_type.content_2
+  module:
+    - options
+    - text
+id: paragraph.content_2.default
+targetEntityType: paragraph
+bundle: content_2
+mode: default
+content:
+  field_footer_callout_bg:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_page_format2:
+    type: boolean
+    label: visually_hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_two_col_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_two_col_wysiwyg:
+    type: text_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

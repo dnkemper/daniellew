@@ -1,0 +1,10 @@
+uuid: 65b017c0-cca9-4190-b3b5-ea1a6bff3fab
+langcode: en
+status: true
+dependencies: {  }
+id: featured_without_caption
+label: 'Featured Without Caption'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

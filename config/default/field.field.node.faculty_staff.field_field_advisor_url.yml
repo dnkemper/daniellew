@@ -1,0 +1,28 @@
+uuid: eac8e93f-0463-4118-8e81-4cab8d7e2ece
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_field_advisor_url
+    - node.type.faculty_staff
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: node.faculty_staff.field_field_advisor_url
+field_name: field_field_advisor_url
+entity_type: node
+bundle: faculty_staff
+label: 'Advisor URL (Artsci)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

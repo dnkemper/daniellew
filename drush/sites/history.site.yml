@@ -1,0 +1,24 @@
+local:
+  root: /var/www/html/web
+  uri: 'https://history.ddev.site'
+  paths:
+    files: sites/history.wustl.edu/files
+    drush-script: /var/www/html/vendor/bin/drush
+dev:
+  uri: 'https://history.artscidev.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/history.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: 'https://history.artscistage.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/history.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: 'https://history.wustl.edu'
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/history.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

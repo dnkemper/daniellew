@@ -1,0 +1,78 @@
+id: paragraph_sidebar_slideshow
+label: 'Sidebar Slideshow Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: sidebar_slideshow
+
+process:
+  type:
+    plugin: default_value
+    default_value: sidebar_slideshow
+
+  # Text fields mapping
+  field_title:
+    plugin: get
+    source: field_title
+  field_callout_title:
+    plugin: get
+    source: field_callout_title
+
+  # Text long field mapping
+
+  field_main_content:
+    -
+      plugin: get
+      source: field_main_content
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  # Link field mapping
+  field_button_link:
+    plugin: field_link_custom
+    source: field_callout_button_url
+    title_source: field_callout_button_text
+  # Paragraphs field mapping
+  field_slideshow_p:
+    plugin: sub_process
+    source: field_slideshow_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_slideshow
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: sidebar_slideshow
+
+migration_dependencies:
+  required:
+    - paragraph_slideshow
+  optional: {}

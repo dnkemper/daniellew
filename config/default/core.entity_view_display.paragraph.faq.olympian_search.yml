@@ -1,0 +1,29 @@
+uuid: 08fd33b4-6a44-4e8c-8cca-701dd623ff41
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.olympian_search
+    - field.field.paragraph.faq.field_description_formatted
+    - field.field.paragraph.faq.field_title
+    - paragraphs.paragraphs_type.faq
+id: paragraph.faq.olympian_search
+targetEntityType: paragraph
+bundle: faq
+mode: olympian_search
+content:
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  field_description_formatted: true

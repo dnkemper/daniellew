@@ -1,0 +1,75 @@
+{%
+  set classes = [
+  'post-details flex slide-title',
+  responsive ? 'responsive-enabled',
+  sticky ? 'sticky-enabled',
+]
+%}
+{%
+  set eventData = row._entity.fields
+%}
+{%
+  set eventDateStart, eventDateEnd, url = eventData.field_event_date.start_date, eventData.field_event_date.end_date, eventData.path.0.alias
+%}
+{%
+  set multiDay = eventData.field_event_date.end_date and eventData.field_event_date.end_date|date("M d") != eventData.field_event_date.start_date|date("M d")
+%}
+
+{{ attach_library('olympian9/node--event-landing-page') }}
+{{ attach_library('olympian9/events') }}
+
+<div class="post-details flex slide-title">
+  {% if '0' in eventData.field_event_date_tbd.0.value %}
+    {% if '1' in eventData.field_show_end_date.0.value %}
+      <div class="event-date multi-day">
+        <time class="month">{{ eventData.field_event_date.start_date|date("M d") }}</time>
+        {% if multiDay %}
+          -
+          <time class="month">{{ eventData.field_event_date.end_date|date("M d") }}</time>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="event-date">
+        <time class="day">{{ eventData.field_event_date.start_date|date("d") }}</time>
+        <time class="month">{{ eventData.field_event_date.start_date|date("M") }}</time>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="event-date">
+      <time class="month">DATE: TBD</time>
+    </div>
+  {% endif %}
+   {% if eventData.field_external_url.0.value['uri'] %}
+   <a class="post-content" href="{{ eventData.field_external_url.0.value['uri'] }}" target="_blank" aria-label="Opens direct link to event in new window">
+   {% else %}
+   <a class="post-content" href="{{ url }}" aria-label="View Event">
+   {% endif %}
+     {{ title_prefix }}
+     {% if eventData.title.value %}
+       {% if eventData.field_external_url.0.value['uri'] %}
+         <h3{{title_attributes}}>{{ eventData.title.value }} <svg class="icon"><use xlink:href="#link-out"></use></svg></h3>
+       {% else %}
+         <h3{{title_attributes}}>{{ eventData.title.value }}</h3>
+       {% endif %}
+     {% endif %}
+     {{ title_suffix }}
+     <div class="meta">
+       {% if eventData.field_location.value %}
+         <span class="location">{{ eventData.field_location.value }}</span>
+       {% endif %}
+       {% if '0' in eventData.field_event_date_tbd.0.value %}
+         {% if '0' in eventData.field_show_end_date.0.value and not multiDay %}
+           {% if eventData.field_location.value %}
+             <span class="white-text">{{ '  |  '|replace({" ": "&nbsp;"})|raw  |nl2br }}</span>
+           {% endif %}
+             <time>All day</time>
+         {% else %}
+           {% if eventData.field_location.value %}
+             <span class="white-text">{{ '  |  '|replace({" ": "&nbsp;"})|raw  |nl2br }}</span>
+           {% endif %}
+             <time>{{ eventDateStart|date("g:i a") }}{% if multiDay or ('1' in eventData.field_show_end_date.0.value) %} - <time>{{ eventDateEnd|date("g:i a") }}</time>{% endif %}</time>
+         {% endif %}
+       {% endif %}
+     </div>
+   </a>
+</div>

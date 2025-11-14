@@ -1,0 +1,23 @@
+uuid: 93b15d08-9919-410b-b65f-c4ae12fca2d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_back_color
+    - paragraphs.paragraphs_type.embedded_webform
+  module:
+    - options
+id: paragraph.embedded_webform.field_back_color
+field_name: field_back_color
+entity_type: paragraph
+bundle: embedded_webform
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Yellow
+default_value_callback: ''
+settings: {  }
+field_type: list_string

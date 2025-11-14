@@ -1,0 +1,64 @@
+uuid: e464b146-9a4c-4040-b46f-35ff2b82826b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publications_intro.field_article_two
+    - field.field.paragraph.publications_intro.field_first_article
+    - field.field.paragraph.publications_intro.field_fourth_article
+    - field.field.paragraph.publications_intro.field_intro_header_subtitle
+    - field.field.paragraph.publications_intro.field_intro_header_title
+    - field.field.paragraph.publications_intro.field_third_article
+    - paragraphs.paragraphs_type.publications_intro
+id: paragraph.publications_intro.default
+targetEntityType: paragraph
+bundle: publications_intro
+mode: default
+content:
+  field_article_two:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: publication_intro
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_first_article:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: publication_intro_featured
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_fourth_article:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: publication_intro
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_intro_header_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_third_article:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: publication_intro
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  field_intro_header_title: true
+  search_api_excerpt: true

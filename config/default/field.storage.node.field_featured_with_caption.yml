@@ -1,0 +1,21 @@
+uuid: 00a84733-6987-46eb-b3c2-17f707aaabb4
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_featured_with_caption
+field_name: field_featured_with_caption
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 5
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

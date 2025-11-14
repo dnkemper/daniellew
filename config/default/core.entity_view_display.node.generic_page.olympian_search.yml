@@ -1,0 +1,89 @@
+uuid: 90d2b1a4-ce6d-41ee-a969-4961e4b51b88
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.generic_page.date_repeat_entity_clone_state
+    - field.field.node.generic_page.date_repeat_entity_master_uuid
+    - field.field.node.generic_page.field_additional_resources
+    - field.field.node.generic_page.field_anchor_links
+    - field.field.node.generic_page.field_articles_spot
+    - field.field.node.generic_page.field_book_categories
+    - field.field.node.generic_page.field_call_to_action_p
+    - field.field.node.generic_page.field_dark_callout
+    - field.field.node.generic_page.field_dotted_line
+    - field.field.node.generic_page.field_extra_two_column_content_p
+    - field.field.node.generic_page.field_faculty_bookshelf_title
+    - field.field.node.generic_page.field_footer_callout_p
+    - field.field.node.generic_page.field_fullscreen_slideshow
+    - field.field.node.generic_page.field_gallery
+    - field.field.node.generic_page.field_introduction_p
+    - field.field.node.generic_page.field_meta_tags
+    - field.field.node.generic_page.field_multipurpose_slideshow_p
+    - field.field.node.generic_page.field_people_teaser
+    - field.field.node.generic_page.field_resources_callout_p
+    - field.field.node.generic_page.field_search
+    - field.field.node.generic_page.field_show_faculty_bookshelf
+    - field.field.node.generic_page.field_sidebar_slideshow_p
+    - field.field.node.generic_page.field_single_image_field_callout
+    - field.field.node.generic_page.field_spotlight_p
+    - field.field.node.generic_page.field_testimonials_p
+    - field.field.node.generic_page.field_timeline
+    - field.field.node.generic_page.field_two_column_content_p
+    - node.type.generic_page
+  module:
+    - user
+id: node.generic_page.olympian_search
+targetEntityType: node
+bundle: generic_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  field_additional_resources: true
+  field_anchor_links: true
+  field_articles_spot: true
+  field_book_categories: true
+  field_call_to_action_p: true
+  field_dark_callout: true
+  field_dotted_line: true
+  field_extra_two_column_content_p: true
+  field_faculty_bookshelf_title: true
+  field_footer_callout_p: true
+  field_fullscreen_slideshow: true
+  field_gallery: true
+  field_introduction_p: true
+  field_meta_tags: true
+  field_multipurpose_slideshow_p: true
+  field_people_teaser: true
+  field_resources_callout_p: true
+  field_show_faculty_bookshelf: true
+  field_sidebar_slideshow_p: true
+  field_single_image_field_callout: true
+  field_spotlight_p: true
+  field_testimonials_p: true
+  field_timeline: true
+  field_two_column_content_p: true
+  links: true

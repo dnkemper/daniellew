@@ -1,0 +1,19 @@
+uuid: dcffd55c-0878-4cef-ab1f-52dacf8cf996
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_read_more_link_url
+field_name: field_read_more_link_url
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

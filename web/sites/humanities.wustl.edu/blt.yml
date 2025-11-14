@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: humanities.ddev.site
+    protocol: https
+  machine_name: humanities
+  human_name: humanities.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: humanities.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/humanities.wustl.edu/files'
+    origin: 'https://humanities.wustl.edu'
+drupal:
+  db:
+    database: drupal_humanities
+system:
+  site:
+    contact_us_url: 'https://humanities.wustl.edu/contact-us'
+    name: humanities
+    email: humanities@wustl.edu

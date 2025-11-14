@@ -1,0 +1,10 @@
+uuid: d9956b39-a976-459d-8ee9-023ce706117e
+langcode: en
+status: true
+dependencies: {  }
+id: lightbox_image
+label: 'Lightbox Image'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Lightbox Image'
+behavior_plugins: {  }

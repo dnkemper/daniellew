@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 84b0be07-bf92-4496-88da-bdddf4069060
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: careeradvising_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/careeradvising_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 45188
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

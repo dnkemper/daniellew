@@ -1,0 +1,21 @@
+diff --git a/modules/entity_share_websub_hub/entity_share_websub_hub.views.inc b/modules/entity_share_websub_hub/entity_share_websub_hub.views.inc
+index 497b8cf153f40d8cd1fac7579a5cc6a4521dbd1f..328f270b0c45c301d6ac8c15ddaed4a098f1c4db 100644
+--- a/modules/entity_share_websub_hub/entity_share_websub_hub.views.inc
++++ b/modules/entity_share_websub_hub/entity_share_websub_hub.views.inc
+@@ -50,6 +50,16 @@ function entity_share_websub_hub_views_data() {
+   $data[$table]['entity_id'] = [
+     'title' => t('Entity ID'),
+     'help' => t('The field showing the entity ID of a syndicated content'),
++    'relationship' => array(
++      'title' => t('UUID'),
++      'help' => t('UUID of content.'),
++      'handler' => ['views_handler_relationship'],
++      'id' => 'standard',
++      'base' => 'node',
++      'base field' => 'uuid',
++      'field' => 'entity_id',
++      'label' => t('uuid'),
++    ),
+     'real field' => 'entity_id',
+     'field' => [
+       'id' => 'standard',

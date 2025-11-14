@@ -1,0 +1,21 @@
+uuid: 92a621fa-85ee-4ba3-be18-38d05bdc5b8c
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_introduction_text_color
+field_name: field_introduction_text_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: olympian_core_introduction_text_color_allowed_values
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

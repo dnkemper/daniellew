@@ -1,0 +1,10 @@
+uuid: 14397822-85c7-45d4-8019-1b788c83483e
+langcode: en
+status: true
+dependencies: {  }
+id: featured_half_image_w_text
+label: 'Featured Half Image w/Text'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Featured Half Image w/Text'
+behavior_plugins: {  }

@@ -1,0 +1,10 @@
+uuid: 073d877c-74cd-49df-9d33-73341feb1b93
+langcode: en
+status: true
+dependencies: {  }
+id: intro_with_links
+label: 'Generic Intro with Side Items'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Generic Intro with Side Items'
+behavior_plugins: {  }

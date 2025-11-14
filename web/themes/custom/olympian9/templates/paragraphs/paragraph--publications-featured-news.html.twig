@@ -1,0 +1,54 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - field_first_news_article - ER
+ * - field_news_header_subtitle - text plain
+ * - field_news_header_title - text plain
+ * - field_second_news_article - ER
+ * @see template_preprocess_block()
+ */
+#}
+
+
+{% block paragraph %}
+
+  <header class="dept-ampersand-header featured-news" id="featured-news">
+    <div class="container dept-ampersand-header__container">
+      <div class="dept-ampersand-header__title">
+        {% if intro_selection_type == 'featured' %}
+          <h1 class="dept-module-title">{{ current_title }}</h1>
+        {% else %}
+          <h2 class="dept-module-title">{{ content.field_news_header_title.0 }}</h2>
+        {% endif %}
+        {% if content.field_news_header_subtitle.0 %}
+          <p class="dept-module-headline">{{ content.field_news_header_subtitle.0 }}</p>
+        {% endif %}
+      </div>
+      <div class="dept-ampersand-featured-news__list">
+        {{ content.field_first_news_article }}
+        {{ content.field_second_news_article }}
+      </div>
+    </div>
+  </header>
+
+{% endblock paragraph %}

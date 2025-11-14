@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c750190a-1861-47f8-9aa6-14fb89c2caf1
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: medicalloa_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/medicalloa_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 29436
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

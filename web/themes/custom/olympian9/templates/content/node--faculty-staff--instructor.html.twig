@@ -1,0 +1,149 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ * field_description - text formatted long
+ * field_additional_titles - text plain long
+ * field_advisor - text plain
+ * field_ * field_advisor_url - text plain
+ * field_areas_of_interest - ER
+ * field_biography - text formatted long w/summary
+ * field_content_type - list text
+ * field_cv - file
+ * field_dark_slideshow - ERR
+ * field_education - text plain long
+ * field_email_address - text plain
+ * field_award - text plain
+ * field_external_profile_link - text plain
+ * field_fax_number - text plain
+ * field_first_name - text plain
+ * field_author_headshot - ER
+ * field_interests - text plain long
+ * field_intro_text - formatted text long
+ * field_is_shared - boolean
+ * field_last_name - text plain
+ * field_links_p - ERR
+ * field_mailing_address - text plain long
+ * field_building_name_and_room_num - text plain long
+ * field_external_url - text plain
+ * field_office_hours - text plain long
+ * field_phone_number - text plain
+ * field_pronouns - text plain
+ * field_search - text plain long
+ * field_shared_content - text plain long
+ * field_shared_content_subscribers - text plain long
+ * field_shared_content_xml - text plain
+ * field_social_media_links_p - ERR
+ * field_position - text plain
+ * field_type_of_staff - ER
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{# {%
+  set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%} #}
+<div class="instructor-container">
+  <div class="instructor-image">
+    {% if is_shared_content == 1 %}
+      {% if headshotCard|raw %}
+        {{ headshotCard|raw }}
+      {% else %}
+        <img loading="lazy" src="{{ base_path ~ directory }}/images/default-person.png" alt="default person image" width="320" height="320">
+      {% endif %}
+    {% else %}
+      {% if content.field_author_headshot.0 %}
+        {{ drupal_image(content.field_author_headshot.0['#media']|file_uri, 'resp_square_small', { alt: headshotAlt ?? '' }, responsive=true) }}
+      {% else %}
+        <img loading="lazy" src="{{ base_path ~ directory }}/images/default-person.png" alt="default person image" width="320" height="320">
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="instructor-details">
+    <h3>{% if content.field_external_profile_link[0]['#url'] %}
+      <a href="{{ content.field_external_profile_link[0]['#url'] }}" aria-label="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}" title="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}">
+        {% else %}
+      <a href="{{ url }}" aria-label="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}" title="View {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}">
+        {% endif %}
+        {{ content.field_first_name.0 }} {{ content.field_last_name.0 }}
+      </a>
+    </h3>
+
+    {% if content.field_position.0 %}
+      <h4>{{ content.field_position.0 }}</h4>
+    {% endif %}
+    {% if content.field_email_address.0 %}
+      <a href="{{ content.field_email_address[0]['#url'] }}" class="instructor-email">
+        {{ content.field_email_address[0]['#title'] }}
+      </a>
+    {% endif %}
+    {% if content.field_phone_number.0 %}
+      <span class="tel">{{ content.field_phone_number.0 }}</span>
+    {% endif %}
+  </div>
+</div>

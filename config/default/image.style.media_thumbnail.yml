@@ -1,0 +1,26 @@
+uuid: b401b84c-f7bc-4e2b-a79f-54acefd92386
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: media_thumbnail
+label: 'Media thumbnail (100x100)'
+effects:
+  dceca6e3-e862-493a-8735-8081770b3711:
+    uuid: dceca6e3-e862-493a-8735-8081770b3711
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 100
+      height: 100
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  e0651c6b-ff34-41a7-ae7f-0d30d1c65b37:
+    uuid: e0651c6b-ff34-41a7-ae7f-0d30d1c65b37
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

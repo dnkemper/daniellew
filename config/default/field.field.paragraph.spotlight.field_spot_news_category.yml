@@ -1,0 +1,26 @@
+uuid: eb84fa65-5631-47f5-b0b3-0779b3c61d85
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_spot_news_category
+    - paragraphs.paragraphs_type.spotlight
+    - taxonomy.vocabulary.article_categories
+id: paragraph.spotlight.field_spot_news_category
+field_name: field_spot_news_category
+entity_type: paragraph
+bundle: spotlight
+label: 'News Category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      article_categories: article_categories
+    sort:
+      field: _none
+field_type: entity_reference

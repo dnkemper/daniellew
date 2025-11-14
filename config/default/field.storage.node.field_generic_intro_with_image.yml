@@ -1,0 +1,21 @@
+uuid: 61efb5f9-84d2-47ef-81e4-f283730f6f38
+langcode: und
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+id: node.field_generic_intro_with_image
+field_name: field_generic_intro_with_image
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

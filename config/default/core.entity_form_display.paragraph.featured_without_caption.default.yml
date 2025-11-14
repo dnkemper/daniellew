@@ -1,0 +1,27 @@
+uuid: bd432ac5-bf70-428e-b8f9-b915dc60472e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_without_caption.field_background_feat_image
+    - paragraphs.paragraphs_type.featured_without_caption
+  module:
+    - media_library
+    - media_library_edit
+id: paragraph.featured_without_caption.default
+targetEntityType: paragraph
+bundle: featured_without_caption
+mode: default
+content:
+  field_background_feat_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+hidden:
+  created: true
+  status: true

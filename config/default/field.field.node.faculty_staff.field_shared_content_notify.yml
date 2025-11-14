@@ -1,0 +1,21 @@
+uuid: 59a0931c-bd52-49ee-b936-f10d6b9a652a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_shared_content_notify
+    - node.type.faculty_staff
+  module:
+    - options
+id: node.faculty_staff.field_shared_content_notify
+field_name: field_shared_content_notify
+entity_type: node
+bundle: faculty_staff
+label: 'Shared Content Notify'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: arthistory.ddev.site
+    protocol: https
+  machine_name: arthistory
+  human_name: arthistory.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: arthistory.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/arthistory.wustl.edu/files'
+    origin: 'https://arthistory.wustl.edu'
+drupal:
+  db:
+    database: drupal_arthistory
+system:
+  site:
+    contact_us_url: 'https://arthistory.wustl.edu/contact-us'
+    name: arthistory
+    email: arthistory@wustl.edu

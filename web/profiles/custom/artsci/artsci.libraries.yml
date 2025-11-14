@@ -1,0 +1,8 @@
+global-scripts:
+  js:
+    js/artsci.behaviors.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery
+    - core/once

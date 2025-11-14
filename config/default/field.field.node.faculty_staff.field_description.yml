@@ -1,0 +1,29 @@
+uuid: f8b172f1-b825-4334-be62-a64407f4241e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_description
+    - filter.format.full_html
+    - node.type.faculty_staff
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: node.faculty_staff.field_description
+field_name: field_description
+entity_type: node
+bundle: faculty_staff
+label: 'Additional Description'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

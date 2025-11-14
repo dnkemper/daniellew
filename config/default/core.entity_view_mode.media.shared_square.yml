@@ -1,0 +1,11 @@
+uuid: c359eb50-6b6a-4f19-b6c6-cd1cbf2a6b46
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.shared_square
+label: 'Shared Square'
+description: ''
+targetEntityType: media
+cache: true

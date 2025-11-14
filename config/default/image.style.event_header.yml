@@ -1,0 +1,26 @@
+uuid: 30be3299-9764-4464-99e1-3f3560179eef
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: event_header
+label: 'Event Header (1040x526)'
+effects:
+  9d24173b-3c8b-44b5-bdd8-7b5f1e5a39a8:
+    uuid: 9d24173b-3c8b-44b5-bdd8-7b5f1e5a39a8
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 1040
+      height: 526
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  61c94d78-1f87-4133-90f8-1b7a3d30d7f5:
+    uuid: 61c94d78-1f87-4133-90f8-1b7a3d30d7f5
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

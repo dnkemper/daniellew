@@ -1,0 +1,167 @@
+uuid: 8c9f3313-e1f4-4e13-83b9-0971e4e6a603
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.events_landing_page.date_repeat_entity_clone_state
+    - field.field.node.events_landing_page.date_repeat_entity_master_uuid
+    - field.field.node.events_landing_page.field_category_display
+    - field.field.node.events_landing_page.field_event_header_image
+    - field.field.node.events_landing_page.field_footer_callout_p
+    - field.field.node.events_landing_page.field_header_type
+    - field.field.node.events_landing_page.field_landing_page_type
+    - field.field.node.events_landing_page.field_meta_tags
+    - field.field.node.events_landing_page.field_search
+    - node.type.events_landing_page
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - media_library
+    - media_library_edit
+    - metatag
+    - paragraphs
+    - paragraphs_features
+    - path
+    - private_content
+id: node.events_landing_page.default
+targetEntityType: node
+bundle: events_landing_page
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category_display:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_event_header_image:
+    type: media_library_widget
+    weight: 2
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_footer_callout_p:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: 'Footer Callout'
+      title_plural: 'Footer Callouts'
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+  field_header_type:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_landing_page_type:
+    type: options_select
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 11
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_search:
+    type: string_textarea
+    weight: 6
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 26
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 7
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  promote: true
+  status: true
+  sticky: true

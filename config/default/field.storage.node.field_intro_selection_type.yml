@@ -1,0 +1,27 @@
+uuid: d752cb8c-c501-4c83-9ab6-52b5e4e5198e
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_intro_selection_type
+field_name: field_intro_selection_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: standard
+      label: 'Standard Intro'
+    -
+      value: featured
+      label: 'Featured News'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

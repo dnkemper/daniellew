@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: polisci.ddev.site
+    protocol: https
+  machine_name: polisci
+  human_name: polisci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: polisci.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/polisci.wustl.edu/files'
+    origin: 'https://polisci.wustl.edu'
+drupal:
+  db:
+    database: drupal_polisci
+system:
+  site:
+    contact_us_url: 'https://polisci.wustl.edu/contact-us'
+    name: polisci
+    email: polisci@wustl.edu

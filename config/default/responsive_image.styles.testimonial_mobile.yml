@@ -1,0 +1,16 @@
+uuid: c5ed9088-8b7f-4114-b307-a4ec193f0943
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.landscape_16_9_600w
+id: testimonial_mobile
+label: 'Testimonial Mobile'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: landscape_16_9_600w
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: landscape_16_9_600w

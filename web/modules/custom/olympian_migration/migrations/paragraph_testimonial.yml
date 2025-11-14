@@ -1,0 +1,60 @@
+id: paragraph_testimonial
+label: 'Testimonial Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: testimonial
+
+process:
+  type:
+    plugin: default_value
+    default_value: testimonial
+
+  # Text with summary field mapping
+  field__home_testimonial:
+    -
+      plugin: get
+      source: field__home_testimonial
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+
+  # List text field mapping
+  field_half_test_bkg_color:
+    plugin: get
+    source: field_half_test_bkg_color
+
+  # Text field mappings
+  field_test_name:
+    plugin: get
+    source: field_test_name
+
+  field_test_title:
+    plugin: get
+    source: field_test_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: testimonial
+
+migration_dependencies:
+  required:
+    - node_testimonial
+  optional: {}

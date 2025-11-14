@@ -1,0 +1,77 @@
+# your_theme/config/schema/your_theme.schema.yml
+olympian9.settings:
+  type: theme_settings
+  label: 'Olympian9 Theme Settings'
+  mapping:
+    site_name:
+      type: string
+      label: 'Site Name'
+    site_mail:
+      type: string
+      label: 'Site Email Address'
+    favicon:
+      type: hidden
+    icon:
+      type: hidden
+    logo:
+      type: hidden
+    theme_settings:
+      type: hidden
+    olympian:
+      type: mapping
+      label: 'Olympian9 settings'
+      mapping:
+        alerts_feed:
+          type: integer
+          label: 'Alerts Feed'
+        chatbot:
+          type: integer
+          label: 'Chatbot'
+    menu:
+      type: mapping
+      label: 'Header settings'
+      mapping:
+        department_image:
+          type: integer
+          label: 'Department Image'
+        header_color:
+          type: integer
+          label: 'Site Header Color'
+        header_logo:
+          type: integer
+          label: 'Header Logo Type'
+        top_button_title_custom_text:
+          type: string
+          label: 'Top Left Title Text'
+        apply_button:
+          type: integer
+          label: 'Show Top-Left Menu Button?'
+        apply_button_text:
+          type: string
+          label: 'Top-Left Button Text'
+        apply_button_link:
+          type: string
+          label: 'Top-Left Button URL'
+        apply_button_external:
+          type: integer
+          label: 'Top-Left Button Base Site'
+    footer:
+      type: mapping
+      label: 'Footer settings'
+      mapping:
+        additional_link_artsci:
+          type: integer
+          label: 'Additional Information Link: Arts & Sciences'
+        additional_link_graduate:
+          type: integer
+          label: 'Additional Information Link: Graduate Studies in A&S'
+        copyright:
+          type: string
+          label: 'Copyright'
+    header:
+      type: mapping
+      label: 'Navigation Display Settings'
+      mapping:
+        toppage:
+          type: boolean
+          label: 'Back to top button'

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: quantumleaps.ddev.site
+    protocol: https
+  machine_name: quantumleaps
+  human_name: quantumleaps.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: quantumleaps.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/quantumleaps.wustl.edu/files'
+    origin: 'https://quantumleaps.wustl.edu'
+drupal:
+  db:
+    database: drupal_quantumleaps
+system:
+  site:
+    contact_us_url: 'https://quantumleaps.wustl.edu/contact-us'
+    name: quantumleaps
+    email: quantumleaps@wustl.edu

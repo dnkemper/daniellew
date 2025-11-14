@@ -1,0 +1,39 @@
+uuid: 9f1e04d1-abb1-41b8-bec1-38f759f601fc
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_people_teaser_views
+field_name: field_people_teaser_views
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '1'
+      label: List
+    -
+      value: '2'
+      label: 'List-Gray Background'
+    -
+      value: '3'
+      label: 'Card-3 Column'
+    -
+      value: '4'
+      label: 'Card-3 Column-Gray Background'
+    -
+      value: '5'
+      label: 'Card-2 Column'
+    -
+      value: '6'
+      label: 'Card-2 Column-Gray Background'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

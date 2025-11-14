@@ -1,0 +1,47 @@
+uuid: 62ae8212-08b2-4d93-9334-d881146f193a
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_publications
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Publications)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: publications
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_button_url:
+    -
+      plugin: get
+      source: field_button_url
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publications
+migration_dependencies: {  }

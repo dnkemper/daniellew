@@ -1,0 +1,7 @@
+name: Video Filter Migrate
+type: module
+description: Provides a custom migration process plugin for video URLs.
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - migrate

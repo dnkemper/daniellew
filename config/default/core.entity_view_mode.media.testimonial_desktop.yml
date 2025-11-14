@@ -1,0 +1,11 @@
+uuid: 1303a946-3532-4d6f-9dd7-1a246e15c876
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.testimonial_desktop
+label: 'Testimonial Desktop'
+description: ''
+targetEntityType: media
+cache: true

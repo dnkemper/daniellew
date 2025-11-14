@@ -1,0 +1,93 @@
+{#
+/**
+ * @file
+ * Theme override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+{#
+  We call a macro which calls itself to render the full tree.
+  @see http://twig.sensiolabs.org/doc/tags/macro.html
+#}
+{{ menus.menu_links(items, attributes, 0, _context) }}
+{{ attach_library('olympian9/navigation-primary') }}
+{% macro menu_links(items, attributes, menu_level, variables) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('menu') }}>
+    {% else %}
+      <ul class="menu">
+    {% endif %}
+            {% if item.url.isRouted and item.url.routeName == '<nolink>' %}
+          {% set menu_item_type = 'nolink' %}
+        {% elseif item.url.isRouted and item.url.routeName == '<button>' %}
+          {% set menu_item_type = 'button' %}
+        {% else %}
+          {% set menu_item_type = 'link' %}
+        {% endif %}
+        {% for item in items|slice(0,variables.limit) %}
+      {%
+        set classes = [
+          'primary-nav__menu-link',
+          'primary-nav__menu-link--' ~ (menu_item_type),
+          'primary-nav__menu-link--level-' ~ (menu_level + 1),
+          
+          item.is_expanded ? 'primary-nav__menu-item--has-children',
+          item.is_collapsed ? 'menu-item--collapsed',
+          item.in_active_trail ? 'menu-item--active-trail',
+        ]
+      %}
+      <li{{ item.attributes.addClass(classes) }}>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+        {% set aria_id = (aria_id ~ loop.index )|clean_id %}
+  {# Add ARIA attributes to the submenu ul element #}
+  {% set submenu_aria_id = 'submenu-' ~ aria_id %}
+  {% set submenu_attributes = create_attribute({
+    'id': submenu_aria_id,
+    'aria-hidden': 'true',
+    'aria-expanded': 'false',
+    'aria-selected': 'false',
+    'role': 'menu',
+    'class': 'submenu-link',
+    'aria-labelledby': aria_id,
+  }) %}
+      {% set toggle_button_attributes = create_attribute({
+                  'class': 'primary-nav primary-nav__button-toggle',
+                  'data-drupal-selector': 'primary-nav-submenu-toggle-button',
+                  'aria-controls': aria_id,
+                  'aria-expanded': 'false',
+                  'aria-hidden': 'true',
+                  'tabindex': '-1',
+                }) %}
+                                          <button{{ toggle_button_attributes }}>
+                  <span class="visually-hidden">{{ '@title sub-navigation'|t({'@title': item.title}) }}</span>
+                  <span class="icon--menu-toggle">
+                    <svg class="icon"><use xlink:href="#nav-arrow"></use></svg>
+                    </span>
+                </button>
+  <ul{{ submenu_attributes }} style="display: none;">
+    {{ menus.menu_links(item.below, attributes, menu_level + 1, submenu_aria_id) }}
+  </ul>
+{% endif %}
+
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

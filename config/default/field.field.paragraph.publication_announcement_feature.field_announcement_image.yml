@@ -1,0 +1,29 @@
+uuid: 25c3cd26-8c53-4c95-a80b-f1d73bad202d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_announcement_image
+    - media.type.image
+    - paragraphs.paragraphs_type.publication_announcement_feature
+id: paragraph.publication_announcement_feature.field_announcement_image
+field_name: field_announcement_image
+entity_type: paragraph
+bundle: publication_announcement_feature
+label: Image
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

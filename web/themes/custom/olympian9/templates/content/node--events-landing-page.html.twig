@@ -1,0 +1,171 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ * - field_location: text plain
+ * - field_event_date_tbd: boolean
+ * - field_event_date: date range
+ * - field_thumbnail: image media type
+ * @see template_preprocess_node()
+ */
+#}
+
+{{ attach_library('olympian9/datepicker-display') }}
+<div{{ attributes.addClass(classes) }}>
+  <div id="events">
+    {% set event_view = drupal_view_result('event_slideshows', 'events_landing_featured')|length %}
+    {% if content.field_header_type[0]['#markup'] == 'Static' or event_view < 1 %}
+      {% if content.field_event_header_image.0 %}
+        <section id="photo-header" aria-label="header with image">
+          <div class="image" style="background-image: url({{ file_url(node.field_event_header_image.entity.field_media_image.entity.fileuri) }});"></div>
+                <div class="container">
+        {{ title_prefix }}
+        {% if label %}
+          <h1{{ title_attributes }}>{{ label }}</h1>
+        {% endif %}
+        {{ title_suffix }}
+      </div>
+      </section>
+      {% else %}
+        <section id="photo-header" aria-label="header with image">
+              <div class="container">
+        {{ title_prefix }}
+        {% if label %}
+          <h1{{ title_attributes }}>{{ label }}</h1>
+        {% endif %}
+        {{ title_suffix }}
+      </div>
+      </section>
+      {% endif %}
+    {% elseif content.field_header_type[0]['#markup'] == 'Slideshow' %}
+        <section id="photo-header" aria-label="header with slideshow">
+         {% set count = drupal_view_result('event_slideshows', 'events_landing_featured')|length %}
+          <div class="featured-posts featured-events slideshow event-slideshow">
+            {{ drupal_view('event_slideshows', 'events_landing_featured') }}
+          </div>
+          {% if count > 1 %}
+            <div class="dots"></div>
+          {% endif %}
+        </section>
+    {% endif %}
+      <div class="categories-list togglee">
+        {% if content.field_landing_page_type[0]['#markup'] == 'card' %}
+          {{ drupal_entity('block', 'exposedformeventseventscardblock', check_access=false) }}
+        {% else %}
+          {{ drupal_entity('block', 'exposedformeventseventslistblock', check_access=false) }}
+        {% endif %}
+      </div>
+
+        <div class="filtered-date togglee-date">
+        <div class="inner">
+                  <section class="date_picker_wrapper" id="date_picker_1">
+    <div class="date_picker_header">
+      <button class="date_picker_year"></button>
+      <h3 class="date_picker_month_day"></h3>
+    </div>
+    <div class="date_picker_body">
+      <div class="date_picker_month_navigation">
+        <button class="date_picker_prev_month date_picker_month_nav_btn">
+<svg class="icon"><use xlink:href="#arrow-prev"></use></svg>
+
+        </button>
+        <div class="date_picker_month_name"></div>
+        <button class="date_picker_next_month date_picker_month_nav_btn">
+<svg class="icon"><use xlink:href="#arrow-next"></use></svg>
+        </button>
+      </div>
+      <div class="date_picker_month_days">
+    <li class="header">Sun</li>
+    <li class="header">Mon</li>
+    <li class="header">Tue</li>
+    <li class="header">Wed</li>
+    <li class="header">Thu</li>
+    <li class="header">Fri</li>
+    <li class="header">Sat</li>
+      </div>
+    </div>
+  </section>
+
+<div id="dateDisplay">{{ custom_date }}</div>
+
+{{ custom_date }}
+{% set customd = custom_date %}
+          </div>
+        </div>
+
+      <div class="subscribe container filtered-list">
+        <a href="webcal://{{ host }}/calendar.ics" type="text/calendar" class="calendar-subscribe" target="_blank">
+          <svg class="icon"><img alt="calendar icon, decorative" src="{{ base_path ~ directory }}/images/icon-rss.png">Subscribe
+            to Calendar
+        </a>
+      </div>
+      <section class="filtered">
+        {% if content.field_landing_page_type[0]['#markup'] == 'card' %}
+          {{ drupal_view('events', 'events_card_block', custom_date) }}
+        {% elseif content.field_landing_page_type[0]['#markup'] == 'list' %}
+          {{ drupal_view('events', 'events_list_block', custom_date) }}
+        {% endif %}
+      </section>
+      {{ content.field_footer_callout_p }}
+  </div>
+</div>

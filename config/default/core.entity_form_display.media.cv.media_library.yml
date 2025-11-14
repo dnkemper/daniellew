@@ -1,0 +1,38 @@
+uuid: d2ce6fa9-89cc-476f-bd8a-1f13053b6392
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.cv.field_media_directory
+    - field.field.media.cv.field_media_file
+    - media.type.cv
+  module:
+    - file
+id: media.cv.media_library
+targetEntityType: media
+bundle: cv
+mode: media_library
+content:
+  field_media_directory:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_media_file:
+    type: file_generic
+    weight: 0
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+hidden:
+  created: true
+  directory: true
+  moderation_state: true
+  name: true
+  path: true
+  status: true
+  translation: true
+  uid: true

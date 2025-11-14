@@ -1,0 +1,98 @@
+uuid: 3ad13c0e-6125-46f7-a8d5-868c833ec7b4
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_timeline_slides
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Slides)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: timeline_slides
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_description:
+    -
+      plugin: lullabot_embedded_content
+      source: field_description
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+  field_dotted_link:
+    plugin: sub_process
+    source: field_optional_link_url
+    include_source: true
+    source_key: root
+    process:
+      dotted_link_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_timeline_slides_links
+        source: root/item_id
+      target_id:
+        plugin: extract
+        source: '@dotted_link_ids'
+        index:
+          - 0
+        default: null
+      target_revision_id:
+        plugin: extract
+        source: '@dotted_link_ids'
+        index:
+          - 1
+        default: null
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: timeline_slides
+migration_dependencies:
+  required: {}
+  optional: {  }

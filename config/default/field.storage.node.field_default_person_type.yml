@@ -1,0 +1,21 @@
+uuid: b34b406b-f6bc-4bae-9e23-a01e6f2b3248
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_default_person_type
+field_name: field_default_person_type
+entity_type: node
+type: list_string
+settings:
+  allowed_values: {  }
+  allowed_values_function: olympian_core_person_type_allowed_values
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,21 @@
+uuid: af6681cc-fa65-4d07-af20-6cd29d728b1c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_bkg_color
+    - paragraphs.paragraphs_type.text_link_with_testimonial
+  module:
+    - options
+id: paragraph.text_link_with_testimonial.field_text_bkg_color
+field_name: field_text_bkg_color
+entity_type: paragraph
+bundle: text_link_with_testimonial
+label: 'Background Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

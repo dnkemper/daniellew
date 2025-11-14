@@ -1,0 +1,16 @@
+uuid: 6814408c-72c0-4831-a890-796ba7cf5eb0
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.book_cover
+id: book_cover
+label: 'Book Cover'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: book_cover
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: book_cover

@@ -1,0 +1,24 @@
+uuid: 364c6350-2cd2-4164-b8ac-127ab652e229
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_reverse_image
+    - media.type.image
+    - node.type.coin
+id: node.coin.field_coin_reverse_image
+field_name: field_coin_reverse_image
+entity_type: node
+bundle: coin
+label: 'Reverse Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+field_type: entity_reference

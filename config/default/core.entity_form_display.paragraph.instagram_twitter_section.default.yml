@@ -1,0 +1,21 @@
+uuid: b445d0a8-dfe9-4e7c-957d-39b2b376edcc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.instagram_twitter_section.field_shown_items
+    - paragraphs.paragraphs_type.instagram_twitter_section
+id: paragraph.instagram_twitter_section.default
+targetEntityType: paragraph
+bundle: instagram_twitter_section
+mode: default
+content:
+  field_shown_items:
+    type: options_buttons
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

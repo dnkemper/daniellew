@@ -1,0 +1,61 @@
+uuid: 01df6336-75aa-4181-8c59-cfff8304a23c
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_taxonomy_term_semester
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - olympian_taxonomy
+  - Content
+migration_group: olympian_d7
+label: 'Taxonomy terms (Semester)'
+source:
+  plugin: d7_taxonomy_term
+  bundle: semester
+  ids:
+    tid:
+      type: integer
+    vid:
+      type: integer
+process:
+  tid:
+    -
+      plugin: get
+      source: tid
+  vid:
+    plugin: default_value
+    default_value: semester
+  revision_id:
+    -
+      plugin: get
+      source: tid
+  name:
+    -
+      plugin: get
+      source: name
+  description/value:
+    -
+      plugin: get
+      source: description
+  description/format:
+    -
+      plugin: get
+      source: format
+  weight:
+    -
+      plugin: get
+      source: weight
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: semester
+idMap:
+  plugin: smart_sql
+migration_dependencies: null

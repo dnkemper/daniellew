@@ -1,0 +1,26 @@
+uuid: 21eb9e54-f317-4c03-92a9-f2fc81a1929f
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: card
+label: 'Card (300x180)'
+effects:
+  828b9eb7-5020-49a9-8029-fa091b50c7a6:
+    uuid: 828b9eb7-5020-49a9-8029-fa091b50c7a6
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 300
+      height: 180
+      crop_type: focal_point
+      focal_point_advanced:
+        shift_x: ''
+        shift_y: ''
+  f1cf586d-e237-44db-acb8-5e679204e0d0:
+    uuid: f1cf586d-e237-44db-acb8-5e679204e0d0
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

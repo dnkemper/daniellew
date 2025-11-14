@@ -1,0 +1,44 @@
+uuid: d200f90c-0e12-4d8d-9dbe-938f1e6cd585
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.tabs.field_introduction_exerpt
+    - field.field.paragraph.tabs.field_single_column
+    - field.field.paragraph.tabs.field_tab_1
+    - paragraphs.paragraphs_type.tabs
+  module:
+    - text
+    - webform
+id: paragraph.tabs.default
+targetEntityType: paragraph
+bundle: tabs
+mode: default
+content:
+  field_introduction_exerpt:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_single_column:
+    type: boolean
+    label: hidden
+    settings:
+      format: boolean
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_tab_1:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

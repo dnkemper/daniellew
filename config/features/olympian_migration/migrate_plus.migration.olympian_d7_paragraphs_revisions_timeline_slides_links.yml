@@ -1,0 +1,48 @@
+uuid: d9caf13b-b76c-4261-8888-5ecca8f8061e
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_timeline_slides_links
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Slides)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: olympian_d7_paragraphs_timeline_slides
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: links
+  # Example field mappings (adjust field names as per your D7 structure)
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+
+  field_new_window:
+    plugin: get
+    source: field_new_window
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: links
+migration_dependencies:
+  required: {}
+  optional: {  }

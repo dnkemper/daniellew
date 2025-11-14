@@ -1,0 +1,127 @@
+id: node_resources
+migration_group: olympian_migration
+label: 'Resources Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - node
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: resources  # Replace with the machine name of your node type in Drupal 7
+#  ------------------------- ---------- ------------------ -------------
+#   Field name                Required   Field type         Cardinality
+#  ------------------------- ---------- ------------------ -------------
+#   field_button_url                     link               1
+#   field_infographic         ✔          entity_reference   1
+#   field_meta_tags                      metatag            1
+#   field_new_window                     boolean            1
+#   field_node_weight                    integer            1
+#   field_resource_category              entity_reference   -1
+#   field_search                         string_long        1
+#   field_subtitle                       string             1
+#   field_title                          string             1
+#  ------------------------- ---------- ------------------ -------------
+process:
+  type:
+    plugin: default_value
+    default_value: resources
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+
+  # Text field mappings
+  field_title: field_title
+  field_subtitle: field_subtitle
+  field_button_url:
+    -
+      plugin: sub_process
+      source: field_button_url
+      process:
+        uri: value
+
+  # Boolean field mapping
+  field_new_window: field_new_window
+
+  # Taxonomy term reference field mapping
+  field_resource_category:
+    plugin: sub_process
+    source: field_resource_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_resource_categories
+        source: tid
+
+  # Image field mapping using sub_process
+  field_infographic:
+    plugin: sub_process
+    source: field_infographic
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: resources
+migration_dependencies:
+  required:
+    - taxonomy_resource_categories
+  optional: {}

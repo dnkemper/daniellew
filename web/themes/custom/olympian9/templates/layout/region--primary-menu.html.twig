@@ -1,0 +1,58 @@
+{{ attach_library('olympian9/navigation-primary') }}
+<nav id="main-nav" class="flex togglee">
+  <div class="inner flex">
+    <div class="column">
+      <div class="search">
+        {{ drupal_entity('block', 'olympian_search_form_narrow') }}
+      </div>
+      {% if drupal_menu('main') | render %}
+        <nav id="primary-nav" role="navigation" aria-label="Main Menu">
+          {{ drupal_menu('main') }}
+        </nav>
+      {% endif %}
+    </div>
+    <div class="column">
+      {% if '1' in apply_button %}
+        <div class="callout">
+          {% if top_button_title_custom_text %}
+            <p>{{ top_button_title_custom_text }}</p>
+          {% else %}
+            <p>Let your curiosity lead the way:</p>
+          {% endif %}
+          <p>
+            {% if '1' in apply_button_external %}
+              <a class="button top-left-menu solid red" target="_blank" href="{{ apply_button_link ? apply_button_link : 'https://artsci.washu.edu/apply' }}">{{ apply_button_text ? apply_button_text : 'Apply Now' }}
+               <svg class="icon"><use xlink:href="#link-out"></use></svg>
+               {% endif %}
+              </a>
+            {% if '2' in apply_button_external %}
+              <a class="button top-left-menu solid red" href="{{ apply_button_link ? apply_button_link : 'https://artsci.washu.edu/apply' }}">{{ apply_button_text ? apply_button_text : 'Apply Now' }}
+              </a>
+              {% endif %}
+          </p>
+        </div>
+      {% endif %}
+      {% if drupal_menu('menu-secondary-navigation') | render %}
+        <nav id="secondary-nav" role="navigation">
+          {{ drupal_menu('menu-secondary-navigation') }}
+        </nav>
+      {% endif %}
+        <ul class="other-schools">
+            <li>
+              <a href="https://artsci.washu.edu" target="_blank">
+                <svg class="icon"><use xlink:href="#link-out"></use></svg>
+                Arts & Sciences
+              </a>
+            </li>
+
+            <li>
+              <a href="https://gradstudies.artsci.wustl.edu/" target="_blank">
+                <svg class="icon"><use xlink:href="#link-out"></use></svg>
+                Graduate Studies in A&S
+              </a>
+            </li>
+        </ul>
+    </div>
+  </div>
+   <div class="ampersand"><svg><use xlink:href="#ampersand"></use></svg></div>
+</nav>

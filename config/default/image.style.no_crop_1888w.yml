@@ -1,0 +1,21 @@
+uuid: af4055d2-9400-4769-9ae0-a5e8b2510d8c
+langcode: en
+status: true
+dependencies: {  }
+name: no_crop_1888w
+label: 'No crop (1888w)'
+effects:
+  7c15b51c-c24d-42ae-a980-838342311237:
+    uuid: 7c15b51c-c24d-42ae-a980-838342311237
+    id: image_scale
+    weight: 1
+    data:
+      width: 1888
+      height: null
+      upscale: false
+  472d6245-4973-42c4-9a47-3a29fd57826d:
+    uuid: 472d6245-4973-42c4-9a47-3a29fd57826d
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

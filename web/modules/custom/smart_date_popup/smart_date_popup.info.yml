@@ -1,0 +1,5 @@
+name: 'smart_date_popup'
+type: module
+description: 'smart date popup'
+package: Custom
+core_version_requirement: ^10

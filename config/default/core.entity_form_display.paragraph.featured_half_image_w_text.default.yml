@@ -1,0 +1,77 @@
+uuid: 6ac6879e-6880-48d0-bd4b-7f5ae4204e92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_half_image_w_text.field_custom_button_
+    - field.field.paragraph.featured_half_image_w_text.field_custom_caption
+    - field.field.paragraph.featured_half_image_w_text.field_half_image
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_description
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_main_titl
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_optional_header
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+  module:
+    - linkit
+    - media_library
+    - media_library_edit
+id: paragraph.featured_half_image_w_text.default
+targetEntityType: paragraph
+bundle: featured_half_image_w_text
+mode: default
+content:
+  field_custom_button_:
+    type: linkit
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_custom_caption:
+    type: string_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_half_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_half_image_description:
+    type: string_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_half_image_main_titl:
+    type: linkit
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_half_image_optional_header:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

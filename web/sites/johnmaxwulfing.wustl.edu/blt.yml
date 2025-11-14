@@ -1,0 +1,23 @@
+project:
+  local:
+    hostname: johnmaxwulfing.ddev.site
+    protocol: https
+  machine_name: johnmaxwulfing
+  human_name: johnmaxwulfing.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: johnmaxwulfing.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/johnmaxwulfing.wustl.edu/files'
+    origin: 'https://johnmaxwulfing.wustl.edu'
+drupal:
+  db:
+    database: drupal_johnmaxwulfing
+system:
+  site:
+    contact_us_url: 'https://johnmaxwulfing.wustl.edu/contact-us'
+    name: johnmaxwulfing
+    email: johnmaxwulfing@wustl.edu
+olympian_migration_source_uri_prefix: 'https://johnmaxwulfing.wustl.edu'

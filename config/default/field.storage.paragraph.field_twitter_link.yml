@@ -1,0 +1,19 @@
+uuid: f929e989-1fa4-4849-b1f6-e1bbe99f444b
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_twitter_link
+field_name: field_twitter_link
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

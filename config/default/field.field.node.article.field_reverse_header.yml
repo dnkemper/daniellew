@@ -1,0 +1,23 @@
+uuid: 44f11e09-0bac-480f-a3fa-4e612e69c2c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_reverse_header
+    - node.type.article
+id: node.article.field_reverse_header
+field_name: field_reverse_header
+entity_type: node
+bundle: article
+label: 'Reverse Header'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: '1'
+  off_label: '0'
+field_type: boolean

@@ -1,0 +1,25 @@
+uuid: 839d71d2-2875-4db4-995c-0323c7d785f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.callout.field_description_formatted
+    - paragraphs.paragraphs_type.callout
+  module:
+    - text
+id: paragraph.callout.default
+targetEntityType: paragraph
+bundle: callout
+mode: default
+content:
+  field_description_formatted:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

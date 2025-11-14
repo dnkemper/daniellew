@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: sociology.ddev.site
+    protocol: https
+  machine_name: sociology
+  human_name: sociology.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: sociology.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/sociology.wustl.edu/files'
+    origin: 'https://sociology.wustl.edu'
+drupal:
+  db:
+    database: drupal_sociology
+system:
+  site:
+    contact_us_url: 'https://sociology.wustl.edu/contact-us'
+    name: sociology
+    email: sociology@wustl.edu

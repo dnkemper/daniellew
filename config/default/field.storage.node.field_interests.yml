@@ -1,0 +1,19 @@
+uuid: e4d4940e-aa5b-4860-a158-f0701121cffd
+langcode: und
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_interests
+field_name: field_interests
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

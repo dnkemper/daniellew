@@ -1,0 +1,22 @@
+uuid: ba6b91fc-469c-4205-ab17-af163ee77fc1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: news_landing_page
+label: 'News Landing Page'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:newslanding]'
+selection_criteria:
+  03809a6f-2e52-4dcc-abb7-dce0162e63a4:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 03809a6f-2e52-4dcc-abb7-dce0162e63a4
+    context_mapping:
+      node: node
+    bundles:
+      news_landing_page: news_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

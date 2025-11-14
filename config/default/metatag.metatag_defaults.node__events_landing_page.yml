@@ -1,0 +1,18 @@
+uuid: 30704275-cce5-40ac-8a5d-3b122d14653c
+langcode: en
+status: true
+dependencies: {  }
+id: node__events_landing_page
+label: 'Content: Events Landing Page'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[site:name] | Arts & Sciences at Washington University in St. Louis'
+  og_description: '[site:name] | Arts & Sciences at Washington University in St. Louis'
+  og_image: '[node:field_event_header_image:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: article
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'

@@ -1,0 +1,18 @@
+uuid: b9a0a97d-1d48-4c0e-9c71-81d5a514af97
+langcode: en
+status: true
+dependencies: {  }
+id: node__faq
+label: 'Content: FAQ'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:field_introduction_p:entity:field_description]'
+  og_description: '[node:field_introduction_p:entity:field_description]'
+  og_image: '[node:field_introduction_p:entity:field_background_image:entity:field_media_image:fullscreen_video:url]'
+  og_title: '[node:title]'
+  og_type: article
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'

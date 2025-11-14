@@ -1,0 +1,86 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 82ba4f60-ea4d-415c-9ff2-f95d5dc2d84d
+  bundle: resources_landing_page
+  default_langcode: en
+  depends:
+    58d62119-6842-41d9-8f42-4b89e63165d9: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Resources '
+  created:
+    -
+      value: 1690475311
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources
+      langcode: en
+      pathauto: 0
+  field_category_display:
+    -
+      value: collapsed
+  field_contact_us_link:
+    -
+      uri: /contact-us
+      title: ''
+      options: {  }
+  field_introduction_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c5fcbd87-b098-46f2-9bd8-bc15c2bd833b
+          bundle: introduction
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690475324
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_ampersand:
+            -
+              value: false
+          field_background:
+            -
+              value: Dark
+          field_background_image:
+            -
+              entity: 58d62119-6842-41d9-8f42-4b89e63165d9
+          field_description:
+            -
+              value: 'search our resources'
+          field_headline:
+            -
+              value: Resources

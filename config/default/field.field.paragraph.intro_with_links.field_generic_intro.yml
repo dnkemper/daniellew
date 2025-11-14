@@ -1,0 +1,31 @@
+uuid: 1704e276-7a7e-4de0-b194-3ee61940b161
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_generic_intro
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.intro_with_links
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.intro_with_links.field_generic_intro
+field_name: field_generic_intro
+entity_type: paragraph
+bundle: intro_with_links
+label: Intro
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: enst.ddev.site
+    protocol: https
+  machine_name: enst
+  human_name: enst.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: enst.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/enst.wustl.edu/files'
+    origin: 'https://enst.wustl.edu'
+drupal:
+  db:
+    database: drupal_enst
+system:
+  site:
+    contact_us_url: 'https://enst.wustl.edu/contact-us'
+    name: enst
+    email: enst@wustl.edu

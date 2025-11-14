@@ -1,0 +1,19 @@
+uuid: a98e8569-fbcd-46ac-8f2d-734128ee4fa2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_excerpt
+    - node.type.faculty_staff
+id: node.faculty_staff.field_link_excerpt
+field_name: field_link_excerpt
+entity_type: node
+bundle: faculty_staff
+label: 'Intro Text'
+description: field_link_excerpt
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

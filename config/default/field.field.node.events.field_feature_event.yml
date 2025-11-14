@@ -1,0 +1,23 @@
+uuid: 1127b5dd-1545-4b82-b53d-22c3e6cb2034
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_feature_event
+    - node.type.events
+id: node.events.field_feature_event
+field_name: field_feature_event
+entity_type: node
+bundle: events
+label: 'Feature on Events Landing Page'
+description: 'Check to feature the events on the event landing page slideshow.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: ''
+  off_label: ''
+field_type: boolean

@@ -1,0 +1,10 @@
+uuid: 70302ef1-e7e5-4bba-81ca-1fbe2f35630f
+langcode: en
+status: true
+dependencies: {  }
+id: sample_courses
+label: 'Callout with subtitle'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Callout with subtitle'
+behavior_plugins: {  }

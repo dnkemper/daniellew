@@ -1,0 +1,11 @@
+{% if content.field_direct_link[0]['#url'] %}
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultUrl: content.field_direct_link[0]['#url'],
+  descriptionField: content.field_link_excerpt,
+} %}
+{% else %}
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultUrl: url,
+  descriptionField: content.field_link_excerpt,
+} %}
+{% endif %}

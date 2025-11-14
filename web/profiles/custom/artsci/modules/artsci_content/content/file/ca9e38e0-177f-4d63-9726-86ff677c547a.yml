@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ca9e38e0-177f-4d63-9726-86ff677c547a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: contact-landing.jpg
+  uri:
+    -
+      value: 'public://2023-12/contact-landing_2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 430160
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

@@ -1,0 +1,10 @@
+{% if content.field_author_description.0 %}
+  {% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+    resultUrl: url,
+    descriptionField: content.field_author_description.0,
+  } %}
+  {% else %}
+{% include '@olympian9/olympian9/node--olympian-search.html.twig' with {
+  resultUrl: url,
+} %}
+{% endif %}

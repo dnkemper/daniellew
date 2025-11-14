@@ -1,0 +1,110 @@
+uuid: f02a5141-a6c1-4f29-a227-843b67b72b21
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.news_landing_page.field_category_display
+    - field.field.node.news_landing_page.field_footer_callout_p
+    - field.field.node.news_landing_page.field_header_p
+    - field.field.node.news_landing_page.field_header_type
+    - field.field.node.news_landing_page.field_landing_page_type
+    - field.field.node.news_landing_page.field_meta_tags
+    - field.field.node.news_landing_page.field_news_header_image
+    - field.field.node.news_landing_page.field_search
+    - node.type.news_landing_page
+  module:
+    - entity_reference_revisions
+    - metatag
+    - options
+    - user
+id: node.news_landing_page.default
+targetEntityType: node
+bundle: news_landing_page
+mode: default
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_category_display:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_header_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_header_type:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_landing_page_type:
+    type: list_key
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_meta_tags:
+    type: metatag_empty_formatter
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_news_header_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: event_header
+      link: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  search_api_excerpt: true

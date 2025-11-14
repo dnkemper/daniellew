@@ -1,0 +1,307 @@
+uuid: 61fd0a6b-beb6-4dfc-96a3-052a90161cf3
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_type_coin
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Node type configuration (Collection Item)'
+source:
+  plugin: d7_node_type
+  constants:
+    preview: 1
+  node_type: coin
+process:
+  type:
+    -
+      plugin: get
+      source: type
+  name:
+    -
+      plugin: get
+      source: name
+  description:
+    -
+      plugin: get
+      source: description
+  help:
+    -
+      plugin: get
+      source: help
+  title_label:
+    -
+      plugin: get
+      source: title_label
+  preview_mode:
+    -
+      plugin: get
+      source: constants/preview
+  display_submitted:
+    -
+      plugin: get
+      source: display_submitted
+  new_revision:
+    -
+      plugin: get
+      source: options/revision
+  create_body:
+    -
+      plugin: get
+      source: create_body
+  create_body_label:
+    -
+      plugin: get
+      source: body_label
+  third_party_settings/menu_ui/available_menus:
+    -
+      plugin: get
+      source: available_menus
+  third_party_settings/menu_ui/parent:
+    -
+      plugin: get
+      source: parent
+  comment_node_coin/0/status:
+    -
+      plugin: get
+      source: comment
+  body:
+    -
+      plugin: get
+      source: body
+  field_additional_image:
+    -
+      plugin: media_migration_delta_sort
+      source: field_additional_image
+    -
+      plugin: sub_process
+      process:
+        target_id:
+          plugin: migration_lookup
+          source: fid
+          migration: olympian_d7_file_entity_image_public
+          no_stub: true
+  field_authority_issuer:
+    -
+      plugin: sub_process
+      source: field_authority_issuer
+      process:
+        target_id: tid
+  field_authority_ruler:
+    -
+      plugin: sub_process
+      source: field_authority_ruler
+      process:
+        target_id: tid
+  field_collection:
+    -
+      plugin: sub_process
+      source: field_collection
+      process:
+        target_id: tid
+  field_collection_number:
+    -
+      plugin: get
+      source: field_collection_number
+  field_conservation:
+    -
+      plugin: get
+      source: field_conservation
+  field_curators_comment:
+    -
+      plugin: get
+      source: field_curators_comment
+  field_denomination:
+    -
+      plugin: sub_process
+      source: field_denomination
+      process:
+        target_id: tid
+  field_die_axis:
+    -
+      plugin: get
+      source: field_die_axis
+  field_inscription_comment:
+    -
+      plugin: get
+      source: field_inscription_comment
+  field_material:
+    -
+      plugin: sub_process
+      source: field_material
+      process:
+        target_id: tid
+  field_object_type:
+    -
+      plugin: sub_process
+      source: field_object_type
+      process:
+        target_id: tid
+  field_obverse_image:
+    -
+      plugin: media_migration_delta_sort
+      source: field_obverse_image
+    -
+      plugin: sub_process
+      process:
+        target_id:
+          plugin: migration_lookup
+          source: fid
+          migration: olympian_d7_file_entity_image_public
+          no_stub: true
+  field_obverse_inscription_langua:
+    -
+      plugin: sub_process
+      source: field_obverse_inscription_langua
+      process:
+        target_id: tid
+  field_original_ticket:
+    -
+      plugin: get
+      source: field_original_ticket
+  field_original_ticket_photo:
+    -
+      plugin: media_migration_delta_sort
+      source: field_original_ticket_photo
+    -
+      plugin: sub_process
+      process:
+        target_id:
+          plugin: migration_lookup
+          source: fid
+          migration: olympian_d7_file_entity_image_public
+          no_stub: true
+  field_permanent_location:
+    -
+      plugin: get
+      source: field_permanent_location
+  field_portrayed:
+    -
+      plugin: sub_process
+      source: field_portrayed
+      process:
+        target_id: tid
+  field_provenance:
+    -
+      plugin: get
+      source: field_provenance
+  field_purchase_information:
+    -
+      plugin: get
+      source: field_purchase_information
+  field_reverse_image:
+    -
+      plugin: media_migration_delta_sort
+      source: field_reverse_image
+    -
+      plugin: sub_process
+      process:
+        target_id:
+          plugin: migration_lookup
+          source: fid
+          migration: olympian_d7_file_entity_image_public
+          no_stub: true
+  field_reverse_inscription_commen:
+    -
+      plugin: get
+      source: field_reverse_inscription_commen
+  field_reverse_inscription_langua:
+    -
+      plugin: sub_process
+      source: field_reverse_inscription_langua
+      process:
+        target_id: tid
+  field_status:
+    -
+      plugin: sub_process
+      source: field_status
+      process:
+        target_id: tid
+  field_temporary_location:
+    -
+      plugin: get
+      source: field_temporary_location
+  field_value:
+    -
+      plugin: get
+      source: field_value
+  field_mint1:
+    -
+      plugin: sub_process
+      source: field_mint1
+      process:
+        target_id: tid
+  field_bibliography:
+    -
+      plugin: get
+      source: field_bibliography
+  field_language:
+    -
+      plugin: sub_process
+      source: field_language
+      process:
+        target_id: tid
+  field_weight:
+    -
+      plugin: get
+      source: field_weight
+  field_acquisition_y:
+    -
+      plugin: get
+      source: field_acquisition_y
+  field_lot_num:
+    -
+      plugin: get
+      source: field_lot_num
+  field_object_num:
+    -
+      plugin: get
+      source: field_object_num
+  field_obverse_description_new:
+    -
+      plugin: get
+      source: field_obverse_description_new
+  field_reverse_description_new:
+    -
+      plugin: get
+      source: field_reverse_description_new
+  field_obverse_legend_new:
+    -
+      plugin: get
+      source: field_obverse_legend_new
+  field_obverse_mintmarks_new:
+    -
+      plugin: get
+      source: field_obverse_mintmarks_new
+  field_reverse_legend_new:
+    -
+      plugin: get
+      source: field_reverse_legend_new
+  field_reverse_mintmarks_new:
+    -
+      plugin: get
+      source: field_reverse_mintmarks_new
+  field_date_first_new:
+    -
+      plugin: get
+      source: field_date_first_new
+  field_date_last_new:
+    -
+      plugin: get
+      source: field_date_last_new
+  field_dimensions_1:
+    -
+      plugin: get
+      source: field_dimensions_1
+destination:
+  plugin: 'entity:node_type'
+  default_bundle: coin
+migration_dependencies:
+  required: {  }
+  optional:
+    - olympian_d7_file_entity_image_public
+    - olympian_d7_file_entity_image_public

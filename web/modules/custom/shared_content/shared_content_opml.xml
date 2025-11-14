@@ -1,0 +1,401 @@
+<opml version="2.0">
+  <body>
+    <!--Master List of all Shared Content feeds-->
+    <!--Add all feeds by going to /admin/config/services/aggregator/add/opml, upload this file and select the Shared Content category before hitting Import-->
+    <!--The "text" attribute is the Title of the feed-->
+    <!--The "xmlUrl" is the url of the feed-->
+    <!--The "feedContentType" is the type of the feed-->
+    <!--The "feedSource" is the base URL before /shared-content/*-->
+
+    <!-- AFAS-->
+    <outline text="AFAS Articles" xmlUrl="https://afas.wustl.edu/shared-content/articles" feedSource="afas.wustl.edu" feedContentType="Article"/>
+        <outline text="AFAS Books" xmlUrl="https://afas.wustl.edu/shared-content/books" feedSource="afas.wustl.edu" feedContentType="Book"/>
+        <outline text="AFAS Events" xmlUrl="https://afas.wustl.edu/shared-content/events" feedSource="afas.wustl.edu" feedContentType="Event"/>
+        <outline text="AFAS Person" xmlUrl="https://afas.wustl.edu/shared-content/people" feedSource="afas.wustl.edu" feedContentType="Person"/>
+
+    <!--Aggregator-->
+    <outline text="Aggregator Articles" xmlUrl="https://aggregator.artsci.wustl.edu/shared-content/articles" feedSource="aggregator.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="Aggregator Books" xmlUrl="https://aggregator.artsci.wustl.edu/shared-content/books" feedSource="aggregator.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="Aggregator Events" xmlUrl="https://aggregator.artsci.wustl.edu/shared-content/events" feedSource="aggregator.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="Aggregator Person" xmlUrl="https://aggregator.artsci.wustl.edu/shared-content/people" feedSource="aggregator.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--AMCS-->
+    <outline text="AMCS Articles" xmlUrl="https://amcs.wustl.edu/shared-content/articles" feedSource="amcs.wustl.edu" feedContentType="Article"/>
+        <outline text="AMCS Books" xmlUrl="https://amcs.wustl.edu/shared-content/books" feedSource="amcs.wustl.edu" feedContentType="Book"/>
+        <outline text="AMCS Events" xmlUrl="https://amcs.wustl.edu/shared-content/events" feedSource="amcs.wustl.edu" feedContentType="Event"/>
+        <outline text="AMCS Person" xmlUrl="https://amcs.wustl.edu/shared-content/people" feedSource="amcs.wustl.edu" feedContentType="Person"/>
+
+    <!--Anthropology-->
+    <outline text="Anthropology Articles" xmlUrl="https://anthropology.wustl.edu/shared-content/articles" feedSource="anthropology.wustl.edu" feedContentType="Article"/>
+        <outline text="Anthropology Books" xmlUrl="https://anthropology.wustl.edu/shared-content/books" feedSource="anthropology.wustl.edu" feedContentType="Book"/>
+        <outline text="Anthropology Events" xmlUrl="https://anthropology.wustl.edu/shared-content/events" feedSource="anthropology.wustl.edu" feedContentType="Event"/>
+        <outline text="Anthropology Person" xmlUrl="https://anthropology.wustl.edu/shared-content/people" feedSource="anthropology.wustl.edu" feedContentType="Person"/>
+
+    <!--ArtHistory-->
+    <outline text="ArtHistory Articles" xmlUrl="https://arthistory.wustl.edu/shared-content/articles" feedSource="arthistory.wustl.edu" feedContentType="Article"/>
+        <outline text="ArtHistory Books" xmlUrl="https://arthistory.wustl.edu/shared-content/books" feedSource="arthistory.wustl.edu" feedContentType="Book"/>
+        <outline text="ArtHistory Events" xmlUrl="https://arthistory.wustl.edu/shared-content/events" feedSource="arthistory.wustl.edu" feedContentType="Event"/>
+        <outline text="ArtHistory Person" xmlUrl="https://arthistory.wustl.edu/shared-content/people" feedSource="arthistory.wustl.edu" feedContentType="Person"/>
+
+    <!--Artsci-->
+    <outline text="Artsci Articles" xmlUrl="https://artsci.washu.edu/shared-content/articles" feedSource="artsci.washu.edu" feedContentType="Article"/>
+        <outline text="Artsci Books" xmlUrl="https://artsci.washu.edu/shared-content/books" feedSource="artsci.washu.edu" feedContentType="Book"/>
+        <outline text="Artsci Events" xmlUrl="https://artsci.washu.edu/shared-content/events" feedSource="artsci.washu.edu" feedContentType="Event"/>
+        <outline text="Artsci Person" xmlUrl="https://artsci.washu.edu/shared-content/people" feedSource="artsci.washu.edu" feedContentType="Person"/>
+
+    <!--Biology-->
+    <outline text="Biology Articles" xmlUrl="https://biology.wustl.edu/shared-content/articles" feedSource="biology.wustl.edu" feedContentType="Article"/>
+        <outline text="Biology Books" xmlUrl="https://biology.wustl.edu/shared-content/books" feedSource="biology.wustl.edu" feedContentType="Book"/>
+        <outline text="Biology Events" xmlUrl="https://biology.wustl.edu/shared-content/events" feedSource="biology.wustl.edu" feedContentType="Event"/>
+        <outline text="Biology Person" xmlUrl="https://biology.wustl.edu/shared-content/people" feedSource="biology.wustl.edu" feedContentType="Person"/>
+
+    <!--BuildingArtsci-->
+    <outline text="BuildingArtsci Articles" xmlUrl="https://buildingartsci.wustl.edu/shared-content/articles" feedSource="buildingartsci.wustl.edu" feedContentType="Article"/>
+        <outline text="BuildingArtsci Books" xmlUrl="https://buildingartsci.wustl.edu/shared-content/books" feedSource="buildingartsci.wustl.edu" feedContentType="Book"/>
+        <outline text="BuildingArtsci Events" xmlUrl="https://buildingartsci.wustl.edu/shared-content/events" feedSource="buildingartsci.wustl.edu" feedContentType="Event"/>
+        <outline text="BuildingArtsci Person" xmlUrl="https://buildingartsci.wustl.edu/shared-content/people" feedSource="buildingartsci.wustl.edu" feedContentType="Person"/>
+
+    <!--Cenhum (Humanities)-->
+    <outline text="Humanities Articles" xmlUrl="https://humanities.wustl.edu/shared-content/articles" feedSource="humanities.wustl.edu" feedContentType="Article"/>
+        <outline text="Humanities Books" xmlUrl="https://humanities.wustl.edu/shared-content/books" feedSource="humanities.wustl.edu" feedContentType="Book"/>
+        <outline text="Humanities Events" xmlUrl="https://humanities.wustl.edu/shared-content/events" feedSource="humanities.wustl.edu" feedContentType="Event"/>
+        <outline text="Humanities Person" xmlUrl="https://humanities.wustl.edu/shared-content/people" feedSource="humanities.wustl.edu" feedContentType="Person"/>
+
+    <!--Chemistry-->
+    <outline text="Chemistry Articles" xmlUrl="https://chemistry.wustl.edu/shared-content/articles" feedSource="chemistry.wustl.edu" feedContentType="Article"/>
+        <outline text="Chemistry Books" xmlUrl="https://chemistry.wustl.edu/shared-content/books" feedSource="chemistry.wustl.edu" feedContentType="Book"/>
+        <outline text="Chemistry Events" xmlUrl="https://chemistry.wustl.edu/shared-content/events" feedSource="chemistry.wustl.edu" feedContentType="Event"/>
+        <outline text="Chemistry Person" xmlUrl="https://chemistry.wustl.edu/shared-content/people" feedSource="chemistry.wustl.edu" feedContentType="Person"/>
+
+    <!--Classics-->
+    <outline text="Classics Articles" xmlUrl="https://classics.wustl.edu/shared-content/articles" feedSource="classics.wustl.edu" feedContentType="Article"/>
+        <outline text="Classics Books" xmlUrl="https://classics.wustl.edu/shared-content/books" feedSource="classics.wustl.edu" feedContentType="Book"/>
+        <outline text="Classics Events" xmlUrl="https://classics.wustl.edu/shared-content/events" feedSource="classics.wustl.edu" feedContentType="Event"/>
+        <outline text="Classics Person" xmlUrl="https://classics.wustl.edu/shared-content/people" feedSource="classics.wustl.edu" feedContentType="Person"/>
+
+    <!--CollegeWriting-->
+    <outline text="CollegeWriting Articles" xmlUrl="https://collegewriting.wustl.edu/shared-content/articles" feedSource="collegewriting.wustl.edu" feedContentType="Article"/>
+        <outline text="CollegeWriting Books" xmlUrl="https://collegewriting.wustl.edu/shared-content/books" feedSource="collegewriting.wustl.edu" feedContentType="Book"/>
+        <outline text="CollegeWriting Events" xmlUrl="https://collegewriting.wustl.edu/shared-content/events" feedSource="collegewriting.wustl.edu" feedContentType="Event"/>
+        <outline text="CollegeWriting Person" xmlUrl="https://collegewriting.wustl.edu/shared-content/people" feedSource="collegewriting.wustl.edu" feedContentType="Person"/>
+
+    <!--CompLitandThought-->
+    <outline text="CompLitandthought Articles" xmlUrl="https://complitandthought.wustl.edu/shared-content/articles" feedSource="complitandthought.wustl.edu" feedContentType="Article"/>
+        <outline text="CompLitandthought Books" xmlUrl="https://complitandthought.wustl.edu/shared-content/books" feedSource="complitandthought.wustl.edu" feedContentType="Book"/>
+        <outline text="CompLitandthought Events" xmlUrl="https://complitandthought.wustl.edu/shared-content/events" feedSource="complitandthought.wustl.edu" feedContentType="Event"/>
+        <outline text="CompLitandthought Person" xmlUrl="https://complitandthought.wustl.edu/shared-content/people" feedSource="complitandthought.wustl.edu" feedContentType="Person"/>
+
+    <!--EALC-->
+    <outline text="EALC Articles" xmlUrl="https://ealc.wustl.edu/shared-content/articles" feedSource="ealc.wustl.edu" feedContentType="Article"/>
+        <outline text="EALC Books" xmlUrl="https://ealc.wustl.edu/shared-content/books" feedSource="ealc.wustl.edu" feedContentType="Book"/>
+        <outline text="EALC Events" xmlUrl="https://ealc.wustl.edu/shared-content/events" feedSource="ealc.wustl.edu" feedContentType="Event"/>
+        <outline text="EALC Person" xmlUrl="https://ealc.wustl.edu/shared-content/people" feedSource="ealc.wustl.edu" feedContentType="Person"/>
+
+    <!--Economics-->
+    <outline text="Economics Articles" xmlUrl="https://economics.wustl.edu/shared-content/articles" feedSource="economics.wustl.edu" feedContentType="Article"/>
+        <outline text="Economics Books" xmlUrl="https://economics.wustl.edu/shared-content/books" feedSource="economics.wustl.edu" feedContentType="Book"/>
+        <outline text="Economics Events" xmlUrl="https://economics.wustl.edu/shared-content/events" feedSource="economics.wustl.edu" feedContentType="Event"/>
+        <outline text="Economics Person" xmlUrl="https://economics.wustl.edu/shared-content/people" feedSource="economics.wustl.edu" feedContentType="Person"/>
+
+    <!--Education-->
+    <outline text="Education Articles" xmlUrl="https://education.wustl.edu/shared-content/articles" feedSource="education.wustl.edu" feedContentType="Article"/>
+        <outline text="Education Books" xmlUrl="https://education.wustl.edu/shared-content/books" feedSource="education.wustl.edu" feedContentType="Book"/>
+        <outline text="Education Events" xmlUrl="https://education.wustl.edu/shared-content/events" feedSource="education.wustl.edu" feedContentType="Event"/>
+        <outline text="Education Person" xmlUrl="https://education.wustl.edu/shared-content/people" feedSource="education.wustl.edu" feedContentType="Person"/>
+
+    <!--English-->
+    <outline text="English Articles" xmlUrl="https://english.wustl.edu/shared-content/articles" feedSource="english.wustl.edu" feedContentType="Article"/>
+        <outline text="English Books" xmlUrl="https://english.wustl.edu/shared-content/books" feedSource="english.wustl.edu" feedContentType="Book"/>
+        <outline text="English Events" xmlUrl="https://english.wustl.edu/shared-content/events" feedSource="english.wustl.edu" feedContentType="Event"/>
+        <outline text="English Person" xmlUrl="https://english.wustl.edu/shared-content/people" feedSource="english.wustl.edu" feedContentType="Person"/>
+
+    <!--ENST-->
+    <outline text="ENST Articles" xmlUrl="https://enst.wustl.edu/shared-content/articles" feedSource="enst.wustl.edu" feedContentType="Article"/>
+        <outline text="ENST Books" xmlUrl="https://enst.wustl.edu/shared-content/books" feedSource="enst.wustl.edu" feedContentType="Book"/>
+        <outline text="ENST Events" xmlUrl="https://enst.wustl.edu/shared-content/events" feedSource="enst.wustl.edu" feedContentType="Event"/>
+        <outline text="ENST Person" xmlUrl="https://enst.wustl.edu/shared-content/people" feedSource="enst.wustl.edu" feedContentType="Person"/>
+
+    <!--EEPS-->
+    <outline text="EEPS Articles" xmlUrl="https://eeps.wustl.edu/shared-content/articles" feedSource="eeps.wustl.edu" feedContentType="Article"/>
+        <outline text="EEPS Books" xmlUrl="https://eeps.wustl.edu/shared-content/books" feedSource="eeps.wustl.edu" feedContentType="Book"/>
+        <outline text="EEPS Events" xmlUrl="https://eeps.wustl.edu/shared-content/events" feedSource="eeps.wustl.edu" feedContentType="Event"/>
+        <outline text="EEPS Person" xmlUrl="https://eeps.wustl.edu/shared-content/people" feedSource="eeps.wustl.edu" feedContentType="Person"/>
+
+    <!--FMS-->
+    <outline text="FMS Articles" xmlUrl="https://fms.wustl.edu/shared-content/articles" feedSource="fms.wustl.edu" feedContentType="Article"/>
+        <outline text="FMS Books" xmlUrl="https://fms.wustl.edu/shared-content/books" feedSource="fms.wustl.edu" feedContentType="Book"/>
+        <outline text="FMS Events" xmlUrl="https://fms.wustl.edu/shared-content/events" feedSource="fms.wustl.edu" feedContentType="Event"/>
+        <outline text="FMS Person" xmlUrl="https://fms.wustl.edu/shared-content/people" feedSource="fms.wustl.edu" feedContentType="Person"/>
+
+    <!--FellowshipsOffice-->
+    <outline text="FellowshipsOffice Articles" xmlUrl="https://fellowshipsoffice.wustl.edu/shared-content/articles" feedSource="fellowshipsoffice.wustl.edu" feedContentType="Article"/>
+        <outline text="FellowshipsOffice Books" xmlUrl="https://fellowshipsoffice.wustl.edu/shared-content/books" feedSource="fellowshipsoffice.wustl.edu" feedContentType="Book"/>
+        <outline text="FellowshipsOffice Events" xmlUrl="https://fellowshipsoffice.wustl.edu/shared-content/events" feedSource="fellowshipsoffice.wustl.edu" feedContentType="Event"/>
+        <outline text="FellowshipsOffice Person" xmlUrl="https://fellowshipsoffice.wustl.edu/shared-content/people" feedSource="fellowshipsoffice.wustl.edu" feedContentType="Person"/>
+
+    <!--Forms-->
+    <outline text="Forms Articles" xmlUrl="https://forms.artsci.wustl.edu/shared-content/articles" feedSource="forms.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="Forms Books" xmlUrl="https://forms.artsci.wustl.edu/shared-content/books" feedSource="forms.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="Forms Events" xmlUrl="https://forms.artsci.wustl.edu/shared-content/events" feedSource="forms.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="Forms Person" xmlUrl="https://forms.artsci.wustl.edu/shared-content/people" feedSource="forms.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--GlobalStudies-->
+    <outline text="GlobalStudies Articles" xmlUrl="https://globalstudies.wustl.edu/shared-content/articles" feedSource="globalstudies.wustl.edu" feedContentType="Article"/>
+        <outline text="GlobalStudies Books" xmlUrl="https://globalstudies.wustl.edu/shared-content/books" feedSource="globalstudies.wustl.edu" feedContentType="Book"/>
+        <outline text="GlobalStudies Events" xmlUrl="https://globalstudies.wustl.edu/shared-content/events" feedSource="globalstudies.wustl.edu" feedContentType="Event"/>
+        <outline text="GlobalStudies Person" xmlUrl="https://globalstudies.wustl.edu/shared-content/people" feedSource="globalstudies.wustl.edu" feedContentType="Person"/>
+
+    <!--GradStudies-->
+    <outline text="GradStudies Articles" xmlUrl="https://gradstudies.artsci.wustl.edu/shared-content/articles" feedSource="gradstudies.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="GradStudies Books" xmlUrl="https://gradstudies.artsci.wustl.edu/shared-content/books" feedSource="gradstudies.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="GradStudies Events" xmlUrl="https://gradstudies.artsci.wustl.edu/shared-content/events" feedSource="gradstudies.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="GradStudies Person" xmlUrl="https://gradstudies.artsci.wustl.edu/shared-content/people" feedSource="gradstudies.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--Graduation-->
+    <outline text="Graduation Articles" xmlUrl="https://graduation.artsci.wustl.edu/shared-content/articles" feedSource="graduation.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="Graduation Books" xmlUrl="https://graduation.artsci.wustl.edu/shared-content/books" feedSource="graduation.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="Graduation Events" xmlUrl="https://graduation.artsci.wustl.edu/shared-content/events" feedSource="graduation.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="Graduation Person" xmlUrl="https://graduation.artsci.wustl.edu/shared-content/people" feedSource="graduation.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--HDW-->
+    <outline text="HDW Articles" xmlUrl="https://hdw.wustl.edu/shared-content/articles" feedSource="hdw.wustl.edu" feedContentType="Article"/>
+        <outline text="HDW Books" xmlUrl="https://hdw.wustl.edu/shared-content/books" feedSource="hdw.wustl.edu" feedContentType="Book"/>
+        <outline text="HDW Events" xmlUrl="https://hdw.wustl.edu/shared-content/events" feedSource="hdw.wustl.edu" feedContentType="Event"/>
+        <outline text="HDW Person" xmlUrl="https://hdw.wustl.edu/shared-content/people" feedSource="hdw.wustl.edu" feedContentType="Person"/>
+
+    <!--History-->
+    <outline text="History Articles" xmlUrl="https://history.wustl.edu/shared-content/articles" feedSource="history.wustl.edu" feedContentType="Article"/>
+        <outline text="History Books" xmlUrl="https://history.wustl.edu/shared-content/books" feedSource="history.wustl.edu" feedContentType="Book"/>
+        <outline text="History Events" xmlUrl="https://history.wustl.edu/shared-content/events" feedSource="history.wustl.edu" feedContentType="Event"/>
+        <outline text="History Person" xmlUrl="https://history.wustl.edu/shared-content/people" feedSource="history.wustl.edu" feedContentType="Person"/>
+
+    <!--HoldThatThought-->
+    <outline text="HoldThatThought Articles" xmlUrl="https://holdthatthought.wustl.edu/shared-content/articles" feedSource="holdthatthought.wustl.edu" feedContentType="Article"/>
+        <outline text="HoldThatThought Books" xmlUrl="https://holdthatthought.wustl.edu/shared-content/books" feedSource="holdthatthought.wustl.edu" feedContentType="Book"/>
+        <outline text="HoldThatThought Events" xmlUrl="https://holdthatthought.wustl.edu/shared-content/events" feedSource="holdthatthought.wustl.edu" feedContentType="Event"/>
+        <outline text="HoldThatThought Person" xmlUrl="https://holdthatthought.wustl.edu/shared-content/people" feedSource="holdthatthought.wustl.edu" feedContentType="Person"/>
+
+    <!--InsideArtsci-->
+    <outline text="InsideArtsci Articles" xmlUrl="https://insideartsci.wustl.edu/shared-content/articles" feedSource="insideartsci.wustl.edu" feedContentType="Article"/>
+        <outline text="InsideArtsci Books" xmlUrl="https://insideartsci.wustl.edu/shared-content/books" feedSource="insideartsci.wustl.edu" feedContentType="Book"/>
+        <outline text="InsideArtsci Events" xmlUrl="https://insideartsci.wustl.edu/shared-content/events" feedSource="insideartsci.wustl.edu" feedContentType="Event"/>
+        <outline text="InsideArtsci Person" xmlUrl="https://insideartsci.wustl.edu/shared-content/people" feedSource="insideartsci.wustl.edu" feedContentType="Person"/>
+
+    <!--IT-->
+    <outline text="IT Articles" xmlUrl="https://it.artsci.wustl.edu/shared-content/articles" feedSource="it.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="IT Books" xmlUrl="https://it.artsci.wustl.edu/shared-content/books" feedSource="it.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="IT Events" xmlUrl="https://it.artsci.wustl.edu/shared-content/events" feedSource="it.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="IT Person" xmlUrl="https://it.artsci.wustl.edu/shared-content/people" feedSource="it.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--ImmersiveTech-->
+    <outline text="ImmersiveTech Articles" xmlUrl="https://immersivetech.wustl.edu/shared-content/articles" feedSource="immersivetech.wustl.edu" feedContentType="Article"/>
+        <outline text="ImmersiveTech Books" xmlUrl="https://immersivetech.wustl.edu/shared-content/books" feedSource="immersivetech.wustl.edu" feedContentType="Book"/>
+        <outline text="ImmersiveTech Events" xmlUrl="https://immersivetech.wustl.edu/shared-content/events" feedSource="immersivetech.wustl.edu" feedContentType="Event"/>
+        <outline text="ImmersiveTech Person" xmlUrl="https://immersivetech.wustl.edu/shared-content/people" feedSource="immersivetech.wustl.edu" feedContentType="Person"/>
+
+    <!--JIMES-->
+    <outline text="JIMES Articles" xmlUrl="https://jimes.wustl.edu/shared-content/articles" feedSource="jimes.wustl.edu" feedContentType="Article"/>
+        <outline text="JIMES Books" xmlUrl="https://jimes.wustl.edu/shared-content/books" feedSource="jimes.wustl.edu" feedContentType="Book"/>
+        <outline text="JIMES Events" xmlUrl="https://jimes.wustl.edu/shared-content/events" feedSource="jimes.wustl.edu" feedContentType="Event"/>
+        <outline text="JIMES Person" xmlUrl="https://jimes.wustl.edu/shared-content/people" feedSource="jimes.wustl.edu" feedContentType="Person"/>
+
+    <!--LAS-->
+    <outline text="LAS Articles" xmlUrl="https://lasprogram.wustl.edu/shared-content/articles" feedSource="lasprogram.wustl.edu" feedContentType="Article"/>
+        <outline text="LAS Books" xmlUrl="https://lasprogram.wustl.edu/shared-content/books" feedSource="lasprogram.wustl.edu" feedContentType="Book"/>
+        <outline text="LAS Events" xmlUrl="https://lasprogram.wustl.edu/shared-content/events" feedSource="lasprogram.wustl.edu" feedContentType="Event"/>
+        <outline text="LAS Person" xmlUrl="https://lasprogram.wustl.edu/shared-content/people" feedSource="lasprogram.wustl.edu" feedContentType="Person"/>
+
+    <!--Linguistics-->
+    <outline text="Linguistics Articles" xmlUrl="https://linguistics.wustl.edu/shared-content/articles" feedSource="linguistics.wustl.edu" feedContentType="Article"/>
+        <outline text="Linguistics Books" xmlUrl="https://linguistics.wustl.edu/shared-content/books" feedSource="linguistics.wustl.edu" feedContentType="Book"/>
+        <outline text="Linguistics Events" xmlUrl="https://linguistics.wustl.edu/shared-content/events" feedSource="linguistics.wustl.edu" feedContentType="Event"/>
+        <outline text="Linguistics Person" xmlUrl="https://linguistics.wustl.edu/shared-content/people" feedSource="linguistics.wustl.edu" feedContentType="Person"/>
+
+    <!--LiteraryArts-->
+    <outline text="LiteraryArts Articles" xmlUrl="https://literaryarts.wustl.edu/shared-content/articles" feedSource="literaryarts.wustl.edu" feedContentType="Article"/>
+        <outline text="LiteraryArts Books" xmlUrl="https://literaryarts.wustl.edu/shared-content/books" feedSource="literaryarts.wustl.edu" feedContentType="Book"/>
+        <outline text="LiteraryArts Events" xmlUrl="https://literaryarts.wustl.edu/shared-content/events" feedSource="literaryarts.wustl.edu" feedContentType="Event"/>
+        <outline text="LiteraryArts Person" xmlUrl="https://literaryarts.wustl.edu/shared-content/people" feedSource="literaryarts.wustl.edu" feedContentType="Person"/>
+
+    <!--Literacies-->
+    <outline text="Literacies Articles" xmlUrl="https://literacies.wustl.edu/shared-content/articles" feedSource="literacies.wustl.edu" feedContentType="Article"/>
+        <outline text="Literacies Books" xmlUrl="https://literacies.wustl.edu/shared-content/books" feedSource="literacies.wustl.edu" feedContentType="Book"/>
+        <outline text="Literacies Events" xmlUrl="https://literacies.wustl.edu/shared-content/events" feedSource="literacies.wustl.edu" feedContentType="Event"/>
+        <outline text="Literacies Person" xmlUrl="https://literacies.wustl.edu/shared-content/people" feedSource="literacies.wustl.edu" feedContentType="Person"/>
+
+    <!--Math-->
+    <outline text="Math Articles" xmlUrl="https://math.wustl.edu/shared-content/articles" feedSource="math.wustl.edu" feedContentType="Article"/>
+        <outline text="Math Books" xmlUrl="https://math.wustl.edu/shared-content/books" feedSource="math.wustl.edu" feedContentType="Book"/>
+        <outline text="Math Events" xmlUrl="https://math.wustl.edu/shared-content/events" feedSource="math.wustl.edu" feedContentType="Event"/>
+        <outline text="Math Person" xmlUrl="https://math.wustl.edu/shared-content/people" feedSource="math.wustl.edu" feedContentType="Person"/>
+
+    <!--MCSS-->
+    <outline text="MCSS Articles" xmlUrl="https://mcss.wustl.edu/shared-content/articles" feedSource="mcss.wustl.edu" feedContentType="Article"/>
+        <outline text="MCSS Books" xmlUrl="https://mcss.wustl.edu/shared-content/books" feedSource="mcss.wustl.edu" feedContentType="Book"/>
+        <outline text="MCSS Events" xmlUrl="https://mcss.wustl.edu/shared-content/events" feedSource="mcss.wustl.edu" feedContentType="Event"/>
+        <outline text="MCSS Person" xmlUrl="https://mcss.wustl.edu/shared-content/people" feedSource="mcss.wustl.edu" feedContentType="Person"/>
+
+    <!--MovingStories-->
+    <outline text="MovingStories Articles" xmlUrl="https://movingstories.wustl.edu/shared-content/articles" feedSource="movingstories.wustl.edu" feedContentType="Article"/>
+        <outline text="MovingStories Books" xmlUrl="https://movingstories.wustl.edu/shared-content/books" feedSource="movingstories.wustl.edu" feedContentType="Book"/>
+        <outline text="MovingStories Events" xmlUrl="https://movingstories.wustl.edu/shared-content/events" feedSource="movingstories.wustl.edu" feedContentType="Event"/>
+        <outline text="MovingStories Person" xmlUrl="https://movingstories.wustl.edu/shared-content/people" feedSource="movingstories.wustl.edu" feedContentType="Person"/>
+
+    <!--Mindfulness-->
+    <outline text="Mindfulness Articles" xmlUrl="https://mindfulness.wustl.edu/shared-content/articles" feedSource="mindfulness.wustl.edu" feedContentType="Article"/>
+        <outline text="Mindfulness Books" xmlUrl="https://mindfulness.wustl.edu/shared-content/books" feedSource="mindfulness.wustl.edu" feedContentType="Book"/>
+        <outline text="Mindfulness Events" xmlUrl="https://mindfulness.wustl.edu/shared-content/events" feedSource="mindfulness.wustl.edu" feedContentType="Event"/>
+        <outline text="Mindfulness Person" xmlUrl="https://mindfulness.wustl.edu/shared-content/people" feedSource="mindfulness.wustl.edu" feedContentType="Person"/>
+
+    <!--Music-->
+    <outline text="Music Articles" xmlUrl="https://music.wustl.edu/shared-content/articles" feedSource="music.wustl.edu" feedContentType="Article"/>
+        <outline text="Music Books" xmlUrl="https://music.wustl.edu/shared-content/books" feedSource="music.wustl.edu" feedContentType="Book"/>
+        <outline text="Music Events" xmlUrl="https://music.wustl.edu/shared-content/events" feedSource="music.wustl.edu" feedContentType="Event"/>
+        <outline text="Music Person" xmlUrl="https://music.wustl.edu/shared-content/people" feedSource="music.wustl.edu" feedContentType="Person"/>
+
+    <!--Overseas-->
+    <outline text="Overseas Articles" xmlUrl="https://overseas.wustl.edu/shared-content/articles" feedSource="overseas.wustl.edu" feedContentType="Article"/>
+        <outline text="Overseas Books" xmlUrl="https://overseas.wustl.edu/shared-content/books" feedSource="overseas.wustl.edu" feedContentType="Book"/>
+        <outline text="Overseas Events" xmlUrl="https://overseas.wustl.edu/shared-content/events" feedSource="overseas.wustl.edu" feedContentType="Event"/>
+        <outline text="Overseas Person" xmlUrl="https://overseas.wustl.edu/shared-content/people" feedSource="overseas.wustl.edu" feedContentType="Person"/>
+
+    <!--PAD-->
+    <outline text="PAD Articles" xmlUrl="https://pad.wustl.edu/shared-content/articles" feedSource="pad.wustl.edu" feedContentType="Article"/>
+        <outline text="PAD Books" xmlUrl="https://pad.wustl.edu/shared-content/books" feedSource="pad.wustl.edu" feedContentType="Book"/>
+        <outline text="PAD Events" xmlUrl="https://pad.wustl.edu/shared-content/events" feedSource="pad.wustl.edu" feedContentType="Event"/>
+        <outline text="PAD Person" xmlUrl="https://pad.wustl.edu/shared-content/people" feedSource="pad.wustl.edu" feedContentType="Person"/>
+
+	<!--Philosophy-->
+    <outline text="Philosophy Articles" xmlUrl="https://philosophy.wustl.edu/shared-content/articles" feedSource="philosophy.wustl.edu" feedContentType="Article"/>
+        <outline text="Philosophy Books" xmlUrl="https://philosophy.wustl.edu/shared-content/books" feedSource="philosophy.wustl.edu" feedContentType="Book"/>
+        <outline text="Philosophy Events" xmlUrl="https://philosophy.wustl.edu/shared-content/events" feedSource="philosophy.wustl.edu" feedContentType="Event"/>
+        <outline text="Philosophy Person" xmlUrl="https://philosophy.wustl.edu/shared-content/people" feedSource="philosophy.wustl.edu" feedContentType="Person"/>
+
+	<!--Physics-->
+    <outline text="Physics Articles" xmlUrl="https://physics.wustl.edu/shared-content/articles" feedSource="physics.wustl.edu" feedContentType="Article"/>
+        <outline text="Physics Books" xmlUrl="https://physics.wustl.edu/shared-content/books" feedSource="physics.wustl.edu" feedContentType="Book"/>
+        <outline text="Physics Events" xmlUrl="https://physics.wustl.edu/shared-content/events" feedSource="physics.wustl.edu" feedContentType="Event"/>
+        <outline text="Physics Person" xmlUrl="https://physics.wustl.edu/shared-content/people" feedSource="physics.wustl.edu" feedContentType="Person"/>
+
+    <!--PNP-->
+    <outline text="PNP Articles" xmlUrl="https://pnp.wustl.edu/shared-content/articles" feedSource="pnp.wustl.edu" feedContentType="Article"/>
+        <outline text="PNP Books" xmlUrl="https://pnp.wustl.edu/shared-content/books" feedSource="pnp.wustl.edu" feedContentType="Book"/>
+        <outline text="PNP Events" xmlUrl="https://pnp.wustl.edu/shared-content/events" feedSource="pnp.wustl.edu" feedContentType="Event"/>
+        <outline text="PNP Person" xmlUrl="https://pnp.wustl.edu/shared-content/people" feedSource="pnp.wustl.edu" feedContentType="Person"/>
+
+    <!--Polisci-->
+    <outline text="Polisci Articles" xmlUrl="https://polisci.wustl.edu/shared-content/articles" feedSource="polisci.wustl.edu" feedContentType="Article"/>
+        <outline text="Polisci Books" xmlUrl="https://polisci.wustl.edu/shared-content/books" feedSource="polisci.wustl.edu" feedContentType="Book"/>
+        <outline text="Polisci Events" xmlUrl="https://polisci.wustl.edu/shared-content/events" feedSource="polisci.wustl.edu" feedContentType="Event"/>
+        <outline text="Polisci Person" xmlUrl="https://polisci.wustl.edu/shared-content/people" feedSource="polisci.wustl.edu" feedContentType="Person"/>
+
+    <!--Postbacc Premed-->
+    <outline text="PBPM Articles" xmlUrl="https://postbaccpremed.wustl.edu/shared-content/articles" feedSource="postbaccpremed.wustl.edu" feedContentType="Article"/>
+        <outline text="PBPM Books" xmlUrl="https://postbaccpremed.wustl.edu/shared-content/books" feedSource="postbaccpremed.wustl.edu" feedContentType="Book"/>
+        <outline text="PBPM Events" xmlUrl="https://postbaccpremed.wustl.edu/shared-content/events" feedSource="postbaccpremed.wustl.edu" feedContentType="Event"/>
+        <outline text="PBPM Person" xmlUrl="https://postbaccpremed.wustl.edu/shared-content/people" feedSource="postbaccpremed.wustl.edu" feedContentType="Person"/>
+
+    <!--PreCollege-->
+    <outline text="PreCollege Articles" xmlUrl="https://precollege.wustl.edu/shared-content/articles" feedSource="precollege.wustl.edu" feedContentType="Article"/>
+        <outline text="PreCollege Books" xmlUrl="https://precollege.wustl.edu/shared-content/books" feedSource="precollege.wustl.edu" feedContentType="Book"/>
+        <outline text="PreCollege Events" xmlUrl="https://precollege.wustl.edu/shared-content/events" feedSource="precollege.wustl.edu" feedContentType="Event"/>
+        <outline text="PreCollege Person" xmlUrl="https://precollege.wustl.edu/shared-content/people" feedSource="precollege.wustl.edu" feedContentType="Person"/>
+
+    <!--PreHealth-->
+    <outline text="PreHealth Articles" xmlUrl="https://prehealth.wustl.edu/shared-content/articles" feedSource="prehealth.wustl.edu" feedContentType="Article"/>
+        <outline text="PreHealth Books" xmlUrl="https://prehealth.wustl.edu/shared-content/books" feedSource="prehealth.wustl.edu" feedContentType="Book"/>
+        <outline text="PreHealth Events" xmlUrl="https://prehealth.wustl.edu/shared-content/events" feedSource="prehealth.wustl.edu" feedContentType="Event"/>
+        <outline text="PreHealth Person" xmlUrl="https://prehealth.wustl.edu/shared-content/people" feedSource="prehealth.wustl.edu" feedContentType="Person"/>
+
+    <!--Psychology-->
+    <outline text="Psychology Articles" xmlUrl="https://psych.wustl.edu/shared-content/articles" feedSource="psych.wustl.edu" feedContentType="Article"/>
+        <outline text="Psychology Books" xmlUrl="https://psych.wustl.edu/shared-content/books" feedSource="psych.wustl.edu" feedContentType="Book"/>
+        <outline text="Psychology Events" xmlUrl="https://psych.wustl.edu/shared-content/events" feedSource="psych.wustl.edu" feedContentType="Event"/>
+        <outline text="Psychology Person" xmlUrl="https://psych.wustl.edu/shared-content/people" feedSource="psych.wustl.edu" feedContentType="Person"/>
+
+    <!--PublicHealthandSociety-->
+    <outline text="PublicHealthandSociety Articles" xmlUrl="https://publichealthandsociety.wustl.edu/shared-content/articles" feedSource="publichealthandsociety.wustl.edu" feedContentType="Article"/>
+        <outline text="PublicHealthandSociety Books" xmlUrl="https://publichealthandsociety.wustl.edu/shared-content/books" feedSource="publichealthandsociety.wustl.edu" feedContentType="Book"/>
+        <outline text="PublicHealthandSociety Events" xmlUrl="https://publichealthandsociety.wustl.edu/shared-content/events" feedSource="publichealthandsociety.wustl.edu" feedContentType="Event"/>
+        <outline text="PublicHealthandSociety Person" xmlUrl="https://publichealthandsociety.wustl.edu/shared-content/people" feedSource="publichealthandsociety.wustl.edu" feedContentType="Person"/>
+
+    <!--QuantumLeaps-->
+    <outline text="QuantumLeaps Articles" xmlUrl="https://quantumleaps.wustl.edu/shared-content/articles" feedSource="quantumleaps.wustl.edu" feedContentType="Article"/>
+        <outline text="QuantumLeaps Books" xmlUrl="https://quantumleaps.wustl.edu/shared-content/books" feedSource="quantumleaps.wustl.edu" feedContentType="Book"/>
+        <outline text="QuantumLeaps Events" xmlUrl="https://quantumleaps.wustl.edu/shared-content/events" feedSource="quantumleaps.wustl.edu" feedContentType="Event"/>
+        <outline text="QuantumLeaps Person" xmlUrl="https://quantumleaps.wustl.edu/shared-content/people" feedSource="quantumleaps.wustl.edu" feedContentType="Person"/>
+
+    <!--Religious (Studies)-->
+    <outline text="Religious Articles" xmlUrl="https://religiousstudies.wustl.edu/shared-content/articles" feedSource="religiousstudies.wustl.edu" feedContentType="Article"/>
+        <outline text="Religious Books" xmlUrl="https://religiousstudies.wustl.edu/shared-content/books" feedSource="religiousstudies.wustl.edu" feedContentType="Book"/>
+        <outline text="Religious Events" xmlUrl="https://religiousstudies.wustl.edu/shared-content/events" feedSource="religiousstudies.wustl.edu" feedContentType="Event"/>
+        <outline text="Religious Person" xmlUrl="https://religiousstudies.wustl.edu/shared-content/people" feedSource="religiousstudies.wustl.edu" feedContentType="Person"/>
+
+    <!--RLL-->
+    <outline text="RLL Articles" xmlUrl="https://rll.wustl.edu/shared-content/articles" feedSource="rll.wustl.edu" feedContentType="Article"/>
+        <outline text="RLL Books" xmlUrl="https://rll.wustl.edu/shared-content/books" feedSource="rll.wustl.edu" feedContentType="Book"/>
+        <outline text="RLL Events" xmlUrl="https://rll.wustl.edu/shared-content/events" feedSource="rll.wustl.edu" feedContentType="Event"/>
+        <outline text="RLL Person" xmlUrl="https://rll.wustl.edu/shared-content/people" feedSource="rll.wustl.edu" feedContentType="Person"/>
+
+    <!--Statistics and Data Science-->
+    <outline text="SDS Articles" xmlUrl="https://sds.wustl.edu/shared-content/articles" feedSource="sds.wustl.edu" feedContentType="Article"/>
+        <outline text="SDS Books" xmlUrl="https://sds.wustl.edu/shared-content/books" feedSource="sds.wustl.edu" feedContentType="Book"/>
+        <outline text="SDS Events" xmlUrl="https://sds.wustl.edu/shared-content/events" feedSource="sds.wustl.edu" feedContentType="Event"/>
+        <outline text="SDS Person" xmlUrl="https://sds.wustl.edu/shared-content/people" feedSource="sds.wustl.edu" feedContentType="Person"/>
+
+    <!--Slavery-->
+    <outline text="Slavery Articles" xmlUrl="https://slavery.wustl.edu/shared-content/articles" feedSource="slavery.wustl.edu" feedContentType="Article"/>
+        <outline text="Slavery Books" xmlUrl="https://slavery.wustl.edu/shared-content/books" feedSource="slavery.wustl.edu" feedContentType="Book"/>
+        <outline text="Slavery Events" xmlUrl="https://slavery.wustl.edu/shared-content/events" feedSource="slavery.wustl.edu" feedContentType="Event"/>
+        <outline text="Slavery Person" xmlUrl="https://slavery.wustl.edu/shared-content/people" feedSource="slavery.wustl.edu" feedContentType="Person"/>
+
+    <!--Sociology-->
+    <outline text="Sociology Articles" xmlUrl="https://sociology.wustl.edu/shared-content/articles" feedSource="sociology.wustl.edu" feedContentType="Article"/>
+        <outline text="Sociology Books" xmlUrl="https://sociology.wustl.edu/shared-content/books" feedSource="sociology.wustl.edu" feedContentType="Book"/>
+        <outline text="Sociology Events" xmlUrl="https://sociology.wustl.edu/shared-content/events" feedSource="sociology.wustl.edu" feedContentType="Event"/>
+        <outline text="Sociology Person" xmlUrl="https://sociology.wustl.edu/shared-content/people" feedSource="sociology.wustl.edu" feedContentType="Person"/>
+
+    <!--StrategicPlan-->
+    <outline text="StrategicPlan Articles" xmlUrl="https://strategicplan.artsci.wustl.edu/shared-content/articles" feedSource="strategicplan.artsci.wustl.edu" feedContentType="Article"/>
+        <outline text="StrategicPlan Books" xmlUrl="https://strategicplan.artsci.wustl.edu/shared-content/books" feedSource="strategicplan.artsci.wustl.edu" feedContentType="Book"/>
+        <outline text="StrategicPlan Events" xmlUrl="https://strategicplan.artsci.wustl.edu/shared-content/events" feedSource="strategicplan.artsci.wustl.edu" feedContentType="Event"/>
+        <outline text="StrategicPlan Person" xmlUrl="https://strategicplan.artsci.wustl.edu/shared-content/people" feedSource="strategicplan.artsci.wustl.edu" feedContentType="Person"/>
+
+    <!--SummerSession-->
+    <outline text="SummerSession Articles" xmlUrl="https://summersession.wustl.edu/shared-content/articles" feedSource="summersession.wustl.edu" feedContentType="Article"/>
+        <outline text="SummerSession Books" xmlUrl="https://summersession.wustl.edu/shared-content/books" feedSource="summersession.wustl.edu" feedContentType="Book"/>
+        <outline text="SummerSession Events" xmlUrl="https://summersession.wustl.edu/shared-content/events" feedSource="summersession.wustl.edu" feedContentType="Event"/>
+        <outline text="SummerSession Person" xmlUrl="https://summersession.wustl.edu/shared-content/people" feedSource="summersession.wustl.edu" feedContentType="Person"/>
+
+    <!--TransdisciplinaryFutures-->
+    <outline text="Transdisciplinary Articles" xmlUrl="https://transdisciplinaryfutures.wustl.edu/shared-content/articles" feedSource="transdisciplinaryfutures.wustl.edu" feedContentType="Article"/>
+        <outline text="Transdisciplinary Books" xmlUrl="https://transdisciplinaryfutures.wustl.edu/shared-content/books" feedSource="transdisciplinaryfutures.wustl.edu" feedContentType="Book"/>
+        <outline text="Transdisciplinary Events" xmlUrl="https://transdisciplinaryfutures.wustl.edu/shared-content/events" feedSource="transdisciplinaryfutures.wustl.edu" feedContentType="Event"/>
+        <outline text="Transdisciplinary Person" xmlUrl="https://transdisciplinaryfutures.wustl.edu/shared-content/people" feedSource="transdisciplinaryfutures.wustl.edu" feedContentType="Person"/>
+
+    <!--TRIADS-->
+    <outline text="TRIADS Articles" xmlUrl="https://triads.wustl.edu/shared-content/articles" feedSource="triads.wustl.edu" feedContentType="Article"/>
+        <outline text="TRIADS Books" xmlUrl="https://triads.wustl.edu/shared-content/books" feedSource="triads.wustl.edu" feedContentType="Book"/>
+        <outline text="TRIADS Events" xmlUrl="https://triads.wustl.edu/shared-content/events" feedSource="triads.wustl.edu" feedContentType="Event"/>
+        <outline text="TRIADS Person" xmlUrl="https://triads.wustl.edu/shared-content/people" feedSource="triads.wustl.edu" feedContentType="Person"/>
+
+    <!--UndergradResearch-->
+    <outline text="UndergradResearch Articles" xmlUrl="https://undergradresearch.wustl.edu/shared-content/articles" feedSource="undergradresearch.wustl.edu" feedContentType="Article"/>
+        <outline text="UndergradResearch Books" xmlUrl="https://undergradresearch.wustl.edu/shared-content/books" feedSource="undergradresearch.wustl.edu" feedContentType="Book"/>
+        <outline text="UndergradResearch Events" xmlUrl="https://undergradresearch.wustl.edu/shared-content/events" feedSource="undergradresearch.wustl.edu" feedContentType="Event"/>
+        <outline text="UndergradResearch Person" xmlUrl="https://undergradresearch.wustl.edu/shared-content/people" feedSource="undergradresearch.wustl.edu" feedContentType="Person"/>
+
+    <!--WC-->
+    <outline text="WC Articles" xmlUrl="https://wc.wustl.edu/shared-content/articles" feedSource="wc.wustl.edu" feedContentType="Article"/>
+        <outline text="WC Books" xmlUrl="https://wc.wustl.edu/shared-content/books" feedSource="wc.wustl.edu" feedContentType="Book"/>
+        <outline text="WC Events" xmlUrl="https://wc.wustl.edu/shared-content/events" feedSource="wc.wustl.edu" feedContentType="Event"/>
+        <outline text="WC Person" xmlUrl="https://wc.wustl.edu/shared-content/people" feedSource="wc.wustl.edu" feedContentType="Person"/>
+
+    <!--WGSS-->
+    <outline text="WGSS Articles" xmlUrl="https://wgss.wustl.edu/shared-content/articles" feedSource="wgss.wustl.edu" feedContentType="Article"/>
+        <outline text="WGSS Books" xmlUrl="https://wgss.wustl.edu/shared-content/books" feedSource="wgss.wustl.edu" feedContentType="Book"/>
+        <outline text="WGSS Events" xmlUrl="https://wgss.wustl.edu/shared-content/events" feedSource="wgss.wustl.edu" feedContentType="Event"/>
+        <outline text="WGSS Person" xmlUrl="https://wgss.wustl.edu/shared-content/people" feedSource="wgss.wustl.edu" feedContentType="Person"/>
+<!--New-->
+  </body>
+</opml>

@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7c77cd72-7640-434c-a342-e4b898ed0c56
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    97d80d2e-7961-4686-8e2e-8f09832b9664: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: article.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /articlejpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 97d80d2e-7961-4686-8e2e-8f09832b9664
+      alt: '""'
+      title: ''
+      width: 2500
+      height: 1664

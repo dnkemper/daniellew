@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 378ca24d-1d84-4b59-8d64-8e1f26a85f0a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: leaveofabsence_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/leaveofabsence_420x420_9.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 19154
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

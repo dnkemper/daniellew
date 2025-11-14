@@ -1,0 +1,18 @@
+uuid: d311ac58-51e2-4a2d-bd2f-853856b134ea
+langcode: en
+status: true
+dependencies:
+  module:
+    - search_api_db
+id: database_server
+name: 'Database Server Keep'
+description: ''
+backend: search_api_db
+backend_config:
+  database: 'default:default'
+  min_chars: 2
+  matching: partial
+  phrase: bigram
+  autocomplete:
+    suggest_suffix: false
+    suggest_words: false

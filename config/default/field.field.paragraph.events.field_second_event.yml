@@ -1,0 +1,25 @@
+uuid: ac6923c1-2e4d-4249-8940-df5ad1b7928d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_second_event
+    - paragraphs.paragraphs_type.events
+id: paragraph.events.field_second_event
+field_name: field_second_event
+entity_type: paragraph
+bundle: events
+label: 'Second Event'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_events
+      arguments: {  }
+field_type: entity_reference

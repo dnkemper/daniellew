@@ -1,0 +1,95 @@
+uuid: 89ddf607-a6a2-4d7d-81d7-9283f41b8efe
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_intro_with_links
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+idMap:
+  plugin: smart_sql
+migration_group: olympian_d7
+label: 'Paragraphs (Generic Intro with Side Items)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: intro_with_links
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_generic_title:
+    -
+      plugin: get
+      source: field_generic_title
+  field_generic_intro:
+    -
+      plugin: lullabot_embedded_content
+      source: field_generic_intro
+    -
+      plugin: custom_img_tag_to_embed
+    -
+      plugin: custom_media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+        wysiwyg: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: remote_video
+      url_field: field_media_oembed_video
+  field_related_links_title:
+    -
+      plugin: get
+      source: field_related_links_title
+  # Link field mappings
+  field_related_links:
+    plugin: sub_process
+    source: field_related_links_
+    process:
+      temp:
+        plugin: link_paragraph_create
+        source: url
+        url_source: url
+        title_source: title
+      target_id: '@temp/target_id'
+      target_revision_id: '@temp/target_revision_id'
+  field_related_link_out:
+    plugin: sub_process
+    source: field_related_link_out
+    process:
+      temp:
+        plugin: link_paragraph_create
+        source: url
+        url_source: url
+        title_source: title
+      target_id: '@temp/target_id'
+      target_revision_id: '@temp/target_revision_id'
+  field_button_link_title:
+    -
+      plugin: get
+      source: field_button_link_title
+  field_button_link:
+    plugin: field_link_custom
+    source: field_button_link/0/url
+    title_source: field_button_link/0/title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: intro_with_links
+migration_dependencies: {  }

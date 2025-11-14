@@ -1,0 +1,21 @@
+uuid: 230cca14-c256-4aad-b075-2311f6633741
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_meta_tags
+    - node.type.coin
+  module:
+    - metatag
+id: node.coin.field_coin_meta_tags
+field_name: field_coin_meta_tags
+entity_type: node
+bundle: coin
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

@@ -1,0 +1,21 @@
+uuid: c227eca6-fe23-4fc7-a864-95eedec4da80
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color_cta
+    - paragraphs.paragraphs_type.publication_call_to_action
+  module:
+    - options
+id: paragraph.publication_call_to_action.field_background_color_cta
+field_name: field_background_color_cta
+entity_type: paragraph
+bundle: publication_call_to_action
+label: 'Background Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

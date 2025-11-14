@@ -1,0 +1,11 @@
+uuid: 485adff5-91a7-4275-8329-6942a6864a25
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.publication_featured_news
+label: publication_featured_news
+description: ''
+targetEntityType: node
+cache: true

@@ -1,0 +1,10 @@
+uuid: de73ec62-1d92-4686-ba1c-9148a78ef735
+langcode: en
+status: true
+dependencies: {  }
+id: horizontal_slide
+label: 'Horizontal Slide'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Horizontal Slide'
+behavior_plugins: {  }

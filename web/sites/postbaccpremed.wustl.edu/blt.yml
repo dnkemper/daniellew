@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: postbaccpremed.ddev.site
+    protocol: https
+  machine_name: postbaccpremed
+  human_name: postbaccpremed.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: postbaccpremed.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/postbaccpremed.wustl.edu/files'
+    origin: 'https://postbaccpremed.wustl.edu'
+drupal:
+  db:
+    database: drupal_postbaccpremed
+system:
+  site:
+    contact_us_url: 'https://postbaccpremed.wustl.edu/contact-us'
+    name: postbaccpremed
+    email: postbaccpremed@wustl.edu

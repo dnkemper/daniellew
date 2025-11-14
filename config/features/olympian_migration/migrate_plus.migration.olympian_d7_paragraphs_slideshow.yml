@@ -1,0 +1,51 @@
+uuid: df326c4e-7d24-4f3b-b54d-1794f7c02ed4
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_slideshow
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+idMap:
+  plugin: smart_sql
+migration_group: olympian_d7
+label: 'Paragraphs (Slideshow)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: slideshow
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_infographic:
+    plugin: sub_process
+    source: field_infographic
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_infographic_description:
+    -
+      plugin: get
+      source: field_infographic_description
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: slideshow
+migration_dependencies: {  }

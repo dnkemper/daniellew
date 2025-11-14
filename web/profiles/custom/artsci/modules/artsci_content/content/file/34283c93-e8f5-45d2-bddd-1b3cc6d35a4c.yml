@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 34283c93-e8f5-45d2-bddd-1b3cc6d35a4c
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: wustlkey_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/wustlkey_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 34923
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

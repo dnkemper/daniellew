@@ -1,0 +1,28 @@
+# Settings for installing Drupal.
+project:
+  human_name: artsci
+  profile:
+    name: artsci
+setup:
+  strategy: install
+drupal:
+  account:
+    # Admin account name and password will be randomly generated unless set here.
+    #name: admin
+    name: asdrupal
+    mail: artsci-webteam@wustl.edu
+  site.mail: artsci-webteam@wustl.edu
+  locale: en
+  local_settings_file: ${docroot}/sites/${site}/settings/local.settings.php
+  settings_file: ${docroot}/sites/${site}/settings.php
+
+drush:
+  alias-dir: ${repo.root}/drush/sites
+  aliases:
+    local: self
+    ci: self
+  ansi: true
+  bin: ${composer.bin}/drush
+  default_alias: ${drush.aliases.local}
+  dir: ${docroot}
+  sanitize: true

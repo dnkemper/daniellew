@@ -1,0 +1,29 @@
+uuid: 16133a90-b6d6-4e1c-957c-377c790260f6
+langcode: en
+status: true
+dependencies:
+  module:
+    - olympian_seo
+title: 'Default cron handler'
+id: olympian_seo_cron
+weight: 0
+module: olympian_seo
+callback: olympian_seo_cron
+scheduler:
+  id: crontab
+  configuration:
+    rules:
+      - '0 6,18 * * *'
+launcher:
+  id: serial
+  configuration:
+    timeouts:
+      lock_timeout: 3600
+    launcher:
+      thread: 0
+logger:
+  id: database
+  configuration:
+    method: '3'
+    expire: 1209600
+    retain: 1000

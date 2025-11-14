@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 7e5fafed-bb46-43d4-befc-3ed7bd5a745f
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: artscicomputing_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/artscicomputing_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 21899
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

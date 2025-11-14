@@ -1,0 +1,88 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * Available variables:
+ * - paragraph: Full paragraph entity.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - paragraph.getCreatedTime() will return the paragraph creation timestamp.
+ *   - paragraph.id(): The paragraph ID.
+ *   - paragraph.bundle(): The type of the paragraph, for example, "image" or "text".
+ *   - paragraph.getOwnerId(): The user ID of the paragraph author.
+ *   See Drupal\paragraphs\Entity\Paragraph for a full list of public properties
+ *   and methods for the paragraph object.
+ * - content: All paragraph items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - paragraphs: The current template type (also known as a "theming hook").
+ *   - paragraphs--type-[type]: The current paragraphs type. For example, if the paragraph is an
+ *     "Image" it would result in "paragraphs--type--image". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - paragraphs--view-mode--[view_mode]: The View Mode of the paragraph; for example, a
+ *     preview would result in: "paragraphs--view-mode--preview", and
+ *     default: "paragraphs--view-mode--default".
+ * - field_slides - ERR
+ * - field_title - text plain
+ +---------------------------------+----------+------------------+-------------+
+| Field name                      | Required | Field type       | Cardinality |
++---------------------------------+----------+------------------+-------------+
+| field_full_description          |          | string_long      | 1           |
+| field_gallery_caption           |          | string           | 1           |
+| field_publication_gallery_image | ✔        | entity_reference | 1           |
++---------------------------------+----------+------------------+-------------+
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set label = 'heading' ~ id %}
+{% set id = paragraph.id() %}
+{{ attach_library('olympian9/fancybox') }}
+{% block paragraph %}
+
+  {% if paragraph.field_publication_gallery_image.entity.field_media_image.0.height > paragraph.field_publication_gallery_image.entity.field_media_image.0.width %}
+    {% set imgrender = '--portrait' %}
+     {% set img_style = 'square_1_1_680w' %}
+  {% elseif paragraph.field_publication_gallery_image.entity.field_media_image.0.width > paragraph.field_publication_gallery_image.entity.field_media_image.0.height %}
+   {% set imgrender = '--horizontal' %}
+    {% set img_style = 'blog_horizontal_thumbnail' %}
+  {% else %}
+    {% set imgrender = '' %}
+    {% set img_style = '' %}
+  {% endif %}
+
+
+  <div class="gallery__list-item js-gallery" data-fancybox-href="#lb-{{ paragraph.id() }}" data-fancybox-group="gallery1">
+    <div class="gallery__list-image" style="background-image: url('{{ file_url(paragraph.field_publication_gallery_image.entity.field_media_image.entity.fileuri|image_style(img_style)) }}');">
+    </div>
+    {% if content.field_gallery_caption %}
+      <div class="text">
+        <p>{{ content.field_gallery_caption }}</p>
+      </div>
+    {% endif %}
+    <div id="lb-{{ paragraph.id() }}" style="display: none">
+      <figure class="gallery__figure gallery__figure{{ imgrender }}">
+        <div class="image">
+          <img src="{{ file_url(paragraph.field_publication_gallery_image.entity.field_media_image.entity.fileuri|image_style(img_style)) }}">
+        </div>
+        <figcaption class="gallery__figcaption">
+          <div class="gallery__figcaption-container">
+            {% if content.field_gallery_caption %}
+              <h3>{{ content.field_gallery_caption.0 }}</h3>
+            {% endif %}
+            {% if content.field_full_description.0 %}
+              <p>{{ content.field_full_description }}</p>
+            {% endif %}
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+{% endblock paragraph %}

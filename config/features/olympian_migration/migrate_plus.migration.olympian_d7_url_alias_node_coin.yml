@@ -1,0 +1,147 @@
+uuid: dba500db-5b04-4ab1-9307-a2e4b4f39396
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_url_alias_node_coin
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+migration_group: migrate_drupal_7
+label: 'URL aliases of Collection Item content items'
+source:
+  plugin: d7_url_alias
+  constants:
+    slash: /
+  entity_type_id: node
+  bundle: coin
+process:
+  id:
+    -
+      plugin: get
+      source: pid
+  _path:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - source
+  alias:
+    -
+      plugin: concat
+      source:
+        - constants/slash
+        - alias
+  node_translation:
+    -
+      plugin: explode
+      source: source
+      delimiter: /
+    -
+      plugin: extract
+      default: INVALID_NID
+      index:
+        - 1
+    -
+      plugin: migration_lookup
+      migration:
+        - olympian_d7_node_complete_article
+        - olympian_d7_node_complete_author
+        - olympian_d7_node_complete_book
+        - olympian_d7_node_complete_coin
+        - olympian_d7_node_complete_collection_landing_page
+        - olympian_d7_node_complete_contact_landing_page
+        - olympian_d7_node_complete_courses
+        - olympian_d7_node_complete_course_landing
+        - olympian_d7_node_complete_events
+        - olympian_d7_node_complete_events_landing_page
+        - olympian_d7_node_complete_faculty_landing_page
+        - olympian_d7_node_complete_faculty_staff
+        - olympian_d7_node_complete_faq
+        - olympian_d7_node_complete_generic_page
+        - olympian_d7_node_complete_home_page
+        - olympian_d7_node_complete_image_cards
+        - olympian_d7_node_complete_image_cards_landing
+        - olympian_d7_node_complete_news_landing_page
+        - olympian_d7_node_complete_page
+        - olympian_d7_node_complete_page_not_found
+        - olympian_d7_node_complete_past_events_landing_page
+        - olympian_d7_node_complete_publication_page
+        - olympian_d7_node_complete_resources
+        - olympian_d7_node_complete_resources_landing_page
+        - olympian_d7_node_complete_testimonial
+        - olympian_d7_node_complete_webform
+    -
+      plugin: node_complete_node_translation_lookup
+  langcode:
+    -
+      plugin: null_coalesce
+      source:
+        - '@node_translation/1'
+        - language
+  path:
+    -
+      plugin: path_set_translated
+      source:
+        - '@_path'
+        - '@node_translation'
+destination:
+  plugin: 'entity:path_alias'
+migration_dependencies:
+  required:
+    - olympian_d7_node_complete_coin
+  optional:
+    - olympian_d7_node_complete_coin
+    - olympian_d7_node_complete_article
+    - olympian_d7_node_complete_author
+    - olympian_d7_node_complete_book
+    - olympian_d7_node_complete_collection_landing_page
+    - olympian_d7_node_complete_contact_landing_page
+    - olympian_d7_node_complete_courses
+    - olympian_d7_node_complete_course_landing
+    - olympian_d7_node_complete_events
+    - olympian_d7_node_complete_events_landing_page
+    - olympian_d7_node_complete_faculty_landing_page
+    - olympian_d7_node_complete_faculty_staff
+    - olympian_d7_node_complete_faq
+    - olympian_d7_node_complete_generic_page
+    - olympian_d7_node_complete_home_page
+    - olympian_d7_node_complete_image_cards
+    - olympian_d7_node_complete_image_cards_landing
+    - olympian_d7_node_complete_news_landing_page
+    - olympian_d7_node_complete_page
+    - olympian_d7_node_complete_page_not_found
+    - olympian_d7_node_complete_past_events_landing_page
+    - olympian_d7_node_complete_publication_page
+    - olympian_d7_node_complete_resources
+    - olympian_d7_node_complete_resources_landing_page
+    - olympian_d7_node_complete_testimonial
+    - olympian_d7_node_complete_webform
+    - olympian_d7_node_complete_article
+    - olympian_d7_node_complete_author
+    - olympian_d7_node_complete_book
+    - olympian_d7_node_complete_coin
+    - olympian_d7_node_complete_collection_landing_page
+    - olympian_d7_node_complete_contact_landing_page
+    - olympian_d7_node_complete_courses
+    - olympian_d7_node_complete_course_landing
+    - olympian_d7_node_complete_events
+    - olympian_d7_node_complete_events_landing_page
+    - olympian_d7_node_complete_faculty_landing_page
+    - olympian_d7_node_complete_faculty_staff
+    - olympian_d7_node_complete_faq
+    - olympian_d7_node_complete_generic_page
+    - olympian_d7_node_complete_home_page
+    - olympian_d7_node_complete_image_cards
+    - olympian_d7_node_complete_image_cards_landing
+    - olympian_d7_node_complete_news_landing_page
+    - olympian_d7_node_complete_page
+    - olympian_d7_node_complete_page_not_found
+    - olympian_d7_node_complete_past_events_landing_page
+    - olympian_d7_node_complete_publication_page
+    - olympian_d7_node_complete_resources
+    - olympian_d7_node_complete_resources_landing_page
+    - olympian_d7_node_complete_testimonial
+    - olympian_d7_node_complete_webform

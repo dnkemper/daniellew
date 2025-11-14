@@ -1,0 +1,23 @@
+uuid: d1bb9fa7-64dc-47ba-a614-2b161fe2fee1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_type
+    - node.type.faculty_staff
+  module:
+    - options
+id: node.faculty_staff.field_content_type
+field_name: field_content_type
+entity_type: node
+bundle: faculty_staff
+label: 'Content Type'
+description: 'Always use "Long" for faculty members. The "Short" option will be used for most staff members.'
+required: true
+translatable: false
+default_value:
+  -
+    value: Short
+default_value_callback: ''
+settings: {  }
+field_type: list_string

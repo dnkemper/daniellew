@@ -1,0 +1,186 @@
+id: olympian_theme_settings
+label: D7 theme settings
+migration_tags:
+  - artsci
+  - Configuration
+migration_group: olympian_d7
+source:
+  plugin: d7_theme_settings
+  constants:
+    config_suffix: .settings
+process:
+  legacy_theme_name:
+    -
+      plugin: explode
+      source: name
+      delimiter: _
+    -
+      plugin: extract
+      index:
+        - 1
+  theme_name:
+    -
+      plugin: static_map
+      source: '@legacy_theme_name'
+      bypass: true
+      map:
+        olympian: olympian9
+  configuration_name:
+    -
+      plugin: concat
+      source:
+        - '@theme_name'
+        - constants/config_suffix
+  toggle_logo:
+    -
+      plugin: get
+      source: theme_settings/toggle_logo
+  toggle_name:
+    -
+      plugin: get
+      source: value/toggle_name
+  header_color:
+    -
+      plugin: get
+      source: value/header_color
+  header_logo:
+    -
+      plugin: get
+      source: value/header_logo
+  top_button_title_custom_text:
+    -
+      plugin: get
+      source: value/top_button_title_custom_text
+  apply_button:
+    -
+      plugin: get
+      source: value/apply_button
+  apply_button_text:
+    -
+      plugin: get
+      source: value/apply_button_text
+  apply_button_link:
+    -
+      plugin: get
+      source: value/apply_button_link
+  apply_button_external:
+    -
+      plugin: get
+      source: value/apply_button_external
+  google_option:
+    -
+      plugin: get
+      source: value/google_option
+  google_code:
+    -
+      plugin: get
+      source: value/google_code
+  default_people:
+    -
+      plugin: get
+      source: value/default_people
+  alerts_feed:
+    -
+      plugin: get
+      source: value/alerts_feed
+  chatbot:
+    -
+      plugin: get
+      source: value/chatbot
+  person_filter_layout:
+    -
+      plugin: get
+      source: value/person_filter_layout
+  areas_of_interest_title:
+    -
+      plugin: get
+      source: value/areas_of_interest_title
+  department_image_path:
+    -
+      plugin: get
+      source: value/department_image_path
+  events_header_image_path:
+    -
+      plugin: get
+      source: value/events_header_image_path
+  events_header_image_upload:
+    -
+      plugin: get
+      source: value/events_header_image
+  department_image_upload:
+    -
+      plugin: get
+      source: value/department_image
+  events_landing_type:
+    -
+      plugin: get
+      source: value/events_landing_type
+  news_landing_type:
+    -
+      plugin: get
+      source: value/news_landing_type
+  event_category_display:
+    -
+      plugin: get
+      source: value/event_category_display
+  resources_category_display:
+    -
+      plugin: get
+      source: value/resources_category_display
+  past_event_category_display:
+    -
+      plugin: get
+      source: value/past_event_category_display
+  news_category_display:
+    -
+      plugin: get
+      source: value/news_category_display
+  image_cards_category_display:
+    -
+      plugin: get
+      source: value/image_cards_category_display
+  additional_link_artsci:
+    -
+      plugin: get
+      source: value/additional_link_artsci
+  header.toppage:
+    -
+      plugin: default_value
+      default_value: 1
+  additional_link_gradstudies:
+    -
+      plugin: get
+      source: value/additional_link_gradstudies
+  toggle_favicon:
+    -
+      plugin: get
+      source: value/toggle_favicon
+  default_logo:
+    -
+      plugin: get
+      source: value/default_logo
+  logo_path:
+    -
+      plugin: get
+      source: value/logo_path
+  logo_upload:
+    -
+      plugin: get
+      source: value/logo_upload
+  default_favicon:
+    -
+      plugin: get
+      source: value/default_favicon
+  favicon_path:
+    -
+      plugin: get
+      source: value/favicon_path
+  favicon_mimetype:
+    -
+      plugin: get
+      source: value/favicon_mimetype
+destination:
+  plugin: d7_theme_settings
+migration_dependencies:
+  required: {  }
+  optional: {  }

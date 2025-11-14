@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://amcs.ddev.site
+  paths:
+    files: sites/amcs.wustl.edu/files
+dev:
+  uri: https://amcs.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/amcs.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://amcs.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/amcs.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://amcs.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/amcs.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

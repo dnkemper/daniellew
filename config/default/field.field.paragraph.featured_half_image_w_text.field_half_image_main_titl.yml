@@ -1,0 +1,28 @@
+uuid: 3f110467-1bb1-4fc3-8534-9395f9c84530
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_half_image_main_titl
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+  module:
+    - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
+id: paragraph.featured_half_image_w_text.field_half_image_main_titl
+field_name: field_half_image_main_titl
+entity_type: paragraph
+bundle: featured_half_image_w_text
+label: 'Main Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

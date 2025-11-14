@@ -1,0 +1,14 @@
+uuid: 13294b78-9005-41ae-bf3e-b5a6eff37116
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.site_staff
+  module:
+    - user
+id: user_remove_role_action.site_staff
+label: 'Remove the site staff role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: site_staff

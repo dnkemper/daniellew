@@ -1,0 +1,70 @@
+diff --git a/src/Plugin/views/row/IcalFieldsWizard.php b/src/Plugin/views/row/IcalFieldsWizard.php
+index 70920e5..63f0647 100644
+--- a/src/Plugin/views/row/IcalFieldsWizard.php
++++ b/src/Plugin/views/row/IcalFieldsWizard.php
+@@ -85,7 +85,7 @@ class IcalFieldsWizard extends Fields {
+ 
+     // Make sure the events are made as per the configuration in view.
+     /** @var string $timezone_override */
+-    $timezone_override = $this->view->field[$style_options['date_field']]->options['settings']['timezone_override'];
++    $timezone_override = $this->view->field[$style_options['date_field']]->options['settings']['timezone_override'] ?? null;
+     if ($timezone_override) {
+       $timezone = new \DateTimeZone($timezone_override);
+     }
+@@ -508,7 +508,7 @@ class IcalFieldsWizard extends Fields {
+       $this->helper->addTimezone($timezone, $endDatetime);
+ 
+       // Can the date be considered all-day?
+-      if ((new class {use SmartDateTrait;})::isAllDay($startDatetime->getTimestamp(), $endDatetime->getTimestamp(), $dateTZ)) {
++      if ($this->isAllDay($startDatetime->getTimestamp(), $endDatetime->getTimestamp(), $dateTZ)) {
+         $event->setNoTime(TRUE);
+       }
+ 
+@@ -631,7 +631,28 @@ class IcalFieldsWizard extends Fields {
+     return $entity;
+ 
+   }
+-
++  protected function isAllDay($start_ts, $end_ts, $timezone = NULL) {
++      if ($timezone) {
++        if ($timezone instanceof DateTimeZone) {
++          // If provided as an object, convert to a string.
++          $timezone = $timezone->getName();
++        }
++        // Apply a specific timezone provided.
++        $default_tz = date_default_timezone_get();
++        date_default_timezone_set($timezone);
++      }
++      // Format timestamps to predictable format for comparison.
++      $temp_start = date('H:i', $start_ts);
++      $temp_end = date('H:i', $end_ts);
++      if ($timezone) {
++        // Revert to previous timezone.
++        date_default_timezone_set($default_tz);
++      }
++      if ($temp_start == '00:00' && $temp_end == '23:59') {
++        return TRUE;
++      }
++      return FALSE;
++    }
+   /**
+    * Gets the renderer services.
+    * @return \Drupal\Core\Render\RendererInterface|mixed
+diff --git a/src/ViewsIcalHelper.php b/src/ViewsIcalHelper.php
+index 878c6e2..e9600d7 100644
+--- a/src/ViewsIcalHelper.php
++++ b/src/ViewsIcalHelper.php
+@@ -336,7 +336,12 @@ final class ViewsIcalHelper implements ViewsIcalHelperInterface {
+    * @throws \Exception
+    */
+   public function addTimezone($timezone, $datetime) {
+-    $style = $this->view->getStyle();
++    if($this->view) {
++        $style = $this->view->getStyle();
++      }
++      else {
++        return;
++      }
+     $options = $style->options;
+     if (!$options['use_vtimezone']) {
+       return;

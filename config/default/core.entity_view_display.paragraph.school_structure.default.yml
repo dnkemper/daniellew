@@ -1,0 +1,52 @@
+uuid: d1f93237-1436-4d25-a448-f009350e0b9b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.school_structure.field_bkg_clr
+    - field.field.paragraph.school_structure.field_subtitle
+    - field.field.paragraph.school_structure.field_timeline_slides_p
+    - field.field.paragraph.school_structure.field_title
+    - paragraphs.paragraphs_type.school_structure
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.school_structure.default
+targetEntityType: paragraph
+bundle: school_structure
+mode: default
+content:
+  field_bkg_clr:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_timeline_slides_p:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

@@ -1,0 +1,437 @@
+#main-nav-toggle {
+  position: fixed;
+  right: 20px;
+  top: 22px;
+  z-index: 19901;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.075em;
+  cursor: pointer;
+  display: block;
+  background: none;
+}
+
+#main-nav-toggle .open,
+#main-nav-toggle .close {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--white);
+}
+
+#main-nav-toggle .open {
+  border: 2px solid var(--red);
+  color: var(--red);
+  letter-spacing: 0.16em;
+  padding: 9px 9px 8px;
+  font-size: 1.1em;
+}
+
+#main-nav-toggle .open:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.scroll #main-nav-toggle .open {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.scroll #main-nav-toggle .open:hover {
+  background: var(--dark-red);
+}
+
+#main-nav-toggle:focus .open {
+  background: var(--red);
+  color: var(--white);
+}
+
+#main-nav-toggle .close {
+  visibility: hidden;
+  opacity: 0;
+  width: 80px;
+  text-align: right;
+  font-weight: normal;
+  top: 4px;
+  font-size: 11px;
+}
+
+#main-nav-toggle .close svg {
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+
+.show #main-nav-toggle {
+  color: var(--white);
+  background: transparent;
+}
+
+.show #main-nav-toggle .close {
+  visibility: visible;
+  opacity: 1;
+  &:hover {
+    color: #989898;
+  }
+}
+
+.show #main-nav-toggle .open {
+  visibility: hidden;
+  opacity: 0;
+}
+
+@media all and (min-width: 768px) {
+  #main-nav-toggle {
+    top: 70px;
+    right: 45px;
+    width: 90px;
+    height: 48px;
+  }
+  #main-nav-toggle .open {
+    padding: 14px 18px 13px;
+    font-size: 13px;
+  }
+  #main-nav-toggle .close {
+    top: 10px;
+  }
+}
+
+#main-nav {
+  display: block;
+  position: fixed;
+  background: #212121;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  z-index: -1;
+  box-sizing: border-box;
+}
+
+#main-nav .inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 70px 8.0527% 60px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: none;
+  box-sizing: border-box;
+}
+
+#main-nav .column:last-child {
+  max-width: 245px;
+}
+
+.show #main-nav {
+  z-index: 9909;
+  visibility: visible;
+  opacity: 1;
+}
+
+.show #main-nav .inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  display: flex;
+  display: -webkit-flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+}
+
+#main-nav .search {
+  margin-bottom: 45px;
+  max-width: 310px;
+  border: none;
+  .button {
+    background: none;
+    border: none;
+  }
+}
+
+#main-nav .search form:after {
+  content: '';
+  border-bottom: 2px solid var(--white);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 48px);
+}
+
+#main-nav .search input[type='search'] {
+  margin-bottom: 0;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0);
+  width: calc(100% - 38px);
+  padding-left: 10px;
+  transition: 0.2s;
+  height: 51px;
+
+  &::placeholder {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-medium-bold);
+    letter-spacing: 0.16em;
+    color: var(--white);
+    transition: 0.2s;
+    line-height: 31px;
+  }
+
+  &:focus {
+    outline: none;
+    border: 2px solid var(--white);
+
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+}
+
+#main-nav .search button {
+  right: 0;
+  left: auto;
+  top: 50%;
+  z-index: -1; //make sure this is below the input#edit-submit--3, which is the real button on the form
+  height: 48px;
+  width: 48px;
+  background: unset;
+  border: none;
+  margin-top: -24px;
+}
+#main-nav .search input.button:hover ~ button svg {
+  fill: var(--gold);
+}
+.js-form-item.form-item.js-form-type-search.form-type-search.js-form-item-keys.form-item-keys.form-no-label.olympian-search
+  input {
+  width: 250px;
+  margin-bottom: 0;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0);
+  transition: 0.2s;
+  font-size: 21px;
+  height: 51px;
+  background: 0 0;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  letter-spacing: 1.2px;
+  border-radius: 0;
+}
+
+#main-nav a.search-button {
+  top: 20px;
+  position: absolute;
+  &:hover {
+    svg,
+    color {
+      fill: var(--gold);
+    }
+  }
+}
+#main-nav .search svg {
+  position: static;
+  transition: 0.2s;
+  width: 24px;
+  height: 24px;
+  fill: var(--white);
+
+  &:hover {
+    fill: var(--gold);
+  }
+}
+
+#main-nav .callout {
+  margin-bottom: 25px;
+}
+
+#main-nav .callout p {
+  font-size: 1.7em;
+  font-family: var(--serif);
+  font-weight: bold;
+  margin-bottom: 1.8em;
+  max-width: 200px;
+}
+
+#main-nav .callout:after,
+#secondary-nav:after {
+  background: var(--white);
+  max-width: 190px;
+  content: '';
+}
+
+#main-nav .callout:after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--white);
+  max-width: 190px;
+  margin-top: 45px;
+}
+
+#main-nav .button {
+  text-transform: none;
+  font-family: var(--serif);
+  letter-spacing: 0;
+}
+
+#main-nav .button.external {
+  padding: 18px 25px 17px;
+}
+
+#main-nav .button .icon {
+  margin-left: 10px;
+  fill: currentColor;
+}
+
+#main-nav .other-schools {
+  font-size: 1.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  margin-bottom: 25px;
+}
+
+#main-nav .other-schools li {
+  margin: 7px 0;
+  font-size: 1.15em;
+  text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+#main-nav .other-schools svg {
+  color: var(--light-blue);
+  width: 18px !important;
+  height: 18px;
+  margin-bottom: -3px;
+  margin-right: 7px !important;
+}
+input::-webkit-search-cancel-button {
+  display: none;
+  width: 0px;
+}
+#main-nav .search input[type='search']:focus {
+  outline: none;
+  border: 2px solid var(--white);
+}
+#main-nav .search input[type='search']:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+#main-nav {
+  .js-form-item.form-item.js-form-type-search.form-type-search.js-form-item-keys.form-item-keys.form-no-label.olympian-search
+    input {
+    background: unset;
+    width: 250px;
+  }
+  input::-webkit-input-placeholder {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--white);
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    line-height: 31px;
+    transition: 0.2s;
+    text-transform: uppercase !important;
+    letter-spacing: 1.7px;
+  }
+}
+#main-nav .other-schools a:hover {
+  color: var(--light-blue);
+}
+
+#main-nav .ampersand {
+  position: absolute;
+  z-index: 0;
+  top: 35px;
+  left: 45%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  opacity: 0.25;
+  display: none;
+}
+
+#main-nav .ampersand svg {
+  width: 600px !important;
+  height: 710px;
+  fill: #414042;
+}
+
+@media all and (min-width: 600px) {
+  #main-nav .callout p {
+    font-size: 1.9em;
+  }
+  #main-nav .ampersand {
+    display: block;
+  }
+}
+
+@media all and (min-width: 1030px) {
+  #main-nav .inner {
+    padding-top: 115px;
+  }
+  #main-nav.show .inner {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  #main-nav .column:first-child {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    width: auto;
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+  }
+  #main-nav .column:last-child {
+    width: 245px;
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    margin-right: 150px;
+  }
+}
+#main-nav .olympian-search-api-form .search-form__submit {
+  display: none;
+}
+div#block-olympian-search-form-narrow {
+  input#edit-submit {
+    background: none;
+    border: none;
+  }
+}
+.olympian-search-api-form-block {
+  > .form-item-search.olympian-search {
+    display: block; //override inline-block
+  }
+  // The following input.button is the real button.
+  // It overlays the <button> element that has the magnifying-glass icon.
+  input.button.form-submit {
+    position: absolute;
+    right: 0;
+    left: auto;
+    height: 48px;
+    width: 48px;
+    top: 50%;
+    background: unset;
+    border: none;
+    margin-top: -24px;
+  }
+}

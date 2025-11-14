@@ -1,0 +1,11 @@
+uuid: 7ca4f93f-56bc-4560-9238-e3b15273cc0b
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.testimonial_mobile
+label: 'Testimonial Mobile'
+description: ''
+targetEntityType: media
+cache: true

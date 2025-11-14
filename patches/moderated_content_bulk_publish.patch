@@ -1,0 +1,16 @@
+diff --git a/js/moderated_content_bulk_publish.js b/js/moderated_content_bulk_publish.js
+index bc23e7da1953716c1e52c5e7c41e59f8ba5abd2a..9a07e41e40479f96e276f875d27379251363ae87 100644
+--- a/js/moderated_content_bulk_publish.js
++++ b/js/moderated_content_bulk_publish.js
+@@ -180,11 +180,6 @@
+                   confirmationDialog_publish.showModal();
+                   return false;
+                 }
+-                else if ((cur_state == Drupal.t('Published')) && (new_state == Drupal.t('Published'))) {
+-                  e.preventDefault();
+-                  confirmationDialog_publish.showModal();
+-                  return false;
+-                }
+                 return true;
+               });
+               $('#edit-create-and-translate').click(function(e) {

@@ -1,0 +1,16 @@
+uuid: cc66b521-88bd-4b20-a84b-fa70f71dfb50
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.event_header
+id: event_header
+label: 'Event Header'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: event_header
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: event_header

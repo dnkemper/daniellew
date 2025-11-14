@@ -1,0 +1,55 @@
+uuid: 02a4d1b7-4e58-4217-bd3f-898011be98b4
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_instagram_twitter_section
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+idMap:
+  plugin: smart_sql
+migration_group: olympian_d7
+label: 'Paragraphs (Twitter Section)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: instagram_twitter_section
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_shown_items:
+    -
+      plugin: default_value
+      default_value: '0'
+  field_instagram_username:
+    -
+      plugin: get
+      source: field_instagram_username
+  field_custom_photo:
+    plugin: sub_process
+    source: field_custom_photo
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: instagram_twitter_section
+migration_dependencies: {  }

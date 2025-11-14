@@ -1,0 +1,61 @@
+id: paragraph_content_repeats
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - artsci-paragraph
+  - 'Paragraphs Content'
+label: 'Paragraphs (Contact Header)'
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: content_repeats
+process:
+  type:
+    plugin: default_value
+    default_value: content_repeats  # Ensure this matches the D10 machine name.
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_description:
+    -
+      plugin: get
+      source: field_description
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_callout_button_text:
+    -
+      plugin: get
+      source: field_callout_button_text
+  field_callout_button_url:
+    -
+      plugin: get
+      source: field_callout_button_url
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: content_repeats
+migration_dependencies:
+  required: {}

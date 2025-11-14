@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: movingstories.ddev.site
+    protocol: https
+  machine_name: movingstories
+  human_name: movingstories.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: movingstories.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/movingstories.wustl.edu/files'
+    origin: 'https://movingstories.wustl.edu'
+drupal:
+  db:
+    database: drupal_movingstories
+system:
+  site:
+    contact_us_url: 'https://movingstories.wustl.edu/contact-us'
+    name: movingstories
+    email: movingstories@wustl.edu

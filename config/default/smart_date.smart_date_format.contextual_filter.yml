@@ -1,0 +1,15 @@
+uuid: af9c519d-1d8c-45ff-886d-6f7174efbede
+langcode: en
+status: true
+dependencies: {  }
+id: contextual_filter
+label: 'Contextual Filter'
+date_format: Ymd
+time_format: ''
+time_hour_format: ''
+allday_label: 'All day'
+separator: ' - '
+join: ', '
+ampm_reduce: '1'
+date_first: '1'
+site_time_toggle: '0'

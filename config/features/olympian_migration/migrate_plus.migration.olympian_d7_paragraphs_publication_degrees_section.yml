@@ -1,0 +1,79 @@
+uuid: 11e630b0-c8b8-4951-86a8-e0c970f60ce0
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_publication_degrees_section
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Publication Degrees Section)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_degrees_section
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_degrees:
+    -
+      plugin: sub_process
+      source: field_degrees
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_publication_degrees_color:
+    -
+      plugin: get
+      source: field_publication_degrees_color
+  field_subtitle:
+    -
+      plugin: get
+      source: field_subtitle
+  field_title:
+    -
+      plugin: get
+      source: field_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_degrees_section
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_publication_degrees_subsection

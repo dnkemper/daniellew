@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function olympian_private_webform_install() {
+  $webform_storage = \Drupal::entityTypeManager()->getStorage('webform');
+  $webforms = $webform_storage->loadMultiple();
+  
+  $count = 0;
+  foreach ($webforms as $webform) {
+    $access_rules = $webform->getAccessRules();
+    
+    // Only update if anonymous access is currently allowed
+    if (empty($access_rules['create']['roles']) || in_array('anonymous', $access_rules['create']['roles'])) {
+      $access_rules['create'] = [
+        'roles' => ['authenticated'],
+        'users' => [],
+        'permissions' => [],
+      ];
+      
+      $webform->setAccessRules($access_rules);
+      $webform->save();
+      $count++;
+    }
+  }
+  
+  return t('Updated @count webforms to require authentication', ['@count' => $count]);
+}

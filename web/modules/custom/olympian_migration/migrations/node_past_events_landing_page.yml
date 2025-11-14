@@ -1,0 +1,172 @@
+id: node_past_events_landing_page
+migration_group: olympian_migration
+label: 'Past Events Landing Page Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: past_events_landing_page
+#  -------------------------------- ---------- ---------------------------- -------------
+#   Field name                       Required   Field type                   Cardinality
+#  -------------------------------- ---------- ---------------------------- -------------
+#   date_repeat_entity_clone_state              boolean                      1
+#   date_repeat_entity_master_uuid              string                       1
+#   field_category_display           ✔          list_string                  1
+#   field_event_header_image                    entity_reference             1
+#   field_footer_callout_p                      entity_reference_revisions   1
+#   field_meta_tags                             metatag                      1
+#   field_search                                string_long                  1
+#  -------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: past_events_landing_page
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+
+
+  # Text fields
+  field_events_subtitle:
+    plugin: get
+    source: field_events_subtitle
+
+  # Boolean and string fields (changed types in D10)
+  date_repeat_entity_clone_state:
+    plugin: get
+    source: date_repeat_entity_clone_state
+  date_repeat_entity_master_uuid:
+    plugin: get
+    source: date_repeat_entity_master_uuid
+
+  # Image field mapping (D7 image to D10 entity reference)
+  field_event_header_image:
+    plugin: sub_process
+    source: field_header_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+
+  field_category_display:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: past_event_category_display
+    -
+      plugin: static_map
+      map:
+        '1': 'collapsed'
+        '2': 'hidden'
+        '3': 'expanded'
+
+  field_introduction_p:
+    plugin: sub_process
+    source: field_introduction_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_introduction
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+    plugin: get
+    source: field_meta_tags
+
+destination:
+  plugin: 'entity:node'
+  default_bundle: past_events_landing_page
+
+migration_dependencies:
+  required:
+    - paragraph_button
+    - paragraph_social_media_links
+    - paragraph_footer_callout
+    - paragraph_introduction
+  optional: {}

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 488eaf1d-842b-4392-9aeb-8d84cc4f75e4
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: iqplan_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/iqplan_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 25799
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

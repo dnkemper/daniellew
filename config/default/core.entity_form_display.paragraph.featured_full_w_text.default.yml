@@ -1,0 +1,76 @@
+uuid: da391f61-2184-4015-8459-771c57f0067b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_full_w_text.field_additional_information
+    - field.field.paragraph.featured_full_w_text.field_custom_button
+    - field.field.paragraph.featured_full_w_text.field_feat_full_background_image
+    - field.field.paragraph.featured_full_w_text.field_featured_new_window
+    - field.field.paragraph.featured_full_w_text.field_main_title
+    - field.field.paragraph.featured_full_w_text.field_optional_header
+    - paragraphs.paragraphs_type.featured_full_w_text
+  module:
+    - linkit
+    - media_library
+    - media_library_edit
+id: paragraph.featured_full_w_text.default
+targetEntityType: paragraph
+bundle: featured_full_w_text
+mode: default
+content:
+  field_additional_information:
+    type: string_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_custom_button:
+    type: linkit
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_feat_full_background_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_featured_new_window:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_main_title:
+    type: linkit
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_optional_header:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

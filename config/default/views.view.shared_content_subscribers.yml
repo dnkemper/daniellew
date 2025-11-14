@@ -1,0 +1,192 @@
+uuid: 664a7f5f-d729-43c7-a27c-964fcb4df3a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.article
+    - node.type.events
+    - node.type.faculty_staff
+  module:
+    - node
+    - user
+id: shared_content_subscribers
+label: 'Shared Content Subscribers'
+module: views
+description: ''
+tag: default
+base_table: node_field_data
+base_field: nid
+display:
+  default:
+    id: default
+    display_title: Master
+    display_plugin: default
+    position: 1
+    display_options:
+      title: 'Shared Content Subscribers'
+      fields:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          plugin_id: field
+          label: ''
+          alter:
+            word_boundary: false
+            ellipsis: false
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          relationship: none
+          group_type: group
+          plugin_id: field
+          label: Nid
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: null
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+            unwanted_characters: ''
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          settings:
+            link_to_entity: 0
+          ui_name: ''
+      pager:
+        type: full
+        options:
+          pagination_heading_level: h4
+          items_per_page: 10
+      exposed_form:
+        type: basic
+      access:
+        type: perm
+      cache:
+        type: none
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          plugin_id: date
+          order: DESC
+      arguments:
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
+          plugin_id: node_nid
+          default_action: 'access denied'
+          default_argument_type: fixed
+          summary_options:
+            items_per_page: 25
+          summary:
+            number_of_records: 0
+            format: default_summary
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          plugin_id: boolean
+          operator: '='
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            article: article
+            events: events
+            faculty_staff: faculty_staff
+      style:
+        type: default
+        options:
+          row_class: ''
+          default_row_class: true
+          uses_fields: true
+          row_class_special: 1
+      row:
+        type: 'entity:node'
+      query:
+        type: views_query
+        options: {  }
+      use_more_always: false
+      display_extenders: {  }
+      style_plugin: default
+      style_options:
+        row_class: ''
+        default_row_class: 1
+        row_class_special: 1
+        uses_fields: 1
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  page:
+    id: page
+    display_title: Page
+    display_plugin: page
+    position: 2
+    display_options:
+      query:
+        type: views_query
+        options: {  }
+      display_extenders: {  }
+      path: shared-content/subscribers/%
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }

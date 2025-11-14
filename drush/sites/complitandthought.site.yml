@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://complitandthought.ddev.site
+  paths:
+    files: sites/complitandthought.wustl.edu/files
+dev:
+  uri: https://complitandthought.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/complitandthought.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://complitandthought.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/complitandthought.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://complitandthought.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    drush-script: /home/drupaladm/d9main/vendor/bin/drush
+    files: sites/complitandthought.wustl.edu/files

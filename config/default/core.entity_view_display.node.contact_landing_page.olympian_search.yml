@@ -1,0 +1,45 @@
+uuid: b5356271-e010-400d-b7e4-54d5003070f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.contact_landing_page.field_footer_callout_p
+    - field.field.node.contact_landing_page.field_introduction_p
+    - field.field.node.contact_landing_page.field_meta_tags
+    - field.field.node.contact_landing_page.field_search
+    - field.field.node.contact_landing_page.field_tabs_p
+    - node.type.contact_landing_page
+  module:
+    - user
+id: node.contact_landing_page.olympian_search
+targetEntityType: node
+bundle: contact_landing_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  content_moderation_control: true
+  field_footer_callout_p: true
+  field_introduction_p: true
+  field_meta_tags: true
+  field_tabs_p: true
+  links: true

@@ -1,0 +1,39 @@
+uuid: be44b39c-7ac2-4a5f-a9c0-ee826a0fa007
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.media_library
+    - field.field.media.cv.field_media_directory
+    - field.field.media.cv.field_media_file
+    - media.type.cv
+  module:
+    - olympian_core
+id: media.cv.media_library
+targetEntityType: media
+bundle: cv
+mode: media_library
+content:
+  field_media_file:
+    type: media_entity_download_download_link
+    label: hidden
+    settings:
+      trim_length: '80'
+      disposition: attachment
+      link_text: Download
+      show_icon: '1'
+      url_only: ''
+      url_plain: ''
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  content_moderation_control: true
+  created: true
+  field_media_directory: true
+  name: true
+  search_api_excerpt: true
+  thumbnail: true
+  uid: true

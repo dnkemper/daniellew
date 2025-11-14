@@ -1,0 +1,356 @@
+uuid: 68aa6871-ba13-47a7-9d32-ab29297a85ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.events.body
+    - field.field.node.events.date_repeat_entity_clone_state
+    - field.field.node.events.date_repeat_entity_master_uuid
+    - field.field.node.events.field_additional_location_inform
+    - field.field.node.events.field_button_url
+    - field.field.node.events.field_call_to_action_butto
+    - field.field.node.events.field_call_to_action_button_text
+    - field.field.node.events.field_content_hash
+    - field.field.node.events.field_date_all_day
+    - field.field.node.events.field_event_category
+    - field.field.node.events.field_event_contact
+    - field.field.node.events.field_event_date
+    - field.field.node.events.field_event_date_alias
+    - field.field.node.events.field_event_date_tbd
+    - field.field.node.events.field_event_geolocation
+    - field.field.node.events.field_event_new_window
+    - field.field.node.events.field_event_smart_date
+    - field.field.node.events.field_external_url
+    - field.field.node.events.field_feature_event
+    - field.field.node.events.field_featured_home_slideshow
+    - field.field.node.events.field_header_image
+    - field.field.node.events.field_introduction_excerpt
+    - field.field.node.events.field_is_shared
+    - field.field.node.events.field_last_fetch
+    - field.field.node.events.field_location
+    - field.field.node.events.field_meta_tags
+    - field.field.node.events.field_rsvp_form
+    - field.field.node.events.field_rsvp_form_link
+    - field.field.node.events.field_search
+    - field.field.node.events.field_shared_content
+    - field.field.node.events.field_shared_content_notify
+    - field.field.node.events.field_shared_content_subscribers
+    - field.field.node.events.field_shared_content_xml
+    - field.field.node.events.field_show_end_date
+    - field.field.node.events.field_thumbnail
+    - node.type.events
+    - workflows.workflow.editorial
+  module:
+    - content_moderation
+    - datetimehideseconds
+    - linkit
+    - media_library
+    - media_library_edit
+    - metatag
+    - path
+    - private_content
+    - smart_date
+    - text
+    - webform
+id: node.events.default
+targetEntityType: node
+bundle: events
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 10
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 31
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_additional_location_inform:
+    type: string_textfield
+    weight: 18
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_button_url:
+    type: linkit
+    weight: 23
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_call_to_action_button_text:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_event_category:
+    type: options_buttons
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_event_contact:
+    type: string_textfield
+    weight: 15
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_event_date_tbd:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_event_geolocation:
+    type: string_textfield
+    weight: 19
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_event_new_window:
+    type: boolean_checkbox
+    weight: 21
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_event_smart_date:
+    type: smartdate_inline
+    weight: 14
+    region: content
+    settings:
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+      show_extra: false
+      hide_date: true
+      allday: true
+      remove_seconds: true
+      duration_overlay: false
+      separator: to
+    third_party_settings:
+      datetimehideseconds:
+        hide: true
+  field_external_url:
+    type: linkit
+    weight: 20
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+      linkit_profile: default
+      linkit_auto_link_text: true
+    third_party_settings: {  }
+  field_feature_event:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_featured_home_slideshow:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_header_image:
+    type: media_library_widget
+    weight: 7
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  field_introduction_excerpt:
+    type: string_textarea
+    weight: 9
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_is_shared:
+    type: boolean_checkbox
+    weight: 26
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_location:
+    type: string_textfield
+    weight: 16
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_meta_tags:
+    type: metatag_firehose
+    weight: 32
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  field_rsvp_form:
+    type: webform_entity_reference_select
+    weight: 24
+    region: content
+    settings:
+      default_data: false
+      webforms: {  }
+    third_party_settings: {  }
+  field_search:
+    type: string_textarea
+    weight: 25
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content:
+    type: string_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content_notify:
+    type: options_select
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_shared_content_subscribers:
+    type: string_textarea
+    weight: 3
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_shared_content_xml:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_show_end_date:
+    type: boolean_checkbox
+    weight: 13
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_thumbnail:
+    type: media_library_widget
+    weight: 8
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings:
+      media_library_edit:
+        show_edit: '1'
+  moderation_state:
+    type: moderation_state_default
+    weight: 27
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 28
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  private:
+    type: private
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp
+    weight: 36
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp
+    weight: 37
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 29
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  field_call_to_action_butto: true
+  field_content_hash: true
+  field_date_all_day: true
+  field_event_date: true
+  field_event_date_alias: true
+  field_last_fetch: true
+  field_rsvp_form_link: true
+  promote: true
+  status: true
+  sticky: true

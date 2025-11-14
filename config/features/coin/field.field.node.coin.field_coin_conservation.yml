@@ -1,0 +1,24 @@
+uuid: 1e4e7160-9457-45bb-a4b1-5660a49563f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_conservation
+    - filter.format.full_html
+    - node.type.coin
+  module:
+    - text
+id: node.coin.field_coin_conservation
+field_name: field_coin_conservation
+entity_type: node
+bundle: coin
+label: Conservation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

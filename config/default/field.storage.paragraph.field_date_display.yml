@@ -1,0 +1,27 @@
+uuid: 2d764480-eeb6-4705-a95d-6213a56fcceb
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_date_display
+field_name: field_date_display
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Full
+      label: Full
+    -
+      value: Year
+      label: Year
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

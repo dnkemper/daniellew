@@ -1,0 +1,10 @@
+uuid: 998ee68b-a4cb-41fc-b0f4-425b02fefcf7
+langcode: en
+status: true
+dependencies: {  }
+id: publication_testimonial_section
+label: 'Publication Testimonial Section'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Testimonial Section'
+behavior_plugins: {  }

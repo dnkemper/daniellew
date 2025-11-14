@@ -1,0 +1,25 @@
+uuid: 7b983085-1156-4e9b-a84b-985c566ba3bb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faculty_and_staff
+    - node.type.book
+id: node.book.field_faculty_and_staff
+field_name: field_faculty_and_staff
+entity_type: node
+bundle: book
+label: 'Faculty and Staff'
+description: 'Use this field to tag the faculty member who authored this book. Multiple faculty members with profiles in this website may be added (comma separated) in this field. If there are authors who do not have profiles in this website, use the "Byline Names" field to list all authors and use this field to tag the ones who are in your website.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_people
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,19 @@
+uuid: 98bc6bdc-605f-4f0b-959e-62173e52e308
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_caption
+    - paragraphs.paragraphs_type.featured_with_caption
+id: paragraph.featured_with_caption.field_caption
+field_name: field_caption
+entity_type: paragraph
+bundle: featured_with_caption
+label: Caption
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

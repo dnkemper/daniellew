@@ -1,0 +1,6 @@
+{
+    "name": "artsci/ampersand_landing_page",
+    "description": "Creates an ampersand landing page content type.",
+    "keywords": ["recipe", "Drupal recipes", "drupal recipe"],
+    "type": "drupal-recipe",
+}

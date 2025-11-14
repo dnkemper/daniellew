@@ -1,0 +1,1664 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming.
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
+use Drupal\content_moderation\Entity\ContentModerationState;
+use Drupal\file\Entity\File;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function olympian9_preprocess_html(&$variables) {
+  $config = \Drupal::config('olympian_core.settings');
+
+  $toppage = 'no-top-scroll';
+  // Used for page by page basis display of scroll to top button.
+  if (theme_get_setting('header.toppage', 'olympian9')) {
+    $toppage = 'top-scroll';
+  }
+  $theme_path = \Drupal::service('extension.list.theme')->getPath('olympian9');
+
+  $variables['attributes']['class'][] = $toppage;
+  $variables['header_type'] = 'inline';
+  $variables['attributes']['class'][] = 'is-always-mobile-nav';
+  $variables['alerts_feed'] = theme_get_setting('alerts_feed', 'olympian9');
+  $variables['header_color'] = theme_get_setting('header_color', 'olympian9');
+  $variables['header_logo'] = theme_get_setting('header_logo', 'olympian9');
+  // Get the contents of the SVG sprite.
+  $icons = file_get_contents($theme_path . '/svg/svg-sprite.html');
+
+  // Add a new render array to page_bottom so the icons
+  // get added to the page.
+  $variables['page_bottom']['icons'] = [
+    '#type' => 'inline_template',
+    '#template' => '<span class="hidden">' . $icons . '</span>',
+  ];
+
+  $viewport = [
+    '#type' => 'html_tag',
+    '#tag' => 'meta',
+    '#attributes' => [
+      'name' => 'viewport',
+      'content' => 'width=device-width, initial-scale=1',
+    ],
+  ];
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    switch ($node->getType()) {
+      case 'faq':
+        $variables['#attached']['library'][] = 'olympian9/accordion';
+        break;
+
+      case 'article':
+      case 'events':
+      case 'faculty_staff':
+      case 'image_cards':
+        $variables['attributes']['class'][] = 'single-post';
+        break;
+
+      case 'home_page':
+        $variables['attributes']['class'][] = 'home';
+        break;
+
+      case 'past_events_landing-page':
+      case 'events_landing_page':
+        $variables['attributes']['class'][] = 'events';
+        $variables['attributes']['class'][] = 'category';
+        break;
+
+      case 'news_landing_page':
+        $variables['attributes']['class'][] = 'news';
+        break;
+
+      case 'faculty_landing_page':
+        $variables['attributes']['class'][] = 'our-people';
+        $variables['attributes']['class'][] = 'toggle-list-class';
+        break;
+
+      case 'image_cards_landing':
+        $variables['attributes']['class'][] = 'toggle-list-class';
+        break;
+
+      case 'resources_landing_page':
+      case 'resources':
+        $variables['attributes']['class'][] = 'academic-resources';
+        $variables['attributes']['class'][] = 'toggle-list-class';
+        break;
+
+      case 'contact_landing_page':
+        $variables['attributes']['class'][] = 'contact';
+        break;
+
+      case 'publication_page':
+      case 'generic_page':
+        $variables['#attached']['library'][] = 'olympian9/slick';
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function olympian9_preprocess_node(&$variables) {
+  if ($node = Drupal::routeMatch()->getParameter('node')) {
+    $variables['date_today'] = strtotime("now");
+    if ($node->hasField('field_media_image')) {
+      // Get first image on multi value field.
+      $image = $node->field_media_image[0]->getValue();
+
+      $variables['img_width'] = $image['width'];
+      $variables['img_height'] = $image['height'];
+      $variables['image_url'] = $image['uri'];
+    }
+  }
+  // Load the node.
+  $node = $variables['node'];
+
+  // Check if the node has the entity reference revision field.
+  if ($node->hasField('field_event_and_article_spotligh')) {
+    $entity_reference_revision_field = $node->get('field_event_and_article_spotligh');
+    // Check if the entity reference revision field is not empty.
+    if (!$entity_reference_revision_field->isEmpty()) {
+      // Load the referenced entity.
+      $referenced_entity = $entity_reference_revision_field->entity;
+
+      // Check if the referenced entity reference field has content.
+      if ($referenced_entity && !$referenced_entity->get('field_spot_articles')
+        ->isEmpty()) {
+        // Add a variable to pass to the Twig template to indicate content presence.
+        $variables['field_spot_articles'] = TRUE;
+      }
+    }
+  }
+
+  // Move addtocal from field_date to separate item.
+  if (isset($variables["content"]["field_event_smart_date"][0]["addtocal"])) {
+    $variables["content"]["addtocal"] = $variables["content"]["field_event_smart_date"][0]["addtocal"];
+    unset($variables["content"]["field_event_smart_date"][0]["addtocal"]);
+  }
+
+  /** @var \Drupal\Core\Extension\ExtensionPathResolver $path_resolver */
+  $path_resolver = Drupal::service('extension.path.resolver');
+  $variables['default_event_image'] = '/' . $path_resolver->getPath('theme', 'olympian9') . '/images/default-event.png';
+  $variables['default_article_image'] = '/' . $path_resolver->getPath('theme', 'olympian9') . '/images/default-article.png';
+  $variables['default_faculty_image'] = '/' . $path_resolver->getPath('theme', 'olympian9') . '/images/default-person.png';
+  // Allowed view modes.
+  /**
+   * @var \Drupal\node\Entity\Node $node
+   */
+  $node = $variables['node'];
+  global $base_url;
+    $node_title = $node->getTitle();
+  $node_url = $node->toUrl('canonical', ['absolute' => TRUE])->toString();
+  $social_data = olympian9_build_social_share($node_url, $node_title);
+
+  $variables['social_share'] = $social_data['links'];
+  $variables['youtube_username'] = $social_data['usernames']['youtube'];
+  $variables['linkedin_username'] = $social_data['usernames']['linkedin'];
+  $variables['twitter_username'] = $social_data['usernames']['twitter'];
+  $variables['facebook_username'] = $social_data['usernames']['facebook'];
+  $variables['instagram_username'] = $social_data['usernames']['instagram'];
+  $variables['current_url'] = $node_url;
+  $variables['current_title'] = $node_title;
+  $department_image_path = theme_get_setting('department_image_path');
+
+  if ($department_image_path) {
+    // Convert the internal URI to a URL.
+    $department_image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($department_image_path);
+    $variables['department_image_path'] = $department_image_url;
+  }
+  // $fid2 = theme_get_setting('department_image_upload', 'olympian9');
+  // if (!empty($fid2)) {
+  //   $file2 = File::load($fid2[0]);
+  // }
+  // if (!empty($file2)) {
+    // $variables['department_image_path'] = $base_url . $file2->createFileUrl();
+  // }
+  // \Drupal::service('file_system')->realpath($events_header_image_path)
+  $variables['department_image'] = theme_get_setting('department_image_upload', 'olympian9');
+  $variables['events_header_image'] = theme_get_setting('events_header_image_upload', 'olympian9');
+  $variables['events_header_image_path'] = theme_get_setting('events_header_image_path', 'olympian9');
+
+  $variables['alerts_feed'] = theme_get_setting('alerts_feed', 'olympian9');
+  $variables['chatbot'] = theme_get_setting('chatbot', 'olympian9');
+
+  $is_shared_content = 0;
+
+  // Access node content.
+  $node = $variables['node'];
+
+  if ($node->bundle() == 'resources') {
+    $alias = get_landing_page_alias('resources_landing_page');
+    $variables['landing_page_alias'] = $alias;
+  }
+  if ($node->bundle() == 'image_cards') {
+    $alias = get_landing_page_alias('image_cards_landing');
+    $variables['landing_page_alias'] = $alias;
+  }
+
+  // Check if the content type is "faculty_staff".
+  if ($node->bundle() == 'faculty_staff') {
+
+    $alias = get_landing_page_alias('faculty_landing_page');
+    $variables['landing_page_alias'] = $alias;
+    $news_alias = get_landing_page_alias('news_landing_page');
+    $variables['news_landing_page_alias'] = $news_alias;
+    // Check if 'field_is_shared' exists and has a value.
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      $variables['sharedURL'] = $node->get('field_shared_content_xml')->value;
+      // Fetch shared content from 'field_shared_content'.
+      $xml = $node->get('field_shared_content')->value;
+
+      // Decode the base64-encoded XML content.
+      if ($xml !== NULL) {
+        $xml = base64_decode($xml);
+        $xml_data = simplexml_load_string($xml);
+        if ($xml_data !== FALSE) {
+          $test = $node->get('field_shared_content_xml')->value;
+
+            $xmlElement = $xml_data->node;
+
+
+          $headshotCard = (string) $xmlElement->headshot;
+          $headshotMobileURL = (string) $xmlElement->headshotMobile;
+          $variables['courses'] = (string) $xmlElement->sampleCourses;
+          if (!empty($headshotCard)) {
+            if (!empty($headshotMobileURL) && $headshotCard != $headshotMobileURL) {
+              $headshot = '<div class="image column half"><img srcset="' . $headshotMobileURL . ' 480w, ' . $headshotCard . ' 944w" src="' . $headshotMobileURL . '" sizes="(max-width:480px) 85vw, 930px" alt="' . $xmlElement->title . '"></div>';
+            }
+            else {
+              $headshot = '<div class="image column half"><img src="' . $headshotMobileURL . '" alt="' . $xmlElement->title . '"></div>';
+            }
+            $headshotCard = '<img loading="lazy" src="' . $headshotMobileURL . '" alt="' . $xmlElement->title . '" width="320" height="320">';
+          }
+          else {
+            $thumbnail = '/' . $path_resolver->getPath('theme', 'olympian9') . '/images/default-person.png';
+            $headshot = '<div class="image column half"><img src="' . $thumbnail . '" alt="default person image" width="680" height="680"></div>';
+            $headshotCard = '<img loading="lazy" src="' . $thumbnail . '" alt="default person image" width="320" height="320">';
+          }
+
+          $nodetitle = (string) $xmlElement->title;
+          $firstName = (string) $xmlElement->firstName;
+          $lastName = (string) $xmlElement->lastName;
+          $contenttype = (string) $xmlElement->contentType;
+          $position = (string) $xmlElement->position;
+          $additionalTitles = (string) $xmlElement->additionalTitles;
+          $variables['headshotCard'] = $headshotCard;
+          $variables['externalURL'] = (string) $xmlElement->externalURL;
+          $variables['direct'] = (string) $xmlElement->externalURL;
+          $biography = (string ) $xmlElement->biography;
+          $emailAddress = (string) $xmlElement->emailAddress;
+          $phoneNumber = (string) $xmlElement->phoneNumber;
+          $faxNumber = (string) $xmlElement->faxNumber;
+          $officeHours = (string) $xmlElement->officeHours;
+          $body_xml = (string) $xmlElement->mailingAddress;
+          $officeDirectionsURL = (string) $xmlElement->officeDirectionsURL;
+          $department = (string) $xmlElement->departmentImage;  //! I could not find this element in the shared content xml (-CSantos 20250605)
+          $mailingAddress = preg_replace('/^<description>|<\/description>$/', '', $body_xml);
+          $buildingNameRoomNumber = (string) $xmlElement->buildingNameRoomNumber;
+          $socialMediaLinks = (string) $xmlElement->socialMediaLinks;
+          $endowedProfessorship = (string) $xmlElement->endowedProfessorship;
+          $education = (string) $xmlElement->education;
+          $interests = (string) $xmlElement->interests;
+          $cv = (string) $xmlElement->cv;
+          $variables['introText'] = (string) $xmlElement->introText;
+          $courses = (string) $xmlElement->sampleCourses;
+          $description = (string) $xmlElement->description;
+          $advisor = (string) $xmlElement->advisor;
+          $advisorURL = (string) $xmlElement->advisorURL;
+          $pronouns = (string) $xmlElement->pronouns;
+          $links = (string) $xmlElement->links;
+          $interests = str_replace(['<br>', '<br />', '<br/>'], "</li><li>", $interests);
+          // Set the variables to pass to Twig.
+          $variables['is_shared_content'] = 1;
+          $variables['nodetitle'] = $nodetitle;
+          $variables['firstName'] = $firstName;
+          $variables['lastName'] = $lastName;
+          $variables['contenttype'] = $contenttype;
+          $variables['position'] = $position;
+          $variables['additionalTitles'] = $additionalTitles;
+          $variables['biography'] = $biography;
+          $variables['emailAddress'] = $emailAddress;
+          $variables['email'] = $emailAddress;
+          $variables['phoneNumber'] = $phoneNumber;
+          $variables['phone'] = $phoneNumber;
+          $variables['faxNumber'] = $faxNumber;
+          $variables['officeHours'] = $officeHours;
+          $variables['officeDirectionsURL'] = $officeDirectionsURL;
+          $variables['department'] = $department;
+          $variables['mailingAddress'] = $mailingAddress;
+          $variables['buildingNameRoomNumber'] = $buildingNameRoomNumber;
+          $variables['socialMediaLinks'] = $socialMediaLinks;
+          $variables['endowed'] = $endowedProfessorship;
+          $variables['endowedProfessorship'] = $endowedProfessorship;
+          $variables['education'] = $education;
+          $variables['interests'] = $interests;
+          $variables['cv'] = $cv;
+          $variables['links'] = $links;
+          $variables['courses'] = $courses;
+          $variables['description'] = $description;
+          $variables['advisor'] = $advisor;
+          $variables['advisorURL'] = $advisorURL;
+          $variables['pronouns'] = $pronouns;
+          $variables['headshot'] = $headshot;
+          $variables['content']['title'] = (string) $xmlElement->title;
+
+          // Override the first name field.
+          if (isset($variables['content']['field_first_name'])) {
+            $variables['content']['field_first_name'][0] = (string) $xmlElement->firstName;
+          }
+
+          // Override the last name field.
+          if (isset($variables['content']['field_last_name'])) {
+            $variables['content']['field_last_name'][0] = (string) $xmlElement->lastName;
+          }
+
+          // Override the position field.
+          if (isset($variables['content']['field_position'])) {
+            $variables['content']['field_position'][0] = (string) $xmlElement->position;
+          }
+          // Override the additional titles field.
+          if (isset($variables['content']['field_additional_titles'])) {
+            $variables['content']['field_additional_titles'][0] = (string) $xmlElement->additionalTitles;
+          }
+
+          // Override the biography field.
+          if (isset($variables['content']['body'])) {
+            $variables['content']['body'][0]['#text'] = $biography;
+          }
+
+          // Override the email field.
+          if (isset($variables['content']['field_email'])) {
+            $variables['content']['field_email'][0] = (string) $xmlElement->emailAddress;
+          }
+          if (isset($variables['content']['field_email_address'])) {
+            $variables['content']['field_email_address'][0]['#title'] = (string) $xmlElement->emailAddress;
+            $variables['content']['field_email_address'][0]['#url'] = 'mailto:' . (string) $xmlElement->emailAddress;
+          }
+
+          // Override the phone number field.
+          if (isset($variables['content']['field_phone_number'])) {
+            $variables['content']['field_phone_number'][0] = (string) $xmlElement->phoneNumber;
+          }
+
+          // Override the office hours field.
+          if (isset($variables['content']['field_office_hours'])) {
+            $variables['content']['field_office_hours'][0] = (string) $xmlElement->officeHours;
+          }
+
+          // Override the department field.
+          if (isset($variables['content']['field_department_image'])) {
+            $variables['content']['field_department_image'][0] = (string) $xmlElement->departmentImage;
+          }
+
+          // Override the mailing address field.
+          if (isset($variables['content']['field_mailing_address'])) {
+            $variables['content']['field_mailing_address'][0] = (string) $xmlElement->mailingAddress;
+          }
+          if (isset($variables['content']['field_mailing_address'])) {
+            $variables['content']['field_mailing_address'][0] = (string) $xmlElement->mailingAddress;
+          }
+          if (isset($variables['content']['field_building_name_and_room_num'])) {
+            $variables['content']['field_building_name_and_room_num'][0] = (string) $xmlElement->buildingNameRoomNumber;
+          }
+          if (isset($variables['content']['field_award'])) {
+            $variables['content']['field_award'][0] = (string) $xmlElement->endowedProfessorship;
+          }
+
+          // Override the pronouns field.
+          if (isset($variables['content']['field_pronouns'])) {
+            $variables['content']['field_pronouns'][0] = (string) $xmlElement->pronouns;
+          }
+          if (isset($variables['content']['field_fax_number'])) {
+            $variables['content']['field_fax_number'][0] = (string) $xmlElement->faxNumber;
+          }
+          if (isset($variables['content']['field_external_url'])) {
+            $variables['content']['field_external_url'][0] = (string) $xmlElement->officeDirectionsURL;
+          }
+          if (isset($variables['content']['field_interests'])) {
+            $variables['content']['field_interests'][0] = (string) $xmlElement->interests;
+          }
+        }
+      }
+    }
+    else {
+      $headshotAlt = '';
+      if (isset($variables['content']['field_author_headshot'][0])) {
+        $headshotAlt = $variables['content']['field_author_headshot'][0]['#media']->field_media_image->alt;
+        if (empty($headshotAlt) || $headshotAlt == '""') {
+          if (isset($variables['content']['field_first_name']) && isset($variables['content']['field_last_name'])) {
+            $headshotAlt = $variables['content']['field_first_name'][0]['#context']['value'] . ' ' . $variables['content']['field_last_name'][0]['#context']['value'];
+          }
+        }
+      }
+      $variables['headshotAlt'] = $headshotAlt;
+      $variables['content']['headshotAlt'] = $headshotAlt;
+    }
+  }
+
+  // Check if the content type is "book".
+  if ($node->bundle() == 'book') {
+
+    // Check if 'field_is_shared' exists and has a value.
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      $variables['sharedURL'] = $node->get('field_shared_content_xml')->value;
+      // Fetch shared content from 'field_shared_content'.
+      $xml = $node->get('field_shared_content')->value;
+      if ($xml !== NULL) {
+        // Decode the base64-encoded XML content.
+        $xml = base64_decode($xml);
+        $xml_data = simplexml_load_string($xml);
+
+        if ($xml_data !== FALSE) {
+          $test = $node->get('field_shared_content_xml')->value;
+
+            $xmlElement = $xml_data->node;
+
+          $variables['drupalVersion'] = '';
+          $variables['thumbnail'] = (string) $xmlElement->cover;
+
+          $links = (string) $xmlElement->links;
+          $names = (string) $xmlElement->bnames;
+          $options = (string) $xmlElement->boptions;
+          $title = (string) $xmlElement->title;
+          $body = (string) $xmlElement->description;
+          $authors = (string) $xmlElement->facultyAndStaff;
+          if (isset($variables['content']['title'])) {
+            $variables['content']['title'][0] = (string) $xmlElement->title;
+          }
+          // Override the additional titles field.
+          if (isset($variables['content']['field_description'])) {
+            $variables['content']['field_description'][0] = (string) $xmlElement->description;
+          }
+          if (isset($variables['content']['field_byline_names'])) {
+            $variables['content']['field_byline_names'][0] = (string) $xmlElement->bnames;
+          }
+          // Override the additional titles field.
+          if (isset($variables['content']['field_byline_options'])) {
+            $variables['content']['field_byline_options'][0] = (string) $xmlElement->boptions;
+          }
+
+          // Set the variables to pass to Twig.
+          $variables['is_shared_content'] = 1;
+          $variables['links'] = $links;
+          $variables['names'] = $names;
+          $variables['options'] = $options;
+          $variables['book_title'] = $title;
+          $variables['body'] = $body;
+          $variables['authors'] = $authors;
+        }
+      }
+    }
+  }
+  // Check if the content type is "events".
+  if ($node->bundle() == 'home_page') {
+    $alias = get_landing_page_alias('events_landing_page');
+    $variables['landing_page_alias'] = $alias;
+  }
+  // Check if the content type is "events".
+  if ($node->bundle() == 'events') {
+    $alias = get_landing_page_alias('events_landing_page');
+    $variables['landing_page_alias'] = $alias;
+    // Check if 'field_is_shared' exists and has a value.
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      // Fetch shared content from 'field_shared_content'.
+      $xml = $node->get('field_shared_content')->value;
+      $variables['sharedURL'] = $node->get('field_shared_content_xml')->value;
+      $sharedHost = parse_url($variables['sharedURL'])['host'];
+
+      if ($xml !== NULL) {
+        // Decode the base64-encoded XML content.
+        $xml = base64_decode($xml);
+        $xml_data = simplexml_load_string($xml);
+
+        if ($xml_data !== FALSE) {
+          // Extract data from XML.
+          $variables['is_shared_content'] = 1;
+          $test = $node->get('field_shared_content_xml')->value;
+
+            $xmlElement = $xml_data->node;
+
+          if (isset($variables['content']['title'])) {
+            $variables['content']['title'][0] = (string) $xmlElement->title;
+          }
+          $nodetitle = (string) $xmlElement->title;
+
+          // Replace relative URLs for images in description with absolute URLs.
+          // The regex pattern checks for "/sites/sitename.wustl.edu/files",
+          // which must be preceded by a double-quote, a single quote, a comma, or a whitespace character
+          // to make sure it doesn't already have an absolute URL (e.g., "https://mcss.wustl.edu/sites/mcss.wustl.edu/files").
+          $body = preg_replace(
+            '/(?<=[\",\',\,,\s])\/sites\/'.$sharedHost.'\/files\//',
+            'https://'.$sharedHost.'/sites/'.$sharedHost.'/files/',
+            (string) $xmlElement->description
+          );
+
+          $introText = (string) $xmlElement->introText;
+          $headerImageDesktop = (string) $xmlElement->headerImage;
+          $reverseHeader = (string) $xmlElement->reverseHeader;
+          $authorname = (string) $xmlElement->authorname;
+          $headerImageMobile = (string) $xmlElement->headerImageMobile;
+          $variables['headerImageMobile'] = (string) $xmlElement->headerImageMobile;
+          $variables['headerImage'] = (string) $xmlElement->headerImage;
+          $location1 = (string) $xmlElement->location;
+          $externalURL = (string) $xmlElement->externalURL;
+
+          $location2 = (string) $xmlElement->additionalLocationInformation;
+          $variables['additionalLocationInformation'] = $location2;
+          $eventTBD = (string) $xmlElement->eventTBD;
+          $eventDate = (string) $xmlElement->eventDate;
+          $variables['eventDateStart'] = (string) $xmlElement->eventDateStart;
+          $variables['eventDateEnd'] = (string) $xmlElement->eventDateEnd;
+          $eventGeolocation = (string) $xmlElement->eventGeolocation;
+
+          $eventGeolocationLink = urlencode($eventGeolocation);
+          $url = (string) $xmlElement->externalURL;
+          $rsvpLink = (string) $xmlElement->rsvpFormLink;
+          $buttonText = !empty($xmlElement->buttonText) ? (string) $xmlElement->buttonText : 'More info';
+          $buttonURL = (string) $xmlElement->buttonURL;
+          $thumbnail = (string) $xmlElement->thumbnail;
+          $variables['eventThumbnail'] = (string) $xmlElement->thumbnail;
+          $thumbnailMobile = (string) $xmlElement->thumbnailMobile;
+          $eventContact = (string) $xmlElement->eventContact;
+          $variables['thumbnailimage'] = (string) $xmlElement->thumbnailMobile;
+          $variables['thumbnail'] = (string) $xmlElement->thumbnail;
+          $thumbnail = (string) $xmlElement->thumbnail;
+          $variables['rsvpLink'] = (string) $xmlElement->rsvpLink;
+
+          // Convert the eventDate to a format compatible with Drupal Smart Date.
+          $date_string = str_replace('T', ' ', (string) $xmlElement->eventDate);
+
+          // Attempt to create a DateTime object with the expected format.
+          $date = \DateTime::createFromFormat('Y-m-d H:i:s', $date_string);
+
+          // Check if the date was successfully created.
+          if ($date !== FALSE) {
+            // If successful, format it in the correct format for Smart Date.
+            $smart_date = $date->format('Y-m-d\TH:i:s');
+          }
+          else {
+            $today = strtotime("now");
+            $smart_date = \Drupal::time()->getRequestTime();
+          }
+          if (!empty($xmlElement->drupalVersion)) {
+            $variables['drupalVersion'] = (string) $xmlElement->drupalVersion;
+            $thumbnailTest = (string) $xmlElement->thumbnail;
+            $headshotCleaned = trim(preg_replace('/\s+/', ' ', $thumbnailTest));
+            $variables['headshotCleaned'] = $headshotCleaned;
+          }
+          if (isset($variables['content']['title'])) {
+            $variables['content']['title'][0] = (string) $xmlElement->title;
+          }
+
+          // Override the fields.
+          if (isset($variables['content']['body'])) {
+            $variables['content']['body'][0] = $body;
+          }
+          if (isset($variables['content']['field_call_to_action_butto'])) {
+            $variables['content']['field_button_url'][0] = (string) $xmlElement->buttonURL;
+          }
+          if (isset($variables['content']['field_call_to_action_button_text'])) {
+            $variables['content']['field_call_to_action_button_text'][0] = (string) $xmlElement->buttonText;
+          }
+          if (isset($variables['content']['field_external_url'])) {
+            $variables['content']['field_external_url'][0] = (string) $xmlElement->externalURL;
+          }
+          // Override the biography field.
+          if (isset($variables['content']['field_introduction_excerpt'])) {
+            $variables['content']['field_introduction_excerpt'][0] = (string) $xmlElement->introText;
+          }
+          if (isset($variables['content']['field_event_contact'])) {
+            $variables['content']['field_event_contact'][0] = (string) $xmlElement->eventContact;
+          }
+          if (isset($variables['content']['field_event_geolocation'])) {
+            // See https://drupal.stackexchange.com/questions/240002/how-to-apply-a-field-formatter-to-a-node-field-programmatically
+            // See https://www.thesavvyfew.com/insights/how-do-i-access-field-value-entity-eg-node-object
+            // Holy cannoli it worked.
+            $node->set('field_event_geolocation', (string) $xmlElement->eventGeolocation);
+            $location_field = $node->get('field_event_geolocation');
+            $renderer = \Drupal::service('renderer');
+            $location_render_array = $location_field->view(['type' => 'simple_gmap']);
+            $variables['content']['field_event_geolocation'][0] = $renderer->render($location_render_array);
+          }
+          if (isset($variables['content']['field_additional_location_inform'])) {
+            $variables['content']['field_additional_location_inform'][0] = (string) $xmlElement->additionalLocationInformation;
+          }
+          if (isset($variables['content']['field_location'])) {
+            $variables['content']['field_location'][0] = (string) $xmlElement->location;
+          }
+          // Override the email field.
+          if (isset($variables['content']['field_event_date_tbd'])) {
+            $variables['content']['field_event_date_tbd'][0] = (string) $xmlElement->eventTBD;
+          }
+
+          // Override the phone number field.
+          if (isset($variables['content']['field_location'])) {
+            $variables['content']['field_location'][0] = (string) $xmlElement->location;
+          }
+
+          // Set the variables to pass to Twig.
+          $variables['is_shared_content'] = 1;
+          $variables['authorname'] = $authorname;
+          $variables['reverseHeader'] = $reverseHeader;
+          $variables['externalURL'] = $externalURL;
+          $variables['nodetitle'] = $nodetitle;
+          $variables['body'] = $body;
+          $variables['introText'] = $introText;
+          $variables['location1'] = $location1;
+          $variables['location2'] = $location2;
+          $variables['eventTBD'] = $eventTBD;
+          $variables['date'] = $smart_date;
+          $variables['eventDate'] = $eventDate;
+          $dateField = $eventDate;
+          if ($dateField) {
+            $variables['dates'] = explode(',', $dateField);
+            $dates = explode(' to ', $dateField);
+            $dateStart = (string) $xmlElement->eventDateStart;
+            if ($dateStart) {
+              $variables['dateStart'] = (string) $xmlElement->eventDateStart;
+              // $variables['dateStart'] = $dateStart|date('U');
+              $dateEnd = (string) $xmlElement->eventDateEnd;
+              $variables['dateEnd'] = (string) $xmlElement->eventDateEnd;
+            }
+            else {
+              $dateStart = trim($dates[0]);
+              $variables['dateStart'] = $dateStart | date('U');
+              $dateEnd = isset($dates[1]) ? trim($dates[1]) : $dateStart;
+              $variables['dateEnd'] = $dateEnd;
+            }
+            $dateStartTimestamp = strtotime($dateStart);
+            $dateEndTimestamp = strtotime($dateEnd);
+            $variables['smartStart'] = date('Y-m-d\TH:i:s', $dateStartTimestamp);
+            $variables['smartEnd'] = date('Y-m-d\TH:i:s', $dateEndTimestamp);
+            if (isset($variables['content']['field_event_smart_date'])) {
+              $variables['content']['field_event_smart_date'][0]['#value'] = date('Y-m-d\TH:i:s', $dateStartTimestamp);
+              $variables['content']['field_event_smart_date'][0]['#end_value'] = date('Y-m-d\TH:i:s', $dateEndTimestamp);
+              $variables['content']['field_show_end_date'][0] = '1';
+            }
+            $variables['dateStartTimestamp'] = strtotime($dateStart) ?: NULL;
+            $variables['dateEndTimestamp'] = strtotime($dateEnd) ?: NULL;
+          }
+
+          $variables['eventGeolocation'] = $eventGeolocation;
+          $variables['eventGeolocationLink'] = $eventGeolocationLink;
+          $variables['direct'] = $url;
+          $variables['rsvpLink'] = $rsvpLink;
+          $variables['buttonText'] = $buttonText;
+          $variables['buttonURL'] = $buttonURL;
+          $variables['eventContact'] = $eventContact;
+
+        }
+      }
+    }
+  }
+  if ($node->bundle() == 'past_events_landing_page') {
+    $alias = get_landing_page_alias('events_landing_page');
+    $variables['landing_page_alias'] = $alias;
+  }
+  if ($node->bundle() == 'events_landing_page') {
+    $alias = get_landing_page_alias('past_events_landing_page');
+    $variables['landing_page_alias'] = $alias;
+  }
+  // Check if the content type is "article".
+  if ($node->bundle() == 'article') {
+    $alias = get_landing_page_alias('news_landing_page');
+    $variables['landing_page_alias'] = $alias;
+
+    if (!empty($node->get('field_shared_content_xml')->value)) {
+      $variables['sharedURL'] = $node->get('field_shared_content_xml')->value;
+      // Fetch shared content from 'field_shared_content'.
+      $xml = $node->get('field_shared_content')->value;
+
+      // Decode the base64-encoded XML content.
+      if ($xml !== NULL) {
+        $xml = base64_decode($xml);
+        $xml_data = simplexml_load_string($xml);
+
+        if ($xml_data !== FALSE) {
+          $test = $node->get('field_shared_content_xml')->value;
+
+            $xmlElement = $xml_data->node;
+
+
+          $variables['is_shared_content'] = 1;
+
+          // Handle header image processing.
+          $headerImageDesktop = (string) $xmlElement->headerImage;
+          $headerImage = str_replace("article_header_image", "event_header", $headerImageDesktop);
+          if (!empty($xmlElement->drupalVersion)) {
+            $variables['drupalVersion'] = (string) $xmlElement->drupalVersion;
+          }
+          if (!empty($xmlElement->headerImage)) {
+            $headerTest = $xmlElement->headerImage;
+            $headerImageTest = trim(preg_replace('/\s+/', ' ', $headerImage));
+            $headerImageArticle = '<div class="image" style="background-image: url(' . $xmlElement->headerImage . ');"><picture><source srcset="' . $xmlElement->headerImage . '" media="(min-width: 600px)"><img src="' . $xmlElement->headerImageMobile . '" alt="' . $xmlElement->title . '"></picture></div>';
+          }
+          else {
+            $headerImageArticle = '';
+          }
+
+          // Setting thumbnail variables.
+          $variables['thumbnailtest'] = (string) $xmlElement->thumbnail;
+          $variables['thumbnail'] = (string) $xmlElement->thumbnail;
+          $variables['thumbnailURL'] = (string) $xmlElement->thumbnail;
+          $variables['thumbnailMobile'] = (string) $xmlElement->thumbnailMobile;
+          $variables['thumbnailMobileURL'] = (string) $xmlElement->thumbnailMobile;
+          $variables['headerImageArticle'] = $headerImageArticle;
+          $variables['headerImage'] = (string) $headerImage;
+          $variables['headerImageDesktop'] = $headerImage;
+          $variables['headerimage'] = $headerImage;
+          $variables['headerImageMobile'] = (string) $xmlElement->headerImageMobile;
+
+          // Additional fields.
+          if (isset($variables['content']['body'])) {
+            $variables['content']['body'][0] = (string) $xmlElement->description;
+          }
+
+          $variables['nodetitle'] = (string) $xmlElement->title;
+          $variables['body'] = (string) $xmlElement->description;
+          $variables['articleDefaultImage'] = '/' . $path_resolver->getPath('theme', 'olympian9') . '/images/default-article.png';
+          $variables['articlebody'] = (string) $xmlElement->description;
+          // Reverse header.
+          $reverseHeader = (int) $xmlElement->reverseHeader;
+          $variables['reverse'] = $reverseHeader == 1 ? 'reverse' : '';
+          $variables['reverseHeader'] = $reverseHeader;
+          $variables['externalURL'] = (string) $xmlElement->externalURL;
+          $variables['introText'] = (string) $xmlElement->introText;
+          $variables['summary'] = (string) $xmlElement->summary;
+          $variables['soundcloud'] = (string) $xmlElement->soundCloud;
+          $variables['postdate'] = (string) $xmlElement->postDate;
+          $variables['category'] = (string) $xmlElement->category;
+          $authorname = (string) $xmlElement->authorname;
+          $author = (string) $xmlElement->author;
+          $variables['author'] = $authorname ?: $author;
+
+          $variables['video'] = (string) $xmlElement->Video;
+
+          // Set the variables to pass to Twig.
+          $variables['is_shared_content'] = 1;
+          $variables['excerpt'] = (string) $xmlElement->summary;
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ *
+ */
+function olympian9_preprocess_links(&$variables) {
+  if (!empty($variables['links'])) {
+    foreach ($variables['links'] as $key => $value) {
+      if (!is_numeric($key)) {
+        $class = Html::getClass($key);
+        $variables['links'][$key]['attributes']->addClass($class);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_breadcrumb().
+ */
+function olympian9_preprocess_breadcrumb(&$variables) {
+  // We are creating a variable for the Current Page Title, to allow us to print
+  // it after the breadcrumbs loop has run.
+  $route_match = \Drupal::routeMatch();
+  // Search page titles aren't resolved using the title_resolver service - it
+  // will always return 'Search' instead of 'Search for [term]', which would
+  // give us a breadcrumb of Home >> Search >> Search.
+  // @todo Revisit after https://www.drupal.org/project/drupal/issues/2359901
+  // @todo Revisit after https://www.drupal.org/project/drupal/issues/2403359
+  $entity = $route_match->getParameter('entity');
+  if ($entity instanceof SearchPageInterface) {
+    $variables['current_page_title'] = $entity->getPlugin()->suggestedTitle();
+  }
+  else {
+    $variables['current_page_title'] = \Drupal::service('title_resolver')
+      ->getTitle(\Drupal::request(), $route_match->getRouteObject());
+  }
+  // Since we are printing the 'Current Page Title', add the URL cache context.
+  // If we don't, then we might end up with something like
+  // "Home > Articles" on the Recipes page, which should read "Home > Recipes".
+  $variables['#cache']['contexts'][] = 'url';
+}
+
+/**
+ * Implements hook_form_alter() for adding classes and placeholder text to the
+ * search forms.
+ */
+function olympian9_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $skip_forms = [
+    'media_library_add_form_upload',
+    'views_exposed_form',
+  ];
+  if (!in_array($form_id, $skip_forms)) {
+    // Add 'olympian9-content' class to all forms except media library.
+    $form['#attributes']['class'][] = 'olympian9-content';
+  }
+  switch ($form_id) {
+    case 'user_login_form':
+    case 'user_login_block':
+    case 'user_login':
+      $form['name']['#attributes']['placeholder'] = t('For administrator use ONLY');
+      $form['pass']['#attributes']['placeholder'] = t('');
+      $form['name']['#title_display'] = t("invisible");
+      $form['pass']['#title_display'] = "invisible";
+      break;
+
+    case 'olympian_search_api_form':
+      // Add placeholder text to keys input.
+      $form['keys']['#attributes']['placeholder'] = t('What are you looking for?');
+
+      // Add classes to the search form submit input.
+      $form['actions']['submit']['#attributes']['class'][] = 'search-form__submit';
+      $form['#attributes']['class'][] = 'olympian9-search';
+      break;
+
+    case 'search_form':
+      $form['basic']['keys']['#attributes']['placeholder'] = t('What are you looking for?');
+      $form['basic']['submit']['#attributes']['class'][] = 'button--primary';
+      $form['advanced']['submit']['#attributes']['class'][] = 'button--primary';
+      break;
+
+    case 'webform_submission':
+      $form['#attached']['library'][] = 'olympian9/webforms';
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_media().
+ */
+function olympian9_preprocess_media(&$variables) {
+  /** @var \Drupal\media\Entity\Media $media */
+  /** @var \Drupal\media_entity\MediaInterface $media */
+
+  $media = $variables['elements']['#media'];
+  // Get the media entity's bundle (such as video, image, etc.)
+  $media_type = $variables['media']->bundle();
+
+  $variables['name'] = $media->label();
+
+  // $variables["elements"]["field_media_image"]["#view_mode"]
+  // Set class if view_mode is specified.
+  if ($media_type == "image") {
+    $variables['attributes']['class'][] = 'hasviewmode mode-' . $variables['view_mode'];
+
+    // If a non-default viewmode was selected, then clear out the style attribute if it's there.
+    // This will clear out any inline width styles (along with any other inline styles).
+    if ($variables['view_mode'] !== 'default' && !empty($variables['attributes']['style'])) {
+      $variables['attributes']['style'] = '';
+    }
+  }
+
+  // Helpful $content variable for templates.
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function olympian9_preprocess_field(&$variables) {
+
+  switch ($variables['field_name']) {
+    case 'field_faqs':
+      $variables['field_container_classes'] = 'list-container';
+      break;
+
+    case 'field_faq':
+      // Add parent_id.
+      $variables['parent_id'] = $variables["element"]["#object"]->id();
+      // Prepare items array.
+      $items = [];
+      foreach ($variables['items'] as $item) {
+        $items[] = $item['content'];
+      }
+      $variables['items'] = $items;
+      break;
+
+    case 'field_default_person_type':
+    case 'field_areas_of_interest_title':
+    case 'field_faculty_column_layout':
+    case 'field_category_display':
+      /** @var Drupal\olympian_core\Access\OlympianCoreAccess $check */
+      $check = Drupal::service('olympian_core.access_checker');
+
+      /** @var Drupal\Core\Access\AccessResultInterface $access */
+      $access = $check->access(Drupal::currentUser()->getAccount());
+
+      if ($access->isForbidden()) {
+        $variables['field_default_person_type']['#access'] = FALSE;
+        $variables['field_areas_of_interest_title']['#access'] = FALSE;
+        $variables['field_faculty_column_layout']['#access'] = FALSE;
+        $variables['field_category_display']['#access'] = FALSE;
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function olympian9_preprocess(&$variables, $hook) {
+  $variables['base_path'] = base_path();
+  $variables['host'] = Drupal::request()->getHost();
+  $config = Drupal::config('olympian_core.settings');
+  // @todo remove theme variables rendered in other preprocess functions
+  $variables['site_has_parent'] = $config->get('has_parent');
+  $variables['site_parent_url'] = $config->get('parent.url');
+  $variables['site_parent_name'] = $config->get('parent.name');
+  // @todo make sure consistent across repos
+  $variables['olympian9_path'] = \Drupal::service('extension.list.theme')->getPath('olympian9');
+  $variables['alerts_feed'] = theme_get_setting('alerts_feed', 'olympian9');
+  $config = Drupal::config('olympian_core.settings');
+  $variables['site_mail'] = $config->get('mail');
+  $variables['custom_403_display'] = $config->get('custom_403.display');
+  $message = $config->get('custom_403.message');
+  $variables['filtered_message'] = check_markup($message, 'full_html');
+  $hubspot_message = $config->get('hubspot');
+  $variables['hubspot'] = check_markup($hubspot_message, 'restricted_html');
+  $variables['header_color'] = theme_get_setting('header_color', 'olympian9');
+  $variables['header_logo'] = theme_get_setting('header_logo', 'olympian9');
+  $variables['apply_button'] = theme_get_setting('apply_button', 'olympian9');
+  $variables['apply_button_text'] = theme_get_setting('apply_button_text', 'olympian9');
+  $variables['apply_button_link'] = theme_get_setting('apply_button_link', 'olympian9');
+  $variables['apply_button_external'] = theme_get_setting('apply_button_external', 'olympian9');
+  $variables['additional_link_artsci'] = theme_get_setting('additional_link_artsci', 'olympian9');
+  $variables['additional_link_graduate'] = theme_get_setting('additional_link_graduate', 'olympian9');
+  $variables['copyright'] = theme_get_setting('copyright', 'olympian9');
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function olympian9_theme_suggestions_views_exposed_form_alter(array &$suggestions, array $variables) {
+  // form[#id] pattern is views-exposed-form-VIEWNAME-DISPLAY
+  // We need to remove the 'views-exposed-form-' part
+  // and to replace underscores with dashes.
+  $suggestions[] = 'views_exposed_form__' . str_replace(
+      ['views-exposed-form-', '-'],
+      ['', '_'],
+      $variables['form']['#id']);
+}
+
+/**
+ * Implements template_preprocess_HOOK() for fieldset.
+ */
+function olympian9_preprocess_fieldset(&$variables) {
+  $element = $variables['element'];
+  $composite_types = ['checkboxes', 'radios'];
+
+  if (!empty($element['#type']) && in_array($element['#type'], $composite_types) && !empty($variables['element']['#children_errors'])) {
+    $variables['legend_span']['attributes']->addClass('has-error');
+  }
+
+  if (!empty($element['#disabled'])) {
+    $variables['legend_span']['attributes']->addClass('is-disabled');
+
+    if (!empty($variables['description']) && !empty($variables['description']['attributes'])) {
+      $variables['description']['attributes']->addClass('is-disabled');
+    }
+  }
+
+  // Remove 'container-inline' class from the main attributes and add a flag
+  // instead.
+  // @todo remove this after https://www.drupal.org/node/3059593 has been
+  //   resolved.
+  if (!empty($variables['attributes']['class'])) {
+    $container_inline_key = array_search('container-inline', $variables['attributes']['class']);
+
+    if ($container_inline_key !== FALSE) {
+      unset($variables['attributes']['class'][$container_inline_key]);
+      $variables['inline_items'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian9_preprocess_checkboxes(&$variables) {
+  $variables['attributes']['class'][] = 'form-boolean-group';
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian9_preprocess_radios(&$variables) {
+  $variables['attributes']['class'][] = 'form-boolean-group';
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for region.html.twig.
+ */
+function olympian9_preprocess_region(&$variables) {
+  $config = \Drupal::config('olympian_core.settings');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_phone'] = $config->get('phone');
+  $variables['site_has_parent'] = $config->get('has_parent');
+  $variables['site_parent_url'] = $config->get('parent.url');
+  $variables['site_parent_name'] = $config->get('parent.name');
+  $variables['site_mail'] = $config->get('mail');
+  $variables['header_logo'] = theme_get_setting('header_logo', 'olympian9');
+  $variables['header_color'] = theme_get_setting('header_color', 'olympian9');
+  $variables['apply_button'] = theme_get_setting('apply_button', 'olympian9');
+  $variables['top_button_title_custom_text'] = theme_get_setting('top_button_title_custom_text', 'olympian9');
+  $variables['apply_button_link'] = theme_get_setting('apply_button_link', 'olympian9');
+  $variables['apply_button_text'] = theme_get_setting('apply_button_text', 'olympian9');
+  $variables['apply_button_external'] = theme_get_setting('apply_button_external', 'olympian9');
+  $variables['header_toppage'] = theme_get_setting('header.toppage', 'olympian9');
+  $variables['header_classes'] = [];
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof NodeInterface) {
+    $variables['node_id'] = $node->id();
+
+    $content_moderation_state = ContentModerationState::loadFromModeratedEntity($node);
+
+    if ($content_moderation_state) {
+      $state_name = $content_moderation_state->get('moderation_state')->value;
+      $variables['moderation_state'] = $state_name;
+    }
+  }
+    // Build social share for region
+  $current_url = \Drupal::request()->getSchemeAndHttpHost() . \Drupal::request()->getRequestUri();
+  $request = \Drupal::request();
+  $route_match = \Drupal::routeMatch();
+  $title = \Drupal::service('title_resolver')->getTitle($request, $route_match->getRouteObject());
+
+  $social_data = olympian9_build_social_share($current_url, $title);
+  $variables['social_share'] = $social_data['links'];
+  $variables['youtube_username'] = $social_data['usernames']['youtube'];
+  $variables['linkedin_username'] = $social_data['usernames']['linkedin'];
+  $variables['twitter_username'] = $social_data['usernames']['twitter'];
+  $variables['facebook_username'] = $social_data['usernames']['facebook'];
+  $variables['instagram_username'] = $social_data['usernames']['instagram'];
+  $variables['current_url'] = $current_url;
+  $variables['current_title'] = $title;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ *
+ * Add custom block theme suggestion based on block type and display.
+ */
+function olympian9_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (!empty($variables['elements']['#id'])) {
+    /** @var \Drupal\block\BlockInterface $block */
+    $block = \Drupal::entityTypeManager()
+      ->getStorage('block')
+      ->load($variables['elements']['#id']);
+    if ($block) {
+      // Add region-specific block theme suggestions.
+      $region = $block
+        ->getRegion();
+
+      $suggestions[] = 'block__' . $region;
+      $suggestions[] = 'block__' . $region . '__' . 'plugin_id' . '__' . $variables['elements']['#plugin_id'];
+      $suggestions[] = 'block__' . $region . '__' . 'id' . '__' . $variables['elements']['#id'];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function olympian9_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  $logged_in = Drupal::currentUser()->isAuthenticated();
+  if ($logged_in) {
+    $suggestions[] = 'node__' . 'authenticated';
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for block.html.twig.
+ */
+function olympian9_preprocess_block(&$variables) {
+  // Add a primary-nav class to main menu navigation block.
+  if ($variables['plugin_id'] === 'system_menu_block:main') {
+    $variables['attributes']['class'][] = 'primary-nav';
+  }
+
+  if (!empty($variables['elements']['#id'])) {
+    /** @var \Drupal\block\BlockInterface $block */
+    $block = Drupal::entityTypeManager()
+      ->getStorage('block')
+      ->load($variables['elements']['#id']);
+    if ($block) {
+      $region = $block->getRegion();
+
+      if ($variables['base_plugin_id'] === 'olympian_search_api_form_block') {
+        if ($region === 'primary_menu') {
+          $variables['#attached']['library'][] = 'olympian9/search-narrow';
+          $variables['content']['actions']['submit']['#theme_wrappers'] = ['input__submit__header_search'];
+        }
+        elseif ($region === 'secondary_menu') {
+          $variables['#attached']['library'][] = 'olympian9/search-wide';
+          $variables['content']['actions']['submit']['#theme_wrappers'] = ['input__submit__header_search'];
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for views templates.
+ */
+function olympian9_preprocess_views_view(array &$variables) {
+  $view = $variables['view'];
+      $current_path = \Drupal::service('path.current')->getPath();
+
+  // Get the path alias
+  $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+
+  // Make it available in the template
+  $variables['current_url'] = $path_alias;
+  $display_id = $variables['display_id'];
+  switch ($variables['id']) {
+    case 'events':
+    case 'event_slideshows':
+    case 'subscribe_to_calendar':
+      // Fetch the landing page alias and create variable to render.
+      $alias = get_landing_page_alias('events_landing_page');
+      $variables['landing_page_alias'] = $alias;
+
+      break;
+
+    case 'news_slideshow':
+      // Fetch the landing page alias and create variable to render.
+      $alias = get_landing_page_alias('news_landing_page');
+      $variables['landing_page_alias'] = $alias;
+      break;
+
+    case 'default_search':
+    case 'related_resources':
+      $alias = get_landing_page_alias('resources_landing_page');
+      $variables['landing_page_alias'] = $alias;
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_preprocess_views_exposed_form().
+ * Prepares variables for views exposed form templates
+ *
+ * This overrides the core views exposed form preprocessor.
+ */
+function olympian9_preprocess_views_exposed_form(&$variables) {
+  // This is from the drupal core template and needs to be added here
+  // Otherwise, this hook will override this functionality.
+  $form =& $variables['form'];
+  if (!empty($form['q'])) {
+    $variables['q'] = $form['q'];
+  }
+  foreach ($form['#info'] as $info) {
+    if (!empty($info['label'])) {
+      $form[$info['value']]['#title'] = $info['label'];
+    }
+    if (!empty($info['description'])) {
+      $form[$info['value']]['#description'] = $info['description'];
+    }
+  }
+  // Used to pass the resources landing page field values to the exposed form.
+  switch ($form['#id']) {
+    case 'views-exposed-form-resources-block-2':
+    case 'views-exposed-form-resources-block-3':
+    case 'views-exposed-form-resources-block-2--2':
+    case 'views-exposed-form-resources-block-3--2':
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'resources_landing_page') {
+          $expanded = '';
+          $expanded_toggle = 'none;';
+          $hidden = 'false';
+          $hidden_toggle_class = '';
+
+          $category_display = $node->get('field_category_display')->value;
+          if ($category_display && $category_display == 'expanded') {
+            $hidden = 'false';
+            $expanded = 'search with-categories toggle-wrap show';
+            $expanded_toggle = 'block;';
+            $hidden_toggle_class = '';
+          }
+          elseif ($category_display && $category_display == 'collapsed') {
+            $hidden = 'false';
+            $expanded = 'search with-categories toggle-wrap';
+            $expanded_toggle = 'none;';
+            $hidden_toggle_class = '';
+          }
+          elseif ($category_display && $category_display == 'hidden') {
+            $expanded = 'search with-categories toggle-wrap';
+            $expanded_toggle = 'none;';
+            $hidden = 'true';
+            $hidden_toggle_class = 'hidden-toggle-true';
+          }
+
+          // Variables to pass to the template.
+          $variables['expanded'] = $expanded;
+          $variables['hidden'] = $hidden;
+          $variables['hidden_toggle'] = $hidden_toggle_class;
+          $variables['expanded_toggle'] = $expanded_toggle;
+        }
+      }
+      break;
+
+    case 'views-exposed-form-news-cards':
+    case 'views-exposed-form-news-list-block':
+    case 'views-exposed-form-news-cards--2':
+    case 'views-exposed-form-news-list-block--2':
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'news_landing_page') {
+          // Moved logic out of the twig template
+          // These variables help with the toggle functionality
+          // on the filter by category
+          // Used to set the default expanded functionality.
+          $expanded = '';
+          $expanded_toggle = 'none;';
+          $hidden = 'false';
+          $hidden_toggle_class = '';
+
+          $category_display = $node->get('field_category_display')->value;
+          if ($category_display && $category_display == 'expanded') {
+            $expanded = 'show';
+            $expanded_toggle = 'block;';
+          }
+          if ($category_display && $category_display == 'hidden') {
+            $hidden = 'true';
+            $hidden_toggle_class = 'hidden-toggle';
+          }
+
+          // Variables to pass to the template.
+          $variables['expanded'] = $expanded;
+          $variables['hidden'] = $hidden;
+          $variables['hidden_toggle'] = $hidden_toggle_class;
+          $variables['expanded_toggle'] = $expanded_toggle;
+        }
+      }
+      break;
+
+    case 'views-exposed-form-faculty-block-grid1--2':
+    case 'views-exposed-form-faculty-block-grid1':
+      $alias = get_landing_page_alias('faculty_landing_page');
+      $variables['landing_page_alias'] = $alias;
+      break;
+
+    case 'views-exposed-form-faculty-block-grid2--2':
+    case 'views-exposed-form-faculty-block-grid2':
+      // Case 'views-exposed-form-faculty-block-list2':
+      $alias = get_landing_page_alias('faculty_landing_page');
+      $variables['landing_page_alias'] = $alias;
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'faculty_landing_page') {
+          $areas_of_interest = $node->get('field_areas_of_interest_title')->value;
+          $category_display = $node->get('field_faculty_column_layout')->value;
+          if ($category_display && $category_display == 'null') {
+            $category_display_class = 'two-column-filter';
+          }
+          if ($category_display && $category_display == 'areas') {
+            $category_display_class = 'single-column-filter';
+          }
+          $variables['category_display'] = $category_display;
+          $variables['category_display_class'] = $category_display_class;
+          if (empty($areas_of_interest)) {
+            $variables['areas_of_interest'] = 'Areas of Interest';
+          }
+          else {
+            $variables['areas_of_interest'] = $areas_of_interest;
+          }
+        }
+      }
+      break;
+
+    case 'views-exposed-form-image-cards-image-card-list--2':
+    case 'views-exposed-form-image-cards-image-card-grid--2':
+    case 'views-exposed-form-image-cards-image-card-list':
+    case 'views-exposed-form-image-cards-image-card-grid':
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'image_cards_landing') {
+          // Moved logic out of the twig template
+          // These variables help with the toggle functionality
+          // on the filter by category
+          // Used to set the default expanded functionality.
+          $expanded = '';
+          $expanded_toggle = 'none;';
+          $hidden = 'false';
+          $hidden_toggle_class = '';
+
+          $category_display = $node->get('field_category_display')->value;
+          if ($category_display && $category_display == 'expanded') {
+            $hidden = 'false';
+            $expanded = 'search with-categories toggle-wrap show';
+            $expanded_toggle = 'block;';
+            $hidden_toggle_class = '';
+          }
+          elseif ($category_display && $category_display == 'collapsed') {
+            $hidden = 'false';
+            $expanded = 'search with-categories toggle-wrap';
+            $expanded_toggle = 'none;';
+            $hidden_toggle_class = '';
+          }
+          elseif ($category_display && $category_display == 'hidden') {
+            $expanded = 'search with-categories toggle-wrap';
+            $expanded_toggle = 'none;';
+            $hidden = 'true';
+            $hidden_toggle_class = 'hidden-toggle-true';
+          }
+
+          // Variables to pass to the template.
+          $variables['expanded'] = $expanded;
+          $variables['hidden'] = $hidden;
+          $variables['hidden_toggle'] = $hidden_toggle_class;
+          $variables['expanded_toggle'] = $expanded_toggle;
+        }
+      }
+      break;
+
+    case 'views-exposed-form-events-events-list-block--2':
+    case 'views-exposed-form-events-events-card-block--2':
+    case 'views-exposed-form-events-events-list-block':
+    case 'views-exposed-form-events-events-card-block':
+      $past_alias = get_landing_page_alias('past_events_landing_page');
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'events_landing_page') {
+          // Moved logic out of the twig template
+          // These variables help with the toggle functionality
+          // on the filter by category
+          // Used to set the default expanded functionality.
+          $expanded = '';
+          $expanded_toggle = 'none;';
+          $hidden = 'false';
+          $hidden_toggle_class = '';
+          $date_expanded = '';
+          $date_expanded_toggle = 'none;';
+
+          $category_display = $node->get('field_category_display')->value;
+          if ($category_display && $category_display == 'expanded') {
+            $expanded = 'show';
+            $expanded_toggle = 'block;';
+            $date_expanded = '';
+            $date_expanded_toggle = 'none;';
+          }
+          if ($category_display && $category_display == 'hidden') {
+            $hidden = 'true';
+            $hidden_toggle_class = 'hidden-toggle';
+          }
+
+          // Variables to pass to the template.
+          $variables['past'] = $past_alias;
+          $variables['expanded'] = $expanded;
+          $variables['hidden'] = $hidden;
+          $variables['hidden_toggle'] = $hidden_toggle_class;
+          $variables['expanded_toggle'] = $expanded_toggle;
+          $variables['date_expanded_toggle'] = $date_expanded_toggle;
+          $variables['date_expanded'] = $date_expanded;
+        }
+      }
+      break;
+
+    case 'views-exposed-form-past-events-landing-page-past-events-block':
+    case 'views-exposed-form-past-events-landing-page-past-events-block--8':
+      $alias = get_landing_page_alias('events_landing_page');
+      $node = \Drupal::routeMatch()->getParameter('node');
+      if ($node instanceof NodeInterface) {
+        $content_type = $node->bundle();
+        if (!empty($content_type) && $content_type == 'past_events_landing_page') {
+          // Moved logic out of the twig template
+          // These variables help with the toggle functionality
+          // on the filter by category
+          // Used to set the default expanded functionality.
+          $expanded = '';
+          $expanded_toggle = 'none;';
+          $hidden = 'false';
+          $hidden_toggle_class = '';
+          $date_expanded = '';
+          $date_expanded_toggle = 'none;';
+
+          $category_display = $node->get('field_category_display')->value;
+          if ($category_display && $category_display == 'expanded') {
+            $expanded = 'show';
+            $expanded_toggle = 'block;';
+            $date_expanded = '';
+            $date_expanded_toggle = 'none;';
+          }
+          if ($category_display && $category_display == 'hidden') {
+            $hidden = 'true';
+            $hidden_toggle_class = 'hidden-toggle';
+          }
+
+          // Variables to pass to the template.
+          $variables['expanded'] = $expanded;
+          $variables['events'] = $alias;
+          $variables['hidden'] = $hidden;
+          $variables['hidden_toggle'] = $hidden_toggle_class;
+          $variables['expanded_toggle'] = $expanded_toggle;
+          $variables['date_expanded_toggle'] = $date_expanded_toggle;
+          $variables['date_expanded'] = $date_expanded;
+        }
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for menu.
+ */
+function olympian9_theme_suggestions_menu_alter(&$suggestions, array $variables) {
+  if (isset($variables['attributes']['region'])) {
+    $suggestions[] = 'menu__' . $variables['attributes']['region'];
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function olympian9_preprocess_page(&$variables) {
+  // Attach the Font Awesome library to the page.
+  $variables['header_toppage'] = theme_get_setting('header.toppage', 'olympian9');
+  $variables['entity'] = \Drupal::routeMatch()->getParameter('entity_type');
+    $current_path = \Drupal::service('path.current')->getPath();
+  $variables['current_url'] = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian9_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $parent = $paragraph->getParentEntity();
+
+  if ($parent && $parent->getEntityTypeId() === 'node') {
+    $node_title = $parent->getTitle();
+    $node_url = $parent->toUrl('canonical', ['absolute' => TRUE])->toString();
+
+    $social_data = olympian9_build_social_share($node_url, $node_title);
+
+    $variables['social_share'] = $social_data['links'];
+    $variables['twitter_username'] = $social_data['usernames']['twitter'];
+    $variables['facebook_username'] = $social_data['usernames']['facebook'];
+    $variables['instagram_username'] = $social_data['usernames']['instagram'];
+    $variables['youtube_username'] = $social_data['usernames']['youtube'];
+    $variables['linkedin_username'] = $social_data['usernames']['linkedin'];
+    $variables['current_url'] = $node_url;
+    $variables['current_title'] = $node_title;
+  }
+  switch ($paragraph->bundle()) {
+    case 'spotlight':
+    case 'events':
+
+      $alias = get_landing_page_alias('events_landing_page');
+      $variables['landing_page_alias'] = $alias;
+      break;
+  }
+}
+
+/**
+ * Implements hook_preprocess_menu_local_task().
+ */
+function olympian9_preprocess_menu_local_task(&$variables) {
+  $url = $variables['link']['#url'];
+
+  if ($url instanceof Url) {
+    $route_name = $url->getRouteName();
+
+    $supported_entity_types = [
+      'node',
+      'revision',
+      'taxonomy_term',
+      'view',
+      'webform',
+      'media',
+    ];
+
+    $route_icon_map = [];
+
+    foreach ($supported_entity_types as $entity_type) {
+      $route_icon_map['entity.' . $entity_type . '.canonical'] = 'published_version';
+      $route_icon_map['entity.' . $entity_type . '.latest_version'] = 'latest_version';
+      $route_icon_map['entity.' . $entity_type . '.edit_form'] = 'edit';
+      $route_icon_map['entity.' . $entity_type . '.delete_form'] = 'delete';
+      $route_icon_map['entity.' . $entity_type . '.version_history'] = 'history';
+      $route_icon_map['entity.' . $entity_type . '.entity_usage'] = 'usage';
+      $route_icon_map['entity.' . $entity_type . '.devel_load'] = 'devel';
+      $route_icon_map['entity.' . $entity_type . '.entity_usage'] = 'usage';
+      $route_icon_map['entity.' . $entity_type . '.devel_load'] = 'devel';
+      $route_icon_map['entity.' . $entity_type . '.replicate'] = 'clone';
+      $route_icon_map['entity.' . $entity_type . '.access_tokens'] = 'token';
+      $route_icon_map['entity.' . $entity_type . '.results_submissions'] = 'results';
+      $route_icon_map['entity.' . $entity_type . '.settings'] = 'settings';
+      $route_icon_map['entity.' . $entity_type . '.export_form'] = 'export-form';
+    }
+
+    // Set the icon if the route matches an entry in the map.
+    if (isset($route_icon_map[$route_name])) {
+      $variables['link']['#options']['attributes']['class'][] = 'local-task-icon';
+      $variables['link']['#options']['attributes']['class'][] = 'local-task-icon--' . $route_icon_map[$route_name];
+    }
+    else {
+      $variables['link']['#options']['attributes']['class'][] = 'hide-local-task-icon';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_user().
+ */
+function olympian9_preprocess_user(&$variables) {
+  /** @var User $account */
+  $account = $variables['elements']['#user'];
+
+  $variables['username'] = $account->getDisplayName();
+}
+
+/**
+ * Get landing page alias function.
+ */
+function get_landing_page_alias($content_type) {
+  // Load the node of the specific content type.
+  $query = \Drupal::entityTypeManager()->getStorage('node')->getQuery()
+    ->accessCheck(FALSE)
+    ->condition('type', $content_type)
+  // Assuming only one node exists.
+    ->range(0, 1);
+  $nids = $query->execute();
+
+  if (!empty($nids)) {
+    $nid = reset($nids);
+    $path = '/node/' . $nid;
+
+    // Retrieve the alias.
+    $alias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+    return $alias;
+  }
+  // No node found.
+  return NULL;
+}
+
+/**
+ * Set landing page alias function.
+ */
+function set_landing_page_alias($content_type, $alias) {
+  // Load the landing page node.
+  $query = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
+    ->condition('type', $content_type)
+  // Assuming only one node exists.
+    ->range(0, 1);
+  $nids = $query->execute();
+
+  if (!empty($nids)) {
+    $nid = reset($nids);
+    $path = '/node/' . $nid;
+
+    // Delete existing aliases for this path.
+    $existing_aliases = \Drupal::service('path_alias.manager')->getAliasesByPath($path);
+    foreach ($existing_aliases as $existing_alias) {
+      PathAlias::load($existing_alias)->delete();
+    }
+
+    // Create the new alias.
+    $path_alias = PathAlias::create([
+      'path' => $path,
+      'alias' => $alias,
+      'langcode' => \Drupal::languageManager()->getDefaultLanguage()->getId(),
+    ]);
+    $path_alias->save();
+
+    return $path_alias->id();
+  }
+  // No node found.
+  return FALSE;
+}
+/**
+ * Helper function to build social share links and usernames.
+ *
+ * PERFORMANCE: Uses static cache for config.
+ */
+function olympian9_build_social_share($url, $title) {
+  static $config;
+  if (!isset($config)) {
+    $config = \Drupal::config('olympian_core.settings');
+  }
+
+  static $site_name;
+  if (!isset($site_name)) {
+    $site_config = \Drupal::config('system.site');
+    $site_name = $site_config->get('name');
+  }
+
+  // Convert arrays to strings (handles Drupal render arrays)
+  if (is_array($url)) {
+    $url = \Drupal::service('renderer')->renderInIsolation($url);
+  }
+  if (is_array($title)) {
+    $title = \Drupal::service('renderer')->renderInIsolation($title);
+  }
+
+  // Ensure we have strings, fallback to empty string
+  $url = (string) $url;
+  $title = (string) $title;
+
+  $share_text = $title . ' - ' . $site_name;
+
+  $twitter_username = $config->get('social_media.twitter_username');
+  $facebook_username = $config->get('social_media.facebook_username');
+  $instagram_username = $config->get('social_media.instagram_username');
+  $youtube_username = $config->get('social_media.youtube_username');
+  $linkedin_username = $config->get('social_media.linkedin_username');
+
+  return [
+    'links' => [
+      'facebook' => [
+        'url' => 'https://www.facebook.com/sharer/sharer.php?u=' . urlencode($url),
+        'username' => $facebook_username,
+        'label' => t('Share on Facebook'),
+        'text' => $share_text,
+      ],
+      'twitter' => [
+        'url' => 'https://twitter.com/intent/tweet?url=' . urlencode($url) . '&text=' . urlencode($share_text) . ($twitter_username ? '&via=' . $twitter_username : ''),
+        'username' => $twitter_username,
+        'label' => t('Share on Twitter'),
+        'text' => $share_text,
+      ],
+      'instagram' => [
+        'username' => $instagram_username,
+        'profile_url' => $instagram_username ? 'https://www.instagram.com/' . $instagram_username : '',
+        'label' => t('Follow on Instagram'),
+        'text' => $share_text,
+      ],
+      'email' => [
+        'url' => 'mailto:?subject=' . rawurlencode($title) . '&body=' . rawurlencode($share_text . "\n\n" . $url),
+        'label' => t('Share via Email'),
+      ],
+    ],
+    'usernames' => [
+      'twitter' => $twitter_username,
+      'facebook' => $facebook_username,
+      'instagram' => $instagram_username,
+      'youtube' => $youtube_username,
+      'linkedin' => $linkedin_username,
+    ],
+  ];
+}

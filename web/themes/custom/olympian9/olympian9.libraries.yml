@@ -1,0 +1,108 @@
+# Main theme library.
+base:
+  version: 1.x
+  css:
+    base:
+      assets/css/global.css: { }
+      /libraries/fontawesome/css/all.min.css: { }
+    component:
+      assets/css/components/photo-header.css: { }
+      assets/css/components/alert.css: { }
+  js:
+    js/olympian.js: { }
+    js/olympian9.status-messages.js: { preprocess: false }
+  dependencies:
+    - core/jquery
+    - core/once
+olympian9_description_toggle:
+  css:
+    theme:
+      assets/css/components/details.css: {}
+  js:
+    js/description_toggle.js: { minified: false }
+status-messages:
+  js:
+    js/olympian9.status-messages.js: { preprocess: false }
+accordion:
+  js:
+    js/accordion.js: { preprocess: false }
+  css:
+    component:
+      assets/css/components/accordion.css: { }
+webforms:
+  css:
+    component:
+      assets/css/components/webforms.css: { preprocess: false }
+tabs:
+  css:
+    component:
+      assets/css/components/tabs.css: { }
+  js:
+    js/tabs.js: { preprocess: false }
+modal:
+  css:
+    component:
+      assets/css/components/modal.css: { preprocess: false }
+  js:
+    js/modal.js: { preprocess: false }
+region--footer:
+  css:
+    theme:
+      assets/css/components/region--footer.css: { }
+region--header:
+  css:
+    theme:
+      assets/css/components/region--header.css: { }
+      assets/css/components/region--main-menu.css: { }
+top-scroll:
+  css:
+    component:
+      assets/css/components/top-scroll.css: { preprocess: false }
+  js:
+    js/top-scroll.js: { preprocess: false }
+fancybox:
+  js:
+    js/jquery.fancybox.js: { }
+    js/site-lightbox.js: { }
+views-exposed-form--faculty-page:
+  js:
+    js/people.js: { preprocess: false }
+    js/view-toggle.js: { preprocess: false }
+  css:
+    component:
+      assets/css/components/local-tasks.css: { }
+      assets/css/views/views-exposed-form--faculty-page.css: { }
+datepicker:
+  css:
+    component:
+      assets/css/views/datepicker-display.css: {}
+  js:
+    js/datepicker-display.js: { preprocess: false }
+  dependencies:
+    - core/jquery
+    - core/once
+#--------------------------------------------------------------*
+# Navigation
+#--------------------------------------------------------------*
+menu-local-task:
+  css:
+    component:
+      assets/css/components/local-tasks.css: { }
+navigation-primary:
+  css:
+    component:
+      assets/css/components/nav-primary.css: { }
+  js:
+    js/toggle.js: { }
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+
+#--------------------------------------------------------------*
+# Maintenance
+#--------------------------------------------------------------*
+maintenance:
+  css:
+    component:
+      assets/css/content/maintenance.css: { }

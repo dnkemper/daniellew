@@ -1,0 +1,10 @@
+uuid: 6de2bbbf-0d9c-48a4-a7c3-9652f356b399
+langcode: en
+status: true
+dependencies: {  }
+id: publication_announcement
+label: 'Publication Announcement'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Announcement'
+behavior_plugins: {  }

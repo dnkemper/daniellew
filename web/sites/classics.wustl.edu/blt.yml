@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: classics.ddev.site
+    protocol: https
+  machine_name: classics
+  human_name: classics.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: classics.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/classics.wustl.edu/files'
+    origin: 'https://classics.wustl.edu'
+drupal:
+  db:
+    database: drupal_classics
+system:
+  site:
+    contact_us_url: 'https://classics.wustl.edu/contact-us'
+    name: classics
+    email: classics@wustl.edu

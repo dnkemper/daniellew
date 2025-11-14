@@ -1,0 +1,10 @@
+uuid: 19288383-69b7-4a23-8b94-7bf8ab7ce8f2
+langcode: en
+status: true
+dependencies: {  }
+id: publication_degree_holder
+label: 'Publication Degree Recipient'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Degree Recipient'
+behavior_plugins: {  }

@@ -1,0 +1,23 @@
+uuid: 820c130b-2038-4a6b-b97b-1d938baa0a7f
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_1_1_480w
+label: 'square 1:1 (480w)'
+effects:
+  49fbbcf7-bc41-4174-bd4f-bc015c4e4536:
+    uuid: 49fbbcf7-bc41-4174-bd4f-bc015c4e4536
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 480
+      crop_type: focal_point
+  264f6ac0-f174-4045-b756-96be4bec1584:
+    uuid: 264f6ac0-f174-4045-b756-96be4bec1584
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

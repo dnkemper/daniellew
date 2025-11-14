@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: afas.ddev.site
+    protocol: https
+  machine_name: afas
+  human_name: afas.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: afas.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/afas.wustl.edu/files'
+    origin: 'https://afas.wustl.edu'
+drupal:
+  db:
+    database: drupal_afas
+system:
+  site:
+    contact_us_url: 'https://afas.wustl.edu/contact-us'
+    name: afas
+    email: afas@wustl.edu

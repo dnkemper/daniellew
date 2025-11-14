@@ -1,0 +1,53 @@
+uuid: daa2354c-6cfc-4387-b6bd-64ca91922a97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_announcements.field_announcement
+    - field.field.paragraph.publication_announcements.field_featured_announcement
+    - field.field.paragraph.publication_announcements.field_subtitle
+    - field.field.paragraph.publication_announcements.field_title
+    - paragraphs.paragraphs_type.publication_announcements
+  module:
+    - entity_reference_revisions
+id: paragraph.publication_announcements.default
+targetEntityType: paragraph
+bundle: publication_announcements
+mode: default
+content:
+  field_announcement:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_featured_announcement:
+    type: entity_reference_revisions_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

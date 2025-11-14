@@ -1,0 +1,43 @@
+uuid: 538e6f4c-f3b1-4a38-a18f-928d0ae6e950
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - private_content
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - menu-quick-links
+      - menu-secondary-navigation
+    parent: 'menu-quick-links:'
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 10
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    minimum_age_to_delete: 0
+    minimum_revisions_to_keep: 10
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+    when_to_delete: 0
+  private_content:
+    private: 1
+name: 'Contact Landing Page'
+type: contact_landing_page
+description: 'This is a one-time use template to display the contact page of the website.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

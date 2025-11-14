@@ -1,0 +1,2 @@
+"use strict";(function(a,b){b.behaviors.olympianMessagesDismiss={attach:function(b){a(".messages .button--dismiss",b).on("click",function(b){b.preventDefault();var c=a(this).parents(".messages-list__item");c.css("opacity",0),c.bind("transitionend",function(){a(this).addClass("visually-hidden"),a(this).css("opacity",1)})})}}})(jQuery,Drupal,drupalSettings);
+//# sourceMappingURL=olympian9.status-messages.js.map

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: literaryarts.ddev.site
+    protocol: https
+  machine_name: literaryarts
+  human_name: literaryarts.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: literaryarts.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/literaryarts.wustl.edu/files'
+    origin: 'https://literaryarts.wustl.edu'
+drupal:
+  db:
+    database: drupal_literaryarts
+system:
+  site:
+    contact_us_url: 'https://literaryarts.wustl.edu/contact-us'
+    name: literaryarts
+    email: literaryarts@wustl.edu

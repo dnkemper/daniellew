@@ -1,0 +1,614 @@
+<?php
+
+/**
+ * @file
+ * Module code for olympian seo.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_migration_plugins_alter().
+ */
+function olympian_seo_migration_plugins_alter(&$definitions) {
+  foreach (array_keys($definitions) as $plugin_id) {
+    $definitions[$plugin_id]['idMap'] = ['plugin' => 'smart_sql'];
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function olympian_seo_form_revision_overview_form_alter(
+  &$form,
+  FormStateInterface $form_state,
+  $form_id,
+) {
+  if (isset($form["nid"], $form["nid"]["#value"])) {
+    $node = Node::load($form["nid"]["#value"]);
+
+    if ($node) {
+      $type = $node->getType();
+      $config = \Drupal::config("node.type.{$type}");
+
+      if (
+        $nrd_limit = $config->get(
+          "third_party_settings.node_revision_delete.minimum_revisions_to_keep"
+        )
+      ) {
+        \Drupal::messenger()->addWarning(
+          t(
+            "There is a @limit revision limit for this content type. The oldest revisions in excess of @limit are deleted during system background processes.",
+            [
+              "@limit" => $nrd_limit,
+            ]
+          )
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function olympian_seo_metatags_alter(array &$metatags, array &$context) {
+  // Append the page number to the title, if it is set and greater than 0.
+  $page = \Drupal::service("pager.parameters")->findPage();
+
+  if ($page) {
+    $metatags["title"] .= " | Page {$page}";
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function olympian_seo_preprocess_node(&$variables) {
+  $admin_context = \Drupal::service("router.admin_context");
+  if (!$admin_context->isAdminRoute()) {
+    $node = $variables["node"];
+    // Get moderation state of node.
+    $revision_id = $node->getRevisionId();
+    if ($revision_id) {
+      $revision = \Drupal::entityTypeManager()
+        ->getStorage("node")
+        ->loadRevision($revision_id);
+      if ($revision instanceof NodeInterface) {
+        $moderation_state = $revision->get("moderation_state")->getString();
+        $status = $revision->get("status")->value;
+        if ((int) $status === 0) {
+          if ($moderation_state) {
+            $pre_vowel = in_array($moderation_state[0], [
+              "a",
+              "e",
+              "i",
+              "o",
+              "u",
+            ])
+              ? "n"
+              : "";
+            $state = \Drupal::config("workflows.workflow.editorial")->get(
+              "type_settings.states.{$moderation_state}.label"
+            );
+          }
+          else {
+            $pre_vowel = "n";
+            $state = "archived";
+          }
+          $warning_text = t(
+            "This content is currently in a@pre_vowel @state state.",
+            [
+              "@pre_vowel" => $pre_vowel,
+              "@state" => $state,
+            ]
+          );
+
+          switch ($variables["view_mode"]) {
+            case "teaser":
+              $variables["content"]["archived"] = [
+                "#type" => "markup",
+                "#markup" =>
+                '<span class="badge badge--orange" aria-description="' .
+                $warning_text .
+                '">' .
+                ucfirst($moderation_state) .
+                "</span>",
+                "#weight" => 99,
+              ];
+              break;
+
+            case "full":
+              \Drupal::messenger()->addWarning($warning_text);
+              break;
+          }
+        }
+      }
+    }
+  }
+  // Move addtocal from field_date to separate item.
+  if (isset($variables["content"]["field_event_smart_date"][0]["addtocal"])) {
+    $variables["content"]["addtocal"] =
+      $variables["content"]["field_event_smart_date"][0]["addtocal"];
+    unset($variables["content"]["field_event_smart_date"][0]["addtocal"]);
+  }
+}
+
+/**
+ * Implements hook_toolbar().
+ */
+function olympian_seo_toolbar() {
+  $url = Url::fromUri("https://it.artsci.wustl.edu/website-guide");
+
+  $items = [];
+  $items["support"] = [
+    "#type" => "toolbar_item",
+    "tab" => [
+      "#type" => "link",
+      "#url" => $url,
+      "#title" => t("@version help", [
+        "@version" => "A&S website",
+      ]),
+      "#options" => [
+        "attributes" => [
+          "title" => t("Opens help documentation in a new window."),
+          "class" => [
+            "toolbar-item",
+            "toolbar-icon",
+            "toolbar-icon-olympian-help",
+          ],
+          "role" => "button",
+          "target" => "_blank",
+        ],
+      ],
+      "#weight" => 100,
+    ],
+    "#weight" => 30,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function olympian_seo_token_info(): array {
+  $info = [];
+  $info["types"]["olympian_seo"] = [
+    "name" => t("Olympian SEO tokens"),
+    "description" => t("Tokens for the olympian landing pages."),
+  ];
+  $info["tokens"]["olympian_seo"]["resourceslanding"] = [
+    "name" => "Resources Landing Page",
+    "description" => "A token for resources landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["newslanding"] = [
+    "name" => "News Landing Page",
+    "description" => "A token for News landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["home"] = [
+    "name" => "Home Landing Page",
+    "description" => "A token for Home landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["date"] = [
+    "name" => "Events Landing Page Date Filter Token",
+    "description" => "A token for event landing page date.",
+  ];
+  $info["tokens"]["olympian_seo"]["eventlanding"] = [
+    "name" => "Events Landing Page",
+    "description" => "A token for event landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["events"] = [
+    "name" => "Events",
+    "description" => "A token for event URLs.",
+  ];
+  $info["tokens"]["olympian_seo"]["pasteventlanding"] = [
+    "name" => "Past Event Landing Page",
+    "description" => "A token for event landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["facultylanding"] = [
+    "name" => "People Landing Page",
+    "description" => "A token for people landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["imagecardlanding"] = [
+    "name" => "Image Card Landing Page",
+    "description" => "A token for image card landing page URL.",
+  ];
+  $info["tokens"]["olympian_seo"]["tidterm"] = [
+    "name" => "Landing Page Taxonomy Term ID prefix",
+    "description" => "A token for taxonomy term prefix.",
+  ];
+  $info["tokens"]["olympian_seo"]["contactus"] = [
+    "name" => "Contact Us",
+    "description" => "A token for Contact Us landing page.",
+  ];
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function olympian_seo_tokens(
+  $type,
+  $tokens,
+  array $data,
+  array $options,
+  BubbleableMetadata $bubbleable_metadata,
+) {
+  $replacements = [];
+  if ($type === "olympian_seo") {
+    foreach ($tokens as $name => $original) {
+      // Find the desired token by name.
+      switch ($name) {
+        case "resourceslanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "home":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "newslanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "date":
+          $replacements[$original] = _olympian_seo_date_token_value();
+          break;
+
+        case "eventlanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "events":
+          $replacements[$original] = _olympian_seo_events_token_value();
+          break;
+
+        case "pasteventlanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "facultylanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "imagecardlanding":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+
+        case "tidterm":
+          $replacements[$original] = "?tid=";
+          break;
+
+        case "contactus":
+          $replacements[$original] = _olympian_seo_landing_token_value();
+          break;
+      }
+    }
+  }
+  return $replacements;
+}
+
+/**
+ * Implements event_token_value().
+ */
+function _olympian_seo_landing_token_value() {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = Drupal::routeMatch()->getParameter("node");
+
+  if ($node instanceof NodeInterface && $node->getType() === "events_landing_page") {
+    $alias = "events";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "past_events_landing_page") {
+    $alias = "past-events";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "faculty_landing_page") {
+    $alias = "people";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "home_page") {
+    $alias = "home";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "image_cards_landing") {
+    $alias = "browse";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "news_landing_page") {
+    $alias = "news";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "resources_landing_page") {
+    $alias = "resources";
+  }
+  elseif ($node instanceof NodeInterface && $node->getType() === "contact_landing_page") {
+    $alias = "contact-us";
+  }
+  else {
+    $alias = "";
+  }
+  return $alias;
+
+}
+
+/**
+ * Implements event_token_value().
+ */
+function _olympian_seo_events_token_value() {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = Drupal::routeMatch()->getParameter("node");
+
+  if ($node instanceof NodeInterface && $node->getType() === "events") {
+    $event_date = $node->get("field_event_smart_date")->value;
+    $tbd = $node->get("field_event_date_tbd")->value;
+    $today = strtotime("now");
+
+    // Ensure that $event_date is in the correct format for strtotime().
+    //    $event_date = date('m/d/Y', strtotime($event_date));
+    if ($event_date < $today && $tbd == 0) {
+      // For future events, set the alias to /events.
+      $alias = "past-events";
+    }
+    else {
+      // For past events, set the alias to /past-events.
+      $alias = "events";
+    }
+
+    return $alias;
+  }
+}
+
+/**
+ * Implements event_token_value().
+ */
+function _olympian_seo_date_token_value(&$alias, array &$context) {
+  // Check if the content is node and the bundle is an article.
+  if ($context["module"] === "node" && $context["bundle"] === "events") {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $context["data"]["node"];
+    // Clean string service.
+    $date = $node->get("field_event_smart_date")->value;
+    if (isset($date)) {
+      $alias = $node->get("field_event_smart_date")->value;
+    }
+    else {
+      $alias = strtotime("now");
+    }
+    return $alias;
+  }
+}
+
+/**
+ * Implements hook_pathauto_alias_alter().
+ */
+function olympian_seo_pathauto_alias_alter(&$alias, array &$context) {
+  // Check if the content is node and the bundle is an article.
+  if ($context["module"] === "node" && $context["bundle"] === "events") {
+    /** @var \Drupal\node\Entity\Node $node */
+    $node = $context["data"]["node"];
+    // Clean string service.
+    $clean_string_service = \Drupal::service("pathauto.alias_cleaner");
+
+    $today = strtotime("now");
+    $title = $node->getTitle();
+    $date = $node->get("field_event_smart_date")->value;
+    $tbd = $node->get("field_event_date_tbd")->value;
+    $field_value = $node->get("field_event_date_alias")->value;
+
+    // If your field is checked.
+    if ($date < $today && $tbd == 0) {
+      $alias = "/past-events/" . $clean_string_service->cleanString($title);
+      // Perform the search and replace.
+      $new_value = str_replace("current event", "past event", $field_value);
+
+      // Set the updated value back to the 'field_search' field.
+      $node->set("field_event_date_alias", $new_value);
+    }
+    else {
+      $alias = "/events/" . $clean_string_service->cleanString($title);
+      // Perform the search and replace.
+    }
+  }
+}
+
+
+/**
+ * Implements hook_cron().
+ *
+ * Deletes past events older than 1 year or updates alias on recent events.
+ * Attempts to recover Smart Date values from shared content XML if missing.
+ */
+function olympian_seo_cron() {
+  // Throttle to run only twice daily (every 12 hours)
+  $last_run = \Drupal::state()->get('olympian_seo.last_cron_run', 0);
+  if (time() - $last_run < 43200) { // 12 hours = 43200 seconds
+    return;
+  }
+  \Drupal::state()->set('olympian_seo.last_cron_run', time());
+
+  $logger = \Drupal::logger('shared_content');
+  $start = microtime(TRUE);
+
+  $now = new \DateTimeImmutable();
+  $cutoff_date = $now->sub(new \DateInterval('P1Y'));
+
+  $deleted = 0;
+  $updated = 0;
+
+  $entity_ids = \Drupal::entityQuery('node')
+    ->condition('type', 'events')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if (!$entity_ids) {
+    \Drupal::logger('shared_content')->notice("🔍 No event nodes found.");
+    return;
+  }
+
+  $nodes = \Drupal\node\Entity\Node::loadMultiple($entity_ids);
+
+  foreach ($nodes as $node) {
+    $nid = $node->id();
+
+    if ($node->get('field_event_date_tbd')->value == 1) {
+      \Drupal::logger('shared_content')->notice("🛑 Skipping TBD node {$nid}.");
+      continue;
+    }
+
+    // Try to get the Smart Date start value
+    $smart_date_field = $node->get('field_event_smart_date')->first();
+    $smart_date_value = $smart_date_field?->get('value')->getString();
+
+    // If missing, try to recover from shared content XML
+    if (!$smart_date_value && $node->hasField('field_shared_content_xml') && !$node->get('field_shared_content_xml')->isEmpty()) {
+      $xml_url = $node->get('field_shared_content_xml')->value;
+      try {
+        $response = \Drupal::httpClient()->get($xml_url, ['timeout' => 30]);
+        if ($response->getStatusCode() === 200) {
+          $xml = simplexml_load_string($response->getBody()->getContents());
+          $xmlElement = $xml->node;
+
+          $dateStart = isset($xmlElement->eventDateStart) ? (string) $xmlElement->eventDateStart : NULL;
+          $dateEnd = isset($xmlElement->eventDateEnd) ? (string) $xmlElement->eventDateEnd : NULL;
+          $dateField = (string) $xmlElement->eventDate;
+
+          if ($dateStart || str_contains($dateField, 'to')) {
+            if ($dateStart) {
+              $start = strtotime($dateStart);
+              $end = $dateEnd ? strtotime($dateEnd) : NULL;
+            }
+            else {
+              [$start, $end] = array_map('trim', explode('to', $dateField));
+              $start = strtotime($start);
+              $end = strtotime($end);
+            }
+
+            if ($start) {
+              $node->set('field_event_smart_date', [
+                'value' => $start,
+                'end_value' => $end,
+              ]);
+              $node->save();
+              $smart_date_field = $node->get('field_event_smart_date')->first();
+              $smart_date_value = $smart_date_field?->get('value')->getString();
+              \Drupal::logger('shared_content')->notice("✅ Rehydrated Smart Date for node {$nid}.");
+            }
+          }
+        }
+      }
+      catch (\Exception $e) {
+        \Drupal::logger('shared_content')->error("❌ Failed to fetch XML for node {$nid}: " . $e->getMessage());
+        continue;
+      }
+    }
+
+    // Still no Smart Date, skip
+    if (!$smart_date_value) {
+      \Drupal::logger('shared_content')->warning("⚠️ Still missing Smart Date on node {$nid}. Skipping.");
+      continue;
+    }
+
+    // Convert Smart Date to timestamp
+    try {
+      $event_date = ctype_digit($smart_date_value)
+        ? (new \DateTimeImmutable())->setTimestamp((int) $smart_date_value)
+        : new \DateTimeImmutable($smart_date_value);
+    }
+    catch (\Exception $e) {
+      \Drupal::logger('shared_content')->error("❌ Invalid Smart Date '{$smart_date_value}' on node {$nid}: " . $e->getMessage());
+      continue;
+    }
+
+    // Delete or update based on cutoff
+    if ($event_date < $cutoff_date) {
+      \Drupal::logger('shared_content')->notice("🗑 Deleting node {$nid} — event date {$event_date->format('Y-m-d H:i:s')} over 1 year old.");
+      $node->delete();
+      $deleted++;
+    }
+    else {
+      $field_value = $node->get('field_event_date_alias')->value;
+      $new_value = str_replace('current event', 'past event', $field_value);
+      $node->set('field_event_date_alias', $new_value);
+      $node->setNewRevision(TRUE);
+      $node->setRevisionCreationTime(\Drupal::time()->getRequestTime());
+      $node->setRevisionUserId(1);
+      $node->setRevisionLogMessage('Replaced "current event" with "past event"');
+      $node->save();
+      \Drupal::logger('shared_content')->notice("✏️ Updated alias for node {$nid} to '{$new_value}'.");
+      $updated++;
+    }
+  }
+
+  $duration = round(microtime(TRUE) - $start, 2);
+  $logger->notice("✅ Olympian SEO cron complete in @time seconds. Deleted: {$deleted}, Updated: {$updated}.", [
+    '@time' => $duration,
+  ]);
+}
+
+
+/**
+ * Implements hook_entity_presave().
+ */
+function olympian_seo_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity instanceof \Drupal\node\NodeInterface && $entity->bundle() === 'events') {
+    // Only act if field_shared_content_xml is set
+    if (!$entity->get('field_shared_content_xml')->isEmpty()) {
+      $url = $entity->get('field_shared_content_xml')->value;
+
+      try {
+        $client = \Drupal::httpClient();
+        $response = $client->get($url, ['timeout' => 30]);
+        if ($response->getStatusCode() === 200) {
+          $xml = simplexml_load_string($response->getBody()->getContents());
+          $xmlElement =  $xml->node;
+
+          // Now apply Smart Date logic
+          if (!empty($xmlElement)) {
+            $eventDate = isset($xmlElement->eventDate) ? (string) $xmlElement->eventDate : null;
+            $dateStart = isset($xmlElement->eventDateStart) ? (string) $xmlElement->eventDateStart : null;
+            $dateEnd = isset($xmlElement->eventDateEnd) ? (string) $xmlElement->eventDateEnd : null;
+
+            if ($dateStart) {
+              $start = strtotime($dateStart);
+              $end = $dateEnd ? strtotime($dateEnd) : null;
+
+              if ($start) {
+                $entity->set('field_event_smart_date', [
+                  'value' => $start,
+                  'end_value' => $end,
+                ]);
+              }
+            }
+            elseif ($eventDate) {
+              $eventDate = str_replace('T', ' ', $eventDate);
+              $date = \DateTime::createFromFormat('Y-m-d H:i:s', $eventDate);
+              if ($date !== FALSE) {
+                $entity->set('field_event_smart_date', [
+                  'value' => $date->format('Y-m-d\TH:i:s'),
+                ]);
+              }
+            }
+          }
+        }
+      } catch (\Exception $e) {
+        \Drupal::logger('shared_content')->error('Presave failed to load XML for event: @message', ['@message' => $e->getMessage()]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function olympian_seo_node_presave(EntityInterface $entity) {
+  switch ($entity->bundle()) {
+    case "events":
+      $date_text = $entity->get("field_event_date_alias")->value;
+      if (empty($date_text)) {
+        $entity->set("field_event_date_alias", "current event");
+      }
+      break;
+  }
+
+}

@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: precollege.ddev.site
+    protocol: https
+  machine_name: precollege
+  human_name: precollege.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: precollege.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/precollege.wustl.edu/files'
+    origin: 'https://precollege.wustl.edu'
+drupal:
+  db:
+    database: drupal_precollege
+system:
+  site:
+    contact_us_url: 'https://precollege.wustl.edu/contact-us'
+    name: precollege
+    email: precollege@wustl.edu

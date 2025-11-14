@@ -1,0 +1,19 @@
+uuid: 16b39803-61dd-40c5-8d79-40c1b8a7eca6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_excerpt
+    - node.type.article
+id: node.article.field_link_excerpt
+field_name: field_link_excerpt
+entity_type: node
+bundle: article
+label: 'Teaser Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

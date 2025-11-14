@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 3bccba62-dd07-4f95-988f-40729aa41f98
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: universityregistrar_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/universityregistrar_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 17766
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

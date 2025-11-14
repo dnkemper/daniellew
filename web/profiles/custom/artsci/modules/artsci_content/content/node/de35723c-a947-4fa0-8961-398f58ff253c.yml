@@ -1,0 +1,78 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: de35723c-a947-4fa0-8961-398f58ff253c
+  bundle: image_cards_landing
+  default_langcode: en
+  depends:
+    131128c4-9baa-4781-9210-be4344e64fbf: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Research
+  created:
+    -
+      value: 1690475153
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /browse
+      langcode: en
+      pathauto: 0
+  field_category_display:
+    -
+      value: collapsed
+  field_header_p:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0edabae7-0112-487e-9bf1-bc0c2e38a83e
+          bundle: introduction
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1690475177
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          field_ampersand:
+            -
+              value: false
+          field_background:
+            -
+              value: Dark
+          field_background_image:
+            -
+              entity: 131128c4-9baa-4781-9210-be4344e64fbf
+          field_headline:
+            -
+              value: Research

@@ -1,0 +1,18 @@
+name: Olympian Media WYSIWYG
+type: module
+description: 'Media and WYSIWYG functionality for the Olympian platform.'
+core_version_requirement: ^8.8 || ^9 || ^10
+weight: 100
+package: Olympian
+dependencies:
+  - drupal:media
+  - entity_browser:entity_browser
+  - entity_browser:entity_browser_entity_form
+  - entity_embed:entity_embed
+  - focal_point:focal_point
+  - inline_entity_form:inline_entity_form
+  - linkit:linkit
+  - media_library:media_library
+libraries:
+  - olympian_media_wysiwyg/media-overrides
+  - olympian_media_wysiwyg/wysiwyg

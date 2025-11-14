@@ -1,0 +1,89 @@
+action.configuration.views_bulk_operations_custom_delete_entity:
+  type: mapping
+  label: 'Configuration for "CustomEntityDeleteAction" action'
+  mapping:
+    example:
+      type: string
+      label: Example
+
+# Schema for the configuration files of the olympian_core module.
+
+olympian_core.settings:
+  type: config_object
+  label: 'Olympian Core settings'
+  mapping:
+    name:
+      type: label
+      label: 'Site name'
+    site_slogan:
+      type: label
+      label: 'Site slogan'
+    mail:
+      type: email
+      label: 'Email address'
+    phone:
+      type: string
+      label: 'Phone number'
+    production_url:
+      type: uri
+      label: 'Production URL'
+    page:
+      type: mapping
+      label: 'Page settings'
+      mapping:
+        front:
+          type: path
+          label: 'Default front page'
+        403:
+          type: path
+          label: 'Default 403 (access denied) page'
+        404:
+          type: path
+          label: 'Default 404 (not found) page'
+    has_parent:
+      type: boolean
+      label: 'Has parent organization'
+    parent:
+      type: mapping
+      label: 'Parent organization'
+      mapping:
+        name:
+          type: label
+          label: 'Parent organization name'
+        url:
+          type: uri
+          label: 'Parent organization URL'
+    contact_us_url:
+      type: path
+      label: 'Contact Us URL'
+    social_media:
+      type: mapping
+      label: 'Social media accounts'
+      mapping:
+        twitter_username:
+          type: string
+          label: 'Twitter username'
+        facebook_username:
+          type: string
+          label: 'Facebook username'
+        instagram_username:
+          type: string
+          label: 'Instagram username'
+        youtube_username:
+          type: string
+          label: 'YouTube channel'
+        linkedin_username:
+          type: string
+          label: 'LinkedIn profile'
+    custom_403_display:
+      type: boolean
+      label: 'Display custom 403 page'
+    custom_403_message:
+      type: text
+      label: 'Custom 403 alert message'
+    olympian_core_replicate_allowed:
+      type: sequence
+      label: 'Allowed content types for cloning'
+      sequence:
+        type: string
+        label: 'Content type ID'

@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://insideartsci.ddev.site
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+dev:
+  uri: https://insideartsci.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://insideartsci.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://insideartsci.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/insideartsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

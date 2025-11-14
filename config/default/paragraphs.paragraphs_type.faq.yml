@@ -1,0 +1,10 @@
+uuid: 39292c34-1231-437b-8b5d-afc2dbe7ff61
+langcode: en
+status: true
+dependencies: {  }
+id: faq
+label: FAQ
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle FAQ'
+behavior_plugins: {  }

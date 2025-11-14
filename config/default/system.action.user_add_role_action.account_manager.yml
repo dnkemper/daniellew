@@ -1,0 +1,14 @@
+uuid: a2c00838-8385-4188-ad38-c08ba2719e7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.account_manager
+  module:
+    - user
+id: user_add_role_action.account_manager
+label: 'Add the Account Manager role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: account_manager

@@ -1,0 +1,10 @@
+uuid: 5e5b14a9-3c2e-4be3-8337-57d0b1bd1003
+langcode: en
+status: true
+dependencies: {  }
+id: embedded_webform
+label: 'Embedded Webform'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Embedded Webform'
+behavior_plugins: {  }

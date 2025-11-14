@@ -1,0 +1,19 @@
+uuid: cc1be9bd-0982-46e7-8056-54413c002d74
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_feat_article_button
+field_name: field_feat_article_button
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

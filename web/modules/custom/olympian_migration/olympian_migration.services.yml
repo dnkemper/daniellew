@@ -1,0 +1,13 @@
+services:
+  logger.channel.olympian_migration:
+    parent: logger.channel_base
+    arguments: ['olympian_migration']
+  post_rowsave_subscriber:
+    class: 'Drupal\olympian_migration\EventSubscriber\PostRowSaveEvent'
+    arguments: [ '@entity_type.manager', '@database' ]
+    tags:
+      - { name: 'event_subscriber' }
+  lullabot_migrate.database7:
+    class: Drupal\Core\Database\Connection
+    factory: 'Drupal\Core\Database\Database::getConnection'
+    arguments: ['default', 'default']

@@ -1,0 +1,21 @@
+uuid: c74be1db-fffc-40d3-8275-d101fa8340a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category_display
+    - node.type.news_landing_page
+  module:
+    - options
+id: node.news_landing_page.field_category_display
+field_name: field_category_display
+entity_type: node
+bundle: news_landing_page
+label: 'Category Display'
+description: 'Changes how the Category filter on the News Landing Page is displayed.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

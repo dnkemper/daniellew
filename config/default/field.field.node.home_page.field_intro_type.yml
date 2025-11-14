@@ -1,0 +1,21 @@
+uuid: da5d94e2-9d2d-4087-99d5-779954f241e5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro_type
+    - node.type.home_page
+  module:
+    - options
+id: node.home_page.field_intro_type
+field_name: field_intro_type
+entity_type: node
+bundle: home_page
+label: 'Intro Type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

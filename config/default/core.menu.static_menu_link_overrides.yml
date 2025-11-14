@@ -1,0 +1,207 @@
+_core:
+  default_config_hash: CXhei_vpaZk-3f_Mj2cH0YmpK-ZpKHoSzVA3yZrDq0g
+definitions:
+  'admin_toolbar_tools__extra_links:node__add__page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 1
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__book':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 2
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__contact_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 3
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__events':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 6
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__events_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 7
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__faq':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 8
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__home_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 9
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__image_cards_landing':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 10
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__image_cards':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 11
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__generic_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 12
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__news_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 13
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__past_events_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 15
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__faculty_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 16
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__faculty_staff':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 17
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__publication_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 18
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__resources':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 19
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__resources_landing_page':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 20
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add__testimonial':
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 21
+    expanded: false
+    enabled: true
+  node__add_page:
+    menu_name: admin
+    parent: 'admin_toolbar_tools.extra_links:node.add'
+    weight: 23
+    expanded: false
+    enabled: true
+  entity__webform__add_form:
+    menu_name: admin
+    parent: system.admin_content
+    weight: -7
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:node__add':
+    menu_name: admin
+    parent: system.admin_content
+    weight: -9
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:view__files':
+    menu_name: admin
+    parent: system.admin_content
+    weight: -5
+    expanded: false
+    enabled: true
+  'admin_toolbar_tools__extra_links:media_page':
+    menu_name: admin
+    parent: system.admin_content
+    weight: -4
+    expanded: false
+    enabled: true
+  interactive_components:
+    menu_name: admin
+    parent: system.admin_content
+    weight: -2
+    expanded: false
+    enabled: true
+  standard__front_page:
+    menu_name: main
+    parent: ''
+    weight: 0
+    expanded: true
+    enabled: true
+  user__page:
+    menu_name: account
+    parent: ''
+    weight: -48
+    expanded: false
+    enabled: true
+  user__logout:
+    menu_name: account
+    parent: ''
+    weight: -47
+    expanded: false
+    enabled: true
+  media_directories_ui__browser:
+    menu_name: admin
+    parent: system.admin_content
+    weight: -8
+    expanded: false
+    enabled: true
+  entity__media__add_page:
+    menu_name: admin
+    parent: media_directories_ui.browser
+    weight: -6
+    expanded: false
+    enabled: true
+  entity__shortcut_set__collection:
+    menu_name: admin
+    parent: system.admin
+    weight: 10
+    expanded: false
+    enabled: false
+  paragraphs__settings:
+    menu_name: admin
+    parent: system.admin_config_content
+    weight: 0
+    expanded: false
+    enabled: false
+  xmlsitemap__admin_search:
+    menu_name: admin
+    parent: system.admin_config_search
+    weight: 0
+    expanded: false
+    enabled: false
+  entity__facets_facet__collection:
+    menu_name: admin
+    parent: system.admin_config_search
+    weight: 30
+    expanded: false
+    enabled: false
+  'admin_toolbar_tools__extra_links:views_ui__reusable_blocks':
+    menu_name: admin
+    parent: entity.view.collection
+    weight: 0
+    expanded: false
+    enabled: false

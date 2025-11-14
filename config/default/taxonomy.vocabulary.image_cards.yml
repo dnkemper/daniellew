@@ -1,0 +1,9 @@
+uuid: 536fdab6-5289-4032-a1db-eee0d7c221b5
+langcode: en
+status: true
+dependencies: {  }
+name: 'Image Cards'
+vid: image_cards
+description: null
+weight: -7
+new_revision: false

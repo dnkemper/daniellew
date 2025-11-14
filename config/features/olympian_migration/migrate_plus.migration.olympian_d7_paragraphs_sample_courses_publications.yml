@@ -1,0 +1,58 @@
+uuid: 6dfadfc2-f18d-4c44-920f-12b95478ca51
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_sample_courses_publications
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Slideshow)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: sample_courses_publications
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  parent_type: parent_type
+  field_course_samples_p:
+    plugin: sub_process
+    source: field_course_samples_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: olympian_d7_paragraphs_course_samples
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+        default: null
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+        default: null
+  field_title:
+    -
+      plugin: get
+      source: field_title
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: sample_courses_publications
+migration_dependencies:
+  required:
+    - olympian_d7_paragraphs_course_samples

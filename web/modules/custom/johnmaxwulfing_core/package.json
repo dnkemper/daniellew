@@ -1,0 +1,67 @@
+{
+  "name": "johnmaxwulfing_core",
+  "version": "1.0.0",
+  "description": "johnmaxwulfing Core",
+  "main": "gulpfile.js",
+  "scripts": {
+    "clean": "rm -rf assets/css; rm -rf assets/js",
+    "build": "gulp build",
+    "prebuild": "yarn run clean",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "johnmaxwulfing",
+    "gulp",
+    "scss",
+    "javascript",
+    "image optimization",
+    "svg optimization"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.18",
+    "cssnano": "^6.1.0",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "postcss": "^8.4.36"
+  },
+  "dependencies": {
+    "gulp-load-plugins": "^2.0.8",
+    "gulp-notify": "^4.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-watch": "^5.0.1",
+    "sass": "^1.55.0"
+  },
+  "//": "'development is the default environment, and legacy is for transpiling the old jQuery codebase",
+  "babel": {
+    "env": {
+      "development": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": "commonjs",
+              "targets": {
+                "node": "current"
+              }
+            }
+          ]
+        ]
+      },
+      "legacy": {
+        "presets": [
+          [
+            "@babel/preset-env",
+            {
+              "modules": false
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

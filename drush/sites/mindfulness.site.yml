@@ -1,0 +1,23 @@
+local:
+  root: '${env.cwd}/web'
+  uri: 'https://mindfulness.ddev.site'
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+dev:
+  uri: 'https://mindfulness.artscidev.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: 'https://mindfulness.artscistage.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: 'https://mindfulness.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/mindfulness.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

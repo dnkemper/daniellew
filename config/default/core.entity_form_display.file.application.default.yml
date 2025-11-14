@@ -1,0 +1,20 @@
+uuid: 6d8cf063-8b63-4de7-ae4c-96577ae4df89
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.file.application.field_folder
+  module:
+    - file
+id: file.application.default
+targetEntityType: file
+bundle: application
+mode: default
+content:
+  field_folder:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

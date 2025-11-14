@@ -1,0 +1,125 @@
+id: node_image_cards
+migration_group: olympian_migration
+label: 'Image Card Node Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - node
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: image_cards  # Replace with the machine name of your node type in Drupal 7
+#  --------------------------------- ---------- ---------------------------- -------------
+#   Field name                        Required   Field type                   Cardinality
+#  --------------------------------- ---------- ---------------------------- -------------
+#   field_call_to_action_button_url              link                         1
+#   field_description                            text_long                    1
+#   field_image_card_terms                       entity_reference             -1
+#   field_meta_tags                              metatag                      1
+#   field_new_window                             boolean                      1
+#   field_optional_callout_p                     entity_reference_revisions   1
+#   field_people_teaser                          entity_reference_revisions   1
+#   field_related_links_p                        entity_reference_revisions   -1
+#   field_sample_courses_p                       entity_reference_revisions   -1
+#   field_search                                 string_long                  1
+#   field_select_testimonials                    entity_reference             -1
+#   field_thumbnail                   ✔          entity_reference             1
+#  --------------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: image_cards
+  # nid:
+  #   -
+  #     plugin: get
+  #     source: nid
+  # vid:
+  #   -
+  #     plugin: get
+  #     source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  # Text field mappings
+  field_search: field_search
+  field_description: field_description
+
+
+  # Boolean field mapping
+  field_new_window: field_new_window
+  field_call_to_action_button_url:
+    plugin: field_link_custom
+    source: field_call_to_action_button_url
+    title_source: field_call_to_action_button_text
+  # Taxonomy term reference field mapping
+  field_image_card_terms:
+    plugin: sub_process
+    source: field_image_card_terms
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_image_cards
+        source: tid
+
+  # Image field mapping using sub_process
+  field_thumbnail:
+    plugin: sub_process
+    source: field_thumbnail
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: image_cards
+migration_dependencies:
+  required: {}
+  optional: {}

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 552349d3-0473-4f3e-8679-4856aced7118
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: transcript_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/transcript_420x420_7_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 25581
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

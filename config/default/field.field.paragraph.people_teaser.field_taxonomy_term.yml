@@ -1,0 +1,26 @@
+uuid: 1814bb0d-324a-4573-a4a1-867723d510d9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_taxonomy_term
+    - paragraphs.paragraphs_type.people_teaser
+    - taxonomy.vocabulary.leadership_administrative_staf
+id: paragraph.people_teaser.field_taxonomy_term
+field_name: field_taxonomy_term
+entity_type: paragraph
+bundle: people_teaser
+label: 'Taxonomy term'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      leadership_administrative_staf: leadership_administrative_staf
+    sort:
+      field: _none
+field_type: entity_reference

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 8f7ee5d3-280c-4a78-a96d-a93d65e14c8b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: resources-landing-page.jpg
+  uri:
+    -
+      value: 'public://2023-12/resources-landing-page_1_1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 918684
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

@@ -1,0 +1,24 @@
+local:
+  root: /var/www/html/web
+  uri: https://olympian.ddev.site
+  paths:
+    files: sites/olympian.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+dev:
+  uri: https://olympian.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/olympian.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://olympian.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/olympian.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://olympian.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/olympian.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

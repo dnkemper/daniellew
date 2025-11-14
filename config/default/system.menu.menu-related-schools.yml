@@ -1,0 +1,8 @@
+uuid: 754c5c3d-acd4-4166-a371-e167be9c0901
+langcode: en
+status: true
+dependencies: {  }
+id: menu-related-schools
+label: 'Related Schools'
+description: 'This menu displays underneath the secondary navigation, to the left of the main navigation (when open).'
+locked: false

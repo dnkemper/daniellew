@@ -1,0 +1,4 @@
+olympian_migration.list:
+  route_name: olympian_migration.list
+  title: 'Paragraphs usage'
+  base_route: entity.field_storage_config.collection

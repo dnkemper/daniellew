@@ -1,0 +1,23 @@
+local:
+  root: '${env.cwd}/web'
+  uri: 'https://literacies.ddev.site'
+  paths:
+    files: sites/literacies.wustl.edu/files
+dev:
+  uri: 'https://literacies.artscidev.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/literacies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: 'https://literacies.artscistage.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/literacies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: 'https://literacies.wustl.edu'
+  root: /var/www/html/d9main/web/
+  paths:
+    files: sites/literacies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

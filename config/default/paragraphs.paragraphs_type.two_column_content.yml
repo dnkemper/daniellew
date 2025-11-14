@@ -1,0 +1,10 @@
+uuid: 6d73537a-e876-469c-ab92-be6758a28183
+langcode: en
+status: true
+dependencies: {  }
+id: two_column_content
+label: 'Two Column Content'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Two Column Content'
+behavior_plugins: {  }

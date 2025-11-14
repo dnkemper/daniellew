@@ -1,0 +1,67 @@
+uuid: 87122d26-ecca-4930-b9e8-ac76923425cb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.people_teaser.field_display_research_interests
+    - field.field.paragraph.people_teaser.field_optional_text
+    - field.field.paragraph.people_teaser.field_people_teaser_titles
+    - field.field.paragraph.people_teaser.field_people_teaser_views
+    - field.field.paragraph.people_teaser.field_person_selector
+    - field.field.paragraph.people_teaser.field_taxonomy_term
+    - paragraphs.paragraphs_type.people_teaser
+  module:
+    - text
+id: paragraph.people_teaser.default
+targetEntityType: paragraph
+bundle: people_teaser
+mode: default
+content:
+  field_display_research_interests:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_optional_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_teaser_titles:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_people_teaser_views:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_person_selector:
+    type: entity_reference_autocomplete_tags
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_taxonomy_term:
+    type: options_select
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

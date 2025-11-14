@@ -1,0 +1,130 @@
+id: node_testimonial
+migration_group: olympian_migration
+label: 'Testimonial content migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: testimonial  # Replace with the machine name of the node type in Drupal 7 if different
+#  -------------------------- ---------- ------------------- -------------
+#   Field name                 Required   Field type          Cardinality
+#  -------------------------- ---------- ------------------- -------------
+#   body                                  text_with_summary   1
+#   field_author               ✔          string              1
+#   field_author_description   ✔          string              1
+#   field_color                           list_string         1
+#   field_meta_tags                       metatag             1
+#   field_search                          string_long         1
+#   field_testimonial_image    ✔          entity_reference    1
+#  -------------------------- ---------- ------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: testimonial  # Replace with the machine name of the node type in Drupal 10 if different
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  body:
+    -
+      plugin: get
+      source: body
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_author: field_author
+  field_author_description: field_author_description
+
+  # Image field mapping
+  field_testimonial_image:
+    plugin: sub_process
+    source: field_testimonial_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # List field
+  field_color:
+    plugin: get
+    source: field_color
+  field_search:
+    -
+      plugin: get
+      source: field_search
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: testimonial  # Replace with the machine name of the node type in Drupal 10 if different
+migration_dependencies:
+  required: {}
+  optional: {}

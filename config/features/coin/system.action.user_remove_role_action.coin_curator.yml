@@ -1,0 +1,14 @@
+uuid: 0c0bbe5c-f5bb-4d90-8a1c-b3acf7efe857
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.coin_curator
+  module:
+    - user
+id: user_remove_role_action.coin_curator
+label: 'Remove the Curator role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: coin_curator

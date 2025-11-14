@@ -1,0 +1,10 @@
+uuid: d3e268d5-f6e8-4cc6-a909-99fafdbdd3b6
+langcode: en
+status: true
+dependencies: {  }
+id: sidebar_slideshow
+label: 'Sidebar Slideshow'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Sidebar Slideshow'
+behavior_plugins: {  }

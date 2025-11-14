@@ -1,0 +1,8 @@
+uuid: 2264e061-e7b0-40f5-acc5-359984d31940
+langcode: en
+status: true
+dependencies: {  }
+name: Issuer
+vid: coin_issuer
+description: ''
+weight: 0

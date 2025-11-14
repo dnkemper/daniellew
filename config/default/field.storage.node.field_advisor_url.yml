@@ -1,0 +1,19 @@
+uuid: 42ef67c4-8365-4ec1-a9ce-81a7766e9aaf
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_advisor_url
+field_name: field_advisor_url
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

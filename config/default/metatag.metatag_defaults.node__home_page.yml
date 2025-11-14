@@ -1,0 +1,17 @@
+uuid: 9bc38936-e10c-4712-8da5-6baa04591677
+langcode: en
+status: true
+dependencies: {  }
+id: node__home_page
+label: 'Content: Home Page'
+tags:
+  canonical_url: '[current-page:url:absolute]'
+  description: '[node:body]'
+  og_description: '[node:summary]'
+  og_title: '[node:title]'
+  og_type: website
+  og_updated_time: '[node:changed:custom:c]'
+  og_url: '[current-page:url:absolute]'
+  robots: 'index, follow'
+  shortlink: '[current-page:url:unaliased]'
+  title: '[node:title] | [current-page:pager][site:name]'

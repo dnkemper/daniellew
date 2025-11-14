@@ -1,0 +1,21 @@
+uuid: 774fa31a-c72d-4fc4-b8b5-27b3726cf4e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category_display
+    - node.type.resources_landing_page
+  module:
+    - options
+id: node.resources_landing_page.field_category_display
+field_name: field_category_display
+entity_type: node
+bundle: resources_landing_page
+label: 'Category Display'
+description: 'Changes how the Category filter on the Resources Landing Page is displayed.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

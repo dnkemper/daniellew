@@ -1,0 +1,23 @@
+uuid: 79bc5b38-e46d-4656-8f09-0d6f1bd1ccd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_background_color_announce
+    - paragraphs.paragraphs_type.publication_announcement
+  module:
+    - options
+id: paragraph.publication_announcement.field_background_color_announce
+field_name: field_background_color_announce
+entity_type: paragraph
+bundle: publication_announcement
+label: 'Background Color'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Gray
+default_value_callback: ''
+settings: {  }
+field_type: list_string

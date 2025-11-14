@@ -1,0 +1,18 @@
+uuid: b5daf224-1984-4529-9c29-5e2d956a9902
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Collection Landing Page'
+type: coin_collection_landing_page
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

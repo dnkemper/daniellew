@@ -1,0 +1,41 @@
+uuid: a27965a7-a056-4b37-a2b6-e37943cd47e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - private_content
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 10
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    minimum_age_to_delete: 0
+    minimum_revisions_to_keep: 10
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+    when_to_delete: 0
+  private_content:
+    private: 1
+name: Resource
+type: resources
+description: 'Used to create organized, browsable links to other content with a graphic icon, title, and subtitle.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

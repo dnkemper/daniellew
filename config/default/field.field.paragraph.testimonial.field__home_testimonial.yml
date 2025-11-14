@@ -1,0 +1,31 @@
+uuid: cf9bae81-541b-432a-89a5-ede91746a25f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field__home_testimonial
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.testimonial.field__home_testimonial
+field_name: field__home_testimonial
+entity_type: paragraph
+bundle: testimonial
+label: Testimonial
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+  required_summary: false
+  allowed_formats:
+    - full_html
+field_type: text_with_summary

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 44113bd5-d9a7-4277-afb7-9d184373ecd7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: image-card-landing.jpg
+  uri:
+    -
+      value: 'public://2023-12/image-card-landing_1_1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1597486
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701520376

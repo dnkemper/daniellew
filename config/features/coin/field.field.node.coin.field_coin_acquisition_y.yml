@@ -1,0 +1,23 @@
+uuid: 373ea74c-298d-45a4-bfe4-15e72540b77d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_acquisition_y
+    - node.type.coin
+id: node.coin.field_coin_acquisition_y
+field_name: field_coin_acquisition_y
+entity_type: node
+bundle: coin
+label: 'Acquisition Year'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

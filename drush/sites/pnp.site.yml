@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://pnp.ddev.site
+  paths:
+    files: sites/pnp.wustl.edu/files
+dev:
+  uri: https://pnp.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/pnp.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://pnp.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/pnp.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://pnp.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/pnp.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

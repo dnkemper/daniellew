@@ -1,0 +1,74 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a54f9442-b4c4-4e04-bb41-fa69c2ca85c2
+  bundle: resources
+  default_langcode: en
+  depends:
+    a487df98-8c7f-4467-9271-019c308bee57: media
+    5bbe721e-2a84-4eac-89e3-c32edcda9024: taxonomy_term
+    330a2970-0c4e-4f2a-abf6-50b4039a5d2c: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Library Services'
+  created:
+    -
+      value: 1690897289
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/library-services
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://library.wustl.edu/'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: a487df98-8c7f-4467-9271-019c308bee57
+  field_new_window:
+    -
+      value: true
+  field_resource_category:
+    -
+      entity: 5bbe721e-2a84-4eac-89e3-c32edcda9024
+    -
+      entity: 330a2970-0c4e-4f2a-abf6-50b4039a5d2c
+  field_subtitle:
+    -
+      value: 'find the sources, people, spaces, and technology to accelerate your studies'
+  field_title:
+    -
+      value: 'Library Services'

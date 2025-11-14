@@ -1,0 +1,45 @@
+id: paragraph_introduction
+label: 'Introduction Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: introduction
+process:
+  type:
+    plugin: default_value
+    default_value: introduction  # Replace with the machine name of the paragraph bundle in Drupal 10 if different
+  field_headline: field_headline
+  field_description: field_description
+
+  # Image field mapping
+  field_background_image:
+    plugin: sub_process
+    source: field_background_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # List fields
+  field_ampersand:
+    plugin: get
+    source: field_ampersand
+  field_background:
+    plugin: get
+    source: field_background
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: introduction  # Replace with the machine name of the paragraph bundle in Drupal 10 if different
+migration_dependencies:
+  required: {}
+  optional: {}

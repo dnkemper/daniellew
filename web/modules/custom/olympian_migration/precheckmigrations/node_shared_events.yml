@@ -1,0 +1,32 @@
+id: node_shared_events
+label: 'Migrate Borrowed Shared Event Nodes'
+migration_tags:
+  - shared_content
+source:
+  plugin: d7_node
+  node_type: events
+
+process:
+  skip_on_empty:
+    plugin: skip_on_condition
+    condition:
+      plugin: empty
+      negate: false
+    source: field_shared_content_xml
+    method: row
+  # Fields that are editable on borrowing site
+  field_featured_home_slideshow: field_featured_home_slideshow
+  field_feature_event: field_feature_event
+  field_search: field_search
+  field_event_category:
+    plugin: sub_process
+    source: field_event_category
+    process:  
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_event_categories
+        source: tid  
+destination:
+  plugin: shared_entity
+  entity_type: 'node'  # Specify the entity type here
+  bundle: 'events'

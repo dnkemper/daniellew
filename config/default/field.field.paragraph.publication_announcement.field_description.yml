@@ -1,0 +1,19 @@
+uuid: e22a7245-251c-498c-99c9-3255bd797e99
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_description
+    - paragraphs.paragraphs_type.publication_announcement
+id: paragraph.publication_announcement.field_description
+field_name: field_description
+entity_type: paragraph
+bundle: publication_announcement
+label: Description
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

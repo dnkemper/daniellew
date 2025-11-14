@@ -1,0 +1,49 @@
+id: paragraph_callout
+label: 'Paragraphs (Callout)'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - Content
+  - artsci-paragraph
+
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: callout
+process:
+  type:
+    plugin: default_value
+    default_value: callout  # Ensure this matches the D10 machine name.
+
+  field_description:
+    -
+      plugin: get
+      source: field_description
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: callout
+migration_dependencies:
+  required: {}
+  optional: {}

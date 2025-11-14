@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ec92463c-e9ee-493a-be4a-8b9de71bfbec
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: overseas_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/overseas_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 49530
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

@@ -1,0 +1,111 @@
+uuid: bf237059-c59b-4412-9ebe-c77c7cb5cda5
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_node_type_collection_landing_page
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Configuration
+migration_group: migrate_drupal_7
+label: 'Node type configuration (Collection Landing Page)'
+source:
+  plugin: d7_node_type
+  constants:
+    preview: 1
+  node_type: collection_landing_page
+process:
+  type:
+    -
+      plugin: get
+      source: type
+  name:
+    -
+      plugin: get
+      source: name
+  description:
+    -
+      plugin: get
+      source: description
+  help:
+    -
+      plugin: get
+      source: help
+  title_label:
+    -
+      plugin: get
+      source: title_label
+  preview_mode:
+    -
+      plugin: get
+      source: constants/preview
+  display_submitted:
+    -
+      plugin: get
+      source: display_submitted
+  new_revision:
+    -
+      plugin: get
+      source: options/revision
+  create_body:
+    -
+      plugin: get
+      source: create_body
+  create_body_label:
+    -
+      plugin: get
+      source: body_label
+  third_party_settings/menu_ui/available_menus:
+    -
+      plugin: get
+      source: available_menus
+  third_party_settings/menu_ui/parent:
+    -
+      plugin: get
+      source: parent
+  comment_node_collection_landing_page/0/status:
+    -
+      plugin: get
+      source: comment
+  field_introduction:
+    -
+      plugin: sub_process
+      source: field_introduction
+      process:
+        target_id:
+          -
+            plugin: paragraphs_lookup
+            tags: 'Paragraphs Content'
+            source: value
+          -
+            plugin: extract
+            index:
+              - id
+        target_revision_id:
+          -
+            plugin: paragraphs_lookup
+            tags:
+              - 'Paragraphs Revisions Content'
+              - 'Paragraphs Content'
+            tag_ids:
+              'Paragraphs Revisions Content':
+                - revision_id
+              'Paragraphs Content':
+                - value
+            source: value
+          -
+            plugin: extract
+            index:
+              - revision_id
+  field_search:
+    -
+      plugin: get
+      source: field_search
+destination:
+  plugin: 'entity:node_type'
+  default_bundle: collection_landing_page
+migration_dependencies:
+  required: {  }
+  optional: {  }

@@ -1,0 +1,21 @@
+uuid: ef7a32c9-37bb-4511-8d3d-d42441483056
+langcode: en
+status: true
+dependencies: {  }
+name: book_cover
+label: 'Book Cover'
+effects:
+  ea966af0-ac5a-4d30-add0-09a171d26b03:
+    uuid: ea966af0-ac5a-4d30-add0-09a171d26b03
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 450
+      upscale: false
+  24692009-e10e-4d40-ae10-f1a0f5cf224a:
+    uuid: 24692009-e10e-4d40-ae10-f1a0f5cf224a
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,23 @@
+uuid: f38bf499-fc45-42c4-8008-121a775e7ff1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_news_link_new_window
+    - paragraphs.paragraphs_type.featured_news
+id: paragraph.featured_news.field_news_link_new_window
+field_name: field_news_link_new_window
+entity_type: paragraph
+bundle: featured_news
+label: 'Link goes outside of current site'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

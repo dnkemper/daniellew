@@ -1,0 +1,106 @@
+uuid: c0ea4ddc-e668-4bd3-901c-7a7b43283263
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.aggregator_feed.aggregator_feed.field_aggregator_purge_items
+    - field.field.aggregator_feed.aggregator_feed.field_feed_source
+    - field.field.aggregator_feed.aggregator_feed.field_feed_type
+    - field.field.aggregator_feed.aggregator_feed.field_last_modified
+  module:
+    - aggregator
+    - datetime
+_core:
+  default_config_hash: ORtH44CMbYMb3_0zumUPwVhPmaLBiImWpZa_hO3qmhU
+id: aggregator_feed.aggregator_feed.default
+targetEntityType: aggregator_feed
+bundle: aggregator_feed
+mode: default
+content:
+  checked:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+      tooltip:
+        date_format: ''
+        custom_date_format: ''
+      time_diff:
+        enabled: false
+        future_format: '@interval hence'
+        past_format: '@interval ago'
+        granularity: 2
+        refresh: 60
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  description:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  feed_icon:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_aggregator_purge_items:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_feed_source:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_feed_type:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_last_modified:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 12
+    region: content
+  items:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  link:
+    type: uri_link
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  more_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  image: true
+  search_api_excerpt: true

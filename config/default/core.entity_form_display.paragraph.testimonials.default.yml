@@ -1,0 +1,21 @@
+uuid: 86f6194e-307d-42c0-bfd2-e28a597e37fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.testimonials.field_select_testimonials
+    - paragraphs.paragraphs_type.testimonials
+id: paragraph.testimonials.default
+targetEntityType: paragraph
+bundle: testimonials
+mode: default
+content:
+  field_select_testimonials:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

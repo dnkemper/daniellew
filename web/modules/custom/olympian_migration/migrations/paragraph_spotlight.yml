@@ -1,0 +1,116 @@
+id: paragraph_spotlight
+label: 'Spotlight Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: spotlight  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: spotlight  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Entity reference fields mapping
+  field_button_link:
+    plugin: field_link_custom
+    source: field_optional_link_url
+    title_source: field_optional_link_text
+
+  # Image field mapping
+  field_fullscreen_video_image:
+    plugin: sub_process
+    source: field_fullscreen_video_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  field_new_window:
+    plugin: get
+    source: field_new_window
+
+  # Taxonomy field mapping
+  field_spot_event_category:
+    plugin: sub_process
+    source: field_spot_event_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_event_categories
+        source: tid
+
+  # Image field mapping
+  field_spot_image:
+    plugin: sub_process
+    source: field_spot_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # Taxonomy field mapping
+  field_spot_news_category:
+    plugin: sub_process
+    source: field_spot_news_category
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_article_categories
+        source: tid
+
+  # Text with summary field mapping
+  field_spotlight_description:
+    -
+      plugin: get
+      source: field_spotlight_description
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_spotlight_image:
+    plugin: sub_process
+    source: field_spotlight_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  field_spotlight_type: field_spotlight_type
+
+  # String Long field mapping
+  field_spotlight_video_short: field_spotlight_video_short
+  # String field mapping
+  field_spotlight_video_title: field_spotlight_video_title
+
+  field_spotlight_video_url:
+    plugin: sub_process
+    source: field_spotlight_video_url
+    process:
+      target_id:
+        plugin: youtube_url_to_media
+        source: value
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: spotlight
+migration_dependencies:
+  required: {}
+  optional: {}

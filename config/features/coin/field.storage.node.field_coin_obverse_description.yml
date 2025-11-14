@@ -1,0 +1,19 @@
+uuid: 3b7b83aa-77ca-4641-8cd1-79444bb7b8a3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_coin_obverse_description
+field_name: field_coin_obverse_description
+entity_type: node
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

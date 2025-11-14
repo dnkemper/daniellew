@@ -1,0 +1,378 @@
+id: node_faculty_staff
+migration_group: olympian_migration
+label: 'Faculty and Staff from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - shared-node-type
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   Field name                         Required   Field type                   Cardinality
+#  ---------------------------------- ---------- ---------------------------- -------------
+#   field_additional_titles                       string_long                  1
+#   field_advisor                                 string                       1
+#   field_advisor_url                             link                         1
+#   field_areas_of_interest                       entity_reference             -1
+#   field_author_headshot                         entity_reference             1
+#   field_award                                   string                       1
+#   field_biography                               text_with_summary            1
+#   field_building_name_and_room_num              string_long                  1
+#   field_content_type                 ✔          list_string                  1
+#   field_cv                                      entity_reference             1
+#   field_dark_slideshow                          entity_reference_revisions   1
+#   field_description                             text_long                    1
+#   field_education                               string_long                  1
+#   field_email_address                           email                        1
+#   field_external_profile_link                   link                         1
+#   field_external_url                            link                         1
+#   field_fax_number                              string                       1
+#   field_first_name                   ✔          string                       1
+#   field_interests                               string_long                  1
+#   field_intro_text                              text_long                    1
+#   field_is_shared                               boolean                      1
+#   field_last_name                    ✔          string                       1
+#   field_links_p                                 entity_reference_revisions   -1
+#   field_mailing_address                         string_long                  1
+#   field_meta_tags                               metatag                      1
+#   field_office_hours                            string_long                  1
+#   field_phone_number                            phone_number                 1
+#   field_position                                string                       1
+#   field_pronouns                                string                       1
+#   field_search                                  string_long                  1
+#   field_shared_content                          string_long                  1
+#   field_shared_content_subscribers              string_long                  1
+#   field_shared_content_xml                      string                       1
+#   field_social_media_links_p                    entity_reference_revisions   1
+#   field_type_of_staff                           entity_reference             -1
+#  ---------------------------------- ---------- ---------------------------- -------------
+source:
+  plugin: d7_node_with_alias
+  node_type: faculty_staff
+idMap:
+  plugin: smart_sql
+process:
+  type:
+    plugin: default_value
+    default_value: faculty_staff
+  # skip_on_not_empty:
+  #   plugin: skip_on_condition
+  #   condition:
+  #     plugin: empty
+  #     negate: true
+  #   source: field_shared_content_xml
+  #   method: row
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    plugin: static_map
+    bypass: true
+    source: language
+    map:
+      und: en
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  field_first_name:
+    -
+      plugin: get
+      source: field_first_name
+  field_last_name:
+    -
+      plugin: get
+      source: field_last_name
+  field_position:
+    -
+      plugin: get
+      source: field_position
+  field_biography:
+    -
+      plugin: get
+      source: field_biography
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_office_hours:
+    -
+      plugin: get
+      source: field_office_hours
+  field_external_url:
+    -
+      plugin: sub_process
+      source: field_external_url
+      process:
+        uri: value
+
+  field_intro_text: field_intro_text
+  field_link_excerpt:
+    -
+      plugin: get
+      source: field_link_excerpt
+    -
+      plugin: img_tag_to_embed
+    -
+      plugin: media_wysiwyg_filter
+      view_mode_matching:
+        media_link: default
+      media_migrations:
+        - media_image_migration
+        - media_cv_migration
+        - media_document_migration
+      file_migrations:
+        - file_migration
+    -
+      plugin: wysiwyg_video_filter
+      target_media_type: 'remote_video'
+      url_field: 'field_media_oembed_video'
+  field_type_of_staff:
+    plugin: sub_process
+    source: field_type_of_staff
+    process:
+      target_id:
+        plugin: migration_lookup
+        source: tid
+        migration: taxonomy_leadership_administrative_staff
+  field_email_address:
+    -
+      plugin: get
+      source: field_email_address
+  field_phone_number:
+    -
+      plugin: get
+      source: field_phone_number
+  field_fax_number:
+    -
+      plugin: get
+      source: field_fax_number
+  field_award:
+    -
+      plugin: get
+      source: field_award
+  field_education:
+    -
+      plugin: get
+      source: field_education
+  field_author_headshot:
+    plugin: sub_process
+    source: field_author_headshot
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+
+  # CV field mapping
+  field_cv:
+    plugin: sub_process
+    source: field_cv
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_cv_migration
+        source: fid
+  field_interests:
+    -
+      plugin: get
+      source: field_interests
+  field_areas_of_interest:
+    plugin: sub_process
+    source: field_areas_of_interest
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: taxonomy_areas_of_interest
+        source: tid
+
+  field_links_p:
+    plugin: sub_process
+    source: field_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_social_media_links_p:
+    plugin: sub_process
+    source: field_social_media_links_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_social_media_links
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  # List fields
+  field_description:
+    -
+      plugin: get
+      source: field_description
+    -
+      plugin: media_wysiwyg_filter
+  #Dark Slideshow
+  field_sample_c_and_p_p:
+    plugin: sub_process
+    source: field_sample_c_and_p_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_sample_courses_publications
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+  field_content_type:
+    -
+      plugin: get
+      source: field_content_type
+  field_external_profile_link:
+    -
+      plugin: sub_process
+      source: field_external_profile_link
+      process:
+        uri: value
+  field_mailing_address:
+    -
+      plugin: get
+      source: field_mailing_address
+  field_building_name_and_room_num:
+    -
+      plugin: get
+      source: field_building_name_and_room_num
+  field_additional_titles:
+    -
+      plugin: get
+      source: field_additional_titles
+  field_search:
+    -
+      plugin: get
+      source: field_search
+    -
+      plugin: media_wysiwyg_filter
+  field_shared_content_xml:
+    -
+      plugin: get
+      source: field_shared_content_xml
+  field_shared_content_subscribers:
+    -
+      plugin: get
+      source: field_shared_content_subscribers
+  field_is_shared:
+    -
+      plugin: get
+      source: field_is_shared
+  field_shared_content:
+    -
+      plugin: get
+      source: field_shared_content
+  field_advisor:
+    -
+      plugin: get
+      source: field_advisor
+
+  field_advisor_url:
+    -
+      plugin: sub_process
+      source: field_advisor_url
+      process:
+        uri: value
+
+  field_pronouns:
+    -
+      plugin: get
+      source: field_pronouns
+  field_meta_tags:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: faculty_staff
+migration_dependencies:
+  required:
+    - paragraph_links
+    - paragraph_social_media_links
+    - paragraph_course_samples
+    - paragraph_slideshow
+    - paragraph_sample_courses_publications
+    - taxonomy_areas_of_interest
+    - taxonomy_leadership_administrative_staff

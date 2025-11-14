@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ed56273c-83ca-48b5-b808-e34e5043d8b1
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: undergraddegreereq_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/undergraddegreereq_420x420_8.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 52992
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

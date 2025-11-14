@@ -1,0 +1,10 @@
+uuid: c9467800-7f96-4b6f-bede-b0d8de0c2f70
+langcode: en
+status: true
+dependencies: {  }
+id: spotlight
+label: Spotlight
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Spotlight'
+behavior_plugins: {  }

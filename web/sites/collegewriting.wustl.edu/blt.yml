@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: collegewriting.ddev.site
+    protocol: https
+  machine_name: collegewriting
+  human_name: collegewriting.wustl.edu
+drush:
+  aliases:
+    local: collegewriting.local
+    remote: collegewriting.prod
+drupal:
+  db:
+    database: drupal_collegewriting
+artsci:
+  stage_file_proxy:
+    origin: 'https://collegewriting.wustl.edu'
+    origin_dir: sites/collegewriting.wustl.edu/files
+system:
+  site:
+    contact_us_url: 'https://collegewriting.wustl.edu/contact-us'
+    name: collegewriting
+    email: collegewriting@wustl.edu

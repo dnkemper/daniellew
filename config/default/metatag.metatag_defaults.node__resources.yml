@@ -1,0 +1,7 @@
+uuid: cc61ed87-ec7e-440e-85e6-5491b39ca547
+langcode: en
+status: true
+dependencies: {  }
+id: node__resources
+label: 'Content: Resource'
+tags: {  }

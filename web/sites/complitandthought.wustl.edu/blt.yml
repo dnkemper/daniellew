@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: complitandthought.ddev.site
+    protocol: https
+  machine_name: complitandthought
+  human_name: complitandthought.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: complitandthought.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/complitandthought.wustl.edu/files'
+    origin: 'https://complitandthought.wustl.edu'
+drupal:
+  db:
+    database: drupal_complitandthought
+system:
+  site:
+    contact_us_url: 'https://complitandthought.wustl.edu/contact-us'
+    name: complitandthought
+    email: complitandthought@wustl.edu

@@ -1,0 +1,23 @@
+uuid: 018ab62f-a02f-4274-bc79-a5ea149d926e
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.news
+  module:
+    - views
+  theme:
+    - olympian9
+id: exposedformnewscards
+theme: olympian9
+region: featured
+weight: -6
+provider: null
+plugin: 'views_exposed_filter_block:news-cards'
+settings:
+  id: 'views_exposed_filter_block:news-cards'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility: {  }

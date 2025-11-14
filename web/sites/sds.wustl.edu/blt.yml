@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: sds.ddev.site
+    protocol: https
+  machine_name: sds
+  human_name: sds.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: sds.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/sds.wustl.edu/files'
+    origin: 'https://sds.wustl.edu'
+drupal:
+  db:
+    database: drupal_sds
+system:
+  site:
+    contact_us_url: 'https://sds.wustl.edu/contact-us'
+    name: sds
+    email: sds@wustl.edu

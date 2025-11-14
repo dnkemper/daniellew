@@ -1,0 +1,33 @@
+uuid: 26f7f0fd-bc13-4850-96cf-221f279b604e
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_background
+field_name: field_background
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Red
+      label: Red
+    -
+      value: Dark
+      label: Dark
+    -
+      value: White
+      label: White
+    -
+      value: no_overlay
+      label: 'No Overlay'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

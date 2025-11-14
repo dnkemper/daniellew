@@ -1,0 +1,19 @@
+uuid: 71450241-21fa-46e1-b9b4-50c3370dae15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subtitle
+    - paragraphs.paragraphs_type.lightbox_image
+id: paragraph.lightbox_image.field_subtitle
+field_name: field_subtitle
+entity_type: paragraph
+bundle: lightbox_image
+label: 'Image Lightbox Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

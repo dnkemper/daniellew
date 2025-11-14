@@ -1,0 +1,19 @@
+uuid: 8d2cccc1-999a-4580-9010-82ff3efe2865
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_author_description
+    - node.type.testimonial
+id: node.testimonial.field_author_description
+field_name: field_author_description
+entity_type: node
+bundle: testimonial
+label: 'Author Description'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

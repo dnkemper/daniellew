@@ -1,0 +1,6 @@
+echo " "
+echo "Run 'lando dev-sync' to sync down dev database and files to your local environment"
+echo " "
+echo "Run 'lando qa-sync' to sync down qa database and files to your local environment"
+echo " "
+echo "Run 'lando uat-sync' to sync down uat database and files to your local environment"

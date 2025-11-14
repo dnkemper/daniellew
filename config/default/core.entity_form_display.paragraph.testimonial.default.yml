@@ -1,0 +1,52 @@
+uuid: 28f398a9-9dc4-4ba7-9235-02134ffa76f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.testimonial.field__home_testimonial
+    - field.field.paragraph.testimonial.field_half_test_bkg_color
+    - field.field.paragraph.testimonial.field_test_name
+    - field.field.paragraph.testimonial.field_test_title
+    - paragraphs.paragraphs_type.testimonial
+  module:
+    - text
+id: paragraph.testimonial.default
+targetEntityType: paragraph
+bundle: testimonial
+mode: default
+content:
+  field__home_testimonial:
+    type: text_textarea_with_summary
+    weight: 2
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  field_half_test_bkg_color:
+    type: options_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_test_name:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_test_title:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

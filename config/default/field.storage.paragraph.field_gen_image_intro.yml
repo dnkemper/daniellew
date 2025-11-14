@@ -1,0 +1,19 @@
+uuid: 8c1d6264-d791-4b31-bf39-3904506a31fe
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - text
+id: paragraph.field_gen_image_intro
+field_name: field_gen_image_intro
+entity_type: paragraph
+type: text_with_summary
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

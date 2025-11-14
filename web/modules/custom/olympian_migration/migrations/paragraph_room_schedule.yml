@@ -1,0 +1,27 @@
+id: paragraph_room_schedule
+label: 'Room Schedule Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: room_schedule  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: room_schedule  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Text field mappings
+  field_building: field_building
+  field_day: field_day
+  field_end_time: field_end_time
+  field_room: field_room
+  field_start_time: field_start_time
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: room_schedule
+migration_dependencies:
+  required: {}
+  optional: {}

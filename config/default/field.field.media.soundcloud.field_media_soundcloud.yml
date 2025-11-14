@@ -1,0 +1,19 @@
+uuid: 4bb1b486-eeb3-4283-891b-8a689d5c9f07
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_media_soundcloud
+    - media.type.soundcloud
+id: media.soundcloud.field_media_soundcloud
+field_name: field_media_soundcloud
+entity_type: media
+bundle: soundcloud
+label: Soundcloud
+description: "Copy the URL of the soundcloud media item you want to embed from your browser toolbar OR click on 'Copy Link' "
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

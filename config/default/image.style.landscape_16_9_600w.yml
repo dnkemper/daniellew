@@ -1,0 +1,23 @@
+uuid: 37185730-db9e-4f90-bf26-d93e11a6aaee
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_16_9_600w
+label: 'landscape 16:9 (600w)'
+effects:
+  47c87cc0-ee73-47dd-ad16-51adcdbe3ba6:
+    uuid: 47c87cc0-ee73-47dd-ad16-51adcdbe3ba6
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 338
+      crop_type: focal_point
+  17d98bdc-6030-4e66-a6b5-11b179f94d97:
+    uuid: 17d98bdc-6030-4e66-a6b5-11b179f94d97
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

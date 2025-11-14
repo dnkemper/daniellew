@@ -1,0 +1,41 @@
+id: paragraph_publication_student_stories
+label: 'Publication Student Stories Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_student_stories  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publication_student_stories  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Paragraphs field mapping for 'field_story'
+  field_story:
+    plugin: sub_process
+    source: field_story
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_publication_student_story  # Replace with the ID of your 'publication_student_story' paragraph migration
+        source: value
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_student_stories
+migration_dependencies:
+  required:
+    - paragraph_publication_student_story  # Ensure this is the correct ID of your 'publication_student_story' paragraph migration
+  optional: {}

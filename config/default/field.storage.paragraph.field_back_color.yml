@@ -1,0 +1,30 @@
+uuid: ad1ca335-38f7-4d48-8ed7-2c6608d71e7c
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_back_color
+field_name: field_back_color
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Yellow
+      label: yellow
+    -
+      value: Gray
+      label: gray
+    -
+      value: White
+      label: white
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

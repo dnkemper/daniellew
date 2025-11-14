@@ -1,0 +1,76 @@
+uuid: 81c6d68a-a1cd-4160-a23d-9856fc300628
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_half_image_w_text.field_custom_button_
+    - field.field.paragraph.featured_half_image_w_text.field_custom_caption
+    - field.field.paragraph.featured_half_image_w_text.field_half_image
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_description
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_main_titl
+    - field.field.paragraph.featured_half_image_w_text.field_half_image_optional_header
+    - paragraphs.paragraphs_type.featured_half_image_w_text
+  module:
+    - link
+id: paragraph.featured_half_image_w_text.default
+targetEntityType: paragraph
+bundle: featured_half_image_w_text
+mode: default
+content:
+  field_custom_button_:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_custom_caption:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_half_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: testimonial_desktop
+      link: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_half_image_description:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_half_image_main_titl:
+    type: link
+    label: visually_hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_half_image_optional_header:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

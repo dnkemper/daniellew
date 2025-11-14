@@ -1,0 +1,168 @@
+id: node_news_landing_page
+migration_group: olympian_migration
+label: Migrate news landing page content from Drupal 7
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_node_with_alias
+  node_type: news_landing_page
+#  ------------------------- ---------- ---------------------------- -------------
+#   Field name                Required   Field type                   Cardinality
+#  ------------------------- ---------- ---------------------------- -------------
+#   field_category_display    ✔          list_string                  1
+#   field_footer_callout_p               entity_reference_revisions   1
+#   field_header_type         ✔          list_string                  1
+#   field_landing_page_type   ✔          list_string                  1
+#   field_meta_tags                      metatag                      1
+#   field_news_header_image              entity_reference             1
+#   field_search                         string_long                  1
+#  ------------------------- ---------- ---------------------------- -------------
+process:
+  type:
+    plugin: default_value
+    default_value: news_landing_page
+  nid:
+    -
+      plugin: get
+      source: nid
+  vid:
+    -
+      plugin: get
+      source: vid
+  langcode:
+    -
+      plugin: default_value
+      source: language
+      default_value: und
+  title:
+    -
+      plugin: get
+      source: title
+  uid:
+    -
+      plugin: get
+      source: node_uid
+  status:
+    -
+      plugin: get
+      source: status
+  created:
+    -
+      plugin: get
+      source: created
+  changed:
+    -
+      plugin: get
+      source: timestamp
+  promote:
+    -
+      plugin: get
+      source: promote
+  sticky:
+    -
+      plugin: get
+      source: sticky
+  revision_uid:
+    -
+      plugin: get
+      source: revision_uid
+  revision_log:
+    -
+      plugin: get
+      source: log
+  revision_timestamp:
+    -
+      plugin: get
+      source: timestamp
+  content_translation_source:
+    -
+      plugin: get
+      source: source_langcode
+  field_category_display:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: news_category_display
+    -
+      plugin: static_map
+      map:
+        '1': 'collapsed'
+        '2': 'hidden'
+        '3': 'expanded'
+
+  field_footer_callout_p:
+    plugin: sub_process
+    source: field_footer_callout_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_footer_callout
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  field_header_p:
+    plugin: sub_process
+    source: field_header_p
+    process:
+      temporary_ids:
+        plugin: migration_lookup
+        migration: paragraph_header
+        source: value  # Assuming 'value' contains the paragraph ID in Drupal 7
+      target_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 0
+      target_revision_id:
+        plugin: extract
+        source: '@temporary_ids'
+        index:
+          - 1
+  # @TODO add header paragraph field_header_p:
+  field_news_header_image:
+    plugin: sub_process
+    source: field_news_header_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+  field_header_type:
+    plugin: get
+    source: field_header_type
+  field_landing_page_type:
+    -
+      plugin: unpack_variable
+      variable: theme_olympian_settings
+      key: news_landing_type
+    -
+      plugin: static_map
+      map:
+        '1': 'card'
+        '2': 'list'
+  field_search:
+    plugin: get
+    source: field_search
+  field_meta_tags:
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity:node'
+  default_bundle: news_landing_page
+migration_dependencies:
+  required:
+    - paragraph_button
+    - paragraph_social_media_links
+    - paragraph_header
+    - paragraph_footer_callout
+  optional: {  }

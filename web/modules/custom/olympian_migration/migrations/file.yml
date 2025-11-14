@@ -1,0 +1,44 @@
+id: file_migration
+label: 'File Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+audit: true
+source:
+  plugin: filtered_file_d7
+  scheme: public
+  constants:
+    dest_uri_prefix: ''
+    source_base_path: ''
+    source_uri_prefix: dynamic
+process:
+  fid: fid
+  uid:
+    plugin: migration_lookup
+    migration: olympian_d7_user
+    source: uid
+    no_stub: true
+  filename: filename
+  source_uri:
+    -
+      plugin: concat
+      source:
+        - constants/source_uri_prefix
+        - filepath
+  dest_uri:
+    plugin: concat
+    source:
+      - constants/dest_uri_prefix
+      - uri
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_uri'
+      - '@dest_uri'
+    no_stub: true
+    file_exists: rename
+  field_media_directory:
+    plugin: migration_lookup
+    source: field_media_directory
+    migration: olympian_d7_taxonomy_term_media_folders
+destination:
+  plugin: 'entity:file'

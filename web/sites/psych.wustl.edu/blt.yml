@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: psych.ddev.site
+    protocol: https
+  machine_name: psych
+  human_name: psych.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: psych.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/psych.wustl.edu/files'
+    origin: 'https://psych.wustl.edu'
+drupal:
+  db:
+    database: drupal_psych
+system:
+  site:
+    contact_us_url: 'https://psych.wustl.edu/contact-us'
+    name: psych
+    email: psych@wustl.edu

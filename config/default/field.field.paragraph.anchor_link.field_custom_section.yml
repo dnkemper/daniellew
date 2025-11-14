@@ -1,0 +1,19 @@
+uuid: 506e9e8c-e5fc-4563-b021-ce0e7e44825e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_custom_section
+    - paragraphs.paragraphs_type.anchor_link
+id: paragraph.anchor_link.field_custom_section
+field_name: field_custom_section
+entity_type: paragraph
+bundle: anchor_link
+label: 'Custom Section'
+description: 'Make sure this matches the name of your custom anchor. Do not use spaces.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

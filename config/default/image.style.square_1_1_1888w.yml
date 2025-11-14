@@ -1,0 +1,23 @@
+uuid: cd0e8e4c-fb4d-467f-a6d2-cb0299a596bd
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_1_1_1888w
+label: 'square 1:1 (1888w)'
+effects:
+  ffcf1caa-20ba-4fa7-89ae-26a052141b1c:
+    uuid: ffcf1caa-20ba-4fa7-89ae-26a052141b1c
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1888
+      height: 1888
+      crop_type: focal_point
+  b8dc92b3-722d-4f98-b22a-c50b077a1026:
+    uuid: b8dc92b3-722d-4f98-b22a-c50b077a1026
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

@@ -1,0 +1,25 @@
+uuid: ac6706a9-9074-4e9e-a160-0658531fc6ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_person_selector
+    - paragraphs.paragraphs_type.people_teaser
+id: paragraph.people_teaser.field_person_selector
+field_name: field_person_selector
+entity_type: paragraph
+bundle: people_teaser
+label: 'Person Selector'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_people
+      arguments: {  }
+field_type: entity_reference

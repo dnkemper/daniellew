@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: slavery.ddev.site
+    protocol: https
+  machine_name: slavery
+  human_name: slavery.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: slavery.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/slavery.wustl.edu/files'
+    origin: 'https://slavery.wustl.edu'
+drupal:
+  db:
+    database: drupal_slavery
+system:
+  site:
+    contact_us_url: 'https://slavery.wustl.edu/contact-us'
+    name: slavery
+    email: slavery@wustl.edu

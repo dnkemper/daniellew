@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: prehealth.ddev.site
+    protocol: https
+  machine_name: prehealth
+  human_name: prehealth.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: prehealth.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/prehealth.wustl.edu/files'
+    origin: 'https://prehealth.wustl.edu'
+drupal:
+  db:
+    database: drupal_prehealth
+system:
+  site:
+    contact_us_url: 'https://prehealth.wustl.edu/contact-us'
+    name: prehealth
+    email: prehealth@wustl.edu

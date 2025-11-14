@@ -1,0 +1,50 @@
+uuid: afcda447-8b9f-477b-8050-04938124fd60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.embedded_webform.field_back_color
+    - field.field.paragraph.embedded_webform.field_form
+    - field.field.paragraph.embedded_webform.field_introduction_excerpt
+    - field.field.paragraph.embedded_webform.field_title
+    - paragraphs.paragraphs_type.embedded_webform
+  module:
+    - options
+    - webform
+id: paragraph.embedded_webform.default
+targetEntityType: paragraph
+bundle: embedded_webform
+mode: default
+content:
+  field_back_color:
+    type: list_default
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_form:
+    type: webform_entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      source_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_introduction_excerpt:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

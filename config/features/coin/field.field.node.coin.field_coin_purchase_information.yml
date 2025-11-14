@@ -1,0 +1,19 @@
+uuid: b5d66cf2-1184-400c-a138-86b91260ceda
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_coin_purchase_information
+    - node.type.coin
+id: node.coin.field_coin_purchase_information
+field_name: field_coin_purchase_information
+entity_type: node
+bundle: coin
+label: 'Purchase Information'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

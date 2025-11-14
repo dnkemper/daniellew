@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: a0eaf66b-c903-44a0-a357-d138be9021c6
+  bundle: resources
+  default_langcode: en
+  depends:
+    9db368f2-e208-4e7c-8815-0938c165ece9: media
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Apply Now'
+  created:
+    -
+      value: 1690897719
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /resources/apply-now
+      langcode: en
+      pathauto: 0
+  rh_action:
+    -
+      value: bundle_default
+  rh_redirect_response:
+    -
+      value: 301
+  rh_redirect_fallback_action:
+    -
+      value: bundle_default
+  field_button_url:
+    -
+      uri: 'https://admissions.wustl.edu/apply'
+      title: ''
+      options: {  }
+  field_infographic:
+    -
+      entity: 9db368f2-e208-4e7c-8815-0938c165ece9
+  field_new_window:
+    -
+      value: true
+  field_subtitle:
+    -
+      value: 'become part of WashU'
+  field_title:
+    -
+      value: 'Apply Now'

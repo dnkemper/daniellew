@@ -1,0 +1,11 @@
+uuid: 32b03648-82ef-4f4f-8bd0-f97df72a098a
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.olympian_search
+label: 'Olympian Search'
+description: ''
+targetEntityType: node
+cache: true

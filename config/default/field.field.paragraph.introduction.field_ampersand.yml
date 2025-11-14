@@ -1,0 +1,23 @@
+uuid: ed606e40-6649-4782-8c7b-cff543d3be88
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_ampersand
+    - paragraphs.paragraphs_type.introduction
+id: paragraph.introduction.field_ampersand
+field_name: field_ampersand
+entity_type: paragraph
+bundle: introduction
+label: 'Show Ampersand'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Show Ampersand'
+  off_label: 'Hide Ampersand'
+field_type: boolean

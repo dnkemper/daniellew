@@ -1,0 +1,18 @@
+uuid: 588d29ec-c0fc-4558-b2d8-43631d6a3b2b
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_featured_new_window
+field_name: field_featured_new_window
+entity_type: paragraph
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

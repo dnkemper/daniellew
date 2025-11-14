@@ -1,0 +1,19 @@
+uuid: ab0e6e9c-3672-4dbc-9946-b45e2dbe370e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_faculty_bookshelf_title
+    - node.type.generic_page
+id: node.generic_page.field_faculty_bookshelf_title
+field_name: field_faculty_bookshelf_title
+entity_type: node
+bundle: generic_page
+label: 'Bookshelf Title'
+description: 'If bookshelf title is left blank the default title "the faculty bookshelf" will display.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,30 @@
+id: paragraph_course_attributes
+label: 'Course Attributes Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: course_attributes
+process:
+  type:
+    plugin: default_value
+    default_value: course_attributes
+
+  # Text field mappings
+  field_ca_full_name: field_ca_full_name
+  field_ca_group: field_ca_group
+  field_ca_owner_full_name: field_ca_owner_full_name
+  field_ca_owner_short_name: field_ca_owner_short_name
+  field_ca_print_code: field_ca_print_code
+  field_ca_short_name: field_ca_short_name
+  field_ca_title: field_ca_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: course_attributes
+migration_dependencies:
+  required: {}
+  optional: {}

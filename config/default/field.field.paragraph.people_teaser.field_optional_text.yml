@@ -1,0 +1,29 @@
+uuid: 1f818eca-3faa-4245-9bd1-5abb5f49e8f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_optional_text
+    - filter.format.full_html
+    - paragraphs.paragraphs_type.people_teaser
+  module:
+    - linkchecker
+    - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
+id: paragraph.people_teaser.field_optional_text
+field_name: field_optional_text
+entity_type: paragraph
+bundle: people_teaser
+label: 'Optional Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - full_html
+field_type: text_long

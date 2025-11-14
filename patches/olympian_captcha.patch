@@ -1,0 +1,16 @@
+diff --git a/captcha.module b/captcha.module
+index 7278a9e..3e57e5d 100755
+--- a/captcha.module
++++ b/captcha.module
+@@ -203,8 +203,9 @@ function captcha_form_alter(array &$form, FormStateInterface $form_state, $form_
+       }
+     }
+ 
+-    if (empty($captcha_point) && $config->get('enabled_default')) {
+-      // Create fake captcha point without saving.
++    // This override to the original content enables captcha automatically on all Drupal Webforms
++    // This way they don't have to be added per instance
++    if (empty($captcha_point) && (str_starts_with($form_id, 'webform_submission_') || ($config->get('enabled_default')))) {
+       $captcha_point = new CaptchaPoint([
+         'formId' => $form_id,
+         'captchaType' => $config->get('default_challenge'),

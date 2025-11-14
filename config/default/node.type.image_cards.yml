@@ -1,0 +1,41 @@
+uuid: dee0b579-964f-4d56-aabc-57c141075651
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - node_revision_delete
+    - private_content
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  node_revision_delete:
+    amount:
+      status: true
+      settings:
+        amount: 10
+    created:
+      status: false
+      settings:
+        age: 1
+    drafts:
+      status: false
+      settings:
+        age: 1
+    minimum_age_to_delete: 0
+    minimum_revisions_to_keep: 10
+    only_drafts:
+      status: false
+      settings:
+        age: 0
+    when_to_delete: 0
+  private_content:
+    private: 1
+name: 'Image Cards'
+type: image_cards
+description: 'Content requiring an image that displays as a card in a grid and can be filtered by tags.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

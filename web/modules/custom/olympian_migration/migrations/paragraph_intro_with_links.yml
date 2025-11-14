@@ -1,0 +1,68 @@
+id: paragraph_intro_with_links
+label: 'Intro with Links Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: intro_with_links
+
+process:
+  type:
+    plugin: default_value
+    default_value: intro_with_links
+
+  # Text field mappings
+  field_generic_title:
+    plugin: get
+    source: field_generic_title
+
+  field_related_links_title:
+    plugin: get
+    source: field_related_links_title
+
+  field_button_link_title:
+    plugin: get
+    source: field_button_link_title
+
+  # Text with summary field mapping
+  field_generic_intro:
+    plugin: get
+    source: field_generic_intro
+
+  # Link field mappings
+  field_related_links:
+    plugin: sub_process
+    source: field_related_links_
+    process:
+      temp:
+        plugin: link_paragraph_create
+        source: url
+        url_source: url
+        title_source: title
+      target_id: '@temp/target_id'
+      target_revision_id: '@temp/target_revision_id'
+  
+  field_related_link_out:
+    plugin: sub_process
+    source: field_related_link_out
+    process:
+      uri: url
+      title: title
+
+  field_button_link:
+    plugin: sub_process
+    source: field_button_link
+    process:
+      uri: uri
+      title: title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: intro_with_links
+
+migration_dependencies:
+  required: {}
+  optional: {}

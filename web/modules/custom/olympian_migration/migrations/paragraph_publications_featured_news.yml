@@ -1,0 +1,46 @@
+id: paragraph_publications_featured_news
+label: 'Publications Featured News Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+  - shared-dep
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publications_featured_news  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: publications_featured_news  # Replace with the machine name of the paragraph bundle in Drupal 10
+
+  # Node reference field mappings using sub_process
+  field_first_news_article:
+    plugin: sub_process
+    source: field_first_news_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  field_second_news_article:
+    plugin: sub_process
+    source: field_second_news_article
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: node_articles
+        source: target_id
+
+  # Text field mappings
+  field_news_header_subtitle: field_news_header_subtitle
+  field_news_header_title: field_news_header_title
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publications_featured_news
+migration_dependencies:
+  required:
+    - node_articles  # Ensure this is the correct ID of your 'node_article' migration
+  optional: {}

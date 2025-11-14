@@ -1,0 +1,21 @@
+uuid: ec182592-751d-4843-9d9f-93f1f691b319
+langcode: und
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_related_links_title
+field_name: field_related_links_title
+entity_type: paragraph
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

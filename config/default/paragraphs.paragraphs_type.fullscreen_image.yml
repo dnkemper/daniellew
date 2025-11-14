@@ -1,0 +1,10 @@
+uuid: d6d7b40e-5a57-43f3-b839-72cfedbcba28
+langcode: en
+status: true
+dependencies: {  }
+id: fullscreen_image
+label: 'Fullscreen Image'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Fullscreen Image'
+behavior_plugins: {  }

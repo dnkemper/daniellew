@@ -1,0 +1,22 @@
+uuid: d3722dfb-5af4-4820-864a-9709c4078bdf
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: resources_landing_page
+label: 'Resources Landing Page'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:resourceslanding]'
+selection_criteria:
+  81bc9d16-cee5-45e0-b751-5fb9bbbb9839:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 81bc9d16-cee5-45e0-b751-5fb9bbbb9839
+    context_mapping:
+      node: node
+    bundles:
+      resources_landing_page: resources_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

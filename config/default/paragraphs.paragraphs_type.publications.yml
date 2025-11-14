@@ -1,0 +1,10 @@
+uuid: 439a83f5-8550-4005-945f-ced83c025506
+langcode: en
+status: true
+dependencies: {  }
+id: publications
+label: Publications
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publications'
+behavior_plugins: {  }

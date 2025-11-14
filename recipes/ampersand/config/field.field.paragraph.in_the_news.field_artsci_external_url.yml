@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_artsci_external_url
+    - paragraphs.paragraphs_type.in_the_news
+_core:
+  default_config_hash: EQ8oUNvztCiEonx9QTXqJ35NV5g2bMl-7iGdXdc3BCE
+id: paragraph.in_the_news.field_artsci_external_url
+field_name: field_artsci_external_url
+entity_type: paragraph
+bundle: in_the_news
+label: 'External URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 7eq6PXtTZfE4rskGFyemgjyljDz7Ae_V7PtjKaO9yyU
+id: bookshelf_callout
+label: 'Bookshelf Callout'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

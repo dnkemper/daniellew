@@ -1,0 +1,10 @@
+uuid: 8dff7724-01e0-4f16-92ca-3c095a9fd8f7
+langcode: en
+status: true
+dependencies: {  }
+id: timeline_slides
+label: Slides
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Slides'
+behavior_plugins: {  }

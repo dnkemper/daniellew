@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cc162dfd-0c8e-4e46-92a9-0397504d9c2e
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    1ccb7936-b035-423d-b9f8-e3c82a7e4806: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: campus-chapel.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /campus-chapeljpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: 1ccb7936-b035-423d-b9f8-e3c82a7e4806
+      alt: 'campus chapel'
+      title: ''
+      width: 4159
+      height: 2717

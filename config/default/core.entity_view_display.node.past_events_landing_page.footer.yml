@@ -1,0 +1,61 @@
+uuid: c26a035a-4cf7-4b7e-a220-de684136ad09
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.footer
+    - field.field.node.past_events_landing_page.date_repeat_entity_clone_state
+    - field.field.node.past_events_landing_page.date_repeat_entity_master_uuid
+    - field.field.node.past_events_landing_page.field_category_display
+    - field.field.node.past_events_landing_page.field_event_header_image
+    - field.field.node.past_events_landing_page.field_footer_callout_p
+    - field.field.node.past_events_landing_page.field_meta_tags
+    - field.field.node.past_events_landing_page.field_search
+    - node.type.past_events_landing_page
+  module:
+    - entity_reference_revisions
+    - user
+id: node.past_events_landing_page.footer
+targetEntityType: node
+bundle: past_events_landing_page
+mode: footer
+content:
+  content_moderation_control:
+    settings: {  }
+    third_party_settings: {  }
+    weight: -20
+    region: content
+  edit_link:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_footer_callout_p:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  field_category_display: true
+  field_event_header_image: true
+  field_meta_tags: true
+  field_search: true
+  search_api_excerpt: true

@@ -1,0 +1,23 @@
+local:
+  root: /var/www/html/web
+  uri: https://globalstudies.ddev.site
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+dev:
+  uri: https://globalstudies.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://globalstudies.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://globalstudies.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/globalstudies.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

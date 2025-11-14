@@ -1,0 +1,15 @@
+.maintenance-page {
+  h1 {
+    color: var(--dark-red);
+  }
+  #primary {
+    background: var(--light-gray)
+      url('/themes/custom/olympian9/assets/svg/ampersand.svg') no-repeat;
+    background-position: calc(90% + 355px) calc(100% + 105px);
+    background-size: 775px 140%;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+  }
+}

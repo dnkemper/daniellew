@@ -1,0 +1,17 @@
+uuid: e63ce898-6c40-4a0f-9716-63e8b18f3c50
+langcode: en
+status: true
+dependencies:
+  module:
+    - olympian_core
+title: 'Default cron handler'
+id: olympian_core_cron
+weight: 0
+module: olympian_core
+callback: 'olympian_core#cron'
+scheduler:
+  id: simple
+launcher:
+  id: serial
+logger:
+  id: database

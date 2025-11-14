@@ -1,0 +1,29 @@
+uuid: e9637fa5-8624-45fe-b6cc-01f7902737f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_publication_person_image
+    - media.type.image
+    - paragraphs.paragraphs_type.publication_person
+id: paragraph.publication_person.field_publication_person_image
+field_name: field_publication_person_image
+entity_type: paragraph
+bundle: publication_person
+label: Image
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

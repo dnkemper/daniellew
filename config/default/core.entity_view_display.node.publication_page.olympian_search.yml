@@ -1,0 +1,66 @@
+uuid: 8f5b0c04-a4e4-46cf-94b3-8f0f3b0d5454
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.publication_page.field_announcements
+    - field.field.node.publication_page.field_awards
+    - field.field.node.publication_page.field_featured_people
+    - field.field.node.publication_page.field_featured_pub_news
+    - field.field.node.publication_page.field_full_screen_video
+    - field.field.node.publication_page.field_intro_section
+    - field.field.node.publication_page.field_intro_selection_type
+    - field.field.node.publication_page.field_intro_with_table_of_conten
+    - field.field.node.publication_page.field_meta_tags
+    - field.field.node.publication_page.field_publication_call_to_action
+    - field.field.node.publication_page.field_publication_degrees
+    - field.field.node.publication_page.field_publication_gallery
+    - field.field.node.publication_page.field_publication_testimonial
+    - field.field.node.publication_page.field_search
+    - field.field.node.publication_page.field_student_stories
+    - node.type.publication_page
+  module:
+    - private_content
+    - user
+id: node.publication_page.olympian_search
+targetEntityType: node
+bundle: publication_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  field_announcements: true
+  field_awards: true
+  field_featured_people: true
+  field_featured_pub_news: true
+  field_full_screen_video: true
+  field_intro_section: true
+  field_intro_selection_type: true
+  field_intro_with_table_of_conten: true
+  field_meta_tags: true
+  field_publication_call_to_action: true
+  field_publication_degrees: true
+  field_publication_gallery: true
+  field_publication_testimonial: true
+  field_student_stories: true
+  links: true

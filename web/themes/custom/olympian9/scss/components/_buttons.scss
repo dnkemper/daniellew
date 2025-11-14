@@ -1,0 +1,262 @@
+/*--------------------------------------------------------------
+# Buttons
+--------------------------------------------------------------*/
+
+button,
+input.button {
+  background: none;
+  outline: 0;
+}
+
+.button,
+input.button,
+.form-submit {
+  display: inline-block;
+  border: 2px solid;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  padding: 14px 20px 13px;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.button.solid,
+input.button.solid,
+.form-submit.solid {
+  border: 0 none;
+  padding: 18px 40px 17px;
+}
+
+.button.top-left-menu.solid {
+  padding: 18px 20px 17px;
+}
+
+.button.small,
+input.button.small,
+.form-submit.small {
+  padding: 6px 15px 5px;
+  border: 2px solid;
+  font-size: 13px;
+}
+
+.button.red,
+.button.form-submit,
+input.button.red,
+input.button.form-submit,
+.form-submit.red,
+.form-submit.form-submit {
+  background: var(--red);
+  color: #fff;
+}
+
+.button.red:hover,
+.button.form-submit:hover,
+input.button.red:hover,
+input.button.form-submit:hover,
+.form-submit.red:hover,
+.form-submit.form-submit:hover {
+  background: var(--dark-red);
+}
+
+.button.blue,
+input.button.blue,
+.form-submit.blue {
+  background: var(--dark-blue);
+  color: #fff;
+}
+
+.button.blue:hover,
+input.button.blue:hover,
+.form-submit.blue:hover {
+  background: #008c8b;
+}
+
+.button.yellow,
+input.button.yellow,
+.form-submit.yellow {
+  background: var(--gold);
+}
+
+.button.yellow:hover,
+input.button.yellow:hover,
+.form-submit.yellow:hover {
+  background: #e9b10a;
+}
+
+.cta .button,
+.cta input.button,
+.cta .form-submit {
+  color: var(--red);
+  border-color: var(--dark-red);
+}
+
+.cta .button:hover,
+.cta input.button:hover,
+.cta .form-submit:hover {
+  background: var(--lightest-gray);
+}
+
+.yellow .button,
+.red .button,
+.blue .button,
+.yellow input.button,
+.red input.button,
+.blue input.button,
+.yellow .form-submit,
+.red .form-submit,
+.blue .form-submit {
+  color: #fff;
+  border-color: #fff;
+}
+
+.yellow .button:hover,
+.yellow input.button:hover,
+.yellow .form-submit:hover {
+  background: #e9b10a;
+}
+
+.red .button:hover,
+.red input.button:hover,
+.red .form-submit:hover {
+  background: #8e1114;
+}
+
+.blue .button:hover,
+.blue input.button:hover,
+.blue .form-submit:hover {
+  background: #54c1c0;
+}
+
+.cancel {
+  background: #757575;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  color: #fff;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 9px;
+  margin-top: -3px;
+  position: relative;
+  font-size: 0;
+}
+
+.cancel:before,
+.cancel:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+  left: 50%;
+  margin-left: -1px;
+  width: 2px;
+  background: #fff;
+  height: 12px;
+}
+
+.js-gallery:hover img,
+.profile-post:hover .cover {
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+}
+
+.cancel:before {
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.cancel:after {
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.cancel:hover {
+  background: #999;
+}
+
+.js-gallery {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.js-gallery img {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.js-gallery:hover img {
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+}
+
+.social-sharing-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em 0;
+
+  svg {
+    &:hover {
+      webkit-transform: translateY(-4px);
+      transform: translateY(-4px);
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+#footer .social-links a.facebook svg {
+  fill: var(--red);
+  width: 39px;
+  height: 39px;
+}
+
+svg#share-facebook,
+.share-widget a.share-facebook svg {
+  fill: #3b5998 !important;
+  width: 32px;
+  height: 32px;
+}
+
+svg#twitter,
+.share-widget a.share-twitter svg {
+  fill: var(--light-blue) !important;
+  width: 32px;
+  height: 20px;
+}
+
+svg#email,
+.share-widget a.share-email svg {
+  fill: var(--red);
+  width: 32px;
+  height: 32px;
+}
+
+.share h2 {
+  color: var(--dark-gray);
+}
+
+article.single-event-post {
+  .social-sharing-buttons {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.not-found {
+  #photo-header {
+    .button {
+      background: #fff;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.85) !important;
+      }
+    }
+  }
+}

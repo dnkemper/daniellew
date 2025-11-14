@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: linguistics.ddev.site
+    protocol: https
+  machine_name: linguistics
+  human_name: linguistics.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: linguistics.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/linguistics.wustl.edu/files'
+    origin: 'https://linguistics.wustl.edu'
+drupal:
+  db:
+    database: drupal_linguistics
+system:
+  site:
+    contact_us_url: 'https://linguistics.wustl.edu/contact-us'
+    name: linguistics
+    email: linguistics@wustl.edu

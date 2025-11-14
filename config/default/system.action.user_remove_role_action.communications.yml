@@ -1,0 +1,14 @@
+uuid: e9b3c213-415b-4a12-b900-843916e966cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.communications
+  module:
+    - user
+id: user_remove_role_action.communications
+label: 'Remove the Communications role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: communications

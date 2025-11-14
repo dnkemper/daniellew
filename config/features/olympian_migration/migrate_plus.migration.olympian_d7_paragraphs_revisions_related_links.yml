@@ -1,0 +1,51 @@
+uuid: 00fb1ae3-af55-48be-ba4d-6f205a0a15ba
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_related_links
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Related Links)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: related_links
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_button_link:
+    plugin: field_link_custom
+    source: field_external_url
+    title_source: field_title
+  field_new_window:
+    -
+      plugin: get
+      source: field_new_window
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: related_links
+migration_dependencies:
+  required: {}
+  optional: {  }

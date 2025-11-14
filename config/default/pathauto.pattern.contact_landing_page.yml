@@ -1,0 +1,22 @@
+uuid: aebb0907-8b0e-4298-9f8e-2b5c99741f43
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: contact_landing_page
+label: 'Contact Landing Page'
+type: 'canonical_entities:node'
+pattern: '[olympian_seo:contactus]'
+selection_criteria:
+  30851766-ae9d-44df-b43e-a24c20c12d52:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 30851766-ae9d-44df-b43e-a24c20c12d52
+    context_mapping:
+      node: node
+    bundles:
+      contact_landing_page: contact_landing_page
+selection_logic: and
+weight: -5
+relationships: {  }

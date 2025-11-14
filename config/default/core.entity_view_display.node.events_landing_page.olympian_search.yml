@@ -1,0 +1,53 @@
+uuid: 730da944-dbe3-49a0-a732-007bd77efcdb
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.olympian_search
+    - field.field.node.events_landing_page.date_repeat_entity_clone_state
+    - field.field.node.events_landing_page.date_repeat_entity_master_uuid
+    - field.field.node.events_landing_page.field_category_display
+    - field.field.node.events_landing_page.field_event_header_image
+    - field.field.node.events_landing_page.field_footer_callout_p
+    - field.field.node.events_landing_page.field_header_type
+    - field.field.node.events_landing_page.field_landing_page_type
+    - field.field.node.events_landing_page.field_meta_tags
+    - field.field.node.events_landing_page.field_search
+    - node.type.events_landing_page
+  module:
+    - user
+id: node.events_landing_page.olympian_search
+targetEntityType: node
+bundle: events_landing_page
+mode: olympian_search
+content:
+  field_search:
+    type: basic_string
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  private:
+    type: private
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  search_api_excerpt:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  content_moderation_control: true
+  date_repeat_entity_clone_state: true
+  date_repeat_entity_master_uuid: true
+  field_category_display: true
+  field_event_header_image: true
+  field_footer_callout_p: true
+  field_header_type: true
+  field_landing_page_type: true
+  field_meta_tags: true
+  links: true

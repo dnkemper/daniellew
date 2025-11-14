@@ -1,0 +1,10 @@
+uuid: 1ce309ad-f939-40b4-a822-78db6675b4c2
+langcode: en
+status: true
+dependencies: {  }
+id: publication_gallery_image
+label: 'Publication Gallery Image'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Publication Gallery Image'
+behavior_plugins: {  }

@@ -1,0 +1,28 @@
+uuid: 9b5980c5-81e0-4de9-b556-53ff663648a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.article_spotlight.field_second_article
+    - field.field.paragraph.article_spotlight.field_spot_articles
+    - paragraphs.paragraphs_type.article_spotlight
+id: paragraph.article_spotlight.default
+targetEntityType: paragraph
+bundle: article_spotlight
+mode: default
+content:
+  field_second_article:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_spot_articles:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

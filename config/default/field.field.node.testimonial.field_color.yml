@@ -1,0 +1,21 @@
+uuid: 27e8242f-5258-4054-bc70-007a901ded05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_color
+    - node.type.testimonial
+  module:
+    - options
+id: node.testimonial.field_color
+field_name: field_color
+entity_type: node
+bundle: testimonial
+label: Color
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

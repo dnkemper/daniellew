@@ -1,0 +1,14 @@
+uuid: 23431bc8-a486-49d7-a009-f8aad2e93059
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.generic_page
+id: node_type_generic_page
+entity_type_id: node_type
+entity_id: generic_page
+action: display_page
+allow_override: 1
+redirect: ''
+redirect_code: 301
+redirect_fallback_action: access_denied

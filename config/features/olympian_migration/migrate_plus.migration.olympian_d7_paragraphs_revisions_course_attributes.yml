@@ -1,0 +1,71 @@
+uuid: 86e41026-4691-473a-a380-351212660c06
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_revisions_course_attributes
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Revisions Content'
+migration_group: olympian_d7
+label: 'Paragraphs Revisions (Course Attributes)'
+source:
+  plugin: d7_paragraphs_item_revision
+  bundle: course_attributes
+process:
+  id:
+    -
+      plugin: paragraphs_lookup
+      tags:
+        - 'Paragraphs Content'
+      source: item_id
+    -
+      plugin: extract
+      index:
+        - id
+  type:
+    -
+      plugin: get
+      source: bundle
+  field_ca_full_name:
+    -
+      plugin: get
+      source: field_ca_full_name
+  field_ca_group:
+    -
+      plugin: get
+      source: field_ca_group
+  field_ca_owner_full_name:
+    -
+      plugin: get
+      source: field_ca_owner_full_name
+  field_ca_owner_short_name:
+    -
+      plugin: get
+      source: field_ca_owner_short_name
+  field_ca_print_code:
+    -
+      plugin: get
+      source: field_ca_print_code
+  field_ca_short_name:
+    -
+      plugin: get
+      source: field_ca_short_name
+  field_ca_title:
+    -
+      plugin: get
+      source: field_ca_title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  new_revisions: true
+  default_bundle: course_attributes
+migration_dependencies:
+  required: {}
+  optional: {  }

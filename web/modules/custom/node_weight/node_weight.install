@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+use Drupal\node\Entity\Node;
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Node Weight module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function node_weight_install(): void {
+  \Drupal::messenger()->addStatus(t('Module Node Weight has been installed.'));
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function node_weight_uninstall(): void {
+  \Drupal::messenger()->addStatus(t('Module Node Weight has been uninstalled.'));
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function node_weight_update_8001() {
+  // Query for nodes of the "webform" content type.
+  $entity_ids = \Drupal::entityQuery('node')
+  // Replace 'webform' with your content type machine name.
+    ->condition('type', 'webform')
+    ->accessCheck(FALSE)
+    ->execute();
+
+  if ($entity_ids) {
+    // Load and delete the nodes.
+    $nodes = Node::loadMultiple($entity_ids);
+    foreach ($nodes as $node) {
+      $node->delete();
+    }
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function node_weight_update_8002() {
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $permissions = array_keys(\Drupal::service('user.permissions')->getPermissions());
+  /** @var \Drupal\user\RoleInterface[] $roles */
+  $roles = $entity_type_manager->getStorage('user_role')->loadMultiple();
+  foreach ($roles as $role) {
+    $role_permissions = $role->getPermissions();
+    $differences = array_diff($role_permissions, $permissions);
+    if ($differences) {
+      foreach ($differences as $permission) {
+        $role->revokePermission($permission);
+      }
+      $role->save();
+    }
+  }
+}

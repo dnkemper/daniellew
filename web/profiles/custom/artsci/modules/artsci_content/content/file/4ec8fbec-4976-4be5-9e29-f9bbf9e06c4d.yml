@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4ec8fbec-4976-4be5-9e29-f9bbf9e06c4d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: faculty_420x420.png
+  uri:
+    -
+      value: 'public://2023-12/faculty_420x420_10.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 35282
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1701521698

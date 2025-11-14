@@ -1,0 +1,16 @@
+uuid: b6e2acb8-c33d-4b4a-9117-1d766c8eaa08
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.focal_point_preview
+id: focal_point_preview
+label: 'Focal Point Preview'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: focal_point_preview
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: focal_point_preview

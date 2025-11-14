@@ -1,0 +1,8 @@
+uuid: d19dfb24-e51d-42f9-b3a1-68a822d96fda
+langcode: en
+status: true
+dependencies: {  }
+name: Denomination
+vid: coin_denomination
+description: ''
+weight: 0

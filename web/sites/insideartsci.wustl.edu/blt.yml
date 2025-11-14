@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: insideartsci.ddev.site
+    protocol: https
+  machine_name: insideartsci
+  human_name: insideartsci.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: insideartsci.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/insideartsci.wustl.edu/files'
+    origin: 'https://insideartsci.wustl.edu'
+drupal:
+  db:
+    database: drupal_insideartsci
+system:
+  site:
+    contact_us_url: 'https://insideartsci.wustl.edu/contact-us'
+    name: insideartsci
+    email: insideartsci@wustl.edu

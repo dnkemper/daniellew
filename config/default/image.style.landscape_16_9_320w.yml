@@ -1,0 +1,23 @@
+uuid: 2e0821ae-2cb0-4188-bb89-517d9f567ad8
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_16_9_320w
+label: 'landscape 16:9 (320w)'
+effects:
+  ac40f61f-df36-4598-b85b-82d56567fbd0:
+    uuid: ac40f61f-df36-4598-b85b-82d56567fbd0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 320
+      height: 180
+      crop_type: focal_point
+  e135a0e3-fed5-4bc9-ac67-3fc9a38aace3:
+    uuid: e135a0e3-fed5-4bc9-ac67-3fc9a38aace3
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

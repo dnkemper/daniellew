@@ -1,0 +1,30 @@
+uuid: cf0ffd14-f784-4612-9cef-9702233d5ee2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.table_of_contents_anchors.field_anchor_section
+    - field.field.paragraph.table_of_contents_anchors.field_anchor_title
+    - paragraphs.paragraphs_type.table_of_contents_anchors
+id: paragraph.table_of_contents_anchors.default
+targetEntityType: paragraph
+bundle: table_of_contents_anchors
+mode: default
+content:
+  field_anchor_section:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_anchor_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

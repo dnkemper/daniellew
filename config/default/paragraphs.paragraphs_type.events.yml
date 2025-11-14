@@ -1,0 +1,10 @@
+uuid: 05b88ca0-290a-4973-9105-1d7d2557319e
+langcode: en
+status: true
+dependencies: {  }
+id: events
+label: Events
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Events'
+behavior_plugins: {  }

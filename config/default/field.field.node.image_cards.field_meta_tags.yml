@@ -1,0 +1,21 @@
+uuid: 5a1e4074-31f3-4083-92a2-7c73efbce6c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.image_cards
+  module:
+    - metatag
+id: node.image_cards.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: image_cards
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

@@ -1,0 +1,21 @@
+uuid: 1afbb1da-b0ba-42ed-9fff-e4476b09ac5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_intro_selection_type
+    - node.type.publication_page
+  module:
+    - options
+id: node.publication_page.field_intro_selection_type
+field_name: field_intro_selection_type
+entity_type: node
+bundle: publication_page
+label: 'Intro Selection Type'
+description: 'If Featured News is chosen, the featured news section will appear at the top instead of the middle of the page.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

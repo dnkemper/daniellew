@@ -1,0 +1,58 @@
+id: paragraph_social_media_links
+label: 'Social Media Links Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+  - artsci-paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: social_media_links  # Replace with the machine name of the paragraph bundle in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: social_media_links  # Replace with the machine name of the paragraph bundle in Drupal 10
+  field_facebook_link:
+    -
+      plugin: sub_process
+      source: field_facebook_url
+      process:
+        uri: value
+  field_twitter_link:
+    -
+      plugin: sub_process
+      source: field_twitter_url
+      process:
+        uri: value
+  field_instagram_link:
+    -
+      plugin: sub_process
+      source: field_instagram_url
+      process:
+        uri: value
+  field_flickr_link:
+    -
+      plugin: sub_process
+      source: field_flickr_url
+      process:
+        uri: value
+
+  field_linkedin_link:
+    -
+      plugin: sub_process
+      source: field_linkedin_url
+      process:
+        uri: value
+  field_youtube_link:
+    -
+      plugin: sub_process
+      source: field_youtube_url
+      process:
+        uri: value
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: social_media_links
+migration_dependencies:
+  required: {}
+  optional: {}

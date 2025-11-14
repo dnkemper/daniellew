@@ -1,0 +1,42 @@
+uuid: ca92b866-1a4b-4669-bce1-28ae4bc587b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_featured_people.field_person
+    - paragraphs.paragraphs_type.publication_featured_people
+  module:
+    - paragraphs
+    - paragraphs_features
+id: paragraph.publication_featured_people.default
+targetEntityType: paragraph
+bundle: publication_featured_people
+mode: default
+content:
+  field_person:
+    type: paragraphs
+    weight: 1
+    region: content
+    settings:
+      title: 'Featured Person'
+      title_plural: 'Featured People'
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: all
+      closed_mode_threshold: 0
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        duplicate: '0'
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 0
+        delete_confirmation: true
+        show_drag_and_drop: false
+hidden:
+  created: true
+  status: true

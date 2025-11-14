@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: anthropology.ddev.site
+    protocol: https
+  machine_name: anthropology
+  human_name: anthropology.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: anthropology.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/anthropology.wustl.edu/files'
+    origin: 'https://anthropology.wustl.edu'
+drupal:
+  db:
+    database: drupal_anthropology
+system:
+  site:
+    contact_us_url: 'https://anthropology.wustl.edu/contact-us'
+    name: anthropology
+    email: anthropology@wustl.edu

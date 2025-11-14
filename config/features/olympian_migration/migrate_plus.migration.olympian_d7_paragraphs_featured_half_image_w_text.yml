@@ -1,0 +1,67 @@
+uuid: b6666ae9-ab47-4eee-9411-599b6e796686
+langcode: en
+status: true
+dependencies: {  }
+id: olympian_d7_paragraphs_featured_half_image_w_text
+class: Drupal\migrate\Plugin\Migration
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags:
+  - 'Drupal 7'
+  - Content
+  - 'Paragraphs Content'
+migration_group: olympian_d7
+idMap:
+  plugin: smart_sql
+label: 'Paragraphs (Featured Half Image w/Text)'
+source:
+  plugin: d7_paragraphs_item
+  bundle: featured_half_image_w_text
+process:
+  type:
+    -
+      plugin: get
+      source: bundle
+  parent_id: parent_id
+  id: item_id
+  revision_id: revision_id
+  field_half_image_optional_header:
+    -
+      plugin: get
+      source: field_half_image_optional_header
+  field_half_image_description:
+    -
+      plugin: get
+      source: field_half_image_description
+  field_custom_caption:
+    -
+      plugin: get
+      source: field_custom_caption
+  field_half_image:
+    plugin: sub_process
+    source: field_half_image
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: media_image_migration
+        source: fid
+      alt: alt
+      title: title
+      width: width
+      height: height
+  field_custom_button_:
+    plugin: field_link_custom
+    source: field_custom_button_/0/url
+    title_source: field_custom_button_/0/title
+  field_half_image_main_titl:
+    plugin: field_link_custom
+    source: field_half_image_main_titl/0/url
+    title_source: field_half_image_main_titl/0/title
+  field_metatag:
+    -
+      plugin: d7_metatag_entities
+      source: pseudo_metatag_entities
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: featured_half_image_w_text
+migration_dependencies: {  }

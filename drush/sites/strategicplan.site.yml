@@ -1,0 +1,21 @@
+local:
+  root: '${env.cwd}/web'
+  uri: https://strategicplan.artsci.ddev.site
+dev:
+  uri: https://strategicplan.artscidev.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/strategicplan.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+stage:
+  uri: https://strategicplan.artscistage.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/strategicplan.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush
+prod:
+  uri: https://strategicplan.artsci.wustl.edu
+  root: /var/www/html/d9main/web
+  paths:
+    files: sites/strategicplan.artsci.wustl.edu/files
+    drush-script: /var/www/html/d9main/vendor/bin/drush

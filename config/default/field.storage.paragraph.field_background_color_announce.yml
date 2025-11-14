@@ -1,0 +1,33 @@
+uuid: 4c2f55cd-0fed-47e2-bec8-9bbf0c009dcd
+langcode: und
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_background_color_announce
+field_name: field_background_color_announce
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: Gray
+      label: gray
+    -
+      value: Green
+      label: green
+    -
+      value: Yellow
+      label: yellow
+    -
+      value: Blue
+      label: blue
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,34 @@
+id: paragraph_dark_callout
+label: 'Dark Callout Paragraph Migration from Drupal 7 to Drupal 10'
+migration_group: olympian_migration
+migration_tags:
+  - artsci
+  - paragraph
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: dark_callout  # Adjust if the bundle name is different in Drupal 7
+process:
+  type:
+    plugin: default_value
+    default_value: dark_callout  # Adjust if the bundle name is different in Drupal 10
+  field_title: field_title
+  field_description: field_description
+
+  # Link field mapping
+  field_callout_button:
+      plugin: field_link_custom
+      source: field_callout_button_url
+      title_source: field_callout_button_text
+  # Boolean field mapping
+  field_new_window:
+    plugin: get
+    source: field_new_window
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: dark_callout
+migration_dependencies:
+  required: {}
+  optional: {}

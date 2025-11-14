@@ -1,0 +1,25 @@
+uuid: 4669dd18-9928-445d-86db-bed2ffe254ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_article_two
+    - paragraphs.paragraphs_type.publications_intro
+id: paragraph.publications_intro.field_article_two
+field_name: field_article_two
+entity_type: paragraph
+bundle: publications_intro
+label: 'Second Article'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: views
+  handler_settings:
+    view:
+      view_name: entity_reference
+      display_name: entity_reference_article
+      arguments: {  }
+field_type: entity_reference

@@ -1,0 +1,41 @@
+uuid: fa2c3915-74e9-41e7-a0c5-79f8e59ec6f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publications.field_button_url
+    - field.field.paragraph.publications.field_subtitle
+    - field.field.paragraph.publications.field_title
+    - paragraphs.paragraphs_type.publications
+id: paragraph.publications.default
+targetEntityType: paragraph
+bundle: publications
+mode: default
+content:
+  field_button_url:
+    type: string_textfield
+    weight: 6
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_subtitle:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

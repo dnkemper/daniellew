@@ -1,0 +1,30 @@
+uuid: bf30c092-c054-40c6-be99-1c7801ad32f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_select_testimonials
+    - node.type.image_cards
+    - node.type.testimonial
+id: node.image_cards.field_select_testimonials
+field_name: field_select_testimonials
+entity_type: node
+bundle: image_cards
+label: 'Select Testimonials'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      testimonial: testimonial
+    sort:
+      field: _none
+      direction: ASC
+    behaviors:
+      views-select-list:
+        status: 0
+field_type: entity_reference

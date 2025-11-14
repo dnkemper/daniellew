@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1171fd86-7b93-4b29-9c66-52a665789279
+  bundle: image
+  default_langcode: en
+  depends:
+    6c34862c-bdd3-490e-b8c8-a05f2b770380: taxonomy_term
+    c1d752ed-2956-45a3-8eb6-7ed114061171: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: seigle-hall.jpg
+  created:
+    -
+      value: 1701520376
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  directory:
+    -
+      entity: 6c34862c-bdd3-490e-b8c8-a05f2b770380
+  path:
+    -
+      alias: /seigle-halljpg
+      langcode: en
+      pathauto: 0
+  field_media_image:
+    -
+      entity: c1d752ed-2956-45a3-8eb6-7ed114061171
+      alt: 'seigle hall campus image'
+      title: ''
+      width: 6169
+      height: 4392

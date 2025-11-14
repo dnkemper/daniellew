@@ -1,0 +1,38 @@
+id: paragraph_publication_call_to_action
+label: 'Publication Call to Action Paragraph Migration from Drupal 7 to Drupal 10'
+migration_tags:
+  - artsci
+idMap:
+  plugin: smart_sql
+source:
+  plugin: d7_paragraphs_item
+  bundle: publication_call_to_action  
+process:
+  type:
+    plugin: default_value
+    default_value: publication_call_to_action  
+
+  # List (text) field mapping
+  field_background_color_cta: field_background_color_cta
+  # Entity reference fields mapping
+  field_call_to_action_button:
+    plugin: field_link_custom
+    source: field_callout_button_url
+    title_source: field_call_to_action_button_text
+
+
+  # Text long and text field mappings
+  field_call_to_action_description: field_call_to_action_description
+  field_call_to_action_title: field_call_to_action_title
+
+  # Boolean field mapping
+  field_new_window:
+    plugin: get
+    source: field_new_window
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: publication_call_to_action
+migration_dependencies:
+  required: {}
+  optional: {}

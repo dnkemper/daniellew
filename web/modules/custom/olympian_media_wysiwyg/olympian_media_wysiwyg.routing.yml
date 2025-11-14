@@ -1,0 +1,7 @@
+olympian_media_wysiwyg.content_sharing_settings:
+  path: '/admin/structure/content-sharing-settings'
+  defaults:
+    _title: 'Content Sharing'
+    _form: 'Drupal\olympian_media_wysiwyg\Form\ContentSharingSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

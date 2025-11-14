@@ -1,0 +1,23 @@
+uuid: 9850066d-fe10-4722-91e3-ea88c4d8c2b9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_twitter_section.field_twitter_description
+    - paragraphs.paragraphs_type.publication_twitter_section
+id: paragraph.publication_twitter_section.default
+targetEntityType: paragraph
+bundle: publication_twitter_section
+mode: default
+content:
+  field_twitter_description:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

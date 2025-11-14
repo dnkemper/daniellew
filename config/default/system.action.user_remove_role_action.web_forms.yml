@@ -1,0 +1,14 @@
+uuid: 44160769-dcd3-4f4f-a31d-dfb732567520
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.web_forms
+  module:
+    - user
+id: user_remove_role_action.web_forms
+label: 'Remove the web forms role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: web_forms

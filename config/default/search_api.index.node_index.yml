@@ -1,0 +1,777 @@
+uuid: 9b3f0762-4153-417d-9da6-3669ebc2f0a1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - field.storage.node.field_additional_titles
+    - field.storage.node.field_author
+    - field.storage.node.field_author_description
+    - field.storage.node.field_award
+    - field.storage.node.field_basic_page_content
+    - field.storage.node.field_button_url
+    - field.storage.node.field_byline_names
+    - field.storage.node.field_byline_options
+    - field.storage.node.field_call_to_action_button_text
+    - field.storage.node.field_description
+    - field.storage.node.field_direct_link
+    - field.storage.node.field_education
+    - field.storage.node.field_event_contact
+    - field.storage.node.field_event_date_tbd
+    - field.storage.node.field_event_geolocation
+    - field.storage.node.field_event_smart_date
+    - field.storage.node.field_external_profile_link
+    - field.storage.node.field_external_url
+    - field.storage.node.field_faculty_and_staff
+    - field.storage.node.field_faqs
+    - field.storage.node.field_first_name
+    - field.storage.node.field_image_card_terms
+    - field.storage.node.field_interests
+    - field.storage.node.field_intro_text
+    - field.storage.node.field_introduction_excerpt
+    - field.storage.node.field_last_name
+    - field.storage.node.field_link_excerpt
+    - field.storage.node.field_location
+    - field.storage.node.field_position
+    - field.storage.node.field_resource_category
+    - field.storage.node.field_search
+    - field.storage.node.field_show_end_date
+    - field.storage.node.field_subtitle
+    - field.storage.node.field_title
+    - field.storage.paragraph.field_call_to_action_title
+    - field.storage.paragraph.field_description
+    - field.storage.paragraph.field_description_formatted
+    - field.storage.paragraph.field_faq
+    - field.storage.paragraph.field_generic_title
+    - field.storage.paragraph.field_half_text_title
+    - field.storage.paragraph.field_link_title
+    - field.storage.paragraph.field_subtitle
+    - field.storage.paragraph.field_title
+    - field.storage.paragraph.field_title_and_body
+    - field.storage.paragraph.field_two_col_title
+    - search_api.server.database_server
+  module:
+    - content_moderation
+    - node
+    - paragraphs
+id: node_index
+name: 'Node Index'
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  created:
+    label: 'Authored on'
+    datasource_id: 'entity:node'
+    property_path: created
+    type: date
+    dependencies:
+      module:
+        - node
+  end_value:
+    label: 'Smart Event Date » End timestamp value'
+    datasource_id: 'entity:node'
+    property_path: 'field_event_smart_date:end_value'
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_smart_date
+  field_additional_titles:
+    label: 'Additional Titles'
+    datasource_id: 'entity:node'
+    property_path: field_additional_titles
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_additional_titles
+  field_author:
+    label: 'Author Name'
+    datasource_id: 'entity:node'
+    property_path: field_author
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_author
+  field_author_description:
+    label: 'Author Description'
+    datasource_id: 'entity:node'
+    property_path: field_author_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_author_description
+  field_award:
+    label: 'Endowed Professorship'
+    datasource_id: 'entity:node'
+    property_path: field_award
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_award
+  field_basic_page_content:
+    label: Content
+    datasource_id: 'entity:node'
+    property_path: field_basic_page_content
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_basic_page_content
+  field_button_url:
+    label: 'Button URL'
+    datasource_id: 'entity:node'
+    property_path: field_button_url
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_button_url
+  field_byline_names:
+    label: 'Byline Names'
+    datasource_id: 'entity:node'
+    property_path: field_byline_names
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_byline_names
+  field_byline_options:
+    label: 'Byline Options'
+    datasource_id: 'entity:node'
+    property_path: field_byline_options
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_byline_options
+  field_call_to_action_button_text:
+    label: 'Button Text'
+    datasource_id: 'entity:node'
+    property_path: field_call_to_action_button_text
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_call_to_action_button_text
+  field_call_to_action_title:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_call_to_action_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_call_to_action_title
+  field_description:
+    label: Description
+    datasource_id: 'entity:node'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_description
+  field_description_1:
+    label: Description
+    datasource_id: 'entity:paragraph'
+    property_path: field_description
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_description
+  field_description_formatted:
+    label: Description
+    datasource_id: 'entity:paragraph'
+    property_path: field_description_formatted
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_description_formatted
+  field_direct_link:
+    label: 'Direct Link'
+    datasource_id: 'entity:node'
+    property_path: field_direct_link
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_direct_link
+  field_education:
+    label: Education
+    datasource_id: 'entity:node'
+    property_path: field_education
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_education
+  field_event_contact:
+    label: 'Event Contact'
+    datasource_id: 'entity:node'
+    property_path: field_event_contact
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_contact
+  field_event_date_tbd:
+    label: 'Event Date TBD'
+    datasource_id: 'entity:node'
+    property_path: field_event_date_tbd
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_event_date_tbd
+  field_event_geolocation:
+    label: 'Geolocation Address'
+    datasource_id: 'entity:node'
+    property_path: field_event_geolocation
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_geolocation
+  field_event_smart_date:
+    label: 'Smart Event Date'
+    datasource_id: 'entity:node'
+    property_path: field_event_smart_date
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_event_smart_date
+  field_event_smart_date_1:
+    label: 'Smart Event Date'
+    datasource_id: 'entity:node'
+    property_path: field_event_smart_date
+    type: date
+    dependencies:
+      config:
+        - field.storage.node.field_event_smart_date
+  field_external_profile_link:
+    label: 'Direct Link'
+    datasource_id: 'entity:node'
+    property_path: field_external_profile_link
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_external_profile_link
+  field_external_url:
+    label: 'Direct Link'
+    datasource_id: 'entity:node'
+    property_path: field_external_url
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_external_url
+  field_faculty_and_staff:
+    label: 'Display this article on these profiles:'
+    datasource_id: 'entity:node'
+    property_path: field_faculty_and_staff
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_faculty_and_staff
+  field_faqs:
+    label: FAQs
+    datasource_id: 'entity:node'
+    property_path: field_faqs
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_faqs
+  field_first_name:
+    label: 'First Name'
+    datasource_id: 'entity:node'
+    property_path: field_first_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_first_name
+  field_generic_title:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_generic_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_generic_title
+  field_half_text_title:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_half_text_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_half_text_title
+  field_image_card_terms:
+    label: 'Image Card Terms'
+    datasource_id: 'entity:node'
+    property_path: field_image_card_terms
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_image_card_terms
+  field_interests:
+    label: Interests
+    datasource_id: 'entity:node'
+    property_path: field_interests
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_interests
+  field_intro_text:
+    label: 'Intro Text'
+    datasource_id: 'entity:node'
+    property_path: field_intro_text
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_intro_text
+  field_introduction_excerpt:
+    label: 'Intro Text'
+    datasource_id: 'entity:node'
+    property_path: field_introduction_excerpt
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_introduction_excerpt
+  field_last_name:
+    label: 'Last Name'
+    datasource_id: 'entity:node'
+    property_path: field_last_name
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_last_name
+  field_link_excerpt:
+    label: 'Teaser Text'
+    datasource_id: 'entity:node'
+    property_path: field_link_excerpt
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_link_excerpt
+  field_link_title:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_link_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_link_title
+  field_location:
+    label: Location
+    datasource_id: 'entity:node'
+    property_path: field_location
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_location
+  field_position:
+    label: Titles
+    datasource_id: 'entity:node'
+    property_path: field_position
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_position
+  field_resource_category:
+    label: Category
+    datasource_id: 'entity:node'
+    property_path: field_resource_category
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_resource_category
+  field_search:
+    label: Search
+    datasource_id: 'entity:node'
+    property_path: field_search
+    type: text
+    boost: 21.0
+    dependencies:
+      config:
+        - field.storage.node.field_search
+  field_show_end_date:
+    label: 'Show End Date'
+    datasource_id: 'entity:node'
+    property_path: field_show_end_date
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.node.field_show_end_date
+  field_subtitle:
+    label: Subtitle
+    datasource_id: 'entity:paragraph'
+    property_path: field_subtitle
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_subtitle
+  field_subtitle_1:
+    label: Subtitle
+    datasource_id: 'entity:node'
+    property_path: field_subtitle
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_subtitle
+  field_title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: field_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.field_title
+  field_title_1:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_title
+  field_title_2:
+    label: 'FAQ » Paragraph » Title'
+    datasource_id: 'entity:paragraph'
+    property_path: 'field_faq:entity:field_title'
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_faq
+        - field.storage.paragraph.field_title
+      module:
+        - paragraphs
+  field_title_and_body:
+    label: 'Title and Body'
+    datasource_id: 'entity:paragraph'
+    property_path: field_title_and_body
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_title_and_body
+  field_two_col_title:
+    label: Title
+    datasource_id: 'entity:paragraph'
+    property_path: field_two_col_title
+    type: text
+    dependencies:
+      config:
+        - field.storage.paragraph.field_two_col_title
+  moderation_state:
+    label: 'Moderation state'
+    datasource_id: 'entity:node'
+    property_path: moderation_state
+    type: text
+    dependencies:
+      module:
+        - content_moderation
+  nid:
+    label: ID
+    datasource_id: 'entity:node'
+    property_path: nid
+    type: integer
+    dependencies:
+      module:
+        - node
+  status:
+    label: status
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: 8.0
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - article
+        - book
+        - contact_landing_page
+        - events
+        - events_landing_page
+        - faculty_landing_page
+        - faculty_staff
+        - faq
+        - generic_page
+        - home_page
+        - image_cards
+        - image_cards_landing
+        - news_landing_page
+        - page
+        - publication_page
+        - resources
+        - resources_landing_page
+        - testimonial
+    languages:
+      default: false
+      selected:
+        - en
+  'entity:paragraph':
+    bundles:
+      default: true
+      selected: {  }
+    languages:
+      default: false
+      selected:
+        - en
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  custom_value: {  }
+  entity_status: {  }
+  entity_type: {  }
+  html_filter:
+    weights:
+      preprocess_index: -48
+      preprocess_query: -47
+    all_fields: true
+    fields:
+      - body
+      - end_value
+      - field_additional_titles
+      - field_author
+      - field_author_description
+      - field_award
+      - field_basic_page_content
+      - field_button_url
+      - field_byline_names
+      - field_byline_options
+      - field_call_to_action_button_text
+      - field_call_to_action_title
+      - field_description
+      - field_description_1
+      - field_description_formatted
+      - field_direct_link
+      - field_education
+      - field_event_contact
+      - field_event_geolocation
+      - field_event_smart_date
+      - field_external_profile_link
+      - field_external_url
+      - field_faculty_and_staff
+      - field_faqs
+      - field_first_name
+      - field_generic_title
+      - field_half_text_title
+      - field_image_card_terms
+      - field_interests
+      - field_intro_text
+      - field_introduction_excerpt
+      - field_last_name
+      - field_link_excerpt
+      - field_link_title
+      - field_location
+      - field_position
+      - field_resource_category
+      - field_search
+      - field_subtitle
+      - field_subtitle_1
+      - field_title
+      - field_title_1
+      - field_title_2
+      - field_title_and_body
+      - field_two_col_title
+      - moderation_state
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+  ignorecase:
+    weights:
+      preprocess_index: -49
+      preprocess_query: -49
+    all_fields: true
+    fields:
+      - body
+      - end_value
+      - field_additional_titles
+      - field_author
+      - field_author_description
+      - field_award
+      - field_basic_page_content
+      - field_button_url
+      - field_byline_names
+      - field_byline_options
+      - field_call_to_action_button_text
+      - field_call_to_action_title
+      - field_description
+      - field_description_1
+      - field_description_formatted
+      - field_direct_link
+      - field_education
+      - field_event_contact
+      - field_event_geolocation
+      - field_event_smart_date
+      - field_external_profile_link
+      - field_external_url
+      - field_faculty_and_staff
+      - field_faqs
+      - field_first_name
+      - field_generic_title
+      - field_half_text_title
+      - field_image_card_terms
+      - field_interests
+      - field_intro_text
+      - field_introduction_excerpt
+      - field_last_name
+      - field_link_excerpt
+      - field_link_title
+      - field_location
+      - field_position
+      - field_resource_category
+      - field_search
+      - field_subtitle
+      - field_subtitle_1
+      - field_title
+      - field_title_1
+      - field_title_2
+      - field_title_and_body
+      - field_two_col_title
+      - moderation_state
+      - title
+  language_with_fallback: {  }
+  rendered_item: {  }
+  reverse_entity_references: {  }
+  stemmer:
+    weights:
+      preprocess_index: -44
+      preprocess_query: -44
+    all_fields: true
+    fields:
+      - body
+      - end_value
+      - field_additional_titles
+      - field_author
+      - field_author_description
+      - field_award
+      - field_basic_page_content
+      - field_button_url
+      - field_byline_names
+      - field_byline_options
+      - field_call_to_action_button_text
+      - field_call_to_action_title
+      - field_description
+      - field_description_1
+      - field_description_formatted
+      - field_direct_link
+      - field_education
+      - field_event_contact
+      - field_event_geolocation
+      - field_event_smart_date
+      - field_external_profile_link
+      - field_external_url
+      - field_faculty_and_staff
+      - field_faqs
+      - field_first_name
+      - field_generic_title
+      - field_half_text_title
+      - field_image_card_terms
+      - field_interests
+      - field_intro_text
+      - field_introduction_excerpt
+      - field_last_name
+      - field_link_excerpt
+      - field_link_title
+      - field_location
+      - field_position
+      - field_resource_category
+      - field_search
+      - field_subtitle
+      - field_subtitle_1
+      - field_title
+      - field_title_1
+      - field_title_2
+      - field_title_and_body
+      - field_two_col_title
+      - moderation_state
+      - title
+    exceptions:
+      texan: texa
+  tokenizer:
+    weights:
+      preprocess_index: -50
+      preprocess_query: -50
+    all_fields: true
+    fields:
+      - body
+      - end_value
+      - field_additional_titles
+      - field_author
+      - field_author_description
+      - field_award
+      - field_basic_page_content
+      - field_button_url
+      - field_byline_names
+      - field_byline_options
+      - field_call_to_action_button_text
+      - field_call_to_action_title
+      - field_description
+      - field_description_1
+      - field_description_formatted
+      - field_direct_link
+      - field_education
+      - field_event_contact
+      - field_event_geolocation
+      - field_event_smart_date
+      - field_external_profile_link
+      - field_external_url
+      - field_faculty_and_staff
+      - field_faqs
+      - field_first_name
+      - field_generic_title
+      - field_half_text_title
+      - field_image_card_terms
+      - field_interests
+      - field_intro_text
+      - field_introduction_excerpt
+      - field_last_name
+      - field_link_excerpt
+      - field_link_title
+      - field_location
+      - field_position
+      - field_resource_category
+      - field_search
+      - field_subtitle
+      - field_subtitle_1
+      - field_title
+      - field_title_1
+      - field_title_2
+      - field_title_and_body
+      - field_two_col_title
+      - moderation_state
+      - title
+    spaces: '[^[:alnum:]]'
+    ignored: "[']"
+    overlap_cjk: 0
+    minimum_word_size: '2'
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  cron_limit: 150
+  delete_on_fail: true
+  index_directly: true
+  track_changes_in_references: true
+server: database_server

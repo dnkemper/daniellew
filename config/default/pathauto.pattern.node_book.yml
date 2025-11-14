@@ -1,0 +1,21 @@
+uuid: 5c7111ce-9c11-4efc-946e-cb150e86a499
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node_book
+label: 'Content - Book'
+type: 'canonical_entities:node'
+pattern: 'books/[node:title]'
+selection_criteria:
+  -
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: node
+    bundles:
+      book: book
+selection_logic: and
+weight: 0
+relationships: {  }

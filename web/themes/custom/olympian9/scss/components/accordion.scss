@@ -1,0 +1,361 @@
+.accordion {
+  .accordion__content {
+    font-family: var(--serif);
+    padding: 20px 20px 25px;
+  }
+
+  .accordion__button {
+    width: 100%;
+    text-align: left;
+    color: var(--gray);
+    border: none;
+    cursor: pointer;
+    flex: 1 1 0;
+    font-family: var(--sans-serif);
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 20px;
+    margin: 0;
+    background: var(--light-gray);
+    transition: 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+
+    &:hover {
+      background: #e1e1e1;
+    }
+
+    .icon {
+      align-items: center;
+      background: var(--red);
+      border-radius: 50%;
+      color: currentColor;
+      height: 24px;
+      justify-content: center;
+      right: 0;
+      transform: rotate(-180deg) translate(0, -0.1em);
+      transition: 0.4s;
+      transition-property: transform, background-color;
+      width: 24px;
+      z-index: 100000000000000000;
+      position: relative;
+      display: block;
+
+      fill: currentColor;
+      margin-left: 35px;
+
+      &::before {
+        background: var(--light-gray);
+        content: '';
+        height: 4px;
+        left: calc(50% - 7px);
+        position: absolute;
+        top: calc(50% - 2px);
+        transition: 0.2s;
+        width: 14px;
+        z-index: 2;
+      }
+
+      &::after {
+        background: var(--light-gray);
+        content: '';
+        height: 4px;
+        left: calc(50% - 7px);
+        position: absolute;
+        top: calc(50% - 2px);
+        transition: 0.2s;
+        width: 14px;
+        transform: rotate(90deg);
+        z-index: 1;
+      }
+    }
+  }
+
+  .accordion__button[aria-expanded='true'] {
+    .icon,
+    svg {
+      transform: rotateY(180deg);
+
+      &::after {
+        z-index: 1;
+        transform: rotate(0) !important;
+      }
+    }
+  }
+}
+
+.text {
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .accordion {
+    .accordion__button {
+      font-size: 24px;
+      padding: 20px 35px;
+    }
+  }
+}
+
+.field--name-field-publication-degrees {
+  .accordion__button {
+    &:focus {
+      background: unset;
+      color: unset;
+    }
+  }
+
+  .accordion__heading {
+    background: unset;
+    color: unset;
+  }
+}
+
+#degrees {
+  position: relative;
+  margin-bottom: 0;
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  .dept-module-header {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .degrees__list {
+    margin: 0 auto;
+    max-width: 982px;
+    padding: 3rem 0 5rem;
+    position: relative;
+    width: 85%;
+    z-index: 1;
+  }
+
+  .degrees__sublist {
+    margin-bottom: 3rem;
+
+    li {
+      font-family: var(--sans-serif);
+      font-size: 16px;
+      letter-spacing: 0.05em;
+      line-height: 1.4;
+      list-style: none;
+      margin: 0 0 0.75rem;
+      padding: 0;
+      text-transform: uppercase;
+    }
+
+    h4 {
+      font-family: var(--sans-serif);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
+
+  em {
+    text-transform: none;
+    font-size: 15px;
+    letter-spacing: 0;
+  }
+
+  button.accordion__button {
+    padding: 0.5rem 0;
+  }
+
+  .accordion__button {
+    background: unset;
+    display: unset;
+
+    .degrees__list-item-title {
+      align-items: center;
+      box-sizing: border-box;
+      cursor: pointer;
+      display: flex;
+      height: 75px;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+    }
+  }
+
+  @media (min-width: 1030px) {
+    .dept-module-headline {
+      font-size: 18px;
+    }
+    .degrees__sublist {
+      ul {
+        column-count: 2;
+      }
+    }
+  }
+}
+
+@mixin degrees($background, $border-color) {
+  background: $background;
+  color: $border-color;
+  h3,
+  .dept-module-headline,
+  h2 {
+    color: $border-color;
+  }
+  .field.field--name-field-degrees {
+    border-bottom: 1px solid $border-color;
+  }
+
+  .accordion__button {
+    border-top: 1px solid $border-color;
+
+    .dept-module-title,
+    .dept-module-headline {
+      color: $border-color;
+    }
+
+    .icon {
+      &::after,
+      &::before {
+        background: $background;
+      }
+
+      background: $border-color;
+    }
+
+    .degrees__sublist {
+      li {
+        color: $border-color;
+      }
+    }
+  }
+}
+
+.degrees.gray {
+  @include degrees(#333, #fff);
+}
+
+.degrees.blue {
+  @include degrees(#016085, #fff);
+}
+
+.degrees.red {
+  @include degrees(#a51516, #fff);
+}
+
+.degrees.yellow {
+  @include degrees(#f9be16, #000);
+}
+
+.degrees.green {
+  @include degrees(#027360, #fff);
+}
+
+.node--type-faq {
+  aside.column.red.faq-anchor-links {
+    .inner {
+      max-width: 300px !important;
+    }
+  }
+
+  .faq-jump-to {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 36px;
+    font-family: var(--serif);
+    margin-bottom: 1em;
+  }
+
+  li {
+    .paragraph.paragraph--type--faq-section.paragraph--view-mode--token {
+      h2 {
+        font-family: var(--sans-serif);
+        font-weight: 600;
+        font-size: 22px !important;
+      }
+    }
+  }
+
+  .faq-list {
+    article {
+      h2 {
+        padding-left: 20px;
+      }
+    }
+
+    .accordion__button {
+      .icon {
+        &::after {
+          content: '';
+          position: absolute;
+          left: calc(50% - 7px);
+          top: calc(50% - 2px);
+          width: 14px;
+          height: 4px;
+          background: var(--light-gray);
+          transition: 0.2s;
+          z-index: 1;
+          transform: rotate(90deg);
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: calc(50% - 7px);
+          top: calc(50% - 2px);
+          width: 14px;
+          height: 4px;
+          background: var(--light-gray);
+          transition: 0.2s;
+          z-index: 2;
+        }
+      }
+    }
+
+    .intro-text {
+      padding: 0 20px;
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .faq-list {
+      .accordion__content {
+        padding: 35px 35px 50px;
+      }
+
+      article {
+        h2 {
+          padding-left: 24px;
+        }
+      }
+
+      .intro-text {
+        padding: 0 35px;
+        margin-bottom: 50px;
+      }
+    }
+  }
+
+  @media (min-width: 1030px) {
+    aside.column.red.faq-anchor-links {
+      order: 2;
+    }
+    aside {
+      width: 516px;
+    }
+  }
+}
+.faq-group {
+  .icon {
+    background: var(--red) !important;
+  }
+}
+.faq-group-token h2 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 22px !important;
+
+  &:hover {
+    color: darken(#f1f1f1, 20%) !important;
+  }
+}

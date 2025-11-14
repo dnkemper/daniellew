@@ -1,0 +1,51 @@
+uuid: d6adad1b-5d62-4948-8f1a-58d4c6bb068a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.publication_full_video.field_full_video_image
+    - field.field.paragraph.publication_full_video.field_full_video_subtitle
+    - field.field.paragraph.publication_full_video.field_full_video_title
+    - field.field.paragraph.publication_full_video.field_full_video_url
+    - paragraphs.paragraphs_type.publication_full_video
+id: paragraph.publication_full_video.default
+targetEntityType: paragraph
+bundle: publication_full_video
+mode: default
+content:
+  field_full_video_image:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: fullscreen_video
+      link: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_full_video_subtitle:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_full_video_title:
+    type: string
+    label: visually_hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_full_video_url:
+    type: entity_reference_entity_view
+    label: visually_hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  search_api_excerpt: true

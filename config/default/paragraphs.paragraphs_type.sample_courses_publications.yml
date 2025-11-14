@@ -1,0 +1,10 @@
+uuid: d19f76c6-ecdc-4112-8175-945e11a00774
+langcode: en
+status: true
+dependencies: {  }
+id: sample_courses_publications
+label: Slideshow
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

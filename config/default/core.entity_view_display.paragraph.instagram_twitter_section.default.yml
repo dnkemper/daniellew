@@ -1,0 +1,23 @@
+uuid: 32427cd1-edf4-4857-b35e-f4b288d262e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.instagram_twitter_section.field_shown_items
+    - paragraphs.paragraphs_type.instagram_twitter_section
+  module:
+    - options
+id: paragraph.instagram_twitter_section.default
+targetEntityType: paragraph
+bundle: instagram_twitter_section
+mode: default
+content:
+  field_shown_items:
+    type: list_key
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

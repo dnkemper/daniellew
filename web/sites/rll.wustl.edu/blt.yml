@@ -1,0 +1,22 @@
+project:
+  local:
+    hostname: rll.ddev.site
+    protocol: https
+  machine_name: rll
+  human_name: rll.wustl.edu
+drush:
+  aliases:
+    local: self
+    remote: rll.prod
+artsci:
+  stage_file_proxy:
+    origin_dir: 'sites/rll.wustl.edu/files'
+    origin: 'https://rll.wustl.edu'
+drupal:
+  db:
+    database: drupal_rll
+system:
+  site:
+    contact_us_url: 'https://rll.wustl.edu/contact-us'
+    name: rll
+    email: rll@wustl.edu

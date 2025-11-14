@@ -1,0 +1,19 @@
+uuid: 94206197-d42c-49ed-82a6-8fee8c354275
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_mailing_address
+    - node.type.faculty_staff
+id: node.faculty_staff.field_mailing_address
+field_name: field_mailing_address
+entity_type: node
+bundle: faculty_staff
+label: 'Mailing Address'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

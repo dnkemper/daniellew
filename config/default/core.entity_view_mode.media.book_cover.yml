@@ -1,0 +1,11 @@
+uuid: 364951de-b344-4582-8a75-570b7a0a9e22
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.book_cover
+label: 'Book Cover'
+description: ''
+targetEntityType: media
+cache: true

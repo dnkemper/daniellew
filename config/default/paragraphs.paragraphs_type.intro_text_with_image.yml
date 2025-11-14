@@ -1,0 +1,10 @@
+uuid: 53f1ab52-170c-4a1b-acba-683cb70679cf
+langcode: en
+status: true
+dependencies: {  }
+id: intro_text_with_image
+label: 'Intro Text with Image'
+icon_uuid: null
+icon_default: null
+description: 'Migrated from paragraph bundle Intro Text with Image'
+behavior_plugins: {  }

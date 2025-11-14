@@ -1,0 +1,21 @@
+uuid: 19990ff5-5bf2-4f29-9fd9-8fee481d8f2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.resources_landing_page
+  module:
+    - metatag
+id: node.resources_landing_page.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: resources_landing_page
+label: 'Meta Tags'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

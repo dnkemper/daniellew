@@ -1,0 +1,25 @@
+mem_allowed_view_modes:
+  default: default
+  background_image: background_image
+  blog_thumbnail: blog_thumbnail
+  book_cover: book_cover
+  card: card
+  featured_blog: featured_blog
+  full: full
+  fullscreen_video: fullscreen_video
+  image_gallery: image_gallery
+  infographic: infographic
+  large: large
+  media_directory: media_directory
+  media_library: media_library
+  medium: medium
+  slideshow: slideshow
+  spotlight_desktop: spotlight_desktop
+  spotlight_mobile: spotlight_mobile
+  testimonial_desktop: testimonial_desktop
+  thumbnail: thumbnail
+  token: token
+full_html: ''
+plain_text: 'h1 h5 h6 pre mergeTableCells mergeTableCellRight'
+iframes: ''
+gutenberg: ''
